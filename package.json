@@ -1,18 +1,20 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "@turbo/gen": "^1.9.7",
-    "eslint": "^7.32.0",
-    "eslint-config-custom": "workspace:*",
-    "prettier": "^2.5.1",
-    "turbo": "^1.9.7"
-  },
-  "packageManager": "pnpm@7.15.0",
-  "name": "hazelhooks"
+	"private": true,
+	"scripts": {
+		"build": "turbo run build",
+		"postinstall": "pnpm format",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"format": "pnpm prettier:write && pnpm rome:format:write",
+		"prettier:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
+		"rome:format:write": "rome format --write ./"
+	},
+	"devDependencies": {
+		"@ianvs/prettier-plugin-sort-imports": "^4.0.2",
+		"@turbo/gen": "^1.10.1",
+		"prettier": "^2.8.8",
+		"turbo": "^1.10.1"
+	},
+	"packageManager": "pnpm@7.15.0",
+	"name": "hazelhooks"
 }
