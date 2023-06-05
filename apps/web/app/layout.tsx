@@ -1,6 +1,7 @@
 import { fontMono, fontSans } from "@/lib/fonts"
 
 import "./globals.css"
+
 import { cn } from "@/lib/utils"
 
 export const metadata = {
