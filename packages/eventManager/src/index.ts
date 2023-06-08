@@ -1,5 +1,5 @@
 import { zValidator } from "@hono/zod-validator"
-import { TM_DurableObject, Task, TaskManager, withTaskManager } from "do-taskmanager"
+import { Task, TaskManager, TM_DurableObject, withTaskManager } from "do-taskmanager"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { prettyJSON } from "hono/pretty-json"
@@ -73,7 +73,10 @@ class EventManager implements TM_DurableObject {
 	async fetch(request: Request): Promise<Response> {
 		const nextMinute = Date.now() + 60 * 1000
 		const headers = [...request.headers.entries()]
-		await this.env.TASK_MANAGER.scheduleTaskIn(nextMinute, { url: request.url, headers })
+		await this.env.TASK_MANAGER.scheduleTaskIn(nextMinute, {
+			url: request.url,
+			headers,
+		})
 		return new Response("Scheduled!")
 	}
 }
