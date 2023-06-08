@@ -1,13 +1,23 @@
 import { zValidator } from "@hono/zod-validator"
+import { TaskManager } from "do-taskmanager"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { prettyJSON } from "hono/pretty-json"
 import { nanoid } from "nanoid"
 import z from "zod"
 
-export type Env = {}
+type MessageBody = {
+	url: string
+	req: RequestInit
+	request_id: string
+	project_id: string
+}
 
-const app = new Hono<{ Bindings: Env }>()
+export type Bindings = {
+	EVENT_MANAGER: ServiceWorkerGlobalScope
+}
+
+const app = new Hono<{ Bindings: Bindings }>()
 
 app.use("/*", cors())
 app.use("*", prettyJSON())
@@ -23,14 +33,19 @@ app.post("/:projectId", zValidator("json", z.any()), async (c) => {
 
 	// TODO: Check if project exists && Check if request url matches project url
 
-	const res = await fetch("https://google.com", {
-		method: c.req.method,
-		headers: c.req.headers,
-		body: c.req.body,
+	c.env.EVENT_MANAGER.fetch("https://google.com", {
+		body: JSON.stringify({
+			req: {
+				method: c.req.method,
+				headers: c.req.headers,
+				body: c.req.body,
+			},
+			request_id: requestsId,
+			project_id: projectId,
+		}),
 	})
-	console.log(res)
 
-	// TODO:Send both res and req as event to tinybird => both with requestsId and projectId
+	// TODO:Send  req as event to tinybird => with requestsId and projectId
 
 	// TODO: Track Usage
 
@@ -42,4 +57,6 @@ app.post("/:projectId", zValidator("json", z.any()), async (c) => {
 	})
 })
 
-export default app
+export default {
+	fetch: app.fetch,
+}
