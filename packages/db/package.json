@@ -2,8 +2,7 @@
 	"name": "db",
 	"private": true,
 	"scripts": {
-		"db:push": "drizzle-kit up:sqlite",
-		"db:generare": "drizzle-kit generate:sqlite"
+		"db:generate": "drizzle-kit generate:sqlite"
 	},
 	"dependencies": {
 		"@libsql/client": "^0.2.0",
