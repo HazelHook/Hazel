@@ -29,9 +29,9 @@ const app = new Hono<{ Bindings: Bindings }>()
 app.use("/*", cors())
 app.use("*", prettyJSON())
 
-app.get("/", (c) => c.text("Hello Hono!"))
-app.post("/", (c) => {
-	console.log(c)
+app.get("/", (c) => c.text("Hazel Backend"))
+app.post("/", async (c) => {
+	console.log(await c.req.json())
 	return c.text("Hello Hono!")
 })
 
@@ -137,7 +137,7 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 
 	// TODO: Check if project exists && Check if request url matches project url
 
-	fetch("http://127.0.0.1:8787/", c.req)
+	await fetch("http://127.0.0.1:8787/", c.req)
 
 	// c.env.EVENT_MANAGER.fetch("https://google.com", {
 	// 	body: JSON.stringify({
@@ -158,9 +158,7 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 	return c.json({
 		status: "SUCCESS",
 		message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestId}`,
-		request_id: requestId,
-		connection_id: connection.id,
-		project_id: connection.projectId,
+		request_id: requestId
 	})
 })
 
