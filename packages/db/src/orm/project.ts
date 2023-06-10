@@ -1,24 +1,24 @@
 import { sql } from "drizzle-orm"
 
-import { Db } from ".."
-import { project, ProjectInsertData } from "../schema"
+import { DB } from ".."
+import { InsertProject, project } from "../schema"
 
 export async function getProject({
 	publicId,
 	db,
 }: {
 	publicId: string
-	db: Db
+	db: DB
 }) {
 	return await db.select().from(project).where(sql`${project.publicId} = ${publicId}`).get()
 }
 
-export const createProject = async ({
+export async function createProject({
 	data,
 	db,
 }: {
-	data: ProjectInsertData
-	db: Db
-}) => {
-	return db.insert(project).values(data)
+	data: InsertProject
+	db: DB
+}) {
+	return await db.insert(project).values(data).returning({ id: project.id }).get()
 }

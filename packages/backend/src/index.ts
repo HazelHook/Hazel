@@ -1,7 +1,10 @@
 import { zValidator } from "@hono/zod-validator"
 import { connectDB } from "db/src/index"
-import { getConnection } from "db/src/orm/connection"
 import { connection, destination, project, source } from "db/src/schema"
+import { getConnection, insertConnection } from "db/src/orm/connection"
+import { getProject, createProject } from "db/src/orm/project"
+import { getSource, createSource } from "db/src/orm/source"
+import { getDestination, createDestination } from "db/src/orm/destination"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { prettyJSON } from "hono/pretty-json"
@@ -31,6 +34,66 @@ app.get("/", (c) => c.text("Hello Hono!"))
 app.post("/", (c) => {
 	console.log(c)
 	return c.text("Hello Hono!")
+})
+app.post("/seed", async (c) => {
+	const db = connectDB({
+		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
+		databaseUrl: c.env.LIBSQL_DB_URL,
+	})
+
+	const customerId = `cus_${nanoid()}`
+
+	const { id: projectId } = await createProject({
+		data: {
+			customerId: customerId,
+			publicId: `prj_${nanoid()}`,
+			name: "Project 1",
+			slug: "project-1"
+		},
+		db
+	})
+
+	const { id: connectionId } = await insertConnection({
+		data: {
+			customerId: customerId,
+			publicId: `con_${nanoid()}`,
+			name: "Connection 1",
+			projectId
+		},
+		db
+	})
+
+	await createSource({
+		data: {
+			customerId: customerId,
+			publicId: `src_${nanoid()}`,
+			name: "Source 1",
+			url: "https://google.com",
+			connectionId
+		},
+		db
+	})
+
+	await createDestination({
+		data: {
+			customerId: customerId,
+			publicId: `dst_${nanoid()}`,
+			name: "Destination 1",
+			url: "https://google.com",
+			connectionId
+		},
+		db
+	})
+
+	return c.json({
+		status: "SUCCESS",
+		message: "Seeded database",
+		data: {
+			customerId,
+			projectId,
+			connectionId
+		}
+	})
 })
 
 app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c) => {
@@ -144,6 +207,7 @@ app.post("/:connectionId", zValidator("json", z.any()), async (c) => {
 		message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestsId}`,
 		request_id: requestsId,
 		connection_id: connection.id,
+		project_id: connection.projectId,
 	})
 })
 

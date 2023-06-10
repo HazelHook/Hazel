@@ -3,7 +3,7 @@ import { drizzle, LibSQLDatabase } from "drizzle-orm/libsql"
 
 import * as schema from "./schema"
 
-export type Db = LibSQLDatabase<typeof schema>
+export type DB = LibSQLDatabase<typeof schema>
 
 export function connectDB({
 	databaseUrl,

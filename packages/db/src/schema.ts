@@ -85,18 +85,17 @@ export const project = sqliteTable("projects", {
 // 	},
 // )
 
-export type ProjectInsertData = InferModel<typeof project, "insert">
-export const insertProject = createInsertSchema(project)
-export const selectProject = createSelectSchema(project)
+export type InsertConnection = InferModel<typeof connection, "insert">
+export type SelectConnection = InferModel<typeof connection, "select">
 
-export type ConnectionInsertData = InferModel<typeof connection, "insert">
-export const insertConnection = createInsertSchema(connection)
-export const selectConnection = createSelectSchema(connection)
+export type InsertDestination = InferModel<typeof destination, "insert">
+export type SelectDestination = InferModel<typeof destination, "select">
 
-export type SourceInsertData = InferModel<typeof source, "insert">
-export const insertSource = createInsertSchema(source)
-export const selectSource = createSelectSchema(source)
+export type InsertSource = InferModel<typeof source, "insert">
+export type SelectSource = InferModel<typeof source, "select">
 
-export type DestinationInsertData = InferModel<typeof destination, "insert">
-export const insertDestination = createInsertSchema(destination)
-export const selectDestination = createSelectSchema(destination)
+export type InsertProject = InferModel<typeof project, "insert">
+export type SelectProject = InferModel<typeof project, "select">
+
+// export const insertConnectionProject = createInsertSchema(connectionProject)
+// export const selectConnectionProject = createSelectSchema(connectionProject)
