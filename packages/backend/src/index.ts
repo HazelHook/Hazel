@@ -1,16 +1,15 @@
 import { faker } from "@faker-js/faker"
 import { zValidator } from "@hono/zod-validator"
 import { connectDB } from "db/src/index"
-import { createConnection, getConnection, getConnectionsForSource } from "db/src/orm/connection"
-import { createDestination, getDestination } from "db/src/orm/destination"
-import { createProject, getProject } from "db/src/orm/project"
-import { createSource, getSource } from "db/src/orm/source"
+import { getConnectionsForSource } from "db/src/orm/connection"
+import { getSource } from "db/src/orm/source"
 import { connection, destination, project, source } from "db/src/schema"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { prettyJSON } from "hono/pretty-json"
 import { nanoid } from "nanoid"
 import z from "zod"
+import { handleEvent } from "./eventManager"
 
 // import { fluxTransformConnection } from "./wasm/transformation"
 
@@ -35,6 +34,16 @@ app.get("/", (c) => c.text("Hazel Backend"))
 app.post("/", async (c) => {
 	console.log(await c.req.json())
 	return c.text("Hello Hono!")
+})
+
+app.get("/random", async (c) => {
+	const db = connectDB({
+		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
+		databaseUrl: c.env.LIBSQL_DB_URL,
+	})
+	const connection = await db.query.connection.findFirst()
+
+	return c.json(connection)
 })
 
 app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c) => {
@@ -133,58 +142,50 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 	const source = await getSource({ publicId: sourceId, db })
 
 	if (!source) {
-		return c.json({
-			body: {
-				status: "404",
-				message: "No source found with that id",
+		return c.json(
+			{
+				body: {
+					status: "404",
+					message: "No source found with that id",
+				},
 			},
-			status: 404,
-		})
+			404,
+		)
 	}
 
-	const connections = await getConnectionsForSource({
-		sourceId: source.id,
-		db,
-	})
-
-	if (connections.length === 0) {
-		return c.json({
-			body: {
-				status: "404",
-				message: "No connections found for that source",
+	//:!! Comment this out for  dev ya know @JeremyFunk
+	if (source.url !== c.req.url) {
+		return c.json(
+			{
+				body: {
+					status: "403",
+					message: `${c.req.url} doesn't match Source (${source.url})`,
+				},
 			},
-			status: 404,
-		})
+			403,
+		)
+	}
+
+	if (source.connections.length === 0) {
+		return c.json(
+			{
+				body: {
+					status: "404",
+					message: "No connections found for that source",
+				},
+			},
+			404,
+		)
 	}
 
 	const requestId = `req_${nanoid()}`
 	const data = await c.req.text()
 
-	for (const conn of connections) {
+	for (const conn of source.connections) {
 		// TODO: Check if project exists && Check if request url matches project url
 
-		if (!conn.destination) {
-			continue
-		}
-
-		// const transformedData = await fluxTransformConnection(conn, data)
-
-		await fetch("http://127.0.0.1:8787/", {
-			method: "POST",
-			body: data,
-		})
-
-		// c.env.EVENT_MANAGER.fetch("https://google.com", {
-		// 	body: JSON.stringify({
-		// 		req: {
-		// 			method: c.req.method,
-		// 			headers: c.req.headers,
-		// 			body: c.req.body,
-		// 		},
-		// 		request_id: requestsId,
-		// 		project_id: projectId,
-		// 	}),
-		// })
+		// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+		await handleEvent({ connection: conn as any, context: c, data: data })
 
 		// TODO: Send req as event to tinybird => with requestsId and projectId
 

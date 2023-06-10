@@ -1,6 +1,5 @@
 import { InferModel, relations, sql } from "drizzle-orm"
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
-import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 
 export const source = sqliteTable("sources", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
@@ -13,6 +12,10 @@ export const source = sqliteTable("sources", {
 	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 })
+
+export const sourceRelations = relations(source, ({ many }) => ({
+	connections: many(connection),
+}))
 
 export const destination = sqliteTable("destinations", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
@@ -87,16 +90,16 @@ export const project = sqliteTable("projects", {
 // )
 
 export type InsertConnection = InferModel<typeof connection, "insert">
-export type SelectConnection = InferModel<typeof connection, "select">
+export type Connection = InferModel<typeof connection, "select">
 
 export type InsertDestination = InferModel<typeof destination, "insert">
-export type SelectDestination = InferModel<typeof destination, "select">
+export type Destination = InferModel<typeof destination, "select">
 
 export type InsertSource = InferModel<typeof source, "insert">
-export type SelectSource = InferModel<typeof source, "select">
+export type Source = InferModel<typeof source, "select">
 
 export type InsertProject = InferModel<typeof project, "insert">
-export type SelectProject = InferModel<typeof project, "select">
+export type Project = InferModel<typeof project, "select">
 
 // export const insertConnectionProject = createInsertSchema(connectionProject)
 // export const selectConnectionProject = createSelectSchema(connectionProject)

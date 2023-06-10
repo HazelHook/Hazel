@@ -10,7 +10,16 @@ export async function getSource({
 	publicId: string
 	db: DB
 }) {
-	return await db.select().from(source).where(eq(source.publicId, publicId)).get()
+	return await db.query.source.findFirst({
+		where: eq(source.publicId, publicId),
+		with: {
+			connections: {
+				with: {
+					destination: true,
+				},
+			},
+		},
+	})
 }
 
 export async function createSource({
