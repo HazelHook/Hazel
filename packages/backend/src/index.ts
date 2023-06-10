@@ -88,6 +88,8 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 				.run()
 		})
 	}
+
+	return c.json({ message: `Created ${c.req.valid("json").amount} new connections` })
 })
 
 app.post("/:connectionId", zValidator("json", z.any()), async (c) => {

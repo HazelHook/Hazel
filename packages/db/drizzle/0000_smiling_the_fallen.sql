@@ -3,7 +3,6 @@ CREATE TABLE `connections` (
 	`public_id` text NOT NULL,
 	`customer_id` text NOT NULL,
 	`name` text NOT NULL,
-	`url` text NOT NULL,
 	`project_id` integer,
 	`created_at` integer DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	`updated_at` integer DEFAULT CURRENT_TIMESTAMP NOT NULL,
