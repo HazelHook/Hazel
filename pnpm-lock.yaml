@@ -11,7 +11,7 @@ importers:
       turbo: ^1.10.2
     devDependencies:
       '@ianvs/prettier-plugin-sort-imports': 4.0.2_prettier@2.8.8
-      '@turbo/gen': 1.10.1_damrkshojdiumlcmdowz44ss6u
+      '@turbo/gen': 1.10.1_umv2mkp3232wegwi6xfiexrrwi
       prettier: 2.8.8
       rome: 12.1.3
       turbo: 1.10.3
@@ -88,10 +88,10 @@ importers:
     devDependencies:
       dotenv: 16.1.4
       drizzle-kit: 0.18.1
-      ts-node: 10.9.1_damrkshojdiumlcmdowz44ss6u
+      ts-node: 10.9.1_umv2mkp3232wegwi6xfiexrrwi
       typescript: 5.1.3
 
-  packages/eventManager:
+  packages/event-manager:
     specifiers:
       '@cloudflare/workers-types': ^4.20230518.0
       '@hono/zod-validator': ^0.1.3
@@ -109,6 +109,14 @@ importers:
     devDependencies:
       '@cloudflare/workers-types': 4.20230518.0
       wrangler: 3.1.0
+
+  packages/hazelflux:
+    specifiers:
+      '@types/node': ^20.2.6
+      typescript: ^5.1.3
+    devDependencies:
+      '@types/node': 20.2.6
+      typescript: 5.1.3
 
   packages/tsconfig:
     specifiers: {}
@@ -937,7 +945,7 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: true
 
-  /@turbo/gen/1.10.1_damrkshojdiumlcmdowz44ss6u:
+  /@turbo/gen/1.10.1_umv2mkp3232wegwi6xfiexrrwi:
     resolution: {integrity: sha512-NF8xUx2Q+wI1KJzTxH6cZ1NJq6eDHRG4S+gXh/pxxPW1tTbh71cvgqnYu1D9gVFwCJR6WsnUuvEOHxgs2ALOsQ==}
     hasBin: true
     dependencies:
@@ -948,7 +956,7 @@ packages:
       minimatch: 9.0.0
       node-plop: 0.26.3
       semver: 7.5.0
-      ts-node: 10.9.1_damrkshojdiumlcmdowz44ss6u
+      ts-node: 10.9.1_umv2mkp3232wegwi6xfiexrrwi
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -962,7 +970,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.2.5
+      '@types/node': 20.2.6
     dev: true
 
   /@types/inquirer/6.5.0:
@@ -979,12 +987,16 @@ packages:
   /@types/node-fetch/2.6.4:
     resolution: {integrity: sha512-1ZX9fcN4Rvkvgv4E6PAY5WXUFWFcRWxZa3EW83UjycOB9ljJCedb2CupIP4RZMEwF/M3eTcCihbBRgwtGbg5Rg==}
     dependencies:
-      '@types/node': 20.2.5
+      '@types/node': 20.2.6
       form-data: 3.0.1
     dev: false
 
   /@types/node/20.2.5:
     resolution: {integrity: sha512-JJulVEQXmiY9Px5axXHeYGLSjhkZEnD+MDPDGbCbIAbMslkKwmygtZFy1X6s/075Yo94sf8GuSlFfPzysQrWZQ==}
+    dev: true
+
+  /@types/node/20.2.6:
+    resolution: {integrity: sha512-GQBWUtGoefMEOx/vu+emHEHU5aw6JdDoEtZhoBrHFPZbA/YNRFfN996XbBASEWdvmLSLyv9FKYppYGyZjCaq/g==}
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -1011,13 +1023,13 @@ packages:
   /@types/through/0.0.30:
     resolution: {integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==}
     dependencies:
-      '@types/node': 20.2.5
+      '@types/node': 20.2.6
     dev: true
 
   /@types/ws/8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
     dependencies:
-      '@types/node': 20.2.5
+      '@types/node': 20.2.6
     dev: false
 
   /acorn-walk/8.2.0:
@@ -3430,7 +3442,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-node/10.9.1_damrkshojdiumlcmdowz44ss6u:
+  /ts-node/10.9.1_umv2mkp3232wegwi6xfiexrrwi:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -3449,7 +3461,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.2.5
+      '@types/node': 20.2.6
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3

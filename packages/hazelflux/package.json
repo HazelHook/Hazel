@@ -1,0 +1,11 @@
+{
+  "name": "hazelflux",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "author": "HazelHook",
+  "devDependencies": {
+    "@types/node": "^20.2.6",
+    "typescript": "^5.1.3"
+  }
+}

@@ -22,8 +22,6 @@ export const destination = sqliteTable("destinations", {
 	name: text("name").notNull(),
 	url: text("url").notNull(),
 
-	
-
 	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 })

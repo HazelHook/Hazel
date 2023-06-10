@@ -1,13 +1,13 @@
 {
-  "version": "5",
-  "dialect": "sqlite",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1686418075048,
-      "tag": "0000_married_vampiro",
-      "breakpoints": false
-    }
-  ]
+	"version": "5",
+	"dialect": "sqlite",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1686418075048,
+			"tag": "0000_married_vampiro",
+			"breakpoints": false
+		}
+	]
 }
