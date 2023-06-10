@@ -1,24 +1,18 @@
 import { sql } from "drizzle-orm"
-import { LibSQLDatabase } from "drizzle-orm/libsql"
 
-import { connection, project } from "../schema"
+import { ProjectInsertData, project } from "../schema"
+import { Db } from ".."
 
 export async function getProject({
 	publicId,
 	db,
 }: {
 	publicId: string
-	db: LibSQLDatabase
+	db: Db
 }) {
 	return await db.select().from(project).where(sql`${project.publicId} = ${publicId}`).get()
 }
 
-export async function getConnection({
-	publicId,
-	db,
-}: {
-	publicId: string
-	db: LibSQLDatabase
-}) {
-	return await db.select().from(connection).where(sql`${connection.publicId} = ${publicId}`).get()
+export const createProject = async ({ data, db }: { data: ProjectInsertData; db: Db }) => {
+	return db.insert(project).values(data)
 }

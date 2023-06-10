@@ -1,11 +1,11 @@
-import { relations, sql } from "drizzle-orm"
+import { InferModel, relations, sql } from "drizzle-orm"
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 
 export const source = sqliteTable("sources", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
 	publicId: text("public_id").notNull(),
-	customerId: text("customerId").notNull(),
+	customerId: text("customer_id").notNull(),
 
 	name: text("name").notNull(),
 	url: text("url").notNull(),
@@ -19,7 +19,7 @@ export const source = sqliteTable("sources", {
 export const destination = sqliteTable("destionations", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
 	publicId: text("public_id").notNull(),
-	customerId: text("customerId").notNull(),
+	customerId: text("customer_id").notNull(),
 
 	name: text("name").notNull(),
 	url: text("url").notNull(),
@@ -33,7 +33,7 @@ export const destination = sqliteTable("destionations", {
 export const connection = sqliteTable("connections", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
 	publicId: text("public_id").notNull(),
-	customerId: text("customerId").notNull(),
+	customerId: text("customer_id").notNull(),
 
 	name: text("name").notNull(),
 	url: text("url").notNull(),
@@ -60,7 +60,7 @@ export const connectionRelations = relations(connection, ({ one }) => ({
 export const project = sqliteTable("projects", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
 	publicId: text("public_id").notNull(),
-	customerId: text("customerId").notNull(),
+	customerId: text("customer_id").notNull(),
 
 	name: text("name").notNull(),
 
@@ -86,5 +86,18 @@ export const project = sqliteTable("projects", {
 // 	},
 // )
 
+export type ProjectInsertData = InferModel<typeof project, "insert">
+export const insertProject = createInsertSchema(project)
+export const selectProject = createSelectSchema(project)
+
+export type ConnectionInsertData = InferModel<typeof connection, "insert">
+export const insertConnection = createInsertSchema(connection)
+export const selectConnection = createSelectSchema(connection)
+
+export type SourceInsertData = InferModel<typeof source, "insert">
 export const insertSource = createInsertSchema(source)
 export const selectSource = createSelectSchema(source)
+
+export type DestinationInsertData = InferModel<typeof destination, "insert">
+export const insertDestination = createInsertSchema(destination)
+export const selectDestination = createSelectSchema(destination)

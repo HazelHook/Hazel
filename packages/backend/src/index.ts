@@ -1,7 +1,7 @@
 import { zValidator } from "@hono/zod-validator"
 import { connectDB } from "db/src/index"
-import { getConnection } from "db/src/orm/project"
-import { TaskManager } from "do-taskmanager"
+import { getConnection } from "db/src/orm/connection"
+import { connection } from "db/src/schema"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { prettyJSON } from "hono/pretty-json"
@@ -29,6 +29,14 @@ app.get("/", (c) => c.text("Hello Hono!"))
 app.post("/", (c) => {
 	console.log(c)
 	return c.text("Hello Hono!")
+})
+
+app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c) => {
+	const db = connectDB({
+		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
+		databaseUrl: c.env.LIBSQL_DB_URL,
+	})
+	await db.transaction(async (tx) => {})
 })
 
 app.post("/:connectionId", zValidator("json", z.any()), async (c) => {
@@ -82,7 +90,7 @@ app.post("/:connectionId", zValidator("json", z.any()), async (c) => {
 		status: "SUCCESS",
 		message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestsId}`,
 		request_id: requestsId,
-		project_id: projectId,
+		connection_id: connection.id,
 	})
 })
 

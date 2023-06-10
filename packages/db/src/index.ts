@@ -1,5 +1,8 @@
 import { createClient } from "@libsql/client/web"
-import { drizzle } from "drizzle-orm/libsql"
+import { LibSQLDatabase, drizzle } from "drizzle-orm/libsql"
+import * as schema from "./schema"
+
+export type Db = LibSQLDatabase<typeof schema>
 
 export function connectDB({
 	databaseUrl,
@@ -12,7 +15,7 @@ export function connectDB({
 		url: databaseUrl,
 		authToken: authToken,
 	})
-	const db = drizzle(client)
+	const db = drizzle(client, { schema })
 
 	return db
 }

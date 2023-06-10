@@ -1,20 +1,13 @@
 {
-	"version": "5",
-	"dialect": "sqlite",
-	"entries": [
-		{
-			"idx": 0,
-			"version": "5",
-			"when": 1686262337962,
-			"tag": "0000_even_aaron_stack",
-			"breakpoints": false
-		},
-		{
-			"idx": 1,
-			"version": "5",
-			"when": 1686262695234,
-			"tag": "0001_fast_vengeance",
-			"breakpoints": false
-		}
-	]
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1686405475665,
+      "tag": "0000_amused_doctor_faustus",
+      "breakpoints": false
+    }
+  ]
 }
