@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm"
 import { DB } from ".."
 import { connection, InsertConnection } from "../schema"
 
@@ -9,7 +10,23 @@ export async function getConnection({
 	db: DB
 }) {
 	return await db.query.connection.findFirst({
-		where: (connection, { eq }) => eq(connection.publicId, publicId),
+		where: eq(connection.publicId, publicId),
+		with: {
+			destination: true,
+			source: true,
+		},
+	})
+}
+
+export async function getConnectionsForSource({
+	sourceId,
+	db,
+}: {
+	sourceId: number
+	db: DB
+}) {
+	return await db.query.connection.findMany({
+		where: eq(connection.sourceId, sourceId),
 		with: {
 			destination: true,
 			source: true,

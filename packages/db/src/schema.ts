@@ -10,13 +10,11 @@ export const source = sqliteTable("sources", {
 	name: text("name").notNull(),
 	url: text("url").notNull(),
 
-	connectionId: integer("connection_id").references(() => connection.id),
-
 	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 })
 
-export const destination = sqliteTable("destionations", {
+export const destination = sqliteTable("destinations", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
 	publicId: text("public_id").notNull(),
 	customerId: text("customer_id").notNull(),
@@ -24,7 +22,7 @@ export const destination = sqliteTable("destionations", {
 	name: text("name").notNull(),
 	url: text("url").notNull(),
 
-	connectionId: integer("connection_id").references(() => connection.id),
+	
 
 	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -37,7 +35,12 @@ export const connection = sqliteTable("connections", {
 
 	name: text("name").notNull(),
 
-	// TODO: SOME SETTINGS POINTS AND STUFF
+	sourceId: integer("destination_id").references(() => source.id),
+	destinationId: integer("source_id").references(() => destination.id),
+
+	// The transformer config.
+	// TODO: Minify
+	fluxConfig: text("flux_config").notNull(),
 
 	projectId: integer("project_id").references(() => project.id),
 
@@ -45,16 +48,16 @@ export const connection = sqliteTable("connections", {
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 })
 
-export const connectionRelations = relations(connection, ({ one }) => ({
-	destination: one(destination, {
-		fields: [connection.id],
-		references: [destination.connectionId],
-	}),
-	source: one(source, {
-		fields: [connection.id],
-		references: [source.connectionId],
-	}),
-}))
+// export const connectionRelations = relations(connection, ({ one }) => ({
+// 	destination: one(destination, {
+// 		fields: [connection.id],
+// 		references: [destination.connectionId],
+// 	}),
+// 	source: one(source, {
+// 		fields: [connection.id],
+// 		references: [source.connectionId],
+// 	}),
+// }))
 
 export const project = sqliteTable("projects", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
