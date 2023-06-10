@@ -1,7 +1,7 @@
 import { zValidator } from "@hono/zod-validator"
 import { connectDB } from "db/src/index"
 import { connection, destination, project, source } from "db/src/schema"
-import { getConnection, insertConnection } from "db/src/orm/connection"
+import { getConnection, createConnection } from "db/src/orm/connection"
 import { getProject, createProject } from "db/src/orm/project"
 import { getSource, createSource } from "db/src/orm/source"
 import { getDestination, createDestination } from "db/src/orm/destination"
@@ -53,7 +53,7 @@ app.post("/seed", async (c) => {
 		db
 	})
 
-	const { id: connectionId } = await insertConnection({
+	const { id: connectionId } = await createConnection({
 		data: {
 			customerId: customerId,
 			publicId: `con_${nanoid()}`,
