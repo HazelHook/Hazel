@@ -1,6 +1,7 @@
+import { eq } from "drizzle-orm"
+
 import { DB } from ".."
 import { destination, InsertDestination } from "../schema"
-import { eq } from "drizzle-orm"
 
 export async function getDestination({
 	publicId,

@@ -1,17 +1,16 @@
+import { faker } from "@faker-js/faker"
 import { zValidator } from "@hono/zod-validator"
 import { connectDB } from "db/src/index"
+import { createConnection, getConnection } from "db/src/orm/connection"
+import { createDestination, getDestination } from "db/src/orm/destination"
+import { createProject, getProject } from "db/src/orm/project"
+import { createSource, getSource } from "db/src/orm/source"
 import { connection, destination, project, source } from "db/src/schema"
-import { getConnection, createConnection } from "db/src/orm/connection"
-import { getProject, createProject } from "db/src/orm/project"
-import { getSource, createSource } from "db/src/orm/source"
-import { getDestination, createDestination } from "db/src/orm/destination"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { prettyJSON } from "hono/pretty-json"
 import { nanoid } from "nanoid"
 import z from "zod"
-
-import { faker } from "@faker-js/faker"
 
 type MessageBody = {
 	url: string
@@ -48,9 +47,9 @@ app.post("/seed", async (c) => {
 			customerId: customerId,
 			publicId: `prj_${nanoid()}`,
 			name: "Project 1",
-			slug: "project-1"
+			slug: "project-1",
 		},
-		db
+		db,
 	})
 
 	const { id: connectionId } = await createConnection({
@@ -58,9 +57,9 @@ app.post("/seed", async (c) => {
 			customerId: customerId,
 			publicId: `con_${nanoid()}`,
 			name: "Connection 1",
-			projectId
+			projectId,
 		},
-		db
+		db,
 	})
 
 	await createSource({
@@ -69,9 +68,9 @@ app.post("/seed", async (c) => {
 			publicId: `src_${nanoid()}`,
 			name: "Source 1",
 			url: "https://google.com",
-			connectionId
+			connectionId,
 		},
-		db
+		db,
 	})
 
 	await createDestination({
@@ -80,9 +79,9 @@ app.post("/seed", async (c) => {
 			publicId: `dst_${nanoid()}`,
 			name: "Destination 1",
 			url: "https://google.com",
-			connectionId
+			connectionId,
 		},
-		db
+		db,
 	})
 
 	return c.json({
@@ -91,8 +90,8 @@ app.post("/seed", async (c) => {
 		data: {
 			customerId,
 			projectId,
-			connectionId
-		}
+			connectionId,
+		},
 	})
 })
 
@@ -152,7 +151,9 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 		})
 	}
 
-	return c.json({ message: `Created ${c.req.valid("json").amount} new connections` })
+	return c.json({
+		message: `Created ${c.req.valid("json").amount} new connections`,
+	})
 })
 
 app.post("/:connectionId", zValidator("json", z.any()), async (c) => {

@@ -1,6 +1,7 @@
+import { eq } from "drizzle-orm"
+
 import { DB } from ".."
 import { InsertSource, source } from "../schema"
-import { eq } from "drizzle-orm"
 
 export async function getSource({
 	publicId,

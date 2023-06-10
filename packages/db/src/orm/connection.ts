@@ -1,5 +1,5 @@
 import { DB } from ".."
-import { InsertConnection, connection } from "../schema"
+import { connection, InsertConnection } from "../schema"
 
 export async function getConnection({
 	publicId,
