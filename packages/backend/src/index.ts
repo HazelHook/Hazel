@@ -194,10 +194,15 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 	for (const conn of source.connections) {
 		// TODO: Check if project exists && Check if request url matches project url
 
-		// rome-ignore lint/suspicious/noExplicitAny: <explanation>
-		await handleEvent({ connection: conn as any, context: c, data: data })
-
-		// TODO: Send req as event to tinybird => with requestsId and projectId
+		await handleEvent({
+			// rome-ignore lint/suspicious/noExplicitAny: type is strange so whatever
+			connection: conn as any,
+			context: c,
+			data: data,
+			requestId,
+			customerId: source.customerId,
+			sourceId: source.publicId,
+		})
 
 		// TODO: Track Usage
 	}

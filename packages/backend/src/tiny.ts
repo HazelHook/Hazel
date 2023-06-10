@@ -18,5 +18,21 @@ export const Tiny = (token: string) => {
 		}),
 	})
 
-	return { publishRequestEvent }
+	const publishResponseEvent = tb.buildIngestEndpoint({
+		datasource: "response_events",
+		event: z.object({
+			timestamp: z.string(),
+			version: z.string(),
+			request_id: z.string(),
+			customer_id: z.string(),
+			source_id: z.string(),
+			status: z.number(),
+			success: z.number(),
+
+			body: z.string(),
+			headers: z.string(),
+		}),
+	})
+
+	return { publishRequestEvent, publishResponseEvent }
 }
