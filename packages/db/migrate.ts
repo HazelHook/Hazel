@@ -1,8 +1,7 @@
-import * as dotenv from "dotenv"
-import { migrate } from "drizzle-orm/libsql/migrator"
-
-import { drizzle } from "drizzle-orm/libsql"
 import { createClient } from "@libsql/client/web"
+import * as dotenv from "dotenv"
+import { drizzle } from "drizzle-orm/libsql"
+import { migrate } from "drizzle-orm/libsql/migrator"
 
 dotenv.config({ path: ".env" })
 

@@ -1,12 +1,14 @@
 import { zValidator } from "@hono/zod-validator"
 import { connectDB } from "db/src/index"
 import { getConnection } from "db/src/orm/connection"
-import { connection } from "db/src/schema"
+import { connection, destination, project, source } from "db/src/schema"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { prettyJSON } from "hono/pretty-json"
 import { nanoid } from "nanoid"
 import z from "zod"
+
+import { faker } from "@faker-js/faker"
 
 type MessageBody = {
 	url: string
@@ -36,7 +38,56 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
 		databaseUrl: c.env.LIBSQL_DB_URL,
 	})
-	await db.transaction(async (tx) => {})
+	const customer = `cus_${nanoid(16)}`
+
+	for (let i = 0; i < c.req.valid("json").amount; i++) {
+		await db.transaction(async (tx) => {
+			const projectRes = await tx
+				.insert(project)
+				.values({
+					name: `Conn ${faker.internet.userName()}`,
+					publicId: nanoid(),
+					customerId: customer,
+
+					slug: faker.internet.domainWord(),
+				})
+				.run()
+			const conn = await tx
+				.insert(connection)
+				.values({
+					name: `Conn ${faker.internet.userName()}`,
+					publicId: nanoid(),
+					customerId: customer,
+
+					projectId: projectRes.lastInsertRowid as unknown as number,
+				})
+				.run()
+			await tx
+				.insert(source)
+				.values({
+					name: `Source ${faker.internet.userName()}`,
+					publicId: nanoid(),
+					customerId: customer,
+
+					url: "http://127.0.0.1:3000/",
+
+					connectionId: conn.lastInsertRowid as unknown as number,
+				})
+				.run()
+			await tx
+				.insert(destination)
+				.values({
+					name: `Dest ${faker.internet.userName()}`,
+					publicId: nanoid(),
+					customerId: customer,
+
+					url: "http://127.0.0.1:8787/",
+
+					connectionId: conn.lastInsertRowid as unknown as number,
+				})
+				.run()
+		})
+	}
 })
 
 app.post("/:connectionId", zValidator("json", z.any()), async (c) => {

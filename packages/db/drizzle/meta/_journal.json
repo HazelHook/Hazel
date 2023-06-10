@@ -1,13 +1,13 @@
 {
-  "version": "5",
-  "dialect": "sqlite",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1686405475665,
-      "tag": "0000_amused_doctor_faustus",
-      "breakpoints": false
-    }
-  ]
+	"version": "5",
+	"dialect": "sqlite",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1686405475665,
+			"tag": "0000_amused_doctor_faustus",
+			"breakpoints": false
+		}
+	]
 }

@@ -36,7 +36,6 @@ export const connection = sqliteTable("connections", {
 	customerId: text("customer_id").notNull(),
 
 	name: text("name").notNull(),
-	url: text("url").notNull(),
 
 	// TODO: SOME SETTINGS POINTS AND STUFF
 

@@ -1,5 +1,5 @@
 import { Db } from ".."
-import { ConnectionInsertData, connection } from "../schema"
+import { connection, ConnectionInsertData } from "../schema"
 
 export async function getConnection({
 	publicId,
@@ -17,6 +17,12 @@ export async function getConnection({
 	})
 }
 
-export const createConnection = async ({ data, db }: { data: ConnectionInsertData; db: Db }) => {
+export const createConnection = async ({
+	data,
+	db,
+}: {
+	data: ConnectionInsertData
+	db: Db
+}) => {
 	return db.insert(connection).values(data)
 }

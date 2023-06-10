@@ -14,6 +14,7 @@
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20230518.0",
+		"@faker-js/faker": "^8.0.2",
 		"dotenv": "^16.1.4",
 		"wrangler": "^3.0.1"
 	}
