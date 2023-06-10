@@ -1,7 +1,12 @@
 import { SelectConnection } from "db/src/schema"
 
-import { fluxTransform } from "../../../hazelflux/src/export"
+import { loadHazelFlux } from "../../../hazelflux/src/export"
 
-export function fluxTransformConnection(conn: SelectConnection): string {
-	return fluxTransform(conn.fluxConfig)
+export async function fluxTransformConnection(conn: SelectConnection, input: string): Promise<string> {
+	const hazelflux = await loadHazelFlux()
+
+	return hazelflux.fluxTransform({
+		config: conn.fluxConfig,
+		input,
+	})
 }

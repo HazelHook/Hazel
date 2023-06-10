@@ -1,4 +1,3 @@
-
 export interface FluxConfig {
 	input: Input
 	transformers: Transformer[]
@@ -26,4 +25,8 @@ interface ValidatedJsonInput {
 	}
 }
 
-export declare function fluxTransform(input: string): string;
+export type HazelFlux = {
+	fluxTransform({ input, config }: { input: string; config: string }): string
+}
+
+export declare function loadHazelFlux(): Promise<HazelFlux>

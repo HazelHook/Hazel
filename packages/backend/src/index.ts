@@ -158,6 +158,7 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 	}
 
 	const requestId = `req_${nanoid()}`
+	const data = await c.req.text()
 
 	for (const conn of connections) {
 		// TODO: Check if project exists && Check if request url matches project url
@@ -166,7 +167,7 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 			continue
 		}
 
-		const transformedData = fluxTransformConnection(conn)
+		const transformedData = await fluxTransformConnection(conn, data)
 
 		await fetch("http://127.0.0.1:8787/", {
 			method: "POST",
