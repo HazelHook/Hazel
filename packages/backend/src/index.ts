@@ -34,66 +34,6 @@ app.post("/", (c) => {
 	console.log(c)
 	return c.text("Hello Hono!")
 })
-app.post("/seed", async (c) => {
-	const db = connectDB({
-		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
-		databaseUrl: c.env.LIBSQL_DB_URL,
-	})
-
-	const customerId = `cus_${nanoid()}`
-
-	const { id: projectId, publicId: projectPublicId } = await createProject({
-		data: {
-			customerId: customerId,
-			publicId: `prj_${nanoid()}`,
-			name: "Project 1",
-			slug: "project-1",
-		},
-		db,
-	})
-
-	const { id: connectionId } = await createConnection({
-		data: {
-			customerId: customerId,
-			publicId: `con_${nanoid()}`,
-			name: "Connection 1",
-			projectId,
-		},
-		db,
-	})
-
-	const { publicId: sourcePublicId } = await createSource({
-		data: {
-			customerId: customerId,
-			publicId: `src_${nanoid()}`,
-			name: "Source 1",
-			url: "https://google.com",
-			connectionId,
-		},
-		db,
-	})
-
-	await createDestination({
-		data: {
-			customerId: customerId,
-			publicId: `dst_${nanoid()}`,
-			name: "Destination 1",
-			url: "https://google.com",
-			connectionId,
-		},
-		db,
-	})
-
-	return c.json({
-		status: "SUCCESS",
-		message: "Seeded database",
-		data: {
-			customerId,
-			projectId: projectPublicId,
-			sourceId: sourcePublicId,
-		},
-	})
-})
 
 app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c) => {
 	const db = connectDB({
@@ -103,16 +43,17 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 	const customer = `cus_${nanoid(16)}`
 	const data: {
 		sourceId: string
-		projectId: number
+		projectId: string
 	}[] = []
 
 	for (let i = 0; i < c.req.valid("json").amount; i++) {
 		await db.transaction(async (tx) => {
+			const projectPublicId = `prj_${nanoid()}`
 			const projectRes = await tx
 				.insert(project)
 				.values({
 					name: `Project ${faker.internet.userName()}`,
-					publicId: `con_${nanoid()}`,
+					publicId: projectPublicId,
 					customerId: customer,
 
 					slug: faker.internet.domainWord(),
@@ -158,7 +99,7 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 
 			data.push({
 				sourceId: sourcePublicId,
-				projectId: projectRes.lastInsertRowid as unknown as number,
+				projectId: projectPublicId
 			})
 		})
 	}
