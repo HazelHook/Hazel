@@ -24,5 +24,5 @@ export const createConnection = async ({
 	data: InsertConnection
 	db: DB
 }) => {
-	return db.insert(connection).values(data).returning({ id: connection.id }).get()
+	return db.insert(connection).values(data).returning({ id: connection.id, publicId: connection.publicId }).get()
 }

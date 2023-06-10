@@ -20,5 +20,9 @@ export async function createDestination({
 	data: InsertDestination
 	db: DB
 }) {
-	return await db.insert(destination).values(data).returning({ id: destination.id }).get()
+	return await db
+		.insert(destination)
+		.values(data)
+		.returning({ id: destination.id, publicId: destination.publicId })
+		.get()
 }

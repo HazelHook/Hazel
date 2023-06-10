@@ -20,5 +20,5 @@ export async function createProject({
 	data: InsertProject
 	db: DB
 }) {
-	return await db.insert(project).values(data).returning({ id: project.id }).get()
+	return await db.insert(project).values(data).returning({ id: project.id, publicId: project.publicId }).get()
 }

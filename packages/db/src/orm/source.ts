@@ -20,5 +20,5 @@ export async function createSource({
 	data: InsertSource
 	db: DB
 }) {
-	return await db.insert(source).values(data).returning({ id: source.id }).get()
+	return await db.insert(source).values(data).returning({ id: source.id, publicId: source.publicId }).get()
 }

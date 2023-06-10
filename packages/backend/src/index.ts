@@ -42,7 +42,7 @@ app.post("/seed", async (c) => {
 
 	const customerId = `cus_${nanoid()}`
 
-	const { id: projectId } = await createProject({
+	const { id: projectId, publicId: projectPublicId } = await createProject({
 		data: {
 			customerId: customerId,
 			publicId: `prj_${nanoid()}`,
@@ -62,7 +62,7 @@ app.post("/seed", async (c) => {
 		db,
 	})
 
-	await createSource({
+	const { publicId: sourcePublicId } = await createSource({
 		data: {
 			customerId: customerId,
 			publicId: `src_${nanoid()}`,
@@ -89,8 +89,8 @@ app.post("/seed", async (c) => {
 		message: "Seeded database",
 		data: {
 			customerId,
-			projectId,
-			connectionId,
+			projectId: projectPublicId,
+			sourceId: sourcePublicId,
 		},
 	})
 })
@@ -101,34 +101,41 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 		databaseUrl: c.env.LIBSQL_DB_URL,
 	})
 	const customer = `cus_${nanoid(16)}`
+	const data: {
+		sourceId: string
+		projectId: number
+	}[] = []
 
 	for (let i = 0; i < c.req.valid("json").amount; i++) {
 		await db.transaction(async (tx) => {
 			const projectRes = await tx
 				.insert(project)
 				.values({
-					name: `Conn ${faker.internet.userName()}`,
-					publicId: nanoid(),
+					name: `Project ${faker.internet.userName()}`,
+					publicId: `con_${nanoid()}`,
 					customerId: customer,
 
 					slug: faker.internet.domainWord(),
 				})
 				.run()
+
 			const conn = await tx
 				.insert(connection)
 				.values({
-					name: `Conn ${faker.internet.userName()}`,
-					publicId: nanoid(),
+					name: `Connection ${faker.internet.userName()}`,
+					publicId: `con_${nanoid()}`,
 					customerId: customer,
 
 					projectId: projectRes.lastInsertRowid as unknown as number,
 				})
 				.run()
+
+			const sourcePublicId = `src_${nanoid()}`
 			await tx
 				.insert(source)
 				.values({
 					name: `Source ${faker.internet.userName()}`,
-					publicId: nanoid(),
+					publicId: sourcePublicId,
 					customerId: customer,
 
 					url: "http://127.0.0.1:3000/",
@@ -139,8 +146,8 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 			await tx
 				.insert(destination)
 				.values({
-					name: `Dest ${faker.internet.userName()}`,
-					publicId: nanoid(),
+					name: `Destination ${faker.internet.userName()}`,
+					publicId: `dst_${nanoid()}`,
 					customerId: customer,
 
 					url: "http://127.0.0.1:8787/",
@@ -148,40 +155,44 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 					connectionId: conn.lastInsertRowid as unknown as number,
 				})
 				.run()
+
+			data.push({
+				sourceId: sourcePublicId,
+				projectId: projectRes.lastInsertRowid as unknown as number,
+			})
 		})
 	}
 
 	return c.json({
 		message: `Created ${c.req.valid("json").amount} new connections`,
+		data,
 	})
 })
 
-app.post("/:connectionId", zValidator("json", z.any()), async (c) => {
+app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 	const db = connectDB({
 		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
 		databaseUrl: c.env.LIBSQL_DB_URL,
 	})
 
-	const connectionId = c.req.param("connectionId")
+	const sourceId = c.req.param("sourceId")
 
-	const requestsId = `req_${nanoid()}`
+	const requestId = `req_${nanoid()}`
 
-	const connection = await getConnection({
-		publicId: connectionId,
+	const source = await getSource({
+		publicId: sourceId,
 		db,
 	})
 
-	if (!connection) {
+	if (!source) {
 		return c.json({
 			body: {
 				status: "404",
-				message: "Connection doesn't exist",
+				message: "No source found with that id",
 			},
 			status: 404,
 		})
 	}
-
-	console.log(connection)
 
 	// TODO: Check if project exists && Check if request url matches project url
 
@@ -205,8 +216,8 @@ app.post("/:connectionId", zValidator("json", z.any()), async (c) => {
 
 	return c.json({
 		status: "SUCCESS",
-		message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestsId}`,
-		request_id: requestsId,
+		message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestId}`,
+		request_id: requestId,
 		connection_id: connection.id,
 		project_id: connection.projectId,
 	})
