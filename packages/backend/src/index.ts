@@ -12,7 +12,7 @@ import { prettyJSON } from "hono/pretty-json"
 import { nanoid } from "nanoid"
 import z from "zod"
 
-import { fluxTransformConnection } from "./wasm/transformation"
+// import { fluxTransformConnection } from "./wasm/transformation"
 
 type MessageBody = {
 	url: string
@@ -167,11 +167,11 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 			continue
 		}
 
-		const transformedData = await fluxTransformConnection(conn, data)
+		// const transformedData = await fluxTransformConnection(conn, data)
 
 		await fetch("http://127.0.0.1:8787/", {
 			method: "POST",
-			body: transformedData,
+			body: data,
 		})
 
 		// c.env.EVENT_MANAGER.fetch("https://google.com", {

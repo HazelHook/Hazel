@@ -46,16 +46,16 @@ export const connection = sqliteTable("connections", {
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 })
 
-// export const connectionRelations = relations(connection, ({ one }) => ({
-// 	destination: one(destination, {
-// 		fields: [connection.id],
-// 		references: [destination.connectionId],
-// 	}),
-// 	source: one(source, {
-// 		fields: [connection.id],
-// 		references: [source.connectionId],
-// 	}),
-// }))
+export const connectionRelations = relations(connection, ({ one }) => ({
+	destination: one(destination, {
+		fields: [connection.destinationId],
+		references: [destination.id],
+	}),
+	source: one(source, {
+		fields: [connection.sourceId],
+		references: [source.id],
+	}),
+}))
 
 export const project = sqliteTable("projects", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
