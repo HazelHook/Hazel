@@ -69,6 +69,9 @@ importers:
       '@hono/zod-validator':
         specifier: ^0.1.3
         version: 0.1.3(hono@3.2.4)(zod@3.21.4)
+      db:
+        specifier: workspace:*
+        version: link:../db
       do-taskmanager:
         specifier: 2.0.0-rc.0
         version: 2.0.0-rc.0
@@ -85,6 +88,9 @@ importers:
       '@cloudflare/workers-types':
         specifier: ^4.20230518.0
         version: 4.20230518.0
+      dotenv:
+        specifier: ^16.1.4
+        version: 16.1.4
       wrangler:
         specifier: ^3.0.1
         version: 3.0.1
@@ -104,9 +110,15 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
     devDependencies:
+      dotenv:
+        specifier: ^16.1.4
+        version: 16.1.4
       drizzle-kit:
         specifier: ^0.18.1
         version: 0.18.1
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.1(@types/node@20.2.5)(typescript@5.1.3)
       typescript:
         specifier: 5.1.3
         version: 5.1.3
@@ -1516,6 +1528,11 @@ packages:
     resolution: {integrity: sha512-HnM6ZlFqcajLsyudHq7LeeLDr2rFAVYtDv/hV5qchQEidSck8j9OPUsXY9KwJv/lHMtYlX4DjRQqwFYa+0r8Ug==}
     dependencies:
       no-case: 2.3.2
+    dev: true
+
+  /dotenv@16.1.4:
+    resolution: {integrity: sha512-m55RtE8AsPeJBpOIFKihEmqUcoVncQIwo7x9U8ZwLEZw9ZpXboz2c+rvog+jUaJvVrZ5kBOeYQBX5+8Aa/OZQw==}
+    engines: {node: '>=12'}
     dev: true
 
   /dreamopt@0.8.0:

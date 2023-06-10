@@ -2,11 +2,6 @@ name = "hazel-backend"
 compatibility_date = "2023-01-01"
 
 
-services = [
-  { binding = "EVENT_MANAGER", service = "EVENT_MANAGER" },
-]
 
-[durable_objects]
-bindings = [
-  { name = "EVENT_DO", class_name = "EVENT_DO" }
-]
+[vars]
+LIBSQL_DB_URL="libsql://enhanced-psycho-man-makisuo.turso.io"

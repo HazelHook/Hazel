@@ -1,15 +1,16 @@
-import { sql } from "drizzle-orm"
-import { integer, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import { relations, sql } from "drizzle-orm"
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
-import { nanoid } from "nanoid"
 
 export const source = sqliteTable("sources", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-	publicId: text("public_id").default(nanoid()).notNull(),
-	externalId: text("external_id").notNull(),
+	publicId: text("public_id").notNull(),
+	customerId: text("customerId").notNull(),
 
 	name: text("name").notNull(),
 	url: text("url").notNull(),
+
+	connectionId: integer("connection_id").references(() => connection.id),
 
 	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -17,11 +18,13 @@ export const source = sqliteTable("sources", {
 
 export const destination = sqliteTable("destionations", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-	publicId: text("public_id").default(nanoid()).notNull(),
-	externalId: text("external_id").notNull(),
+	publicId: text("public_id").notNull(),
+	customerId: text("customerId").notNull(),
 
 	name: text("name").notNull(),
 	url: text("url").notNull(),
+
+	connectionId: integer("connection_id").references(() => connection.id),
 
 	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -29,14 +32,11 @@ export const destination = sqliteTable("destionations", {
 
 export const connection = sqliteTable("connections", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-	publicId: text("public_id").default(nanoid()).notNull(),
-	externalId: text("external_id").notNull(),
+	publicId: text("public_id").notNull(),
+	customerId: text("customerId").notNull(),
 
 	name: text("name").notNull(),
 	url: text("url").notNull(),
-
-	sourceId: integer("source_id").references(() => source.id),
-	destionationId: integer("destionation_id").references(() => destination.id),
 
 	// TODO: SOME SETTINGS POINTS AND STUFF
 
@@ -46,10 +46,21 @@ export const connection = sqliteTable("connections", {
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 })
 
+export const connectionRelations = relations(connection, ({ one }) => ({
+	destination: one(destination, {
+		fields: [connection.id],
+		references: [destination.connectionId],
+	}),
+	source: one(source, {
+		fields: [connection.id],
+		references: [source.connectionId],
+	}),
+}))
+
 export const project = sqliteTable("projects", {
 	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-	publicId: text("public_id").default(nanoid()).notNull(),
-	externalId: text("external_id").notNull(),
+	publicId: text("public_id").notNull(),
+	customerId: text("customerId").notNull(),
 
 	name: text("name").notNull(),
 

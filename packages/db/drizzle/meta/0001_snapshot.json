@@ -1,8 +1,8 @@
 {
 	"version": "5",
 	"dialect": "sqlite",
-	"id": "37b97b98-4854-4f4e-a552-18bb2b51292f",
-	"prevId": "00000000-0000-0000-0000-000000000000",
+	"id": "d547084d-aab3-42e9-be7b-67a84dbd4d8d",
+	"prevId": "37b97b98-4854-4f4e-a552-18bb2b51292f",
 	"tables": {
 		"connections": {
 			"name": "connections",
@@ -18,8 +18,7 @@
 					"name": "public_id",
 					"type": "text",
 					"primaryKey": false,
-					"notNull": true,
-					"default": "('fyib2lxxcxdQY-QYDrdJ2')"
+					"notNull": true
 				},
 				"external_id": {
 					"name": "external_id",
@@ -117,8 +116,7 @@
 					"name": "public_id",
 					"type": "text",
 					"primaryKey": false,
-					"notNull": true,
-					"default": "('e5GFwLWxcck5eDH8gU87R')"
+					"notNull": true
 				},
 				"external_id": {
 					"name": "external_id",
@@ -173,8 +171,7 @@
 					"name": "public_id",
 					"type": "text",
 					"primaryKey": false,
-					"notNull": true,
-					"default": "('9Y0cxD5PD-fcXc4Yn3GtP')"
+					"notNull": true
 				},
 				"external_id": {
 					"name": "external_id",
@@ -223,8 +220,7 @@
 					"name": "public_id",
 					"type": "text",
 					"primaryKey": false,
-					"notNull": true,
-					"default": "('-6Ms36K67LzLaCtU0lp3U')"
+					"notNull": true
 				},
 				"external_id": {
 					"name": "external_id",
