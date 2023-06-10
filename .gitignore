@@ -35,3 +35,4 @@ packages/backend/.dev.vars
 
 # vercel
 .vercel
+packages/db/src/tinybird/.tinyb

@@ -13,7 +13,7 @@ export const source = sqliteTable("sources", {
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 })
 
-export const sourceRelations = relations(source, ({ many }) => ({
+export const sourceRelations = relations(source, ({ many, one }) => ({
 	connections: many(connection),
 }))
 

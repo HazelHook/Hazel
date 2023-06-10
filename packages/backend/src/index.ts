@@ -1,34 +1,27 @@
 import { faker } from "@faker-js/faker"
 import { zValidator } from "@hono/zod-validator"
 import { connectDB } from "db/src/index"
-import { getConnectionsForSource } from "db/src/orm/connection"
 import { getSource } from "db/src/orm/source"
 import { connection, destination, project, source } from "db/src/schema"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
-import { prettyJSON } from "hono/pretty-json"
 import { nanoid } from "nanoid"
 import z from "zod"
+
 import { handleEvent } from "./eventManager"
+import { Tiny } from "./tiny"
 
 // import { fluxTransformConnection } from "./wasm/transformation"
-
-type MessageBody = {
-	url: string
-	req: RequestInit
-	request_id: string
-	project_id: string
-}
 
 export type Bindings = {
 	LIBSQL_DB_URL: string
 	LIBSQL_DB_AUTH_TOKEN: string
+	TINY_TOKEN: string
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
 
 app.use("/*", cors())
-app.use("*", prettyJSON())
 
 app.get("/", (c) => c.text("Hazel Backend"))
 app.post("/", async (c) => {
@@ -138,6 +131,8 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 		databaseUrl: c.env.LIBSQL_DB_URL,
 	})
 
+	const tiny = Tiny(c.env.TINY_TOKEN)
+
 	const sourceId = c.req.param("sourceId")
 	const source = await getSource({ publicId: sourceId, db })
 
@@ -155,15 +150,15 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 
 	//:!! Comment this out for  dev ya know @JeremyFunk
 	if (source.url !== c.req.url) {
-		return c.json(
-			{
-				body: {
-					status: "403",
-					message: `${c.req.url} doesn't match Source (${source.url})`,
-				},
-			},
-			403,
-		)
+		// return c.json(
+		// 	{
+		// 		body: {
+		// 			status: "403",
+		// 			message: `${c.req.url} doesn't match Source (${source.url})`,
+		// 		},
+		// 	},
+		// 	403,
+		// )
 	}
 
 	if (source.connections.length === 0) {
@@ -180,6 +175,21 @@ app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 
 	const requestId = `req_${nanoid()}`
 	const data = await c.req.text()
+
+	const headersObj: Record<string, string> = {}
+	c.req.headers.forEach((value, key) => {
+		headersObj[key] = value
+	})
+
+	await tiny.publishRequestEvent({
+		timestamp: new Date().toISOString(),
+		source_id: source.publicId,
+		customer_id: source.customerId,
+		version: "1.0",
+		request_id: requestId,
+		body: data,
+		headers: JSON.stringify(headersObj),
+	})
 
 	for (const conn of source.connections) {
 		// TODO: Check if project exists && Check if request url matches project url

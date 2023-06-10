@@ -1,0 +1,18 @@
+TOKEN tracker APPEND
+
+DESCRIPTION >
+    Request Events Datasource
+
+SCHEMA >
+    `timestamp` DateTime `json:$.timestamp`,
+    `version` LowCardinality(String) `json:$.version`,
+    `request_id` String `json:$.request_id`,
+    `customer_id` String `json:$.customer_id`,
+    `source_id` String `json:$.source_id`,
+    `body` String `json:$.body`,
+    `headers` String `json:$.headers`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
+ENGINE_SORTING_KEY "timestamp"
+ENGINE_TTL "timestamp + toIntervalDay(60)"
