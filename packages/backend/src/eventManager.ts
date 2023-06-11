@@ -1,8 +1,8 @@
 import { Connection, Destination } from "db/src/schema"
+import { Tiny } from "db/src/tinybird/index"
 import { Context } from "hono"
 
 import { Bindings } from "."
-import { Tiny } from "./tiny"
 
 export const handleEvent = async ({
 	connection,

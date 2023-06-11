@@ -1,3 +1,9 @@
+DESCRIPTION >
+	Returns Webhooks event grouped by source
+
+
+TOKEN "kpi_per_source_endpoint_read_4073" READ
+
 NODE filtered
 DESCRIPTION >
     Returns the filtered response events
@@ -20,9 +26,9 @@ SQL >
 
     %
     WITH toDate(`timestamp`) AS date
-    SELECT date, customer_id, count() AS events
+    SELECT date, `customer_id`, `source_id`, count() AS events
     FROM filtered
-    GROUP BY date, customer_id
+    GROUP BY date, `source_id`, `customer_id`
     ORDER BY date DESC, events DESC
 
 

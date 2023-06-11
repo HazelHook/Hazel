@@ -4,6 +4,7 @@ import { connectDB } from "db/src/index"
 import { getSource } from "db/src/orm/source"
 import { connection, destination, project, source } from "db/src/schema"
 import { Tiny } from "db/src/tinybird/index"
+import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { nanoid } from "nanoid"
@@ -38,6 +39,21 @@ app.get("/random", async (c) => {
 
 	return c.json(connection)
 })
+
+// app.get("/user/:userId", async (c) => {
+// 	const userId = c.req.param("userId")
+
+// 	const db = connectDB({
+// 		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
+// 		databaseUrl: c.env.LIBSQL_DB_URL,
+// 	})
+
+// 	const sources = db.query.source.findMany({
+// 		where: eq(source.customerId, userId),
+// 	})
+
+// 	return c.json(JSON.stringify(sources))
+// })
 
 app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c) => {
 	const db = connectDB({

@@ -40,7 +40,6 @@ export const Tiny = (token: string) => {
 			customer_id: z.string(),
 		}),
 		data: z.object({
-			source_id: z.string(),
 			customer_id: z.string(),
 			events: z.number(),
 			date: z.string(),
@@ -54,7 +53,6 @@ export const Tiny = (token: string) => {
 			success: z.number().min(0).max(1).optional(),
 		}),
 		data: z.object({
-			source_id: z.string(),
 			customer_id: z.string(),
 			requests: z.number(),
 			date: z.string(),

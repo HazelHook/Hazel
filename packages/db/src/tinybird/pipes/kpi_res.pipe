@@ -1,3 +1,5 @@
+TOKEN "response_events_pipe_2118_endpoint_read_4584" READ
+
 TOKEN "kpi_res" READ
 
 NODE filtered
@@ -7,12 +9,12 @@ DESCRIPTION >
 SQL >
 
     %
-    SELECT *
-    FROM response_events
-    WHERE
-        customer_id
-        = {{ String(customer_id, "", description="Customer ID", required=True) }}
-        AND success = {{ Int8(success, 1, description="Sucessful Responses or not", required=False)}}
+        SELECT *
+        FROM response_events
+        WHERE
+            customer_id
+            = {{ String(customer_id, "", description="Customer ID", required=True) }}
+            AND success = {{ Int8(success, 1, description="Sucessful Responses or not", required=False)}}
 
 
 
@@ -23,22 +25,20 @@ DESCRIPTION >
 SQL >
 
     %
-     WITH 
-            toDate(`timestamp`) AS date
-        SELECT 
-            date,
-            `customer_id`,
-            `source_id`,
-            count() AS requests
-        FROM 
-            filtered
-        GROUP BY 
-            date, 
-            `customer_id`, 
-            `source_id`, 
-            `success`
-        ORDER BY 
-            date DESC,
-            requests DESC
+         WITH 
+                toDate(`timestamp`) AS date
+            SELECT 
+                date,
+                `customer_id`,
+                count() AS requests
+            FROM 
+                filtered
+            GROUP BY 
+                date, 
+                `customer_id`, 
+                `success`
+            ORDER BY 
+                date DESC,
+                requests DESC
 
 
