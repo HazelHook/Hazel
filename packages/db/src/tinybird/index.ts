@@ -1,6 +1,15 @@
 import { Tinybird } from "@chronark/zod-bird"
 import { z } from "zod"
 
+const sourceTimeSeriesRes = z.object({
+	date: z.string(),
+	customer_id: z.string(),
+	source_id: z.string(),
+	events: z.number(),
+})
+
+export type SourceTimeSeries = z.infer<typeof sourceTimeSeriesRes>
+
 export const Tiny = (token: string) => {
 	const tb = new Tinybird({ token })
 
@@ -59,5 +68,13 @@ export const Tiny = (token: string) => {
 		}),
 	})
 
-	return { publishRequestEvent, publishResponseEvent, getResKpis, getReqKpis }
+	const getTimeseriesBySource = tb.buildPipe({
+		pipe: "kpi_per_source",
+		parameters: z.object({
+			customer_id: z.string(),
+		}),
+		data: sourceTimeSeriesRes,
+	})
+
+	return { publishRequestEvent, publishResponseEvent, getResKpis, getReqKpis, getTimeseriesBySource }
 }

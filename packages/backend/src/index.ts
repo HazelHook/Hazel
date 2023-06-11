@@ -142,8 +142,8 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 })
 
 app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
-	c.env.HAZELFLUX_BINDING.fetch(c.req.raw.clone())
-
+	const test = await c.env.HAZELFLUX_BINDING.fetch(c.req.raw.clone())
+	console.log(await test.text())
 	const db = connectDB({
 		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
 		databaseUrl: c.env.LIBSQL_DB_URL,

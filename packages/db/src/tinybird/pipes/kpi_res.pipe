@@ -13,8 +13,9 @@ SQL >
         FROM response_events
         WHERE
             customer_id
-            = {{ String(customer_id, "", description="Customer ID", required=True) }}
+            = {{ String(customer_id, "cus_8NiWC2t_SZVKALuy", description="Customer ID", required=True) }}
             AND success = {{ Int8(success, 1, description="Sucessful Responses or not", required=False)}}
+            AND timestamp >= DATE_SUB(NOW(), INTERVAL {{Int16(date_range, 30, description="Date Range for Timeseries", required=False)}} DAY)
 
 
 
@@ -30,7 +31,8 @@ SQL >
             SELECT 
                 date,
                 `customer_id`,
-                count() AS requests
+                count() AS requests,
+                uniq(source_id)
             FROM 
                 filtered
             GROUP BY 

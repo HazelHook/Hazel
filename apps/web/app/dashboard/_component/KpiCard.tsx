@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
+import { chartColors } from "@/lib/utils"
 
 export interface KpiCardProps {
 	title: string
@@ -8,9 +9,10 @@ export interface KpiCardProps {
 	labels: string[]
 	group?: string
 	id?: string
+	color?: string
 }
 
-export const KpiCard = ({ series, labels, title, subtitle, group, id }: KpiCardProps) => {
+export const KpiCard = ({ series, labels, title, subtitle, group, id, color }: KpiCardProps) => {
 	return (
 		<Card className="w-full h-full overflow-hidden">
 			<div className="pt-4">
@@ -30,6 +32,7 @@ export const KpiCard = ({ series, labels, title, subtitle, group, id }: KpiCardP
 						fill: {
 							opacity: 1,
 						},
+						colors: color ? [color] : chartColors,
 						labels: labels,
 						yaxis: {
 							min: 0,

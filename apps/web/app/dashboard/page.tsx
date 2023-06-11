@@ -1,11 +1,12 @@
 import { Tiny } from "db/src/tinybird"
 
-import { getSeededProfileImageUrl } from "@/lib/utils"
+import { chartColors, getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 
 import { KpiCard } from "./_component/KpiCard"
+import { transformSourcesChartData } from "./_utils"
 
 const Dashboard = async () => {
 	// rome-ignore lint/style/noNonNullAssertion: <explanation>
@@ -24,6 +25,9 @@ const Dashboard = async () => {
 		success: 0,
 	})
 
+	const bySources = await tiny.getTimeseriesBySource({ customer_id: "cus_8NiWC2t_SZVKALuy" })
+
+	const chartData = transformSourcesChartData(bySources.data)
 	return (
 		<main className="container p-8 space-y-4">
 			<div className="flex flex-row gap-2">
@@ -37,6 +41,7 @@ const Dashboard = async () => {
 			</div>
 			<div className="flex gap-4 flex-col md:flex-row">
 				<KpiCard
+					color={chartColors[0]}
 					title={"Events"}
 					subtitle={String(reqKpis.data.reduce((curr, el) => curr + el.events, 0))}
 					group="kpis"
@@ -45,6 +50,7 @@ const Dashboard = async () => {
 					labels={reqKpis.data.map((datum) => datum.date)}
 				/>
 				<KpiCard
+					color={chartColors[1]}
 					title={"Requests"}
 					subtitle={String(resKpis.data.reduce((curr, el) => curr + el.requests, 0))}
 					id={"req"}
@@ -58,6 +64,7 @@ const Dashboard = async () => {
 					labels={reqKpis.data.map((datum) => datum.date)}
 				/>
 				<KpiCard
+					color={chartColors[3]}
 					title={"Errors"}
 					subtitle={String(errorKpis.data.reduce((curr, el) => curr + el.requests, 0))}
 					id={"errors"}
@@ -76,18 +83,6 @@ const Dashboard = async () => {
 					<CardHeader>
 						<CardTitle>Usage Overview</CardTitle>
 					</CardHeader>
-					<CardContent className="pb-0">
-						<div className="flex gap-8">
-							<div>
-								<span className="text-muted-forground text-xs">This month</span>
-								<p className="font-sans text-lg font-medium">75,689</p>
-							</div>
-							<div>
-								<span className="text-muted-forground text-xs">Last month</span>
-								<p className="font-sans text-lg font-medium">75,689</p>
-							</div>
-						</div>
-					</CardContent>
 
 					<div className="w-full p-6">
 						<Chart
@@ -101,6 +96,7 @@ const Dashboard = async () => {
 										show: false,
 									},
 								},
+								colors: chartColors,
 								legend: {
 									show: true,
 									position: "top",
@@ -114,15 +110,7 @@ const Dashboard = async () => {
 								},
 								xaxis: {
 									type: "datetime",
-									categories: [
-										"2020-09-19T00:00:00.000Z",
-										"2020-09-20T01:30:00.000Z",
-										"2020-09-21T02:30:00.000Z",
-										"2020-09-22T03:30:00.000Z",
-										"2020-09-23T04:30:00.000Z",
-										"2020-09-24T05:30:00.000Z",
-										"2020-09-25T06:30:00.000Z",
-									],
+									categories: chartData.categories,
 								},
 								tooltip: {
 									x: {
@@ -130,10 +118,7 @@ const Dashboard = async () => {
 									},
 								},
 							}}
-							series={[
-								{ name: "Source 1", data: [12, 12, 12] },
-								{ name: "Source 2", data: [4, 4, 4] },
-							]}
+							series={chartData.series}
 							type="area"
 							height={350}
 							width={"100%"}

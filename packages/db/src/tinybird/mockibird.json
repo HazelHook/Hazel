@@ -1,0 +1,59 @@
+{
+	"timestamp": {
+		"type": "mockingbird.datetimeBetween",
+		"params": [
+			{
+				"start": "2023-05-12T00:00:00.000Z",
+				"end": "2023-06-12T00:00:00.000Z"
+			}
+		]
+	},
+	"version": {
+		"type": "mockingbird.pick",
+		"params": [
+			{
+				"values": ["1.0"]
+			}
+		]
+	},
+	"source_id": {
+		"type": "mockingbird.pick",
+		"params": [
+			{
+				"values": ["src_7FZZ8Ucd_rvfR8eNqDSks", "src_7FZZ8Ucd_rvfR8eNqDSks"]
+			}
+		]
+	},
+	"request_id": {
+		"type": "mockingbird.pick",
+		"params": [
+			{
+				"values": ["req_xcSsGaKnY9uLb6hqRc0Na"]
+			}
+		]
+	},
+	"customer_id": {
+		"type": "mockingbird.pick",
+		"params": [
+			{
+				"values": ["cus_8NiWC2t_SZVKALuy"]
+			}
+		]
+	},
+	"body": {
+		"type": "mockingbird.pick",
+		"params": [
+			{
+				"values": ["{}"]
+			}
+		]
+	},
+	"headers": {
+		"type": "mockingbird.pick",
+		"params": [
+			{
+				"values": ["{}"]
+			}
+		]
+	}
+}

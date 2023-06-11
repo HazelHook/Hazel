@@ -5,10 +5,19 @@ DESCRIPTION >
 SQL >
 
     %
-        SELECT *
-        FROM request_events
-        WHERE
-            customer_id = {{ String(customer_id, "", description="Customer ID", required=True) }}
+    SELECT *
+    FROM request_events
+    WHERE
+        customer_id
+        = {{
+            String(
+                customer_id,
+                "cus_8NiWC2t_SZVKALuy",
+                description="Customer ID",
+                required=True,
+            )
+        }}
+        AND timestamp >= DATE_SUB(NOW(), INTERVAL {{Int16(date_range, 30, description="Date Range for Timeseries", required=False)}} DAY)
 
 
 
@@ -20,7 +29,7 @@ SQL >
 
     %
     WITH toDate(`timestamp`) AS date
-    SELECT date, customer_id, count() AS events
+    SELECT date, customer_id, count() AS events, uniq(source_id) AS sources
     FROM filtered
     GROUP BY date, customer_id
     ORDER BY date DESC, events DESC

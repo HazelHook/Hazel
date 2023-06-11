@@ -4,6 +4,11 @@ services = [
   { binding = "HAZELFLUX_BINDING", service = "hazelflux", environment = "production" }
 ]
 
+[vars]
+LIBSQL_DB_AUTH_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODY0MjQ5NDMsImlkIjoiZTg1ZTJlY2EtMDdjMy0xMWVlLWI0NzItMDJhYWUyZTUyZmQyIn0.cZDxUBAfxBt3J7DGfVUodfind-WgN92pntg9nS0HZUqOeKoZUbXVV8OTf3pysin9Ei4DJNKKzPnTrvlaxSwsAw"
+LIBSQL_DB_URL = "libsql://hazel-makisuo.turso.io"
+TINY_TOKEN = "p.eyJ1IjogImI2MTNjZDdkLTFmZDItNDNlOS1hNzA5LTZhZTQ0NmI3ZjMxMSIsICJpZCI6ICI1NjJkMWRmOC0yZGQ3LTQ2YmUtODcxYS05OTEyZWQ4MzMwNDIifQ.DI8E73IYinRTBH2_XbjwMvzMSzR_qPlROoaAhhOSa-0"
+
 
 [placement]
 mode = "smart"
