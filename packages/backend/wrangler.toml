@@ -5,9 +5,5 @@ services = [
 ]
 
 
-[vars]
-LIBSQL_DB_URL="libsql://hazel-jeremyfunk.turso.io"
-
-
 [placement]
 mode = "smart"
