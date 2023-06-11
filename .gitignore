@@ -13,6 +13,9 @@ coverage
 out/
 build
 
+# rust
+target/
+
 # misc
 .DS_Store
 *.pem
