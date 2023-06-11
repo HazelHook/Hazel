@@ -26,7 +26,7 @@ app.use("/*", cors())
 app.get("/", (c) => c.text("Hazel Backend"))
 app.post("/", async (c) => {
 	console.log(await c.req.json())
-	return c.text("Hello Hono!")
+	return c.text("Hello Hono!", 500)
 })
 
 app.get("/random", async (c) => {

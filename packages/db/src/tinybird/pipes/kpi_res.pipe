@@ -1,0 +1,44 @@
+TOKEN "kpi_res" READ
+
+NODE filtered
+DESCRIPTION >
+    Returns the filtered response events
+
+SQL >
+
+    %
+    SELECT *
+    FROM response_events
+    WHERE
+        customer_id
+        = {{ String(customer_id, "", description="Customer ID", required=True) }}
+        AND success = {{ Int8(success, 1, description="Sucessful Responses or not", required=False)}}
+
+
+
+NODE timestamp_data
+DESCRIPTION >
+    Returns data sorted by timestamp
+
+SQL >
+
+    %
+     WITH 
+            toDate(`timestamp`) AS date
+        SELECT 
+            date,
+            `customer_id`,
+            `source_id`,
+            count() AS requests
+        FROM 
+            filtered
+        GROUP BY 
+            date, 
+            `customer_id`, 
+            `source_id`, 
+            `success`
+        ORDER BY 
+            date DESC,
+            requests DESC
+
+
