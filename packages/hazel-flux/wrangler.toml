@@ -9,4 +9,4 @@ command = "cargo install -q worker-build && worker-build --release"
 port = 8786
 
 [vars]
-environment = "dev"
+environment = "prod"

@@ -12,7 +12,7 @@ pub fn get_input_node(node: &RequestNode) -> Result<Box<dyn InputNode>, Box<dyn 
     match node_type {
         "json" => Ok(Box::new(json_input_node::JsonInputNode)),
         "validated_json" => {
-            let config: &Value = node.config.as_ref().unwrap();
+            let config: Value = node.config.clone().unwrap_or(Value::Null);
 
             let input = validated_json_input_node::ValidatedJsonInputNode::configure(config)?;
             Ok(Box::new(input))

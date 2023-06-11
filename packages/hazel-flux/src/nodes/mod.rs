@@ -12,7 +12,7 @@ pub trait InputNode {
 
 // Returns a new instance of the input node with the given configuration or throws an error
 pub trait ConfigurableInputNode: InputNode {
-    fn configure(config: &Value) -> Result<Self, Box<dyn std::error::Error>>
+    fn configure(config: Value) -> Result<Self, Box<dyn std::error::Error>>
     where
         Self: Sized;
 }
