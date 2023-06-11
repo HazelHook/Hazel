@@ -64,7 +64,7 @@ fn err_string(message: &str, error: &str, code: u16) -> Result<Response> {
 }
 
 #[event(fetch)]
-async fn main(mut req: Request, env: Env, ctx: Context) -> Result<Response> {
+async fn main(mut req: Request, env: Env, _: Context) -> Result<Response> {
     let mut headers = Headers::new();
     let _ = headers.set("Content-Type", "application/json");
 
