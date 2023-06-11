@@ -1,15 +1,15 @@
-import { faker } from "@faker-js/faker"
 import { zValidator } from "@hono/zod-validator"
+import { randWord } from "@ngneat/falso"
 import { connectDB } from "db/src/index"
 import { getSource } from "db/src/orm/source"
 import { connection, destination, project, source } from "db/src/schema"
+import { Tiny } from "db/src/tinybird/index"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { nanoid } from "nanoid"
 import z from "zod"
 
 import { handleEvent } from "./eventManager"
-import { Tiny } from "./tiny"
 
 // import { fluxTransformConnection } from "./wasm/transformation"
 
@@ -56,11 +56,11 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 			const projectRes = await tx
 				.insert(project)
 				.values({
-					name: `Project ${faker.internet.userName()}`,
+					name: `Project ${randWord({ capitalize: true })}`,
 					publicId: projectPublicId,
 					customerId: customer,
 
-					slug: faker.internet.domainWord(),
+					slug: randWord({ capitalize: true }),
 				})
 				.run()
 
@@ -68,7 +68,7 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 			const sourceRes = await tx
 				.insert(source)
 				.values({
-					name: `Source ${faker.internet.userName()}`,
+					name: `Source ${randWord({ capitalize: true })}`,
 					publicId: sourcePublicId,
 					customerId: customer,
 
@@ -78,7 +78,7 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 			const destinationRes = await tx
 				.insert(destination)
 				.values({
-					name: `Destination ${faker.internet.userName()}`,
+					name: `Destination ${randWord({ capitalize: true })}`,
 					publicId: `dst_${nanoid()}`,
 					customerId: customer,
 
@@ -89,7 +89,7 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 			await tx
 				.insert(connection)
 				.values({
-					name: `Connection ${faker.internet.userName()}`,
+					name: `Connection ${randWord({ capitalize: true })}`,
 					publicId: `con_${nanoid()}`,
 					customerId: customer,
 					fluxConfig: JSON.stringify({

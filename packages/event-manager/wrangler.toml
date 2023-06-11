@@ -1,8 +1,0 @@
-name = "hazel-event-manager"
-compatibility_date = "2023-01-01"
-
-
-[durable_objects]
-bindings = [
-  { name = "EVENT_DO", class_name = "EVENT_DO" }
-]
