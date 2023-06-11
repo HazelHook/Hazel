@@ -1,7 +1,7 @@
 {
 	"name": "hazel-backend",
 	"scripts": {
-		"dev": "wrangler dev src/index.ts",
+		"dev": "wrangler dev src/index.ts --env dev",
 		"deploy": "wrangler deploy --minify src/index.ts"
 	},
 	"dependencies": {

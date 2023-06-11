@@ -4,7 +4,6 @@ import { connectDB } from "db/src/index"
 import { getSource } from "db/src/orm/source"
 import { connection, destination, project, source } from "db/src/schema"
 import { Tiny } from "db/src/tinybird/index"
-import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { nanoid } from "nanoid"
@@ -18,6 +17,7 @@ export type Bindings = {
 	LIBSQL_DB_URL: string
 	LIBSQL_DB_AUTH_TOKEN: string
 	TINY_TOKEN: string
+	HAZELFLUX_BINDING: ServiceWorkerGlobalScope
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
@@ -142,6 +142,8 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 })
 
 app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
+	c.env.HAZELFLUX_BINDING.fetch(c.req.raw.clone())
+
 	const db = connectDB({
 		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
 		databaseUrl: c.env.LIBSQL_DB_URL,

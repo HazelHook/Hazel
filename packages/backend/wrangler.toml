@@ -1,9 +1,12 @@
 name = "hazel-backend"
 compatibility_date = "2023-01-01"
+services = [
+  { binding = "HAZELFLUX_BINDING", service = "hazelflux", environment = "production" }
+]
 
 
 [vars]
-LIBSQL_DB_URL="libsql://hazel-makisuo.turso.io"
+LIBSQL_DB_URL="libsql://hazel-jeremyfunk.turso.io"
 
 
 [placement]
