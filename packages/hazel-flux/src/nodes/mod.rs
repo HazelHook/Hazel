@@ -4,8 +4,8 @@ pub mod output;
 pub mod transform;
 
 pub trait InputNode {
-    fn transform_input(&self, data: &str) -> Result<Value, Box<dyn std::error::Error>>;
-    fn transform_input_dev(&self, data: &str) -> Result<Value, Box<dyn std::error::Error>> {
+    fn transform_input(&self, data: &Value) -> Result<Value, Box<dyn std::error::Error>>;
+    fn transform_input_dev(&self, data: &Value) -> Result<Value, Box<dyn std::error::Error>> {
         self.transform_input(data)
     }
 }

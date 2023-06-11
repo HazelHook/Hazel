@@ -32,6 +32,7 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 packages/backend/.dev.vars
+packages/hazel-flux/performance-testing/data/*.json
 
 # turbo
 .turbo

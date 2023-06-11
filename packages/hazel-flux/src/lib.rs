@@ -1,5 +1,7 @@
 use config::{prepare, RequestConfig, ResolvedConfig};
-use serde::Deserialize;
+use jsonschema::JSONSchema;
+use serde::{Deserialize, Serialize};
+use serde_json::{Value, Deserializer};
 use worker::*;
 
 mod config;
@@ -7,7 +9,7 @@ pub mod nodes;
 
 fn transform_prod(
     config: &ResolvedConfig,
-    data: &str,
+    data: &Value,
 ) -> core::result::Result<String, Box<dyn std::error::Error>> {
     let mut transformed = config.input_node.transform_input(&data)?;
     for transformer in config.transformer_nodes.iter() {
@@ -19,7 +21,7 @@ fn transform_prod(
 
 fn transform_dev(
     config: &ResolvedConfig,
-    data: &str,
+    data: &Value,
 ) -> core::result::Result<String, Box<dyn std::error::Error>> {
     let mut transformed = config.input_node.transform_input_dev(&data)?;
 
@@ -30,9 +32,9 @@ fn transform_dev(
     config.output_node.transform_output_dev(&transformed)
 }
 
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 struct RequestData {
-    data: String,
+    data: Value,
     config: RequestConfig,
 }
 
@@ -106,5 +108,10 @@ async fn main(mut req: Request, env: Env, _: Context) -> Result<Response> {
         return Ok(err.with_headers(headers));
     }
 
-    Response::ok(output.unwrap())
+    let resp = Response::ok(output.unwrap())?;
+
+    let resp = resp.with_headers(headers);
+
+    Ok(resp)
 }
+

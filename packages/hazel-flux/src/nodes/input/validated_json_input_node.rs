@@ -10,8 +10,8 @@ pub struct ValidatedJsonInputNode{
 
 
 impl InputNode for ValidatedJsonInputNode {
-    fn transform_input(&self, data: &str) -> Result<Value, Box<dyn std::error::Error>> {
-        let json_data = serde_json::from_str(data)?;
+    fn transform_input(&self, data: &Value) -> Result<Value, Box<dyn std::error::Error>> {
+        let json_data = serde_json::from_str(data.to_string().as_str())?;
         console_log!("Validating json data: {}", json_data);
 
         let result = self.schema.validate(&json_data);
