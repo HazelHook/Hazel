@@ -1,5 +1,6 @@
 import { Tiny } from "db/src/tinybird"
 
+import { serverClient } from "@/server/server"
 import { chartColors, getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,7 +8,6 @@ import { Chart } from "@/components/ui/chart"
 
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
-import { serverClient } from "@/server/server"
 
 const Dashboard = async () => {
 	const test = await serverClient.greeting.query({ text: "XD" })

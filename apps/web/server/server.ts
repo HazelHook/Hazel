@@ -1,8 +1,9 @@
-import { createTRPCProxyClient, httpBatchLink, loggerLink } from "@trpc/client"
-import { AppRouter } from "./routers/_app"
-import SuperJSON from "superjson"
-import { getUrl } from "./shared"
 import { headers } from "next/headers"
+import { createTRPCProxyClient, httpBatchLink, loggerLink } from "@trpc/client"
+import SuperJSON from "superjson"
+
+import { AppRouter } from "./routers/_app"
+import { getUrl } from "./shared"
 
 export const serverClient = createTRPCProxyClient<AppRouter>({
 	transformer: SuperJSON,

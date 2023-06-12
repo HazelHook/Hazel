@@ -7,8 +7,9 @@ import {
 	experimental_serverActionLink,
 } from "@trpc/next/app-dir/client"
 import superjson from "superjson"
-import { getUrl } from "./shared"
+
 import { AppRouter } from "./routers/_app"
+import { getUrl } from "./shared"
 
 export const api = experimental_createTRPCNextAppDirClient<AppRouter>({
 	config() {

@@ -1,9 +1,11 @@
 "use client"
 
-import { useAction } from "@/server/client"
 import { useState } from "react"
-import { testAction } from "./_actions"
+
+import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
+
+import { testAction } from "./_actions"
 
 export function Action() {
 	const [text, setText] = useState("")
