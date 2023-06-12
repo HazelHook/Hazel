@@ -37,16 +37,16 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children, params }: RootLayoutProps) {
 	return (
-		<>
-			<html lang="en" suppressHydrationWarning>
-				<head />
-				<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
-					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-						{children}
-						<TailwindIndicator />
-					</ThemeProvider>
-				</body>
-			</html>
-		</>
+		<div className="relative flex min-h-screen flex-col">
+			<SiteHeader />
+			<div className="grid grow lg:grid-cols-5">
+				{/* @ts-expect-error */}
+				<Sidebar
+					params={params}
+					className="fixed flex w-12 flex-col justify-between transition-[width] duration-1000 lg:w-64"
+				/>
+				<div className="col-span-full ml-12 border-l transition-[margin] duration-1000 lg:ml-64">{children}</div>
+			</div>
+		</div>
 	)
 }

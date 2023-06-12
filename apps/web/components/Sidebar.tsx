@@ -17,7 +17,7 @@ import { PaperWithTextIcon } from "@/components/icons/PaperWithText"
 import { PersonsIcon } from "@/components/icons/Persons"
 import { SettingsIcon } from "@/components/icons/Settings"
 import { WritingIcon } from "@/components/icons/Writing"
-import { ProjectSelect } from "@/app/dashboard/_component/ProjectSelect"
+import { ProjectSelect } from "@/app/(pages)/dashboard/_component/ProjectSelect"
 
 import { SidebarProjectItem } from "./SidearProjectItem"
 import { SidebarClientItem } from "./SidebarItem"
