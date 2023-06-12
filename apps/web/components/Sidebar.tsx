@@ -95,14 +95,14 @@ export async function Sidebar({ className, params }: SidebarProps) {
 				<div className="py-2 lg:px-4">
 					<div className="space-y-1">
 						<Suspense>
-							<div className="mb-4">
+							<div className="mb-4 hidden lg:block ">
 								<ProjectSelect projects={await projects} />
 							</div>
 						</Suspense>
 
-						<SidebarItem href={"/app"} title={"Overview"} icon={HomeIcon} />
+						<SidebarItem href={"/dashboard"} title={"Overview"} icon={HomeIcon} />
 						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={WritingIcon} />
-						<SidebarItem href={"/app/overview"} title={"Connections"} icon={DashboardIcon} />
+						<SidebarItem href={"/connections"} title={"Connections"} icon={DashboardIcon} />
 					</div>
 				</div>
 				<div className="py-2 space-y-2">

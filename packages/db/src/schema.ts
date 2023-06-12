@@ -58,6 +58,10 @@ export const connectionRelations = relations(connection, ({ one }) => ({
 		fields: [connection.sourceId],
 		references: [source.id],
 	}),
+	project: one(project, {
+		fields: [connection.projectId],
+		references: [project.id],
+	}),
 }))
 
 export const project = sqliteTable("projects", {
@@ -76,18 +80,9 @@ export const project = sqliteTable("projects", {
 	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 })
 
-// export const connectionProject = sqliteTable(
-// 	"connections",
-// 	{
-// 		projectId: integer("project_id").references(() => project.id),
-// 		connectionId: integer("connection_id").references(() => connection.id),
-// 	},
-// 	(table) => {
-// 		return {
-// 			pk: primaryKey(table.projectId, table.connectionId),
-// 		}
-// 	},
-// )
+export const projectRelations = relations(project, ({ many }) => ({
+	connection: many(connection),
+}))
 
 export type InsertConnection = InferModel<typeof connection, "insert">
 export type Connection = InferModel<typeof connection, "select">

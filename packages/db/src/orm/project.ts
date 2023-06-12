@@ -25,6 +25,26 @@ export async function getProjects({
 	})
 }
 
+export async function getFullProjects({
+	customerId,
+	db,
+}: {
+	customerId: string
+	db: DB
+}) {
+	return await db.query.project.findMany({
+		where: eq(project.customerId, customerId),
+		with: {
+			connection: {
+				with: {
+					source: true,
+					destination: true,
+				},
+			},
+		},
+	})
+}
+
 export async function createProject({
 	data,
 	db,
