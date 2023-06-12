@@ -30,7 +30,8 @@ const transformProjectsToFlowElements = (projects: FullProject[]): { nodes: Node
 	const edges: Edge[] = []
 
 	const yPadding = 200
-	let yPosition = 10
+	const labelPadding = 70
+	let yPosition = labelPadding
 
 	projects.forEach((project) => {
 		// Add project as node
@@ -38,10 +39,10 @@ const transformProjectsToFlowElements = (projects: FullProject[]): { nodes: Node
 			id: project.publicId,
 			type: "group",
 			data: { label: project.name },
-			position: { x: 0, y: yPosition - 45 },
+			position: { x: 0, y: yPosition - labelPadding },
 			className: "w-[1000px]",
 			style: {
-				height: project.connection.length * 300 + 45,
+				height: project.connection.length * 300 + labelPadding,
 			},
 		})
 
@@ -51,7 +52,7 @@ const transformProjectsToFlowElements = (projects: FullProject[]): { nodes: Node
 				id: connection.publicId,
 				type: "input",
 				data: { label: connection.name },
-				position: { x: 100, y: yPosition },
+				position: { x: 50, y: yPosition },
 			})
 
 			// If there's a destination, add it as a node and connect it to the connection
