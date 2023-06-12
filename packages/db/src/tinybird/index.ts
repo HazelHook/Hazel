@@ -76,5 +76,11 @@ export const Tiny = (token: string) => {
 		data: sourceTimeSeriesRes,
 	})
 
-	return { publishRequestEvent, publishResponseEvent, getResKpis, getReqKpis, getTimeseriesBySource }
+	return {
+		publishRequestEvent,
+		publishResponseEvent,
+		getResKpis,
+		getReqKpis,
+		getTimeseriesBySource,
+	}
 }

@@ -44,3 +44,15 @@ export const createConnection = async ({
 }) => {
 	return db.insert(connection).values(data).returning({ id: connection.id, publicId: connection.publicId }).get()
 }
+
+export async function getConnections({
+	customerId,
+	db,
+}: {
+	customerId: string
+	db: DB
+}) {
+	return await db.query.connection.findMany({
+		where: eq(connection.customerId, customerId),
+	})
+}

@@ -29,9 +29,13 @@ export const metadata: Metadata = {
 
 interface RootLayoutProps {
 	children: React.ReactNode
+	params: {
+		org?: string
+		slug?: string
+	}
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children, params }: RootLayoutProps) {
 	return (
 		<>
 			<html lang="en" suppressHydrationWarning>
@@ -42,7 +46,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
 							<SiteHeader />
 							<div className="grid grow lg:grid-cols-5">
 								{/* @ts-expect-error */}
-								<Sidebar className="fixed flex w-12 flex-col justify-between transition-[width] duration-1000 lg:w-64" />
+								<Sidebar
+									params={params}
+									className="fixed flex w-12 flex-col justify-between transition-[width] duration-1000 lg:w-64"
+								/>
 								<div className="col-span-full ml-12 border-l transition-[margin] duration-1000 lg:ml-64">
 									{children}
 								</div>

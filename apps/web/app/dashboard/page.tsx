@@ -25,7 +25,9 @@ const Dashboard = async () => {
 		success: 0,
 	})
 
-	const bySources = await tiny.getTimeseriesBySource({ customer_id: "cus_8NiWC2t_SZVKALuy" })
+	const bySources = await tiny.getTimeseriesBySource({
+		customer_id: "cus_8NiWC2t_SZVKALuy",
+	})
 
 	const chartData = transformSourcesChartData(bySources.data)
 	return (
@@ -131,5 +133,7 @@ const Dashboard = async () => {
 }
 
 export const fetchCache = "force-no-store"
+
+export const runtime = "edge"
 
 export default Dashboard

@@ -32,3 +32,5 @@ export default function IndexPage() {
 		</section>
 	)
 }
+
+export const runtime = "edge"

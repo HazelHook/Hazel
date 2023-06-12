@@ -1,6 +1,10 @@
+import { Suspense } from "react"
 import Link from "next/link"
+import { getConnections } from "db/src/orm/connection"
+import { getProjects } from "db/src/orm/project"
 import { LucideProps } from "lucide-react"
 
+import db from "@/lib/db"
 import { cn } from "@/lib/utils"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { AddPersonIcon } from "@/components/icons/AddPerson"
@@ -13,10 +17,17 @@ import { PaperWithTextIcon } from "@/components/icons/PaperWithText"
 import { PersonsIcon } from "@/components/icons/Persons"
 import { SettingsIcon } from "@/components/icons/Settings"
 import { WritingIcon } from "@/components/icons/Writing"
+import { ProjectSelect } from "@/app/dashboard/_component/ProjectSelect"
 
+import { SidebarProjectItem } from "./SidearProjectItem"
 import { SidebarClientItem } from "./SidebarItem"
 
-type SidebarProps = React.HTMLAttributes<HTMLDivElement>
+type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
+	params: {
+		org?: string
+		slug?: string
+	}
+}
 
 export const SidebarItem = ({
 	icon,
@@ -43,12 +54,23 @@ export const SidebarItem = ({
 	)
 }
 
-export async function Sidebar({ className }: SidebarProps) {
+export async function Sidebar({ className, params }: SidebarProps) {
 	// const user = await currentUser()
 
 	// const organizations = await clerkClient.users.getOrganizationMembershipList({
 	// 	userId: user?.id,
 	// })
+
+	// TODO: HARD CODED
+	const projects = getProjects({
+		customerId: "cus_8NiWC2t_SZVKALuy",
+		db,
+	})
+
+	const connections = await getConnections({
+		customerId: "cus_8NiWC2t_SZVKALuy",
+		db,
+	})
 
 	// const isOrg!== "personal"
 
@@ -72,14 +94,20 @@ export async function Sidebar({ className }: SidebarProps) {
 
 				<div className="py-2 lg:px-4">
 					<div className="space-y-1">
+						<Suspense>
+							<div className="mb-4">
+								<ProjectSelect projects={await projects} />
+							</div>
+						</Suspense>
+
 						<SidebarItem href={"/app"} title={"Overview"} icon={HomeIcon} />
-						<SidebarItem href={"/app/overview"} title={"Dashboard"} icon={DashboardIcon} disabled />
 						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={WritingIcon} />
+						<SidebarItem href={"/app/overview"} title={"Connections"} icon={DashboardIcon} />
 					</div>
 				</div>
-				<div className="py-2">
+				<div className="py-2 space-y-2">
 					<div className="hidden flex-row items-center justify-between lg:flex">
-						<h2 className="relative w-full grow px-6 text-lg font-semibold tracking-tight">Projects</h2>
+						<h2 className="relative w-full grow px-6 text-lg font-semibold tracking-tight">Wenhook Connections</h2>
 						{/* <CreateWebsite
 							organizations={JSON.parse(JSON.stringify(organizations.map(({ organization }) => organization)))}
 							user={JSON.parse(JSON.stringify(user))}
@@ -90,9 +118,9 @@ export async function Sidebar({ className }: SidebarProps) {
 					</div>
 					<ScrollArea className={"max-w-[300px] lg:px-2"}>
 						<div className="space-y-1 py-2 lg:px-2">
-							{/* {projects.map((project) => (
+							{connections.map((project) => (
 								<SidebarProjectItem key={project.id} project={project} params={params} />
-							))} */}
+							))}
 						</div>
 					</ScrollArea>
 				</div>
