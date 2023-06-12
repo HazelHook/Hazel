@@ -2,13 +2,15 @@ import { Tiny } from "db/src/tinybird"
 
 import { chartColors, getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
+import { client } from "@/server/client"
 
 const Dashboard = async () => {
+	const test = await client.greeting.query({ text: "XD" })
 	// rome-ignore lint/style/noNonNullAssertion: <explanation>
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 

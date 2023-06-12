@@ -1,6 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import React, { memo } from "react"
 import { Handle, Position } from "reactflow"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface DefaultNode {
 	data: {

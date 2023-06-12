@@ -1,7 +1,7 @@
 import Link from "next/link"
+import { Image } from "@unpic/react"
 
 import { Button } from "@/components/ui/button"
-import { Image } from "@unpic/react"
 
 export default function NotFoundPage() {
 	return (

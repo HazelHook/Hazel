@@ -1,12 +1,15 @@
 "use client"
 
 import ReactFlow, { Background, Controls, Edge, Node, NodeTypes } from "reactflow"
+
 import "./Flow.css"
+
+import { Connection, Destination, Project, Source } from "db/src/schema"
+
 import { DefaultNode } from "./nodes/DefaultNode"
+import { GroupNode } from "./nodes/Group"
 import { InputNode } from "./nodes/InputNode"
 import { OutputNode } from "./nodes/OutputNode"
-import { GroupNode } from "./nodes/Group"
-import { Connection, Destination, Project, Source } from "db/src/schema"
 
 const nodeTypes: NodeTypes = {
 	default: DefaultNode,
@@ -19,7 +22,10 @@ export type FullProject = Project & {
 	connection: FullConnection[]
 }
 
-export type FullConnection = Connection & { source?: Source; destination?: Destination }
+export type FullConnection = Connection & {
+	source?: Source
+	destination?: Destination
+}
 
 export interface FlowInterface {
 	projects: FullProject[]
