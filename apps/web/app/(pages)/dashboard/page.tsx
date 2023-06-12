@@ -7,10 +7,10 @@ import { Chart } from "@/components/ui/chart"
 
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
-import { client } from "@/server/client"
+import { serverClient } from "@/server/server"
 
 const Dashboard = async () => {
-	const test = await client.greeting.query({ text: "XD" })
+	const test = await serverClient.greeting.query({ text: "XD" })
 	// rome-ignore lint/style/noNonNullAssertion: <explanation>
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 

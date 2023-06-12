@@ -6,16 +6,6 @@ import { ZodError } from "zod"
 
 import { Context } from "./context"
 
-function getBaseUrl() {
-	if (typeof window !== "undefined") return ""
-	if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
-	return `http://localhost:${process.env.PORT || "3000"}`
-}
-
-export function getUrl() {
-	return `${getBaseUrl()}/api/trpc`
-}
-
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,
 	errorFormatter(opts) {
