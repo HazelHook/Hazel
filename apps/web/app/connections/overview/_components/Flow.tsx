@@ -107,11 +107,9 @@ const transformProjectsToFlowElements = (projects: FullProject[]): { nodes: Node
 export const Flow = ({ projects }: FlowInterface) => {
 	const { nodes, edges } = transformProjectsToFlowElements(projects)
 	return (
-		<div className="h-full">
-			<ReactFlow nodes={nodes} nodeTypes={nodeTypes} edges={edges} fitView className="bg-background">
-				<Background />
-				<Controls />
-			</ReactFlow>
-		</div>
+		<ReactFlow nodes={nodes} nodeTypes={nodeTypes} edges={edges} fitView className="bg-background">
+			<Background />
+			<Controls />
+		</ReactFlow>
 	)
 }
