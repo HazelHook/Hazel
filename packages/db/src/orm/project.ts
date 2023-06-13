@@ -9,8 +9,24 @@ export async function getProject({
 }: {
 	publicId: string
 	db: DB
+	with?: {
+		connection: {
+			destination?: boolean
+			source?: boolean
+		}
+	}
 }) {
-	return await db.select().from(project).where(sql`${project.publicId} = ${publicId}`).get()
+	return await db.query.project.findFirst({
+		where: eq(project.publicId, publicId),
+		with: {
+			connection: {
+				with: {
+					source: true,
+					destination: true,
+				},
+			},
+		},
+	})
 }
 
 export async function getProjects({
@@ -28,16 +44,23 @@ export async function getProjects({
 export async function getFullProjects({
 	customerId,
 	db,
+	include,
 }: {
 	customerId: string
 	db: DB
+	include?: {
+		connection: {
+			destination?: boolean
+			source?: boolean
+		}
+	}
 }) {
 	return await db.query.project.findMany({
 		where: eq(project.customerId, customerId),
 		with: {
 			connection: {
 				with: {
-					source: true,
+					source: undefined,
 					destination: true,
 				},
 			},

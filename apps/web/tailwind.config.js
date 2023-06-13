@@ -49,8 +49,8 @@ module.exports = {
 				},
 			},
 			borderRadius: {
-				lg: `var(--radius)`,
-				md: `calc(var(--radius) - 2px)`,
+				lg: "var(--radius)",
+				md: "calc(var(--radius) - 2px)",
 				sm: "calc(var(--radius) - 4px)",
 			},
 			fontFamily: {
@@ -65,10 +65,19 @@ module.exports = {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: 0 },
 				},
+				run: {
+					"0%, 100%": {
+						backgroundPosition: "100% 50%",
+					},
+					"50%": {
+						backgroundPosition: "0% 50%",
+					},
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+				run: "run 4s ease-in infinite",
 			},
 		},
 	},
