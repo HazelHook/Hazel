@@ -4,8 +4,6 @@ import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-import "./index.css"
-
 const ConnectionsPage = async () => {
 	const project = await getProject({ publicId: appConfig.devProject, db })
 	console.log(project)
