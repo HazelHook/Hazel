@@ -103,6 +103,8 @@ export async function Sidebar({ className, params }: SidebarProps) {
 						<SidebarItem href={"/dashboard"} title={"Overview"} icon={HomeIcon} />
 						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={WritingIcon} />
 						<SidebarItem href={"/connections"} title={"Connections"} icon={DashboardIcon} />
+						<SidebarItem href={"/sources"} title={"Sources"} icon={DashboardIcon} />
+						<SidebarItem href={"/destinations"} title={"Destinations"} icon={DashboardIcon} />
 					</div>
 				</div>
 				<div className="py-2 space-y-2">

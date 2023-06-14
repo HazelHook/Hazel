@@ -41,6 +41,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.0.2
         version: 1.0.2(@types/react@18.2.12)(react@18.2.0)
+      '@tanstack/react-table':
+        specifier: ^8.9.2
+        version: 8.9.2(react-dom@18.2.0)(react@18.2.0)
       '@trpc/client':
         specifier: ^10.30.0
         version: 10.30.0(@trpc/server@10.30.0)
@@ -62,6 +65,9 @@ importers:
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
       db:
         specifier: workspace:*
         version: link:../../packages/db
@@ -1905,6 +1911,23 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
+  /@tanstack/react-table@8.9.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Irvw4wqVF9hhuYzmNrlae4IKdlmgSyoRWnApSLebvYzqHoi5tEsYzBj6YPd0hX78aB/L+4w/jgK2eBQVpGfThQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@tanstack/table-core': 8.9.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@tanstack/table-core@8.9.2:
+    resolution: {integrity: sha512-ajc0OF+karBAdaSz7OK09rCoAHB1XI1+wEhu+tDNMPc+XcO+dTlXXN/Vc0a8vym4kElvEjXEDd9c8Zfgt4bekA==}
+    engines: {node: '>=12'}
+    dev: false
+
   /@trpc/client@10.30.0(@trpc/server@10.30.0):
     resolution: {integrity: sha512-utz0qRI4eU3QcHvBwcSONEnt5pWR3Dyk4VFJnySHysBT6GQRRpJifWX5+RxDhFK93LxcAmiirFbYXjZ40gbobw==}
     peerDependencies:
@@ -2901,6 +2924,13 @@ packages:
   /data-uri-to-buffer@2.0.2:
     resolution: {integrity: sha512-ND9qDTLc6diwj+Xe5cdAgVTbLVdXbtxTJRXRhli8Mowuaan+0EJOtdqJ0QCHNSSPyoXGx9HX2/VMnKeC34AChA==}
     dev: true
+
+  /date-fns@2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
+    engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.22.5
+    dev: false
 
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}

@@ -31,3 +31,22 @@ export async function createSource({
 }) {
 	return await db.insert(source).values(data).returning({ id: source.id, publicId: source.publicId }).get()
 }
+
+export async function getSources({
+	customerId,
+	db,
+}: {
+	customerId: string
+	db: DB
+}) {
+	return await db.query.source.findMany({
+		where: eq(source.customerId, customerId),
+		with: {
+			connections: {
+				with: {
+					destination: true,
+				},
+			},
+		},
+	})
+}

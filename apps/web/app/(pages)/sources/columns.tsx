@@ -1,0 +1,88 @@
+"use client"
+
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { ColumnDef } from "@tanstack/react-table"
+import { Connection, Destination, Source } from "db/src/schema"
+import { ArrowDown, ArrowUp, ArrowUpDown, CheckIcon } from "lucide-react"
+
+export type Column = Source & {
+	connections: Connection[]
+}
+
+export const columns: ColumnDef<Column>[] = [
+	{
+		accessorKey: "name",
+		header: ({ column }) => {
+			return (
+				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+					Name
+					{column.getIsSorted() === "asc" ? (
+						<ArrowUp className="ml-2 h-4 w-4" />
+					) : (
+						<ArrowDown className="ml-2 h-4 w-4" />
+					)}
+				</Button>
+			)
+		},
+	},
+	{
+		accessorKey: "type",
+		header: "Type",
+		cell: "TODO:TYPE HERE",
+	},
+	{
+		accessorKey: "connections",
+		header: "Destination",
+		cell: ({ cell }) => {
+			const connections = cell.getValue() as (Connection & { destination: Destination })[]
+
+			return (
+				<div className="flex flex-row gap-1">
+					<div className="bg-secondary rounded-xl text-ellipsis w-fit min-w-[24px] h-6 flex justify-center items-center">
+						<p>{connections.length}</p>
+					</div>
+					<div className="flex flex-row gap-1 flex-wrap">
+						{connections.map((conn) => (
+							<Badge variant="outline" key={`badge-${conn.publicId}`}>
+								{conn.destination.name}
+							</Badge>
+						))}
+					</div>
+				</div>
+			)
+		},
+	},
+	{
+		accessorKey: "group",
+		header: ({ column }) => {
+			return (
+				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+					Group
+					{column.getIsSorted() === "asc" ? (
+						<ArrowUp className="ml-2 h-4 w-4" />
+					) : (
+						<ArrowDown className="ml-2 h-4 w-4" />
+					)}
+				</Button>
+			)
+		},
+		cell: ({ cell }) => {
+			return <p>-</p>
+		},
+	},
+	{
+		accessorKey: "connections",
+		header: "Status",
+		cell: ({ cell }) => {
+			const connections = cell.getValue() as (Connection & { destination: Destination })[]
+
+			return (
+				<Badge>
+					<CheckIcon className="w-4 h-4 mr-2" />
+					<p>{connections.length}</p>
+				</Badge>
+			)
+		},
+	},
+]
