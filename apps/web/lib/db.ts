@@ -1,6 +1,7 @@
 import { connectDB } from "db/src/index"
 
 export default connectDB({
-	databaseUrl: process.env.LIBSQL_DB_URL as string,
-	authToken: process.env.LIBSQL_DB_AUTH_TOKEN as string,
+	host: process.env.PLANETSCALE_DB_HOST as string,
+	username: process.env.PLANETSCALE_DB_USERNAME as string,
+	password: process.env.PLANETSCALE_DB_PASSWORD as string,
 })

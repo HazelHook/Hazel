@@ -30,11 +30,7 @@ export async function createSource({
 	data: Omit<InsertSource, "publicId">
 	db: DB
 }) {
-	return await db
-		.insert(source)
-		.values({ ...data, publicId: `src_${nanoid(17)}` })
-		.returning({ id: source.id, publicId: source.publicId })
-		.get()
+	return await db.insert(source).values({ ...data, publicId: `src_${nanoid(17)}` })
 }
 
 export async function getSources({

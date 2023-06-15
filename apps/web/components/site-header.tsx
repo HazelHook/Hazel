@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import { buttonVariants } from "@/components/ui/button"
 import { UserNav } from "@/app/(pages)/_component/UserNav"
+
 import { SettingsIcon } from "./icons/Settings"
 import { ThemeToggle } from "./theme-toggle"
 

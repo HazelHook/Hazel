@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useParams } from "next/navigation"
 import { useAuth, useUser } from "@clerk/nextjs"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
@@ -17,13 +18,12 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { CardIcon } from "@/components/icons/Card"
-import { SettingsIcon } from "@/components/icons/Settings"
-import { RoundPlusIcon } from "@/components/icons/RoundPlus"
-import { LogoutIcon } from "@/components/icons/Logout"
 import { BarChartIcon } from "@/components/icons/BarChart"
+import { CardIcon } from "@/components/icons/Card"
 import { HomeIcon } from "@/components/icons/Home"
-import { useParams } from "next/navigation"
+import { LogoutIcon } from "@/components/icons/Logout"
+import { RoundPlusIcon } from "@/components/icons/RoundPlus"
+import { SettingsIcon } from "@/components/icons/Settings"
 
 export function UserNav() {
 	const { signOut } = useAuth()

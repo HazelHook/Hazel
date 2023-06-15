@@ -1,20 +1,23 @@
-import { createClient } from "@libsql/client/web"
-import { drizzle, LibSQLDatabase } from "drizzle-orm/libsql"
+import { connect } from "@planetscale/database"
+import { drizzle, MySql2Database } from "drizzle-orm/mysql2"
 
 import * as schema from "./schema"
 
-export type DB = LibSQLDatabase<typeof schema>
+export type DB = MySql2Database<typeof schema>
 
 export function connectDB({
-	databaseUrl,
-	authToken,
+	username,
+	host,
+	password,
 }: {
-	databaseUrl: string
-	authToken: string
+	host: string
+	username: string
+	password: string
 }) {
-	const client = createClient({
-		url: databaseUrl,
-		authToken: authToken,
+	const client = connect({
+		username,
+		host,
+		password,
 	})
 	const db = drizzle(client, { schema })
 

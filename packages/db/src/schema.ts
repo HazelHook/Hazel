@@ -1,53 +1,91 @@
 import { InferModel, relations, sql } from "drizzle-orm"
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import { timestamp } from "drizzle-orm/mysql-core"
+import { index } from "drizzle-orm/mysql-core"
+import { json } from "drizzle-orm/mysql-core"
+import { uniqueIndex } from "drizzle-orm/mysql-core"
+import { bigint } from "drizzle-orm/mysql-core"
+import { int } from "drizzle-orm/mysql-core"
+import { serial } from "drizzle-orm/mysql-core"
+import { mysqlTable, text, varchar } from "drizzle-orm/mysql-core"
 
-export const source = sqliteTable("sources", {
-	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-	publicId: text("public_id").notNull(),
-	customerId: text("customer_id").notNull(),
+export const source = mysqlTable(
+	"sources",
+	{
+		id: serial("id").primaryKey().autoincrement(),
+		publicId: varchar("public_id", { length: 32 }).notNull(),
+		customerId: varchar("customer_id", { length: 128 }).notNull(),
 
-	name: text("name").notNull(),
-	url: text("url").notNull(),
+		name: varchar("name", { length: 64 }).notNull(),
+		url: varchar("url", { length: 128 }).notNull(),
 
-	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-})
+		createdAt: timestamp("created_at").defaultNow().notNull(),
+		updatedAt: timestamp("updated_at").defaultNow().notNull(),
+	},
+	// (source) => ({
+	// 	publicIdIndex: uniqueIndex("src_public_id_idx").on(source.publicId),
+
+	// 	customerIdIndex: index("src_customer_id_idx").on(source.customerId),
+	// }),
+)
 
 export const sourceRelations = relations(source, ({ many, one }) => ({
 	connections: many(connection),
 }))
 
-export const destination = sqliteTable("destinations", {
-	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-	publicId: text("public_id").notNull(),
-	customerId: text("customer_id").notNull(),
+export const destination = mysqlTable(
+	"destinations",
+	{
+		id: serial("id").autoincrement().primaryKey(),
+		publicId: varchar("public_id", { length: 32 }).notNull(),
+		customerId: varchar("customer_id", { length: 128 }).notNull(),
 
-	name: text("name").notNull(),
-	url: text("url").notNull(),
+		name: text("name").notNull(),
+		url: text("url").notNull(),
 
-	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-})
+		createdAt: timestamp("created_at").defaultNow().notNull(),
+		updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+	},
+	// (destination) => ({
+	// 	publicIdIndex: index("dest_public_id_idx").on(destination.publicId),
 
-export const connection = sqliteTable("connections", {
-	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-	publicId: text("public_id").notNull(),
-	customerId: text("customer_id").notNull(),
+	// 	customerIdIndex: index("dest_customer_id_idx").on(destination.customerId),
+	// }),
+)
 
-	name: text("name").notNull(),
+export const destinationRelations = relations(destination, ({ many, one }) => ({
+	connections: many(connection),
+}))
 
-	sourceId: integer("destination_id").references(() => source.id),
-	destinationId: integer("source_id").references(() => destination.id),
+export const connection = mysqlTable(
+	"connections",
+	{
+		id: serial("id").autoincrement().primaryKey(),
+		publicId: varchar("public_id", { length: 32 }).notNull(),
+		customerId: varchar("customer_id", { length: 128 }).notNull(),
 
-	// The transformer config.
-	// TODO: Minify
-	fluxConfig: text("flux_config").notNull(),
+		name: text("name").notNull(),
 
-	projectId: integer("project_id").references(() => project.id),
+		sourceId: int("destination_id"),
+		destinationId: int("source_id"),
 
-	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-})
+		// The transformer config.
+		// TODO: Minify
+		fluxConfig: json("flux_config"),
+
+		createdAt: timestamp("created_at").defaultNow().notNull(),
+		updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+
+		// TODO: RULES
+	},
+	// (connection) => ({
+	// 	publicIdIndex: index("conn_public_id_idx").on(connection.publicId),
+
+	// 	customerIdIndex: index("conn_customer_id_idx").on(connection.customerId),
+
+	// 	sourceIdIndex: index("source_id_idx").on(connection.sourceId),
+	// 	destinationIndex: index("source_id_idx").on(connection.destinationId),
+	// }),
+)
 
 export const connectionRelations = relations(connection, ({ one }) => ({
 	destination: one(destination, {
@@ -58,30 +96,6 @@ export const connectionRelations = relations(connection, ({ one }) => ({
 		fields: [connection.sourceId],
 		references: [source.id],
 	}),
-	project: one(project, {
-		fields: [connection.projectId],
-		references: [project.id],
-	}),
-}))
-
-export const project = sqliteTable("projects", {
-	id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-	publicId: text("public_id").notNull(),
-	customerId: text("customer_id").notNull(),
-
-	name: text("name").notNull(),
-
-	// TODO: SOME SETTINGS POINTS AND STUFF
-
-	// Should be unique aswell
-	slug: text("name").notNull(),
-
-	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-})
-
-export const projectRelations = relations(project, ({ many }) => ({
-	connection: many(connection),
 }))
 
 export type InsertConnection = InferModel<typeof connection, "insert">
@@ -92,9 +106,6 @@ export type Destination = InferModel<typeof destination, "select">
 
 export type InsertSource = InferModel<typeof source, "insert">
 export type Source = InferModel<typeof source, "select">
-
-export type InsertProject = InferModel<typeof project, "insert">
-export type Project = InferModel<typeof project, "select">
 
 // export const insertConnectionProject = createInsertSchema(connectionProject)
 // export const selectConnectionProject = createSelectSchema(connectionProject)
