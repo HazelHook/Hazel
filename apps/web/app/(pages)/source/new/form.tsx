@@ -1,18 +1,24 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { useForm } from "react-hook-form"
+import * as z from "zod"
+
+import { useAction } from "@/server/client"
+import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { formSchema } from "./schema"
-import { useAction } from "@/server/client"
-import { createSourceAction } from "./_actions"
-import { useRouter } from "next/navigation"
 
-export function NewSourceForm() {
+import type { createSourceAction } from "./_actions"
+import { formSchema } from "./schema"
+
+interface NewSourceFormProps {
+	action: typeof createSourceAction
+}
+
+export function NewSourceForm({ action }: NewSourceFormProps) {
 	const router = useRouter()
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -23,7 +29,7 @@ export function NewSourceForm() {
 		},
 	})
 
-	const createSource = useAction(createSourceAction, {
+	const createSource = useAction(action, {
 		onSuccess(data) {
 			router.push(`/source/${data.id}/`)
 		},

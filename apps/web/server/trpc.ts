@@ -1,4 +1,5 @@
 import { headers } from "next/headers"
+import { auth } from "@clerk/nextjs"
 import { experimental_createServerActionHandler } from "@trpc/next/app-dir/server"
 import { initTRPC } from "@trpc/server"
 import superjson from "superjson"
@@ -32,6 +33,7 @@ export const createAction = experimental_createServerActionHandler(t, {
 
 		return {
 			headers: Object.fromEntries(newHeaders),
+			auth: auth(),
 		}
 	},
 })

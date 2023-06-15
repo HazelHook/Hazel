@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm"
+import { nanoid } from "nanoid"
 
 import { DB } from ".."
 import { InsertSource, source } from "../schema"
-import { nanoid } from "nanoid"
 
 export async function getSource({
 	publicId,

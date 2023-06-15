@@ -20,7 +20,7 @@ export const ProjectSelect = ({ projects }: ProjectSelectProps) => {
 				</SelectTrigger>
 				<SelectContent>
 					{projects.map((project) => (
-						<SelectItem value={project.slug}>
+						<SelectItem value={project.slug} key={project.publicId}>
 							<div className="flex flex-row gap-2 items-center">
 								<Avatar className="w-4 h-4">
 									<AvatarImage src={getSeededProfileImageUrl(project.publicId)} />

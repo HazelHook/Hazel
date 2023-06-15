@@ -100,7 +100,7 @@ export async function Sidebar({ className, params }: SidebarProps) {
 							</div>
 						</Suspense>
 
-						<SidebarItem href={"/dashboard"} title={"Overview"} icon={HomeIcon} />
+						<SidebarItem href={"/"} title={"Overview"} icon={HomeIcon} />
 						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={WritingIcon} />
 						<SidebarItem href={"/connections"} title={"Connections"} icon={DashboardIcon} />
 						<SidebarItem href={"/sources"} title={"Sources"} icon={DashboardIcon} />

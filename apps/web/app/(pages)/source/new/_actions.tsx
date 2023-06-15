@@ -1,10 +1,12 @@
 "use server"
 
-import { createAction, publicProcedure } from "@/server/trpc"
-import { formSchema } from "./schema"
 import { createSource } from "db/src/orm/source"
-import db from "@/lib/db"
+
+import { createAction, publicProcedure } from "@/server/trpc"
 import { appConfig } from "@/lib/config"
+import db from "@/lib/db"
+
+import { formSchema } from "./schema"
 
 /**
  * Either inline procedures using trpc's flexible
@@ -14,7 +16,11 @@ import { appConfig } from "@/lib/config"
  */
 export const createSourceAction = createAction(
 	publicProcedure.input(formSchema).mutation(async (opts) => {
-		const source = await createSource({ data: { ...opts.input, customerId: appConfig.devUser }, db })
+		console.log(opts.ctx.auth)
+		const source = await createSource({
+			data: { ...opts.input, customerId: appConfig.devUser },
+			db,
+		})
 
 		return {
 			id: source.publicId,

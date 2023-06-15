@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { getSources } from "db/src/orm/source"
 import { PlusIcon } from "lucide-react"
 
@@ -7,7 +8,6 @@ import { Button, buttonVariants } from "@/components/ui/button"
 
 import { columns } from "./columns"
 import { DataTable } from "./data-table"
-import Link from "next/link"
 
 const SourcePage = async () => {
 	const sources = await getSources({ customerId: appConfig.devUser, db: db })
