@@ -1,18 +1,18 @@
 "use client"
 
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 import {
 	ColumnDef,
-	SortingState,
 	flexRender,
 	getCoreRowModel,
 	getSortedRowModel,
+	SortingState,
 	useReactTable,
 } from "@tanstack/react-table"
+import { Source } from "db/src/schema"
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Source } from "db/src/schema"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]

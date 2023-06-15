@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm"
 
 import { DB } from ".."
 import { InsertSource, source } from "../schema"
+import { nanoid } from "nanoid"
 
 export async function getSource({
 	publicId,
@@ -26,10 +27,14 @@ export async function createSource({
 	data,
 	db,
 }: {
-	data: InsertSource
+	data: Omit<InsertSource, "publicId">
 	db: DB
 }) {
-	return await db.insert(source).values(data).returning({ id: source.id, publicId: source.publicId }).get()
+	return await db
+		.insert(source)
+		.values({ ...data, publicId: `src_${nanoid(17)}` })
+		.returning({ id: source.id, publicId: source.publicId })
+		.get()
 }
 
 export async function getSources({

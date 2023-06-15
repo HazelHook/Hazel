@@ -1,10 +1,11 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { Connection, Destination, Source } from "db/src/schema"
 import { ArrowDown, ArrowUp, ArrowUpDown, CheckIcon } from "lucide-react"
+
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 export type Column = Source & {
 	connections: Connection[]
@@ -35,7 +36,9 @@ export const columns: ColumnDef<Column>[] = [
 		accessorKey: "connections",
 		header: "Destination",
 		cell: ({ cell }) => {
-			const connections = cell.getValue() as (Connection & { destination: Destination })[]
+			const connections = cell.getValue() as (Connection & {
+				destination: Destination
+			})[]
 
 			return (
 				<div className="flex flex-row gap-1">
@@ -75,7 +78,9 @@ export const columns: ColumnDef<Column>[] = [
 		accessorKey: "connections",
 		header: "Status",
 		cell: ({ cell }) => {
-			const connections = cell.getValue() as (Connection & { destination: Destination })[]
+			const connections = cell.getValue() as (Connection & {
+				destination: Destination
+			})[]
 
 			return (
 				<Badge>

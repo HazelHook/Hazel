@@ -1,36 +1,141 @@
-import Link from "next/link"
+import { Tiny } from "db/src/tinybird"
 
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
+import { serverClient } from "@/server/server"
+import { chartColors, getSeededProfileImageUrl } from "@/lib/utils"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Chart } from "@/components/ui/chart"
 
-export default function IndexPage() {
+import { KpiCard } from "./_component/KpiCard"
+import { transformSourcesChartData } from "./_utils"
+
+const Dashboard = async () => {
+	const test = await serverClient.greeting.query({ text: "XD" })
+	// rome-ignore lint/style/noNonNullAssertion: <explanation>
+	const tiny = Tiny(process.env.TINY_TOKEN!)
+
+	const reqKpis = await tiny.getReqKpis({
+		customer_id: "cus_8NiWC2t_SZVKALuy",
+	})
+	const resKpis = await tiny.getResKpis({
+		customer_id: "cus_8NiWC2t_SZVKALuy",
+		success: 1,
+	})
+
+	const errorKpis = await tiny.getResKpis({
+		customer_id: "cus_8NiWC2t_SZVKALuy",
+		success: 0,
+	})
+
+	const bySources = await tiny.getTimeseriesBySource({
+		customer_id: "cus_8NiWC2t_SZVKALuy",
+	})
+
+	const chartData = transformSourcesChartData(bySources.data)
 	return (
-		<section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-			<div className="flex max-w-[980px] flex-col items-start gap-2">
-				<h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl hover:shadow-andiShadow">
-					Beautifully designed components <br className="hidden sm:inline" />
-					built with Radix UI and Tailwind CSS.
-				</h1>
-				<p className="max-w-[700px] text-lg text-muted-foreground">
-					Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. And
-					Next.js 13 Ready.
-				</p>
+		<main className="container p-8 space-y-4">
+			<div className="flex flex-row gap-2">
+				<Avatar className="w-16 h-16">
+					<AvatarImage src={getSeededProfileImageUrl("12")} />
+				</Avatar>
+				<div className="flex justify-center flex-col">
+					<h3 className="text-2xl">Welcome back, Makisuo</h3>
+					<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
+				</div>
 			</div>
-			<div className="flex gap-4">
-				<Link href={siteConfig.links.docs} target="_blank" rel="noreferrer" className={buttonVariants()}>
-					Documentation
-				</Link>
-				<Link
-					target="_blank"
-					rel="noreferrer"
-					href={siteConfig.links.github}
-					className={buttonVariants({ variant: "outline" })}
-				>
-					GitHub
-				</Link>
+			<div className="flex gap-4 flex-col md:flex-row">
+				<KpiCard
+					color={chartColors[0]}
+					title={"Events"}
+					subtitle={String(reqKpis.data.reduce((curr, el) => curr + el.events, 0))}
+					group="kpis"
+					id={"events"}
+					series={[{ name: "Events", data: reqKpis.data.map((datum) => datum.events) }]}
+					labels={reqKpis.data.map((datum) => datum.date)}
+				/>
+				<KpiCard
+					color={chartColors[1]}
+					title={"Requests"}
+					subtitle={String(resKpis.data.reduce((curr, el) => curr + el.requests, 0))}
+					id={"req"}
+					group="kpis"
+					series={[
+						{
+							name: "Requests",
+							data: resKpis.data.map((datum) => datum.requests),
+						},
+					]}
+					labels={reqKpis.data.map((datum) => datum.date)}
+				/>
+				<KpiCard
+					color={chartColors[3]}
+					title={"Errors"}
+					subtitle={String(errorKpis.data.reduce((curr, el) => curr + el.requests, 0))}
+					id={"errors"}
+					group="kpis"
+					series={[
+						{
+							name: "Errors",
+							data: errorKpis.data.map((datum) => datum.requests),
+						},
+					]}
+					labels={errorKpis.data.map((datum) => datum.date)}
+				/>
 			</div>
-		</section>
+			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+				<Card className="col-span-full w-full h-full overflow-hidden">
+					<CardHeader>
+						<CardTitle>Usage Overview</CardTitle>
+					</CardHeader>
+
+					<div className="w-full p-6">
+						<Chart
+							options={{
+								chart: {
+									id: "wow",
+									sparkline: {
+										enabled: false,
+									},
+									toolbar: {
+										show: false,
+									},
+								},
+								colors: chartColors,
+								legend: {
+									show: true,
+									position: "top",
+								},
+								dataLabels: {
+									enabled: false,
+								},
+								stroke: {
+									width: [2, 2, 2],
+									curve: "smooth",
+								},
+								xaxis: {
+									type: "datetime",
+									categories: chartData.categories,
+								},
+								tooltip: {
+									x: {
+										format: "dd/MM/yy HH:mm",
+									},
+								},
+							}}
+							series={chartData.series}
+							type="area"
+							height={350}
+							width={"100%"}
+						/>
+					</div>
+				</Card>
+			</div>
+		</main>
 	)
 }
 
+export const fetchCache = "force-no-store"
+
 export const runtime = "edge"
+
+export default Dashboard

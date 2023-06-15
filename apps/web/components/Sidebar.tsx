@@ -17,7 +17,7 @@ import { PaperWithTextIcon } from "@/components/icons/PaperWithText"
 import { PersonsIcon } from "@/components/icons/Persons"
 import { SettingsIcon } from "@/components/icons/Settings"
 import { WritingIcon } from "@/components/icons/Writing"
-import { ProjectSelect } from "@/app/(pages)/dashboard/_component/ProjectSelect"
+import { ProjectSelect } from "@/app/(pages)/_component/ProjectSelect"
 
 import { SidebarProjectItem } from "./SidearProjectItem"
 import { SidebarClientItem } from "./SidebarItem"
@@ -108,23 +108,13 @@ export async function Sidebar({ className, params }: SidebarProps) {
 					</div>
 				</div>
 				<div className="py-2 space-y-2">
-					<div className="hidden flex-row items-center justify-between lg:flex">
-						<h2 className="relative w-full grow px-6 text-lg font-semibold tracking-tight">Wenhook Connections</h2>
-						{/* <CreateWebsite
-							organizations={JSON.parse(JSON.stringify(organizations.map(({ organization }) => organization)))}
-							user={JSON.parse(JSON.stringify(user))}
-							iconOnly
-							variant="ghost"
-							className="item-center mr-2 flex w-fit justify-center"
-						/> */}
-					</div>
-					<ScrollArea className={"max-w-[300px] lg:px-2"}>
+					{/* <ScrollArea className={"max-w-[300px] lg:px-2"}>
 						<div className="space-y-1 py-2 lg:px-2">
 							{connections.map((project) => (
 								<SidebarProjectItem key={project.id} project={project} params={params} />
 							))}
 						</div>
-					</ScrollArea>
+					</ScrollArea> */}
 				</div>
 				<div className="py-2 lg:px-4">
 					<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Settings</h2>

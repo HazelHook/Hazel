@@ -1,10 +1,13 @@
+import { getSources } from "db/src/orm/source"
+import { PlusIcon } from "lucide-react"
+
 import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
-import { getSources } from "db/src/orm/source"
-import { DataTable } from "./data-table"
+import { Button, buttonVariants } from "@/components/ui/button"
+
 import { columns } from "./columns"
-import { Button } from "@/components/ui/button"
-import { PlusIcon } from "lucide-react"
+import { DataTable } from "./data-table"
+import Link from "next/link"
 
 const SourcePage = async () => {
 	const sources = await getSources({ customerId: appConfig.devUser, db: db })
@@ -12,10 +15,10 @@ const SourcePage = async () => {
 		<main className="p-4">
 			<div className="flex flex-row justify-between mb-4">
 				<h3 className="text-xl font-semibold">Sources</h3>
-				<Button>
+				<Link href="/source/new" className={buttonVariants()}>
 					<PlusIcon className="mr-2" />
 					New Source
-				</Button>
+				</Link>
 			</div>
 			<DataTable columns={columns} data={sources} />
 		</main>
