@@ -74,6 +74,8 @@ export function NewSourceForm({ action }: NewSourceFormProps) {
 						</FormItem>
 					)}
 				/>
+				<FormMessage />
+
 				<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
 					Create
 				</Button>

@@ -1,12 +1,7 @@
-import { Suspense } from "react"
 import Link from "next/link"
-import { getConnections } from "db/src/orm/connection"
-import { getProjects } from "db/src/orm/project"
 import { LucideProps } from "lucide-react"
 
-import db from "@/lib/db"
 import { cn } from "@/lib/utils"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { AddPersonIcon } from "@/components/icons/AddPerson"
 import { BarChartIcon } from "@/components/icons/BarChart"
 import { CardIcon } from "@/components/icons/Card"
@@ -17,7 +12,6 @@ import { PaperWithTextIcon } from "@/components/icons/PaperWithText"
 import { PersonsIcon } from "@/components/icons/Persons"
 import { SettingsIcon } from "@/components/icons/Settings"
 import { WritingIcon } from "@/components/icons/Writing"
-import { ProjectSelect } from "@/app/(pages)/_component/ProjectSelect"
 
 import { SidebarProjectItem } from "./SidearProjectItem"
 import { SidebarClientItem } from "./SidebarItem"
@@ -61,17 +55,6 @@ export async function Sidebar({ className, params }: SidebarProps) {
 	// 	userId: user?.id,
 	// })
 
-	// TODO: HARD CODED
-	const projects = getProjects({
-		customerId: "cus_8NiWC2t_SZVKALuy",
-		db,
-	})
-
-	const connections = await getConnections({
-		customerId: "cus_8NiWC2t_SZVKALuy",
-		db,
-	})
-
 	// const isOrg!== "personal"
 
 	return (
@@ -94,12 +77,6 @@ export async function Sidebar({ className, params }: SidebarProps) {
 
 				<div className="py-2 lg:px-4">
 					<div className="space-y-1">
-						<Suspense>
-							<div className="mb-4 hidden lg:block ">
-								<ProjectSelect projects={await projects} />
-							</div>
-						</Suspense>
-
 						<SidebarItem href={"/"} title={"Overview"} icon={HomeIcon} />
 						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={WritingIcon} />
 						<SidebarItem href={"/connections"} title={"Connections"} icon={DashboardIcon} />
