@@ -32,9 +32,6 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.1.1
         version: 3.1.1(react-hook-form@7.44.3)
-      '@planetscale/database':
-        specifier: ^1.7.0
-        version: 1.7.0
       '@radix-ui/react-avatar':
         specifier: ^1.0.3
         version: 1.0.3(@types/react-dom@18.2.5)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0)
@@ -83,9 +80,6 @@ importers:
       db:
         specifier: workspace:*
         version: link:../../packages/db
-      drizzle-orm:
-        specifier: ^0.26.5
-        version: 0.26.5(@libsql/client@0.2.0)(@planetscale/database@1.7.0)
       lucide-react:
         specifier: 0.242.0
         version: 0.242.0(react@18.2.0)
@@ -171,6 +165,9 @@ importers:
       '@ngneat/falso':
         specifier: ^6.4.0
         version: 6.4.0
+      '@planetscale/database':
+        specifier: ^1.7.0
+        version: 1.7.0
       db:
         specifier: workspace:*
         version: link:../db
@@ -179,7 +176,7 @@ importers:
         version: 2.0.0-rc.0
       drizzle-orm:
         specifier: ^0.26.5
-        version: 0.26.5(@cloudflare/workers-types@4.20230518.0)
+        version: 0.26.5(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.7.0)
       hono:
         specifier: ^3.2.5
         version: 3.2.5
@@ -3426,7 +3423,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.26.5(@cloudflare/workers-types@4.20230518.0):
+  /drizzle-orm@0.26.5(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.7.0):
     resolution: {integrity: sha512-ajjbOIoXqldWoWBn0RbVQCCT732R4Ad+gUjUrlmMpzWYwgnbG/qqPy84NhHntQ/MR//z3xfvT1Z2fD8uCAPX3g==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -3489,6 +3486,7 @@ packages:
         optional: true
     dependencies:
       '@cloudflare/workers-types': 4.20230518.0
+      '@planetscale/database': 1.7.0
     dev: false
 
   /drizzle-orm@0.26.5(@libsql/client@0.2.0)(@planetscale/database@1.7.0):

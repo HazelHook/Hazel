@@ -5,7 +5,10 @@ import db from "@/lib/db"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 
 const ConnectionsPage = async () => {
-	const connections = await getConnections({ customerId: appConfig.devUser, db })
+	const connections = await getConnections({
+		customerId: appConfig.devUser,
+		db,
+	})
 
 	return (
 		<main className="container py-6">

@@ -1,9 +1,5 @@
 import { InferModel, relations } from "drizzle-orm"
-import { timestamp } from "drizzle-orm/mysql-core"
-import { json } from "drizzle-orm/mysql-core"
-import { int } from "drizzle-orm/mysql-core"
-import { serial } from "drizzle-orm/mysql-core"
-import { mysqlTable, text, varchar } from "drizzle-orm/mysql-core"
+import { int, json, mysqlTable, serial, text, timestamp, varchar } from "drizzle-orm/mysql-core"
 
 export const source = mysqlTable(
 	"sources",

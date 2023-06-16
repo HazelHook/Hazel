@@ -1,7 +1,8 @@
+import { getConnections } from "db/src/orm/connection"
+
 import db from "@/lib/db"
 
 import { Flow } from "./_components/Flow"
-import { getConnections } from "db/src/orm/connection"
 
 const ConnectionsOverview = async () => {
 	const connections = await getConnections({

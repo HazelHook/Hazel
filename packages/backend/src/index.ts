@@ -1,8 +1,7 @@
 import { zValidator } from "@hono/zod-validator"
 import { randWord } from "@ngneat/falso"
-import { connectDB } from "db/src/index"
 import { getSource } from "db/src/orm/source"
-import { connection, destination, project, source } from "db/src/schema"
+import { connection, destination, source } from "db/src/schema"
 import { Tiny } from "db/src/tinybird/index"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
@@ -10,12 +9,14 @@ import { nanoid } from "nanoid"
 import z from "zod"
 
 import { handleEvent } from "./eventManager"
+import { cDb } from "./db"
 
 // import { fluxTransformConnection } from "./wasm/transformation"
 
 export type Bindings = {
-	LIBSQL_DB_URL: string
-	LIBSQL_DB_AUTH_TOKEN: string
+	PLANETSCALE_DB_HOST: string
+	PLANETSCALE_DB_USERNAME: string
+	PLANETSCALE_DB_PASSWORD: string
 	TINY_TOKEN: string
 	HAZELFLUX_BINDING: ServiceWorkerGlobalScope
 }
@@ -31,10 +32,12 @@ app.post("/", async (c) => {
 })
 
 app.get("/random", async (c) => {
-	const db = connectDB({
-		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
-		databaseUrl: c.env.LIBSQL_DB_URL,
+	const db = cDb({
+		username: c.env.PLANETSCALE_DB_USERNAME,
+		password: c.env.PLANETSCALE_DB_PASSWORD,
+		host: c.env.PLANETSCALE_DB_HOST,
 	})
+
 	const connection = await db.query.connection.findFirst()
 
 	return c.json(connection)
@@ -55,82 +58,62 @@ app.get("/random", async (c) => {
 // 	return c.json(JSON.stringify(sources))
 // })
 
-app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c) => {
-	const db = connectDB({
-		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
-		databaseUrl: c.env.LIBSQL_DB_URL,
+app.post("/seed", zValidator("json", z.object({ amount: z.number(), customerId: z.string() })), async (c) => {
+	const db = cDb({
+		username: c.env.PLANETSCALE_DB_USERNAME,
+		password: c.env.PLANETSCALE_DB_PASSWORD,
+		host: c.env.PLANETSCALE_DB_HOST,
 	})
-	const customer = `cus_${nanoid(16)}`
+
+	const input = c.req.valid("json")
+
 	const data: {
 		sourceId: string
-		projectId: string
 	}[] = []
 
-	for (let i = 0; i < c.req.valid("json").amount; i++) {
+	for (let i = 0; i < input.amount; i++) {
 		await db.transaction(async (tx) => {
-			const projectPublicId = `prj_${nanoid()}`
-			const projectRes = await tx
-				.insert(project)
-				.values({
-					name: `Project ${randWord({ capitalize: true })}`,
-					publicId: projectPublicId,
-					customerId: customer,
-
-					slug: randWord({ capitalize: true }),
-				})
-				.run()
-
 			const sourcePublicId = `src_${nanoid()}`
-			const sourceRes = await tx
-				.insert(source)
-				.values({
-					name: `Source ${randWord({ capitalize: true })}`,
-					publicId: sourcePublicId,
-					customerId: customer,
+			const sourceRes = await tx.insert(source).values({
+				name: `${randWord({ capitalize: true })}`,
+				publicId: sourcePublicId,
+				customerId: input.customerId,
 
-					url: "http://127.0.0.1:3000/",
-				})
-				.run()
-			const destinationRes = await tx
-				.insert(destination)
-				.values({
-					name: `Destination ${randWord({ capitalize: true })}`,
-					publicId: `dst_${nanoid()}`,
-					customerId: customer,
+				url: "http://127.0.0.1:3000/",
+			})
 
-					url: "http://127.0.0.1:8787/",
-				})
-				.run()
+			console.log(sourceRes)
+			const destinationRes = await tx.insert(destination).values({
+				name: `${randWord({ capitalize: true })}`,
+				publicId: `dst_${nanoid()}`,
+				customerId: input.customerId,
 
-			await tx
-				.insert(connection)
-				.values({
-					name: `Connection ${randWord({ capitalize: true })}`,
-					publicId: `con_${nanoid()}`,
-					customerId: customer,
-					fluxConfig: JSON.stringify({
-						input: {
-							type: "json",
+				url: "http://127.0.0.1:8787/",
+			})
+
+			await tx.insert(connection).values({
+				name: `${randWord({ capitalize: true })}`,
+				publicId: `con_${nanoid()}`,
+				customerId: input.customerId,
+				fluxConfig: JSON.stringify({
+					input: {
+						type: "json",
+					},
+					output: {
+						type: "json",
+					},
+					transformers: [
+						{
+							type: "uppercase",
 						},
-						output: {
-							type: "json",
-						},
-						transformers: [
-							{
-								type: "uppercase",
-							},
-						],
-					}),
-					sourceId: sourceRes.lastInsertRowid as unknown as number,
-					destinationId: destinationRes.lastInsertRowid as unknown as number,
-
-					projectId: projectRes.lastInsertRowid as unknown as number,
-				})
-				.run()
+					],
+				}),
+				sourceId: sourceRes.insertId as unknown as number,
+				destinationId: destinationRes.insertId as unknown as number,
+			})
 
 			data.push({
 				sourceId: sourcePublicId,
-				projectId: projectPublicId,
 			})
 		})
 	}
@@ -144,11 +127,11 @@ app.post("/seed", zValidator("json", z.object({ amount: z.number() })), async (c
 app.post("/:sourceId", zValidator("json", z.any()), async (c) => {
 	const test = await c.env.HAZELFLUX_BINDING.fetch(c.req.raw.clone())
 	console.log(await test.text())
-	const db = connectDB({
-		authToken: c.env.LIBSQL_DB_AUTH_TOKEN,
-		databaseUrl: c.env.LIBSQL_DB_URL,
+	const db = cDb({
+		username: c.env.PLANETSCALE_DB_USERNAME,
+		password: c.env.PLANETSCALE_DB_PASSWORD,
+		host: c.env.PLANETSCALE_DB_HOST,
 	})
-
 	const tiny = Tiny(c.env.TINY_TOKEN)
 
 	const sourceId = c.req.param("sourceId")

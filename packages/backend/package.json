@@ -1,5 +1,5 @@
 {
-	"name": "hazel-backend",
+	"name": "backend",
 	"scripts": {
 		"dev": "wrangler dev src/index.ts --env dev",
 		"deploy": "wrangler deploy --minify src/index.ts"
@@ -8,6 +8,7 @@
 		"@chronark/zod-bird": "^0.1.1",
 		"@hono/zod-validator": "^0.1.3",
 		"@ngneat/falso": "^6.4.0",
+		"@planetscale/database": "^1.7.0",
 		"db": "workspace:*",
 		"do-taskmanager": "2.0.0-rc.0",
 		"drizzle-orm": "^0.26.5",
