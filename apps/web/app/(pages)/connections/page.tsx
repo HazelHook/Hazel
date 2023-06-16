@@ -1,16 +1,15 @@
-import { getProject } from "db/src/orm/project"
+import { getConnections } from "db/src/orm/connection"
 
 import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 
 const ConnectionsPage = async () => {
-	const project = await getProject({ publicId: appConfig.devProject, db })
-	console.log(project)
+	const connections = await getConnections({ customerId: appConfig.devUser, db })
 
 	return (
 		<main className="container py-6">
-			{project?.connection.map((conn) => (
+			{connections.map((conn) => (
 				<div className="space-y-2 max-w-2xl">
 					<h3 className="text-lg font-semibold">{conn.name}</h3>
 					<div className="flex flex-row group">

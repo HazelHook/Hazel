@@ -19,6 +19,22 @@ export async function getConnection({
 	})
 }
 
+export async function getConnections({
+	customerId,
+	db,
+}: {
+	customerId: string
+	db: DB
+}) {
+	return await db.query.connection.findMany({
+		where: eq(connection.customerId, customerId),
+		with: {
+			source: true,
+			destination: true,
+		},
+	})
+}
+
 export async function getConnectionsForSource({
 	sourceId,
 	db,
@@ -35,6 +51,22 @@ export async function getConnectionsForSource({
 	})
 }
 
+export async function getConnectionsForDestionations({
+	destinationId,
+	db,
+}: {
+	destinationId: number
+	db: DB
+}) {
+	return await db.query.connection.findMany({
+		where: eq(connection.destinationId, destinationId),
+		with: {
+			destination: true,
+			source: true,
+		},
+	})
+}
+
 export const createConnection = async ({
 	data,
 	db,
@@ -42,17 +74,5 @@ export const createConnection = async ({
 	data: InsertConnection
 	db: DB
 }) => {
-	return db.insert(connection).values(data).returning({ id: connection.id, publicId: connection.publicId }).get()
-}
-
-export async function getConnections({
-	customerId,
-	db,
-}: {
-	customerId: string
-	db: DB
-}) {
-	return await db.query.connection.findMany({
-		where: eq(connection.customerId, customerId),
-	})
+	return db.insert(connection).values(data)
 }

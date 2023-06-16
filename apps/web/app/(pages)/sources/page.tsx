@@ -4,7 +4,7 @@ import { PlusIcon } from "lucide-react"
 
 import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 
 import { columns } from "./columns"
 import { DataTable } from "./data-table"
