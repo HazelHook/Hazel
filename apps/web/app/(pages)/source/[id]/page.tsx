@@ -20,9 +20,9 @@ const SourcePage = async ({
 		notFound()
 	}
 
-	if (source.customerId !== userId) {
-		redirect("/")
-	}
+	// if (source.customerId !== userId) {
+	// 	redirect("/")
+	// }
 
 	return (
 		<main className="p-4">

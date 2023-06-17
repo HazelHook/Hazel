@@ -3,10 +3,12 @@ import { getConnections } from "db/src/orm/connection"
 import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { auth } from "@/lib/auth"
 
 const ConnectionsPage = async () => {
+	const { userId } = auth()
 	const connections = await getConnections({
-		customerId: appConfig.devUser,
+		customerId: userId,
 		db,
 	})
 

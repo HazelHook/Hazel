@@ -2,15 +2,17 @@ import Link from "next/link"
 import { getSources } from "db/src/orm/source"
 import { PlusIcon } from "lucide-react"
 
-import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
 import { buttonVariants } from "@/components/ui/button"
 
 import { columns } from "./columns"
 import { DataTable } from "@/components/ui/data-table"
+import { auth } from "@/lib/auth"
 
 const SourcePage = async () => {
-	const sources = await getSources({ customerId: appConfig.devUser, db: db })
+	const { userId } = auth()
+
+	const sources = await getSources({ customerId: userId, db: db })
 	return (
 		<main className="p-4">
 			<div className="flex flex-row justify-between mb-4">

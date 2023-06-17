@@ -1,6 +1,5 @@
 import { Tiny } from "db/src/tinybird"
 
-import { serverClient } from "@/server/server"
 import { chartColors, getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,28 +7,32 @@ import { Chart } from "@/components/ui/chart"
 
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
+import { auth } from "@/lib/auth"
+import { currentUser } from "@clerk/nextjs"
 
 const Dashboard = async () => {
-	const test = await serverClient.greeting.query({ text: "XD" })
+	const { userId } = auth()
 	// rome-ignore lint/style/noNonNullAssertion: <explanation>
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
 	const reqKpis = await tiny.getReqKpis({
-		customer_id: "cus_8NiWC2t_SZVKALuy",
+		customer_id: userId,
 	})
 	const resKpis = await tiny.getResKpis({
-		customer_id: "cus_8NiWC2t_SZVKALuy",
+		customer_id: userId,
 		success: 1,
 	})
 
 	const errorKpis = await tiny.getResKpis({
-		customer_id: "cus_8NiWC2t_SZVKALuy",
+		customer_id: userId,
 		success: 0,
 	})
 
 	const bySources = await tiny.getTimeseriesBySource({
-		customer_id: "cus_8NiWC2t_SZVKALuy",
+		customer_id: userId,
 	})
+
+	const user = await currentUser()
 
 	const chartData = transformSourcesChartData(bySources.data)
 	return (
@@ -39,7 +42,7 @@ const Dashboard = async () => {
 					<AvatarImage src={getSeededProfileImageUrl("12")} />
 				</Avatar>
 				<div className="flex justify-center flex-col">
-					<h3 className="text-2xl">Welcome back, Makisuo</h3>
+					<h3 className="text-2xl">Welcome back, {user?.username}</h3>
 					<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
 				</div>
 			</div>

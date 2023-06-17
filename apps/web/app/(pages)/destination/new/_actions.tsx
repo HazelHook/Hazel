@@ -10,9 +10,8 @@ import { formSchema } from "./schema"
 
 export const createDestinationAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
-		console.log(opts.ctx.auth)
 		const source = await createDestination({
-			data: { ...opts.input, customerId: appConfig.devUser },
+			data: { ...opts.input, customerId: opts.ctx.auth.userId },
 			db,
 		})
 

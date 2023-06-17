@@ -1,18 +1,19 @@
 import Link from "next/link"
 import { getDestinations } from "db/src/orm/destination"
-import { getSources } from "db/src/orm/source"
 import { PlusIcon } from "lucide-react"
 
-import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
 import { buttonVariants } from "@/components/ui/button"
 
 import { columns } from "./columns"
 import { DataTable } from "@/components/ui/data-table"
+import { auth } from "@/lib/auth"
 
 const DestinationsPage = async () => {
+	const { userId } = auth()
+
 	const destinations = await getDestinations({
-		customerId: appConfig.devUser,
+		customerId: userId,
 		db: db,
 	})
 

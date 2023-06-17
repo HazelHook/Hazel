@@ -3,7 +3,6 @@
 import { createSource } from "db/src/orm/source"
 
 import { createAction, protectedProcedure } from "@/server/trpc"
-import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
 
 import { formSchema } from "./schema"
@@ -17,7 +16,7 @@ import { formSchema } from "./schema"
 export const createSourceAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
 		const source = await createSource({
-			data: { ...opts.input, customerId: appConfig.devUser },
+			data: { ...opts.input, customerId: opts.ctx.auth.userId },
 			db,
 		})
 
