@@ -1,8 +1,5 @@
 import "@/styles/globals.css"
 
-import { Metadata } from "next"
-
-import { siteConfig } from "@/config/site"
 import { Sidebar } from "@/components/Sidebar"
 import { SiteHeader } from "@/components/site-header"
 

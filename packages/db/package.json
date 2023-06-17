@@ -9,6 +9,7 @@
 	"dependencies": {
 		"@chronark/zod-bird": "^0.1.1",
 		"@libsql/client": "^0.2.0",
+		"@planetscale/database": "^1.7.0",
 		"drizzle-orm": "^0.26.5",
 		"drizzle-zod": "^0.4.3",
 		"nanoid": "^4.0.2",

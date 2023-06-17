@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm"
 
 import { DB } from ".."
 import { destination, InsertDestination } from "../schema"
+import { nanoid } from "nanoid"
 
 export async function getDestination({
 	publicId,
@@ -10,19 +11,37 @@ export async function getDestination({
 	publicId: string
 	db: DB
 }) {
-	return await db.select().from(destination).where(eq(destination.publicId, publicId)).get()
+	return await db.select().from(destination).where(eq(destination.publicId, publicId))
+}
+
+export async function getDestinations({
+	customerId,
+	db,
+}: {
+	customerId: string
+	db: DB
+}) {
+	return await db.query.destination.findMany({
+		where: eq(destination.customerId, customerId),
+		with: {
+			connections: {
+				with: {
+					source: true,
+				},
+			},
+		},
+	})
 }
 
 export async function createDestination({
 	data,
 	db,
 }: {
-	data: InsertDestination
+	data: Omit<InsertDestination, "publicId">
 	db: DB
 }) {
-	return await db
-		.insert(destination)
-		.values(data)
-		.returning({ id: destination.id, publicId: destination.publicId })
-		.get()
+	const publicId = `src_${nanoid(17)}`
+	const res = await db.insert(destination).values({ ...data, publicId })
+
+	return { res, publicId }
 }

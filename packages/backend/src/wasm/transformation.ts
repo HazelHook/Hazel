@@ -1,5 +1,3 @@
-import { SelectConnection } from "db/src/schema"
-
 // export async function fluxTransformConnection(conn: SelectConnection, input: string): Promise<string> {
 
 // 	return HazelFlux.transform({
