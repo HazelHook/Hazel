@@ -33,26 +33,6 @@ export const columns: ColumnDef<Column>[] = [
 		},
 	},
 	{
-		accessorKey: "destination",
-		header: "Destination",
-		cell: ({ cell }) => {
-			const destination = cell.getValue() as Destination
-
-			return (
-				<div className="flex flex-row gap-1">
-					<Link href={`/destination/${destination.publicId}`}>
-						<Badge variant="secondary">
-							<Avatar className="w-3 h-3 m-1">
-								<AvatarImage src={getSeededProfileImageUrl(destination.publicId)} />
-							</Avatar>
-							{destination.name}
-						</Badge>
-					</Link>
-				</div>
-			)
-		},
-	},
-	{
 		accessorKey: "source",
 		header: "Source",
 		cell: ({ cell }) => {
@@ -62,7 +42,7 @@ export const columns: ColumnDef<Column>[] = [
 				<div className="flex flex-row gap-1">
 					<Link href={`/source/${source.publicId}`}>
 						<Badge variant="secondary">
-							<Avatar className="w-3 h-3 m-1">
+							<Avatar className="w-3 h-3 mr-2">
 								<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
 							</Avatar>
 							{source.name}
@@ -72,6 +52,27 @@ export const columns: ColumnDef<Column>[] = [
 			)
 		},
 	},
+	{
+		accessorKey: "destination",
+		header: "Destination",
+		cell: ({ cell }) => {
+			const destination = cell.getValue() as Destination
+
+			return (
+				<div className="flex flex-row gap-1">
+					<Link href={`/destination/${destination.publicId}`}>
+						<Badge variant="secondary">
+							<Avatar className="w-3 h-3 mr-2">
+								<AvatarImage src={getSeededProfileImageUrl(destination.publicId)} />
+							</Avatar>
+							{destination.name}
+						</Badge>
+					</Link>
+				</div>
+			)
+		},
+	},
+
 	{
 		accessorKey: "group",
 		header: ({ column }) => {

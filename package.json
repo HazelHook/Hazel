@@ -2,7 +2,6 @@
 	"private": true,
 	"scripts": {
 		"build": "turbo run build",
-		"postinstall": "pnpm format",
 		"dev": "turbo run dev",
 		"lint": "turbo run lint",
 		"format": "pnpm prettier:write && pnpm rome:format:write",
