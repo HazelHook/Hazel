@@ -53,3 +53,5 @@ export default function ErrorPage({
 		</div>
 	)
 }
+
+export const runtime = "edge"

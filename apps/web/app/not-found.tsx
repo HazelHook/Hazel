@@ -31,3 +31,5 @@ export default function NotFoundPage() {
 		</div>
 	)
 }
+
+export const runtime = "edge"

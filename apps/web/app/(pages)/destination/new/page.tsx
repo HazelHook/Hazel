@@ -9,4 +9,6 @@ const NewSourcePage = () => {
 	)
 }
 
+export const runtime = "edge"
+
 export default NewSourcePage

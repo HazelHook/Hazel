@@ -11,4 +11,6 @@ const handler = (req: Request) =>
 		createContext,
 	})
 
+export const runtime = "edge"
+
 export { handler as GET, handler as POST }

@@ -17,9 +17,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
+	rootPath: string
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data, rootPath }: DataTableProps<TData, TValue>) {
 	const router = useRouter()
 	const [sorting, setSorting] = useState<SortingState>([])
 
@@ -36,7 +37,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 	})
 
 	const navigate = (source: Source) => () => {
-		router.push(`/source/${source.publicId}`)
+		router.push(`${rootPath}/${source.publicId}`)
 	}
 
 	return (

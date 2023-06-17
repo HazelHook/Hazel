@@ -16,7 +16,6 @@ import { formSchema } from "./schema"
  */
 export const createSourceAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
-		console.log(opts.ctx.auth)
 		const source = await createSource({
 			data: { ...opts.input, customerId: appConfig.devUser },
 			db,

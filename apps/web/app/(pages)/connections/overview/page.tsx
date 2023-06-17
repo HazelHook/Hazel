@@ -16,4 +16,6 @@ const ConnectionsOverview = async () => {
 	)
 }
 
+export const runtime = "edge"
+
 export default ConnectionsOverview

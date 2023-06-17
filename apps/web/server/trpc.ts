@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 import { auth } from "@clerk/nextjs"
 import { experimental_createServerActionHandler } from "@trpc/next/app-dir/server"
-import { TRPCError, initTRPC } from "@trpc/server"
+import { initTRPC, TRPCError } from "@trpc/server"
 import superjson from "superjson"
 import { ZodError } from "zod"
 

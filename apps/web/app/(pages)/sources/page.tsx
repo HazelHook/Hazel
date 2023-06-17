@@ -7,7 +7,7 @@ import db from "@/lib/db"
 import { buttonVariants } from "@/components/ui/button"
 
 import { columns } from "./columns"
-import { DataTable } from "./data-table"
+import { DataTable } from "@/components/ui/data-table"
 
 const SourcePage = async () => {
 	const sources = await getSources({ customerId: appConfig.devUser, db: db })
@@ -20,9 +20,11 @@ const SourcePage = async () => {
 					New Source
 				</Link>
 			</div>
-			<DataTable columns={columns} data={sources} />
+			<DataTable rootPath="/source" columns={columns} data={sources} />
 		</main>
 	)
 }
+
+export const runtime = "edge"
 
 export default SourcePage

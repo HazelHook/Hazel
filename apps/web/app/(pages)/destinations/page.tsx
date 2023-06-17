@@ -8,7 +8,7 @@ import db from "@/lib/db"
 import { buttonVariants } from "@/components/ui/button"
 
 import { columns } from "./columns"
-import { DataTable } from "./data-table"
+import { DataTable } from "@/components/ui/data-table"
 
 const DestinationsPage = async () => {
 	const destinations = await getDestinations({
@@ -25,9 +25,11 @@ const DestinationsPage = async () => {
 					New Destination
 				</Link>
 			</div>
-			<DataTable columns={columns} data={destinations} />
+			<DataTable rootPath="/destination" columns={columns} data={destinations} />
 		</main>
 	)
 }
+
+export const runtime = "edge"
 
 export default DestinationsPage
