@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm"
 
 import { DB } from ".."
 import { destination, InsertDestination } from "../schema"
+import { nanoid } from "nanoid"
 
 export async function getDestination({
 	publicId,
@@ -36,8 +37,11 @@ export async function createDestination({
 	data,
 	db,
 }: {
-	data: InsertDestination
+	data: Omit<InsertDestination, "publicId">
 	db: DB
 }) {
-	return await db.insert(destination).values(data)
+	const publicId = `src_${nanoid(17)}`
+	const res = await db.insert(destination).values({ ...data, publicId })
+
+	return { res, publicId }
 }
