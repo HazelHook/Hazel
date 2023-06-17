@@ -4,7 +4,7 @@
 		"params": [
 			{
 				"start": "2023-05-12T00:00:00.000Z",
-				"end": "2023-06-12T00:00:00.000Z"
+				"end": "2023-06-17T00:00:00.000Z"
 			}
 		]
 	},
@@ -17,10 +17,17 @@
 		]
 	},
 	"source_id": {
-		"type": "mockingbird.pick",
+		"type": "mockingbird.pickWeighted",
 		"params": [
 			{
-				"values": ["src_7FZZ8Ucd_rvfR8eNqDSks", "src_7FZZ8Ucd_rvfR8eNqDSks"]
+				"values": [
+					"src_sCN4s7quDdoBHw6nXydka",
+					"src_zuWLpg_y-lueQg5TfG5VV",
+					"src_vOZg0Lp6kcENCDnOZdgpb",
+					"src_YHxRrZlbTvvU2BkA0yceJ",
+					"src_ZnrE62STXrejDAsRBn9Sr"
+				],
+				"weights": [90, 7, 3, 30, 70]
 			}
 		]
 	},
@@ -36,7 +43,7 @@
 		"type": "mockingbird.pick",
 		"params": [
 			{
-				"values": ["cus_8NiWC2t_SZVKALuy"]
+				"values": ["user_2RFXEq9BzmRMggnKwjEeFeHVfMV"]
 			}
 		]
 	},

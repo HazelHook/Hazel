@@ -1,5 +1,7 @@
+import { currentUser } from "@clerk/nextjs"
 import { Tiny } from "db/src/tinybird"
 
+import { auth } from "@/lib/auth"
 import { chartColors, getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,8 +9,6 @@ import { Chart } from "@/components/ui/chart"
 
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
-import { auth } from "@/lib/auth"
-import { currentUser } from "@clerk/nextjs"
 
 const Dashboard = async () => {
 	const { userId } = auth()

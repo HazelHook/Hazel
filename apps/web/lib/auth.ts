@@ -1,5 +1,5 @@
-import { auth as clerkAuth } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
+import { auth as clerkAuth } from "@clerk/nextjs"
 
 export const auth = () => {
 	const res = clerkAuth()

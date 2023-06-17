@@ -1,9 +1,9 @@
+import { notFound, redirect } from "next/navigation"
+import { auth } from "@clerk/nextjs"
 import { getSource } from "db/src/orm/source"
 
 import db from "@/lib/db"
 import { buttonVariants } from "@/components/ui/button"
-import { notFound, redirect } from "next/navigation"
-import { auth } from "@clerk/nextjs"
 
 const SourcePage = async ({
 	params,

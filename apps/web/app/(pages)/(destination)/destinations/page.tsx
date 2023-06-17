@@ -2,12 +2,12 @@ import Link from "next/link"
 import { getDestinations } from "db/src/orm/destination"
 import { PlusIcon } from "lucide-react"
 
+import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { buttonVariants } from "@/components/ui/button"
+import { DataTable } from "@/components/ui/data-table"
 
 import { columns } from "./columns"
-import { DataTable } from "@/components/ui/data-table"
-import { auth } from "@/lib/auth"
 
 const DestinationsPage = async () => {
 	const { userId } = auth()

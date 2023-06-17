@@ -77,6 +77,9 @@ importers:
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
+      dagre:
+        specifier: ^0.8.5
+        version: 0.8.5
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -120,6 +123,9 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
+      '@types/dagre':
+        specifier: ^0.7.48
+        version: 0.7.48
       '@types/node':
         specifier: ^20.3.1
         version: 20.3.1
@@ -2481,6 +2487,10 @@ packages:
       '@types/d3-zoom': 3.0.3
     dev: false
 
+  /@types/dagre@0.7.48:
+    resolution: {integrity: sha512-rF3yXSwHIrDxEkN6edCE4TXknb5YSEpiXfLaspw1I08grC49ZFuAVGOQCmZGIuLUGoFgcqGlUFBL/XrpgYpQgw==}
+    dev: true
+
   /@types/express-serve-static-core@4.17.35:
     resolution: {integrity: sha512-wALWQwrgiB2AWTT91CB62b6Yt0sNHpznUXeZEcnPU3DRdlDIz74x8Qg1UUYKSVFi+va5vKOLYRBI1bRKiLLKIg==}
     dependencies:
@@ -3291,6 +3301,13 @@ packages:
       es5-ext: 0.10.62
       type: 1.2.0
     dev: true
+
+  /dagre@0.8.5:
+    resolution: {integrity: sha512-/aTqmnRta7x7MCCpExk7HQL2O4owCT2h8NT//9I1OQ9vt29Pa0BzSAkR5lwFUcQ7491yVi/3CXU9jQ5o0Mn2Sw==}
+    dependencies:
+      graphlib: 2.1.8
+      lodash: 4.17.21
+    dev: false
 
   /data-uri-to-buffer@2.0.2:
     resolution: {integrity: sha512-ND9qDTLc6diwj+Xe5cdAgVTbLVdXbtxTJRXRhli8Mowuaan+0EJOtdqJ0QCHNSSPyoXGx9HX2/VMnKeC34AChA==}
@@ -4293,6 +4310,12 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
+  /graphlib@2.1.8:
+    resolution: {integrity: sha512-jcLLfkpoVGmH7/InMC/1hIvOPSUh38oJtGhvrOFGzioE1DZ+0YW16RgmOJhHiuWTvGiJQ9Z1Ik43JvkRPRvE+A==}
+    dependencies:
+      lodash: 4.17.21
+    dev: false
+
   /handlebars@4.7.7:
     resolution: {integrity: sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==}
     engines: {node: '>=0.4.7'}
@@ -4646,7 +4669,6 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
