@@ -6,6 +6,8 @@ import { ArrowDown, ArrowUp, CheckIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { getSeededProfileImageUrl } from "@/lib/utils"
 
 export type Column = Source & {
 	connections: Connection[]
@@ -24,6 +26,17 @@ export const columns: ColumnDef<Column>[] = [
 						<ArrowDown className="ml-2 h-4 w-4" />
 					)}
 				</Button>
+			)
+		},
+		cell: ({ cell, table, row }) => {
+			const id = row.original.publicId
+			return (
+				<div className="flex flex-row items-center">
+					<Avatar className="w-4 h-4 mr-2">
+						<AvatarImage src={getSeededProfileImageUrl(id)} />
+					</Avatar>
+					{cell.getValue<string>()}
+				</div>
 			)
 		},
 	},
@@ -48,6 +61,9 @@ export const columns: ColumnDef<Column>[] = [
 					<div className="flex flex-row gap-1 flex-wrap">
 						{connections.map((conn) => (
 							<Badge variant="outline" key={`badge-${conn.publicId}`}>
+								<Avatar className="w-3 h-3 mr-2">
+									<AvatarImage src={getSeededProfileImageUrl(conn.publicId)} />
+								</Avatar>
 								{conn.source.name}
 							</Badge>
 						))}
