@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 import { auth } from "@clerk/nextjs"
 import { experimental_createServerActionHandler } from "@trpc/next/app-dir/server"
-import { initTRPC } from "@trpc/server"
+import { TRPCError, initTRPC } from "@trpc/server"
 import superjson from "superjson"
 import { ZodError } from "zod"
 
@@ -21,9 +21,6 @@ const t = initTRPC.context<Context>().create({
 	},
 })
 
-export const router = t.router
-export const publicProcedure = t.procedure
-
 export const createAction = experimental_createServerActionHandler(t, {
 	createContext() {
 		const newHeaders = new Map(headers())
@@ -37,3 +34,19 @@ export const createAction = experimental_createServerActionHandler(t, {
 		}
 	},
 })
+
+const isAuthed = t.middleware(({ next, ctx }) => {
+	if (!ctx.auth.userId) {
+		throw new TRPCError({ code: "UNAUTHORIZED" })
+	}
+	return next({
+		ctx: {
+			auth: ctx.auth,
+		},
+	})
+})
+
+export const router = t.router
+export const publicProcedure = t.procedure
+
+export const protectedProcedure = t.procedure.use(isAuthed)
