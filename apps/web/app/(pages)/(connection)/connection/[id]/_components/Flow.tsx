@@ -7,6 +7,7 @@ import ReactFlow, {
 	EdgeTypes,
 	Node,
 	NodeTypes,
+	ReactFlowInstance,
 	addEdge,
 	useEdgesState,
 	useNodesState,
@@ -21,7 +22,7 @@ import { DefaultNode } from "@/components/ui/flow/nodes/DefaultNode"
 import { InputNode } from "@/components/ui/flow/nodes/InputNode"
 import { GroupNode } from "@/components/ui/flow/nodes/Group"
 import { OutputNode } from "@/components/ui/flow/nodes/OutputNode"
-import { useCallback, useLayoutEffect, useState } from "react"
+import { useCallback, useLayoutEffect, useRef, useState } from "react"
 import { EdgeButton } from "@/components/ui/flow/edges/ButtonEdge"
 import ELK, { type ElkNode, type ElkExtendedEdge, type LayoutOptions } from "elkjs/lib/elk.bundled.js"
 
@@ -93,16 +94,16 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 	const position = { x: 0, y: 0 }
 
 	// Add connection as node
-	nodes.push({
-		id: connection.publicId,
-		type: "group",
-		data: { label: connection.name },
-		position: position,
-		className: "w-[1000px]",
-		style: {
-			height: 500 + 100,
-		},
-	})
+	// nodes.push({
+	// 	id: connection.publicId,
+	// 	type: "group",
+	// 	data: { label: connection.name },
+	// 	position: position,
+	// 	className: "w-[1000px]",
+	// 	style: {
+	// 		height: 500 + 100,
+	// 	},
+	// })
 
 	if (connection.source) {
 		if (!nodes.find((node) => node.id === connection.source?.publicId)) {
@@ -133,8 +134,8 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 			id: `src-${connection.source.publicId}-d${connection.destination.publicId}`,
 			source: connection.source.publicId,
 			target: connection.destination.publicId,
-			type: "default",
-			animated: true,
+			type: "button",
+			animated: false,
 		})
 	}
 
@@ -142,6 +143,11 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 }
 
 export const Flow = ({ connection }: { connection: FullConnection }) => {
+	const reactFlowWrapper = useRef<HTMLDivElement>(null)
+
+	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+	const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance<any, any>>()
+
 	const inital = transformProjectsToFlowElements(connection)
 	const [nodes, setNodes, onNodesChange] = useNodesState([])
 	const [edges, setEdges, onEdgesChange] = useEdgesState([])
@@ -151,7 +157,7 @@ export const Flow = ({ connection }: { connection: FullConnection }) => {
 	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [])
 	const onLayout = useCallback(
-		({ direction = "DOWN", useInitialNodes = false }) => {
+		({ direction = "DOWN", useInitialNodes = false }: { direction: "DOWN" | "RIGHT"; useInitialNodes: boolean }) => {
 			const opts = { "elk.direction": direction, ...elkOptions }
 			const ns = useInitialNodes ? inital.nodes : nodes
 			const es = useInitialNodes ? inital.edges : edges
@@ -168,24 +174,67 @@ export const Flow = ({ connection }: { connection: FullConnection }) => {
 		[nodes, edges],
 	)
 
+	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+	const onDragOver = useCallback((event: any) => {
+		event.preventDefault()
+		event.dataTransfer.dropEffect = "move"
+	}, [])
+
+	const onDrop = useCallback(
+		// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+		(event: any) => {
+			event.preventDefault()
+
+			const reactFlowBounds = reactFlowWrapper?.current?.getBoundingClientRect()
+			const type = event.dataTransfer.getData("application/reactflow")
+
+			// check if the dropped element is valid
+			if (typeof type === "undefined" || !type) {
+				return
+			}
+
+			const position = reactFlowInstance?.project({
+				// rome-ignore lint/style/noNonNullAssertion: <explanation>
+				x: event.clientX - reactFlowBounds?.left!,
+				// rome-ignore lint/style/noNonNullAssertion: <explanation>
+				y: event.clientY - reactFlowBounds?.top!,
+			})
+			const newNode = {
+				id: `${Math.random() * Math.random()}`,
+				type,
+				position,
+				data: { label: `${type} node` },
+			}
+
+			// @ts-expect-error
+			setNodes((nds) => nds.concat(newNode))
+		},
+		[reactFlowInstance],
+	)
+
 	useLayoutEffect(() => {
 		onLayout({ direction: "RIGHT", useInitialNodes: true })
 	}, [])
 
 	return (
-		<ReactFlow
-			nodeTypes={nodeTypes}
-			edgeTypes={edgeTypes}
-			onConnect={onConnect}
-			nodes={nodes}
-			edges={edges}
-			onNodesChange={onNodesChange}
-			onEdgesChange={onEdgesChange}
-			fitView
-			className="bg-background"
-		>
-			<Background />
-			<Controls />
-		</ReactFlow>
+		<div className="h-full w-full" ref={reactFlowWrapper}>
+			<ReactFlow
+				nodeTypes={nodeTypes}
+				edgeTypes={edgeTypes}
+				onConnect={onConnect}
+				nodes={nodes}
+				edges={edges}
+				onNodesChange={onNodesChange}
+				onEdgesChange={onEdgesChange}
+				onInit={setReactFlowInstance}
+				onDrop={onDrop}
+				onDragOver={onDragOver}
+				fitView
+				className="bg-background"
+			>
+				<Background />
+				<Controls />
+			</ReactFlow>
+		</div>
 	)
 }

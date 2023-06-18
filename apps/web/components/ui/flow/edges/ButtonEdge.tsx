@@ -1,7 +1,9 @@
 import React from "react"
 import { BaseEdge, EdgeLabelRenderer, EdgeProps, getBezierPath } from "reactflow"
 
-import { Button } from "../../button"
+import { useDrag, useDrop } from "react-dnd"
+
+import { RoundPlusIcon } from "@/components/icons/RoundPlus"
 
 const onEdgeClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
 	evt.stopPropagation()
@@ -36,14 +38,15 @@ export const EdgeButton = ({
 					style={{
 						position: "absolute",
 						transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-						fontSize: 12,
 						// everything inside EdgeLabelRenderer has no pointer events by default
 						// if you have an interactive element, set pointer-events: all
 						pointerEvents: "all",
 					}}
-					className="nodrag nopan"
+					className="nodrag nopan flex justify-center"
 				>
-					<Button onClick={(event) => onEdgeClick(event, id)}>×</Button>
+					<button type="button" className="rounded-full bg-secondary" onClick={(event) => onEdgeClick(event, id)}>
+						<RoundPlusIcon />
+					</button>
 				</div>
 			</EdgeLabelRenderer>
 		</>
