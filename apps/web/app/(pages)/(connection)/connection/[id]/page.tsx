@@ -10,8 +10,6 @@ import { auth } from "@/lib/auth"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { NavTabs } from "./_components/NavTabs"
 import { getCachedConnection } from "@/lib/orm"
 
 const SourcePage = async ({
@@ -21,11 +19,7 @@ const SourcePage = async ({
 		id: string
 	}
 }) => {
-	const connection = await getCachedConnection({ publicId: params.id, db })
-
-	if (!connection) {
-		notFound()
-	}
+	const connection = await getCachedConnection({ publicId: params.id })
 
 	const { userId } = auth()
 
@@ -38,24 +32,24 @@ const SourcePage = async ({
 
 	const pReqKpis = tiny.getReqKpis({
 		customer_id: userId,
-		source_id: connection.source?.publicId,
+		source_id: connection.source?.publicId || "",
 	})
 
 	const pResKpis = tiny.getResKpis({
 		customer_id: userId,
-		source_id: connection.source?.publicId,
+		source_id: connection.source?.publicId || "",
 		success: 1,
 	})
 
 	const pErrorKpis = tiny.getResKpis({
 		customer_id: userId,
-		source_id: connection.source?.publicId,
+		source_id: connection.source?.publicId || "",
 		success: 0,
 	})
 
 	const pBySources = tiny.getTimeseriesBySource({
 		customer_id: userId,
-		source_id: connection.source?.publicId,
+		source_id: connection.source?.publicId || "",
 	})
 
 	const [reqKpis, resKpis, errorKpis, bySources] = await Promise.all([pReqKpis, pResKpis, pErrorKpis, pBySources])

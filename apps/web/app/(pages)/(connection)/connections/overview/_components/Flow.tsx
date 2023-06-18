@@ -2,15 +2,15 @@
 
 import ReactFlow, { Background, Controls, Edge, Node, NodeTypes } from "reactflow"
 
-import "./Flow.css"
+import "@/components/ui/flow/Flow.css"
 
 import dagre from "dagre"
 import { Connection, Destination, Source } from "db/src/schema"
 
-import { DefaultNode } from "./nodes/DefaultNode"
-import { GroupNode } from "./nodes/Group"
-import { InputNode } from "./nodes/InputNode"
-import { OutputNode } from "./nodes/OutputNode"
+import { DefaultNode } from "@/components/ui/flow/nodes/DefaultNode"
+import { GroupNode } from "@/components/ui/flow/nodes/Group"
+import { InputNode } from "@/components/ui/flow/nodes/InputNode"
+import { OutputNode } from "@/components/ui/flow/nodes/OutputNode"
 
 const nodeTypes: NodeTypes = {
 	default: DefaultNode,
