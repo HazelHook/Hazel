@@ -1,17 +1,77 @@
 import { getCachedConnection } from "@/lib/orm"
-import { Flow } from "../_components/Flow"
+import { Flow, FullConnection } from "../_components/Flow"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FlowProvider } from "../_components/Provider"
 import { Nodebar } from "../_components/NodeBar"
 
+import type { Edge, Node } from "reactflow"
+
+const transformProjectsToFlowElements = (connection: FullConnection): { nodes: Node[]; edges: Edge[] } => {
+	const nodes: Node[] = []
+	const edges: Edge[] = []
+
+	const position = { x: 0, y: 0 }
+
+	// Add connection as node
+	// nodes.push({
+	// 	id: connection.publicId,
+	// 	type: "group",
+	// 	data: { label: connection.name },
+	// 	position: position,
+	// 	className: "w-[1000px]",
+	// 	style: {
+	// 		height: 500 + 100,
+	// 	},
+	// })
+
+	if (connection.source) {
+		if (!nodes.find((node) => node.id === connection.source?.publicId)) {
+			nodes.push({
+				id: connection.source.publicId,
+				type: "input",
+				data: { label: connection.source.name },
+				position,
+			})
+		}
+	}
+
+	// If there's a destination, add it as a node and connect it to the connection
+
+	if (connection.destination) {
+		if (!nodes.find((node) => node.id === connection.destination?.publicId)) {
+			nodes.push({
+				id: connection.destination.publicId,
+				type: "default",
+				data: { label: connection.destination.name },
+				position,
+			})
+		}
+	}
+
+	if (connection.destination && connection.source) {
+		edges.push({
+			id: `src-${connection.source.publicId}-d${connection.destination.publicId}`,
+			source: connection.source.publicId,
+			target: connection.destination.publicId,
+			type: "button",
+			animated: false,
+		})
+	}
+
+	return { nodes, edges }
+}
+
 const AdvancedPage = async ({ params }: { params: { id: string } }) => {
 	const connection = await getCachedConnection({ publicId: params.id })
+
+	const { nodes, edges } = transformProjectsToFlowElements(connection)
+
 	return (
 		<main className="h-full w-full">
 			<FlowProvider>
 				<div className="flex flex-row gap-2 w-full h-full">
 					<Card className="h-full w-full overflow-hidden">
-						<Flow connection={connection} />
+						<Flow initalNodes={nodes} initalEdges={edges} />
 					</Card>
 					<Card>
 						<CardHeader>

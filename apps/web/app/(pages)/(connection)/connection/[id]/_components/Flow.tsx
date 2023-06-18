@@ -87,80 +87,33 @@ const getLayoutedElements = async (nodes: Node[], edges: Edge[], options: Layout
 		.catch(console.error)
 }
 
-const transformProjectsToFlowElements = (connection: FullConnection): { nodes: Node[]; edges: Edge[] } => {
-	const nodes: Node[] = []
-	const edges: Edge[] = []
-
-	const position = { x: 0, y: 0 }
-
-	// Add connection as node
-	// nodes.push({
-	// 	id: connection.publicId,
-	// 	type: "group",
-	// 	data: { label: connection.name },
-	// 	position: position,
-	// 	className: "w-[1000px]",
-	// 	style: {
-	// 		height: 500 + 100,
-	// 	},
-	// })
-
-	if (connection.source) {
-		if (!nodes.find((node) => node.id === connection.source?.publicId)) {
-			nodes.push({
-				id: connection.source.publicId,
-				type: "input",
-				data: { label: connection.source.name },
-				position,
-			})
-		}
-	}
-
-	// If there's a destination, add it as a node and connect it to the connection
-
-	if (connection.destination) {
-		if (!nodes.find((node) => node.id === connection.destination?.publicId)) {
-			nodes.push({
-				id: connection.destination.publicId,
-				type: "ouput",
-				data: { label: connection.destination.name },
-				position,
-			})
-		}
-	}
-
-	if (connection.destination && connection.source) {
-		edges.push({
-			id: `src-${connection.source.publicId}-d${connection.destination.publicId}`,
-			source: connection.source.publicId,
-			target: connection.destination.publicId,
-			type: "button",
-			animated: false,
-		})
-	}
-
-	return { nodes, edges }
+export interface FlowProps {
+	initalEdges: Edge[]
+	initalNodes: Node[]
 }
 
-export const Flow = ({ connection }: { connection: FullConnection }) => {
+export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
+	const firstRender = useRef<boolean>(true)
 	const reactFlowWrapper = useRef<HTMLDivElement>(null)
 
 	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance<any, any>>()
 
-	const inital = transformProjectsToFlowElements(connection)
 	const [nodes, setNodes, onNodesChange] = useNodesState([])
 	const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
 	const { fitView } = useReactFlow()
 
 	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
-	const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [])
+	const onConnect = useCallback((params: any) => {
+		setEdges((eds) => addEdge(params, eds))
+	}, [])
+
 	const onLayout = useCallback(
 		({ direction = "DOWN", useInitialNodes = false }: { direction: "DOWN" | "RIGHT"; useInitialNodes: boolean }) => {
 			const opts = { "elk.direction": direction, ...elkOptions }
-			const ns = useInitialNodes ? inital.nodes : nodes
-			const es = useInitialNodes ? inital.edges : edges
+			const ns = useInitialNodes ? initalNodes : nodes
+			const es = useInitialNodes ? initalEdges : edges
 
 			getLayoutedElements(ns, es, opts).then((layouted) => {
 				if (layouted) {
@@ -213,8 +166,10 @@ export const Flow = ({ connection }: { connection: FullConnection }) => {
 	)
 
 	useLayoutEffect(() => {
-		onLayout({ direction: "RIGHT", useInitialNodes: true })
-	}, [])
+		onLayout({ direction: "RIGHT", useInitialNodes: firstRender.current })
+
+		firstRender.current = false
+	}, [edges])
 
 	return (
 		<div className="h-full w-full" ref={reactFlowWrapper}>
