@@ -47,7 +47,7 @@ const SourcePage = async ({
 		success: 0,
 	})
 
-	const pBySources = tiny.getTimeseriesBySource({
+	const pBySources = tiny.getReqTimeseries({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 	})

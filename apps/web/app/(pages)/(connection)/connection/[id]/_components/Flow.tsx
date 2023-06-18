@@ -166,10 +166,10 @@ export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
 	)
 
 	useLayoutEffect(() => {
-		onLayout({ direction: "RIGHT", useInitialNodes: firstRender.current })
+		onLayout({ direction: "RIGHT", useInitialNodes: true })
 
 		firstRender.current = false
-	}, [edges])
+	}, [])
 
 	return (
 		<div className="h-full w-full" ref={reactFlowWrapper}>

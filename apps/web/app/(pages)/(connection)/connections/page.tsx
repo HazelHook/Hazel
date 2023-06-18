@@ -1,9 +1,7 @@
 import { getConnections } from "db/src/orm/connection"
 
 import { auth } from "@/lib/auth"
-import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { PlusIcon } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"

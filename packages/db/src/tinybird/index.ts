@@ -71,11 +71,21 @@ export const Tiny = (token: string) => {
 		}),
 	})
 
-	const getTimeseriesBySource = tb.buildPipe({
+	const getReqTimeseries = tb.buildPipe({
 		pipe: "kpi_per_source",
 		parameters: z.object({
 			customer_id: z.string(),
 			source_id: z.string().optional(),
+		}),
+		data: sourceTimeSeriesRes,
+	})
+
+	const getResTimeseries = tb.buildPipe({
+		pipe: "res_timeline",
+		parameters: z.object({
+			customer_id: z.string(),
+			source_id: z.string().optional(),
+			date_range: z.number().optional(),
 		}),
 		data: sourceTimeSeriesRes,
 	})
@@ -85,6 +95,7 @@ export const Tiny = (token: string) => {
 		publishResponseEvent,
 		getResKpis,
 		getReqKpis,
-		getTimeseriesBySource,
+		getResTimeseries,
+		getReqTimeseries,
 	}
 }

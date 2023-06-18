@@ -28,7 +28,7 @@ const Dashboard = async () => {
 		success: 0,
 	})
 
-	const bySources = await tiny.getTimeseriesBySource({
+	const bySources = await tiny.getReqTimeseries({
 		customer_id: userId,
 	})
 
