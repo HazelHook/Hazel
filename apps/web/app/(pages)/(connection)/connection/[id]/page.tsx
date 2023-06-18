@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 import db from "@/lib/db"
 import { getConnection } from "db/src/orm/connection"
@@ -11,6 +11,8 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { NavTabs } from "./_components/NavTabs"
+import { getCachedConnection } from "@/lib/orm"
 
 const SourcePage = async ({
 	params,
@@ -19,57 +21,49 @@ const SourcePage = async ({
 		id: string
 	}
 }) => {
-	const connection = await getConnection({ publicId: params.id, db })
-
-	const { userId } = auth()
-
-	// rome-ignore lint/style/noNonNullAssertion: <explanation>
-	const tiny = Tiny(process.env.TINY_TOKEN!)
-
-	const reqKpis = await tiny.getReqKpis({
-		customer_id: userId,
-	})
-
-	const resKpis = await tiny.getResKpis({
-		customer_id: userId,
-		success: 1,
-	})
-
-	const errorKpis = await tiny.getResKpis({
-		customer_id: userId,
-		success: 0,
-	})
+	const connection = await getCachedConnection({ publicId: params.id, db })
 
 	if (!connection) {
 		notFound()
 	}
 
-	const bySources = await tiny.getTimeseriesBySource({
+	const { userId } = auth()
+
+	if (connection.customerId !== userId) {
+		redirect("/")
+	}
+
+	// rome-ignore lint/style/noNonNullAssertion: <explanation>
+	const tiny = Tiny(process.env.TINY_TOKEN!)
+
+	const pReqKpis = tiny.getReqKpis({
 		customer_id: userId,
+		source_id: connection.source?.publicId,
 	})
+
+	const pResKpis = tiny.getResKpis({
+		customer_id: userId,
+		source_id: connection.source?.publicId,
+		success: 1,
+	})
+
+	const pErrorKpis = tiny.getResKpis({
+		customer_id: userId,
+		source_id: connection.source?.publicId,
+		success: 0,
+	})
+
+	const pBySources = tiny.getTimeseriesBySource({
+		customer_id: userId,
+		source_id: connection.source?.publicId,
+	})
+
+	const [reqKpis, resKpis, errorKpis, bySources] = await Promise.all([pReqKpis, pResKpis, pErrorKpis, pBySources])
 
 	const chartData = transformSourcesChartData(bySources.data)
 
-	// if (source.customerId !== userId) {
-	// 	redirect("/")
-	// }
-
 	return (
-		<main className="p-4 space-y-4">
-			<div className="flex flex-row justify-between mb-4">
-				<div>
-					<h3 className="text-xl font-semibold">Connection</h3>
-					<h4 className="text-lg text-muted-foreground">{connection.name}</h4>
-				</div>
-			</div>
-			<Tabs defaultValue="/" className="w-full">
-				<TabsList>
-					<TabsTrigger value="/">Overview</TabsTrigger>
-					<TabsTrigger value="/events">Events</TabsTrigger>
-					<TabsTrigger value="/settings">Advanced</TabsTrigger>
-					<TabsTrigger value="/settings">Settings</TabsTrigger>
-				</TabsList>
-			</Tabs>
+		<div className="space-y-4">
 			<div className="flex gap-4 flex-col md:flex-row">
 				<KpiCard
 					color={chartColors[0]}
@@ -157,7 +151,7 @@ const SourcePage = async ({
 					</div>
 				</Card>
 			</div>
-		</main>
+		</div>
 	)
 }
 

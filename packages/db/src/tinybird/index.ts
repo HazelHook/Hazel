@@ -47,6 +47,7 @@ export const Tiny = (token: string) => {
 		pipe: "kpi_req",
 		parameters: z.object({
 			customer_id: z.string(),
+			source_id: z.string().optional(),
 		}),
 		data: z.object({
 			customer_id: z.string(),
@@ -59,6 +60,7 @@ export const Tiny = (token: string) => {
 		pipe: "kpi_res",
 		parameters: z.object({
 			customer_id: z.string(),
+			source_id: z.string().optional(),
 			success: z.number().min(0).max(1).optional(),
 		}),
 		data: z.object({
@@ -72,6 +74,7 @@ export const Tiny = (token: string) => {
 		pipe: "kpi_per_source",
 		parameters: z.object({
 			customer_id: z.string(),
+			source_id: z.string().optional(),
 		}),
 		data: sourceTimeSeriesRes,
 	})
