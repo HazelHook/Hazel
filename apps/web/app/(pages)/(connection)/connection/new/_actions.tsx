@@ -1,11 +1,10 @@
 "use server"
 
-import { createSource } from "db/src/orm/source"
-
 import { createAction, protectedProcedure } from "@/server/trpc"
 import db from "@/lib/db"
 
 import { formSchema } from "./schema"
+import { createConnection } from "db/src/orm/connection"
 
 /**
  * Either inline procedures using trpc's flexible
@@ -13,15 +12,27 @@ import { formSchema } from "./schema"
  * Wrap the procedure in a `createAction` call to
  * make it server-action friendly
  */
-export const createSourceAction = createAction(
+export const createConnectionAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
-		const source = await createSource({
-			data: { ...opts.input, customerId: opts.ctx.auth.userId },
+		const source = await db.query.source.findFirst({
+			where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
+		})
+
+		const destination = await db.query.destination.findFirst({
+			where: (source, { eq }) => eq(source.publicId, opts.input.publiceDestinationId),
+		})
+		const connection = await createConnection({
+			data: {
+				name: opts.input.name,
+				sourceId: source?.id,
+				destinationId: destination?.id,
+				customerId: opts.ctx.auth.userId,
+			},
 			db,
 		})
 
 		return {
-			id: source.publicId,
+			id: connection.publicId,
 		}
 	}),
 )

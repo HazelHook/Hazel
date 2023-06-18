@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm"
 
 import { DB } from ".."
 import { connection, InsertConnection } from "../schema"
+import { nanoid } from "nanoid"
 
 export async function getConnection({
 	publicId,
@@ -67,12 +68,16 @@ export async function getConnectionsForDestionations({
 	})
 }
 
-export const createConnection = async ({
+export async function createConnection({
 	data,
 	db,
 }: {
-	data: InsertConnection
+	data: Omit<InsertConnection, "publicId">
 	db: DB
-}) => {
-	return db.insert(connection).values(data)
+}) {
+	const publicId = `con_${nanoid(17)}`
+
+	const res = await db.insert(connection).values({ ...data, publicId })
+
+	return { res, publicId }
 }

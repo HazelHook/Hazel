@@ -120,7 +120,7 @@ export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
 					setNodes(layouted.nodes as Node[])
 					setEdges(layouted.edges as unknown as Edge[])
 
-					window.requestAnimationFrame(() => fitView())
+					window.requestAnimationFrame(() => fitView({ duration: 800 }))
 				}
 			})
 		},

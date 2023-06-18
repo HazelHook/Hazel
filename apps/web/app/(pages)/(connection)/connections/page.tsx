@@ -21,7 +21,7 @@ const ConnectionsPage = async () => {
 		<main className="p-4">
 			<div className="flex flex-row justify-between mb-4">
 				<h3 className="text-xl font-semibold">Connections</h3>
-				<Link href="/source/new" className={buttonVariants()}>
+				<Link href="/connection/new" className={buttonVariants()}>
 					<PlusIcon className="mr-2" />
 					New Connection
 				</Link>

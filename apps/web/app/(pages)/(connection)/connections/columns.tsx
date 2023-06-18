@@ -92,10 +92,10 @@ export const columns: ColumnDef<Column>[] = [
 		},
 	},
 	{
-		accessorKey: "destination",
+		accessorKey: "id",
 		header: "Status",
 		cell: ({ cell }) => {
-			const destination = cell.getValue<Destination>()
+			// const destination = cell.getValue<Destination>()
 
 			return (
 				<Badge>
