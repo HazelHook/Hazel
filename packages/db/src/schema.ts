@@ -1,5 +1,5 @@
 import { InferModel, relations } from "drizzle-orm"
-import { int, json, mysqlTable, serial, text, timestamp, varchar } from "drizzle-orm/mysql-core"
+import { boolean, int, json, mysqlTable, serial, text, timestamp, varchar } from "drizzle-orm/mysql-core"
 
 export const source = mysqlTable(
 	"sources",
@@ -60,6 +60,8 @@ export const connection = mysqlTable(
 
 		sourceId: int("destination_id"),
 		destinationId: int("source_id"),
+
+		enabled: boolean("enabled").default(true),
 
 		// The transformer config.
 		// TODO: Minify

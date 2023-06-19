@@ -11,7 +11,7 @@
 		"@planetscale/database": "^1.7.0",
 		"db": "workspace:*",
 		"do-taskmanager": "2.0.0-rc.0",
-		"drizzle-orm": "^0.26.5",
+		"drizzle-orm": "^0.27.0",
 		"hono": "^3.2.5",
 		"nanoid": "^4.0.2",
 		"zod": "^3.21.4"

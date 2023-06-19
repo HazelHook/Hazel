@@ -38,6 +38,8 @@ const SourcePage = async ({
 
 	const chartData = transformSourcesChartData(res.data)
 
+	console.log(source.connections.map((conn) => conn.destination).filter(Boolean))
+
 	return (
 		<main className="space-y-4">
 			<div className="flex flex-row justify-between mb-4">
@@ -46,58 +48,60 @@ const SourcePage = async ({
 				</div>
 				<div className={buttonVariants()}>Add Destination TODO:</div>
 			</div>
-			<DataTable
-				rootPath="/destination"
-				columns={columns}
-				data={source.connections as (Connection & { destination: Destination | null })[]}
-			/>
-			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-				<Card className="col-span-full w-full h-full overflow-hidden">
-					<CardHeader>
-						<CardTitle>Usage Overview</CardTitle>
-					</CardHeader>
+			<div className="flex flex-row gap-2 w-full">
+				<DataTable
+					rootPath="/destination"
+					columns={columns}
+					data={(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []}
+				/>
+				<div className="w-full">
+					<Card className="col-span-full w-full h-full overflow-hidden">
+						<CardHeader>
+							<CardTitle>Usage Overview</CardTitle>
+						</CardHeader>
 
-					<div className="w-full p-6">
-						<Chart
-							options={{
-								chart: {
-									id: "wow",
-									sparkline: {
+						<div className="w-full p-6">
+							<Chart
+								options={{
+									chart: {
+										id: "wow",
+										sparkline: {
+											enabled: false,
+										},
+										toolbar: {
+											show: false,
+										},
+									},
+									colors: chartColors,
+									legend: {
+										show: true,
+										position: "top",
+									},
+									dataLabels: {
 										enabled: false,
 									},
-									toolbar: {
-										show: false,
+									stroke: {
+										width: [2, 2, 2],
+										curve: "smooth",
 									},
-								},
-								colors: chartColors,
-								legend: {
-									show: true,
-									position: "top",
-								},
-								dataLabels: {
-									enabled: false,
-								},
-								stroke: {
-									width: [2, 2, 2],
-									curve: "smooth",
-								},
-								xaxis: {
-									type: "datetime",
-									categories: chartData.categories,
-								},
-								tooltip: {
-									x: {
-										format: "dd/MM/yy HH:mm",
+									xaxis: {
+										type: "datetime",
+										categories: chartData.categories,
 									},
-								},
-							}}
-							series={chartData.series}
-							type="area"
-							height={350}
-							width={"100%"}
-						/>
-					</div>
-				</Card>
+									tooltip: {
+										x: {
+											format: "dd/MM/yy HH:mm",
+										},
+									},
+								}}
+								series={chartData.series}
+								type="area"
+								height={350}
+								width={"100%"}
+							/>
+						</div>
+					</Card>
+				</div>
 			</div>
 		</main>
 	)
