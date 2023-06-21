@@ -5,12 +5,13 @@ import { buttonVariants } from "@/components/ui/button"
 import { DataTable } from "@/components/ui/data-table"
 import { columns } from "./column"
 import { getCachedSource } from "@/lib/orm"
-import { Connection, Destination } from "db/src/schema"
+import { Destination } from "db/src/schema"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 import { Tiny } from "db/src/tinybird"
-import { chartColors } from "@/lib/utils"
+import { chartColors, formatDateTime } from "@/lib/utils"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
+import { sub } from "date-fns"
 
 const SourcePage = async ({
 	params,
@@ -20,6 +21,8 @@ const SourcePage = async ({
 	}
 }) => {
 	const source = await getCachedSource({ publicId: params.id })
+
+	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	const { userId } = auth()
 
@@ -34,7 +37,7 @@ const SourcePage = async ({
 	// rome-ignore lint/style/noNonNullAssertion: <explanation>
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
-	const res = await tiny.getReqTimeseries({ customer_id: userId, source_id: source.publicId })
+	const res = await tiny.getReqTimeseries({ customer_id: userId, source_id: source.publicId, start_date: startTime })
 
 	const chartData = transformSourcesChartData(res.data)
 

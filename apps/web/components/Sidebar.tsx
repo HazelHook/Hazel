@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils"
 import { AddPersonIcon } from "@/components/icons/AddPerson"
 import { BarChartIcon } from "@/components/icons/BarChart"
 import { CardIcon } from "@/components/icons/Card"
-import { DashboardIcon } from "@/components/icons/Dashboard"
 import { HomeIcon } from "@/components/icons/Home"
 import { MapleLogoIcon } from "@/components/icons/MapleLogo"
 import { PaperWithTextIcon } from "@/components/icons/PaperWithText"
@@ -13,8 +12,10 @@ import { PersonsIcon } from "@/components/icons/Persons"
 import { SettingsIcon } from "@/components/icons/Settings"
 import { WritingIcon } from "@/components/icons/Writing"
 
-import { SidebarProjectItem } from "./SidearProjectItem"
 import { SidebarClientItem } from "./SidebarItem"
+import { AutomationIcon } from "./icons/pika/automation"
+import { GitCommitIcon } from "./icons/pika/gitCommit"
+import { ChainIcon } from "./icons/pika/chain"
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	params: {
@@ -79,9 +80,9 @@ export async function Sidebar({ className, params }: SidebarProps) {
 					<div className="space-y-1">
 						<SidebarItem href={"/"} title={"Overview"} icon={HomeIcon} />
 						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={WritingIcon} />
-						<SidebarItem href={"/connections"} title={"Connections"} icon={DashboardIcon} />
-						<SidebarItem href={"/sources"} title={"Sources"} icon={DashboardIcon} />
-						<SidebarItem href={"/destinations"} title={"Destinations"} icon={DashboardIcon} />
+						<SidebarItem href={"/connections"} title={"Connections"} icon={ChainIcon} />
+						<SidebarItem href={"/sources"} title={"Sources"} icon={GitCommitIcon} />
+						<SidebarItem href={"/destinations"} title={"Destinations"} icon={AutomationIcon} />
 					</div>
 				</div>
 				<div className="py-2 space-y-2">

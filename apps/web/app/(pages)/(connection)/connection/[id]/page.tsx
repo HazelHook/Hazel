@@ -4,13 +4,14 @@ import db from "@/lib/db"
 import { getConnection } from "db/src/orm/connection"
 import { Switch } from "@/components/ui/switch"
 import { KpiCard } from "@/app/(pages)/_component/KpiCard"
-import { chartColors } from "@/lib/utils"
+import { chartColors, formatDateTime } from "@/lib/utils"
 import { Tiny } from "db/src/tinybird"
 import { auth } from "@/lib/auth"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
 import { getCachedConnection } from "@/lib/orm"
+import { sub } from "date-fns"
 
 const SourcePage = async ({
 	params,
@@ -27,29 +28,35 @@ const SourcePage = async ({
 		redirect("/")
 	}
 
+	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
+
 	// rome-ignore lint/style/noNonNullAssertion: <explanation>
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
 	const pReqKpis = tiny.getReqKpis({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
+		start_date: startTime,
 	})
 
 	const pResKpis = tiny.getResKpis({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		success: 1,
+		start_date: startTime,
 	})
 
 	const pErrorKpis = tiny.getResKpis({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		success: 0,
+		start_date: startTime,
 	})
 
 	const pBySources = tiny.getReqTimeseries({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
+		start_date: startTime,
 	})
 
 	const [reqKpis, resKpis, errorKpis, bySources] = await Promise.all([pReqKpis, pResKpis, pErrorKpis, pBySources])
