@@ -55,6 +55,7 @@ SQL >
             )
         }}
 
-    GROUP BY source_id, bucket, customer_id, status, count
+    GROUP BY bucket, source_id, customer_id, status, count
+    ORDER BY bucket
 
 
