@@ -11,3 +11,11 @@ export const getSeededProfileImageUrl = (id: string) => {
 }
 
 export const chartColors = [colors.purple[500], colors.teal[500], colors.amber[500], colors.sky[500]]
+
+export function formatDateTime(date: Date) {
+	return `${date.getUTCFullYear()}-${`0${date.getUTCMonth() + 1}`.slice(-2)}-${`0${date.getUTCDate()}`.slice(
+		-2,
+	)} ${`0${date.getUTCHours()}`.slice(-2)}:${`0${date.getUTCMinutes()}`.slice(-2)}:${`0${date.getUTCSeconds()}`.slice(
+		-2,
+	)}`
+}

@@ -10,6 +10,16 @@ const sourceTimeSeriesRes = z.object({
 
 export type SourceTimeSeries = z.infer<typeof sourceTimeSeriesRes>
 
+const period = z.enum(["daily", "hourly", "weekly", "monthly"])
+
+const baseParams = z.object({
+	start_date: z.string(),
+
+	end_date: z.string().optional(),
+
+	period: period.default("daily").optional(),
+})
+
 export const Tiny = (token: string) => {
 	const tb = new Tinybird({ token })
 
@@ -46,48 +56,61 @@ export const Tiny = (token: string) => {
 
 	const getReqKpis = tb.buildPipe({
 		pipe: "kpi_req",
-		parameters: z.object({
-			customer_id: z.string(),
-			source_id: z.string().optional(),
-		}),
+		parameters: baseParams.merge(
+			z.object({
+				customer_id: z.string(),
+				source_id: z.string().optional(),
+			}),
+		),
 		data: z.object({
 			customer_id: z.string(),
 			events: z.number(),
+			sources: z.number(),
 			date: z.string(),
 		}),
 	})
 
 	const getResKpis = tb.buildPipe({
 		pipe: "kpi_res",
-		parameters: z.object({
-			customer_id: z.string(),
-			source_id: z.string().optional(),
-			success: z.number().min(0).max(1).optional(),
-		}),
+		parameters: baseParams.merge(
+			z.object({
+				customer_id: z.string(),
+				source_id: z.string().optional(),
+				success: z.number(),
+			}),
+		),
 		data: z.object({
 			customer_id: z.string(),
 			requests: z.number(),
+			sources: z.number(),
 			date: z.string(),
 		}),
 	})
 
 	const getReqTimeseries = tb.buildPipe({
-		pipe: "kpi_per_source",
-		parameters: z.object({
-			customer_id: z.string(),
-			source_id: z.string().optional(),
-		}),
+		pipe: "req_timeline",
+		parameters: baseParams.merge(
+			z.object({
+				customer_id: z.string(),
+				source_id: z.string().optional(),
+			}),
+		),
 		data: sourceTimeSeriesRes,
 	})
 
 	const getResTimeseries = tb.buildPipe({
 		pipe: "res_timeline",
-		parameters: z.object({
-			customer_id: z.string(),
-			source_id: z.string().optional(),
-			date_range: z.number().optional(),
-		}),
-		data: sourceTimeSeriesRes,
+		parameters: baseParams.merge(
+			z.object({
+				customer_id: z.string(),
+				source_id: z.string().optional(),
+			}),
+		),
+		data: sourceTimeSeriesRes.merge(
+			z.object({
+				status: z.number(),
+			}),
+		),
 	})
 
 	return {

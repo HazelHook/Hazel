@@ -2,34 +2,41 @@ import { currentUser } from "@clerk/nextjs"
 import { Tiny } from "db/src/tinybird"
 
 import { auth } from "@/lib/auth"
-import { chartColors, getSeededProfileImageUrl } from "@/lib/utils"
+import { chartColors, formatDateTime, getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
+import { sub } from "date-fns"
 
 const Dashboard = async () => {
 	const { userId } = auth()
+
+	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 	// rome-ignore lint/style/noNonNullAssertion: <explanation>
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
 	const reqKpis = await tiny.getReqKpis({
 		customer_id: userId,
+		start_date: startTime,
 	})
 	const resKpis = await tiny.getResKpis({
 		customer_id: userId,
 		success: 1,
+		start_date: startTime,
 	})
 
 	const errorKpis = await tiny.getResKpis({
 		customer_id: userId,
 		success: 0,
+		start_date: startTime,
 	})
 
 	const bySources = await tiny.getReqTimeseries({
 		customer_id: userId,
+		start_date: startTime,
 	})
 
 	const user = await currentUser()

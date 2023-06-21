@@ -1,8 +1,8 @@
-NODE hourly_res
+NODE daily_res
 SQL >
 
     SELECT
-        toStartOfHour(timestamp) AS bucket,
+        toStartOfDay(timestamp) AS bucket,
         customer_id,
         source_id,
         status,
@@ -15,7 +15,7 @@ SQL >
         status
 
 TYPE materialized
-DATASOURCE hourly_res_mv
+DATASOURCE daily_res_mv
 ENGINE "AggregatingMergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(bucket)"
 ENGINE_SORTING_KEY "bucket, source_id, customer_id, status"

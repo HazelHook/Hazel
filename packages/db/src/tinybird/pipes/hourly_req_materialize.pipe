@@ -1,22 +1,21 @@
-NODE aggregate
+NODE hourly_req
 SQL >
 
     SELECT
         toStartOfHour(timestamp) AS bucket,
         customer_id,
         source_id,
-        version
+        countState() AS count
     FROM request_events
     GROUP BY
         bucket,
         source_id,
-        customer_id,
-        version
+        customer_id
 
 TYPE materialized
 DATASOURCE hourly_req_mv
 ENGINE "AggregatingMergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(bucket)"
-ENGINE_SORTING_KEY "bucket, source_id, customer_id, version"
+ENGINE_SORTING_KEY "bucket, source_id, customer_id"
 ENGINE_TTL "bucket + toIntervalDay(120)"
 

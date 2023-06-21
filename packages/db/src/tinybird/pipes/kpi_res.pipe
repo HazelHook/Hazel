@@ -9,16 +9,43 @@ DESCRIPTION >
 SQL >
 
     %
-            SELECT *
-            FROM response_events
-            WHERE
-                customer_id
-                = {{ String(customer_id, "cus_8NiWC2t_SZVKALuy", description="Customer ID", required=True) }} AND
-                {% if defined(source_id) %}
-                    source_id = {{ String(source_id, description="Source ID", required=False) }} AND
-                {% end %}
-                success = {{ Int8(success, 1, description="Sucessful Responses or not", required=False)}} AND
-                timestamp >= DATE_SUB(NOW(), INTERVAL {{Int16(date_range, 30, description="Date Range for Timeseries", required=False)}} DAY)
+    {% if not defined(customer_id) %}
+        {{ error('customer_id (String) query param is required') }}
+    {% end %}
+
+    {% if not defined(start_date) %}
+        {{ error('start_date (DateTime) query param is required') }}
+    {% end %}
+
+
+    SELECT *
+    FROM response_events
+    WHERE
+        customer_id
+        = {{
+            String(
+                customer_id,
+                "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
+                description="Customer ID",
+                required=True,
+            )
+        }}
+        AND {% if defined(source_id) %}
+            source_id
+            = {{ String(source_id, description="Source ID", required=False) }}
+            AND
+        {% end %}
+        {% if period == 'daily' or period == 'hourly' or not defined(period) %}
+            timestamp >= {{ DateTime(start_date, required=True) }}
+            {% if defined(end_date) %}
+                AND timestamp < {{ DateTime(end_date, required=False) }}
+            {% end %}
+        {% elif period == 'weekly' or period == 'monthly' %}
+            bucket >= toDate({{ DateTime(start_date, required=True) }})
+            {% if defined(end_date) %}
+                AND bucket < toDate({{ DateTime(end_date, required=False) }})
+            {% end %}
+        {% end %}
 
 
 
@@ -29,21 +56,21 @@ DESCRIPTION >
 SQL >
 
     %
-             WITH 
-                    toDate(`timestamp`) AS date
-                SELECT 
-                    date,
-                    `customer_id`,
-                    count() AS requests,
-                    uniq(source_id)
-                FROM 
-                    filtered
-                GROUP BY 
-                    date, 
-                    `customer_id`, 
-                    `success`
-                ORDER BY 
-                    date DESC,
-                    requests DESC
+                     WITH 
+                            toDate(`timestamp`) AS date
+                        SELECT 
+                            date,
+                            `customer_id`,
+                            count() AS requests,
+                            uniq(source_id) As sources
+                        FROM 
+                            filtered
+                        GROUP BY 
+                            date, 
+                            `customer_id`, 
+                            `success`
+                        ORDER BY 
+                            date DESC,
+                            requests DESC
 
 
