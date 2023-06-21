@@ -1,0 +1,24 @@
+NODE endpoint
+SQL >
+
+    %
+    SELECT *
+    FROM request_events
+    WHERE
+        customer_id
+        = {{
+            String(
+                customer_id,
+                "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
+                description="Customer ID",
+                required=True,
+            )
+        }}
+        {% if defined(source_id) %}
+            AND source_id
+            = {{ String(source_id, description="Source ID", required=False) }}
+        {% end %}
+    LIMIT {{ Int32(limit, 100, description="Limit of Entries", required=False) }}
+    OFFSET {{ Int32(offset, 0, description="Offset", required=False) }}
+
+

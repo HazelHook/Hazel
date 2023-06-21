@@ -1,8 +1,5 @@
-import { notFound, redirect } from "next/navigation"
+import { redirect } from "next/navigation"
 
-import db from "@/lib/db"
-import { getConnection } from "db/src/orm/connection"
-import { Switch } from "@/components/ui/switch"
 import { KpiCard } from "@/app/(pages)/_component/KpiCard"
 import { chartColors, formatDateTime } from "@/lib/utils"
 import { Tiny } from "db/src/tinybird"
