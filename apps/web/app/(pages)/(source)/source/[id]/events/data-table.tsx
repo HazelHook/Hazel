@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import {
 	ColumnDef,
 	flexRender,
@@ -14,6 +13,9 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { DataTablePagination } from "@/components/ui/data-table-pagination"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -23,6 +25,7 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = useState<SortingState>([])
+	const [sheetId, setSheetId] = useState<string>()
 
 	const table = useReactTable({
 		data,
@@ -36,6 +39,12 @@ export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableP
 			sorting,
 		},
 	})
+
+	const handleSheetOpen = (state: boolean) => {
+		if (!state) {
+			setSheetId(undefined)
+		}
+	}
 
 	return (
 		<div className="space-y-2">
@@ -57,7 +66,12 @@ export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableP
 					<TableBody>
 						{table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map((row) => (
-								<TableRow className="cursor-pointer" key={row.id} data-state={row.getIsSelected() && "selected"}>
+								<TableRow
+									className="cursor-pointer"
+									key={row.id}
+									data-state={row.getIsSelected() && "selected"}
+									onClick={() => setSheetId((row.original as any).request_id)}
+								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
 									))}
@@ -74,6 +88,15 @@ export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableP
 				</Table>
 			</div>
 			<DataTablePagination hasFilter table={table} maxCount={maxItems} />
+			<Sheet open={!!sheetId} onOpenChange={handleSheetOpen}>
+				<SheetContent>
+					<SheetHeader>
+						<SheetTitle>Request Overview</SheetTitle>
+						<SheetDescription>{sheetId}</SheetDescription>
+					</SheetHeader>
+					<div className="grid gap-4 py-4">{}</div>
+				</SheetContent>
+			</Sheet>
 		</div>
 	)
 }
