@@ -33,7 +33,6 @@ export function connectWDB({
 	host: string
 	username: string
 	password: string
-	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	fetch: any
 }) {
 	const client = connect({

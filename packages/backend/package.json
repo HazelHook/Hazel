@@ -2,7 +2,8 @@
 	"name": "backend",
 	"scripts": {
 		"dev": "wrangler dev src/index.ts --env dev",
-		"deploy": "wrangler deploy --minify src/index.ts"
+		"deploy": "wrangler deploy --minify src/index.ts",
+		"id": "ts-node src/scripts/id.ts"
 	},
 	"dependencies": {
 		"@chronark/zod-bird": "^0.1.1",

@@ -47,6 +47,7 @@ export const handleEvent = async ({
 		customer_id: customerId,
 		version: "1.0",
 		request_id: requestId,
+		destination_id: connection.destination.publicId,
 		body: await res.text(),
 		headers: JSON.stringify(headersObj),
 		status: res.status,

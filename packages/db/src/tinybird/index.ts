@@ -26,6 +26,7 @@ const eventRes = z.object({
 	request_id: z.string(),
 	customer_id: z.string(),
 	source_id: z.string(),
+	destination_id: z.string(),
 
 	status: z.number(),
 	success: z.number(),

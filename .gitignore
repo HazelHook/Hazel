@@ -33,6 +33,7 @@ yarn-error.log*
 .env.production.local
 packages/backend/.dev.vars
 packages/hazel-flux/performance-testing/data/*.json
+packages/scripts/dist
 
 # turbo
 .turbo
