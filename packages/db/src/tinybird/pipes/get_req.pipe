@@ -1,4 +1,4 @@
-TOKEN "get_res_endpoint_read_2469" READ
+TOKEN "get_reqs_endpoint_read_3025" READ
 
 NODE endpoint
 SQL >

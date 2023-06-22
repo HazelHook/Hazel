@@ -20,38 +20,42 @@ const baseParams = z.object({
 	period: period.default("daily").optional(),
 })
 
+const eventRes = z.object({
+	timestamp: z.string(),
+	version: z.string(),
+	request_id: z.string(),
+	customer_id: z.string(),
+	source_id: z.string(),
+
+	status: z.number(),
+	success: z.number(),
+
+	body: z.string(),
+	headers: z.string(),
+})
+
+const eventReq = z.object({
+	timestamp: z.string(),
+	version: z.string(),
+	request_id: z.string(),
+	customer_id: z.string(),
+	source_id: z.string(),
+
+	body: z.string(),
+	headers: z.string(),
+})
+
 export const Tiny = (token: string) => {
 	const tb = new Tinybird({ token })
 
 	const publishRequestEvent = tb.buildIngestEndpoint({
 		datasource: "request_events",
-		event: z.object({
-			timestamp: z.string(),
-			version: z.string(),
-			request_id: z.string(),
-			customer_id: z.string(),
-			source_id: z.string(),
-
-			body: z.string(),
-			headers: z.string(),
-		}),
+		event: eventReq,
 	})
 
 	const publishResponseEvent = tb.buildIngestEndpoint({
 		datasource: "response_events",
-		event: z.object({
-			timestamp: z.string(),
-			version: z.string(),
-			request_id: z.string(),
-			customer_id: z.string(),
-			source_id: z.string(),
-
-			status: z.number(),
-			success: z.number(),
-
-			body: z.string(),
-			headers: z.string(),
-		}),
+		event: eventRes,
 	})
 
 	const getReqKpis = tb.buildPipe({
@@ -113,6 +117,28 @@ export const Tiny = (token: string) => {
 		),
 	})
 
+	const getReq = tb.buildPipe({
+		pipe: "get_req",
+		parameters: z.object({
+			customer_id: z.string(),
+			source_id: z.string().optional(),
+			limit: z.number().optional(),
+			offset: z.number().optional(),
+		}),
+		data: eventReq,
+	})
+
+	const getRes = tb.buildPipe({
+		pipe: "get_res",
+		parameters: z.object({
+			customer_id: z.string(),
+			source_id: z.string().optional(),
+			limit: z.number().optional(),
+			offset: z.number().optional(),
+		}),
+		data: eventRes,
+	})
+
 	return {
 		publishRequestEvent,
 		publishResponseEvent,
@@ -120,5 +146,7 @@ export const Tiny = (token: string) => {
 		getReqKpis,
 		getResTimeseries,
 		getReqTimeseries,
+		getRes,
+		getReq,
 	}
 }

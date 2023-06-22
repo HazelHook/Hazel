@@ -9,6 +9,7 @@ SCHEMA >
     `request_id` String `json:$.request_id`,
     `customer_id` String `json:$.customer_id`,
     `source_id` String `json:$.source_id`,
+    `destination_id` String `json:$.destination_id`,
     `status` Int32 `json:$.status`,
     `success` Int32 `json:$.success`,
     `body` String `json:$.body`,

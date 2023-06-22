@@ -1,5 +1,3 @@
-import "@/styles/globals.css"
-
 import { Sidebar } from "@/components/Sidebar"
 import { SiteHeader } from "@/components/site-header"
 
