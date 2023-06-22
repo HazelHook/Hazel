@@ -1,0 +1,38 @@
+{
+	"name": "scripts",
+	"type": "module",
+	"main": "dist/scripts/cli.js",
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc --watch",
+		"start": "DEV=true node dist/scripts/src/cli.js"
+	},
+	"dependencies": {
+		"@chronark/zod-bird": "^0.1.1",
+		"@ngneat/falso": "^6.4.0",
+		"dotenv": "^16.3.1",
+		"ink": "^4.1.0",
+		"ink-ascii": "^0.0.4",
+		"ink-big-text": "^2.0.0",
+		"ink-confirm-input": "^2.0.0",
+		"ink-form": "^1.0.2",
+		"ink-gradient": "^3.0.0",
+		"ink-markdown": "^1.0.1",
+		"ink-progress-bar": "^3.0.0",
+		"ink-select-input": "^5.0.0",
+		"ink-table": "^3.0.0",
+		"ink-text-input": "^5.0.1",
+		"js2xmlparser": "^5.0.0",
+		"meow": "^11.0.0",
+		"nanoid": "^4.0.2",
+		"node-fetch": "^3.3.1",
+		"react": "^18.2.0",
+		"react-devtools-core": "^4.27.8"
+	},
+	"devDependencies": {
+		"@types/node": "^20.3.1",
+		"@types/react": "^18.0.32",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.3"
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+
+		"module": "node16",
+		"moduleResolution": "node16",
+		"moduleDetection": "force",
+		"target": "ES2021",
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ES2021"
+		],
+		"jsx": "react",
+		"declaration": true,
+		"stripInternal": true,
+		"strict": false,
+		"skipLibCheck": true
+	}
+}

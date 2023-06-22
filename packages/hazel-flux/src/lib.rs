@@ -1,7 +1,6 @@
 use config::{prepare, RequestConfig, ResolvedConfig};
-use jsonschema::JSONSchema;
 use serde::{Deserialize, Serialize};
-use serde_json::{Value, Deserializer};
+use serde_json::{Value};
 use worker::*;
 
 mod config;
