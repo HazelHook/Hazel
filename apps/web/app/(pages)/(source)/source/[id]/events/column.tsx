@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { VerticalIcon } from "@/components/icons/pika/vertical"
 
-interface Request {
+export interface Request {
 	timestamp: string
 	version: string
 	request_id: string

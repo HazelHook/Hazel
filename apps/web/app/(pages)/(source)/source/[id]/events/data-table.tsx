@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import {
 	ColumnDef,
 	flexRender,
@@ -14,18 +14,20 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { DataTablePagination } from "@/components/ui/data-table-pagination"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+
+import { Request } from "./column"
 
 interface DataTableProps<TData, TValue> {
-	columns: ColumnDef<TData, TValue>[]
-	data: TData[]
+	columns: ColumnDef<Request, TValue>[]
+	data: Request[]
 	maxItems: number
 }
 
 export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = useState<SortingState>([])
 	const [sheetId, setSheetId] = useState<string>()
+
+	const selectedReq = useMemo(() => data.find((datum) => datum.request_id === sheetId), [data, sheetId])
 
 	const table = useReactTable({
 		data,
@@ -94,7 +96,16 @@ export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableP
 						<SheetTitle>Request Overview</SheetTitle>
 						<SheetDescription>{sheetId}</SheetDescription>
 					</SheetHeader>
-					<div className="grid gap-4 py-4">{}</div>
+					<div className="grid gap-4 py-4">
+						<div className="space-y-2">
+							<p>Headers</p>
+							{selectedReq?.headers}
+						</div>
+						<div className="space-y-2">
+							<p>Body</p>
+							{selectedReq?.body}
+						</div>
+					</div>
 				</SheetContent>
 			</Sheet>
 		</div>
