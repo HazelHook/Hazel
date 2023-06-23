@@ -1,14 +1,12 @@
 {
 	"name": "scripts",
 	"type": "module",
-	"main": "dist/scripts/cli.js",
+	"main": "dist/cli.js",
 	"scripts": {
-		"build": "tsc",
-		"dev": "tsc --watch",
-		"start": "DEV=true node dist/scripts/src/cli.js"
+		"build": "tsup src --format --watch --format esm",
+		"dev": "DEV=true node dist/cli.js"
 	},
 	"dependencies": {
-		"@chronark/zod-bird": "^0.1.1",
 		"@ngneat/falso": "^6.4.0",
 		"dotenv": "^16.3.1",
 		"ink": "^4.1.0",
@@ -27,7 +25,8 @@
 		"nanoid": "^4.0.2",
 		"node-fetch": "^3.3.1",
 		"react": "^18.2.0",
-		"react-devtools-core": "^4.27.8"
+		"react-devtools-core": "^4.27.8",
+		"tsconfig": "workspace:*"
 	},
 	"devDependencies": {
 		"@types/node": "^20.3.1",
