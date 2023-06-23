@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+// @ts-expect-error
 import { Box, useInput, Newline } from "ink"
 import { Planter } from "./planter.js"
 import { Quicklinks } from "./quicklinks.js";

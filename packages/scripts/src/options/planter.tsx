@@ -1,5 +1,7 @@
 import React, { useState } from "react"
+// @ts-expect-error
 import { Box, Text, Newline, useInput } from "ink"
+// @ts-expect-error
 import TextInput from "ink-text-input"
 import { Tiny } from "../../../db/src/tinybird/index.js"
 import { connection, destination, source } from "../../../db/src/schema.js"
@@ -7,7 +9,7 @@ import { connectWDB } from "../../../db/src/index.js"
 import { randBetweenDate, rand, randJSON, randText, randNumber, randWord, randUrl } from "@ngneat/falso"
 import js2xmlparser from "js2xmlparser"
 import fetch from "node-fetch"
-
+import { nanoid } from "nanoid"
 
 const cDb = (input: {
 	host: string
@@ -17,11 +19,10 @@ const cDb = (input: {
 	return connectWDB({ ...input, fetch })
 }
 
-
 function generateIds(numberOfIds: number, prefix: string) {
 	const ids = []
 	for (let i = 0; i < numberOfIds; i++) {
-		ids.push(`${prefix}_${i}`)
+		ids.push(`${prefix}_${nanoid()}`)
 	}
 	return ids
 }
@@ -36,14 +37,15 @@ function generateContent() {
 		content = JSON.stringify(randJSON({ minKeys: 1, maxKeys: 20 }))
 	} else if (ids > 3) {
 		content_type = "application/xml"
-		content = js2xmlparser.parse("root", randJSON({ minKeys: 1, maxKeys: 20 }))
+		// content = js2xmlparser.parse("root", randJSON({ minKeys: 1, maxKeys: 20, }))
+		content = `<root>${randText({ charCount: randNumber({ min: 10, max: 1000 }) })}</root>`
 	} else if (ids > 1) {
 		content_type = "text/plain"
 		content = randText({ charCount: randNumber({ min: 10, max: 1000 }) })
-	}else {
+	} else {
 		return {
-			headers: '{}',
-			body: '{}',			
+			headers: "{}",
+			body: "{}",
 		}
 	}
 
@@ -51,14 +53,29 @@ function generateContent() {
 		headers: JSON.stringify({
 			"Content-Type": content_type,
 			"Content-Length": content.length,
-			"User-Agent": rand(["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36", "Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36", "Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36", "Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36", "Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36"]),
-			"Accept": rand(["text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8"]),
+			"User-Agent": rand([
+				"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+				"Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36",
+				"Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36",
+				"Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36",
+				"Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36",
+			]),
+			Accept: rand([
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+			]),
 		}),
 		body: content,
 	}
 }
 
-function generateSuccessState(){
+function generateSuccessState() {
 	const status = rand([200, 201, 400, 401, 403, 404, 424, 500, 503])
 	return {
 		status,
@@ -96,29 +113,27 @@ export function Planter({
 			}
 
 			if (key.return) {
-				const  tb = Tiny(process.env.TINY_TOKEN!)
+				const tb = Tiny(process.env.TINY_TOKEN!)
 
 				const generatedSourceIds = generateIds(parseInt(sources), "src")
 				const generatedDestinationIds = generateIds(parseInt(destinations), "dst")
 				const generatedConnectionIds = generateIds(parseInt(connections), "conn")
-
 
 				const db = cDb({
 					username: process.env.PLANETSCALE_DB_USERNAME!,
 					password: process.env.PLANETSCALE_DB_PASSWORD!,
 					host: process.env.PLANETSCALE_DB_HOST!,
 				})
-
 				const sourceObjects: any[] = []
-				
+
 				for (let i = 0; i < generatedSourceIds.length; i++) {
 					const sourceObject = await db.transaction(async (tx) => {
-						const sourceRes = await tx.insert(source).values({
+						return await tx.insert(source).values({
 							name: `${randWord({ capitalize: true })}`,
 							publicId: generatedSourceIds[i],
 							customerId,
-			
-							url: "http://127.0.0.1:3000/",
+
+							url: "http://127.0.0.1:8787/",
 						})
 					})
 
@@ -128,44 +143,36 @@ export function Planter({
 				const destinationObjects: any[] = []
 				for (let i = 0; i < generatedDestinationIds.length; i++) {
 					const destinationObject = await db.transaction(async (tx) => {
-						const destinationRes = await tx.insert(destination).values({
+						return await tx.insert(destination).values({
 							name: `${randWord({ capitalize: true })}`,
 							publicId: generatedDestinationIds[i],
 							customerId,
-			
-							url: randUrl()
-						})
 
+							url: randUrl(),
+						})
 					})
 
 					destinationObjects.push(destinationObject)
 				}
 
-				
 				for (let i = 0; i < generatedConnectionIds.length; i++) {
-					const sourceId = generatedSourceIds[i % generatedSourceIds.length]
-					const destinationId = generatedDestinationIds[i % generatedDestinationIds.length]
-
 					await db.transaction(async (tx) => {
 						await tx.insert(connection).values({
 							name: randWord({ capitalize: true }),
 							customerId: customerId,
 							publicId: generatedConnectionIds[i],
-							
+
 							sourceId: sourceObjects[i % sourceObjects.length].inertId,
 							destinationId: destinationObjects[i % destinationObjects.length].inertId,
 						})
 					})
 				}
-			
 
 				const generatedRequestIds = generateIds(parseInt(numberOfRequests), "req")
-
 				for (let i = 0; i < parseInt(numberOfRequests); i++) {
 					let content = generateContent()
 
 					const timestamp = randBetweenDate({ from: new Date("01/04/2023"), to: new Date() }).toISOString()
-
 					tb.publishRequestEvent({
 						customer_id: customerId,
 						source_id: generatedSourceIds[i % generatedSourceIds.length],
@@ -175,10 +182,8 @@ export function Planter({
 						body: content.body,
 						headers: content.headers,
 					})
-
 					content = generateContent()
 					const { status, success } = generateSuccessState()
-
 					tb.publishResponseEvent({
 						customer_id: customerId,
 						source_id: generatedSourceIds[i % generatedSourceIds.length],
@@ -191,7 +196,7 @@ export function Planter({
 						version: "1",
 						timestamp: randBetweenDate({
 							from: new Date(timestamp),
-							to: new Date(timestamp + 1000)
+							to: new Date(new Date(timestamp).getTime() + 1000),
 						}).toISOString(),
 					})
 				}
@@ -253,7 +258,3 @@ export function Planter({
 		</Text>
 	)
 }
-function nanoid() {
-	throw new Error("Function not implemented.")
-}
-

@@ -1,6 +1,9 @@
 import React from "react"
+// @ts-expect-error
 import { Box, Text } from "ink"
+// @ts-expect-error
 import Gradient from "ink-gradient"
+// @ts-expect-error
 import BigText from "ink-big-text"
 import Options from "./options/options.js"
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+// @ts-expect-error
 import { Box, Text } from "ink"
 
 export function Quicklinks({ mode, selected, engaged }: { mode: "details" | "select"; selected?: boolean; engaged?: boolean }) {

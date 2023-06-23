@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import React from 'react';
+// @ts-expect-error
 import {render} from 'ink';
 import meow from 'meow';
 import App from './app.js';
@@ -26,9 +27,6 @@ const cli = meow(
 	},
 );
 
-render(<App />);
-// setInterval(() => {
-// 	data.clear();
-// 	data.cleanup();
-// 	data = render(<App />);
-// }, 100)
+render(<App />, {
+	patchConsole: true
+});
