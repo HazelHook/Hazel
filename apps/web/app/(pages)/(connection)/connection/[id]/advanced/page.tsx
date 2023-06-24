@@ -89,14 +89,14 @@ const AdvancedPage = async ({ params }: { params: { id: string } }) => {
 					<Card className="h-full w-full overflow-hidden">
 						<Flow initalNodes={nodes} initalEdges={edges} />
 					</Card>
-					<Card>
+					{/* <Card>
 						<CardHeader>
 							<CardTitle>Custom Nodes</CardTitle>
 						</CardHeader>
 						<CardContent>
 							<Nodebar />
 						</CardContent>
-					</Card>
+					</Card> */}
 				</div>
 			</FlowProvider>
 		</main>
