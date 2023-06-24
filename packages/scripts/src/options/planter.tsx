@@ -1,13 +1,10 @@
 import React, { useState } from "react"
-// @ts-expect-error
-import { Box, Text, Newline, useInput } from "ink"
-// @ts-expect-error
-import TextInput from "ink-text-input"
+import { Box, Text, Newline, useInput } from "../ext/ink"
+import TextInput from "../ext/ink-text-input"
 import { Tiny } from "../../../db/src/tinybird/index.js"
 import { connection, destination, source } from "../../../db/src/schema.js"
 import { connectWDB } from "../../../db/src/index.js"
 import { randBetweenDate, rand, randJSON, randText, randNumber, randWord, randUrl } from "@ngneat/falso"
-import js2xmlparser from "js2xmlparser"
 import fetch from "node-fetch"
 import { nanoid } from "nanoid"
 
@@ -56,19 +53,15 @@ function generateContent() {
 			"User-Agent": rand([
 				"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
 				"Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36",
-				"Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36",
-				"Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36",
-				"Mozilla/5.0 (Linux; Android 12; SM-S906N Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36",
+				"Mozilla/5.0 (Linux; Android 10; Google Pixel 4 Build/QD1A.190821.014.C2; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/78.0.3904.108 Mobile Safari/537.36",
+				"Mozilla/5.0 (Linux; Android 9; J8110 Build/55.0.A.0.552; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36",
+				"Mozilla/5.0 (iPhone14,3; U; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 Mobile/19A346 Safari/602.1",
 			]),
 			Accept: rand([
 				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+				"application/json",
+				"application/xml",
+				"text/plain",
 			]),
 		}),
 		body: content,
@@ -124,8 +117,8 @@ export function Planter({
 					password: process.env.PLANETSCALE_DB_PASSWORD!,
 					host: process.env.PLANETSCALE_DB_HOST!,
 				})
-				const sourceObjects: any[] = []
 
+				const sourceObjects: any[] = []
 				for (let i = 0; i < generatedSourceIds.length; i++) {
 					const sourceObject = await db.transaction(async (tx) => {
 						return await tx.insert(source).values({
@@ -155,6 +148,9 @@ export function Planter({
 					destinationObjects.push(destinationObject)
 				}
 
+				console.log("sourceObjects", sourceObjects)
+				console.log("destinationObjects", destinationObjects)
+
 				for (let i = 0; i < generatedConnectionIds.length; i++) {
 					await db.transaction(async (tx) => {
 						await tx.insert(connection).values({
@@ -162,8 +158,8 @@ export function Planter({
 							customerId: customerId,
 							publicId: generatedConnectionIds[i],
 
-							sourceId: sourceObjects[i % sourceObjects.length].inertId,
-							destinationId: destinationObjects[i % destinationObjects.length].inertId,
+							sourceId: sourceObjects[i % sourceObjects.length].insertId,
+							destinationId: destinationObjects[i % destinationObjects.length].insertId,
 						})
 					})
 				}

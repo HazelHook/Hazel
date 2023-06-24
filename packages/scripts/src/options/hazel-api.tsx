@@ -1,6 +1,5 @@
 import React from "react"
-// @ts-expect-error
-import { Box, Text } from "ink"
+import { Box, Text } from "../ext/ink"
 
 export function HazelAPI({ mode, selected, engaged }: { mode: "details" | "select"; selected?: boolean; engaged: boolean }) {
 	if (mode === "details"){

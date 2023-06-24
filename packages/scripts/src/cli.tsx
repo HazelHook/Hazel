@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import React from 'react';
-// @ts-expect-error
-import {render} from 'ink';
+import {render} from './ext/ink';
 import meow from 'meow';
 import App from './app.js';
 

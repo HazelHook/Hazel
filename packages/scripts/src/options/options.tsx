@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-// @ts-expect-error
-import { Box, useInput, Newline } from "ink"
+import { Box, useInput, Newline } from "../ext/ink"
 import { Planter } from "./planter.js"
 import { Quicklinks } from "./quicklinks.js";
 import { HazelAPI } from "./hazel-api.js";
