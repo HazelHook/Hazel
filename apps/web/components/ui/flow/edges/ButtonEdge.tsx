@@ -4,6 +4,7 @@ import { BaseEdge, EdgeLabelRenderer, EdgeProps, getBezierPath } from "reactflow
 import { useDrag, useDrop } from "react-dnd"
 
 import { RoundPlusIcon } from "@/components/icons/RoundPlus"
+import { Popover, PopoverContent, PopoverTrigger } from "../../popover"
 
 const onEdgeClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
 	evt.stopPropagation()
@@ -44,9 +45,16 @@ export const EdgeButton = ({
 					}}
 					className="nodrag nopan flex justify-center"
 				>
-					<button type="button" className="rounded-full bg-secondary" onClick={(event) => onEdgeClick(event, id)}>
-						<RoundPlusIcon />
-					</button>
+					<Popover>
+						<PopoverTrigger asChild>
+							<button type="button" className="rounded-full bg-secondary">
+								<RoundPlusIcon />
+							</button>
+						</PopoverTrigger>
+						<PopoverContent>
+							<div>Wow</div>
+						</PopoverContent>
+					</Popover>
 				</div>
 			</EdgeLabelRenderer>
 		</>

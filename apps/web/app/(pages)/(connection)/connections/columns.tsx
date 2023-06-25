@@ -2,7 +2,6 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Connection, Destination, Source } from "db/src/schema"
-import { ArrowDown, ArrowUp, CheckIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -10,6 +9,9 @@ import Link from "next/link"
 import { Avatar } from "@radix-ui/react-avatar"
 import { AvatarImage } from "@/components/ui/avatar"
 import { getSeededProfileImageUrl } from "@/lib/utils"
+import { UpSquareIcon } from "@/components/icons/pika/upSquare"
+import { DownSquareIcon } from "@/components/icons/pika/downSquare"
+import { CheckIcon } from "@/components/icons/Check"
 
 export type Column = Connection & {
 	source: Source | null
@@ -24,9 +26,9 @@ export const columns: ColumnDef<Column>[] = [
 				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
 					Name
 					{column.getIsSorted() === "asc" ? (
-						<ArrowUp className="ml-2 h-4 w-4" />
+						<UpSquareIcon className="ml-2 h-4 w-4" />
 					) : (
-						<ArrowDown className="ml-2 h-4 w-4" />
+						<DownSquareIcon className="ml-2 h-4 w-4" />
 					)}
 				</Button>
 			)
@@ -80,9 +82,9 @@ export const columns: ColumnDef<Column>[] = [
 				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
 					Group
 					{column.getIsSorted() === "asc" ? (
-						<ArrowUp className="ml-2 h-4 w-4" />
+						<UpSquareIcon className="ml-2 h-4 w-4" />
 					) : (
-						<ArrowDown className="ml-2 h-4 w-4" />
+						<DownSquareIcon className="ml-2 h-4 w-4" />
 					)}
 				</Button>
 			)

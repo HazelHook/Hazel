@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -31,8 +30,8 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			name: "",
-			publicSourceId: sources[0].publicId,
-			publiceDestinationId: destinations[0].publicId,
+			publicSourceId: sources[0]?.publicId || "",
+			publiceDestinationId: destinations[0]?.publicId || "",
 		},
 	})
 

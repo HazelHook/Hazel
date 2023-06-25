@@ -15,10 +15,10 @@ export const LiveIcon = ({
 					!inactive && "bg-green-400 opacity-75",
 					"absolute inline-flex h-full w-full animate-ping rounded-full",
 				)}
-			></span>
+			/>
 			<span
 				className={cn(inactive && "bg-muted", !inactive && "bg-green-500", "relative inline-flex h-3 w-3 rounded-full")}
-			></span>
+			/>
 		</div>
 	)
 }

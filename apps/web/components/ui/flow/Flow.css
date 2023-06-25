@@ -221,8 +221,9 @@
 }
 .react-flow__controls-button {
   border: none;
-  background: #fefefe;
-  border-bottom: 1px solid #eee;
+  background: hsla(var(--card));
+  border-bottom: 1px solid;
+  border-color: hsla(var(--border));
   box-sizing: content-box;
   display: flex;
   justify-content: center;
@@ -234,13 +235,13 @@
   -moz-user-select: none;
   user-select: none;
   padding: 5px;
+  color: hsla(var(--card-foreground));
 }
-.react-flow__controls-button:hover {
-  background: #f4f4f4;
-}
+
 .react-flow__controls-button svg {
   width: 100%;
   max-width: 12px;
+  color: hsla(var(--card-foreground));
   max-height: 12px;
 }
 .react-flow__controls-button:disabled {
@@ -250,7 +251,7 @@
   fill-opacity: 0.4;
 }
 .react-flow__minimap {
-  background-color: #fff;
+  background-color: hsla(var(--card));
 }
 .react-flow__resize-control {
   position: absolute;

@@ -19,16 +19,18 @@ import "@/components/ui/flow/Flow.css"
 import dagre from "dagre"
 import { Connection, Destination, Source } from "db/src/schema"
 import { DefaultNode } from "@/components/ui/flow/nodes/DefaultNode"
-import { InputNode } from "@/components/ui/flow/nodes/InputNode"
 import { GroupNode } from "@/components/ui/flow/nodes/Group"
 import { OutputNode } from "@/components/ui/flow/nodes/OutputNode"
 import { useCallback, useLayoutEffect, useRef, useState } from "react"
 import { EdgeButton } from "@/components/ui/flow/edges/ButtonEdge"
 import ELK, { type ElkNode, type ElkExtendedEdge, type LayoutOptions } from "elkjs/lib/elk.bundled.js"
+import { SourceNode } from "@/components/ui/flow/nodes/SourceNode"
+import { DestinationNode } from "@/components/ui/flow/nodes/DestinationNode"
 
 const nodeTypes: NodeTypes = {
 	default: DefaultNode,
-	input: InputNode,
+	source: SourceNode,
+	destination: DestinationNode,
 	output: OutputNode,
 	group: GroupNode,
 }
@@ -66,8 +68,8 @@ const getLayoutedElements = async (nodes: Node[], edges: Edge[], options: Layout
 			sourcePosition: isHorizontal ? "right" : "bottom",
 
 			// Hardcode a width and height for elk to use when layouting.
-			width: 150,
-			height: 50,
+			width: 200,
+			height: 160,
 		})),
 		edges: edges as unknown as ElkExtendedEdge[],
 	}
@@ -96,7 +98,6 @@ export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
 	const firstRender = useRef<boolean>(true)
 	const reactFlowWrapper = useRef<HTMLDivElement>(null)
 
-	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance<any, any>>()
 
 	const [nodes, setNodes, onNodesChange] = useNodesState([])
@@ -104,7 +105,6 @@ export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
 
 	const { fitView } = useReactFlow()
 
-	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const onConnect = useCallback((params: any) => {
 		setEdges((eds) => addEdge(params, eds))
 	}, [])
@@ -127,14 +127,12 @@ export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
 		[nodes, edges],
 	)
 
-	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const onDragOver = useCallback((event: any) => {
 		event.preventDefault()
 		event.dataTransfer.dropEffect = "move"
 	}, [])
 
 	const onDrop = useCallback(
-		// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 		(event: any) => {
 			event.preventDefault()
 
@@ -147,9 +145,7 @@ export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
 			}
 
 			const position = reactFlowInstance?.project({
-				// rome-ignore lint/style/noNonNullAssertion: <explanation>
 				x: event.clientX - reactFlowBounds?.left!,
-				// rome-ignore lint/style/noNonNullAssertion: <explanation>
 				y: event.clientY - reactFlowBounds?.top!,
 			})
 			const newNode = {
@@ -188,7 +184,7 @@ export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
 				className="bg-background"
 			>
 				<Background />
-				<Controls />
+				<Controls className="!bg-card" />
 			</ReactFlow>
 		</div>
 	)

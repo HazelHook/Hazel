@@ -9,7 +9,7 @@ import { Connection, Destination, Source } from "db/src/schema"
 
 import { DefaultNode } from "@/components/ui/flow/nodes/DefaultNode"
 import { GroupNode } from "@/components/ui/flow/nodes/Group"
-import { InputNode } from "@/components/ui/flow/nodes/InputNode"
+import { InputNode } from "@/components/ui/flow/nodes/SourceNode"
 import { OutputNode } from "@/components/ui/flow/nodes/OutputNode"
 
 const nodeTypes: NodeTypes = {

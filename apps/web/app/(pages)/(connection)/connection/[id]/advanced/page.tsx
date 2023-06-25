@@ -28,9 +28,17 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 		if (!nodes.find((node) => node.id === connection.source?.publicId)) {
 			nodes.push({
 				id: connection.source.publicId,
-				type: "input",
-				data: { label: connection.source.name },
+				type: "source",
+				data: {
+					stats: {
+						day: 12012,
+						month: 100000000,
+					},
+					source: connection.source,
+					url: `https://api.hazelhook.dev/webhook/${connection.source.publicId}`,
+				},
 				position,
+				draggable: false,
 			})
 		}
 	}
@@ -41,9 +49,16 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 		if (!nodes.find((node) => node.id === connection.destination?.publicId)) {
 			nodes.push({
 				id: connection.destination.publicId,
-				type: "default",
-				data: { label: connection.destination.name },
+				type: "destination",
+				data: {
+					stats: {
+						day: 12012,
+						month: 100000000,
+					},
+					destination: connection.destination,
+				},
 				position,
+				draggable: false,
 			})
 		}
 	}
@@ -55,6 +70,7 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 			target: connection.destination.publicId,
 			type: "button",
 			animated: false,
+			deletable: false,
 		})
 	}
 
@@ -67,7 +83,7 @@ const AdvancedPage = async ({ params }: { params: { id: string } }) => {
 	const { nodes, edges } = transformProjectsToFlowElements(connection)
 
 	return (
-		<main className="h-full w-full">
+		<main className="h-full max-h-[80%]">
 			<FlowProvider>
 				<div className="flex flex-row gap-2 w-full h-full">
 					<Card className="h-full w-full overflow-hidden">
