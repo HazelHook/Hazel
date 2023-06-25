@@ -4,10 +4,6 @@ import Gradient from "./ext/ink-gradient"
 import BigText from "./ext/ink-big-text"
 import Options from "./options/options.js"
 
-type Props = {
-	name: string | undefined
-}
-
 export default function App() {
 	return (
 		<Box width="100%" display="flex" flexDirection="column">

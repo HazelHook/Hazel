@@ -11,7 +11,8 @@
 				"noNonNullAssertion": "off"
 			},
 			"suspicious": {
-				"noExplicitAny": "off"
+				"noExplicitAny": "off",
+				"noArrayIndexKey": "off"
 			}
 		},
 		"ignore": ["node_modules", ".next", "dist"]

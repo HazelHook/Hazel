@@ -3,18 +3,10 @@ import { Box, Text, Newline, useInput } from "../ext/ink"
 import TextInput from "../ext/ink-text-input"
 import { Tiny } from "../../../db/src/tinybird/index.js"
 import { connection, destination, source } from "../../../db/src/schema.js"
-import { connectWDB } from "../../../db/src/index.js"
 import { randBetweenDate, rand, randJSON, randText, randNumber, randWord, randUrl } from "@ngneat/falso"
-import fetch from "node-fetch"
 import { nanoid } from "nanoid"
-
-const cDb = (input: {
-	host: string
-	username: string
-	password: string
-}) => {
-	return connectWDB({ ...input, fetch })
-}
+import { useDataSources } from "../lib/datasource"
+import figures from "figures"
 
 function generateIds(numberOfIds: number, prefix: string) {
 	const ids = []
@@ -86,6 +78,7 @@ export function Planter({
 	const [destinations, setDestinations] = useState("")
 	const [numberOfRequests, setNumberOfRequests] = useState("")
 	const [connections, setConnections] = useState("")
+	const [dataSources, setDataSources] = useDataSources()
 
 	const [selectedInput, setSelectedInput] = useState(0)
 
@@ -112,11 +105,7 @@ export function Planter({
 				const generatedDestinationIds = generateIds(parseInt(destinations), "dst")
 				const generatedConnectionIds = generateIds(parseInt(connections), "conn")
 
-				const db = cDb({
-					username: process.env.PLANETSCALE_DB_USERNAME!,
-					password: process.env.PLANETSCALE_DB_PASSWORD!,
-					host: process.env.PLANETSCALE_DB_HOST!,
-				})
+				const db = dataSources.db
 
 				const sourceObjects: any[] = []
 				for (let i = 0; i < generatedSourceIds.length; i++) {
@@ -147,9 +136,6 @@ export function Planter({
 
 					destinationObjects.push(destinationObject)
 				}
-
-				console.log("sourceObjects", sourceObjects)
-				console.log("destinationObjects", destinationObjects)
 
 				for (let i = 0; i < generatedConnectionIds.length; i++) {
 					await db.transaction(async (tx) => {
@@ -243,14 +229,14 @@ export function Planter({
 
 	if (selected) {
 		return (
-			<Text bold color="#CC671B">
+			<Text bold color="#CC671B" dimColor={engaged}>
 				{">"} Hazelnut Planter
 			</Text>
 		)
 	}
 	return (
 		<Text color="#CC671B" dimColor>
-			{"  "}Hazelnut Planter
+			{" "} Hazelnut Planter
 		</Text>
 	)
 }

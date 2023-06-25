@@ -1,8 +1,8 @@
-#!/usr/bin/env node
-import React from 'react';
-import {render} from './ext/ink';
-import meow from 'meow';
-import App from './app.js';
+import React from "react"
+import { render } from "./ext/ink"
+import meow from "meow"
+import App from "./app.js"
+import { GlobalStateProvider } from "./lib/datasource"
 
 const cli = meow(
 	`
@@ -20,12 +20,17 @@ const cli = meow(
 		importMeta: import.meta,
 		flags: {
 			name: {
-				type: 'string',
+				type: "string",
 			},
 		},
 	},
-);
+)
 
-render(<App />, {
-	patchConsole: true
-});
+render(
+	(<GlobalStateProvider>
+		<App />
+	</GlobalStateProvider>),
+	{
+		patchConsole: true,
+	},
+)
