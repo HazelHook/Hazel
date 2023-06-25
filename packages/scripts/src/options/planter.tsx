@@ -1,11 +1,12 @@
-import React, { useState } from "react"
-import { Box, Text, Newline, useInput } from "../ext/ink"
+import React, { useEffect, useState } from "react"
+import { Box, Text, Newline, useInput, measureElement } from "../ext/ink"
 import TextInput from "../ext/ink-text-input"
 import { Tiny } from "../../../db/src/tinybird/index.js"
 import { connection, destination, source } from "../../../db/src/schema.js"
 import { randBetweenDate, rand, randJSON, randText, randNumber, randWord, randUrl } from "@ngneat/falso"
 import { nanoid } from "nanoid"
 import { useDataSources } from "../lib/datasource"
+import { ProgressBar } from "../ext/ink-progress-bar"
 import figures from "figures"
 
 function generateIds(numberOfIds: number, prefix: string) {
@@ -81,6 +82,23 @@ export function Planter({
 	const [dataSources, setDataSources] = useDataSources()
 
 	const [selectedInput, setSelectedInput] = useState(0)
+
+	const [progress, setProgress] = useState({
+		percentage: 1.0,
+		width: 0,
+	})
+	const progressRef = React.useRef<any>()
+	useEffect(() => {
+		if (progressRef.current) {
+			const size = measureElement(progressRef.current)
+			console.log(size)
+			setProgress({
+				percentage: progress.percentage,
+				width: size.width - 6,
+			})
+		}
+	}, [progressRef.current])
+
 
 	useInput(async (input, key) => {
 		if (engaged) {
@@ -190,7 +208,7 @@ export function Planter({
 		if (!selected) return null
 
 		return (
-			<Box display="flex" flexDirection="column">
+			<Box display="flex" flexDirection="column" ref={progressRef}>
 				<Box>
 					<Box marginRight={1}>
 						<Text>CoustomerId: </Text>
@@ -223,6 +241,7 @@ export function Planter({
 					</Box>
 					<TextInput value={numberOfRequests} onChange={setNumberOfRequests} focus={selectedInput === 4 && engaged} />
 				</Box>
+				<ProgressBar percent={progress.percentage} columns={progress.width}/>
 			</Box>
 		)
 	}
