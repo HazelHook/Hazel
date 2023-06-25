@@ -1,20 +1,34 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Connect Dev DB",
-            "command": "open",
-            "args": [
-              "-a",
-              "TablePlus",
-              "mysql://idba9dft9xnfbpeh7p4m:pscale_pw_FlEj2UL0OWeic5wDE6dx5UhvESh8JhYzC3OfOxlmE8C@aws.connect.psdb.cloud/hazel"
-            ],
-            "problemMatcher": [],
-            "presentation": {
-              "reveal": "never",
-              "panel": "dedicated",
-              "close": true
-            }
-          },
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Connect Dev DB",
+      "command": "open",
+      "args": [
+        "-a",
+        "TablePlus",
+        "mysql://idba9dft9xnfbpeh7p4m:pscale_pw_FlEj2UL0OWeic5wDE6dx5UhvESh8JhYzC3OfOxlmE8C@aws.connect.psdb.cloud/hazel"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "close": true
+      }
+    },
+    {
+      "label": "BG: Build code",
+      "group": "build",
+      "command": "pnpm",
+      "args": ["build"],
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "panel": "dedicated",
+        "reveal": "never"
+      }
+    }
+  ]
 }

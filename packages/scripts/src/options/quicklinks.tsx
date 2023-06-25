@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-// @ts-expect-error
-import { Box, Text } from "ink"
+import { Box, Text } from "../ext/ink"
+import figures from "figures";
 
 export function Quicklinks({ mode, selected, engaged }: { mode: "details" | "select"; selected?: boolean; engaged?: boolean }) {
 	if (mode === "details") {
@@ -9,14 +9,14 @@ export function Quicklinks({ mode, selected, engaged }: { mode: "details" | "sel
 	}
 	if (selected) {
 		return (
-			<Text bold color="#CC671B">
+			<Text bold color="#CC671B" dimColor={engaged}>
 				{">"} Quicklinks
 			</Text>
 		)
 	}
 	return (
 		<Text color="#CC671B" dimColor>
-			{"  "}Quicklinks
+			{" "} Quicklinks
 		</Text>
 	)
 }

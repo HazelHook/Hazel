@@ -1,15 +1,8 @@
 import React from "react"
-// @ts-expect-error
-import { Box, Text } from "ink"
-// @ts-expect-error
-import Gradient from "ink-gradient"
-// @ts-expect-error
-import BigText from "ink-big-text"
+import { Box, Text } from "./ext/ink"
+import Gradient from "./ext/ink-gradient"
+import BigText from "./ext/ink-big-text"
 import Options from "./options/options.js"
-
-type Props = {
-	name: string | undefined
-}
 
 export default function App() {
 	return (

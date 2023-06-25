@@ -8,6 +8,7 @@
 	},
 	"dependencies": {
 		"@chronark/zod-bird": "^0.1.1",
+		"@cloudflare/workers-types": "^4.20230518.0",
 		"@planetscale/database": "^1.7.0",
 		"drizzle-orm": "^0.27.0",
 		"drizzle-zod": "^0.4.4",

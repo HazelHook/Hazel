@@ -1,9 +1,11 @@
 import React, { useState } from "react"
-// @ts-expect-error
-import { Box, useInput, Newline } from "ink"
+import { Box, useInput, Newline } from "../ext/ink"
 import { Planter } from "./planter.js"
 import { Quicklinks } from "./quicklinks.js";
 import { HazelAPI } from "./hazel-api.js";
+import { Purger } from "./purger";
+const numberOptions = 4
+const blocked = [3]
 
 export default function Options() {
 	const [option, setOption] = useState(0)
@@ -15,28 +17,26 @@ export default function Options() {
 			if (key.upArrow) {
 				let newOption = option - 1
 				if(newOption < 0)
-					newOption = 2
-	
+					newOption = numberOptions - 1
 				
 				setOption(newOption)
 			}
 	
 			if (key.downArrow) {
 				let newOption = option + 1
-				if(newOption >= 3)
+				if(newOption >= numberOptions)
 					newOption = 0
 	
-				
 				setOption(newOption)
 			}
 		}
 
 
-		if(key.rightArrow && option === 0){
+		if(key.rightArrow && (option === 0 || option === 3)){
 			setEngaged(true)
 		}
 
-		if(key.leftArrow){
+		if(key.leftArrow && !blocked.includes(option)){
 			setEngaged(false)
 		}
 	});
@@ -53,12 +53,14 @@ export default function Options() {
 					<Planter mode="select" selected={option === 0} engaged={engaged}/>
 					<Quicklinks mode="select" selected={option === 1} engaged={engaged}/>
 					<HazelAPI mode="select" selected={option === 2} engaged={engaged}/>
+					<Purger mode="select" selected={option === 3} engaged={engaged} disengage={() => setEngaged(false)}/>
 				</Box>
 			</Box>
 			<Box height="100%" display="flex" flexDirection="column">
 				<Planter mode="details" selected={option === 0} engaged={engaged}/>
 				<Quicklinks mode="details" selected={option === 1} engaged={engaged}/>
 				<HazelAPI mode="details" selected={option === 2} engaged={engaged}/>
+				<Purger mode="details" selected={option === 3} engaged={engaged} disengage={() => setEngaged(false)}/>
             </Box>
 		</Box>
 	)
