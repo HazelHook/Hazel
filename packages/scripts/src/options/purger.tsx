@@ -7,6 +7,7 @@ import { Button } from "../components/button"
 import { cap } from "../lib/util"
 import { Checkbox } from "../components/checkbox"
 import figures from "figures"
+import { connection, destination, source } from "../../../db/src/schema"
 
 function truncate(datasource: string, cascade: boolean) {
 	childProcess.exec(
@@ -27,12 +28,13 @@ export function Purger({
 	const [cascadeDelete, setCascadeDelete] = useState(false)
 	const [tabIndex, setTabIndex] = useState(0)
 	const elementCount = (datasources.datasources?.length ?? 0) + 2
-	const tables = Object.keys(datasources.db.query)
+	const tables = {connections: connection, destinations: destination, sources: source}
+	const tablesCount = Object.keys(tables).length
 
 	useInput((input, key) => {
 		if (engaged) {
 			if(key.leftArrow){
-				if(tabIndex === 0 || selectedOption > tables.length){
+				if(tabIndex === 0 || selectedOption > tablesCount){
 					disengage()
 				} else if(tabIndex === 1){
 					setTabIndex(0)
@@ -47,8 +49,8 @@ export function Purger({
 				if (tabIndex === 0) {
 					setTabIndex(1)
 
-					if(selectedOption >= tables.length){
-						setSelectedOption(tables.length - 1)
+					if(selectedOption >= tablesCount){
+						setSelectedOption(tablesCount - 1)
 					}
 				}
 			}
@@ -82,12 +84,12 @@ export function Purger({
 							selectedColor: "green",
 						}}
 						title="Database Tables"
-						items={tables}
+						items={Object.keys(tables)}
 						type="checkbox"
 						engaged={engaged && tabIndex === 1}
 						selectedIndex={selectedOption}
 						setSelectedIndex={(index) => {
-							if(index >= tables.length && index < elementCount - 1){
+							if(index >= tablesCount && index < elementCount - 1){
 								setSelectedOption(elementCount - 2)
 								setTabIndex(0)
 							}else{
@@ -109,18 +111,17 @@ export function Purger({
 					<Button
 						name="Purge Datasources"
 						selected={selectedOption === elementCount - 1 && engaged}
-						onClick={() => {
+						onClick={async () => {
 							console.log(selectedCheckboxTab1)
 							for (const index of selectedCheckboxTab1) {
 								if (index < datasources.datasources.length) truncate(datasources.datasources[index].name, cascadeDelete)
 							}
 
 							for (const index of selectedCheckboxTab2) {
-								if (index < tables.length){
-									datasources.db.query[tables[index]].truncate()
+								if (index < tablesCount){
+									await datasources.db.delete(tables[Object.keys(tables)[index]])
 								}
 							}
-
 						}}
 					/>
 				</Box>

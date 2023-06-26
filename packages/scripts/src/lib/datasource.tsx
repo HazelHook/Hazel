@@ -25,6 +25,7 @@ const db = connectWDB({
 	host: process.env.PLANETSCALE_DB_HOST!,
 	fetch,
 })
+
 const output = stripAnsi(
 	childProcess.execSync(`tb --token ${process.env.TINY_TOKEN!} datasource ls --format json`).toString("utf8"),
 )
