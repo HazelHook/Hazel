@@ -65,15 +65,18 @@ const transformProjectsToFlowElements = (connections: FullConnection[]): { nodes
 		}
 
 		if (connection.destination && connection.source) {
-			edges.push({
-				id: `src-${connection.source.publicId}-d${connection.destination.publicId}`,
-				source: connection.source.publicId,
-				target: connection.destination.publicId,
-				type: "button",
-				animated: false,
-				deletable: false,
-				zIndex: 49,
-			})
+			const edgeId = `${connection.source.publicId}-${connection.destination.publicId}`
+			if (!edges.find((edge) => edge.id === edgeId)) {
+				edges.push({
+					id: `${connection.source.publicId}-${connection.destination.publicId}`,
+					source: connection.source.publicId,
+					target: connection.destination.publicId,
+					type: "button",
+					animated: false,
+					deletable: false,
+					zIndex: 49,
+				})
+			}
 		}
 	})
 
@@ -88,8 +91,6 @@ const ConnectionsOverview = async () => {
 	})
 
 	const { nodes, edges } = transformProjectsToFlowElements(connections)
-
-	console.log(nodes)
 
 	return (
 		<div className="h-full">

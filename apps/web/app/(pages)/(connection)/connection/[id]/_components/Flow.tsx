@@ -109,8 +109,6 @@ const getLayoutedElements = async (
 
 	const layout = await elk.layout(graph)
 
-	// console.log(layout)
-
 	const flatNodes: Node[] = []
 
 	layout.children?.forEach((child) => {

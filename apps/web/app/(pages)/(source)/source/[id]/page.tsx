@@ -34,14 +34,11 @@ const SourcePage = async ({
 		redirect("/")
 	}
 
-	// rome-ignore lint/style/noNonNullAssertion: <explanation>
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
 	const res = await tiny.getReqTimeseries({ customer_id: userId, source_id: source.publicId, start_date: startTime })
 
 	const chartData = transformSourcesChartData(res.data)
-
-	console.log(source.connections.map((conn) => conn.destination).filter(Boolean))
 
 	return (
 		<main className="space-y-4">

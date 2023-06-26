@@ -12,8 +12,6 @@ export const NavTabs = ({ children }: NavTabsProps) => {
 	const router = useRouter()
 	const segment = useSelectedLayoutSegment()
 
-	console.log(segment)
-
 	const handleNavigation = (v: string) => {
 		router.push(path.replace(segment || "", "") + v)
 	}

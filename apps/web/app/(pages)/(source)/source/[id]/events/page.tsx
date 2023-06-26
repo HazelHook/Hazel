@@ -11,8 +11,6 @@ const EventsPage = async () => {
 		customer_id: userId,
 	})
 
-	console.log(reqs)
-
 	return (
 		<div>
 			<div className="w-full">
