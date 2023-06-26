@@ -51,38 +51,90 @@ const elkOptions = {
 
 const elk = new ELK()
 
-const getLayoutedElements = async (nodes: Node[], edges: Edge[], options: LayoutOptions = {}) => {
+const getLayoutedElements = async (
+	nodes: Node[],
+	edges: Edge[],
+	options: LayoutOptions = {},
+): Promise<{ nodes: Node[]; edges: Edge[] }> => {
 	const isHorizontal = options?.["elk.direction"] === "RIGHT"
+
+	const size = { width: 200, height: 160 }
+
+	const computedNodes: Map<string, ElkNode> = new Map()
+
+	nodes.forEach((node) => {
+		if (node.parentNode) {
+			const parent = computedNodes.get(node.parentNode)
+
+			if (!parent) {
+				console.error(`Parent should be defined before child. Parent: ${node.parentNode}`)
+				return
+			}
+
+			const newNode: ElkNode = {
+				...node,
+				// @ts-expect-errors
+				targetPosition: isHorizontal ? "left" : "top",
+				sourcePosition: isHorizontal ? "right" : "bottom",
+				width: size.width,
+				height: size.height,
+			}
+
+			parent.children = [...(parent.children || []), newNode]
+
+			computedNodes.set(node.parentNode, parent)
+
+			return
+		}
+
+		computedNodes.set(node.id, {
+			...node,
+			// @ts-expect-errors
+			targetPosition: isHorizontal ? "left" : "top",
+			sourcePosition: isHorizontal ? "right" : "bottom",
+			properties: { "elk.padding": "[top=60, left=20, bottom=60, right=20]" },
+			width: size.width,
+			height: size.height,
+		})
+	})
+
 	const graph: ElkNode = {
 		id: "root",
 		layoutOptions: options,
-		children: nodes.map((node) => ({
-			...node,
-			// Adjust the target and source handle positions based on the layout
-			// direction.
-			targetPosition: isHorizontal ? "left" : "top",
-			sourcePosition: isHorizontal ? "right" : "bottom",
-
-			// Hardcode a width and height for elk to use when layouting.
-			width: 200,
-			height: 160,
-		})),
-		edges: edges as unknown as ElkExtendedEdge[],
+		children: Array.from(computedNodes.values()),
+		edges: edges as unknown as ElkExtendedEdge[], // If you have control over `edges` structure, try to avoid type casting
 	}
 
-	return elk
-		.layout(graph)
-		.then((layoutedGraph) => ({
-			nodes: layoutedGraph.children?.map((node) => ({
-				...node,
-				// React Flow expects a position property on the node instead of `x`
-				// and `y` fields.
-				position: { x: node.x, y: node.y },
-			})),
+	const layout = await elk.layout(graph)
 
-			edges: layoutedGraph.edges,
-		}))
-		.catch(console.error)
+	// console.log(layout)
+
+	const flatNodes: Node[] = []
+
+	layout.children?.forEach((child) => {
+		// @ts-expect-errors
+		flatNodes.push({
+			...child,
+			style: {
+				width: child.width,
+				height: child.height,
+			},
+			position: { x: child.x || 0, y: child.y || 0 },
+		})
+
+		child.children?.forEach((nested) => {
+			// @ts-expect-errors
+			flatNodes.push({
+				...nested,
+				position: { x: nested.x || 0, y: nested.y || 0 },
+			})
+		})
+	})
+
+	return {
+		nodes: flatNodes,
+		edges: layout.edges as unknown as Edge[],
+	}
 }
 
 export interface FlowProps {

@@ -1,6 +1,7 @@
 import React, { memo } from "react"
+import { NodeProps } from "reactflow"
 
-interface DefaultNode {
+interface DefaultNode extends NodeProps {
 	data: {
 		label: string
 	}

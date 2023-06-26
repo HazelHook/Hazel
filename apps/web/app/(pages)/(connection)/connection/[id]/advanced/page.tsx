@@ -1,8 +1,7 @@
 import { getCachedConnection } from "@/lib/orm"
 import { Flow, FullConnection } from "../_components/Flow"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { FlowProvider } from "../_components/Provider"
-import { Nodebar } from "../_components/NodeBar"
 
 import type { Edge, Node } from "reactflow"
 
@@ -13,16 +12,12 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 	const position = { x: 0, y: 0 }
 
 	// Add connection as node
-	// nodes.push({
-	// 	id: connection.publicId,
-	// 	type: "group",
-	// 	data: { label: connection.name },
-	// 	position: position,
-	// 	className: "w-[1000px]",
-	// 	style: {
-	// 		height: 500 + 100,
-	// 	},
-	// })
+	nodes.push({
+		id: connection.publicId,
+		type: "group",
+		data: { label: connection.name },
+		position: position,
+	})
 
 	if (connection.source) {
 		if (!nodes.find((node) => node.id === connection.source?.publicId)) {
@@ -37,6 +32,7 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 					source: connection.source,
 					url: `https://api.hazelhook.dev/webhook/${connection.source.publicId}`,
 				},
+				parentNode: connection.publicId,
 				position,
 				draggable: false,
 			})
@@ -57,6 +53,7 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 					},
 					destination: connection.destination,
 				},
+				parentNode: connection.publicId,
 				position,
 				draggable: false,
 			})
