@@ -38,7 +38,6 @@
 		"bright": "^0.8.2",
 		"class-variance-authority": "^0.6.0",
 		"clsx": "^1.2.1",
-		"dagre": "^0.8.5",
 		"date-fns": "^2.30.0",
 		"db": "workspace:*",
 		"elkjs": "^0.8.2",

@@ -16,7 +16,6 @@ import ReactFlow, {
 
 import "@/components/ui/flow/Flow.css"
 
-import dagre from "dagre"
 import { Connection, Destination, Source } from "db/src/schema"
 import { DefaultNode } from "@/components/ui/flow/nodes/DefaultNode"
 import { GroupNode } from "@/components/ui/flow/nodes/Group"
@@ -49,9 +48,6 @@ const elkOptions = {
 	"elk.layered.spacing.nodeNodeBetweenLayers": "100",
 	"elk.spacing.nodeNode": "80",
 }
-
-const dagreGraph = new dagre.graphlib.Graph()
-dagreGraph.setDefaultEdgeLabel(() => ({}))
 
 const elk = new ELK()
 
