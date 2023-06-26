@@ -43,7 +43,7 @@ export const EdgeButton = ({
 						// if you have an interactive element, set pointer-events: all
 						pointerEvents: "all",
 					}}
-					className="nodrag nopan flex justify-center"
+					className="nodrag nopan flex justify-center z-50"
 				>
 					<Popover>
 						<PopoverTrigger asChild>

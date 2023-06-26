@@ -25,11 +25,13 @@ import { EdgeButton } from "@/components/ui/flow/edges/ButtonEdge"
 import ELK, { type ElkNode, type ElkExtendedEdge, type LayoutOptions } from "elkjs/lib/elk.bundled.js"
 import { SourceNode } from "@/components/ui/flow/nodes/SourceNode"
 import { DestinationNode } from "@/components/ui/flow/nodes/DestinationNode"
+import { ConnectionGroupNode } from "@/components/ui/flow/nodes/ConnectionGroup"
 
 const nodeTypes: NodeTypes = {
 	default: DefaultNode,
 	source: SourceNode,
 	destination: DestinationNode,
+	connection: ConnectionGroupNode,
 	output: OutputNode,
 	group: GroupNode,
 }
@@ -92,7 +94,7 @@ const getLayoutedElements = async (
 			// @ts-expect-errors
 			targetPosition: isHorizontal ? "left" : "top",
 			sourcePosition: isHorizontal ? "right" : "bottom",
-			properties: { "elk.padding": "[top=60, left=20, bottom=60, right=20]" },
+			properties: { "elk.padding": "[top=60, left=30, bottom=60, right=30]" },
 			width: size.width,
 			height: size.height,
 		})

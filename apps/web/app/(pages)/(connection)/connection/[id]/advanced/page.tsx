@@ -14,7 +14,7 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 	// Add connection as node
 	nodes.push({
 		id: connection.publicId,
-		type: "group",
+		type: "connection",
 		data: { label: connection.name },
 		position: position,
 	})
@@ -68,6 +68,7 @@ const transformProjectsToFlowElements = (connection: FullConnection): { nodes: N
 			type: "button",
 			animated: false,
 			deletable: false,
+			zIndex: 49,
 		})
 	}
 
@@ -86,14 +87,6 @@ const AdvancedPage = async ({ params }: { params: { id: string } }) => {
 					<Card className="h-full w-full overflow-hidden">
 						<Flow initalNodes={nodes} initalEdges={edges} />
 					</Card>
-					{/* <Card>
-						<CardHeader>
-							<CardTitle>Custom Nodes</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<Nodebar />
-						</CardContent>
-					</Card> */}
 				</div>
 			</FlowProvider>
 		</main>
