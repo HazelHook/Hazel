@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx"
+import { sub } from "date-fns"
 import { twMerge } from "tailwind-merge"
 import colors from "tailwindcss/colors"
 
@@ -18,4 +19,34 @@ export function formatDateTime(date: Date) {
 	)} ${`0${date.getUTCHours()}`.slice(-2)}:${`0${date.getUTCMinutes()}`.slice(-2)}:${`0${date.getUTCSeconds()}`.slice(
 		-2,
 	)}`
+}
+
+export function charToDuration(char: "h" | "d" | "m" | "y") {
+	switch (char) {
+		case "h":
+			return "hours"
+		case "d":
+			return "days"
+		case "m":
+			return "months"
+		case "y":
+			return "years"
+	}
+}
+
+export function subtractFromString(date: Date, str: string) {
+	const parsed = /^(\d+)([a-z]+)$/i.exec(str)
+
+	if (!parsed) {
+		return
+	}
+
+	const value = parseInt(parsed[1], 10)
+	const unit = parsed[2].toLowerCase()
+
+	const duration = {
+		[charToDuration(unit as any)]: value,
+	}
+
+	return sub(date, duration)
 }

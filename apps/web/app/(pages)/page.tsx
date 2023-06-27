@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs"
 import { Tiny } from "db/src/tinybird"
 
 import { auth } from "@/lib/auth"
-import { chartColors, formatDateTime, getSeededProfileImageUrl } from "@/lib/utils"
+import { chartColors, formatDateTime, getSeededProfileImageUrl, subtractFromString } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
@@ -12,31 +12,47 @@ import { transformSourcesChartData } from "./_utils"
 import { sub } from "date-fns"
 import { DatePicker } from "./_component/DatePicker"
 
-const Dashboard = async () => {
+interface DashboardPageProps {
+	searchParams: {
+		period?: string
+		date_from?: string
+		date_to?: string
+	}
+}
+
+const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const { userId } = auth()
 
-	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 	const tiny = Tiny(process.env.TINY_TOKEN!)
+
+	const endTime = searchParams.date_to || formatDateTime(new Date())
+	const startTime =
+		searchParams.date_from ||
+		formatDateTime(subtractFromString(new Date(), searchParams.period || "7d") || sub(new Date(), { days: 7 }))
 
 	const reqKpisPromise = tiny.getReqKpis({
 		customer_id: userId,
 		start_date: startTime,
+		end_date: endTime,
 	})
 	const resKpisPromise = tiny.getResKpis({
 		customer_id: userId,
 		success: 1,
 		start_date: startTime,
+		end_date: endTime,
 	})
 
 	const errorKpisPromise = tiny.getResKpis({
 		customer_id: userId,
 		success: 0,
 		start_date: startTime,
+		end_date: endTime,
 	})
 
 	const bySourcesPromise = tiny.getReqTimeseries({
 		customer_id: userId,
 		start_date: startTime,
+		end_date: endTime,
 	})
 
 	const userPromise = currentUser()
