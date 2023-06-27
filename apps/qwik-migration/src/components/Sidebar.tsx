@@ -1,0 +1,121 @@
+import { cn } from "@/lib/utils"
+import { AddPersonIcon } from "ui/icons/AddPerson"
+import { BarChartIcon } from "ui/icons/BarChart"
+import { CardIcon } from "ui/icons/Card"
+import { HomeIcon } from "ui/icons/Home"
+import { MapleLogoIcon } from "ui/icons/MapleLogo"
+import { PaperWithTextIcon } from "ui/icons/PaperWithText"
+import { PersonsIcon } from "ui/icons/Persons"
+import { SettingsIcon } from "ui/icons/Settings"
+import { WritingIcon } from "ui/icons/Writing"
+
+import { SidebarClientItem } from "./SidebarItem"
+import { AutomationIcon } from "ui/icons/pika/automation"
+import { GitCommitIcon } from "ui/icons/pika/gitCommit"
+import { ChainIcon } from "ui/icons/pika/chain"
+import type { IconProps } from "ui/icons/pika/types"
+import { Slot } from "@builder.io/qwik"
+
+type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
+	params: {
+		org?: string
+		slug?: string
+	}
+}
+
+export const SidebarItem = ({
+	icon,
+	endIcon,
+	...rest
+}: {
+	href: string
+	icon: (props: IconProps) => JSX.Element
+	endIcon?: (props: IconProps) => JSX.Element
+	title: string
+	target?: string
+	disabled?: boolean
+	size?: "default" | "xs" | "sm" | "lg"
+}) => {
+	return (
+		<SidebarClientItem
+			icon={<Slot name="icon" class="h-4 w-4 lg:mr-2" />}
+			endIcon={<Slot name="endIcon" class="hidden h-3 w-3 lg:ml-2 lg:block" />}
+			{...rest}
+		/>
+	)
+}
+
+export async function Sidebar({ className, params }: SidebarProps) {
+	// const user = await currentUser()
+
+	// const organizations = await clerkClient.users.getOrganizationMembershipList({
+	// 	userId: user?.id,
+	// })
+
+	// const isOrg!== "personal"
+
+	return (
+		<div class={cn("flex w-full flex-col justify-between gap-4", className)} style={{ height: "calc(100vh - 4rem)" }}>
+			<div class="h-full w-full max-w-full space-y-2 pb-4 lg:space-y-4">
+				<Link class="cursor-pointer" href={"/"}>
+					<div class="hidden flex-row items-center gap-2 px-4 py-2 lg:flex">
+						<MapleLogoIcon class="h-12 w-12" />
+
+						<h1 class="text-3xl font-semibold tracking-tight">Hazel</h1>
+					</div>
+
+					<div class="flex justify-center pb-2 lg:hidden">
+						<MapleLogoIcon class="h-6 w-6" />
+					</div>
+				</Link>
+
+				<div class="py-2 lg:px-4">
+					<div class="space-y-1">
+						<SidebarItem href={"/"} title={"Overview"} icon={HomeIcon} />
+						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={WritingIcon} />
+						<SidebarItem href={"/connections"} title={"Connections"} icon={ChainIcon} />
+						<SidebarItem href={"/sources"} title={"Sources"} icon={GitCommitIcon} />
+						<SidebarItem href={"/destinations"} title={"Destinations"} icon={AutomationIcon} />
+					</div>
+				</div>
+				<div class="py-2 space-y-2">
+					{/* <ScrollArea className={"max-w-[300px] lg:px-2"}>
+						<div className="space-y-1 py-2 lg:px-2">
+							{connections.map((project) => (
+								<SidebarProjectItem key={project.id} project={project} params={params} />
+							))}
+						</div>
+					</ScrollArea> */}
+				</div>
+				<div class="py-2 lg:px-4">
+					<h2 class="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Settings</h2>
+					<div class="space-y-1">
+						<SidebarItem href={"/app/settings"} title={"Settings"} icon={SettingsIcon} />
+						<SidebarItem href={"/app/settings/usage"} title={"Usage"} icon={BarChartIcon} />
+						<SidebarItem href={"/app/settings/billing"} title={"Billing"} icon={CardIcon} />
+						<SidebarItem href={"/app/settings/invoices"} title={"Invoices"} icon={PaperWithTextIcon} />
+						<SidebarItem href={"/app/settings/members"} title={"Members"} icon={PersonsIcon} />
+						<SidebarItem href={"/app/settings/invites"} title={"Invites"} icon={AddPersonIcon} />
+					</div>
+				</div>
+
+				{/* <div className="py-2">
+					<h2 className="relative px-6 text-lg font-semibold tracking-tight">Your Teams</h2>
+					<ScrollArea className="h-[300px] px-2">
+						<div className="space-y-1 p-2">
+							{organizations.map(({ organization }) => (
+								<Button key={organization.id} variant="ghost" size="sm" className="w-full justify-start font-normal">
+									<Avatar className="mr-2 h-4 w-4 rounded-[3px]">
+										<AvatarImage src={getSeededProfileImageUrl(organization.id)}></AvatarImage>
+									</Avatar>
+									{organization.name}
+								</Button>
+							))}
+						</div>
+					</ScrollArea>
+				</div> */}
+			</div>
+			<div class="hidden p-2 lg:block">{/* <TeamSwitcher className="lg:w-full" /> */}</div>
+		</div>
+	)
+}
