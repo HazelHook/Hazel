@@ -1,37 +1,39 @@
-import React from 'react';
-import {Box, Text} from '../ink';
-import PropTypes from 'prop-types';
-import stringWidth from 'string-width';
+import { Box, Text } from "../ink"
 
 // Helpers
-const getSideDividerWidth = (width, titleWidth) => (width - titleWidth) / 2;
-const getNumberOfCharsPerWidth = (char, width) => width / stringWidth(char);
+const getSideDividerWidth = (width: number, titleWidth: number) => (width - titleWidth) / 2
+const getNumberOfCharsPerWidth = (char: string, width: number) => width / char.length
 
-const PAD = ' ';
+const PAD = " "
 
 // Divider
-const Divider = ({
+
+interface DividerProps {
+	title: string
+	width: number
+	padding: number
+	titlePadding: number
+	titleColor: string
+	dividerChar: string
+	dividerColor: string
+}
+
+export const Divider = ({
 	title,
-	width,
-	padding,
-	titlePadding,
-	titleColor,
-	dividerChar,
-	dividerColor
-}) => {
-	const titleString = title ?
-		`${PAD.repeat(titlePadding) + title + PAD.repeat(titlePadding)}` :
-		'';
-	const titleWidth = stringWidth(titleString);
+	width = 50,
+	padding = 1,
+	titlePadding = 1,
+	titleColor = "white",
+	dividerChar = "-",
+	dividerColor = "grey",
+}: DividerProps) => {
+	const titleString = title ? `${PAD.repeat(titlePadding) + title + PAD.repeat(titlePadding)}` : ""
 
-	const dividerWidth = getSideDividerWidth(width, titleWidth);
-	const numberOfCharsPerSide = getNumberOfCharsPerWidth(
-		dividerChar,
-		dividerWidth
-	);
-	const dividerSideString = dividerChar.repeat(numberOfCharsPerSide);
+	const dividerWidth = getSideDividerWidth(width, titleString.length)
+	const numberOfCharsPerSide = getNumberOfCharsPerWidth(dividerChar, dividerWidth)
+	const dividerSideString = dividerChar.repeat(numberOfCharsPerSide)
 
-	const paddingString = PAD.repeat(padding);
+	const paddingString = PAD.repeat(padding)
 
 	return (
 		<Box flexDirection="row">
@@ -43,27 +45,5 @@ const Divider = ({
 				{paddingString}
 			</Text>
 		</Box>
-	);
-};
-
-Divider.propTypes = {
-	title: PropTypes.string,
-	width: PropTypes.number,
-	padding: PropTypes.number,
-	titlePadding: PropTypes.number,
-	titleColor: PropTypes.string,
-	dividerChar: PropTypes.string,
-	dividerColor: PropTypes.string
-};
-
-Divider.defaultProps = {
-	title: null,
-	width: 50,
-	padding: 1,
-	titlePadding: 1,
-	titleColor: 'white',
-	dividerChar: '─',
-	dividerColor: 'grey'
-};
-
-module.exports = Divider;
+	)
+}
