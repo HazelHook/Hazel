@@ -15,13 +15,13 @@ const transformProjectsToFlowElements = (connections: FullConnection[]): { nodes
 
 	// Add connection as node
 	connections.forEach((connection) => {
-		nodes.push({
-			id: connection.publicId,
-			type: "connection",
-			data: { label: connection.name },
-			position: position,
-			draggable: false,
-		})
+		// nodes.push({
+		// 	id: connection.publicId,
+		// 	type: "connection",
+		// 	data: { label: connection.name },
+		// 	position: position,
+		// 	draggable: false,
+		// })
 
 		if (connection.source) {
 			if (!nodes.find((node) => node.id === connection.source?.publicId)) {
@@ -36,7 +36,7 @@ const transformProjectsToFlowElements = (connections: FullConnection[]): { nodes
 						source: connection.source,
 						url: `https://api.hazelhook.dev/webhook/${connection.source.publicId}`,
 					},
-					parentNode: connection.publicId,
+					// parentNode: connection.publicId,
 					position,
 					draggable: false,
 				})
@@ -57,7 +57,7 @@ const transformProjectsToFlowElements = (connections: FullConnection[]): { nodes
 						},
 						destination: connection.destination,
 					},
-					parentNode: connection.publicId,
+					// parentNode: connection.publicId,
 					position,
 					draggable: false,
 				})
@@ -76,6 +76,8 @@ const transformProjectsToFlowElements = (connections: FullConnection[]): { nodes
 					deletable: false,
 					zIndex: 49,
 				})
+			} else {
+				console.log("HI")
 			}
 		}
 	})

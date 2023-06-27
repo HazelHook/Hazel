@@ -10,49 +10,63 @@ import { Chart } from "@/components/ui/chart"
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
 import { sub } from "date-fns"
+import { DatePicker } from "./_component/DatePicker"
 
 const Dashboard = async () => {
 	const { userId } = auth()
 
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
-	// rome-ignore lint/style/noNonNullAssertion: <explanation>
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
-	const reqKpis = await tiny.getReqKpis({
+	const reqKpisPromise = tiny.getReqKpis({
 		customer_id: userId,
 		start_date: startTime,
 	})
-	const resKpis = await tiny.getResKpis({
+	const resKpisPromise = tiny.getResKpis({
 		customer_id: userId,
 		success: 1,
 		start_date: startTime,
 	})
 
-	const errorKpis = await tiny.getResKpis({
+	const errorKpisPromise = tiny.getResKpis({
 		customer_id: userId,
 		success: 0,
 		start_date: startTime,
 	})
 
-	const bySources = await tiny.getReqTimeseries({
+	const bySourcesPromise = tiny.getReqTimeseries({
 		customer_id: userId,
 		start_date: startTime,
 	})
 
-	const user = await currentUser()
+	const userPromise = currentUser()
+
+	const [reqKpis, resKpis, errorKpis, bySources, user] = await Promise.all([
+		reqKpisPromise,
+		resKpisPromise,
+		errorKpisPromise,
+		bySourcesPromise,
+		userPromise,
+	])
 
 	const chartData = transformSourcesChartData(bySources.data)
 	return (
 		<main className="container p-8 space-y-4">
-			<div className="flex flex-row gap-2">
-				<Avatar className="w-16 h-16">
-					<AvatarImage src={getSeededProfileImageUrl("12")} />
-				</Avatar>
-				<div className="flex justify-center flex-col">
-					<h3 className="text-2xl">Welcome back, {user?.username}</h3>
-					<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
+			<div className="flex flex-row justify-between">
+				<div className="flex flex-row gap-2">
+					<Avatar className="w-16 h-16">
+						<AvatarImage src={getSeededProfileImageUrl(userId)} />
+					</Avatar>
+					<div className="flex justify-center flex-col">
+						<h3 className="text-2xl">Welcome back, {user?.username}</h3>
+						<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
+					</div>
+				</div>
+				<div>
+					<DatePicker />
 				</div>
 			</div>
+
 			<div className="flex gap-4 flex-col md:flex-row">
 				<KpiCard
 					color={chartColors[0]}
@@ -144,7 +158,7 @@ const Dashboard = async () => {
 	)
 }
 
-export const fetchCache = "force-no-store"
+// export const fetchCache = "force-no-store"
 
 export const runtime = "edge"
 
