@@ -1,21 +1,19 @@
 import Link from "next/link"
-import { LucideProps } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { AddPersonIcon } from "@/components/icons/AddPerson"
-import { BarChartIcon } from "@/components/icons/BarChart"
-import { CardIcon } from "@/components/icons/Card"
-import { HomeIcon } from "@/components/icons/Home"
-import { MapleLogoIcon } from "@/components/icons/MapleLogo"
-import { PaperWithTextIcon } from "@/components/icons/PaperWithText"
-import { PersonsIcon } from "@/components/icons/Persons"
-import { SettingsIcon } from "@/components/icons/Settings"
-import { WritingIcon } from "@/components/icons/Writing"
 
 import { SidebarClientItem } from "./SidebarItem"
 import { AutomationIcon } from "./icons/pika/automation"
 import { GitCommitIcon } from "./icons/pika/gitCommit"
-import { ChainIcon } from "./icons/pika/chain"
+import { IconProps } from "@/components/icons/pika/types"
+import { MapleLogoIcon } from "@/components/icons/Logo"
+import { HomeIcon } from "@/components/icons/pika/home"
+import { PaperBagIcon } from "@/components/icons/pika/paperBag"
+import { LinkChainIcon } from "@/components/icons/pika/linkChain"
+import { Settings01Icon } from "@/components/icons/pika/settings01"
+import { BarChartDownIcon } from "@/components/icons/pika/barChartDown"
+import { CardIcon } from "@/components/icons/pika/card"
+import { PaperclipIcon } from "@/components/icons/pika/paperclip"
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	params: {
@@ -30,8 +28,8 @@ export const SidebarItem = ({
 	...rest
 }: {
 	href: string
-	icon: (props: LucideProps) => JSX.Element
-	endIcon?: (props: LucideProps) => JSX.Element
+	icon: (props: IconProps) => JSX.Element
+	endIcon?: (props: IconProps) => JSX.Element
 	title: string
 	target?: string
 	disabled?: boolean
@@ -79,8 +77,8 @@ export async function Sidebar({ className, params }: SidebarProps) {
 				<div className="py-2 lg:px-4">
 					<div className="space-y-1">
 						<SidebarItem href={"/"} title={"Overview"} icon={HomeIcon} />
-						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={WritingIcon} />
-						<SidebarItem href={"/connections"} title={"Connections"} icon={ChainIcon} />
+						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={PaperBagIcon} />
+						<SidebarItem href={"/connections"} title={"Connections"} icon={LinkChainIcon} />
 						<SidebarItem href={"/sources"} title={"Sources"} icon={GitCommitIcon} />
 						<SidebarItem href={"/destinations"} title={"Destinations"} icon={AutomationIcon} />
 					</div>
@@ -97,12 +95,12 @@ export async function Sidebar({ className, params }: SidebarProps) {
 				<div className="py-2 lg:px-4">
 					<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Settings</h2>
 					<div className="space-y-1">
-						<SidebarItem href={"/app/settings"} title={"Settings"} icon={SettingsIcon} />
-						<SidebarItem href={"/app/settings/usage"} title={"Usage"} icon={BarChartIcon} />
+						<SidebarItem href={"/app/settings"} title={"Settings"} icon={Settings01Icon} />
+						<SidebarItem href={"/app/settings/usage"} title={"Usage"} icon={BarChartDownIcon} />
 						<SidebarItem href={"/app/settings/billing"} title={"Billing"} icon={CardIcon} />
-						<SidebarItem href={"/app/settings/invoices"} title={"Invoices"} icon={PaperWithTextIcon} />
-						<SidebarItem href={"/app/settings/members"} title={"Members"} icon={PersonsIcon} />
-						<SidebarItem href={"/app/settings/invites"} title={"Invites"} icon={AddPersonIcon} />
+						<SidebarItem href={"/app/settings/invoices"} title={"Invoices"} icon={PaperclipIcon} />
+						<SidebarItem href={"/app/settings/members"} title={"Members"} icon={PaperclipIcon} />
+						<SidebarItem href={"/app/settings/invites"} title={"Invites"} icon={PaperclipIcon} />
 					</div>
 				</div>
 

@@ -1,6 +1,8 @@
-import { SVGProps } from "react"
-
-export interface IconProps extends Partial<SVGProps<SVGSVGElement>> {
-	size?: string | number
-	absoluteStrokeWidth?: boolean
-}
+	
+	export interface IconProps  {
+	  class?: string
+	  className?: string
+	  size?: string | number
+	  absoluteStrokeWidth?: boolean
+	}
+	

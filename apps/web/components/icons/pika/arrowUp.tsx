@@ -1,14 +1,12 @@
-import { IconProps } from "./types"
 
-export const ArrowUpIcon = (props: IconProps) => (
-	<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-		<path
-			stroke="currentColor"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			strokeWidth="2"
-			d="M13 15H7a4 4 0 0 0-4 4 2 2 0 0 0 2 2h10m6-5.126a10 10 0 0 0-1.704-1.77A.469.469 0 0 0 19 14m-2 1.874a10 10 0 0 1 1.704-1.77A.469.469 0 0 1 19 14m0 0v7M15 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
-		/>
-		<title>arrowUpIcon</title>
-	</svg>
-)
+            import { IconProps } from "./types"
+            
+            export const ArrowUpIcon = (props: IconProps) => (
+                <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 8.83a30.23 30.23 0 0 1 5.406-5.62A.949.949 0 0 1 12 3m6 5.83a30.233 30.233 0 0 0-5.406-5.62A.949.949 0 0 0 12 3m0 0v18"/>
+<title>arrowUpIcon</title></svg>
+
+        	)
+
+			
+		

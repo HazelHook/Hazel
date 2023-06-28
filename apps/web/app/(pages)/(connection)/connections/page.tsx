@@ -3,10 +3,10 @@ import { getConnections } from "db/src/orm/connection"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import Link from "next/link"
-import { PlusIcon } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { DataTable } from "@/components/ui/data-table"
 import { columns } from "./columns"
+import { AddIcon } from "@/components/icons/pika/add"
 
 const ConnectionsPage = async () => {
 	const { userId } = auth()
@@ -20,7 +20,7 @@ const ConnectionsPage = async () => {
 			<div className="flex flex-row justify-between mb-4">
 				<h3 className="text-xl font-semibold">Connections</h3>
 				<Link href="/connection/new" className={buttonVariants()}>
-					<PlusIcon className="mr-2" />
+					<AddIcon className="mr-2" />
 					New Connection
 				</Link>
 			</div>

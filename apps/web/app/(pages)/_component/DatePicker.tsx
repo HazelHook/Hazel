@@ -3,12 +3,13 @@
 import { useCallback, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { format } from "date-fns"
-import { CalendarIcon, Check } from "lucide-react"
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 import { formatDateTime } from "@/lib/utils"
 import { CustomDatePicker } from "./CustomDatePicker"
+import { CalendarIcon } from "@/components/icons/pika/calendar"
+import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 type Interval = {
 	name: string
@@ -84,7 +85,7 @@ export const DatePicker = () => {
 				<div className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
 					{value === "custom" && (
 						<span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-							<Check className="h-4 w-4" />
+							<CheckTickIcon className="h-4 w-4" />
 						</span>
 					)}
 

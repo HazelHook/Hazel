@@ -1,16 +1,8 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination, Source } from "db/src/schema"
-import { ArrowDown, ArrowUp, CheckIcon } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Avatar } from "@radix-ui/react-avatar"
-import { AvatarImage } from "@/components/ui/avatar"
-import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Switch } from "@/components/ui/switch"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -19,7 +11,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { VerticalIcon } from "@/components/icons/pika/vertical"
+import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
 
 export interface Request {
 	timestamp: string
@@ -62,7 +54,7 @@ export const columns: ColumnDef<Column>[] = [
 					<DropdownMenuTrigger asChild>
 						<Button variant="ghost" className="h-8 w-8 p-0">
 							<span className="sr-only">Open menu</span>
-							<VerticalIcon className="h-4 w-4" />
+							<FilterVerticalIcon className="h-4 w-4" />
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">

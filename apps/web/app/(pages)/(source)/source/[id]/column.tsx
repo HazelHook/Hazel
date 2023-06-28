@@ -2,7 +2,6 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Connection, Destination, Source } from "db/src/schema"
-import { ArrowDown, ArrowUp, CheckIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -11,6 +10,9 @@ import { Avatar } from "@radix-ui/react-avatar"
 import { AvatarImage } from "@/components/ui/avatar"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Switch } from "@/components/ui/switch"
+import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
+import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
+import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 export type Column = Destination
 
@@ -43,9 +45,9 @@ export const columns: ColumnDef<Column>[] = [
 				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
 					Group
 					{column.getIsSorted() === "asc" ? (
-						<ArrowUp className="ml-2 h-4 w-4" />
+						<ArrowUpIcon className="ml-2 h-4 w-4" />
 					) : (
-						<ArrowDown className="ml-2 h-4 w-4" />
+						<ArrowDownIcon className="ml-2 h-4 w-4" />
 					)}
 				</Button>
 			)
@@ -60,7 +62,7 @@ export const columns: ColumnDef<Column>[] = [
 		cell: ({ cell }) => {
 			return (
 				<Badge>
-					<CheckIcon className="w-4 h-4 mr-2" />
+					<CheckTickIcon className="w-4 h-4 mr-2" />
 				</Badge>
 			)
 		},

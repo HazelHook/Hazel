@@ -2,12 +2,14 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Connection, Destination, Source } from "db/src/schema"
-import { ArrowDown, ArrowUp, ArrowUpDown, CheckIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { getSeededProfileImageUrl } from "@/lib/utils"
+import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
+import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
+import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 export type Column = Source & {
 	connections: Connection[]
@@ -21,9 +23,9 @@ export const columns: ColumnDef<Column>[] = [
 				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
 					Name
 					{column.getIsSorted() === "asc" ? (
-						<ArrowUp className="ml-2 h-4 w-4" />
+						<ArrowUpIcon className="ml-2 h-4 w-4" />
 					) : (
-						<ArrowDown className="ml-2 h-4 w-4" />
+						<ArrowDownIcon className="ml-2 h-4 w-4" />
 					)}
 				</Button>
 			)
@@ -79,9 +81,9 @@ export const columns: ColumnDef<Column>[] = [
 				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
 					Group
 					{column.getIsSorted() === "asc" ? (
-						<ArrowUp className="ml-2 h-4 w-4" />
+						<ArrowUpIcon className="ml-2 h-4 w-4" />
 					) : (
-						<ArrowDown className="ml-2 h-4 w-4" />
+						<ArrowDownIcon className="ml-2 h-4 w-4" />
 					)}
 				</Button>
 			)
@@ -100,7 +102,7 @@ export const columns: ColumnDef<Column>[] = [
 
 			return (
 				<Badge>
-					<CheckIcon className="w-4 h-4 mr-2" />
+					<CheckTickIcon className="w-4 h-4 mr-2" />
 					<p>{connections.length}</p>
 				</Badge>
 			)
