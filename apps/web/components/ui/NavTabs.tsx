@@ -1,8 +1,9 @@
 "use client"
 
-import { Tabs, TabsList } from "@/components/ui/tabs"
-import { usePathname, useRouter, useSelectedLayoutSegment } from "next/navigation"
 import { ReactNode } from "react"
+import { usePathname, useRouter, useSelectedLayoutSegment } from "next/navigation"
+
+import { Tabs, TabsList } from "@/components/ui/tabs"
 
 interface NavTabsProps {
 	children: ReactNode[]

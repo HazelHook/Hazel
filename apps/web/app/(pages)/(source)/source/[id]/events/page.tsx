@@ -1,7 +1,9 @@
-import { auth } from "@/lib/auth"
 import { Tiny } from "db/src/tinybird"
-import { DataTable } from "./data-table"
+
+import { auth } from "@/lib/auth"
+
 import { columns } from "./column"
+import { DataTable } from "./data-table"
 
 const EventsPage = async () => {
 	const { userId } = auth()

@@ -1,1 +1,1 @@
-declare module 'cfonts';
+declare module "cfonts"

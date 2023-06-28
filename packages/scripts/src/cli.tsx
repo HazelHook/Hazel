@@ -27,9 +27,9 @@ const cli = meow(
 )
 
 render(
-	(<GlobalStateProvider>
+	<GlobalStateProvider>
 		<App />
-	</GlobalStateProvider>),
+	</GlobalStateProvider>,
 	{
 		patchConsole: true,
 	},

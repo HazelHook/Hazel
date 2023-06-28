@@ -6,15 +6,15 @@ export function Checkbox({
 	selected,
 	highlighted,
 	label,
-    selectedColor,
-    color,
+	selectedColor,
+	color,
 	onToggle,
 }: {
 	selected?: boolean
 	highlighted?: boolean
 	label: string
-    selectedColor: string
-    color: string
+	selectedColor: string
+	color: string
 	onToggle?: (selected: boolean) => void
 }) {
 	useInput((input, key) => {
@@ -24,10 +24,7 @@ export function Checkbox({
 	})
 
 	return (
-		<Text
-			color={selected ? selectedColor : color}
-			dimColor={!highlighted}
-		>
+		<Text color={selected ? selectedColor : color} dimColor={!highlighted}>
 			{selected ? figures.checkboxOn : figures.checkboxOff} {label}
 		</Text>
 	)

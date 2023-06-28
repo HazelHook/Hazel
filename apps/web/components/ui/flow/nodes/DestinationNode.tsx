@@ -1,20 +1,20 @@
 import React, { memo, useState } from "react"
+import { format, formatDistance } from "date-fns"
+import { Destination } from "db/src/schema"
 import { Position } from "reactflow"
 
-import { Card, CardFooter } from "@/components/ui/card"
-import { Handle } from "../base/Handle"
-import { Separator } from "@/components/ui/separator"
-import { cn } from "@/lib/utils"
-import { ChainIcon } from "@/components/icons/pika/chain"
-import { CopyButton } from "@/components/CopyButton"
 import { dashboardNumberFormatter } from "@/lib/formatters"
+import { cn } from "@/lib/utils"
+import { Card, CardFooter } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import { CopyButton } from "@/components/CopyButton"
 import { AutomationIcon } from "@/components/icons/pika/automation"
-import { Sheet, SheetContent, SheetFooter, SheetHeader } from "../../sheet"
+
 import { Button } from "../../button"
-import { Destination } from "db/src/schema"
-import { format, formatDistance } from "date-fns"
-import { Label } from "../../label"
 import { Input } from "../../input"
+import { Label } from "../../label"
+import { Sheet, SheetContent, SheetFooter, SheetHeader } from "../../sheet"
+import { Handle } from "../base/Handle"
 
 interface DefaultNode {
 	data: {

@@ -1,14 +1,14 @@
 import { redirect } from "next/navigation"
-
-import { KpiCard } from "@/app/(pages)/_component/KpiCard"
-import { chartColors, formatDateTime } from "@/lib/utils"
+import { sub } from "date-fns"
 import { Tiny } from "db/src/tinybird"
+
 import { auth } from "@/lib/auth"
+import { getCachedConnection } from "@/lib/orm"
+import { chartColors, formatDateTime } from "@/lib/utils"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
+import { KpiCard } from "@/app/(pages)/_component/KpiCard"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
-import { getCachedConnection } from "@/lib/orm"
-import { sub } from "date-fns"
 
 const SourcePage = async ({
 	params,

@@ -1,4 +1,4 @@
-import { cn } from "@/utils"
+import { cn } from "ui"
 
 export const LiveIcon = ({
 	className,

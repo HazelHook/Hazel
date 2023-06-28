@@ -1,17 +1,17 @@
-import {createContext} from 'react';
+import { createContext } from "react"
 
 export type Props = {
-	readonly activeId?: string;
-	readonly add: (id: string, options: {autoFocus: boolean}) => void;
-	readonly remove: (id: string) => void;
-	readonly activate: (id: string) => void;
-	readonly deactivate: (id: string) => void;
-	readonly enableFocus: () => void;
-	readonly disableFocus: () => void;
-	readonly focusNext: () => void;
-	readonly focusPrevious: () => void;
-	readonly focus: (id: string) => void;
-};
+	readonly activeId?: string
+	readonly add: (id: string, options: { autoFocus: boolean }) => void
+	readonly remove: (id: string) => void
+	readonly activate: (id: string) => void
+	readonly deactivate: (id: string) => void
+	readonly enableFocus: () => void
+	readonly disableFocus: () => void
+	readonly focusNext: () => void
+	readonly focusPrevious: () => void
+	readonly focus: (id: string) => void
+}
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const FocusContext = createContext<Props>({
@@ -24,9 +24,9 @@ const FocusContext = createContext<Props>({
 	disableFocus() {},
 	focusNext() {},
 	focusPrevious() {},
-	focus() {}
-});
+	focus() {},
+})
 
-FocusContext.displayName = 'InternalFocusContext';
+FocusContext.displayName = "InternalFocusContext"
 
-export default FocusContext;
+export default FocusContext

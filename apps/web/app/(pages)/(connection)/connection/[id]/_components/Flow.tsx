@@ -1,6 +1,7 @@
 "use client"
 
 import ReactFlow, {
+	addEdge,
 	Background,
 	Controls,
 	Edge,
@@ -8,7 +9,6 @@ import ReactFlow, {
 	Node,
 	NodeTypes,
 	ReactFlowInstance,
-	addEdge,
 	useEdgesState,
 	useNodesState,
 	useReactFlow,
@@ -16,16 +16,17 @@ import ReactFlow, {
 
 import "@/components/ui/flow/Flow.css"
 
+import { useCallback, useLayoutEffect, useRef, useState } from "react"
 import { Connection, Destination, Source } from "db/src/schema"
+import ELK, { type ElkExtendedEdge, type ElkNode, type LayoutOptions } from "elkjs/lib/elk.bundled.js"
+
+import { EdgeButton } from "@/components/ui/flow/edges/ButtonEdge"
+import { ConnectionGroupNode } from "@/components/ui/flow/nodes/ConnectionGroup"
 import { DefaultNode } from "@/components/ui/flow/nodes/DefaultNode"
+import { DestinationNode } from "@/components/ui/flow/nodes/DestinationNode"
 import { GroupNode } from "@/components/ui/flow/nodes/Group"
 import { OutputNode } from "@/components/ui/flow/nodes/OutputNode"
-import { useCallback, useLayoutEffect, useRef, useState } from "react"
-import { EdgeButton } from "@/components/ui/flow/edges/ButtonEdge"
-import ELK, { type ElkNode, type ElkExtendedEdge, type LayoutOptions } from "elkjs/lib/elk.bundled.js"
 import { SourceNode } from "@/components/ui/flow/nodes/SourceNode"
-import { DestinationNode } from "@/components/ui/flow/nodes/DestinationNode"
-import { ConnectionGroupNode } from "@/components/ui/flow/nodes/ConnectionGroup"
 
 const nodeTypes: NodeTypes = {
 	default: DefaultNode,
@@ -158,7 +159,13 @@ export const Flow = ({ initalEdges, initalNodes }: FlowProps) => {
 	}, [])
 
 	const onLayout = useCallback(
-		({ direction = "DOWN", useInitialNodes = false }: { direction: "DOWN" | "RIGHT"; useInitialNodes: boolean }) => {
+		({
+			direction = "DOWN",
+			useInitialNodes = false,
+		}: {
+			direction: "DOWN" | "RIGHT"
+			useInitialNodes: boolean
+		}) => {
 			const opts = { "elk.direction": direction, ...elkOptions }
 			const ns = useInitialNodes ? initalNodes : nodes
 			const es = useInitialNodes ? initalEdges : edges

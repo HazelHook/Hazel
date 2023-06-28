@@ -1,16 +1,16 @@
 // Ignoring missing types error to avoid adding another dependency for this hack to work
-import ws from 'ws';
+import ws from "ws"
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const customGlobal = global as any;
+const customGlobal = global as any
 
 // These things must exist before importing `react-devtools-core`
 if (!customGlobal.WebSocket) {
-	customGlobal.WebSocket = ws;
+	customGlobal.WebSocket = ws
 }
 
 if (!customGlobal.window) {
-	customGlobal.window = global;
+	customGlobal.window = global
 }
 
 // Filter out Ink's internal components from devtools for a cleaner view.
@@ -23,48 +23,48 @@ customGlobal.window.__REACT_DEVTOOLS_COMPONENT_FILTERS__ = [
 		type: 1,
 		// ElementTypeHostComponent
 		value: 7,
-		isEnabled: true
+		isEnabled: true,
 	},
 	{
 		// ComponentFilterDisplayName
 		type: 2,
-		value: 'InternalApp',
+		value: "InternalApp",
 		isEnabled: true,
-		isValid: true
+		isValid: true,
 	},
 	{
 		// ComponentFilterDisplayName
 		type: 2,
-		value: 'InternalAppContext',
+		value: "InternalAppContext",
 		isEnabled: true,
-		isValid: true
+		isValid: true,
 	},
 	{
 		// ComponentFilterDisplayName
 		type: 2,
-		value: 'InternalStdoutContext',
+		value: "InternalStdoutContext",
 		isEnabled: true,
-		isValid: true
+		isValid: true,
 	},
 	{
 		// ComponentFilterDisplayName
 		type: 2,
-		value: 'InternalStderrContext',
+		value: "InternalStderrContext",
 		isEnabled: true,
-		isValid: true
+		isValid: true,
 	},
 	{
 		// ComponentFilterDisplayName
 		type: 2,
-		value: 'InternalStdinContext',
+		value: "InternalStdinContext",
 		isEnabled: true,
-		isValid: true
+		isValid: true,
 	},
 	{
 		// ComponentFilterDisplayName
 		type: 2,
-		value: 'InternalFocusContext',
+		value: "InternalFocusContext",
 		isEnabled: true,
-		isValid: true
-	}
-];
+		isValid: true,
+	},
+]

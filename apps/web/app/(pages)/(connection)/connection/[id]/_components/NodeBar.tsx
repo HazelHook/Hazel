@@ -1,7 +1,8 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
 import React from "react"
+
+import { Badge } from "@/components/ui/badge"
 
 export const Nodebar = () => {
 	const onDragStart = (event: React.DragEvent<HTMLDivElement>, nodeType: string) => {

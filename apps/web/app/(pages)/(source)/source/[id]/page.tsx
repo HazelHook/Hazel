@@ -1,17 +1,18 @@
 import { notFound, redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
-
-import { buttonVariants } from "@/components/ui/button"
-import { DataTable } from "@/components/ui/data-table"
-import { columns } from "./column"
-import { getCachedSource } from "@/lib/orm"
+import { sub } from "date-fns"
 import { Destination } from "db/src/schema"
+import { Tiny } from "db/src/tinybird"
+
+import { getCachedSource } from "@/lib/orm"
+import { chartColors, formatDateTime } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
-import { Tiny } from "db/src/tinybird"
-import { chartColors, formatDateTime } from "@/lib/utils"
+import { DataTable } from "@/components/ui/data-table"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
-import { sub } from "date-fns"
+
+import { columns } from "./column"
 
 const SourcePage = async ({
 	params,
@@ -36,7 +37,11 @@ const SourcePage = async ({
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
-	const res = await tiny.getReqTimeseries({ customer_id: userId, source_id: source.publicId, start_date: startTime })
+	const res = await tiny.getReqTimeseries({
+		customer_id: userId,
+		source_id: source.publicId,
+		start_date: startTime,
+	})
 
 	const chartData = transformSourcesChartData(res.data)
 

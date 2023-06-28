@@ -1,6 +1,7 @@
+import { Toaster } from "sonner"
+
 import { Sidebar } from "@/components/Sidebar"
 import { SiteHeader } from "@/components/site-header"
-import { Toaster } from "sonner"
 
 interface RootLayoutProps {
 	children: React.ReactNode

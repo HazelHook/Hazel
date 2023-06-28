@@ -19,7 +19,7 @@ export function Purger({
 	mode,
 	selected,
 	engaged,
-	disengage
+	disengage,
 }: { mode: "details" | "select"; selected?: boolean; engaged: boolean; disengage: () => void }) {
 	const [datasources, setDatasources] = useDataSources()
 	const [selectedCheckboxTab1, setSelectedCheckboxesTab1] = useState<number[]>([])
@@ -28,18 +28,18 @@ export function Purger({
 	const [cascadeDelete, setCascadeDelete] = useState(false)
 	const [tabIndex, setTabIndex] = useState(0)
 	const elementCount = (datasources.datasources?.length ?? 0) + 2
-	const tables = {connections: connection, destinations: destination, sources: source}
+	const tables = { connections: connection, destinations: destination, sources: source }
 	const tablesCount = Object.keys(tables).length
 
 	useInput((input, key) => {
 		if (engaged) {
-			if(key.leftArrow){
-				if(tabIndex === 0 || selectedOption > tablesCount){
+			if (key.leftArrow) {
+				if (tabIndex === 0 || selectedOption > tablesCount) {
 					disengage()
-				} else if(tabIndex === 1){
+				} else if (tabIndex === 1) {
 					setTabIndex(0)
 
-					if(selectedOption >= datasources.datasources.length){
+					if (selectedOption >= datasources.datasources.length) {
 						setSelectedOption(datasources.datasources.length - 1)
 					}
 				}
@@ -49,7 +49,7 @@ export function Purger({
 				if (tabIndex === 0) {
 					setTabIndex(1)
 
-					if(selectedOption >= tablesCount){
+					if (selectedOption >= tablesCount) {
 						setSelectedOption(tablesCount - 1)
 					}
 				}
@@ -89,10 +89,10 @@ export function Purger({
 						engaged={engaged && tabIndex === 1}
 						selectedIndex={selectedOption}
 						setSelectedIndex={(index) => {
-							if(index >= tablesCount && index < elementCount - 1){
+							if (index >= tablesCount && index < elementCount - 1) {
 								setSelectedOption(elementCount - 2)
 								setTabIndex(0)
-							}else{
+							} else {
 								setSelectedOption(cap(0, elementCount - 1, index))
 							}
 						}}
@@ -118,7 +118,7 @@ export function Purger({
 							}
 
 							for (const index of selectedCheckboxTab2) {
-								if (index < tablesCount){
+								if (index < tablesCount) {
 									await datasources.db.delete(tables[Object.keys(tables)[index]])
 								}
 							}
@@ -137,7 +137,8 @@ export function Purger({
 		}
 		return (
 			<Text color="#CC671B" dimColor>
-				{" "} Data Purger
+				{" "}
+				Data Purger
 			</Text>
 		)
 	}

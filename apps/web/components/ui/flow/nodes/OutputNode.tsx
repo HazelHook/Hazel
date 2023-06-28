@@ -2,6 +2,7 @@ import React, { memo } from "react"
 import { Position } from "reactflow"
 
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+
 import { Handle } from "../base/Handle"
 
 interface DefaultNode {

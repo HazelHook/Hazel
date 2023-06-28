@@ -1,19 +1,19 @@
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-
-import { SidebarClientItem } from "./SidebarItem"
-import { AutomationIcon } from "./icons/pika/automation"
-import { GitCommitIcon } from "./icons/pika/gitCommit"
-import { IconProps } from "@/components/icons/pika/types"
 import { MapleLogoIcon } from "@/components/icons/Logo"
-import { HomeIcon } from "@/components/icons/pika/home"
-import { PaperBagIcon } from "@/components/icons/pika/paperBag"
-import { LinkChainIcon } from "@/components/icons/pika/linkChain"
-import { Settings01Icon } from "@/components/icons/pika/settings01"
 import { BarChartDownIcon } from "@/components/icons/pika/barChartDown"
 import { CardIcon } from "@/components/icons/pika/card"
+import { HomeIcon } from "@/components/icons/pika/home"
+import { LinkChainIcon } from "@/components/icons/pika/linkChain"
+import { PaperBagIcon } from "@/components/icons/pika/paperBag"
 import { PaperclipIcon } from "@/components/icons/pika/paperclip"
+import { Settings01Icon } from "@/components/icons/pika/settings01"
+import { IconProps } from "@/components/icons/pika/types"
+
+import { AutomationIcon } from "./icons/pika/automation"
+import { GitCommitIcon } from "./icons/pika/gitCommit"
+import { SidebarClientItem } from "./SidebarItem"
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	params: {

@@ -1,9 +1,10 @@
-import { getCachedConnection } from "@/lib/orm"
-import { Flow, FullConnection } from "../_components/Flow"
-import { Card } from "@/components/ui/card"
-import { FlowProvider } from "../_components/Provider"
-
 import type { Edge, Node } from "reactflow"
+
+import { getCachedConnection } from "@/lib/orm"
+import { Card } from "@/components/ui/card"
+
+import { Flow, FullConnection } from "../_components/Flow"
+import { FlowProvider } from "../_components/Provider"
 
 const transformProjectsToFlowElements = (connection: FullConnection): { nodes: Node[]; edges: Edge[] } => {
 	const nodes: Node[] = []

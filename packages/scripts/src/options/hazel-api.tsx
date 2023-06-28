@@ -1,12 +1,15 @@
 import React from "react"
 import { Box, Text } from "../ext/ink"
 
-export function HazelAPI({ mode, selected, engaged }: { mode: "details" | "select"; selected?: boolean; engaged: boolean }) {
-	if (mode === "details"){
-		if(!selected) return null
+export function HazelAPI({
+	mode,
+	selected,
+	engaged,
+}: { mode: "details" | "select"; selected?: boolean; engaged: boolean }) {
+	if (mode === "details") {
+		if (!selected) return null
 		return <Text>Expose Hazel API here.</Text>
-	}
-	else if (mode === "select"){
+	} else if (mode === "select") {
 		if (selected) {
 			return (
 				<Text bold color="#CC671B" dimColor={engaged}>
@@ -16,7 +19,8 @@ export function HazelAPI({ mode, selected, engaged }: { mode: "details" | "selec
 		}
 		return (
 			<Text color="#CC671B" dimColor>
-				{" "} Hazel API
+				{" "}
+				Hazel API
 			</Text>
 		)
 	}

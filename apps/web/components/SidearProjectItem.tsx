@@ -3,14 +3,11 @@ import { Connection } from "db/src/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { ChevronDownIcon } from "@/components/icons/ChevronDown"
-import { ChevronRightIcon } from "@/components/icons/ChevronRight"
-import { DashboardIcon } from "@/components/icons/Dashboard"
-import { SettingsIcon } from "@/components/icons/Settings"
-import { TvChartIcon } from "@/components/icons/TvChart"
 
 import { SidebarItem } from "./Sidebar"
 import { Image } from "./ui/image"
+import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons"
+import { Icons } from "@/components/icons"
 
 export interface SidebarProjectItemProps {
 	project: Connection
@@ -41,19 +38,13 @@ export const SidebarProjectItem = ({ project, params }: SidebarProjectItemProps)
 					<SidebarItem
 						href={`/app/${params.org}/${project.publicId}`}
 						title={"Dashboard"}
-						icon={DashboardIcon}
-						size={"xs"}
-					/>
-					<SidebarItem
-						href={`/app/${params.org}/${project.publicId}/live`}
-						title={"Live (WIP)"}
-						icon={TvChartIcon}
+						icon={Icons.dashboard}
 						size={"xs"}
 					/>
 					<SidebarItem
 						href={`/app/${params.org}/${project.publicId}/settings`}
 						title={"Settings"}
-						icon={SettingsIcon}
+						icon={Icons.settings}
 						size={"xs"}
 					/>
 				</div>

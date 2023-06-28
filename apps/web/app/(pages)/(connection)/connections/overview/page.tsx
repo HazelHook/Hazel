@@ -1,11 +1,12 @@
 import { getConnections } from "db/src/orm/connection"
-
-import db from "@/lib/db"
-import { FlowProvider } from "../../connection/[id]/_components/Provider"
-import { Card } from "@/components/ui/card"
-import { Flow, FullConnection } from "../../connection/[id]/_components/Flow"
 import { Edge, Node } from "reactflow"
+
 import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+import { Card } from "@/components/ui/card"
+
+import { Flow, FullConnection } from "../../connection/[id]/_components/Flow"
+import { FlowProvider } from "../../connection/[id]/_components/Provider"
 
 const transformProjectsToFlowElements = (connections: FullConnection[]): { nodes: Node[]; edges: Edge[] } => {
 	const nodes: Node[] = []

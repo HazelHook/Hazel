@@ -1,17 +1,17 @@
 "use client"
 
+import Link from "next/link"
+import { Avatar } from "@radix-ui/react-avatar"
 import { ColumnDef } from "@tanstack/react-table"
 import { Connection, Destination, Source } from "db/src/schema"
 
+import { getSeededProfileImageUrl } from "@/lib/utils"
+import { AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Avatar } from "@radix-ui/react-avatar"
-import { AvatarImage } from "@/components/ui/avatar"
-import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Switch } from "@/components/ui/switch"
-import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
+import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 export type Column = Destination

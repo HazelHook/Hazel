@@ -2,19 +2,19 @@ import React from "react"
 import { Text, Box } from "../ink"
 
 export function ProgressBar({
-  percent,
-  columns,
-  left = 0,
-  right = 0,
-  character = "█",
-  rightPad = false,
+	percent,
+	columns,
+	left = 0,
+	right = 0,
+	character = "█",
+	rightPad = false,
 }: {
-  percent: number
-  columns?: number
-  left?: number
-  right?: number
-  character?: string
-  rightPad?: boolean
+	percent: number
+	columns?: number
+	left?: number
+	right?: number
+	character?: string
+	rightPad?: boolean
 }) {
 	const screen = columns || process.stdout.columns || 80
 	const space = screen - right - left
@@ -28,5 +28,9 @@ export function ProgressBar({
 		name = chars + " ".repeat(space - max)
 	}
 
-	return <Box borderColor='#CC671B' borderStyle='round' width={'100%'}><Text color='green'>{name}</Text></Box>
+	return (
+		<Box borderColor="#CC671B" borderStyle="round" width={"100%"}>
+			<Text color="green">{name}</Text>
+		</Box>
+	)
 }

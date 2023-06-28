@@ -1,13 +1,13 @@
-import * as React from 'react';
-import {Text} from '../ink';
+import * as React from "react"
+import { Text } from "../ink"
 
 export type Props = {
-	isSelected?: boolean;
-	label: string;
-};
-
-function Item({isSelected = false, label}: Props) {
-	return <Text color={isSelected ? 'blue' : undefined}>{label}</Text>;
+	isSelected?: boolean
+	label: string
 }
 
-export default Item;
+function Item({ isSelected = false, label }: Props) {
+	return <Text color={isSelected ? "blue" : undefined}>{label}</Text>
+}
+
+export default Item

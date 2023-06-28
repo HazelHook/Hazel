@@ -2,20 +2,20 @@
 
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Destination, Source } from "db/src/schema"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { useAction } from "@/server/client"
+import { getSeededProfileImageUrl } from "@/lib/utils"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 import type { createConnectionAction } from "./_actions"
 import { formSchema } from "./schema"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Destination, Source } from "db/src/schema"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { getSeededProfileImageUrl } from "@/lib/utils"
 
 interface NewSourceFormProps {
 	action: typeof createConnectionAction

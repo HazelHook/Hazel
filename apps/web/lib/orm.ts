@@ -1,9 +1,9 @@
 import { cache } from "react"
-
-import { getConnection } from "db/src/orm/connection"
-import db from "./db"
 import { notFound } from "next/navigation"
+import { getConnection } from "db/src/orm/connection"
 import { getSource, getSources } from "db/src/orm/source"
+
+import db from "./db"
 
 export const getCachedConnection = cache(async ({ publicId }: { publicId: string }) => {
 	const connection = await getConnection({ publicId, db })

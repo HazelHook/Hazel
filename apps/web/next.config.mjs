@@ -4,6 +4,7 @@ const nextConfig = {
 	experimental: {
 		serverActions: true,
 	},
+	transpilePackages: ["ui"],
 }
 
 export default nextConfig

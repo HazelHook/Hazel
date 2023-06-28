@@ -1,9 +1,11 @@
+import { getDestinations } from "db/src/orm/destination"
+import { getSources } from "db/src/orm/source"
+
 import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+
 import { createConnectionAction } from "./_actions"
 import { NewConnectionForm } from "./form"
-import { getDestinations } from "db/src/orm/destination"
-import db from "@/lib/db"
-import { getSources } from "db/src/orm/source"
 
 const NewConnectionPage = async () => {
 	const { userId } = auth()

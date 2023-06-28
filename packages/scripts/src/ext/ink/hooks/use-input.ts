@@ -1,9 +1,9 @@
-import {type Buffer} from 'node:buffer';
-import {useEffect} from 'react';
-import {isUpperCase} from 'is-upper-case';
-import parseKeypress, {nonAlphanumericKeys} from '../parse-keypress.js';
-import reconciler from '../reconciler.js';
-import useStdin from './use-stdin.js';
+import { type Buffer } from "node:buffer"
+import { useEffect } from "react"
+import { isUpperCase } from "is-upper-case"
+import parseKeypress, { nonAlphanumericKeys } from "../parse-keypress.js"
+import reconciler from "../reconciler.js"
+import useStdin from "./use-stdin.js"
 
 /**
  * Handy information about a key that was pressed.
@@ -12,75 +12,75 @@ export type Key = {
 	/**
 	 * Up arrow key was pressed.
 	 */
-	upArrow: boolean;
+	upArrow: boolean
 
 	/**
 	 * Down arrow key was pressed.
 	 */
-	downArrow: boolean;
+	downArrow: boolean
 
 	/**
 	 * Left arrow key was pressed.
 	 */
-	leftArrow: boolean;
+	leftArrow: boolean
 
 	/**
 	 * Right arrow key was pressed.
 	 */
-	rightArrow: boolean;
+	rightArrow: boolean
 
 	/**
 	 * Page Down key was pressed.
 	 */
-	pageDown: boolean;
+	pageDown: boolean
 
 	/**
 	 * Page Up key was pressed.
 	 */
-	pageUp: boolean;
+	pageUp: boolean
 
 	/**
 	 * Return (Enter) key was pressed.
 	 */
-	return: boolean;
+	return: boolean
 
 	/**
 	 * Escape key was pressed.
 	 */
-	escape: boolean;
+	escape: boolean
 
 	/**
 	 * Ctrl key was pressed.
 	 */
-	ctrl: boolean;
+	ctrl: boolean
 
 	/**
 	 * Shift key was pressed.
 	 */
-	shift: boolean;
+	shift: boolean
 
 	/**
 	 * Tab key was pressed.
 	 */
-	tab: boolean;
+	tab: boolean
 
 	/**
 	 * Backspace key was pressed.
 	 */
-	backspace: boolean;
+	backspace: boolean
 
 	/**
 	 * Delete key was pressed.
 	 */
-	delete: boolean;
+	delete: boolean
 
 	/**
 	 * [Meta key](https://en.wikipedia.org/wiki/Meta_key) was pressed.
 	 */
-	meta: boolean;
-};
+	meta: boolean
+}
 
-type Handler = (input: string, key: Key) => void;
+type Handler = (input: string, key: Key) => void
 
 type Options = {
 	/**
@@ -89,8 +89,8 @@ type Options = {
 	 *
 	 * @default true
 	 */
-	isActive?: boolean;
-};
+	isActive?: boolean
+}
 
 /**
  * This hook is used for handling user input.
@@ -118,84 +118,80 @@ type Options = {
  */
 const useInput = (inputHandler: Handler, options: Options = {}) => {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
-	const {stdin, setRawMode, internal_exitOnCtrlC} = useStdin();
+	const { stdin, setRawMode, internal_exitOnCtrlC } = useStdin()
 
 	useEffect(() => {
 		if (options.isActive === false) {
-			return;
+			return
 		}
 
-		setRawMode(true);
+		setRawMode(true)
 
 		return () => {
-			setRawMode(false);
-		};
-	}, [options.isActive, setRawMode]);
+			setRawMode(false)
+		}
+	}, [options.isActive, setRawMode])
 
 	useEffect(() => {
 		if (options.isActive === false) {
-			return;
+			return
 		}
 
 		const handleData = (data: Buffer) => {
-			const keypress = parseKeypress(data);
+			const keypress = parseKeypress(data)
 
 			const key = {
-				upArrow: keypress.name === 'up',
-				downArrow: keypress.name === 'down',
-				leftArrow: keypress.name === 'left',
-				rightArrow: keypress.name === 'right',
-				pageDown: keypress.name === 'pagedown',
-				pageUp: keypress.name === 'pageup',
-				return: keypress.name === 'return',
-				escape: keypress.name === 'escape',
+				upArrow: keypress.name === "up",
+				downArrow: keypress.name === "down",
+				leftArrow: keypress.name === "left",
+				rightArrow: keypress.name === "right",
+				pageDown: keypress.name === "pagedown",
+				pageUp: keypress.name === "pageup",
+				return: keypress.name === "return",
+				escape: keypress.name === "escape",
 				ctrl: keypress.ctrl,
 				shift: keypress.shift,
-				tab: keypress.name === 'tab',
-				backspace: keypress.name === 'backspace',
-				delete: keypress.name === 'delete',
+				tab: keypress.name === "tab",
+				backspace: keypress.name === "backspace",
+				delete: keypress.name === "delete",
 				// `parseKeypress` parses \u001B\u001B[A (meta + up arrow) as meta = false
 				// but with option = true, so we need to take this into account here
 				// to avoid breaking changes in Ink.
 				// TODO(vadimdemedes): consider removing this in the next major version.
-				meta: keypress.meta || keypress.name === 'escape' || keypress.option
-			};
+				meta: keypress.meta || keypress.name === "escape" || keypress.option,
+			}
 
-			let input = keypress.ctrl ? keypress.name : keypress.sequence;
+			let input = keypress.ctrl ? keypress.name : keypress.sequence
 
 			if (nonAlphanumericKeys.includes(keypress.name)) {
-				input = '';
+				input = ""
 			}
 
 			// Strip meta if it's still remaining after `parseKeypress`
 			// TODO(vadimdemedes): remove this in the next major version.
-			if (input.startsWith('\u001B')) {
-				input = input.slice(1);
+			if (input.startsWith("\u001B")) {
+				input = input.slice(1)
 			}
 
-			if (
-				input.length === 1 &&
-				typeof input[0] === 'string' &&
-				isUpperCase(input[0])
-			) {
-				key.shift = true;
+			if (input.length === 1 && typeof input[0] === "string" && isUpperCase(input[0])) {
+				key.shift = true
 			}
 
 			// If app is not supposed to exit on Ctrl+C, then let input listener handle it
-			if (!(input === 'c' && key.ctrl) || !internal_exitOnCtrlC) {
+			if (!(input === "c" && key.ctrl) || !internal_exitOnCtrlC) {
 				// @ts-expect-error TypeScript types for `batchedUpdates` require an argument, but React's codebase doesn't provide it and it works without it as exepected.
 				reconciler.batchedUpdates(() => {
-					inputHandler(input, key);
-				});
+					inputHandler(input, key)
+				})
 			}
-		};
+		}
 
-		stdin?.on('data', handleData);
+		stdin?.on("data", handleData)
 
 		return () => {
-			stdin?.off('data', handleData);
-		};
-	}, [options.isActive, stdin, internal_exitOnCtrlC, inputHandler]);
-};
+			stdin?.off("data", handleData)
+		}
+	}, [options.isActive, stdin, internal_exitOnCtrlC, inputHandler])
+}
 
-export default useInput;
+export default useInput

@@ -1,9 +1,8 @@
 import React from "react"
 import { BaseEdge, EdgeLabelRenderer, EdgeProps, getBezierPath } from "reactflow"
 
-import { useDrag, useDrop } from "react-dnd"
+import { AddCircleIcon } from "@/components/icons/pika/addCircle"
 
-import { RoundPlusIcon } from "@/components/icons/RoundPlus"
 import { Popover, PopoverContent, PopoverTrigger } from "../../popover"
 
 const onEdgeClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
@@ -48,7 +47,7 @@ export const EdgeButton = ({
 					<Popover>
 						<PopoverTrigger asChild>
 							<button type="button" className="rounded-full bg-secondary">
-								<RoundPlusIcon />
+								<AddCircleIcon />
 							</button>
 						</PopoverTrigger>
 						<PopoverContent>

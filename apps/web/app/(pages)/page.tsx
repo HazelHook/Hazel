@@ -1,4 +1,5 @@
 import { currentUser } from "@clerk/nextjs"
+import { sub } from "date-fns"
 import { Tiny } from "db/src/tinybird"
 
 import { auth } from "@/lib/auth"
@@ -7,10 +8,9 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 
+import { DatePicker } from "./_component/DatePicker"
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
-import { sub } from "date-fns"
-import { DatePicker } from "./_component/DatePicker"
 
 interface DashboardPageProps {
 	searchParams: {

@@ -1,7 +1,8 @@
-import { getCachedSource } from "@/lib/orm"
 import { type ReactNode } from "react"
-import { TabsTrigger } from "@/components/ui/tabs"
+
+import { getCachedSource } from "@/lib/orm"
 import { NavTabs } from "@/components/ui/NavTabs"
+import { TabsTrigger } from "@/components/ui/tabs"
 
 const ConnectionLayout = async ({
 	children,

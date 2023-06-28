@@ -18,12 +18,12 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { BarChartIcon } from "@/components/icons/BarChart"
-import { CardIcon } from "@/components/icons/Card"
-import { HomeIcon } from "@/components/icons/Home"
-import { LogoutIcon } from "@/components/icons/Logout"
-import { RoundPlusIcon } from "@/components/icons/RoundPlus"
-import { SettingsIcon } from "@/components/icons/Settings"
+import { AddCircleIcon } from "@/components/icons/pika/addCircle"
+import { BarChartDownIcon } from "@/components/icons/pika/barChartDown"
+import { CardExportIcon } from "@/components/icons/pika/cardExport"
+import { HomeIcon } from "@/components/icons/pika/home"
+import { LogOutRightIcon } from "@/components/icons/pika/logOutRight"
+import { Settings01Icon } from "@/components/icons/pika/settings01"
 
 export function UserNav() {
 	const { signOut } = useAuth()
@@ -76,7 +76,7 @@ export function UserNav() {
 						</DropdownMenuItem>
 						<DropdownMenuItem asChild>
 							<Link href={`/${params.org}/settings/billing`}>
-								<CardIcon className="mr-2 h-4 w-4" />
+								<CardExportIcon className="mr-2 h-4 w-4" />
 								<span>Billing</span>
 
 								<DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
@@ -84,7 +84,7 @@ export function UserNav() {
 						</DropdownMenuItem>
 						<DropdownMenuItem asChild>
 							<Link href={`/${params.org}/settings/usage`}>
-								<BarChartIcon className="mr-2 h-4 w-4" />
+								<BarChartDownIcon className="mr-2 h-4 w-4" />
 								<span>Usage</span>
 
 								<DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
@@ -92,7 +92,7 @@ export function UserNav() {
 						</DropdownMenuItem>
 						<DropdownMenuItem asChild>
 							<Link href={`/${params.org}/settings`}>
-								<SettingsIcon className="mr-2 h-4 w-4" />
+								<Settings01Icon className="mr-2 h-4 w-4" />
 								<span>Settings</span>
 								<DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
 							</Link>
@@ -102,13 +102,13 @@ export function UserNav() {
 								setTeamModal(true)
 							}}
 						>
-							<RoundPlusIcon className="mr-2 h-4 w-4" />
+							<AddCircleIcon className="mr-2 h-4 w-4" />
 							<span>New Team</span>
 						</DropdownMenuItem>
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem onClick={() => signOut()}>
-						<LogoutIcon className="mr-2 h-4 w-4" />
+						<LogOutRightIcon className="mr-2 h-4 w-4" />
 						<span>Log out</span>
 						<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
 					</DropdownMenuItem>

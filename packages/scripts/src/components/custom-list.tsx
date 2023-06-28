@@ -74,9 +74,7 @@ export function CustomList(props: LabelListProps | CheckboxListProps) {
 	if (props.type === "checkbox") {
 		return (
 			<Box flexDirection="column">
-				<Text>
-					{props.title}
-				</Text>
+				<Text>{props.title}</Text>
 				{props.items.map((item, i) => (
 					<Text
 						color={selectedCheckbox.includes(i) ? props.config.selectedColor : props.config.color}

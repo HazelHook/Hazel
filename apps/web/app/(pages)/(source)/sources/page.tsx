@@ -5,9 +5,9 @@ import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { buttonVariants } from "@/components/ui/button"
 import { DataTable } from "@/components/ui/data-table"
+import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"
-import { AddIcon } from "@/components/icons/pika/add"
 
 const SourcePage = async () => {
 	const { userId } = auth()

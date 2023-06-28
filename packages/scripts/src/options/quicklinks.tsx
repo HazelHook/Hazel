@@ -1,10 +1,14 @@
 import React, { useState } from "react"
 import { Box, Text } from "../ext/ink"
-import figures from "figures";
+import figures from "figures"
 
-export function Quicklinks({ mode, selected, engaged }: { mode: "details" | "select"; selected?: boolean; engaged?: boolean }) {
+export function Quicklinks({
+	mode,
+	selected,
+	engaged,
+}: { mode: "details" | "select"; selected?: boolean; engaged?: boolean }) {
 	if (mode === "details") {
-		if(!selected) return null
+		if (!selected) return null
 		return <Text>A collection of useful quicklinks for internal use.</Text>
 	}
 	if (selected) {
@@ -16,7 +20,8 @@ export function Quicklinks({ mode, selected, engaged }: { mode: "details" | "sel
 	}
 	return (
 		<Text color="#CC671B" dimColor>
-			{" "} Quicklinks
+			{" "}
+			Quicklinks
 		</Text>
 	)
 }

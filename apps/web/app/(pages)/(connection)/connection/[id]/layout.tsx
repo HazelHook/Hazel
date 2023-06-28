@@ -1,9 +1,11 @@
+import { type ReactNode } from "react"
+import { notFound } from "next/navigation"
+
 import db from "@/lib/db"
 import { getCachedConnection } from "@/lib/orm"
-import { type ReactNode } from "react"
-import { NavTabs } from "../../../../../components/ui/NavTabs"
 import { TabsTrigger } from "@/components/ui/tabs"
-import { notFound } from "next/navigation"
+
+import { NavTabs } from "../../../../../components/ui/NavTabs"
 
 const ConnectionLayout = async ({
 	children,
