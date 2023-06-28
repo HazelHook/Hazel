@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button"
 
 import { SidebarItem } from "./Sidebar"
 import { Image } from "./ui/image"
-import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons"
 import { Icons } from "@/components/icons"
+import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
+import { ChevronRightIcon } from "@/components/icons/pika/chevronRight"
 
 export interface SidebarProjectItemProps {
 	project: Connection
