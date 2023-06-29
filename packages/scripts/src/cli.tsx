@@ -1,4 +1,3 @@
-import React from "react"
 import { render } from "./ext/ink"
 import meow from "meow"
 import App from "./app.js"

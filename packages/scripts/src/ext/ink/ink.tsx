@@ -1,11 +1,11 @@
 import process from "node:process"
-import React, { type ReactNode } from "react"
+import { type ReactNode } from "react"
 import throttle from "lodash/throttle.js"
 import { type DebouncedFunc } from "lodash"
 import ansiEscapes from "ansi-escapes"
 import originalIsCi from "is-ci"
 import autoBind from "auto-bind"
-import signalExit from "signal-exit"
+import { onExit } from "signal-exit"
 import patchConsole from "patch-console"
 import { type FiberRoot } from "react-reconciler"
 // eslint-disable-next-line n/file-extension-in-import
@@ -93,7 +93,7 @@ export default class Ink {
 		)
 
 		// Unmount when process exits
-		this.unsubscribeExit = signalExit(this.unmount, { alwaysLast: false })
+		this.unsubscribeExit = onExit(this.unmount, { alwaysLast: false })
 
 		if (process.env["DEV"] === "true") {
 			reconciler.injectIntoDevTools({
