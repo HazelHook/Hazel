@@ -5,12 +5,19 @@ import { auth } from "@/lib/auth"
 import { columns } from "./column"
 import { DataTable } from "./data-table"
 
-const EventsPage = async () => {
+interface EventsPageProps {
+	params: {
+		id: string
+	}
+}
+
+const EventsPage = async ({ params }: EventsPageProps) => {
 	const { userId } = auth()
 	const tiny = Tiny(process.env.TINY_TOKEN as string)
 
 	const reqs = await tiny.getReq({
 		customer_id: userId,
+		source_id: params.id,
 	})
 
 	return (

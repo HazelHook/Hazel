@@ -134,6 +134,7 @@ export const Tiny = (token: string) => {
 		parameters: z.object({
 			customer_id: z.string(),
 			source_id: z.string().optional(),
+			destionation_id: z.string().optional(),
 			limit: z.number().optional(),
 			offset: z.number().optional(),
 		}),
