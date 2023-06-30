@@ -13,7 +13,7 @@ importers:
         version: 4.0.2(prettier@2.8.8)
       '@turbo/gen':
         specifier: ^1.10.6
-        version: 1.10.6(@types/node@20.3.2)(typescript@5.1.5)
+        version: 1.10.6(@types/node@20.3.2)(typescript@5.1.6)
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
@@ -22,7 +22,7 @@ importers:
         version: 12.1.3
       tsup:
         specifier: ^7.1.0
-        version: 7.1.0(typescript@5.1.5)
+        version: 7.1.0(typescript@5.1.6)
       turbo:
         specifier: ^1.10.6
         version: 1.10.6
@@ -30,8 +30,8 @@ importers:
   apps/web:
     dependencies:
       '@clerk/nextjs':
-        specifier: ^4.21.12
-        version: 4.21.12(next@13.4.7)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^4.21.13
+        version: 4.21.13(next@13.4.7)(react-dom@18.2.0)(react@18.2.0)
       '@hookform/resolvers':
         specifier: ^3.1.1
         version: 3.1.1(react-hook-form@7.45.1)
@@ -105,8 +105,8 @@ importers:
         specifier: ^0.8.2
         version: 0.8.2
       framer-motion:
-        specifier: ^10.12.17
-        version: 10.12.17(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^10.12.18
+        version: 10.12.18(react-dom@18.2.0)(react@18.2.0)
       next:
         specifier: ^13.4.7
         version: 13.4.7(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
@@ -197,13 +197,13 @@ importers:
         version: 0.1.1
       '@hono/zod-validator':
         specifier: ^0.1.3
-        version: 0.1.3(hono@3.2.6)(zod@3.21.4)
+        version: 0.1.3(hono@3.2.7)(zod@3.21.4)
       '@ngneat/falso':
         specifier: ^6.4.0
         version: 6.4.0
       '@planetscale/database':
-        specifier: ^1.7.0
-        version: 1.7.0
+        specifier: ^1.8.0
+        version: 1.8.0
       db:
         specifier: workspace:*
         version: link:../db
@@ -212,10 +212,10 @@ importers:
         version: 2.0.0-rc.0
       drizzle-orm:
         specifier: ^0.27.0
-        version: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.7.0)
+        version: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.8.0)
       hono:
-        specifier: ^3.2.6
-        version: 3.2.6
+        specifier: ^3.2.7
+        version: 3.2.7
       nanoid:
         specifier: ^4.0.2
         version: 4.0.2
@@ -239,11 +239,11 @@ importers:
         specifier: ^4.20230518.0
         version: 4.20230518.0
       '@planetscale/database':
-        specifier: ^1.7.0
-        version: 1.7.0
+        specifier: ^1.8.0
+        version: 1.8.0
       drizzle-orm:
         specifier: ^0.27.0
-        version: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.7.0)
+        version: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.8.0)
       drizzle-zod:
         specifier: ^0.4.4
         version: 0.4.4(drizzle-orm@0.27.0)(zod@3.21.4)
@@ -258,7 +258,7 @@ importers:
         specifier: ^16.3.1
         version: 16.3.1
       drizzle-kit:
-        specifier: ^0.19.1
+        specifier: ^0.19.2
         version: 0.19.2
       ts-node:
         specifier: ^10.9.1
@@ -270,7 +270,7 @@ importers:
   packages/hazel-flux:
     devDependencies:
       wrangler:
-        specifier: ^2.13.0
+        specifier: ^2.20.0
         version: 2.20.0
 
   packages/scripts:
@@ -279,7 +279,7 @@ importers:
         specifier: ^6.4.0
         version: 6.4.0
       ansi-escapes:
-        specifier: ^6.0.0
+        specifier: ^6.2.0
         version: 6.2.0
       arr-rotate:
         specifier: ^1.0.0
@@ -294,8 +294,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       chalk:
-        specifier: ^5.2.0
-        version: 5.2.0
+        specifier: ^5.3.0
+        version: 5.3.0
       chalk-pipe:
         specifier: ^6.0.0
         version: 6.0.0
@@ -429,7 +429,7 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0
       ws:
-        specifier: ^8.12.0
+        specifier: ^8.13.0
         version: 8.13.0
       yn:
         specifier: ^5.0.0
@@ -439,17 +439,17 @@ importers:
         version: 0.3.3
     devDependencies:
       '@types/node':
-        specifier: ^20.3.1
-        version: 20.3.1
+        specifier: ^20.3.2
+        version: 20.3.2
       '@types/react':
-        specifier: ^18.0.32
-        version: 18.2.12
+        specifier: ^18.2.14
+        version: 18.2.14
       ts-node:
         specifier: ^10.9.1
-        version: 10.9.1(@types/node@20.3.1)(typescript@5.1.3)
+        version: 10.9.1(@types/node@20.3.2)(typescript@5.1.6)
       typescript:
-        specifier: ^5.1.3
-        version: 5.1.3
+        specifier: ^5.1.6
+        version: 5.1.6
 
   packages/tsconfig: {}
 
@@ -506,17 +506,17 @@ importers:
     optionalDependencies:
       '@builder.io/qwik-react':
         specifier: 0.5.0
-        version: 0.5.0(@builder.io/qwik@1.1.5)(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+        version: 0.5.0(@builder.io/qwik@1.2.2)(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
       '@hookform/resolvers':
         specifier: ^3.1.1
         version: 3.1.1(react-hook-form@7.45.1)
       react-hook-form:
-        specifier: ^7.45.0
+        specifier: ^7.45.1
         version: 7.45.1(react@18.2.0)
     devDependencies:
       '@builder.io/qwik':
-        specifier: ^1.1.5
-        version: 1.1.5(undici@5.22.1)
+        specifier: ^1.2.2
+        version: 1.2.2(undici@5.22.1)
       '@types/react':
         specifier: ^18.2.14
         version: 18.2.14
@@ -530,8 +530,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       typescript:
-        specifier: ^5.1.3
-        version: 5.1.3
+        specifier: ^5.1.6
+        version: 5.1.6
 
 packages:
 
@@ -736,7 +736,7 @@ packages:
       '@babel/helper-validator-identifier': 7.22.5
       to-fast-properties: 2.0.0
 
-  /@builder.io/qwik-react@0.5.0(@builder.io/qwik@1.1.5)(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
+  /@builder.io/qwik-react@0.5.0(@builder.io/qwik@1.2.2)(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-JdJWQWOJGv7ddQqEZwzR8wPh0IoCQZwD9qo75+reiQaLp6eH+Pjsm/kn1LaMQt6u72pCCNjnj5kEn/bnbfnIjQ==}
     engines: {node: '>=16'}
     requiresBuild: true
@@ -747,7 +747,7 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
     dependencies:
-      '@builder.io/qwik': 1.1.5(undici@5.22.1)
+      '@builder.io/qwik': 1.2.2(undici@5.22.1)
       '@types/react': 18.2.14
       '@types/react-dom': 18.2.6
       react: 18.2.0
@@ -755,8 +755,8 @@ packages:
     dev: false
     optional: true
 
-  /@builder.io/qwik@1.1.5(undici@5.22.1):
-    resolution: {integrity: sha512-/CZzZaUPctUBHNjchJRXV+JC28HZtv4JteCKnpqjp8YcvzHNuB3A0FpIGEzEWD/F/pg+4YunvxrBSb9ZdPJROw==}
+  /@builder.io/qwik@1.2.2(undici@5.22.1):
+    resolution: {integrity: sha512-zPLXa7CFiNJvk2kCNlQO+Z15pgNXERGUUCVGTx9J/2S+GQ3sVynZEi9FgHFz0gowlY69yvAUWADNIWMCOISTfg==}
     engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
     hasBin: true
     peerDependencies:
@@ -770,8 +770,8 @@ packages:
       zod: 3.21.4
     dev: false
 
-  /@clerk/backend@0.23.6:
-    resolution: {integrity: sha512-+JnG9jmqoqPPKCHEtGf7vhFj2G8qNXmkPR8cDycjbUje/rXGNzxYAkgGaOahD9gXj5oZYMTKfGAebPf5i24JuA==}
+  /@clerk/backend@0.23.7:
+    resolution: {integrity: sha512-/Fxh4mGp1vunryGKsiX6G33fSOxYpJT0sBYoPiFQ7aQbYCrDb/R/+ieT7mYdjS/7McPxPr50/5MvAbZirj8HGw==}
     engines: {node: '>=14'}
     dependencies:
       '@clerk/types': 3.46.1
@@ -783,8 +783,8 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@clerk/clerk-react@4.21.0(react@18.2.0):
-    resolution: {integrity: sha512-wd8BDGIh8zMx6R9uTmAQdgtTBzx7B7hlWlWSxZ+oJVcz8MqT7gcmmYGgqnr5RuDtaWK9Z2jzya6CvVodzJi/Wg==}
+  /@clerk/clerk-react@4.21.1(react@18.2.0):
+    resolution: {integrity: sha512-sviPg3Cp9j9mT3gW7DUJT9w/hxg37T2yxMMs93WSonEs8OA9bM6t2uMwT7NZAy1kdVVwjlWs6c+TQ7/M2qbEDA==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
@@ -796,11 +796,11 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@clerk/clerk-sdk-node@4.10.13:
-    resolution: {integrity: sha512-Yy7N/DT1GdW+oI3/PxYqgjIgHCIEPI97dDUYn1xpG82y9aIQMVI69/W7KRK940559GDl4CmgZm1Taon+SOdDmQ==}
+  /@clerk/clerk-sdk-node@4.10.14:
+    resolution: {integrity: sha512-1rNo/CIp+fmlJ1c18KpvMJmJECB5kcep6Y18DDHAOwXH1NmmrNyPIZZVDSDk4zrb/Hs1Rv3dAImjOwmOujCTOQ==}
     engines: {node: '>=14'}
     dependencies:
-      '@clerk/backend': 0.23.6
+      '@clerk/backend': 0.23.7
       '@clerk/types': 3.46.1
       '@types/cookies': 0.7.7
       '@types/express': 4.17.14
@@ -811,17 +811,17 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@clerk/nextjs@4.21.12(next@13.4.7)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-KjdKaDaDAaVFBXnXVoHC/PSycHHmATzLizhvC0BVmpsOKFdcWarnOltd5uXaHekUI79nFYLIAZLGMiOZRgZLPg==}
+  /@clerk/nextjs@4.21.13(next@13.4.7)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-BGSm8FmiG8mQkPMM8YAk4EMP3nj5RvPm2cz8Tio//QS/1Xq/9qpnsuSFLwy+oyPtgguVS1m8p0spQ068i6JTcQ==}
     engines: {node: '>=14'}
     peerDependencies:
       next: '>=10'
       react: ^17.0.2 || ^18.0.0-0
       react-dom: ^17.0.2 || ^18.0.0-0
     dependencies:
-      '@clerk/backend': 0.23.6
-      '@clerk/clerk-react': 4.21.0(react@18.2.0)
-      '@clerk/clerk-sdk-node': 4.10.13
+      '@clerk/backend': 0.23.7
+      '@clerk/clerk-react': 4.21.1(react@18.2.0)
+      '@clerk/clerk-sdk-node': 4.10.14
       '@clerk/types': 3.46.1
       next: 13.4.7(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
       path-to-regexp: 6.2.1
@@ -1617,13 +1617,13 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@hono/zod-validator@0.1.3(hono@3.2.6)(zod@3.21.4):
+  /@hono/zod-validator@0.1.3(hono@3.2.7)(zod@3.21.4):
     resolution: {integrity: sha512-g6dnqmkehV6VHjemJoWYwWqD/YwAl8awNJR2fxL8bqvPiYPvShycRZDrdHSpobgX61kaBc4n8mt0YJSHYvKbFQ==}
     peerDependencies:
       hono: 3.*
       zod: ^3.19.1
     dependencies:
-      hono: 3.2.6
+      hono: 3.2.7
       zod: 3.21.4
     dev: false
 
@@ -2029,8 +2029,8 @@ packages:
       webcrypto-core: 1.7.7
     dev: false
 
-  /@planetscale/database@1.7.0:
-    resolution: {integrity: sha512-lWR6biXChUyQnxsT4RT1CIeR3ZJvwTQXiQ+158MnY3VjLwjHEGakDzdH9kwUGPk6CHvu6UeqRXp1DgUOVHJFTw==}
+  /@planetscale/database@1.8.0:
+    resolution: {integrity: sha512-+zk04eXRiaJGaRnJZkCxXbBtBvQDQJXCoxqlXhLY3HzAovXfsBnh6DjXRujPRQQ7GKtT8/tOlyvZ9h6ReM+GLQ==}
     engines: {node: '>=16'}
     dev: false
 
@@ -3074,7 +3074,7 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: true
 
-  /@turbo/gen@1.10.6(@types/node@20.3.2)(typescript@5.1.5):
+  /@turbo/gen@1.10.6(@types/node@20.3.2)(typescript@5.1.6):
     resolution: {integrity: sha512-sZWqL7VVBaLz4iFdMUpGg0n8agl7aLauGAVsrwC/0EQSmCh4tHzNeJQA4GSOjMwDBpa2ZO46/8KKdl2m0zDFRA==}
     hasBin: true
     dependencies:
@@ -3085,7 +3085,7 @@ packages:
       minimatch: 9.0.1
       node-plop: 0.26.3
       semver: 7.5.1
-      ts-node: 10.9.1(@types/node@20.3.2)(typescript@5.1.5)
+      ts-node: 10.9.1(@types/node@20.3.2)(typescript@5.1.6)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -3369,10 +3369,6 @@ packages:
     resolution: {integrity: sha512-vmYJF0REqDyyU0gviezF/KHq/fYaUbFhkcNbQCuPGFQj6VTbXuHZoxs/Y7mutWe73C8AC6l9fFu8mSYiBAqkGA==}
     dev: false
 
-  /@types/node@20.3.1:
-    resolution: {integrity: sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg==}
-    dev: true
-
   /@types/node@20.3.2:
     resolution: {integrity: sha512-vOBLVQeCQfIcF/2Y7eKFTqrMnizK5lRNQ7ykML/5RuwVXVWxYkgwS7xbt4B6fKCUPgbSL5FSsjHQpaGQP/dQmw==}
 
@@ -3395,14 +3391,6 @@ packages:
     resolution: {integrity: sha512-2et4PDvg6PVCyS7fuTc4gPoksV58bW0RwSxWKcPRcHZf0PRUGq03TKcD/rUHe3azfV6/5/biUBJw+HhCQjaP0A==}
     dependencies:
       '@types/react': 18.2.14
-
-  /@types/react@18.2.12:
-    resolution: {integrity: sha512-ndmBMLCgn38v3SntMeoJaIrO6tGHYKMEBohCUmw8HoLLQdRMOIGXfeYaBTLe2lsFaSB3MOK1VXscYFnmLtTSmw==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.3
-      csstype: 3.1.2
-    dev: true
 
   /@types/react@18.2.14:
     resolution: {integrity: sha512-A0zjq+QN/O0Kpe30hA1GidzyFjatVvrpIvWLxD+xv67Vt91TWWgco9IvrJBkeyHm1trGaFS/FSGqPlhyeZRm0g==}
@@ -3912,7 +3900,7 @@ packages:
     resolution: {integrity: sha512-H7j4M+HShvd+fHVRo7ldWJYNckyTvctUDS29wdvpJR2JkxgkxMCcgjxqGvc1r1lOVLR50xE0/dA7WvuX4XQkoQ==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
     dependencies:
-      chalk: 5.2.0
+      chalk: 5.3.0
     dev: false
 
   /chalk@2.4.2:
@@ -3930,8 +3918,8 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
-  /chalk@5.2.0:
-    resolution: {integrity: sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==}
+  /chalk@5.3.0:
+    resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   /change-case@3.1.0:
@@ -4479,7 +4467,7 @@ packages:
     dependencies:
       '@esbuild-kit/esm-loader': 2.5.5
       camelcase: 7.0.1
-      chalk: 5.2.0
+      chalk: 5.3.0
       commander: 9.5.0
       esbuild: 0.18.6
       esbuild-register: 3.4.2(esbuild@0.18.6)
@@ -4492,7 +4480,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.7.0):
+  /drizzle-orm@0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.8.0):
     resolution: {integrity: sha512-LGiJ0icB+wQwgbSCOvAjONY8Ec6G/EDzQQP5PmUaQYeI9OqgpVKHC2T1fFIbvk5dabWsbokJ5NOciVAxriStig==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -4555,7 +4543,7 @@ packages:
         optional: true
     dependencies:
       '@cloudflare/workers-types': 4.20230518.0
-      '@planetscale/database': 1.7.0
+      '@planetscale/database': 1.8.0
     dev: false
 
   /drizzle-zod@0.4.4(drizzle-orm@0.27.0)(zod@3.21.4):
@@ -4564,7 +4552,7 @@ packages:
       drizzle-orm: '>=0.23.13'
       zod: '*'
     dependencies:
-      drizzle-orm: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.7.0)
+      drizzle-orm: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.8.0)
       zod: 3.21.4
     dev: false
 
@@ -5053,8 +5041,8 @@ packages:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
-  /framer-motion@10.12.17(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-IR+aAYntsyu6ofyxqQV4QYotmOqzcuKxhqNpfc3DXJjNWOPpOeSyH0A+In3IEBu49Yx/+PNht+YMeZSdCNaYbw==}
+  /framer-motion@10.12.18(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-cfhiUpPbj+0eEWKjuD+5cz5cMqH71xOtMxGiS/cSGfHn2OlHIEAqFnFyzEMENw5PxWR9bMVhatzzpD6lexmHZQ==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -5301,8 +5289,8 @@ packages:
       react-is: 16.13.1
     dev: false
 
-  /hono@3.2.6:
-    resolution: {integrity: sha512-jUf9SgkTW/H3Pd9oPwFgf3j05RXUbILWm96WlHll56t2Jkv8tVXyfLeBzYwdTzB7JE/hx+DWMXrVJ06UdfcKng==}
+  /hono@3.2.7:
+    resolution: {integrity: sha512-7YCF9t4oMF3L3ghvcmlEBx2hoC9VyBBLuVrPZiOkU7PtFBrnQtkFEnYCRcPKCJiMoXHX3bDhU9R3HQbw+WnQJg==}
     engines: {node: '>=16.0.0'}
     dev: false
 
@@ -5842,7 +5830,7 @@ packages:
     dependencies:
       ansi-escapes: 6.2.0
       cardinal: 2.1.1
-      chalk: 5.2.0
+      chalk: 5.3.0
       cli-table3: 0.6.3
       marked: 5.1.0
       node-emoji: 1.11.0
@@ -7665,37 +7653,6 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-node@10.9.1(@types/node@20.3.1)(typescript@5.1.3):
-    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.9
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 20.3.1
-      acorn: 8.8.2
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 5.1.3
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    dev: true
-
   /ts-node@10.9.1(@types/node@20.3.2)(typescript@5.1.3):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
@@ -7727,7 +7684,7 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-node@10.9.1(@types/node@20.3.2)(typescript@5.1.5):
+  /ts-node@10.9.1(@types/node@20.3.2)(typescript@5.1.6):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -7753,7 +7710,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.1.5
+      typescript: 5.1.6
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
@@ -7769,7 +7726,7 @@ packages:
   /tslib@2.5.3:
     resolution: {integrity: sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==}
 
-  /tsup@7.1.0(typescript@5.1.5):
+  /tsup@7.1.0(typescript@5.1.6):
     resolution: {integrity: sha512-mazl/GRAk70j8S43/AbSYXGgvRP54oQeX8Un4iZxzATHt0roW0t6HYDVZIXMw0ZQIpvr1nFMniIVnN5186lW7w==}
     engines: {node: '>=16.14'}
     hasBin: true
@@ -7799,7 +7756,7 @@ packages:
       source-map: 0.8.0-beta.0
       sucrase: 3.32.0
       tree-kill: 1.2.2
-      typescript: 5.1.5
+      typescript: 5.1.6
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -7934,6 +7891,12 @@ packages:
 
   /typescript@5.1.5:
     resolution: {integrity: sha512-FOH+WN/DQjUvN6WgW+c4Ml3yi0PH+a/8q+kNIfRehv1wLhWONedw85iu+vQ39Wp49IzTJEsZ2lyLXpBF7mkF1g==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: true
+
+  /typescript@5.1.6:
+    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true

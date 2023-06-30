@@ -15,7 +15,7 @@
 		"format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
 	},
 	"dependencies": {
-		"@clerk/nextjs": "^4.21.12",
+		"@clerk/nextjs": "^4.21.13",
 		"@hookform/resolvers": "^3.1.1",
 		"@radix-ui/react-avatar": "^1.0.3",
 		"@radix-ui/react-dialog": "^1.0.4",
@@ -40,7 +40,7 @@
 		"date-fns": "^2.30.0",
 		"db": "workspace:*",
 		"elkjs": "^0.8.2",
-		"framer-motion": "^10.12.17",
+		"framer-motion": "^10.12.18",
 		"next": "^13.4.7",
 		"next-themes": "^0.2.1",
 		"react": "^18.2.0",
@@ -54,8 +54,8 @@
 		"sonner": "^0.5.0",
 		"superjson": "^1.12.4",
 		"tailwind-merge": "^1.13.2",
-		"zod": "^3.21.4",
-		"ui": "workspace:*"
+		"ui": "workspace:*",
+		"zod": "^3.21.4"
 	},
 	"devDependencies": {
 		"@types/node": "^20.3.2",
@@ -68,7 +68,7 @@
 		"prettier": "^2.8.8",
 		"tailwindcss": "^3.3.2",
 		"tailwindcss-animate": "^1.0.6",
-		"typescript": "5.1.5",
-		"tsconfig": "workspace:*"
+		"tsconfig": "workspace:*",
+		"typescript": "5.1.5"
 	}
 }
