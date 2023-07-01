@@ -3,6 +3,8 @@ import { Tiny } from "db/src/tinybird"
 import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
 import { notFound } from "next/navigation"
+import { DataTable } from "./data-table"
+import { columns } from "./column"
 
 interface EventsPageProps {
 	params: {
@@ -20,7 +22,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 		notFound()
 	}
 
-	const { data } = await tiny.getRes({
+	const { data, rows_before_limit_at_least } = await tiny.getRes({
 		customer_id: userId,
 		source_id: connection.source?.publicId,
 		destionation_id: connection.destination?.publicId,
@@ -29,8 +31,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 	return (
 		<div>
 			<div className="w-full">
-				{JSON.stringify(data)}
-				{/* <DataTable columns={columns} data={reqs.data} maxItems={reqs.rows_before_limit_at_least || reqs.data.length} /> */}
+				<DataTable columns={columns} data={data} maxItems={rows_before_limit_at_least || data.length} />
 			</div>
 		</div>
 	)
