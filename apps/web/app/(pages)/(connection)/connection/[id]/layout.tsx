@@ -1,11 +1,9 @@
 import { type ReactNode } from "react"
-import { notFound } from "next/navigation"
 
-import db from "@/lib/db"
 import { getCachedConnection } from "@/lib/orm"
-import { TabsTrigger } from "@/components/ui/tabs"
 
-import { NavTabs } from "../../../../../components/ui/NavTabs"
+import { LinkTab } from "@/components/ui/linkTabs"
+import { NavTabs } from "@/components/ui/NavTabs"
 
 const ConnectionLayout = async ({
 	children,
@@ -16,6 +14,7 @@ const ConnectionLayout = async ({
 		id: string
 	}
 }) => {
+	const basePath = `/connection/${params.id}`
 	const connection = await getCachedConnection({ publicId: params.id })
 
 	return (
@@ -27,10 +26,10 @@ const ConnectionLayout = async ({
 				</div>
 			</div>
 			<NavTabs>
-				<TabsTrigger value="/">Overview</TabsTrigger>
-				<TabsTrigger value="/events">Events</TabsTrigger>
-				<TabsTrigger value="/advanced">Advanced</TabsTrigger>
-				<TabsTrigger value="/settings">Settings</TabsTrigger>
+				<LinkTab href={basePath}>Overview</LinkTab>
+				<LinkTab href={`${basePath}/events`}>Events</LinkTab>
+				<LinkTab href={`${basePath}/advanced`}>Advanced</LinkTab>
+				<LinkTab href={`${basePath}/settings`}>Settings</LinkTab>
 			</NavTabs>
 			{children}
 		</main>

@@ -26,6 +26,15 @@ export const columns: ColumnDef<Column>[] = [
 			return <div>{requestId}</div>
 		},
 	},
+	{
+		accessorKey: "destination_id",
+		header: "Destination ID",
+		cell: ({ cell, row }) => {
+			const destinationId = cell.getValue() as string
+
+			return <div>{destinationId}</div>
+		},
+	},
 
 	{
 		accessorKey: "timestamp",
