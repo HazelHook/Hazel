@@ -1,0 +1,59 @@
+"use client"
+
+import { MaximizeIcon } from "@/components/icons/pika/maximize"
+import { Maximize02Icon } from "@/components/icons/pika/maximize02"
+import { MinimizeIcon } from "@/components/icons/pika/minimize"
+import { Minimize02Icon } from "@/components/icons/pika/minimize02"
+import { AnimatePresence, motion } from "framer-motion"
+import { ReactNode, useId, useMemo, useState } from "react"
+
+export interface ExpandableListProps {
+	maxItems?: number
+	title: string
+	items: { title: string; description: string }[]
+}
+
+export const ExpandableList = ({ title, maxItems = 3, items }: ExpandableListProps) => {
+	const [isExpanded, setIsExpanded] = useState(false)
+
+	const shownItems = useMemo(() => (isExpanded ? items : items.slice(0, maxItems)), [items, isExpanded, maxItems])
+	return (
+		<div className="flex flex-col gap-2 border rounded-md bg-card text-card-foreground">
+			<div className="p-3 border-b text-sm text-muted-foreground">{title}</div>
+			<motion.div layout className="flex flex-col gap-2">
+				{shownItems.map((item) => (
+					<motion.div className="w-full border-b p-3" key={item.title}>
+						<div className="flex flex-row justify-between max-w-xs">
+							<p className="font-semibold">{item.title}</p>
+							<p className="text-sm">{item.description}</p>
+						</div>
+					</motion.div>
+				))}
+			</motion.div>
+
+			{maxItems < items.length && (
+				<>
+					{isExpanded ? (
+						// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						<div
+							className="w-full p-3 text-cyan-500 text-sm cursor-pointer flex flex-row items-center gap-2"
+							onClick={() => setIsExpanded(false)}
+						>
+							<Minimize02Icon className="w-4 h-4" />
+							Collapse
+						</div>
+					) : (
+						// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						<div
+							className="w-full p-3 text-cyan-500 text-sm cursor-pointer flex flex-row items-center gap-2"
+							onClick={() => setIsExpanded(true)}
+						>
+							<Maximize02Icon className="w-4 h-4" />
+							{`Expand ${items.length - maxItems} more`}
+						</div>
+					)}
+				</>
+			)}
+		</div>
+	)
+}
