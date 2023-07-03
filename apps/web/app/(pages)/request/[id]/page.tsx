@@ -21,7 +21,7 @@ const ResponsePage = () => {
 			<div className="flex flex-row gap-2 items-center">
 				<div className="h-5 w-5 bg-green-500 rounded-sm" />
 
-				<h1 className="text-2xl">Reponse ID HERE</h1>
+				<h1 className="text-2xl">Request ID HERE</h1>
 			</div>
 			<Card>
 				<CardContent className="pt-6">
@@ -36,16 +36,9 @@ const ResponsePage = () => {
 								</Link>
 							}
 						/>
-						<ListItem
-							name="Destination"
-							description={
-								<Link href={`/destination/${"destID"}`}>
-									<Button size="xs" variant="link">
-										Dest Name
-									</Button>
-								</Link>
-							}
-						/>
+						<ListItem name="Status" description={"Accepted"} />
+						<ListItem name="Created Events" description={"1"} />
+
 						<ListItem
 							name="Received"
 							description={Intl.DateTimeFormat("en", {
@@ -74,12 +67,20 @@ const ResponsePage = () => {
 			</Suspense>
 			<Card>
 				<CardHeader>
-					<CardTitle>Response Body</CardTitle>
+					<CardTitle>Body</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<Suspense>
 						<Code lang="json">{"{ name: 'WOW'}"}</Code>
 					</Suspense>
+				</CardContent>
+			</Card>
+			<Card>
+				<CardHeader>
+					<CardTitle>Events</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<Suspense>Events Here</Suspense>
 				</CardContent>
 			</Card>
 		</div>
