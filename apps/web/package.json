@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "doppler run -- next dev",
+		"dev:raw": "next dev",
 		"dev:turbo": "doppler run -- next dev --turbo",
 		"build": "next build",
 		"start": "next start",
