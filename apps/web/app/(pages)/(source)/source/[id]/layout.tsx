@@ -3,6 +3,7 @@ import { type ReactNode } from "react"
 import { getCachedSource } from "@/lib/orm"
 import { NavTabs } from "@/components/ui/NavTabs"
 import { TabsTrigger } from "@/components/ui/tabs"
+import { LinkTab } from "@/components/ui/linkTabs"
 
 const ConnectionLayout = async ({
 	children,
@@ -24,9 +25,9 @@ const ConnectionLayout = async ({
 				</div>
 			</div>
 			<NavTabs>
-				<TabsTrigger value="/">Overview</TabsTrigger>
-				<TabsTrigger value="/events">Events</TabsTrigger>
-				<TabsTrigger value="/settings">Settings</TabsTrigger>
+				<LinkTab href={`/source/${params.id}`}>Overview</LinkTab>
+				<LinkTab href={`/source/${params.id}/events`}>Events</LinkTab>
+				<LinkTab href={`/source/${params.id}/settings`}>Settings</LinkTab>
 			</NavTabs>
 			{children}
 		</main>
