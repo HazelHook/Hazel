@@ -1,5 +1,5 @@
 import { InferModel, relations } from "drizzle-orm"
-import { boolean, int, json, mysqlTable, serial, text, timestamp, varchar } from "drizzle-orm/mysql-core"
+import { boolean, index, int, json, mysqlTable, serial, text, timestamp, varchar } from "drizzle-orm/mysql-core"
 
 export const source = mysqlTable(
 	"sources",
@@ -58,10 +58,10 @@ export const connection = mysqlTable(
 
 		name: text("name").notNull(),
 
-		sourceId: int("destination_id"),
-		destinationId: int("source_id"),
+		sourceId: int("destination_id").notNull(),
+		destinationId: int("source_id").notNull(),
 
-		enabled: boolean("enabled").default(true),
+		enabled: boolean("enabled").default(true).notNull(),
 
 		// The transformer config.
 		// TODO: Minify
@@ -73,12 +73,12 @@ export const connection = mysqlTable(
 		// TODO: RULES
 	},
 	// (connection) => ({
-	// 	publicIdIndex: index("conn_public_id_idx").on(connection.publicId),
+	// publicIdIndex: index("conn_public_id_idx").on(connection.publicId),
 
-	// 	customerIdIndex: index("conn_customer_id_idx").on(connection.customerId),
+	// customerIdIndex: index("conn_customer_id_idx").on(connection.customerId),
 
-	// 	sourceIdIndex: index("source_id_idx").on(connection.sourceId),
-	// 	destinationIndex: index("source_id_idx").on(connection.destinationId),
+	// sourceIdIndex: index("source_id_idx").on(connection.sourceId),
+	// destinationIndex: index("source_id_idx").on(connection.destinationId),
 	// }),
 )
 
