@@ -24,8 +24,8 @@ export const ExpandableList = ({ title, maxItems = 3, items }: ExpandableListPro
 				{shownItems.map((item) => (
 					<motion.div className="w-full border-b px-6 py-3" key={item.title}>
 						<div className="flex flex-row justify-between max-w-xs">
-							<p className="font-semibold">{item.title}</p>
-							<p className="text-sm">{item.description}</p>
+							<p className="font-semibold w-full">{item.title}</p>
+							<p className="text-sm text-ellipsis">{item.description}</p>
 						</div>
 					</motion.div>
 				))}

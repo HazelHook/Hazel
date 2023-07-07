@@ -63,14 +63,10 @@ export const connection = mysqlTable(
 
 		enabled: boolean("enabled").default(true).notNull(),
 
-		// The transformer config.
-		// TODO: Minify
 		fluxConfig: json("flux_config"),
 
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 		updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
-
-		// TODO: RULES
 	},
 	// (connection) => ({
 	// publicIdIndex: index("conn_public_id_idx").on(connection.publicId),

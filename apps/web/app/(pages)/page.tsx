@@ -1,6 +1,5 @@
 import { currentUser } from "@clerk/nextjs"
 import { sub } from "date-fns"
-import { Tiny } from "db/src/tinybird"
 
 import { auth } from "@/lib/auth"
 import { chartColors, formatDateTime, getSeededProfileImageUrl, subtractFromString } from "@/lib/utils"
@@ -11,6 +10,7 @@ import { Chart } from "@/components/ui/chart"
 import { DatePicker } from "./_component/DatePicker"
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
+import tiny from "@/lib/tiny"
 
 interface DashboardPageProps {
 	searchParams: {
@@ -22,8 +22,6 @@ interface DashboardPageProps {
 
 const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const { userId } = auth()
-
-	const tiny = Tiny(process.env.TINY_TOKEN!)
 
 	const endTime = searchParams.date_to || formatDateTime(new Date())
 	const startTime =

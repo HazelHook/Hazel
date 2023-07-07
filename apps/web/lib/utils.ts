@@ -50,3 +50,14 @@ export function subtractFromString(date: Date, str: string) {
 
 	return sub(date, duration)
 }
+
+export function jsonToArray(obj: { [key: string]: any }): Array<{ title: string; description: any }> {
+	const arr = []
+	for (const key in obj) {
+		// rome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
+		if (obj.hasOwnProperty(key)) {
+			arr.push({ title: key, description: obj[key] })
+		}
+	}
+	return arr
+}
