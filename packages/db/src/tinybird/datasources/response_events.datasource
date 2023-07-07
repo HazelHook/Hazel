@@ -4,7 +4,9 @@ DESCRIPTION >
     Response Events Datasource
 
 SCHEMA >
-    `timestamp` DateTime `json:$.timestamp`,
+    `id` String `json:$.id`,
+    `timestamp` DateTime64(3) `json:$.timestamp`,
+    `send_timestamp` DateTime64(3) `json:$.send_timestamp`,
     `version` LowCardinality(String) `json:$.version`,
     `request_id` String `json:$.request_id`,
     `customer_id` String `json:$.customer_id`,
@@ -18,4 +20,4 @@ SCHEMA >
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
 ENGINE_SORTING_KEY "timestamp, customer_id, source_id, request_id"
-ENGINE_TTL "timestamp + toIntervalDay(60)"
+ENGINE_TTL "toDateTime(timestamp) + toIntervalDay(60)"

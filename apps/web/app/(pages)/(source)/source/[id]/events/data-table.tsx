@@ -19,7 +19,7 @@ import { Request } from "./column"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<Request, TValue>[]
-	data: Request[]
+	data: Response[]
 	maxItems: number
 }
 
@@ -27,7 +27,7 @@ export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableP
 	const [sorting, setSorting] = useState<SortingState>([])
 	const [sheetId, setSheetId] = useState<string>()
 
-	const selectedReq = useMemo(() => data.find((datum) => datum.request_id === sheetId), [data, sheetId])
+	const selectedReq = useMemo(() => data.find((datum) => datum.id === sheetId), [data, sheetId])
 
 	const table = useReactTable({
 		data,

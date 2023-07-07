@@ -1,4 +1,3 @@
-# Data Source created from Pipe 'daily_res_materialize'
 
 SCHEMA >
     `bucket` DateTime,

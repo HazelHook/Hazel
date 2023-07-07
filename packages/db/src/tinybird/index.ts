@@ -21,7 +21,9 @@ const baseParams = z.object({
 })
 
 const eventRes = z.object({
-	timestamp: z.string(),
+	id: z.string(),
+	timestamp: z.number().or(z.string()),
+	send_timestamp: z.number().or(z.string()),
 	version: z.string(),
 	request_id: z.string(),
 	customer_id: z.string(),
@@ -35,15 +37,20 @@ const eventRes = z.object({
 	headers: z.string(),
 })
 
+export type Response = z.infer<typeof eventRes>
+
 const eventReq = z.object({
-	timestamp: z.string(),
+	id: z.string(),
+	timestamp: z.number().or(z.string()),
 	version: z.string(),
-	request_id: z.string(),
 	customer_id: z.string(),
 	source_id: z.string(),
 
 	body: z.string(),
 	headers: z.string(),
+
+	validated: z.number(),
+	rejected: z.number(),
 })
 
 export const Tiny = (token: string) => {
@@ -121,9 +128,9 @@ export const Tiny = (token: string) => {
 	const getReq = tb.buildPipe({
 		pipe: "get_req",
 		parameters: z.object({
+			request_id: z.string().optional(),
 			customer_id: z.string(),
 			source_id: z.string().optional(),
-			request_id: z.string().optional(),
 			limit: z.number().optional(),
 			offset: z.number().optional(),
 		}),
@@ -133,9 +140,11 @@ export const Tiny = (token: string) => {
 	const getRes = tb.buildPipe({
 		pipe: "get_res",
 		parameters: z.object({
+			response_id: z.string().optional(),
+			request_id: z.string().optional(),
 			customer_id: z.string(),
 			source_id: z.string().optional(),
-			destionation_id: z.string().optional(),
+			destination_id: z.string().optional(),
 			limit: z.number().optional(),
 			offset: z.number().optional(),
 		}),

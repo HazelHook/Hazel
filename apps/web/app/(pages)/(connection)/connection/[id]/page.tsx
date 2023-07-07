@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation"
 import { sub } from "date-fns"
-import { Tiny } from "db/src/tinybird"
 
 import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
@@ -9,6 +8,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 import { KpiCard } from "@/app/(pages)/_component/KpiCard"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
+import tiny from "@/lib/tiny"
 
 const SourcePage = async ({
 	params,
@@ -26,9 +26,6 @@ const SourcePage = async ({
 	}
 
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
-
-	// rome-ignore lint/style/noNonNullAssertion: <explanation>
-	const tiny = Tiny(process.env.TINY_TOKEN!)
 
 	const pReqKpis = tiny.getReqKpis({
 		customer_id: userId,

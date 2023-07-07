@@ -9,6 +9,7 @@ import tiny from "@/lib/tiny"
 import { auth } from "@/lib/auth"
 import { notFound } from "next/navigation"
 import { jsonToArray } from "@/lib/utils"
+import { getCachedSource } from "@/lib/orm"
 
 const ListItem = ({ name, description }: { name: string; description: ReactNode | string }) => {
 	return (
@@ -35,16 +36,19 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const req = data[0]
 
+	const { data: resData } = await tiny.getRes({ customer_id: userId })
+
 	// TODO: ADD ACCEPETED/REJECTED TO TINYBIRD => Wasnt valid
 
 	const headers = JSON.parse(req.headers)
+	const source = getCachedSource({ publicId: req.source_id })
 
 	return (
 		<div className="p-6 container space-y-4">
 			<div className="flex flex-row gap-2 items-center">
 				<div className="h-5 w-5 bg-green-500 rounded-sm" />
 
-				<h1 className="text-2xl uppercase">{req.request_id}</h1>
+				<h1 className="text-2xl uppercase">{req.id}</h1>
 			</div>
 			<Card>
 				<CardContent className="pt-6">
@@ -52,15 +56,17 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 						<ListItem
 							name="Source"
 							description={
-								<Link href={`/source/${"sourceID"}`}>
-									<Button size="xs" variant="link">
-										Source Name
-									</Button>
-								</Link>
+								<Suspense>
+									<Link href={`/source/${req.source_id}`}>
+										<Button size="xs" variant="link">
+											{(await source).name}
+										</Button>
+									</Link>
+								</Suspense>
 							}
 						/>
-						<ListItem name="Status" description={"Accepted"} />
-						<ListItem name="Created Events" description={"1"} />
+						<ListItem name="Status" description={"Accepted TODO"} />
+						<ListItem name="Created Events" description={resData.length} />
 
 						<ListItem
 							name="Received"
@@ -71,9 +77,12 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 								hour: "numeric",
 								minute: "numeric",
 								second: "numeric",
-							}).format(Date.now())}
+							}).format(new Date(req.timestamp))}
 						/>
-						<ListItem name="Added Latency" description={"56ms"} />
+						<ListItem
+							name="Added Latency"
+							description={`${new Date(resData[0]?.send_timestamp).getTime() - new Date(req.timestamp).getTime()}ms`}
+						/>
 						<ListItem name="Verified" description={"False"} />
 					</div>
 				</CardContent>
@@ -96,7 +105,17 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 					<CardTitle>Events</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<Suspense>Events Here</Suspense>
+					<div className="flex flex-col gap-2">
+						<Suspense>
+							{resData.map((res) => (
+								<Link href={`/response/${res.id}`}>
+									<Button variant="link" className="uppercase">
+										{res.id}
+									</Button>
+								</Link>
+							))}
+						</Suspense>
+					</div>
 				</CardContent>
 			</Card>
 		</div>

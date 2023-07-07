@@ -12,13 +12,13 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
-import { Response } from "@/lib/types/tiny"
+import { Response } from "db/src/tinybird"
 
 export type Column = Response
 
 export const columns: ColumnDef<Column>[] = [
 	{
-		accessorKey: "request_id",
+		accessorKey: "id",
 		header: "Request ID",
 		cell: ({ cell, row }) => {
 			const requestId = cell.getValue() as string
@@ -60,7 +60,7 @@ export const columns: ColumnDef<Column>[] = [
 					<DropdownMenuContent align="end">
 						<DropdownMenuLabel>Actions</DropdownMenuLabel>
 						<DropdownMenuItem>View Request</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.request_id)}>
+						<DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.id)}>
 							Copy request ID
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />

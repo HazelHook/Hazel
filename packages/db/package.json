@@ -4,7 +4,8 @@
 	"type": "module",
 	"scripts": {
 		"db:push": "drizzle-kit push:mysql",
-		"db:generate": "drizzle-kit generate:mysql"
+		"db:generate": "drizzle-kit generate:mysql",
+		"tb:pull": "tb pull --auto --force"
 	},
 	"dependencies": {
 		"@chronark/zod-bird": "^0.1.1",
