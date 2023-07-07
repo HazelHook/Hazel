@@ -8,7 +8,7 @@ import Link from "next/link"
 import tiny from "@/lib/tiny"
 import { auth } from "@/lib/auth"
 import { notFound } from "next/navigation"
-import { jsonToArray } from "@/lib/utils"
+import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { getCachedSource } from "@/lib/orm"
 
 const ListItem = ({ name, description }: { name: string; description: ReactNode | string }) => {
@@ -65,7 +65,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 								</Suspense>
 							}
 						/>
-						<ListItem name="Status" description={"Accepted TODO"} />
+						<ListItem name="Status" description={req.rejected ? "Rejected" : "Accepted"} />
 						<ListItem name="Created Events" description={resData.length} />
 
 						<ListItem
@@ -83,7 +83,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 							name="Added Latency"
 							description={`${new Date(resData[0]?.send_timestamp).getTime() - new Date(req.timestamp).getTime()}ms`}
 						/>
-						<ListItem name="Verified" description={"False"} />
+						<ListItem name="Verified" description={capitalizeFirstLetter(String(!!req.validated))} />
 					</div>
 				</CardContent>
 			</Card>

@@ -34,6 +34,10 @@ export function charToDuration(char: "h" | "d" | "m" | "y") {
 	}
 }
 
+export function capitalizeFirstLetter(str: string): string {
+	return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 export function subtractFromString(date: Date, str: string) {
 	const parsed = /^(\d+)([a-z]+)$/i.exec(str)
 
