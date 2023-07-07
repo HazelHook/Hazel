@@ -9,7 +9,7 @@ export const source = mysqlTable(
 		customerId: varchar("customer_id", { length: 128 }).notNull(),
 
 		name: varchar("name", { length: 64 }).notNull(),
-		url: varchar("url", { length: 128 }).notNull(),
+		url: varchar("url", { length: 128 }),
 
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 		updatedAt: timestamp("updated_at").defaultNow().notNull(),

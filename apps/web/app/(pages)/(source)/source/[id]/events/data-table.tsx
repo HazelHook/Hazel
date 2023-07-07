@@ -14,12 +14,11 @@ import {
 import { DataTablePagination } from "@/components/ui/data-table-pagination"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-
-import { Request } from "./column"
+import { Request } from "db/src/tinybird"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<Request, TValue>[]
-	data: Response[]
+	data: Request[]
 	maxItems: number
 }
 

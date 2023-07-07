@@ -22,11 +22,16 @@ export const createConnectionAction = createAction(
 		const destination = await db.query.destination.findFirst({
 			where: (source, { eq }) => eq(source.publicId, opts.input.publiceDestinationId),
 		})
+
+		if (!destination || !source) {
+			throw new Error("Doesnt exist bruw")
+		}
+
 		const connection = await createConnection({
 			data: {
 				name: opts.input.name,
-				sourceId: source?.id,
-				destinationId: destination?.id,
+				sourceId: source.id,
+				destinationId: destination.id,
 				customerId: opts.ctx.auth.userId,
 			},
 			db,

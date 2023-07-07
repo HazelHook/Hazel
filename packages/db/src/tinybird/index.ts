@@ -38,6 +38,7 @@ const eventRes = z.object({
 })
 
 export type Response = z.infer<typeof eventRes>
+export type Request = z.infer<typeof eventReq>
 
 const eventReq = z.object({
 	id: z.string(),
