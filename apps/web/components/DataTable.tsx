@@ -14,19 +14,19 @@ import {
 import { DataTablePagination } from "@/components/ui/data-table-pagination"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Request } from "db/src/tinybird"
+
 
 interface DataTableProps<TData, TValue> {
-	columns: ColumnDef<Request, TValue>[]
-	data: Request[]
+	columns: ColumnDef<TData, TValue>[]
+	data: TData[]
 	maxItems: number
 }
 
-export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableProps<TData, TValue>) {
+export function DataTable<TData extends Record<string, any> & { id: string }, TValue>({ columns, data, maxItems }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = useState<SortingState>([])
 	const [sheetId, setSheetId] = useState<string>()
 
-	const selectedReq = useMemo(() => data.find((datum) => datum.id === sheetId), [data, sheetId])
+	const selectedRequest = useMemo(() => data.find((datum) => datum.id === sheetId), [data, sheetId])
 
 	const table = useReactTable({
 		data,
@@ -35,7 +35,6 @@ export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableP
 		onSortingChange: setSorting,
 		getSortedRowModel: getSortedRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
-
 		state: {
 			sorting,
 		},
@@ -98,11 +97,11 @@ export function DataTable<TData, TValue>({ columns, data, maxItems }: DataTableP
 					<div className="grid gap-4 py-4">
 						<div className="space-y-2">
 							<p>Headers</p>
-							{selectedReq?.headers}
+							{selectedRequest?.headers}
 						</div>
 						<div className="space-y-2">
 							<p>Body</p>
-							{selectedReq?.body}
+							{selectedRequest?.body}
 						</div>
 					</div>
 				</SheetContent>

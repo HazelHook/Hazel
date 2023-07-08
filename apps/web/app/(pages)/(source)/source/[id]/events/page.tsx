@@ -1,9 +1,11 @@
 import { Tiny } from "db/src/tinybird"
 
 import { auth } from "@/lib/auth"
-
+import { getCachedSource } from "@/lib/orm"
+import { notFound } from "next/navigation"
+import { DataTable } from "../../../../../../components/DataTable"
 import { columns } from "./column"
-import { DataTable } from "./data-table"
+import tiny from "@/lib/tiny"
 
 interface EventsPageProps {
 	params: {
@@ -11,19 +13,47 @@ interface EventsPageProps {
 	}
 }
 
+async function fetchData({ customer_id, source_id }: { customer_id: string; source_id: string }) {
+	const [req, res] = await Promise.all([
+		tiny.getReq({
+			customer_id,
+			source_id,
+		}),
+		tiny.getRes({
+			customer_id,
+			source_id,
+		}),
+	])
+
+	const merged = req.data.map((d) => {
+		const responses = res.data.filter((r) => r.request_id === d.id)
+		return Object.assign(d, {responses})
+	})
+
+	return {
+		data: merged,
+		rows: req.rows, 
+		rows_before_limit_at_least: req.rows_before_limit_at_least
+	}
+}
+
+type PromiseType<T> = T extends Promise<infer U> ? U : never;
+export type EventDataRowType = PromiseType<ReturnType<typeof fetchData>>['data'][number]
+
 const EventsPage = async ({ params }: EventsPageProps) => {
 	const { userId } = auth()
-	const tiny = Tiny(process.env.TINY_TOKEN as string)
+	const source = await getCachedSource({ publicId: params.id })
+	
+	if (!source) {
+		notFound()
+	}
 
-	const reqs = await tiny.getReq({
-		customer_id: userId,
-		source_id: params.id,
-	})
+	const sources = await fetchData({ customer_id: userId, source_id: params.id })
 
 	return (
 		<div>
 			<div className="w-full">
-				<DataTable columns={columns} data={reqs.data} maxItems={reqs.rows_before_limit_at_least || reqs.data.length} />
+				<DataTable columns={columns} data={sources.data} maxItems={sources.rows_before_limit_at_least || sources.data.length} />
 			</div>
 		</div>
 	)

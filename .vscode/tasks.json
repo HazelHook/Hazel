@@ -17,6 +17,32 @@
       }
     },
     {
+      "label": "Open Tinybird",
+      "command": "open",
+      "args": ["https://ui.tinybird.co/"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "close": true
+      }
+    },
+    {
+      "label": "Start web",
+      "command": "pnpm",
+      "args": [
+        "dev",
+        "--filter",
+        "web"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "close": true
+      }
+    },
+    {
       "label": "BG: Build code",
       "group": "build",
       "command": "pnpm",

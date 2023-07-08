@@ -37,13 +37,15 @@ const SourcePage = async ({
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
-	const res = await tiny.getReqTimeseries({
+	const req = await tiny.getReqTimeseries({
 		customer_id: userId,
 		source_id: source.publicId,
 		start_date: startTime,
 	})
 
-	const chartData = transformSourcesChartData(res.data)
+
+
+	const chartData = transformSourcesChartData(req.data)
 
 	return (
 		<main className="space-y-4">

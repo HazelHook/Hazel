@@ -1,0 +1,14 @@
+{
+  "IIFE": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "iife",
+    "body": ["(() => {", "\t$1", "})()"],
+    "description": "Immediately invoked function expression"
+  },
+  "IIFE (async)": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "iifa",
+    "body": ["await (async () => {", "\t$1", "})()"],
+    "description": "Asynchronous immediately invoked function expression"
+  }
+}
