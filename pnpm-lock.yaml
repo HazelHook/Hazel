@@ -190,46 +190,6 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
 
-  packages/backend:
-    dependencies:
-      '@chronark/zod-bird':
-        specifier: ^0.1.1
-        version: 0.1.1
-      '@hono/zod-validator':
-        specifier: ^0.1.3
-        version: 0.1.3(hono@3.2.7)(zod@3.21.4)
-      '@ngneat/falso':
-        specifier: ^6.4.0
-        version: 6.4.0
-      '@planetscale/database':
-        specifier: ^1.8.0
-        version: 1.8.0
-      db:
-        specifier: workspace:*
-        version: link:../db
-      do-taskmanager:
-        specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0
-      drizzle-orm:
-        specifier: ^0.27.0
-        version: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.8.0)
-      hono:
-        specifier: ^3.2.7
-        version: 3.2.7
-      nanoid:
-        specifier: ^4.0.2
-        version: 4.0.2
-      zod:
-        specifier: ^3.21.4
-        version: 3.21.4
-    devDependencies:
-      '@cloudflare/workers-types':
-        specifier: ^4.20230518.0
-        version: 4.20230518.0
-      wrangler:
-        specifier: ^3.1.1
-        version: 3.1.1
-
   packages/db:
     dependencies:
       '@chronark/zod-bird':
@@ -901,6 +861,7 @@ packages:
 
   /@cloudflare/workers-types@4.20230518.0:
     resolution: {integrity: sha512-A0w1V+5SUawGaaPRlhFhSC/SCDT9oQG8TMoWOKFLA4qbqagELqEAFD4KySBIkeVOvCBLT1DZSYBMCxbXddl0kw==}
+    dev: false
 
   /@code-hike/lighter@0.6.6:
     resolution: {integrity: sha512-dLkSpowP4NaWDUgay3Mebb8V+wYqVGRD+Tl8wSfWdtIH0z4OUU3UznSsmvvGpCgkdUIF5DhOPRGRowqkNWQsrg==}
@@ -1615,16 +1576,6 @@ packages:
       '@floating-ui/dom': 1.4.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  /@hono/zod-validator@0.1.3(hono@3.2.7)(zod@3.21.4):
-    resolution: {integrity: sha512-g6dnqmkehV6VHjemJoWYwWqD/YwAl8awNJR2fxL8bqvPiYPvShycRZDrdHSpobgX61kaBc4n8mt0YJSHYvKbFQ==}
-    peerDependencies:
-      hono: 3.*
-      zod: ^3.19.1
-    dependencies:
-      hono: 3.2.7
-      zod: 3.21.4
     dev: false
 
   /@hookform/resolvers@3.1.1(react-hook-form@7.45.1):
@@ -4225,13 +4176,6 @@ packages:
       redux: 4.2.1
     dev: false
 
-  /do-taskmanager@2.0.0-rc.0:
-    resolution: {integrity: sha512-f0ul0seeuVn39cOANvaieJtdvi6WY2ndD4k7ZWxcDuUMd7Vn7b3+fs+1Xqb+aKVRyCWbaLOf0BGfChtyNk1oiQ==}
-    dependencies:
-      serialize-error: 11.0.0
-      ulid-workers: 2.1.0
-    dev: false
-
   /doctrine@3.0.0:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
     engines: {node: '>=6.0.0'}
@@ -5074,11 +5018,6 @@ packages:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
-    dev: false
-
-  /hono@3.2.7:
-    resolution: {integrity: sha512-7YCF9t4oMF3L3ghvcmlEBx2hoC9VyBBLuVrPZiOkU7PtFBrnQtkFEnYCRcPKCJiMoXHX3bDhU9R3HQbw+WnQJg==}
-    engines: {node: '>=16.0.0'}
     dev: false
 
   /hosted-git-info@4.1.0:
@@ -6757,13 +6696,6 @@ packages:
       upper-case-first: 1.1.2
     dev: true
 
-  /serialize-error@11.0.0:
-    resolution: {integrity: sha512-YKrURWDqcT3VGX/s/pCwaWtpfJEEaEw5Y4gAnQDku92b/HjVj4r4UhA5QrMVMFotymK2wIWs5xthny5SMFu7Vw==}
-    engines: {node: '>=14.16'}
-    dependencies:
-      type-fest: 2.19.0
-    dev: false
-
   /server-only@0.0.1:
     resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
     dev: false
@@ -7573,10 +7505,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /ulid-workers@2.1.0:
-    resolution: {integrity: sha512-D4+5fwPt5FEoGdMQtx5YwRHUZ4SDWSypraDZiXT3Y8U7T0C6h99dXhpWJQScNckoVRU+zi+BDuoBKHAffrn9vg==}
-    dev: false
 
   /undici@5.22.1:
     resolution: {integrity: sha512-Ji2IJhFXZY0x/0tVBXeQwgPlLWw13GVzpsWPQ3rV50IFMMof2I55PZZxtm4P6iNq+L5znYN9nSTAq0ZyE6lSJw==}
