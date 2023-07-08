@@ -26,14 +26,21 @@ export const connection = buildMysqlTable(
 	{
 		name,
 
-		sourceId: int("destination_id").references(() => source.id).notNull(),
-		destinationId: int("source_id").references(() => destination.id).notNull(),
+		sourceId: int("destination_id"),
+		destinationId: int("source_id"),
 
 		enabled: boolean("enabled").default(true).notNull(),
 
 		fluxConfig: json("flux_config"),
 	},
 )
+
+export const sourceRelations = relations(source, ({ many, one }) => ({
+	connections: many(connection),
+}))
+export const destinationRelations = relations(destination, ({ many, one }) => ({
+	connections: many(connection),
+}))
 
 export const connectionRelations = relations(connection, ({ one }) => ({
 	destination: one(destination, {

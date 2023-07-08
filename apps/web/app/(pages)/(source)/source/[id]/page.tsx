@@ -1,8 +1,6 @@
 import { notFound, redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
 import { sub } from "date-fns"
-import { Destination } from "db/src/schema"
-import { Tiny } from "db/src/tinybird"
 
 import { getCachedSource } from "@/lib/orm"
 import { chartColors, formatDateTime } from "@/lib/utils"
@@ -13,6 +11,7 @@ import { DataTable } from "@/components/ui/data-table"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
 
 import { columns } from "./column"
+import { Tiny } from "db/src/tinybird"
 
 const SourcePage = async ({
 	params,
@@ -23,7 +22,7 @@ const SourcePage = async ({
 }) => {
 	const source = await getCachedSource({ publicId: params.id })
 
-	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
+	const startTime = sub(new Date(), { days: 7 })
 
 	const { userId } = auth()
 
@@ -37,8 +36,8 @@ const SourcePage = async ({
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
-	const req = await tiny.getReqTimeseries({
-		customer_id: userId,
+	const req = await tiny.requests.getTimeseries({
+		customer_id: userId!,
 		source_id: source.publicId,
 		start_date: startTime,
 	})

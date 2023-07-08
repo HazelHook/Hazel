@@ -1,14 +1,10 @@
 import { cache } from "react"
 import { notFound } from "next/navigation"
-import { getConnection } from "db/src/orm/connection"
-import { getSource, getSources } from "db/src/orm/source"
-
 import db from "./db"
-import { getDestination } from "db/src/orm/destination"
 import { PromiseType } from "@/lib/ts/helpers"
 
 export const getCachedConnection = cache(async ({ publicId }: { publicId: string }) => {
-	const connection = await getConnection({ publicId, db })
+	const connection = await db.connection.findFirst({ publicId })
 
 	if (!connection) {
 		notFound()
@@ -19,7 +15,7 @@ export const getCachedConnection = cache(async ({ publicId }: { publicId: string
 export type CacheConnection = PromiseType<ReturnType<typeof getCachedConnection>>
 
 export const getCachedSource = cache(async ({ publicId }: { publicId: string }) => {
-	const source = await getSource({ publicId, db })
+	const source = await db.source.findFirst({ publicId })
 
 	if (!source) {
 		notFound()
@@ -30,7 +26,7 @@ export const getCachedSource = cache(async ({ publicId }: { publicId: string }) 
 export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>
 
 export const getCachedDestination = cache(async ({ publicId }: { publicId: string }) => {
-	const destination = await getDestination({ publicId, db })
+	const destination = await db.destination.findFirst({ publicId })
 
 	if (!destination) {
 		notFound()
