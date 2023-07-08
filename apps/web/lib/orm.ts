@@ -5,6 +5,7 @@ import { getSource, getSources } from "db/src/orm/source"
 
 import db from "./db"
 import { getDestination } from "db/src/orm/destination"
+import { PromiseType } from "@/lib/ts/helpers"
 
 export const getCachedConnection = cache(async ({ publicId }: { publicId: string }) => {
 	const connection = await getConnection({ publicId, db })
@@ -15,6 +16,7 @@ export const getCachedConnection = cache(async ({ publicId }: { publicId: string
 
 	return connection
 })
+export type CacheConnection = PromiseType<ReturnType<typeof getCachedConnection>>
 
 export const getCachedSource = cache(async ({ publicId }: { publicId: string }) => {
 	const source = await getSource({ publicId, db })
@@ -25,6 +27,7 @@ export const getCachedSource = cache(async ({ publicId }: { publicId: string }) 
 
 	return source
 })
+export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>
 
 export const getCachedDestination = cache(async ({ publicId }: { publicId: string }) => {
 	const destination = await getDestination({ publicId, db })
@@ -35,3 +38,4 @@ export const getCachedDestination = cache(async ({ publicId }: { publicId: strin
 
 	return destination
 })
+export type CacheDestination = PromiseType<ReturnType<typeof getCachedDestination>>

@@ -6,6 +6,8 @@ import { notFound } from "next/navigation"
 import { DataTable } from "../../../../../../components/DataTable"
 import { columns } from "./column"
 import tiny from "@/lib/tiny"
+import { TableWrapper } from "@/app/(pages)/(source)/source/[id]/events/table"
+import { PromiseType } from "@/lib/ts/helpers"
 
 interface EventsPageProps {
 	params: {
@@ -37,7 +39,6 @@ async function fetchData({ customer_id, source_id }: { customer_id: string; sour
 	}
 }
 
-type PromiseType<T> = T extends Promise<infer U> ? U : never;
 export type EventDataRowType = PromiseType<ReturnType<typeof fetchData>>['data'][number]
 
 const EventsPage = async ({ params }: EventsPageProps) => {
@@ -53,7 +54,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 	return (
 		<div>
 			<div className="w-full">
-				<DataTable columns={columns} data={sources.data} maxItems={sources.rows_before_limit_at_least || sources.data.length} />
+				<TableWrapper data={sources.data} maxItems={sources.rows_before_limit_at_least || sources.data.length} source={source} />
 			</div>
 		</div>
 	)
