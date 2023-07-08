@@ -12,18 +12,25 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
-import { Request } from "db/src/tinybird"
+import { EventDataRowType } from "@/app/(pages)/(source)/source/[id]/events/page"
 
-export type Column = Request
-
-export const columns: ColumnDef<Column>[] = [
+export const columns: ColumnDef<EventDataRowType>[] = [
 	{
-		accessorKey: "request_id",
+		accessorKey: "id",
 		header: "Request ID",
 		cell: ({ cell, row }) => {
 			const requestId = cell.getValue() as string
 
 			return <div>{requestId}</div>
+		},
+	},
+	{
+		accessorKey: "",
+		header: "Response Status",
+		cell: ({ cell, row }) => {
+			const destinationId = cell.getValue() as string
+
+			return <div>{destinationId}</div>
 		},
 	},
 
@@ -50,6 +57,7 @@ export const columns: ColumnDef<Column>[] = [
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
 						<DropdownMenuLabel>Actions</DropdownMenuLabel>
+						<DropdownMenuItem>View Request</DropdownMenuItem>
 						<DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.id)}>
 							Copy request ID
 						</DropdownMenuItem>
