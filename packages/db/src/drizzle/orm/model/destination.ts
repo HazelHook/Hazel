@@ -1,9 +1,8 @@
 import { eq } from "drizzle-orm"
 import { nanoid } from "nanoid"
-
-import { DB } from ".."
-import { destination, InsertDestination } from "../schema"
-import { generatePublicId } from "../schema/common"
+import { DB } from "../.."
+import { InsertDestination, destination } from "../../schema"
+import { generatePublicId } from "../../schema/common"
 
 export async function getDestination({
 	publicId,
