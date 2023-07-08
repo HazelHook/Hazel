@@ -1,13 +1,13 @@
-import React, { type ReactNode } from "react";
+import React, { type ReactNode } from "react"
 
 export type Props = {
-  /**
-   * Function which transforms children output. It accepts children and must return transformed children too.
-   */
-  readonly transform: (children: string) => string;
+	/**
+	 * Function which transforms children output. It accepts children and must return transformed children too.
+	 */
+	readonly transform: (children: string) => string
 
-  readonly children?: ReactNode;
-};
+	readonly children?: ReactNode
+}
 
 /**
  * Transform a string representation of React components before they are written to output.
@@ -16,16 +16,13 @@ export type Props = {
  * That's what <Transform> component does, it gives you an output string of its child components and lets you transform it in any way.
  */
 export default function Transform({ children, transform }: Props) {
-  if (children === undefined || children === null) {
-    return null;
-  }
+	if (children === undefined || children === null) {
+		return null
+	}
 
-  return (
-    <ink-text
-      style={{ flexGrow: 0, flexShrink: 1, flexDirection: "row" }}
-      internal_transform={transform}
-    >
-      {children}
-    </ink-text>
-  );
+	return (
+		<ink-text style={{ flexGrow: 0, flexShrink: 1, flexDirection: "row" }} internal_transform={transform}>
+			{children}
+		</ink-text>
+	)
 }

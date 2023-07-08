@@ -1,15 +1,15 @@
-import React, { FunctionComponent, ReactNode } from "react";
-import chalkPipe from "chalk-pipe";
+import React, { FunctionComponent, ReactNode } from "react"
+import chalkPipe from "chalk-pipe"
 
-import { Transform } from "../ink";
+import { Transform } from "../ink"
 
 export type ColorProps = {
-  styles?: string;
-  children?: ReactNode;
-};
+	styles?: string
+	children?: ReactNode
+}
 
 const Color: FunctionComponent<ColorProps> = ({ styles = "", children }) => {
-  return <Transform transform={chalkPipe(styles)}>{children}</Transform>;
-};
+	return <Transform transform={chalkPipe(styles)}>{children}</Transform>
+}
 
-export default Color;
+export default Color

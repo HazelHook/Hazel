@@ -1,45 +1,45 @@
-"use client";
+"use client"
 
-import { ReactNode } from "react";
+import { ReactNode } from "react"
 
-import { CacheDestination } from "@/lib/orm";
-import { DataTable } from "@/components/DataTable";
-import { columns } from "@/app/(pages)/(destination)/destination/[id]/events/column";
-import { EventDataRowType } from "@/app/(pages)/(destination)/destination/[id]/events/page";
+import { CacheDestination } from "@/lib/orm"
+import { DataTable } from "@/components/DataTable"
+import { columns } from "@/app/(pages)/(destination)/destination/[id]/events/column"
+import { EventDataRowType } from "@/app/(pages)/(destination)/destination/[id]/events/page"
 
 export const TableWrapper = ({
-  data,
-  maxItems,
-  destination,
+	data,
+	maxItems,
+	destination,
 }: {
-  data: EventDataRowType;
-  maxItems: number;
-  destination: CacheDestination;
+	data: EventDataRowType
+	maxItems: number
+	destination: CacheDestination
 }) => {
-  return (
-    <DataTable
-      columns={columns}
-      data={data}
-      maxItems={maxItems}
-      // renderSheet={(data) => <TableSheet data={data}  />}
-    />
-  );
-};
+	return (
+		<DataTable
+			columns={columns}
+			data={data}
+			maxItems={maxItems}
+			// renderSheet={(data) => <TableSheet data={data}  />}
+		/>
+	)
+}
 
 const ListItem = ({
-  name,
-  description,
+	name,
+	description,
 }: {
-  name: string;
-  description: ReactNode | string;
+	name: string
+	description: ReactNode | string
 }) => {
-  return (
-    <div className="flex flex-row justify-between max-w-[250px]">
-      <p className="text-muted-foreground">{name}</p>
-      <p>{description}</p>
-    </div>
-  );
-};
+	return (
+		<div className="flex flex-row justify-between max-w-[250px]">
+			<p className="text-muted-foreground">{name}</p>
+			<p>{description}</p>
+		</div>
+	)
+}
 
 // const TableSheet = ({ data, destination }: { data: EventDataRowType[]; destination: CacheDestination }) => {
 // 	const successfulResponses = data.filter((r) => r.success)

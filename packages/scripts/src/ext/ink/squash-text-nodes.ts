@@ -1,4 +1,4 @@
-import { type DOMElement } from "./dom.js";
+import { type DOMElement } from "./dom.js"
 
 // Squashing text nodes allows to combine multiple text nodes into one and write
 // to `Output` instance only once. For example, <Text>hello{' '}world</Text>
@@ -7,37 +7,31 @@ import { type DOMElement } from "./dom.js";
 // Also, this is necessary for libraries like ink-link (https://github.com/sindresorhus/ink-link),
 // which need to wrap all children at once, instead of wrapping 3 text nodes separately.
 const squashTextNodes = (node: DOMElement): string => {
-  let text = "";
+	let text = ""
 
-  if (node.childNodes.length > 0) {
-    for (const childNode of node.childNodes) {
-      let nodeText = "";
+	if (node.childNodes.length > 0) {
+		for (const childNode of node.childNodes) {
+			let nodeText = ""
 
-      if (childNode.nodeName === "#text") {
-        nodeText = childNode.nodeValue;
-      } else {
-        if (
-          childNode.nodeName === "ink-text" ||
-          childNode.nodeName === "ink-virtual-text"
-        ) {
-          nodeText = squashTextNodes(childNode);
-        }
+			if (childNode.nodeName === "#text") {
+				nodeText = childNode.nodeValue
+			} else {
+				if (childNode.nodeName === "ink-text" || childNode.nodeName === "ink-virtual-text") {
+					nodeText = squashTextNodes(childNode)
+				}
 
-        // Since these text nodes are being concatenated, `Output` instance won't be able to
-        // apply children transform, so we have to do it manually here for each text node
-        if (
-          nodeText.length > 0 &&
-          typeof childNode.internal_transform === "function"
-        ) {
-          nodeText = childNode.internal_transform(nodeText);
-        }
-      }
+				// Since these text nodes are being concatenated, `Output` instance won't be able to
+				// apply children transform, so we have to do it manually here for each text node
+				if (nodeText.length > 0 && typeof childNode.internal_transform === "function") {
+					nodeText = childNode.internal_transform(nodeText)
+				}
+			}
 
-      text += nodeText;
-    }
-  }
+			text += nodeText
+		}
+	}
 
-  return text;
-};
+	return text
+}
 
-export default squashTextNodes;
+export default squashTextNodes

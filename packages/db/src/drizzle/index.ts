@@ -1,37 +1,34 @@
-import { connect } from "@planetscale/database";
-import {
-  drizzle,
-  PlanetScaleDatabase,
-} from "drizzle-orm/planetscale-serverless";
+import { connect } from "@planetscale/database"
+import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
 
-import { DrizzleTable } from "./orm/db-table";
-import * as schema from "./schema";
+import { DrizzleTable } from "./orm/db-table"
+import * as schema from "./schema"
 
-export type DB = PlanetScaleDatabase<typeof schema>;
+export type DB = PlanetScaleDatabase<typeof schema>
 
 export function connectDB({
-  username,
-  host,
-  password,
+	username,
+	host,
+	password,
 }: {
-  host: string;
-  username: string;
-  password: string;
+	host: string
+	username: string
+	password: string
 }) {
-  const client = connect({
-    username,
-    host,
-    password,
-  });
+	const client = connect({
+		username,
+		host,
+		password,
+	})
 
-  const db = drizzle(client, { schema });
+	const db = drizzle(client, { schema })
 
-  return {
-    db,
-    source: new DrizzleTable("source", schema.source, db),
-    destination: new DrizzleTable("destination", schema.destination, db),
-    connection: new DrizzleTable("connection", schema.connection, db),
-  };
+	return {
+		db,
+		source: new DrizzleTable("source", schema.source, db),
+		destination: new DrizzleTable("destination", schema.destination, db),
+		connection: new DrizzleTable("connection", schema.connection, db),
+	}
 }
 
 // export function connectWDB({

@@ -1,14 +1,14 @@
-import { ReactNode } from "react";
+import { ReactNode } from "react"
 
-import { LinkTabList } from "@/components/ui/linkTabs";
+import { LinkTabList } from "@/components/ui/linkTabs"
 
 interface NavTabsProps {
-  children: ReactNode[];
+	children: ReactNode[]
 }
 export const NavTabs = ({ children }: NavTabsProps) => {
-  return (
-    <div className="w-full">
-      <LinkTabList>{children}</LinkTabList>
-    </div>
-  );
-};
+	return (
+		<div className="w-full">
+			<LinkTabList>{children}</LinkTabList>
+		</div>
+	)
+}

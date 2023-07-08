@@ -1,23 +1,21 @@
-import React from "react";
-import figures from "figures";
-import PropTypes from "prop-types";
+import React from "react"
+import figures from "figures"
+import PropTypes from "prop-types"
 
-import { Box, Text } from "../ink";
+import { Box, Text } from "../ink"
 
 const CheckBox = ({ isSelected }) => (
-  <Box marginRight={1}>
-    <Text color="green">
-      {isSelected ? figures.circleFilled : figures.circle}
-    </Text>
-  </Box>
-);
+	<Box marginRight={1}>
+		<Text color="green">{isSelected ? figures.circleFilled : figures.circle}</Text>
+	</Box>
+)
 
 CheckBox.propTypes = {
-  isSelected: PropTypes.bool,
-};
+	isSelected: PropTypes.bool,
+}
 
 CheckBox.defaultProps = {
-  isSelected: false,
-};
+	isSelected: false,
+}
 
-export default CheckBox;
+export default CheckBox

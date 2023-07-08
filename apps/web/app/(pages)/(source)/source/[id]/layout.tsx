@@ -1,37 +1,37 @@
-import { type ReactNode } from "react";
+import { type ReactNode } from "react"
 
-import { getCachedSource } from "@/lib/orm";
-import { LinkTab } from "@/components/ui/linkTabs";
-import { NavTabs } from "@/components/ui/NavTabs";
-import { TabsTrigger } from "@/components/ui/tabs";
+import { getCachedSource } from "@/lib/orm"
+import { LinkTab } from "@/components/ui/linkTabs"
+import { NavTabs } from "@/components/ui/NavTabs"
+import { TabsTrigger } from "@/components/ui/tabs"
 
 const ConnectionLayout = async ({
-  children,
-  params,
+	children,
+	params,
 }: {
-  children: ReactNode;
-  params: {
-    id: string;
-  };
+	children: ReactNode
+	params: {
+		id: string
+	}
 }) => {
-  const source = await getCachedSource({ publicId: params.id });
+	const source = await getCachedSource({ publicId: params.id })
 
-  return (
-    <main className="p-4 space-y-4 h-full">
-      <div className="flex flex-row justify-between mb-4">
-        <div>
-          <h3 className="text-xl font-semibold">Source</h3>
-          <h4 className="text-lg text-muted-foreground">{source.name}</h4>
-        </div>
-      </div>
-      <NavTabs>
-        <LinkTab href={`/source/${params.id}`}>Overview</LinkTab>
-        <LinkTab href={`/source/${params.id}/events`}>Events</LinkTab>
-        <LinkTab href={`/source/${params.id}/settings`}>Settings</LinkTab>
-      </NavTabs>
-      {children}
-    </main>
-  );
-};
+	return (
+		<main className="p-4 space-y-4 h-full">
+			<div className="flex flex-row justify-between mb-4">
+				<div>
+					<h3 className="text-xl font-semibold">Source</h3>
+					<h4 className="text-lg text-muted-foreground">{source.name}</h4>
+				</div>
+			</div>
+			<NavTabs>
+				<LinkTab href={`/source/${params.id}`}>Overview</LinkTab>
+				<LinkTab href={`/source/${params.id}/events`}>Events</LinkTab>
+				<LinkTab href={`/source/${params.id}/settings`}>Settings</LinkTab>
+			</NavTabs>
+			{children}
+		</main>
+	)
+}
 
-export default ConnectionLayout;
+export default ConnectionLayout

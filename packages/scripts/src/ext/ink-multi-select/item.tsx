@@ -1,19 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 
-import { Text } from "../ink";
+import { Text } from "../ink"
 
-const Item = ({ isHighlighted, label }) => (
-  <Text color={isHighlighted ? "blue" : undefined}>{label}</Text>
-);
+const Item = ({ isHighlighted, label }) => <Text color={isHighlighted ? "blue" : undefined}>{label}</Text>
 
 Item.propTypes = {
-  isHighlighted: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-};
+	isHighlighted: PropTypes.bool,
+	label: PropTypes.string.isRequired,
+}
 
 Item.defaultProps = {
-  isHighlighted: false,
-};
+	isHighlighted: false,
+}
 
-export default Item;
+export default Item

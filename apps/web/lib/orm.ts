@@ -1,49 +1,39 @@
-import { cache } from "react";
-import { notFound } from "next/navigation";
+import { cache } from "react"
+import { notFound } from "next/navigation"
 
-import { PromiseType } from "@/lib/ts/helpers";
+import { PromiseType } from "@/lib/ts/helpers"
 
-import db from "./db";
+import db from "./db"
 
-export const getCachedConnection = cache(
-  async ({ publicId }: { publicId: string }) => {
-    const connection = await db.connection.findFirst({ publicId });
+export const getCachedConnection = cache(async ({ publicId }: { publicId: string }) => {
+	const connection = await db.connection.findFirst({ publicId })
 
-    if (!connection) {
-      notFound();
-    }
+	if (!connection) {
+		notFound()
+	}
 
-    return connection;
-  }
-);
-export type CacheConnection = PromiseType<
-  ReturnType<typeof getCachedConnection>
->;
+	return connection
+})
+export type CacheConnection = PromiseType<ReturnType<typeof getCachedConnection>>
 
-export const getCachedSource = cache(
-  async ({ publicId }: { publicId: string }) => {
-    const source = await db.source.findFirst({ publicId });
+export const getCachedSource = cache(async ({ publicId }: { publicId: string }) => {
+	const source = await db.source.findFirst({ publicId })
 
-    if (!source) {
-      notFound();
-    }
+	if (!source) {
+		notFound()
+	}
 
-    return source;
-  }
-);
-export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>;
+	return source
+})
+export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>
 
-export const getCachedDestination = cache(
-  async ({ publicId }: { publicId: string }) => {
-    const destination = await db.destination.findFirst({ publicId });
+export const getCachedDestination = cache(async ({ publicId }: { publicId: string }) => {
+	const destination = await db.destination.findFirst({ publicId })
 
-    if (!destination) {
-      notFound();
-    }
+	if (!destination) {
+		notFound()
+	}
 
-    return destination;
-  }
-);
-export type CacheDestination = PromiseType<
-  ReturnType<typeof getCachedDestination>
->;
+	return destination
+})
+export type CacheDestination = PromiseType<ReturnType<typeof getCachedDestination>>

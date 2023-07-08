@@ -1,11 +1,11 @@
-import meow from "meow";
+import meow from "meow"
 
-import App from "./app.js";
-import { render } from "./ext/ink";
-import { GlobalStateProvider } from "./lib/datasource";
+import App from "./app.js"
+import { render } from "./ext/ink"
+import { GlobalStateProvider } from "./lib/datasource"
 
 const cli = meow(
-  `
+	`
 	Usage
 	  $ scripts
 
@@ -16,21 +16,21 @@ const cli = meow(
 	  $ scripts --name=Jane
 	  Hello, Jane
 `,
-  {
-    importMeta: import.meta,
-    flags: {
-      name: {
-        type: "string",
-      },
-    },
-  }
-);
+	{
+		importMeta: import.meta,
+		flags: {
+			name: {
+				type: "string",
+			},
+		},
+	},
+)
 
 render(
-  <GlobalStateProvider>
-    <App />
-  </GlobalStateProvider>,
-  {
-    patchConsole: true,
-  }
-);
+	<GlobalStateProvider>
+		<App />
+	</GlobalStateProvider>,
+	{
+		patchConsole: true,
+	},
+)
