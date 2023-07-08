@@ -15,7 +15,6 @@ import { DataTablePagination } from "@/components/ui/data-table-pagination"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
@@ -23,9 +22,12 @@ interface DataTableProps<TData, TValue> {
 	renderSheet?: (data: TData) => React.ReactNode
 }
 
-
-
-export function DataTable<TData extends Record<string, any> & { id: string }, TValue>({ columns, data, maxItems, renderSheet }: DataTableProps<TData, TValue>) {
+export function DataTable<TData extends Record<string, any> & { id: string }, TValue>({
+	columns,
+	data,
+	maxItems,
+	renderSheet,
+}: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = useState<SortingState>([])
 	const [sheetId, setSheetId] = useState<string>()
 
@@ -93,13 +95,7 @@ export function DataTable<TData extends Record<string, any> & { id: string }, TV
 			<DataTablePagination hasFilter table={table} maxCount={maxItems} />
 			<Sheet open={!!sheetId} onOpenChange={handleSheetOpen}>
 				<SheetContent>
-					<SheetHeader>
-						<SheetTitle>Request Overview</SheetTitle>
-						<SheetDescription>{sheetId}</SheetDescription>
-					</SheetHeader>
-					<div className="grid gap-4 py-4">
-						{selectedRequest && renderSheet?.(selectedRequest)}
-					</div>
+					<div className="grid gap-4 py-4">{selectedRequest && renderSheet?.(selectedRequest)}</div>
 				</SheetContent>
 			</Sheet>
 		</div>
