@@ -1,35 +1,36 @@
-import { useEffect, useContext, useMemo } from "react"
-import FocusContext from "../components/FocusContext.js"
-import useStdin from "./use-stdin.js"
+import { useContext, useEffect, useMemo } from "react";
+
+import FocusContext from "../components/FocusContext.js";
+import useStdin from "./use-stdin.js";
 
 type Input = {
-	/**
-	 * Enable or disable this component's focus, while still maintaining its position in the list of focusable components.
-	 */
-	isActive?: boolean
+  /**
+   * Enable or disable this component's focus, while still maintaining its position in the list of focusable components.
+   */
+  isActive?: boolean;
 
-	/**
-	 * Auto focus this component, if there's no active (focused) component right now.
-	 */
-	autoFocus?: boolean
+  /**
+   * Auto focus this component, if there's no active (focused) component right now.
+   */
+  autoFocus?: boolean;
 
-	/**
-	 * Assign an ID to this component, so it can be programmatically focused with `focus(id)`.
-	 */
-	id?: string
-}
+  /**
+   * Assign an ID to this component, so it can be programmatically focused with `focus(id)`.
+   */
+  id?: string;
+};
 
 type Output = {
-	/**
-	 * Determines whether this component is focused or not.
-	 */
-	isFocused: boolean
+  /**
+   * Determines whether this component is focused or not.
+   */
+  isFocused: boolean;
 
-	/**
-	 * Allows focusing a specific element with the provided `id`.
-	 */
-	focus: (id: string) => void
-}
+  /**
+   * Allows focusing a specific element with the provided `id`.
+   */
+  focus: (id: string) => void;
+};
 
 /**
  * Component that uses `useFocus` hook becomes "focusable" to Ink,
@@ -39,46 +40,51 @@ type Output = {
  * This hook returns an object with `isFocused` boolean property, which
  * determines if this component is focused or not.
  */
-const useFocus = ({ isActive = true, autoFocus = false, id: customId }: Input = {}): Output => {
-	const { isRawModeSupported, setRawMode } = useStdin()
-	const { activeId, add, remove, activate, deactivate, focus } = useContext(FocusContext)
+const useFocus = ({
+  isActive = true,
+  autoFocus = false,
+  id: customId,
+}: Input = {}): Output => {
+  const { isRawModeSupported, setRawMode } = useStdin();
+  const { activeId, add, remove, activate, deactivate, focus } =
+    useContext(FocusContext);
 
-	const id = useMemo(() => {
-		return customId ?? Math.random().toString().slice(2, 7)
-	}, [customId])
+  const id = useMemo(() => {
+    return customId ?? Math.random().toString().slice(2, 7);
+  }, [customId]);
 
-	useEffect(() => {
-		add(id, { autoFocus })
+  useEffect(() => {
+    add(id, { autoFocus });
 
-		return () => {
-			remove(id)
-		}
-	}, [id, autoFocus])
+    return () => {
+      remove(id);
+    };
+  }, [id, autoFocus]);
 
-	useEffect(() => {
-		if (isActive) {
-			activate(id)
-		} else {
-			deactivate(id)
-		}
-	}, [isActive, id])
+  useEffect(() => {
+    if (isActive) {
+      activate(id);
+    } else {
+      deactivate(id);
+    }
+  }, [isActive, id]);
 
-	useEffect(() => {
-		if (!isRawModeSupported || !isActive) {
-			return
-		}
+  useEffect(() => {
+    if (!isRawModeSupported || !isActive) {
+      return;
+    }
 
-		setRawMode(true)
+    setRawMode(true);
 
-		return () => {
-			setRawMode(false)
-		}
-	}, [isActive])
+    return () => {
+      setRawMode(false);
+    };
+  }, [isActive]);
 
-	return {
-		isFocused: Boolean(id) && activeId === id,
-		focus,
-	}
-}
+  return {
+    isFocused: Boolean(id) && activeId === id,
+    focus,
+  };
+};
 
-export default useFocus
+export default useFocus;

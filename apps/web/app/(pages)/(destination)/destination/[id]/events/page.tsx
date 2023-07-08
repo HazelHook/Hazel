@@ -1,47 +1,60 @@
-import { auth } from "@/lib/auth"
-import { getCachedDestination } from "@/lib/orm"
-import { notFound } from "next/navigation"
-import tiny from "@/lib/tiny"
-import { PromiseType } from "@/lib/ts/helpers"
-import { TableWrapper } from "@/app/(pages)/(destination)/destination/[id]/events/table"
+import { notFound } from "next/navigation";
+
+import { auth } from "@/lib/auth";
+import { getCachedDestination } from "@/lib/orm";
+import tiny from "@/lib/tiny";
+import { PromiseType } from "@/lib/ts/helpers";
+import { TableWrapper } from "@/app/(pages)/(destination)/destination/[id]/events/table";
 
 interface EventsPageProps {
-	params: {
-		id: string
-	}
+  params: {
+    id: string;
+  };
 }
 
-async function fetch({ customer_id, destination_id }: { customer_id: string; destination_id: string }) {
-	const destinations = await tiny.getRes({
-		customer_id,
-		destination_id,
-	})
+async function fetch({
+  customer_id,
+  destination_id,
+}: {
+  customer_id: string;
+  destination_id: string;
+}) {
+  const destinations = await tiny.getRes({
+    customer_id,
+    destination_id,
+  });
 
-	return destinations
+  return destinations;
 }
 
-export type EventDataRowType = PromiseType<ReturnType<typeof fetch>>["data"]
+export type EventDataRowType = PromiseType<ReturnType<typeof fetch>>["data"];
 
 const EventsPage = async ({ params }: EventsPageProps) => {
-	const { userId } = auth()
-	const destination = await getCachedDestination({ publicId: params.id })
-	
-	if (!destination) {
-		notFound()
-	}
+  const { userId } = auth();
+  const destination = await getCachedDestination({ publicId: params.id });
 
-	const destinations = await fetch({
-		customer_id: userId,
-		destination_id: params.id,
-	})
+  if (!destination) {
+    notFound();
+  }
 
-	return (
-		<div>
-			<div className="w-full">
-				<TableWrapper data={destinations.data} maxItems={destinations.rows_before_limit_at_least || destinations.data.length} destination={destination} />
-			</div>
-		</div>
-	)
-}
+  const destinations = await fetch({
+    customer_id: userId,
+    destination_id: params.id,
+  });
 
-export default EventsPage
+  return (
+    <div>
+      <div className="w-full">
+        <TableWrapper
+          data={destinations.data}
+          maxItems={
+            destinations.rows_before_limit_at_least || destinations.data.length
+          }
+          destination={destination}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default EventsPage;

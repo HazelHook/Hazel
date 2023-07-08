@@ -1,1 +1,1 @@
-export const appConfig = {}
+export const appConfig = {};

@@ -1,33 +1,33 @@
-import { z } from "zod"
+import { z } from "zod";
 
-import { publicProcedure, router } from "../trpc"
+import { publicProcedure, router } from "../trpc";
 
 export const createPost = publicProcedure
-	.input(
-		z.object({
-			title: z.string(),
-			content: z.string(),
-		}),
-	)
-	.mutation(async (opts) => {
-		return {
-			id: "1",
-			...opts.input,
-		}
-	})
+  .input(
+    z.object({
+      title: z.string(),
+      content: z.string(),
+    })
+  )
+  .mutation(async (opts) => {
+    return {
+      id: "1",
+      ...opts.input,
+    };
+  });
 
 export const appRouter = router({
-	greeting: publicProcedure
-		.input(
-			z.object({
-				text: z.string(),
-			}),
-		)
-		.query(async (opts) => {
-			return `hello ${opts.input.text}`
-		}),
+  greeting: publicProcedure
+    .input(
+      z.object({
+        text: z.string(),
+      })
+    )
+    .query(async (opts) => {
+      return `hello ${opts.input.text}`;
+    }),
 
-	createPost,
-})
+  createPost,
+});
 
-export type AppRouter = typeof appRouter
+export type AppRouter = typeof appRouter;

@@ -1,63 +1,55 @@
-import { InferModel, relations } from "drizzle-orm"
-import { boolean, int, json, text, varchar } from "drizzle-orm/mysql-core"
-import { buildMysqlTable } from "./common"
+import { InferModel, relations } from "drizzle-orm";
+import { boolean, int, json, text, varchar } from "drizzle-orm/mysql-core";
 
-const name = varchar("name", { length: 64 }).notNull()
-const url = varchar("url", { length: 128 }).notNull()
+import { buildMysqlTable } from "./common";
 
-export const source = buildMysqlTable(
-    "sources",
-	{
-		name,
-		url,
-	},
-)
+const name = varchar("name", { length: 64 }).notNull();
+const url = varchar("url", { length: 128 }).notNull();
 
-export const destination = buildMysqlTable(
-    "destinations",
-	{
-		name,
-		url,
-	},
-)
+export const source = buildMysqlTable("sources", {
+  name,
+  url,
+});
 
-export const connection = buildMysqlTable(
-	"connections",
-	{
-		name,
+export const destination = buildMysqlTable("destinations", {
+  name,
+  url,
+});
 
-		sourceId: int("destination_id"),
-		destinationId: int("source_id"),
+export const connection = buildMysqlTable("connections", {
+  name,
 
-		enabled: boolean("enabled").default(true).notNull(),
+  sourceId: int("destination_id"),
+  destinationId: int("source_id"),
 
-		fluxConfig: json("flux_config"),
-	},
-)
+  enabled: boolean("enabled").default(true).notNull(),
+
+  fluxConfig: json("flux_config"),
+});
 
 export const sourceRelations = relations(source, ({ many, one }) => ({
-	connections: many(connection),
-}))
+  connections: many(connection),
+}));
 export const destinationRelations = relations(destination, ({ many, one }) => ({
-	connections: many(connection),
-}))
+  connections: many(connection),
+}));
 
 export const connectionRelations = relations(connection, ({ one }) => ({
-	destination: one(destination, {
-		fields: [connection.destinationId],
-		references: [destination.id],
-	}),
-	source: one(source, {
-		fields: [connection.sourceId],
-		references: [source.id],
-	}),
-}))
+  destination: one(destination, {
+    fields: [connection.destinationId],
+    references: [destination.id],
+  }),
+  source: one(source, {
+    fields: [connection.sourceId],
+    references: [source.id],
+  }),
+}));
 
-export type InsertConnection = InferModel<typeof connection, "insert">
-export type Connection = InferModel<typeof connection, "select">
+export type InsertConnection = InferModel<typeof connection, "insert">;
+export type Connection = InferModel<typeof connection, "select">;
 
-export type InsertDestination = InferModel<typeof destination, "insert">
-export type Destination = InferModel<typeof destination, "select">
+export type InsertDestination = InferModel<typeof destination, "insert">;
+export type Destination = InferModel<typeof destination, "select">;
 
-export type InsertSource = InferModel<typeof source, "insert">
-export type Source = InferModel<typeof source, "select">
+export type InsertSource = InferModel<typeof source, "insert">;
+export type Source = InferModel<typeof source, "select">;

@@ -1,103 +1,126 @@
-import cliBoxes from "cli-boxes"
-import chalk from "chalk"
-import colorize from "./colorize.js"
-import { type DOMNode } from "./dom.js"
-import type Output from "./output.js"
+import chalk from "chalk";
+import cliBoxes from "cli-boxes";
 
-const renderBorder = (x: number, y: number, node: DOMNode, output: Output): void => {
-	if (node.style.borderStyle) {
-		const width = node.yogaNode!.getComputedWidth()
-		const height = node.yogaNode!.getComputedHeight()
-		const box = typeof node.style.borderStyle === "string" ? cliBoxes[node.style.borderStyle] : node.style.borderStyle
+import colorize from "./colorize.js";
+import { type DOMNode } from "./dom.js";
+import type Output from "./output.js";
 
-		const topBorderColor = node.style.borderTopColor ?? node.style.borderColor
-		const bottomBorderColor = node.style.borderBottomColor ?? node.style.borderColor
-		const leftBorderColor = node.style.borderLeftColor ?? node.style.borderColor
-		const rightBorderColor = node.style.borderRightColor ?? node.style.borderColor
+const renderBorder = (
+  x: number,
+  y: number,
+  node: DOMNode,
+  output: Output
+): void => {
+  if (node.style.borderStyle) {
+    const width = node.yogaNode!.getComputedWidth();
+    const height = node.yogaNode!.getComputedHeight();
+    const box =
+      typeof node.style.borderStyle === "string"
+        ? cliBoxes[node.style.borderStyle]
+        : node.style.borderStyle;
 
-		const dimTopBorderColor = node.style.borderTopDimColor ?? node.style.borderDimColor
+    const topBorderColor = node.style.borderTopColor ?? node.style.borderColor;
+    const bottomBorderColor =
+      node.style.borderBottomColor ?? node.style.borderColor;
+    const leftBorderColor =
+      node.style.borderLeftColor ?? node.style.borderColor;
+    const rightBorderColor =
+      node.style.borderRightColor ?? node.style.borderColor;
 
-		const dimBottomBorderColor = node.style.borderBottomDimColor ?? node.style.borderDimColor
+    const dimTopBorderColor =
+      node.style.borderTopDimColor ?? node.style.borderDimColor;
 
-		const dimLeftBorderColor = node.style.borderLeftDimColor ?? node.style.borderDimColor
+    const dimBottomBorderColor =
+      node.style.borderBottomDimColor ?? node.style.borderDimColor;
 
-		const dimRightBorderColor = node.style.borderRightDimColor ?? node.style.borderDimColor
+    const dimLeftBorderColor =
+      node.style.borderLeftDimColor ?? node.style.borderDimColor;
 
-		const showTopBorder = node.style.borderTop !== false
-		const showBottomBorder = node.style.borderBottom !== false
-		const showLeftBorder = node.style.borderLeft !== false
-		const showRightBorder = node.style.borderRight !== false
+    const dimRightBorderColor =
+      node.style.borderRightDimColor ?? node.style.borderDimColor;
 
-		const contentWidth = width - (showLeftBorder ? 1 : 0) - (showRightBorder ? 1 : 0)
+    const showTopBorder = node.style.borderTop !== false;
+    const showBottomBorder = node.style.borderBottom !== false;
+    const showLeftBorder = node.style.borderLeft !== false;
+    const showRightBorder = node.style.borderRight !== false;
 
-		let topBorder = showTopBorder
-			? colorize(
-					(showLeftBorder ? box.topLeft : "") + box.top.repeat(contentWidth) + (showRightBorder ? box.topRight : ""),
-					topBorderColor,
-					"foreground",
-			  )
-			: undefined
+    const contentWidth =
+      width - (showLeftBorder ? 1 : 0) - (showRightBorder ? 1 : 0);
 
-		if (showTopBorder && dimTopBorderColor) {
-			topBorder = chalk.dim(topBorder)
-		}
+    let topBorder = showTopBorder
+      ? colorize(
+          (showLeftBorder ? box.topLeft : "") +
+            box.top.repeat(contentWidth) +
+            (showRightBorder ? box.topRight : ""),
+          topBorderColor,
+          "foreground"
+        )
+      : undefined;
 
-		let verticalBorderHeight = height
+    if (showTopBorder && dimTopBorderColor) {
+      topBorder = chalk.dim(topBorder);
+    }
 
-		if (showTopBorder) {
-			verticalBorderHeight -= 1
-		}
+    let verticalBorderHeight = height;
 
-		if (showBottomBorder) {
-			verticalBorderHeight -= 1
-		}
+    if (showTopBorder) {
+      verticalBorderHeight -= 1;
+    }
 
-		let leftBorder = (colorize(box.left, leftBorderColor, "foreground") + "\n").repeat(verticalBorderHeight)
+    if (showBottomBorder) {
+      verticalBorderHeight -= 1;
+    }
 
-		if (dimLeftBorderColor) {
-			leftBorder = chalk.dim(leftBorder)
-		}
+    let leftBorder = (
+      colorize(box.left, leftBorderColor, "foreground") + "\n"
+    ).repeat(verticalBorderHeight);
 
-		let rightBorder = (colorize(box.right, rightBorderColor, "foreground") + "\n").repeat(verticalBorderHeight)
+    if (dimLeftBorderColor) {
+      leftBorder = chalk.dim(leftBorder);
+    }
 
-		if (dimRightBorderColor) {
-			rightBorder = chalk.dim(rightBorder)
-		}
+    let rightBorder = (
+      colorize(box.right, rightBorderColor, "foreground") + "\n"
+    ).repeat(verticalBorderHeight);
 
-		let bottomBorder = showBottomBorder
-			? colorize(
-					(showLeftBorder ? box.bottomLeft : "") +
-						box.bottom.repeat(contentWidth) +
-						(showRightBorder ? box.bottomRight : ""),
-					bottomBorderColor,
-					"foreground",
-			  )
-			: undefined
+    if (dimRightBorderColor) {
+      rightBorder = chalk.dim(rightBorder);
+    }
 
-		if (showBottomBorder && dimBottomBorderColor) {
-			bottomBorder = chalk.dim(bottomBorder)
-		}
+    let bottomBorder = showBottomBorder
+      ? colorize(
+          (showLeftBorder ? box.bottomLeft : "") +
+            box.bottom.repeat(contentWidth) +
+            (showRightBorder ? box.bottomRight : ""),
+          bottomBorderColor,
+          "foreground"
+        )
+      : undefined;
 
-		const offsetY = showTopBorder ? 1 : 0
+    if (showBottomBorder && dimBottomBorderColor) {
+      bottomBorder = chalk.dim(bottomBorder);
+    }
 
-		if (topBorder) {
-			output.write(x, y, topBorder, { transformers: [] })
-		}
+    const offsetY = showTopBorder ? 1 : 0;
 
-		if (showLeftBorder) {
-			output.write(x, y + offsetY, leftBorder, { transformers: [] })
-		}
+    if (topBorder) {
+      output.write(x, y, topBorder, { transformers: [] });
+    }
 
-		if (showRightBorder) {
-			output.write(x + width - 1, y + offsetY, rightBorder, {
-				transformers: [],
-			})
-		}
+    if (showLeftBorder) {
+      output.write(x, y + offsetY, leftBorder, { transformers: [] });
+    }
 
-		if (bottomBorder) {
-			output.write(x, y + height - 1, bottomBorder, { transformers: [] })
-		}
-	}
-}
+    if (showRightBorder) {
+      output.write(x + width - 1, y + offsetY, rightBorder, {
+        transformers: [],
+      });
+    }
 
-export default renderBorder
+    if (bottomBorder) {
+      output.write(x, y + height - 1, bottomBorder, { transformers: [] });
+    }
+  }
+};
+
+export default renderBorder;

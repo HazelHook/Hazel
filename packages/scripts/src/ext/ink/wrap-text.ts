@@ -1,43 +1,48 @@
-import wrapAnsi from "wrap-ansi"
-import cliTruncate from "cli-truncate"
-import { type Styles } from "./styles.js"
+import cliTruncate from "cli-truncate";
+import wrapAnsi from "wrap-ansi";
 
-const cache: Record<string, string> = {}
+import { type Styles } from "./styles.js";
 
-const wrapText = (text: string, maxWidth: number, wrapType: Styles["textWrap"]): string => {
-	const cacheKey = text + String(maxWidth) + String(wrapType)
-	const cachedText = cache[cacheKey]
+const cache: Record<string, string> = {};
 
-	if (cachedText) {
-		return cachedText
-	}
+const wrapText = (
+  text: string,
+  maxWidth: number,
+  wrapType: Styles["textWrap"]
+): string => {
+  const cacheKey = text + String(maxWidth) + String(wrapType);
+  const cachedText = cache[cacheKey];
 
-	let wrappedText = text
+  if (cachedText) {
+    return cachedText;
+  }
 
-	if (wrapType === "wrap") {
-		wrappedText = wrapAnsi(text, maxWidth, {
-			trim: false,
-			hard: true,
-		})
-	}
+  let wrappedText = text;
 
-	if (wrapType!.startsWith("truncate")) {
-		let position: "end" | "middle" | "start" = "end"
+  if (wrapType === "wrap") {
+    wrappedText = wrapAnsi(text, maxWidth, {
+      trim: false,
+      hard: true,
+    });
+  }
 
-		if (wrapType === "truncate-middle") {
-			position = "middle"
-		}
+  if (wrapType!.startsWith("truncate")) {
+    let position: "end" | "middle" | "start" = "end";
 
-		if (wrapType === "truncate-start") {
-			position = "start"
-		}
+    if (wrapType === "truncate-middle") {
+      position = "middle";
+    }
 
-		wrappedText = cliTruncate(text, maxWidth, { position })
-	}
+    if (wrapType === "truncate-start") {
+      position = "start";
+    }
 
-	cache[cacheKey] = wrappedText
+    wrappedText = cliTruncate(text, maxWidth, { position });
+  }
 
-	return wrappedText
-}
+  cache[cacheKey] = wrappedText;
 
-export default wrapText
+  return wrappedText;
+};
+
+export default wrapText;

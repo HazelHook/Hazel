@@ -1,1 +1,1 @@
-export { default, Item, Indicator, CheckBox } from "./multi-select"
+export { default, Item, Indicator, CheckBox } from "./multi-select";

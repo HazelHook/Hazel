@@ -1,16 +1,16 @@
-import { fetchRequestHandler } from "@trpc/server/adapters/fetch"
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
-import { createContext } from "@/server/context"
-import { appRouter } from "@/server/routers/_app"
+import { createContext } from "@/server/context";
+import { appRouter } from "@/server/routers/_app";
 
 const handler = (req: Request) =>
-	fetchRequestHandler({
-		endpoint: "/api/trpc",
-		req,
-		router: appRouter,
-		createContext,
-	})
+  fetchRequestHandler({
+    endpoint: "/api/trpc",
+    req,
+    router: appRouter,
+    createContext,
+  });
 
-export const runtime = "edge"
+export const runtime = "edge";
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };

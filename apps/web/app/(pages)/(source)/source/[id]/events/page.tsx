@@ -1,59 +1,75 @@
-import { auth } from "@/lib/auth"
-import { getCachedSource } from "@/lib/orm"
-import { notFound } from "next/navigation"
-import tiny from "@/lib/tiny"
-import { TableWrapper } from "@/app/(pages)/(source)/source/[id]/events/table"
-import { PromiseType } from "@/lib/ts/helpers"
+import { notFound } from "next/navigation";
+
+import { auth } from "@/lib/auth";
+import { getCachedSource } from "@/lib/orm";
+import tiny from "@/lib/tiny";
+import { PromiseType } from "@/lib/ts/helpers";
+import { TableWrapper } from "@/app/(pages)/(source)/source/[id]/events/table";
 
 interface EventsPageProps {
-	params: {
-		id: string
-	}
+  params: {
+    id: string;
+  };
 }
 
-async function fetchData({ customer_id, source_id }: { customer_id: string; source_id: string }) {
-	const [req, res] = await Promise.all([
-		tiny.requests.get({
-			customer_id,
-			source_id,
-		}),
-		tiny.responses.get({
-			customer_id,
-			source_id,
-		}),
-	])
+async function fetchData({
+  customer_id,
+  source_id,
+}: {
+  customer_id: string;
+  source_id: string;
+}) {
+  const [req, res] = await Promise.all([
+    tiny.requests.get({
+      customer_id,
+      source_id,
+    }),
+    tiny.responses.get({
+      customer_id,
+      source_id,
+    }),
+  ]);
 
-	const merged = req.data.map((d) => {
-		const responses = res.data.filter((r) => r.request_id === d.id)
-		return Object.assign(d, {responses})
-	})
+  const merged = req.data.map((d) => {
+    const responses = res.data.filter((r) => r.request_id === d.id);
+    return Object.assign(d, { responses });
+  });
 
-	return {
-		data: merged,
-		rows: req.rows, 
-		rows_before_limit_at_least: req.rows_before_limit_at_least
-	}
+  return {
+    data: merged,
+    rows: req.rows,
+    rows_before_limit_at_least: req.rows_before_limit_at_least,
+  };
 }
 
-export type EventDataRowType = PromiseType<ReturnType<typeof fetchData>>['data'][number]
+export type EventDataRowType = PromiseType<
+  ReturnType<typeof fetchData>
+>["data"][number];
 
 const EventsPage = async ({ params }: EventsPageProps) => {
-	const { userId } = auth()
-	const source = await getCachedSource({ publicId: params.id })
-	
-	if (!source) {
-		notFound()
-	}
+  const { userId } = auth();
+  const source = await getCachedSource({ publicId: params.id });
 
-	const sources = await fetchData({ customer_id: userId, source_id: params.id })
+  if (!source) {
+    notFound();
+  }
 
-	return (
-		<div>
-			<div className="w-full">
-				<TableWrapper data={sources.data} maxItems={sources.rows_before_limit_at_least || sources.data.length} source={source} />
-			</div>
-		</div>
-	)
-}
+  const sources = await fetchData({
+    customer_id: userId,
+    source_id: params.id,
+  });
 
-export default EventsPage
+  return (
+    <div>
+      <div className="w-full">
+        <TableWrapper
+          data={sources.data}
+          maxItems={sources.rows_before_limit_at_least || sources.data.length}
+          source={source}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default EventsPage;

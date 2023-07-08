@@ -1,13 +1,14 @@
-import React, { type FC as ReactFC, type ReactNode } from "react"
-import { Transform, Text } from "../ink"
-import PropTypes from "prop-types"
-import terminalLink from "terminal-link"
+import React, { type FC as ReactFC, type ReactNode } from "react";
+import PropTypes from "prop-types";
+import terminalLink from "terminal-link";
+
+import { Text, Transform } from "../ink";
 
 /* eslint-disable react/boolean-prop-naming */
 export type Props = {
-	readonly children: ReactNode
+  readonly children: ReactNode;
 
-	/**
+  /**
 	The URL to link to.
 
 	@example
@@ -20,9 +21,9 @@ export type Props = {
 	</Link>
 	```
 	*/
-	readonly url: string
+  readonly url: string;
 
-	/**
+  /**
 	Determines whether the URL should be printed in parens after the text for unsupported terminals: `My website (https://sindresorhus.com)`.
 
 	@default true
@@ -37,8 +38,8 @@ export type Props = {
 	</Link>
 	```
 	*/
-	readonly fallback?: boolean
-}
+  readonly fallback?: boolean;
+};
 /* eslint-enable react/boolean-prop-naming */
 
 /**
@@ -62,21 +63,28 @@ render(
 ```
 */
 const Link: ReactFC<Props> = (
-	props, // eslint-disable-line react/function-component-definition
+  props // eslint-disable-line react/function-component-definition
 ) => (
-	<Transform transform={(children) => terminalLink(children, props.url, { fallback: props.fallback })}>
-		<Text>{props.children}</Text>
-	</Transform>
-)
+  <Transform
+    transform={(children) =>
+      terminalLink(children, props.url, { fallback: props.fallback })
+    }
+  >
+    <Text>{props.children}</Text>
+  </Transform>
+);
 
 Link.propTypes = {
-	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-	url: PropTypes.string.isRequired,
-	fallback: PropTypes.bool, // eslint-disable-line react/boolean-prop-naming
-}
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  url: PropTypes.string.isRequired,
+  fallback: PropTypes.bool, // eslint-disable-line react/boolean-prop-naming
+};
 
 Link.defaultProps = {
-	fallback: true,
-}
+  fallback: true,
+};
 
-export default Link
+export default Link;

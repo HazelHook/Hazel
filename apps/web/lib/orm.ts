@@ -1,37 +1,49 @@
-import { cache } from "react"
-import { notFound } from "next/navigation"
-import db from "./db"
-import { PromiseType } from "@/lib/ts/helpers"
+import { cache } from "react";
+import { notFound } from "next/navigation";
 
-export const getCachedConnection = cache(async ({ publicId }: { publicId: string }) => {
-	const connection = await db.connection.findFirst({ publicId })
+import { PromiseType } from "@/lib/ts/helpers";
 
-	if (!connection) {
-		notFound()
-	}
+import db from "./db";
 
-	return connection
-})
-export type CacheConnection = PromiseType<ReturnType<typeof getCachedConnection>>
+export const getCachedConnection = cache(
+  async ({ publicId }: { publicId: string }) => {
+    const connection = await db.connection.findFirst({ publicId });
 
-export const getCachedSource = cache(async ({ publicId }: { publicId: string }) => {
-	const source = await db.source.findFirst({ publicId })
+    if (!connection) {
+      notFound();
+    }
 
-	if (!source) {
-		notFound()
-	}
+    return connection;
+  }
+);
+export type CacheConnection = PromiseType<
+  ReturnType<typeof getCachedConnection>
+>;
 
-	return source
-})
-export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>
+export const getCachedSource = cache(
+  async ({ publicId }: { publicId: string }) => {
+    const source = await db.source.findFirst({ publicId });
 
-export const getCachedDestination = cache(async ({ publicId }: { publicId: string }) => {
-	const destination = await db.destination.findFirst({ publicId })
+    if (!source) {
+      notFound();
+    }
 
-	if (!destination) {
-		notFound()
-	}
+    return source;
+  }
+);
+export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>;
 
-	return destination
-})
-export type CacheDestination = PromiseType<ReturnType<typeof getCachedDestination>>
+export const getCachedDestination = cache(
+  async ({ publicId }: { publicId: string }) => {
+    const destination = await db.destination.findFirst({ publicId });
+
+    if (!destination) {
+      notFound();
+    }
+
+    return destination;
+  }
+);
+export type CacheDestination = PromiseType<
+  ReturnType<typeof getCachedDestination>
+>;

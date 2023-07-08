@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { ReactNode } from "react"
-import { ReactFlowProvider } from "reactflow"
+import { ReactNode } from "react";
+import { ReactFlowProvider } from "reactflow";
 
 export const FlowProvider = ({ children }: { children: ReactNode }) => {
-	return <ReactFlowProvider>{children}</ReactFlowProvider>
-}
+  return <ReactFlowProvider>{children}</ReactFlowProvider>;
+};
