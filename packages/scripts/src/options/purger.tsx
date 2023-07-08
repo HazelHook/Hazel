@@ -6,8 +6,6 @@ import { CustomList } from "../components/custom-list"
 import { Button } from "../components/button"
 import { cap } from "../lib/util"
 import { Checkbox } from "../components/checkbox"
-import figures from "figures"
-import { connection, destination, source } from "../../../db/src/schema"
 
 function truncate(datasource: string, cascade: boolean) {
 	childProcess.exec(
@@ -28,7 +26,7 @@ export function Purger({
 	const [cascadeDelete, setCascadeDelete] = useState(false)
 	const [tabIndex, setTabIndex] = useState(0)
 	const elementCount = (datasources.datasources?.length ?? 0) + 2
-	const tables = { connections: connection, destinations: destination, sources: source }
+	const tables ={}// { connections: connection, destinations: destination, sources: source }
 	const tablesCount = Object.keys(tables).length
 
 	useInput((input, key) => {

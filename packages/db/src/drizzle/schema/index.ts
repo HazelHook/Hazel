@@ -2,45 +2,38 @@ import { InferModel, relations } from "drizzle-orm"
 import { boolean, int, json, text, varchar } from "drizzle-orm/mysql-core"
 import { buildMysqlTable } from "./common"
 
+const name = varchar("name", { length: 64 }).notNull()
+const url = varchar("url", { length: 128 }).notNull()
 
 export const source = buildMysqlTable(
     "sources",
 	{
-		name: varchar("name", { length: 64 }).notNull(),
-		url: varchar("url", { length: 128 }),
+		name,
+		url,
 	},
 )
 
 export const destination = buildMysqlTable(
     "destinations",
 	{
-		name: varchar("name", { length: 64 }).notNull(),
-		url: varchar("url", { length: 128 }),
+		name,
+		url,
 	},
 )
 
 export const connection = buildMysqlTable(
 	"connections",
 	{
-		name: varchar("name", { length: 64 }).notNull(),
+		name,
 
-		sourceId: int("destination_id").notNull(),
-		destinationId: int("source_id").notNull(),
+		sourceId: int("destination_id").references(() => source.id).notNull(),
+		destinationId: int("source_id").references(() => destination.id).notNull(),
 
 		enabled: boolean("enabled").default(true).notNull(),
 
 		fluxConfig: json("flux_config"),
 	},
 )
-
-export const sourceRelations = relations(source, ({ many, one }) => ({
-	connections: many(connection),
-}))
-
-export const destinationRelations = relations(destination, ({ many, one }) => ({
-	connections: many(connection),
-}))
-
 
 export const connectionRelations = relations(connection, ({ one }) => ({
 	destination: one(destination, {

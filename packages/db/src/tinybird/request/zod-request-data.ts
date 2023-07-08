@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { baseParams, body, hazelVersion, headers, status, timestamp } from "../zod-common";
+import { body, hazelVersion, headers, successState, timestamp } from "../zod-common";
 
 export const requestEventTimeSeries = z.object({
 	customer_id: z.string(),
@@ -15,6 +15,7 @@ export const requestEvent = z.object({
 	id: z.string(),
 	customer_id: z.string(),
 	source_id: z.string(),
+	request_id: z.string(),
 
 	// Metadata
 	version: hazelVersion,
@@ -23,8 +24,8 @@ export const requestEvent = z.object({
 	timestamp,
 
 	// Status
-	validated: status,
-	rejected: status,
+	validated: successState,
+	rejected: successState,
 
 	// Data
 	body,

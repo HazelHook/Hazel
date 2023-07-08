@@ -3,7 +3,6 @@ import { rand, randBetweenDate, randJSON, randNumber, randText, randUrl, randWor
 import figures from "figures"
 import { nanoid } from "nanoid"
 
-import { connection, destination, source } from "../../../db/src/schema.js"
 import { Tiny } from "../../../db/src/tinybird/index.js"
 import { Box, measureElement, Newline, Text, useInput } from "../ext/ink"
 import { ProgressBar } from "../ext/ink-progress-bar"
@@ -145,7 +144,7 @@ export function Planter({
 				const sourceObjects: any[] = []
 				await db.transaction(async (tx) => {
 					for (let i = 0; i < generatedSourceIds.length; i++) {
-						const sourceObject = await tx.insert(source).values({
+						const sourceObject = await tx.insert(sources).values({
 							name: `${randWord({ capitalize: true })}`,
 							publicId: generatedSourceIds[i],
 							customerId,
@@ -164,7 +163,7 @@ export function Planter({
 				const destinationObjects: any[] = []
 				await db.transaction(async (tx) => {
 					for (let i = 0; i < generatedDestinationIds.length; i++) {
-						const destinationObject = await tx.insert(destination).values({
+						const destinationObject = await tx.insert(destinations).values({
 							name: `${randWord({ capitalize: true })}`,
 							publicId: generatedDestinationIds[i],
 							customerId,
@@ -183,7 +182,7 @@ export function Planter({
 
 				await db.transaction(async (tx) => {
 					for (let i = 0; i < generatedConnectionIds.length; i++) {
-						await tx.insert(connection).values({
+						await tx.insert(connections).values({
 							name: randWord({ capitalize: true }),
 							customerId: customerId,
 							publicId: generatedConnectionIds[i],
@@ -210,11 +209,11 @@ export function Planter({
 					}).toISOString()
 
 					promises.push(
-						tb.publishRequestEvent({
+						tb.requests.publish({
 							customer_id: customerId,
 							source_id: generatedSourceIds[i % generatedSourceIds.length],
 							request_id: generatedRequestIds[i],
-							version: "1",
+							version: "1.0",
 							timestamp,
 							body: content.body,
 							headers: content.headers,
@@ -224,7 +223,7 @@ export function Planter({
 					const { status, success } = generateSuccessState()
 
 					promises.push(
-						tb.publishResponseEvent({
+						tb.responses.publish({
 							customer_id: customerId,
 							source_id: generatedSourceIds[i % generatedSourceIds.length],
 							destination_id: generatedDestinationIds[i % generatedDestinationIds.length],
@@ -233,7 +232,7 @@ export function Planter({
 							headers: content.headers,
 							status,
 							success: success ? 1 : 0,
-							version: "1",
+							version: "1.0",
 							timestamp: randBetweenDate({
 								from: new Date(timestamp),
 								to: new Date(new Date(timestamp).getTime() + 1000),

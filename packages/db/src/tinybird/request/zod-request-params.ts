@@ -13,7 +13,9 @@ export const getRequestParams = z.object({
 export const getRequestsKpiParams = z.object({
 	customer_id: z.string(),
 	source_id: z.string().optional(),
-	
+
+	success: z.number().optional(),
+
 	period: period.default("daily").optional(),
 	start_date: z.date(),
 	end_date: z.date().optional(),

@@ -15,14 +15,13 @@ export const getResponseParams = z.object({
 export const getResponseKpisParams =
 	z.object({
 		customer_id: z.string(),
-		destination_id: z.string().optional(),
 		source_id: z.string().optional(),
 
 		start_date: z.date(),
 		end_date: z.date().optional(),
 		period: period.default("daily").optional(),
 
-		success: z.number(),
+		success: z.number().optional(),
 	})
 
 

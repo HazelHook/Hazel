@@ -3,7 +3,7 @@ import { requestEvent, requestEventTimeSeries } from "./zod-request-data"
 import { getRequestParams, getRequestsKpiParams, getRequestsTimeseriesParams } from "./zod-request-params"
 
 
-export const buildTinyBirdResource = (tb: Tinybird) => {
+export const buildTinyBirdRequests = (tb: Tinybird) => {
     const publish = tb.buildIngestEndpoint({
         datasource: "event_requests",
         event: requestEvent,

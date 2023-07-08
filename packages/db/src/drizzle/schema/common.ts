@@ -1,4 +1,4 @@
-import { AnyMySqlColumnBuilder, mysqlTable, serial, timestamp, varchar } from "drizzle-orm/mysql-core"
+import { mysqlTable, serial, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { nanoid } from "nanoid"
 
 const commonFields = {

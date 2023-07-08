@@ -1,8 +1,8 @@
-import { eq } from "drizzle-orm"
+import { DBQueryConfig, eq } from "drizzle-orm"
 
-import { DB } from ".."
-import { connection, InsertConnection } from "../schema"
-import { generatePublicId } from "../schema/common"
+import { DB } from "../.."
+import { connection, InsertConnection } from "../../schema"
+import { generatePublicId } from "../../schema/common"
 
 export async function getConnection({
 	publicId,
@@ -51,6 +51,7 @@ export async function getConnections({
 		if(destinationId) return eq(connection.destinationId, destinationId)
 		if(sourceId) return eq(connection.sourceId, sourceId)
 	})()
+
 
 	return await db.query.connection.findMany({
 		where,

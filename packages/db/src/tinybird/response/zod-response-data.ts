@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { body, hazelVersion, headers, status, timestamp } from "../zod-common";
+import { body, hazelVersion, headers, successState, timestamp } from "../zod-common";
 
 export const responseEventTimeSeries = z.object({
     customer_id: z.string(),
@@ -9,7 +9,7 @@ export const responseEventTimeSeries = z.object({
     date: z.date(),
     
     events: z.number(),
-    status: status
+    status: successState
 }).describe("Contains the number of events sent to a destination, grouped by date.")
 export type ResponseEventTimeSeries = z.infer<typeof responseEventTimeSeries>
 
@@ -29,7 +29,10 @@ export const responseEvent = z.object({
 	send_timestamp: timestamp,
 
 	// Status
-	status,
+	validated: successState,
+	rejected: successState,
+	status: z.number(),
+	success: z.number(),
 
 	// Data
 	body,
@@ -38,6 +41,7 @@ export const responseEvent = z.object({
 export type ResponseEvent = z.infer<typeof responseEvent>
 
 export const responseEventKpis = z.object({
+	customer_id: z.string(),
 	requests: z.number(),
 	sources: z.number(),
 	date: z.string(),

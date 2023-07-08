@@ -25,37 +25,37 @@ const SourcePage = async ({
 		redirect("/")
 	}
 
-	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
+	const startTime = sub(new Date(), { days: 7 })
 
-	const pReqKpis = tiny.getReqKpis({
+	const pRequestKpis = tiny.requests.getKpis({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})
 
-	const pResKpis = tiny.getResKpis({
+	const pResponseKpis = tiny.responses.getKpis({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		success: 1,
 		start_date: startTime,
 	})
 
-	const pErrorKpis = tiny.getResKpis({
+	const pErrorResponseKpis = tiny.responses.getKpis({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		success: 0,
 		start_date: startTime,
 	})
 
-	const pBySources = tiny.getReqTimeseries({
+	const pRequestTimeseries = tiny.requests.getTimeseries({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})
 
-	const [reqKpis, resKpis, errorKpis, bySources] = await Promise.all([pReqKpis, pResKpis, pErrorKpis, pBySources])
+	const [requestKpis, responseKpis, errorKpis, requestTimeseries] = await Promise.all([pRequestKpis, pResponseKpis, pErrorResponseKpis, pRequestTimeseries])
 
-	const chartData = transformSourcesChartData(bySources.data)
+	const chartData = transformSourcesChartData(requestTimeseries.data)
 
 	return (
 		<div className="space-y-4">
@@ -63,25 +63,25 @@ const SourcePage = async ({
 				<KpiCard
 					color={chartColors[0]}
 					title={"Events"}
-					subtitle={String(reqKpis.data.reduce((curr, el) => curr + el.events, 0))}
+					subtitle={String(requestKpis.data.reduce((curr, el) => curr + el.events, 0))}
 					group="kpis"
 					id={"events"}
-					series={[{ name: "Events", data: reqKpis.data.map((datum) => datum.events) }]}
-					labels={reqKpis.data.map((datum) => datum.date)}
+					series={[{ name: "Events", data: requestKpis.data.map((datum) => datum.events) }]}
+					labels={requestKpis.data.map((datum) => formatDateTime(datum.date))}
 				/>
 				<KpiCard
 					color={chartColors[1]}
 					title={"Requests"}
-					subtitle={String(resKpis.data.reduce((curr, el) => curr + el.requests, 0))}
+					subtitle={String(responseKpis.data.reduce((curr, el) => curr + el.requests, 0))}
 					id={"req"}
 					group="kpis"
 					series={[
 						{
 							name: "Requests",
-							data: resKpis.data.map((datum) => datum.requests),
+							data: responseKpis.data.map((datum) => datum.requests),
 						},
 					]}
-					labels={reqKpis.data.map((datum) => datum.date)}
+					labels={requestKpis.data.map((datum) => formatDateTime(datum.date))}
 				/>
 				<KpiCard
 					color={chartColors[3]}
