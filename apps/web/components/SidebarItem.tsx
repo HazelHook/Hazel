@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const SidebarClientItem = ({
 	href,
@@ -44,17 +45,24 @@ export const SidebarClientItem = ({
 	}
 
 	return (
-		<Link className="click" href={href} target={target}>
-			<Button
-				variant="ghost"
-				disabled={disabled}
-				size={size}
-				className={cn(active && "bg-muted", "w-full justify-center lg:justify-start")}
-			>
-				{icon}
-				<p className="hidden lg:block">{title}</p>
-				{endIcon}
-			</Button>
-		</Link>
+		<Tooltip disableHoverableContent>
+			<TooltipTrigger asChild>
+				<Link className="click" href={href} target={target}>
+					<Button
+						variant="ghost"
+						disabled={disabled}
+						size={size}
+						className={cn(active && "bg-muted", "w-full justify-center lg:justify-start")}
+					>
+						{icon}
+						<p className="hidden lg:block">{title}</p>
+						{endIcon}
+					</Button>
+				</Link>
+			</TooltipTrigger>
+			<TooltipContent className="lg:hidden" align="center" side="right">
+				{title}
+			</TooltipContent>
+		</Tooltip>
 	)
 }
