@@ -45,6 +45,8 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 		},
 	})
 
+	console.log(form.getValues())
+
 	const createSource = useAction(action, {
 		onSuccess(data) {
 			router.push(`/connection/${data.id}/`)
@@ -82,7 +84,14 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Source</FormLabel>
-								<Select onValueChange={field.onChange} defaultValue={field.value}>
+								<Select
+									onValueChange={(value) => {
+										if (value !== "") {
+											field.onChange(value)
+										}
+									}}
+									value={field.value}
+								>
 									<FormControl>
 										<SelectTrigger>
 											<SelectValue placeholder="Select a verified email to display" />
@@ -117,7 +126,14 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Destination</FormLabel>
-								<Select onValueChange={field.onChange} defaultValue={field.value}>
+								<Select
+									onValueChange={(value) => {
+										if (value !== "") {
+											field.onChange(value)
+										}
+									}}
+									value={field.value}
+								>
 									<FormControl>
 										<SelectTrigger>
 											<SelectValue placeholder="Select a verified email to display" />
@@ -170,9 +186,10 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 					<NewSourceForm
 						shouldRedirect={false}
 						onClose={(id) => {
-							console.log(id)
-							form.setValue("publicSourceId", id, { shouldTouch: true })
+							console.log(id, "XD")
 							setSourceModal(false)
+							form.setValue("publicSourceId", id)
+							form.setValue("name", id)
 						}}
 						action={createSourceAction}
 					/>
@@ -183,8 +200,9 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 				<DialogContent>
 					<NewDestinationForm
 						onClose={(id) => {
-							form.setValue("publiceDestinationId", id)
+							console.log(id)
 							setDestinationModal(false)
+							form.setValue("publiceDestinationId", id)
 						}}
 						shouldRedirect={false}
 						action={createDestinationAction}

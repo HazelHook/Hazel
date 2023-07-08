@@ -36,9 +36,9 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true }: NewSou
 
 			if (shouldRedirect) {
 				router.push(`/source/${data.id}/`)
-			} else {
-				onClose?.(data.id)
 			}
+
+			onClose?.(data.id)
 		},
 		onError(error) {
 			form.setError("root", error)

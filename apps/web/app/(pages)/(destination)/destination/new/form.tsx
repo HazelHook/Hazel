@@ -36,9 +36,9 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 			router.refresh()
 			if (shouldRedirect) {
 				router.push(`/destination/${data.id}/`)
-			} else {
-				onClose?.(data.id)
 			}
+
+			onClose?.(data.id)
 		},
 		onError(error) {
 			form.setError("root", error)
