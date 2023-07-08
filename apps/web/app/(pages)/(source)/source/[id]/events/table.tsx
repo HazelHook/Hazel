@@ -96,16 +96,6 @@ const TableSheet = ({ data, source }: { data: EventDataRowType; source: CacheSou
 					<Suspense>
 						<ExpandableList title="Headers" maxItems={3} items={jsonToArray(headers)} />
 					</Suspense>
-					{/* <Card>
-				<CardHeader>
-					<CardTitle>Body</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<Suspense>
-						<Code lang="json">{data.body}</Code>
-					</Suspense>
-				</CardContent>
-			</Card> */}
 					<Card>
 						<CardHeader>
 							<CardTitle>Events</CardTitle>

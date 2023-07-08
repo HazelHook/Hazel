@@ -1,4 +1,4 @@
-import { connectDB } from "db/src/index"
+import { connectDB } from "db/src/drizzle"
 
 export default connectDB({
 	host: process.env.PLANETSCALE_DB_HOST as string,

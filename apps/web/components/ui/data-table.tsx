@@ -10,7 +10,6 @@ import {
 	SortingState,
 	useReactTable,
 } from "@tanstack/react-table"
-import { Source } from "db/src/schema"
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
@@ -36,8 +35,8 @@ export function DataTable<TData, TValue>({ columns, data, rootPath }: DataTableP
 		},
 	})
 
-	const navigate = (source: Source) => () => {
-		router.push(`${rootPath}/${source.publicId}`)
+	const navigate = (data: TData) => () => {
+		router.push(`${rootPath}/${data.publicId}`)
 	}
 
 	return (
@@ -61,7 +60,7 @@ export function DataTable<TData, TValue>({ columns, data, rootPath }: DataTableP
 						table.getRowModel().rows.map((row) => (
 							<TableRow
 								className="cursor-pointer"
-								onClick={navigate(row.original as Source)}
+								onClick={navigate(row.original)}
 								key={row.id}
 								data-state={row.getIsSelected() && "selected"}
 							>
