@@ -7,10 +7,8 @@ import { Status } from "@/components/Status"
 import { ExpandableList } from "@/components/ui/ExpandableList"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { CacheSource, getCachedSource } from "@/lib/orm"
+import { CacheSource } from "@/lib/orm"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
-import { Code } from "bright"
-import { headers } from "next/headers"
 import Link from "next/link"
 import { ReactNode, Suspense } from "react"
 
@@ -41,6 +39,8 @@ const ListItem = ({ name, description }: { name: string; description: ReactNode 
 const TableSheet = ({ data, source }: { data: EventDataRowType; source: CacheSource }) => {
 	const successfulResponses = data.responses.filter((r) => r.success)
 	const success = successfulResponses.length === data.responses.length
+
+	const headers = JSON.parse(data.headers)
 
 	return (
 		<div className="p-6 container space-y-4">
@@ -89,7 +89,7 @@ const TableSheet = ({ data, source }: { data: EventDataRowType; source: CacheSou
 			<Suspense>
 				<ExpandableList title="Headers" maxItems={3} items={jsonToArray(headers)} />
 			</Suspense>
-			<Card>
+			{/* <Card>
 				<CardHeader>
 					<CardTitle>Body</CardTitle>
 				</CardHeader>
@@ -98,7 +98,7 @@ const TableSheet = ({ data, source }: { data: EventDataRowType; source: CacheSou
 						<Code lang="json">{data.body}</Code>
 					</Suspense>
 				</CardContent>
-			</Card>
+			</Card> */}
 			<Card>
 				<CardHeader>
 					<CardTitle>Events</CardTitle>
