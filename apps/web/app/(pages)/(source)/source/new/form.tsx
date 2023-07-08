@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -16,9 +15,11 @@ import { formSchema } from "./schema"
 
 interface NewSourceFormProps {
 	action: typeof createSourceAction
+	shouldRedirect?: boolean
+	onClose?: (id: string) => void
 }
 
-export function NewSourceForm({ action }: NewSourceFormProps) {
+export function NewSourceForm({ onClose, action, shouldRedirect = true }: NewSourceFormProps) {
 	const router = useRouter()
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -31,7 +32,13 @@ export function NewSourceForm({ action }: NewSourceFormProps) {
 
 	const createSource = useAction(action, {
 		onSuccess(data) {
-			router.push(`/source/${data.id}/`)
+			router.refresh()
+
+			if (shouldRedirect) {
+				router.push(`/source/${data.id}/`)
+			} else {
+				onClose?.(data.id)
+			}
 		},
 		onError(error) {
 			form.setError("root", error)

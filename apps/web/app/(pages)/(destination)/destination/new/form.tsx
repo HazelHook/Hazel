@@ -16,9 +16,11 @@ import { formSchema } from "./schema"
 
 interface NewDestinationFormProps {
 	action: typeof createDestinationAction
+	shouldRedirect?: boolean
+	onClose?: (id: string) => void
 }
 
-export function NewDestinationForm({ action }: NewDestinationFormProps) {
+export function NewDestinationForm({ onClose, action, shouldRedirect = true }: NewDestinationFormProps) {
 	const router = useRouter()
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -31,7 +33,12 @@ export function NewDestinationForm({ action }: NewDestinationFormProps) {
 
 	const createSource = useAction(action, {
 		onSuccess(data) {
-			router.push(`/destination/${data.id}/`)
+			router.refresh()
+			if (shouldRedirect) {
+				router.push(`/destination/${data.id}/`)
+			} else {
+				onClose?.(data.id)
+			}
 		},
 		onError(error) {
 			form.setError("root", error)

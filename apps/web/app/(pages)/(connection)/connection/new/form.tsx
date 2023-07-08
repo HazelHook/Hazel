@@ -16,6 +16,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 import type { createConnectionAction } from "./_actions"
 import { formSchema } from "./schema"
+import { AddIcon } from "@/components/icons/pika/add"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
+import { createDestinationAction } from "@/app/(pages)/(destination)/destination/new/_actions"
+import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
+import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
+import { useState } from "react"
 
 interface NewSourceFormProps {
 	action: typeof createConnectionAction
@@ -24,6 +31,9 @@ interface NewSourceFormProps {
 }
 
 export function NewConnectionForm({ action, sources, destinations }: NewSourceFormProps) {
+	const [sourceModal, setSourceModal] = useState(false)
+	const [destinationModal, setDestinationModal] = useState(false)
+
 	const router = useRouter()
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -44,92 +54,143 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 		},
 	})
 
-	// 2. Define a submit handler.
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		createSource.mutate(values)
 	}
 
 	return (
-		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-				<FormField
-					control={form.control}
-					name="name"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Name</FormLabel>
-							<FormControl>
-								<Input placeholder="Connection ..." {...field} />
-							</FormControl>
-							<FormDescription>A name to identify your connection.</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name="publicSourceId"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Source</FormLabel>
-							<Select onValueChange={field.onChange} defaultValue={field.value}>
+		<>
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+					<FormField
+						control={form.control}
+						name="name"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Name</FormLabel>
 								<FormControl>
-									<SelectTrigger>
-										<SelectValue placeholder="Select a verified email to display" />
-									</SelectTrigger>
+									<Input placeholder="Connection ..." {...field} />
 								</FormControl>
-								<SelectContent>
-									{sources.map((source) => (
-										<SelectItem key={source.publicId} value={source.publicId}>
-											<div className="flex flex-row items-center">
-												<Avatar className="mr-2 w-4 h-4">
-													<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
-												</Avatar>
-												{source.name}
-											</div>
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name="publiceDestinationId"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Destination</FormLabel>
-							<Select onValueChange={field.onChange} defaultValue={field.value}>
-								<FormControl>
-									<SelectTrigger>
-										<SelectValue placeholder="Select a verified email to display" />
-									</SelectTrigger>
-								</FormControl>
-								<SelectContent>
-									{destinations.map((source) => (
-										<SelectItem key={source.publicId} value={source.publicId}>
-											<div className="flex flex-row items-center">
-												<Avatar className="mr-2 w-4 h-4">
-													<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
-												</Avatar>
-												{source.name}
-											</div>
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormMessage />
+								<FormDescription>A name to identify your connection.</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="publicSourceId"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Source</FormLabel>
+								<Select onValueChange={field.onChange} defaultValue={field.value}>
+									<FormControl>
+										<SelectTrigger>
+											<SelectValue placeholder="Select a verified email to display" />
+										</SelectTrigger>
+									</FormControl>
+									<SelectContent>
+										{sources.map((source) => (
+											<SelectItem key={source.publicId} value={source.publicId}>
+												<div className="flex flex-row items-center">
+													<Avatar className="mr-2 w-4 h-4">
+														<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+													</Avatar>
+													{source.name}
+												</div>
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<div className="flex justify-center">
+						<Button variant="outline" type="button" onClick={() => setSourceModal(true)}>
+							<AddIcon className="w-5 h-5 mr-2" />
+							Create New Source
+						</Button>
+					</div>
+					<FormField
+						control={form.control}
+						name="publiceDestinationId"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Destination</FormLabel>
+								<Select onValueChange={field.onChange} defaultValue={field.value}>
+									<FormControl>
+										<SelectTrigger>
+											<SelectValue placeholder="Select a verified email to display" />
+										</SelectTrigger>
+									</FormControl>
+									<SelectContent>
+										{destinations.map((source) => (
+											<SelectItem key={source.publicId} value={source.publicId}>
+												<div className="flex flex-row items-center">
+													<Avatar className="mr-2 w-4 h-4">
+														<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+													</Avatar>
+													{source.name}
+												</div>
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormMessage />
 
-				<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
-					Create
-				</Button>
-			</form>
-		</Form>
+					<div className="flex justify-center">
+						<Button
+							variant="outline"
+							type="button"
+							onClick={() => {
+								setDestinationModal(true)
+							}}
+						>
+							<AddIcon className="w-5 h-5 mr-2" />
+							Create New Destination
+						</Button>
+					</div>
+
+					<Button
+						type="submit"
+						disabled={createSource.status === "loading"}
+						loading={createSource.status === "loading"}
+					>
+						Create
+					</Button>
+				</form>
+			</Form>
+
+			<Dialog open={sourceModal} onOpenChange={setSourceModal}>
+				<DialogContent>
+					<NewSourceForm
+						shouldRedirect={false}
+						onClose={(id) => {
+							console.log(id)
+							form.setValue("publicSourceId", id, { shouldTouch: true })
+							setSourceModal(false)
+						}}
+						action={createSourceAction}
+					/>
+				</DialogContent>
+			</Dialog>
+
+			<Dialog open={destinationModal} onOpenChange={setDestinationModal}>
+				<DialogContent>
+					<NewDestinationForm
+						onClose={(id) => {
+							form.setValue("publiceDestinationId", id)
+							setDestinationModal(false)
+						}}
+						shouldRedirect={false}
+						action={createDestinationAction}
+					/>
+				</DialogContent>
+			</Dialog>
+		</>
 	)
 }
