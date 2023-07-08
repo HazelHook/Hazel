@@ -13,11 +13,11 @@ interface EventsPageProps {
 
 async function fetchData({ customer_id, source_id }: { customer_id: string; source_id: string }) {
 	const [req, res] = await Promise.all([
-		tiny.getReq({
+		tiny.requests.get({
 			customer_id,
 			source_id,
 		}),
-		tiny.getRes({
+		tiny.responses.get({
 			customer_id,
 			source_id,
 		}),
