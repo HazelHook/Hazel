@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react"
-import { format, formatDistance, formatRelative } from "date-fns"
+import { format, formatDistance } from "date-fns"
 import { Source } from "db/src/schema"
 import { Position } from "reactflow"
 
@@ -117,7 +117,7 @@ export const SourceNode = memo(({ data }: DefaultNode) => {
 								<Label htmlFor="host" className="text-right">
 									Host
 								</Label>
-								<Input id="host" value={data.source.url} className="col-span-3" />
+								<Input id="host" value={data.source.url || ""} className="col-span-3" />
 							</div>
 							<div className="flex flex-row items-center gap-2">
 								<Separator className="w-1/2" />
