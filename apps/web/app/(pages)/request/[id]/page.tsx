@@ -10,6 +10,7 @@ import { auth } from "@/lib/auth"
 import { notFound } from "next/navigation"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { getCachedSource } from "@/lib/orm"
+import { Status } from "@/app/(pages)/request/[id]/_components/Status"
 
 const ListItem = ({ name, description }: { name: string; description: ReactNode | string }) => {
 	return (
@@ -19,6 +20,8 @@ const ListItem = ({ name, description }: { name: string; description: ReactNode 
 		</div>
 	)
 }
+
+Code.theme = "material-ocean"
 
 interface ResponsePageProps {
 	params: {
@@ -46,7 +49,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	return (
 		<div className="p-6 container space-y-4">
 			<div className="flex flex-row gap-2 items-center">
-				<div className="h-5 w-5 bg-green-500 rounded-sm" />
+				<Status status={req.rejected ? "error" : "success"} />
 
 				<h1 className="text-2xl uppercase">{req.id}</h1>
 			</div>
@@ -109,9 +112,12 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 						<Suspense>
 							{resData.map((res) => (
 								<Link href={`/response/${res.id}`}>
-									<Button variant="link" className="uppercase">
-										{res.id}
-									</Button>
+									<div className="flex flex-row items-center">
+										<Status size={4} status={res.success ? "success" : "error"} />
+										<Button variant="link" className="uppercase">
+											{res.id}
+										</Button>
+									</div>
 								</Link>
 							))}
 						</Suspense>

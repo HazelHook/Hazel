@@ -146,6 +146,9 @@ importers:
       tailwind-merge:
         specifier: ^1.13.2
         version: 1.13.2
+      ts-pattern:
+        specifier: ^5.0.1
+        version: 5.0.1
       ui:
         specifier: workspace:*
         version: link:../../packages/ui
@@ -7328,6 +7331,10 @@ packages:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
+
+  /ts-pattern@5.0.1:
+    resolution: {integrity: sha512-ZyNm28Lsg34Co5DS3e9DVyjlX2Y+2exkI4jqTKyU+9/OL6Y2fKOOuL8i+7no71o74C6mVS+UFoP3ekM3iCT1HQ==}
+    dev: false
 
   /tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
