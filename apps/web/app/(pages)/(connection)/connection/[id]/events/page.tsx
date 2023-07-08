@@ -3,8 +3,8 @@ import { Tiny } from "db/src/tinybird"
 import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
 import { notFound } from "next/navigation"
-import { DataTable } from "./data-table"
 import { columns } from "./column"
+import { DataTable } from "@/components/DataTable"
 
 interface EventsPageProps {
 	params: {

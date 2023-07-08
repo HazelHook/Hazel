@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
 import { EventDataRowType } from "@/app/(pages)/(source)/source/[id]/events/page"
+import { Status } from "@/components/Status"
 
 export const columns: ColumnDef<EventDataRowType>[] = [
 	{
@@ -25,21 +26,27 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 		},
 	},
 	{
-		accessorKey: "",
-		header: "Response Status",
-		cell: ({ cell, row }) => {
-			const destinationId = cell.getValue() as string
-
-			return <div>{destinationId}</div>
-		},
-	},
-
-	{
 		accessorKey: "timestamp",
 		header: "Timestamp",
 		cell: ({ cell }) => {
 			const date = new Date(cell.getValue<string>())
 			return <p>{cell.getValue<string>()}</p>
+		},
+	},
+	{
+		accessorKey: "responses",
+		header: () => <div className="text-center">Status</div>,
+		cell: ({ cell, row }) => {
+			const responses = cell.getValue() as EventDataRowType["responses"]
+			const succeeded = responses.filter((r) => r.success)
+
+			if(succeeded.length === responses.length) {
+				return <div className="w-full justify-center flex p0">
+					<Status status="success"/>
+				</div>
+			}
+
+			return <Status status="error"/>
 		},
 	},
 	{

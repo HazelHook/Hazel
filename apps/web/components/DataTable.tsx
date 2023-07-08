@@ -20,9 +20,12 @@ interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
 	maxItems: number
+	renderSheet?: (data: TData) => React.ReactNode
 }
 
-export function DataTable<TData extends Record<string, any> & { id: string }, TValue>({ columns, data, maxItems }: DataTableProps<TData, TValue>) {
+
+
+export function DataTable<TData extends Record<string, any> & { id: string }, TValue>({ columns, data, maxItems, renderSheet }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = useState<SortingState>([])
 	const [sheetId, setSheetId] = useState<string>()
 
@@ -70,7 +73,7 @@ export function DataTable<TData extends Record<string, any> & { id: string }, TV
 									className="cursor-pointer"
 									key={row.id}
 									data-state={row.getIsSelected() && "selected"}
-									onClick={() => setSheetId((row.original as any).request_id)}
+									onClick={() => setSheetId(row.original.id)}
 								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
@@ -95,14 +98,7 @@ export function DataTable<TData extends Record<string, any> & { id: string }, TV
 						<SheetDescription>{sheetId}</SheetDescription>
 					</SheetHeader>
 					<div className="grid gap-4 py-4">
-						<div className="space-y-2">
-							<p>Headers</p>
-							{selectedRequest?.headers}
-						</div>
-						<div className="space-y-2">
-							<p>Body</p>
-							{selectedRequest?.body}
-						</div>
+						{selectedRequest && renderSheet?.(selectedRequest)}
 					</div>
 				</SheetContent>
 			</Sheet>
