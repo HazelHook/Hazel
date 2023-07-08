@@ -10,10 +10,12 @@ import { Button } from "@/components/ui/button"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
-import { EventDataRowType } from "@/app/(pages)/(destination)/destination/[id]/events/page"
 
+export type Column = Source & {
+	connections: Connection[]
+}
 
-export const columns: ColumnDef<EventDataRowType>[] = [
+export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
@@ -44,6 +46,33 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 		accessorKey: "type",
 		header: "Type",
 		cell: "TODO:TYPE HERE",
+	},
+	{
+		accessorKey: "connections",
+		header: "Destination",
+		cell: ({ cell }) => {
+			const connections = cell.getValue() as (Connection & {
+				destination: Destination
+			})[]
+
+			return (
+				<div className="flex flex-row gap-1">
+					<div className="bg-secondary rounded-xl text-ellipsis w-fit min-w-[24px] h-6 flex justify-center items-center">
+						<p>{connections.length}</p>
+					</div>
+					<div className="flex flex-row gap-1 flex-wrap">
+						{connections.map((conn) => (
+							<Badge variant="outline" key={`badge-${conn.publicId}`}>
+								<Avatar className="w-3 h-3 mr-2">
+									<AvatarImage src={getSeededProfileImageUrl(conn.publicId)} />
+								</Avatar>
+								{conn.destination.name}
+							</Badge>
+						))}
+					</div>
+				</div>
+			)
+		},
 	},
 	{
 		accessorKey: "group",

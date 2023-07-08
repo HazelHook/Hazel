@@ -1,10 +1,6 @@
-import { Tiny } from "db/src/tinybird"
-
 import { auth } from "@/lib/auth"
 import { getCachedSource } from "@/lib/orm"
 import { notFound } from "next/navigation"
-import { DataTable } from "../../../../../../components/DataTable"
-import { columns } from "./column"
 import tiny from "@/lib/tiny"
 import { TableWrapper } from "@/app/(pages)/(source)/source/[id]/events/table"
 import { PromiseType } from "@/lib/ts/helpers"

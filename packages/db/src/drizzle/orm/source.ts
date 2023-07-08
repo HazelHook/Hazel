@@ -3,6 +3,7 @@ import { nanoid } from "nanoid"
 
 import { DB } from ".."
 import { InsertSource, source } from "../schema"
+import { generatePublicId } from "../schema/common"
 
 export async function getSource({
 	publicId,
@@ -30,7 +31,7 @@ export async function createSource({
 	data: Omit<InsertSource, "publicId">
 	db: DB
 }) {
-	const publicId = `src_${nanoid(17)}`
+	const publicId = generatePublicId("src")
 	const res = await db.insert(source).values({ ...data, publicId })
 
 	return { res, publicId }

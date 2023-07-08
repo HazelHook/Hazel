@@ -3,6 +3,7 @@ import { nanoid } from "nanoid"
 
 import { DB } from ".."
 import { destination, InsertDestination } from "../schema"
+import { generatePublicId } from "../schema/common"
 
 export async function getDestination({
 	publicId,
@@ -40,7 +41,7 @@ export async function createDestination({
 	data: Omit<InsertDestination, "publicId">
 	db: DB
 }) {
-	const publicId = `src_${nanoid(17)}`
+	const publicId = generatePublicId("dst")
 	const res = await db.insert(destination).values({ ...data, publicId })
 
 	return { res, publicId }
