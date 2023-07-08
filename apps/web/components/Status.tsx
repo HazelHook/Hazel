@@ -1,5 +1,5 @@
 import { cn } from "ui"
-import { match, P } from "ts-pattern"
+import { match } from "ts-pattern"
 
 interface StatusProps {
 	status: "error" | "success" | "pending"

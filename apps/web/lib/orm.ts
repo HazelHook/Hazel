@@ -4,6 +4,7 @@ import { getConnection } from "db/src/orm/connection"
 import { getSource, getSources } from "db/src/orm/source"
 
 import db from "./db"
+import { getDestination } from "db/src/orm/destination"
 
 export const getCachedConnection = cache(async ({ publicId }: { publicId: string }) => {
 	const connection = await getConnection({ publicId, db })
@@ -23,4 +24,14 @@ export const getCachedSource = cache(async ({ publicId }: { publicId: string }) 
 	}
 
 	return source
+})
+
+export const getCachedDestination = cache(async ({ publicId }: { publicId: string }) => {
+	const destination = await getDestination({ publicId, db })
+
+	if (!destination) {
+		notFound()
+	}
+
+	return destination
 })

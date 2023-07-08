@@ -5,6 +5,16 @@ import { Code } from "bright"
 import { ExpandableList } from "@/components/ui/ExpandableList"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import tiny from "@/lib/tiny"
+import { auth } from "@/lib/auth"
+import { notFound } from "next/navigation"
+import { Status } from "@/components/Status"
+import { getCachedDestination, getCachedSource } from "@/lib/orm"
+import { jsonToArray } from "@/lib/utils"
+import { Request } from "db/src/tinybird"
+import { Badge } from "@/components/ui/badge"
+import { format } from "date-fns"
+import { dateFormatter } from "@/lib/formatters"
 
 const ListItem = ({ name, description }: { name: string; description: ReactNode | string }) => {
 	return (
@@ -15,13 +25,59 @@ const ListItem = ({ name, description }: { name: string; description: ReactNode 
 	)
 }
 
-const ResponsePage = () => {
+interface ResponsePageProps {
+	params: {
+		id: string
+	}
+}
+
+const RequestLink = async ({ request }: { request: Promise<{ data: Request[] }> }) => {
+	const res = await request
+
+	const req = res.data[0]
+
+	return (
+		<Link href={`/request/${req?.id}`}>
+			<Button variant="link">
+				{req?.id}
+				<Badge className="ml-3">
+					{Intl.DateTimeFormat("en", {
+						day: "numeric",
+						month: "numeric",
+						year: "numeric",
+						minute: "2-digit",
+						hour: "2-digit",
+						second: "2-digit",
+					}).format(new Date(req.timestamp))}
+				</Badge>
+			</Button>
+		</Link>
+	)
+}
+
+const ResponsePage = async ({ params }: ResponsePageProps) => {
+	const { userId } = auth()
+	const { data } = await tiny.getRes({ customer_id: userId, response_id: params.id })
+
+	if (data.length === 0) {
+		notFound()
+	}
+
+	const res = data[0]
+
+	const req = tiny.getReq({ customer_id: userId, request_id: res.request_id })
+
+	const source = await getCachedSource({ publicId: res.source_id })
+	const destination = await getCachedDestination({ publicId: res.destination_id })
+
+	const headers = JSON.parse(res.headers)
+
 	return (
 		<div className="p-6 container space-y-4">
 			<div className="flex flex-row gap-2 items-center">
-				<div className="h-5 w-5 bg-green-500 rounded-sm" />
+				<Status status={res.success ? "success" : "error"} />
 
-				<h1 className="text-2xl">Reponse ID HERE</h1>
+				<h1 className="text-2xl uppercase">{res.id}</h1>
 			</div>
 			<Card>
 				<CardContent className="pt-6">
@@ -29,9 +85,9 @@ const ResponsePage = () => {
 						<ListItem
 							name="Source"
 							description={
-								<Link href={`/source/${"sourceID"}`}>
+								<Link href={`/source/${res.source_id}`}>
 									<Button size="xs" variant="link">
-										Source Name
+										{source.name}
 									</Button>
 								</Link>
 							}
@@ -39,9 +95,9 @@ const ResponsePage = () => {
 						<ListItem
 							name="Destination"
 							description={
-								<Link href={`/destination/${"destID"}`}>
+								<Link href={`/destination/${res.destination_id}`}>
 									<Button size="xs" variant="link">
-										Dest Name
+										{destination.name}
 									</Button>
 								</Link>
 							}
@@ -55,22 +111,18 @@ const ResponsePage = () => {
 								hour: "numeric",
 								minute: "numeric",
 								second: "numeric",
-							}).format(Date.now())}
+							}).format(new Date(res.timestamp))}
 						/>
-						<ListItem name="Added Latency" description={"56ms"} />
-						<ListItem name="Verified" description={"False"} />
+						<ListItem
+							name="Added Latency"
+							description={`${new Date(res.timestamp).getTime() - new Date(res.send_timestamp).getTime()}ms`}
+						/>
+						<ListItem name="Status" description={res.status} />
 					</div>
 				</CardContent>
 			</Card>
 			<Suspense>
-				<ExpandableList
-					title="Headers"
-					maxItems={1}
-					items={[
-						{ title: "Test", description: "JSON/XML" },
-						{ title: "Test", description: "JSON/XML" },
-					]}
-				/>
+				<ExpandableList title="Headers" maxItems={3} items={jsonToArray(headers)} />
 			</Suspense>
 			<Card>
 				<CardHeader>
@@ -78,10 +130,20 @@ const ResponsePage = () => {
 				</CardHeader>
 				<CardContent>
 					<Suspense>
-						<Code lang="json">{"{ name: 'WOW'}"}</Code>
+						<Code lang="json">{res.body}</Code>
 					</Suspense>
 				</CardContent>
 			</Card>
+			<Suspense>
+				<Card>
+					<CardHeader>
+						<CardTitle>Request</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<RequestLink request={req} />
+					</CardContent>
+				</Card>
+			</Suspense>
 		</div>
 	)
 }

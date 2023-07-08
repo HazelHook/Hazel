@@ -11,7 +11,7 @@ export async function getDestination({
 	publicId: string
 	db: DB
 }) {
-	return await db.select().from(destination).where(eq(destination.publicId, publicId))
+	return await db.query.destination.findFirst({ where: eq(destination.publicId, publicId) })
 }
 
 export async function getDestinations({

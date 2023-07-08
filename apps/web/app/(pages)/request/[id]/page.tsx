@@ -10,7 +10,7 @@ import { auth } from "@/lib/auth"
 import { notFound } from "next/navigation"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { getCachedSource } from "@/lib/orm"
-import { Status } from "@/app/(pages)/request/[id]/_components/Status"
+import { Status } from "@/components/Status"
 
 const ListItem = ({ name, description }: { name: string; description: ReactNode | string }) => {
 	return (
