@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { getConnections } from "db/src/orm/connection"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
@@ -11,9 +10,8 @@ import { columns } from "./columns"
 
 const ConnectionsPage = async () => {
 	const { userId } = auth()
-	const connections = await getConnections({
+	const connections = await db.connection.getMany({
 		customerId: userId,
-		db,
 	})
 
 	return (

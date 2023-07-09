@@ -29,7 +29,7 @@ export function connectDB({
 		db,
 		source: {
 			table: new DrizzleTable("source", schema.source, db),
-			getOne: async (publicId: string) => {
+			getOne: async ({ publicId }: { publicId: string }) => {
 				return await db.query.source.findFirst({
 					where: eq(schema.source.publicId, publicId),
 					with: {
@@ -41,7 +41,7 @@ export function connectDB({
 					},
 				})
 			},
-			getMany: async (customerId: string) => {
+			getMany: async ({ customerId }: { customerId: string }) => {
 				return await db.query.source.findMany({
 					where: eq(schema.source.customerId, customerId),
 					with: {
@@ -54,20 +54,23 @@ export function connectDB({
 				})
 			},
 			create: async (data: Omit<schema.InsertSource, "publicId">) => {
-				return await db.insert(schema.source).values({
+				const publicId = generatePublicId("src")
+				const res = await db.insert(schema.source).values({
 					...data,
-					publicId: generatePublicId("src"),
+					publicId,
 				})
-			}
+
+				return { res, publicId}
+			},
 		},
 		destination: {
 			table: new DrizzleTable("destination", schema.destination, db),
-			getOne: async (publicId: string) => {
+			getOne: async ({ publicId }: { publicId: string }) => {
 				return await db.query.destination.findFirst({
 					where: eq(schema.destination.publicId, publicId),
 				})
 			},
-			getMany: async (customerId: string) => {
+			getMany: async ({ customerId }: { customerId: string }) => {
 				return await db.query.destination.findMany({
 					where: eq(schema.destination.customerId, customerId),
 					with: {
@@ -80,15 +83,18 @@ export function connectDB({
 				})
 			},
 			create: async (data: Omit<schema.InsertDestination, "publicId">) => {
-				return await db.insert(schema.destination).values({
+				const publicId = generatePublicId("dst")
+				const res = await db.insert(schema.destination).values({
 					...data,
-					publicId: generatePublicId("dst"),
+					publicId,
 				})
-			}
+
+				return { res, publicId}
+			},
 		},
 		connection: {
 			table: new DrizzleTable("connection", schema.connection, db),
-			getOne: async (publicId: string) => {
+			getOne: async ({ publicId }: { publicId: string }) => {
 				return await db.query.connection.findFirst({
 					where: eq(schema.connection.publicId, publicId),
 					with: {
@@ -97,7 +103,7 @@ export function connectDB({
 					},
 				})
 			},
-			getMany: async (customerId: string) => {
+			getMany: async ({ customerId }: { customerId: string }) => {
 				return await db.query.connection.findMany({
 					where: eq(schema.connection.customerId, customerId),
 					with: {
@@ -107,15 +113,16 @@ export function connectDB({
 				})
 			},
 			create: async (data: Omit<schema.InsertConnection, "publicId">) => {
-				return await db.insert(schema.connection).values({
+				const publicId = generatePublicId("con")
+				const res =await db.insert(schema.connection).values({
 					...data,
-					publicId: generatePublicId("con"),
+					publicId,
 				})
-			}
+				return { res, publicId}
+			},
 		},
 	}
 }
-
 
 // public async create(data: Omit<InferModel<typeof this.table, "insert">, "publicId">) {
 // 	const abbreviation = iife(() => {
@@ -216,7 +223,6 @@ export function connectDB({
 // 		with: withResult,
 // 	})
 // }
-
 
 // export function connectWDB({
 // 	username,

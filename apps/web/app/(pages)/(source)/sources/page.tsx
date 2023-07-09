@@ -12,7 +12,7 @@ import { notFound, redirect } from "next/navigation"
 const SourcePage = async () => {
 	const { userId } = auth()
 
-	const sources = await db.source.findMany({ customerId: userId })
+	const sources = await db.source.getMany({ customerId: userId })
 
 	if(!sources) {
 		notFound()
@@ -27,7 +27,7 @@ const SourcePage = async () => {
 					New Source
 				</Link>
 			</div>
-			<DataTable rootPath="/source" columns={columns} data={sources} />
+			<DataTable rootPath="/source" columns={columns as any} data={sources} />
 		</main>
 	)
 }

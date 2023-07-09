@@ -6,7 +6,7 @@ import { PromiseType } from "@/lib/ts/helpers"
 import db from "./db"
 
 export const getCachedConnection = cache(async ({ publicId }: { publicId: string }) => {
-	const connection = await db.connection.findFirst({ publicId })
+	const connection = await db.connection.getOne({ publicId })
 
 	if (!connection) {
 		notFound()
@@ -17,7 +17,7 @@ export const getCachedConnection = cache(async ({ publicId }: { publicId: string
 export type CacheConnection = PromiseType<ReturnType<typeof getCachedConnection>>
 
 export const getCachedSource = cache(async ({ publicId }: { publicId: string }) => {
-	const source = await db.source.findFirst({ publicId })
+	const source = await db.source.getOne({ publicId })
 
 	if (!source) {
 		notFound()
@@ -28,7 +28,7 @@ export const getCachedSource = cache(async ({ publicId }: { publicId: string }) 
 export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>
 
 export const getCachedDestination = cache(async ({ publicId }: { publicId: string }) => {
-	const destination = await db.destination.findFirst({ publicId })
+	const destination = await db.destination.getOne({ publicId })
 
 	if (!destination) {
 		notFound()

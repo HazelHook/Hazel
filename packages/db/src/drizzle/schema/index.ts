@@ -19,8 +19,8 @@ export const destination = buildMysqlTable("destinations", {
 export const connection = buildMysqlTable("connections", {
 	name,
 
-	sourceId: int("destination_id"),
-	destinationId: int("source_id"),
+	sourceId: int("destination_id").notNull(),
+	destinationId: int("source_id").notNull(),
 
 	enabled: boolean("enabled").default(true).notNull(),
 
