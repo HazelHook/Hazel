@@ -5,6 +5,11 @@ const nextConfig = {
 		serverActions: true,
 	},
 	transpilePackages: ["ui"],
+	webpack: (config) => {
+		if (config.name === "server") config.optimization.concatenateModules = false
+
+		return config
+	},
 }
 
 export default nextConfig
