@@ -3,7 +3,6 @@ import { type ReactNode } from "react"
 import { getCachedSource } from "@/lib/orm"
 import { LinkTab } from "@/components/ui/linkTabs"
 import { NavTabs } from "@/components/ui/NavTabs"
-import { TabsTrigger } from "@/components/ui/tabs"
 
 const ConnectionLayout = async ({
 	children,

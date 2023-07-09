@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { Avatar } from "@radix-ui/react-avatar"
 import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination } from "db/src/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { AvatarImage } from "@/components/ui/avatar"
@@ -13,6 +12,7 @@ import { Switch } from "@/components/ui/switch"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { Destination } from "db/src/drizzle/schema"
 
 export type Column = Destination
 
