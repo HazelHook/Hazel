@@ -1,4 +1,3 @@
-import { getConnections } from "db/src/orm/connection"
 import { Edge, Node } from "reactflow"
 
 import { auth } from "@/lib/auth"
@@ -88,9 +87,8 @@ const transformProjectsToFlowElements = (connections: FullConnection[]): { nodes
 
 const ConnectionsOverview = async () => {
 	const { userId } = auth()
-	const connections = await getConnections({
+	const connections = await db.connection.getMany({
 		customerId: userId,
-		db,
 	})
 
 	const { nodes, edges } = transformProjectsToFlowElements(connections)

@@ -12,7 +12,7 @@ import { notFound } from "next/navigation"
 const DestinationsPage = async () => {
 	const { userId } = auth()
 
-	const destinations = await db.destination.findMany({
+	const destinations = await db.destination.getMany({
 		customerId: userId,
 	})
 

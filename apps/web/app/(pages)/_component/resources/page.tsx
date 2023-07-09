@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { getSources } from "db/src/orm/source"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
@@ -12,7 +11,7 @@ import { columns } from "./columns"
 const SourcePage = async () => {
 	const { userId } = auth()
 
-	const sources = await getSources({ customerId: userId, db: db })
+	const sources = await db.source.getMany({ customerId: userId })
 	return (
 		<main className="p-4">
 			<div className="flex flex-row justify-between mb-4">

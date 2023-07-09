@@ -1,5 +1,3 @@
-import { getDestinations } from "db/src/orm/destination"
-import { getSources } from "db/src/orm/source"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
@@ -10,8 +8,8 @@ import { NewConnectionForm } from "./form"
 const NewConnectionPage = async () => {
 	const { userId } = auth()
 
-	const sources = await getSources({ customerId: userId, db })
-	const destinations = await getDestinations({ customerId: userId, db })
+	const sources = await db.source.getMany({ customerId: userId })
+	const destinations = await db.destination.getMany({ customerId: userId })
 	return (
 		<main className="p-4">
 			<NewConnectionForm action={createConnectionAction} destinations={destinations} sources={sources} />

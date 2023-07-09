@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Destination, Source } from "db/src/schema"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -23,6 +22,7 @@ import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import type { createConnectionAction } from "./_actions"
 import { formSchema } from "./schema"
+import { Destination, Source } from "db/src/drizzle/schema"
 
 interface NewSourceFormProps {
 	action: typeof createConnectionAction

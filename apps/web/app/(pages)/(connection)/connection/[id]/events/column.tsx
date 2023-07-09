@@ -1,7 +1,6 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Response } from "db/src/tinybird"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -13,8 +12,9 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
+import { ResponseEvent } from "db/src/tinybird/response/zod-response-data"
 
-export type Column = Response
+export type Column = ResponseEvent
 
 export const columns: ColumnDef<Column>[] = [
 	{

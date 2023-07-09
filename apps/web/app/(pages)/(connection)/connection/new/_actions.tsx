@@ -1,7 +1,5 @@
 "use server"
 
-import { createConnection } from "db/src/orm/connection"
-
 import { createAction, protectedProcedure } from "@/server/trpc"
 import db from "@/lib/db"
 
@@ -15,11 +13,11 @@ import { formSchema } from "./schema"
  */
 export const createConnectionAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
-		const source = await db.query.source.findFirst({
+		const source = await db.db.query.source.findFirst({
 			where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
 		})
 
-		const destination = await db.query.destination.findFirst({
+		const destination = await db.db.query.destination.findFirst({
 			where: (source, { eq }) => eq(source.publicId, opts.input.publiceDestinationId),
 		})
 
@@ -27,14 +25,11 @@ export const createConnectionAction = createAction(
 			throw new Error("Doesnt exist bruw")
 		}
 
-		const connection = await createConnection({
-			data: {
-				name: opts.input.name,
-				sourceId: source.id,
-				destinationId: destination.id,
-				customerId: opts.ctx.auth.userId,
-			},
-			db,
+		const connection = await db.connection.create({
+			name: opts.input.name,
+			sourceId: source.id,
+			destinationId: destination.id,
+			customerId: opts.ctx.auth.userId,
 		})
 
 		return {

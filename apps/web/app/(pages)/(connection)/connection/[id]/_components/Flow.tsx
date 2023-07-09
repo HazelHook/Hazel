@@ -17,7 +17,7 @@ import ReactFlow, {
 import "@/components/ui/flow/Flow.css"
 
 import { useCallback, useLayoutEffect, useRef, useState } from "react"
-import { Connection, Destination, Source } from "db/src/schema"
+import { Connection, Destination, Source } from "db/src/drizzle/schema"
 import ELK, { type ElkExtendedEdge, type ElkNode, type LayoutOptions } from "elkjs/lib/elk.bundled.js"
 
 import { EdgeButton } from "@/components/ui/flow/edges/ButtonEdge"

@@ -1,7 +1,6 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination, Source } from "db/src/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
@@ -11,6 +10,8 @@ import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { EventDataRowType } from "@/app/(pages)/(destination)/destination/[id]/events/page"
+import { Connection } from "reactflow"
+import { Destination } from "db/src/drizzle/schema"
 
 export const columns: ColumnDef<EventDataRowType>[] = [
 	{

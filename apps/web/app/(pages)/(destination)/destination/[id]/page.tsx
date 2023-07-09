@@ -19,7 +19,7 @@ const DestinationPage = async ({
 }) => {
 	const destination = await getCachedDestination({ publicId: params.id })
 
-	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
+	const startTime = sub(new Date(), { days: 7 })
 
 	const { userId } = auth()
 
@@ -33,7 +33,7 @@ const DestinationPage = async ({
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
-	const req = await tiny.getResTimeseries({
+	const req = await tiny.responses.getTimeseries({
 		customer_id: userId,
 
 		start_date: startTime,
