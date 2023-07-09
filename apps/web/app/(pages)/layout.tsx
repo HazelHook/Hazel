@@ -1,5 +1,3 @@
-import { Toaster } from "sonner"
-
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Sidebar } from "@/components/Sidebar"
 import { SiteHeader } from "@/components/site-header"

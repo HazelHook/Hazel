@@ -1,11 +1,8 @@
 "use client"
 
-import { ReactNode, useId, useMemo, useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
+import { useMemo, useState } from "react"
 
-import { MaximizeIcon } from "@/components/icons/pika/maximize"
 import { Maximize02Icon } from "@/components/icons/pika/maximize02"
-import { MinimizeIcon } from "@/components/icons/pika/minimize"
 import { Minimize02Icon } from "@/components/icons/pika/minimize02"
 
 export interface ExpandableListProps {

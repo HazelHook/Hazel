@@ -1,6 +1,5 @@
 import React, { memo, useState } from "react"
 import { format, formatDistance } from "date-fns"
-import { Source } from "db/src/schema"
 import { Position } from "reactflow"
 
 import { dashboardNumberFormatter } from "@/lib/formatters"
@@ -15,6 +14,7 @@ import { Input } from "../../input"
 import { Label } from "../../label"
 import { Sheet, SheetContent, SheetFooter, SheetHeader } from "../../sheet"
 import { Handle } from "../base/Handle"
+import { Source } from "db/src/drizzle/schema"
 
 interface DefaultNode {
 	data: {

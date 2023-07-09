@@ -12,6 +12,7 @@ import { DataTable } from "@/components/ui/data-table"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
 
 import { columns } from "./column"
+import { Destination } from "db/src/drizzle/schema"
 
 const SourcePage = async ({
 	params,

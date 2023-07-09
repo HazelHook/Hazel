@@ -2,11 +2,8 @@ import { ReactNode, Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Code } from "bright"
-import { format } from "date-fns"
-import { Request } from "db/src/tinybird"
 
 import { auth } from "@/lib/auth"
-import { dateFormatter } from "@/lib/formatters"
 import { getCachedDestination, getCachedSource } from "@/lib/orm"
 import tiny from "@/lib/tiny"
 import { jsonToArray } from "@/lib/utils"
@@ -15,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ExpandableList } from "@/components/ui/ExpandableList"
 import { Status } from "@/components/Status"
+import { RequestEvent } from "db/src/tinybird/request/zod-request-data"
 
 const ListItem = ({
 	name,
@@ -40,7 +38,7 @@ interface ResponsePageProps {
 const RequestLink = async ({
 	request,
 }: {
-	request: Promise<{ data: Request[] }>
+	request: Promise<{ data: RequestEvent[] }>
 }) => {
 	const res = await request
 
@@ -67,7 +65,7 @@ const RequestLink = async ({
 
 const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { userId } = auth()
-	const { data } = await tiny.getRes({
+	const { data } = await tiny.responses.get({
 		customer_id: userId,
 		response_id: params.id,
 	})
@@ -78,7 +76,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const res = data[0]
 
-	const req = tiny.getReq({ customer_id: userId, request_id: res.request_id })
+	const req = tiny.requests.get({ customer_id: userId, request_id: res.request_id })
 
 	const source = await getCachedSource({ publicId: res.source_id })
 	const destination = await getCachedDestination({

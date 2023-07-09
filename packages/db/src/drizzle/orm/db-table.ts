@@ -1,35 +1,127 @@
-import { eq, InferModel, TableConfig } from "drizzle-orm"
+import { eq, iife, InferModel, TableConfig } from "drizzle-orm"
 import { _ } from "drizzle-orm/db.d-cf0abe10"
 import { AnyMySqlColumn, MySqlTableWithColumns } from "drizzle-orm/mysql-core"
 
+type IDFilter =
+	| {
+			publicId: string
+	  }
+	| {
+			customerId: string
+	  }
+
 import { DB } from ".."
+import { generatePublicId } from "../schema/common"
 
-export class DrizzleTable<T extends TableConfig<AnyMySqlColumn>> {
-	public readonly table: MySqlTableWithColumns<T>
+export class DrizzleTable<TableType extends keyof DB["query"]> {
+	public readonly table: MySqlTableWithColumns<any>
 	private readonly db: DB
-	public readonly name: keyof typeof this.db["query"]
+	public readonly name: TableType
 
-	constructor(name: keyof typeof db["query"], table: MySqlTableWithColumns<T>, db: DB) {
+	constructor(name: TableType, table: MySqlTableWithColumns<any>, db: DB) {
 		this.name = name
 		this.table = table
 		this.db = db
 	}
 
-	public async findFirst(data: Parameters<typeof this.db.query[typeof this.name]["findFirst"]>) {
-		// @ts-expect-error
-		return await this.db.query[this.name].findFirst(...data)
+	public async create(data: Omit<InferModel<typeof this.table, "insert">, "publicId">) {
+		const abbreviation = iife(() => {
+			switch (this.name) {
+				case "connection":
+					return "con"
+				case "destination":
+					return "dst"
+				case "source":
+					return "src"
+				default:
+					throw new Error("Invalid table name")
+			}
+		})
+		const publicId = generatePublicId(abbreviation)
+
+		const res = await this.db.insert(this.table).values({ ...data, publicId })
+
+		return { res, publicId }
 	}
 
-	public async findMany({ customerId }: { customerId: string }) {
-		if (this.name === "connection") {
-			return await this.db.query[this.name].findMany({
-				where: eq(this.table.customerId, customerId),
-				with: {
+	public async findFirst(data: IDFilter) {
+		const where = iife(() => {
+			if ("publicId" in data) {
+				return eq(this.table.publicId, data.publicId)
+			}
+			if ("customerId" in data) {
+				return eq(this.table.customerId, data.customerId)
+			}
+			throw new Error("Invalid ID filter")
+		})
+
+		const withResult = (() => {
+			if (this.name === "connection") {
+				return {
+					destination: true,
+					source: true,
+				}
+			} else if (this.name === "source") {
+				return {
+					connections: {
+						with: {
+							destination: true,
+						},
+					},
+				}
+			} else if (this.name === "destination") {
+				return
+			}
+			throw new Error("Invalid table name")
+		})()
+
+		return await this.db.query[this.name].findFirst({
+			where,
+			with: withResult,
+		})
+	}
+
+	public async findMany(data: IDFilter) {
+		const where = iife(() => {
+			if ("publicId" in data) {
+				return eq(this.table.publicId, data.publicId)
+			}
+			if ("customerId" in data) {
+				return eq(this.table.customerId, data.customerId)
+			}
+			throw new Error("Invalid ID filter")
+		})
+
+		const withResult = (() => {
+			if (this.name === "connection") {
+				return {
 					source: true,
 					destination: true,
-				},
-			})
-		}
+				}
+			} else if (this.name === "source") {
+				return {
+					connections: {
+						with: {
+							destination: true,
+						},
+					},
+				}
+			} else if (this.name === "destination") {
+				return {
+					connections: {
+						with: {
+							source: true,
+						},
+					},
+				}
+			}
+			throw new Error("Invalid table name")
+		})()
+
+		return await this.db.query[this.name].findMany({
+			where,
+			with: withResult,
+		})
 	}
 
 	public insert(data: Parameters<ReturnType<typeof this.db.insert<typeof this.table>>["values"]>) {

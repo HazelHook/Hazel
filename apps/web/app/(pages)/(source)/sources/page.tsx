@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { getSources } from "db/src/orm/source"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
@@ -8,11 +7,17 @@ import { DataTable } from "@/components/ui/data-table"
 import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"
+import { notFound, redirect } from "next/navigation"
 
 const SourcePage = async () => {
 	const { userId } = auth()
 
-	const sources = await getSources({ customerId: userId, db: db })
+	const sources = await db.source.findMany({ customerId: userId })
+
+	if(!sources) {
+		notFound()
+	}
+
 	return (
 		<main className="p-4">
 			<div className="flex flex-row justify-between mb-4">

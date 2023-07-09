@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { getDestinations } from "db/src/orm/destination"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
@@ -8,14 +7,18 @@ import { DataTable } from "@/components/ui/data-table"
 import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"
+import { notFound } from "next/navigation"
 
 const DestinationsPage = async () => {
 	const { userId } = auth()
 
-	const destinations = await getDestinations({
+	const destinations = await db.destination.findMany({
 		customerId: userId,
-		db: db,
 	})
+
+	if(!destinations) {
+		notFound()
+	}
 
 	return (
 		<main className="p-4">

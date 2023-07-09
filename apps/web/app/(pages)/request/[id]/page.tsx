@@ -37,7 +37,7 @@ interface ResponsePageProps {
 
 const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { userId } = auth()
-	const { data } = await tiny.getReq({
+	const { data } = await tiny.requests.get({
 		request_id: params.id,
 		customer_id: userId,
 	})
@@ -48,7 +48,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const req = data[0]
 
-	const { data: resData } = await tiny.getRes({ customer_id: userId })
+	const { data: resData } = await tiny.responses.get({ customer_id: userId })
 
 	// TODO: ADD ACCEPETED/REJECTED TO TINYBIRD => Wasnt valid
 

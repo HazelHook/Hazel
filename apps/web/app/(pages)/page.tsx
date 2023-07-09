@@ -23,31 +23,33 @@ interface DashboardPageProps {
 const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const { userId } = auth()
 
-	const endTime = searchParams.date_to || formatDateTime(new Date())
-	const startTime =
-		searchParams.date_from ||
-		formatDateTime(subtractFromString(new Date(), searchParams.period || "7d") || sub(new Date(), { days: 7 }))
+	const endTime = searchParams.date_to ? new Date(searchParams.date_to) : new Date()
 
-	const reqKpisPromise = tiny.getReqKpis({
+	const startTime = (() => {
+		if (searchParams.date_from) return new Date(searchParams.date_from)
+		if (searchParams.period) return subtractFromString(new Date(), searchParams.period)
+	})() ?? sub(new Date(), { days: 7 })
+
+	const kpiRequestPromise = tiny.requests.getKpis({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,
 	})
-	const resKpisPromise = tiny.getResKpis({
+	const kpiResponsePromise = tiny.responses.getKpis({
 		customer_id: userId,
 		success: 1,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
-	const errorKpisPromise = tiny.getResKpis({
+	const kpiErrorPromise = tiny.responses.getKpis({
 		customer_id: userId,
 		success: 0,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
-	const bySourcesPromise = tiny.getReqTimeseries({
+	const timeseriesBySourcePromise = tiny.requests.getTimeseries({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,
@@ -55,15 +57,15 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 	const userPromise = currentUser()
 
-	const [reqKpis, resKpis, errorKpis, bySources, user] = await Promise.all([
-		reqKpisPromise,
-		resKpisPromise,
-		errorKpisPromise,
-		bySourcesPromise,
+	const [kpiRequests, kpiResponses, kpiErrors, timelineBySources, user] = await Promise.all([
+		kpiRequestPromise,
+		kpiResponsePromise,
+		kpiErrorPromise,
+		timeseriesBySourcePromise,
 		userPromise,
 	])
 
-	const chartData = transformSourcesChartData(bySources.data)
+	const chartData = transformSourcesChartData(timelineBySources.data)
 	return (
 		<main className="container p-8 space-y-4">
 			<div className="flex flex-row justify-between">
@@ -85,39 +87,39 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 				<KpiCard
 					color={chartColors[0]}
 					title={"Events"}
-					subtitle={String(reqKpis.data.reduce((curr, el) => curr + el.events, 0))}
+					subtitle={String(kpiRequests.data.reduce((curr, el) => curr + el.events, 0))}
 					group="kpis"
 					id={"events"}
-					series={[{ name: "Events", data: reqKpis.data.map((datum) => datum.events) }]}
-					labels={reqKpis.data.map((datum) => datum.date)}
+					series={[{ name: "Events", data: kpiRequests.data.map((datum) => datum.events) }]}
+					labels={kpiRequests.data.map((datum) => formatDateTime(datum.date))}
 				/>
 				<KpiCard
 					color={chartColors[1]}
 					title={"Requests"}
-					subtitle={String(resKpis.data.reduce((curr, el) => curr + el.requests, 0))}
+					subtitle={String(kpiResponses.data.reduce((curr, el) => curr + el.requests, 0))}
 					id={"req"}
 					group="kpis"
 					series={[
 						{
 							name: "Requests",
-							data: resKpis.data.map((datum) => datum.requests),
+							data: kpiResponses.data.map((datum) => datum.requests),
 						},
 					]}
-					labels={reqKpis.data.map((datum) => datum.date)}
+					labels={kpiRequests.data.map((datum) => formatDateTime(datum.date))}
 				/>
 				<KpiCard
 					color={chartColors[3]}
 					title={"Errors"}
-					subtitle={String(errorKpis.data.reduce((curr, el) => curr + el.requests, 0))}
+					subtitle={String(kpiErrors.data.reduce((curr, el) => curr + el.requests, 0))}
 					id={"errors"}
 					group="kpis"
 					series={[
 						{
 							name: "Errors",
-							data: errorKpis.data.map((datum) => datum.requests),
+							data: kpiErrors.data.map((datum) => datum.requests),
 						},
 					]}
-					labels={errorKpis.data.map((datum) => datum.date)}
+					labels={kpiErrors.data.map((datum) => datum.date)}
 				/>
 			</div>
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
