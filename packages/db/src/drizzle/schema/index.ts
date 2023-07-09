@@ -1,31 +1,58 @@
 import { InferModel, relations } from "drizzle-orm"
-import { boolean, int, json, text, varchar } from "drizzle-orm/mysql-core"
+import { boolean, index, int, json, text, varchar } from "drizzle-orm/mysql-core"
 
 import { buildMysqlTable } from "./common"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 }).notNull()
 
-export const source = buildMysqlTable("sources", {
-	name,
-	url,
-})
+export const source = buildMysqlTable(
+	"sources",
+	{
+		name,
+		url,
+	},
+	(table) => ({
+		publicIdIndex: index("src_public_id_idx").on(table.publicId),
 
-export const destination = buildMysqlTable("destinations", {
-	name,
-	url,
-})
+		customerIdIndex: index("src_customer_id_idx").on(table.customerId),
+	}),
+)
 
-export const connection = buildMysqlTable("connections", {
-	name,
+export const destination = buildMysqlTable(
+	"destinations",
+	{
+		name,
+		url,
+	},
+	(table) => ({
+		publicIdIndex: index("dest_public_id_idx").on(table.publicId),
 
-	sourceId: int("destination_id").notNull(),
-	destinationId: int("source_id").notNull(),
+		customerIdIndex: index("dest_customer_id_idx").on(table.customerId),
+	}),
+)
 
-	enabled: boolean("enabled").default(true).notNull(),
+export const connection = buildMysqlTable(
+	"connections",
+	{
+		name,
 
-	fluxConfig: json("flux_config"),
-})
+		sourceId: int("destination_id").notNull(),
+		destinationId: int("source_id").notNull(),
+
+		enabled: boolean("enabled").default(true).notNull(),
+
+		fluxConfig: json("flux_config"),
+	},
+	(table) => ({
+		publicIdIndex: index("conn_public_id_idx").on(table.publicId),
+
+		customerIdIndex: index("conn_customer_id_idx").on(table.customerId),
+
+		sourceIdIndex: index("conn_source_id_idx").on(table.sourceId),
+		destinationIndex: index("conn_source_id_idx").on(table.destinationId),
+	}),
+)
 
 export const sourceRelations = relations(source, ({ many, one }) => ({
 	connections: many(connection),

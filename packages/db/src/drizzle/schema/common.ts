@@ -1,4 +1,5 @@
-import { mysqlTable, serial, timestamp, varchar } from "drizzle-orm/mysql-core"
+import { BuildColumns, sql } from "drizzle-orm"
+import { MySqlTableExtraConfig, mysqlTable, serial, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { nanoid } from "nanoid"
 
 const commonFields = {
@@ -6,15 +7,23 @@ const commonFields = {
 	customerId: varchar("customer_id", { length: 128 }).notNull(),
 	publicId: varchar("public_id", { length: 21 }).notNull(),
 
-	createdAt: timestamp("created_at").defaultNow().notNull(),
-	updatedAt: timestamp("updated_at").defaultNow().notNull(),
+	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
+	updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 }
 
-export const buildMysqlTable = <T extends object>(name: string, fields: T) => {
-	return mysqlTable(name, {
-		...commonFields,
-		...fields,
-	})
+export const buildMysqlTable = <TTableName extends string, TColumnsMap extends Record<string, any>>(
+	name: TTableName,
+	fields: TColumnsMap,
+	extraConfig?: (self: BuildColumns<TTableName, TColumnsMap & typeof commonFields>) => MySqlTableExtraConfig,
+) => {
+	return mysqlTable(
+		name,
+		{
+			...commonFields,
+			...fields,
+		},
+		extraConfig,
+	)
 }
 
 export const generatePublicId = (prefix: "src" | "dst" | "con") => {
