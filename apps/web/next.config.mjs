@@ -3,6 +3,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	experimental: {
 		serverActions: true,
+		serverComponentsExternalPackages: ["@trpc/server"],
 	},
 	transpilePackages: ["ui"],
 	webpack: (config) => {
