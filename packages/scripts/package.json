@@ -3,7 +3,7 @@
 	"type": "module",
 	"main": "dist/cli.js",
 	"scripts": {
-		"build": "tsup src --watch --format esm",
+		"buildsss": "tsup src --watch --format esm",
 		"dev": "doppler run -- node --inspect --watch --enable-source-maps dist/cli.js"
 	},
 	"dependencies": {

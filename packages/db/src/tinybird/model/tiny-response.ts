@@ -31,29 +31,25 @@ export const buildTinyBirdResponse = (tb: Tinybird) => {
 			headers,
 		},
 		parameters: {
-			customer_id: true,
-			destination_id: false,
-			request_id: false,
-			source_id: false,
-		},
-		additional: {
+			customer_id: z.string(),
+			destination_id: z.string().optional(),
+			request_id: z.string().optional(),
+			source_id: z.string().optional(),
 			response_id: z.string().optional(),
 		},
 	})
 		.add({
 			name: "kpi_response",
 			schema: {
-				date: z.date(),
+				date: z.string(),
 				customer_id: z.string(),
 				requests: z.number(),
 				sources: z.number(),
 			},
 			parameters: {
-				customer_id: true,
-			},
-			additional: {
-				start_date: z.date(),
-				end_date: z.date().optional(),
+				customer_id: z.string(),
+				start_date: z.string(),
+				end_date: z.string().optional(),
 				period: period.default("daily").optional(),
 				source_id: z.string().optional(),
 			},
@@ -68,11 +64,9 @@ export const buildTinyBirdResponse = (tb: Tinybird) => {
 				events: z.number(),
 			},
 			parameters: {
-				customer_id: true,
-			},
-			additional: {
-				start_date: z.date(),
-				end_date: z.date().optional(),
+				customer_id: z.string(),
+				start_date: z.string(),
+				end_date: z.string().optional(),
 				period: period.default("daily").optional(),
 				source_id: z.string().optional(),
 			},

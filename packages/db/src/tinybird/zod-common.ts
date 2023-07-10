@@ -25,45 +25,14 @@ export const body = z.string().describe("The request or response body of a web r
 export const headers = z.string().describe("The headers of a web request")
 
 type SchemaRecordType = Record<string, ZodTypeAny>
-type ParameterSelectorType<TSchema> = Partial<Record<keyof TSchema, boolean>>
-
-type ParameterSelector<TSchema extends SchemaRecordType, TParams extends ParameterSelectorType<TSchema>> = {
-	[K in Extract<keyof TParams, keyof TSchema>]: TParams[K] extends true
-		? TSchema[K]
-		: TParams[K] extends false
-		? ZodOptional<TSchema[K]>
-		: never
+type ZodMapped<T extends SchemaRecordType> = {
+	[K in keyof T]: z.infer<T[K]>
 }
 
-function getParamFields<TSchema extends SchemaRecordType, TParams extends ParameterSelectorType<TSchema>>(
-	schema: TSchema,
-	params: TParams,
-): ParameterSelector<TSchema, TParams> {
-	return Object.entries(params).reduce((acc, [key, value]) => {
-		if (value === true) {
-			return {
-				...acc,
-				[key]: schema[key],
-			}
-		}
-
-		if (value === false) {
-			return {
-				...acc,
-				[key]: z.optional(schema[key]),
-			}
-		}
-
-		return acc
-	}, {} as ParameterSelector<TSchema, TParams>)
-}
-
-class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends ParameterSelectorType<TSchema>> {
+class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends SchemaRecordType> {
 	private _name: IndexableString
-	private _tb: Tinybird
-	private _schema: TSchema
 	private _publish: ReturnType<typeof Tinybird.prototype.buildIngestEndpoint<TSchema>>
-	private _get: ReturnType<typeof Tinybird.prototype.buildPipe<ParameterSelector<TSchema, TParams>, TSchema>>
+	private _get: ReturnType<typeof Tinybird.prototype.buildPipe<ZodMapped<TParams>, ZodMapped<TSchema>>>
 
 	constructor({
 		name,
@@ -77,31 +46,19 @@ class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends Paramet
 		parameters: TParams
 	}) {
 		this._name = name
-		this._tb = tb
-		this._schema = schema
 
-		this._publish = this._tb.buildIngestEndpoint({
-			datasource: `get_${this._name}`,
+		this._publish = tb.buildIngestEndpoint({
+			datasource: this._name,
 			// @ts-ignore
 			event: schema,
 		})
 
-		const params = getParamFields(schema, parameters)
-
 		// @ts-ignore
-		this._get = this._tb.buildPipe({
-			pipe: `kpi_${this._name}`,
-			parameters: z.object(params) as AnyZodObject,
+		this._get = tb.buildPipe({
+			pipe: this._name,
+			parameters: z.object(parameters) as AnyZodObject,
 			data: z.object(schema),
 		})
-	}
-
-	public get name() {
-		return this._name
-	}
-
-	public get schema() {
-		return this._schema
 	}
 
 	public get publish() {
@@ -124,27 +81,22 @@ export class TinybirdResourceBuilder<TSchema extends Record<IndexableString, Tin
 		this._tb = tb
 	}
 
-	public add<TData extends SchemaRecordType, Name extends IndexableString, Additional extends SchemaRecordType>({
+	public add<TData extends SchemaRecordType, Name extends IndexableString>({
 		name,
 		schema,
 		parameters,
-		additional,
 	}: {
 		name: Name
 		schema: TData
-		parameters: ParameterSelectorType<TData>
-		additional?: Additional
+		parameters: SchemaRecordType
 	}): TinybirdResourceBuilder<
-		TSchema & { [K in Name]: TinybirdEndpoint<TData, ParameterSelectorType<TData> & Additional> }
+		TSchema & { [K in Name]: TinybirdEndpoint<TData, SchemaRecordType> }
 	> {
 		const endpoint = new TinybirdEndpoint({
 			tb: this._tb,
 			name,
 			schema,
-			parameters: Object.fromEntries([
-				...Object.entries(parameters),
-				...(additional ? Object.entries(additional) : []),
-			]),
+			parameters
 		})
 
 		const newResource = this._resource as any
@@ -164,22 +116,20 @@ export class TinybirdResourceBuilder<TSchema extends Record<IndexableString, Tin
 	public static build<
 		TData extends SchemaRecordType,
 		Name extends IndexableString,
-		Additional extends SchemaRecordType,
+		Parameters extends SchemaRecordType
 	>({
 		tb,
 		name,
 		schema,
 		parameters,
-		additional,
 	}: {
 		tb: Tinybird
 		name: Name
 		schema: TData
-		parameters: ParameterSelectorType<TData>
-		additional?: Additional
+		parameters: Parameters
 	}): TinybirdResourceBuilder<
 		Record<IndexableString, TinybirdEndpoint<any, any>> & {
-			[K in Name]: TinybirdEndpoint<TData, ParameterSelectorType<TData>>
+			[K in Name]: TinybirdEndpoint<TData, Parameters>
 		}
 	> {
 		const result = new TinybirdResourceBuilder({}, tb)
@@ -187,7 +137,6 @@ export class TinybirdResourceBuilder<TSchema extends Record<IndexableString, Tin
 			name,
 			schema,
 			parameters,
-			additional,
 		})
 
 		return result as any

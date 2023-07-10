@@ -30,26 +30,26 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 			searchParams.period ? subtractFromString(new Date(), searchParams.period)! : sub(new Date(), { days: 7 }),
 		)
 
-	const kpiRequestPromise = tiny.requests.getKpis({
+	const kpiRequestPromise = tiny.requests.kpi({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,
 	})
-	const kpiResponsePromise = tiny.responses.getKpis({
+	const kpiResponsePromise = tiny.responses.kpi({
 		customer_id: userId,
 		success: 1,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
-	const kpiErrorPromise = tiny.responses.getKpis({
+	const kpiErrorPromise = tiny.responses.kpi({
 		customer_id: userId,
 		success: 0,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
-	const timeseriesBySourcePromise = tiny.requests.getTimeseries({
+	const timeseriesBySourcePromise = tiny.requests.timeline({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,
@@ -91,7 +91,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					group="kpis"
 					id={"events"}
 					series={[{ name: "Events", data: kpiRequests.data.map((datum) => datum.events) }]}
-					labels={kpiRequests.data.map((datum) => formatDateTime(datum.date))}
+					labels={kpiRequests.data.map((datum) => formatDateTime(new Date(datum.date)))}
 				/>
 				<KpiCard
 					color={chartColors[1]}
@@ -105,7 +105,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 							data: kpiResponses.data.map((datum) => datum.requests),
 						},
 					]}
-					labels={kpiRequests.data.map((datum) => formatDateTime(datum.date))}
+					labels={kpiRequests.data.map((datum) => formatDateTime(new Date(datum.date)))}
 				/>
 				<KpiCard
 					color={chartColors[3]}
@@ -119,7 +119,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 							data: kpiErrors.data.map((datum) => datum.requests),
 						},
 					]}
-					labels={kpiErrors.data.map((datum) => formatDateTime(datum.date))}
+					labels={kpiErrors.data.map((datum) => formatDateTime(new Date(datum.date)))}
 				/>
 			</div>
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
