@@ -14,7 +14,7 @@ import { StatusBadge } from "@/components/StatusBadge"
 import { SourceLink } from "@/app/(pages)/_component/SourceLink"
 
 import { DatePicker } from "./_component/DatePicker"
-import { KpiCard } from "./_component/KpiCard"
+import { KpiCard, KpiLoadingCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
 
 interface DashboardPageProps {
@@ -40,7 +40,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		limit: 5,
 	})
 
-	const kpiRequestPromise = tiny.request.kpi({
+	const kpiRequest = tiny.request.kpi({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,
@@ -68,8 +68,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 	const userPromise = currentUser()
 
-	const [kpiRequests, kpiResponses, kpiErrors, timelineBySources, user] = await Promise.all([
-		kpiRequestPromise,
+	const [kpiResponses, kpiErrors, timelineBySources, user] = await Promise.all([
 		kpiResponsePromise,
 		kpiErrorPromise,
 		timeseriesBySourcePromise,
@@ -99,34 +98,40 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 			</div>
 
 			<div className="flex gap-4 flex-col md:flex-row">
-				<KpiCard
-					color={chartColors[0]}
-					title={"Events"}
-					subtitle={String(kpiRequests.data.reduce((curr, el) => curr + el.events, 0))}
-					group="kpis"
-					id={"events"}
-					series={[
-						{
-							name: "Events",
-							data: kpiRequests.data.map((datum) => datum.events),
-						},
-					]}
-					labels={kpiRequests.data.map((datum) => formatDateTime(new Date(datum.date)))}
-				/>
-				<KpiCard
-					color={chartColors[1]}
-					title={"Requests"}
-					subtitle={String(kpiResponses.data.reduce((curr, el) => curr + el.requests, 0))}
-					id={"req"}
-					group="kpis"
-					series={[
-						{
-							name: "Requests",
-							data: kpiResponses.data.map((datum) => datum.requests),
-						},
-					]}
-					labels={kpiRequests.data.map((datum) => formatDateTime(new Date(datum.date)))}
-				/>
+				<Suspense fallback={<KpiLoadingCard color={chartColors[0]} title={"Events"} />}>
+					<KpiCard
+						color={chartColors[0]}
+						title={"Events"}
+						subtitle={String((await kpiRequest).data.reduce((curr, el) => curr + el.events, 0))}
+						group="kpis"
+						id={"events"}
+						series={[
+							{
+								name: "Events",
+								data: (await kpiRequest).data.map((datum) => datum.events),
+							},
+						]}
+						labels={(await kpiRequest).data.map((datum) => formatDateTime(new Date(datum.date)))}
+					/>
+				</Suspense>
+
+				<Suspense fallback={<KpiLoadingCard color={chartColors[0]} title={"Request"} />}>
+					<KpiCard
+						color={chartColors[1]}
+						title={"Requests"}
+						subtitle={String(kpiResponses.data.reduce((curr, el) => curr + el.requests, 0))}
+						id={"req"}
+						group="kpis"
+						series={[
+							{
+								name: "Requests",
+								data: kpiResponses.data.map((datum) => datum.requests),
+							},
+						]}
+						labels={(await kpiRequest).data.map((datum) => formatDateTime(new Date(datum.date)))}
+					/>
+				</Suspense>
+
 				<KpiCard
 					color={chartColors[3]}
 					title={"Errors"}

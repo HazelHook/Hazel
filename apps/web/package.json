@@ -45,6 +45,7 @@
 		"framer-motion": "^10.12.18",
 		"next": "13.4.9",
 		"next-themes": "^0.2.1",
+		"nprogress": "^0.2.0",
 		"react": "^18.2.0",
 		"react-apexcharts": "^1.4.0",
 		"react-day-picker": "^8.8.0",
@@ -64,6 +65,7 @@
 	"devDependencies": {
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@types/node": "^20.4.1",
+		"@types/nprogress": "^0.2.0",
 		"@types/react": "^18.2.14",
 		"@types/react-dom": "^18.2.6",
 		"@typescript-eslint/parser": "^5.61.0",

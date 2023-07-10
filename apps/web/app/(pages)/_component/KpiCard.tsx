@@ -76,3 +76,23 @@ export const KpiCard = ({ series, labels, title, subtitle, group, id, color }: K
 		</Card>
 	)
 }
+
+export const KpiLoadingCard = ({
+	color,
+	title,
+	subtitle,
+}: {
+	title: string
+	subtitle?: string
+	group?: string
+	id?: string
+	color?: string
+}) => (
+	<KpiCard
+		title={title}
+		subtitle={subtitle || "Loading..."}
+		series={[{ name: "Loading", data: [1, 1, 1, 1, 1, 1, 1] }]}
+		labels={[]}
+		color={color}
+	/>
+)

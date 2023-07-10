@@ -8,6 +8,7 @@ import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+import NextProgress from "@/components/NProgress"
 
 export const metadata: Metadata = {
 	title: {
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 				<head />
 				<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+						<NextProgress />
 						{children}
 						<TailwindIndicator />
 					</ThemeProvider>
