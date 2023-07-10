@@ -36,55 +36,63 @@ const parameters = {
 }
 export type TBResponseParameters = ZodMapped<typeof parameters>
 
-const responseKpi = {
+const kpiSchema = {
 	date: z.string(),
 	customer_id: z.string(),
 	requests: z.number(),
 	sources: z.number(),
 }
-export type TBKpiResponse = ZodMapped<typeof responseKpi>
-const responseKpiParameters = {
+export type TBKpiResponse = ZodMapped<typeof kpiSchema>
+const kpiParameters = {
 	customer_id: z.string(),
 	start_date: z.string(),
 	end_date: z.string().optional(),
 	period: period.default("daily").optional(),
 	source_id: z.string().optional(),
 }
-export type TBKpiResponseParameters = ZodMapped<typeof responseKpiParameters>
+export type TBKpiResponseParameters = ZodMapped<typeof kpiParameters>
 
-const responseTimeline = {
+const timelineSchema = {
 	date: z.string(),
 	source_id: z.string(),
 	customer_id: z.string(),
 	status: z.number(),
 	events: z.number(),
 }
-export type TBTimelineResponse = ZodMapped<typeof responseTimeline>
-const responseTimelineParameters = {
+export type TBTimelineResponse = ZodMapped<typeof timelineSchema>
+const timelineParameters = {
 	customer_id: z.string(),
 	start_date: z.string(),
 	end_date: z.string().optional(),
 	period: period.default("daily").optional(),
 	source_id: z.string().optional(),
 }
-export type TBTimelineResponseParameters = ZodMapped<typeof responseTimelineParameters>
+export type TBTimelineResponseParameters = ZodMapped<typeof timelineParameters>
 
 export const buildTinyBirdResponse = (tb: Tinybird) => {
-	return TinybirdResourceBuilder.build({
+	const builder = new TinybirdResourceBuilder({
 		tb,
-		name: "get_response",
-		schema,
-		parameters
+		name: "response",
 	})
-		.add({
-			name: "kpi_response",
-			schema: responseKpi,
-			parameters: responseKpiParameters,
-		})
-		.add({
-			name: "timeline_response",
-			schema: responseTimeline,
-			parameters: responseTimelineParameters,
-		})
-		.finalize()
+
+	const get = builder.build({
+		name: "get",
+		schema,
+		parameters,
+	})
+
+	return {
+		get: get.get,
+		publish: get.publish,
+		kpi: builder.build({
+			name: "kpi",
+			schema: kpiSchema,
+			parameters: kpiParameters,
+		}).get,
+		timeline: builder.build({
+			name: "timeline",
+			schema: timelineSchema,
+			parameters: timelineParameters
+		}).get
+	}
 }

@@ -37,7 +37,7 @@ interface ResponsePageProps {
 
 const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { userId } = auth()
-	const { data } = await tiny.requests.get({
+	const { data } = await tiny.request.get({
 		request_id: params.id,
 		customer_id: userId,
 		limit: undefined, // TODO
@@ -51,7 +51,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const req = data[0]
 
-	const { data: resData } = await tiny.responses.get({ customer_id: userId, destination_id: undefined, request_id: undefined, response_id: undefined, source_id: undefined }) // TODO
+	const { data: resData } = await tiny.response.get({ customer_id: userId, destination_id: undefined, request_id: undefined, response_id: undefined, source_id: undefined }) // TODO
 
 	// TODO: ADD ACCEPETED/REJECTED TO TINYBIRD => Wasnt valid
 

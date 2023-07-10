@@ -51,9 +51,9 @@ export type TBKpiRequestParameters = ZodMapped<typeof kpiParameters>
 
 const timelineSchema = {
 	date: z.string(),
-				customer_id: z.string(),
-				source_id: z.string(),
-				events: z.number(),
+	customer_id: z.string(),
+	source_id: z.string(),
+	events: z.number(),
 }
 export type TBTimelineRequest = ZodMapped<typeof timelineSchema>
 const timelineParameters = {
@@ -67,21 +67,29 @@ export type TBTimelineRequestParameters = ZodMapped<typeof timelineParameters>
 
 
 export const buildTinyBirdRequest = (tb: Tinybird) => {
-	return TinybirdResourceBuilder.build({
+	const builder = new TinybirdResourceBuilder({
 		tb,
-		name: "get_request",
+		name: "request",
+	})
+
+	const get = builder.build({
+		name: "get",
 		schema: schema,
 		parameters: parameters,
 	})
-		.add({
-			name: "kpi_request",
+
+	return {
+		get: get.get,
+		publish: get.publish,
+		kpi: builder.build({
+			name: "kpi",
 			schema: kpiSchema,
 			parameters: kpiParameters,
-		})
-		.add({
-			name: "timeline_request",
+		}).get,
+		timeline: builder.build({
+			name: "timeline",
 			schema: timelineSchema,
 			parameters: timelineParameters
-		})
-		.finalize()
+		}).get
+	}
 }

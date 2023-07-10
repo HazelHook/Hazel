@@ -30,26 +30,26 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 			searchParams.period ? subtractFromString(new Date(), searchParams.period)! : sub(new Date(), { days: 7 }),
 		)
 
-	const kpiRequestPromise = tiny.requests.kpi({
+	const kpiRequestPromise = tiny.request.kpi({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,
 	})
-	const kpiResponsePromise = tiny.responses.kpi({
+	const kpiResponsePromise = tiny.response.kpi({
 		customer_id: userId,
-		success: 1,
-		start_date: startTime,
-		end_date: endTime,
-	})
-
-	const kpiErrorPromise = tiny.responses.kpi({
-		customer_id: userId,
-		success: 0,
+		// success: 1,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
-	const timeseriesBySourcePromise = tiny.requests.timeline({
+	const kpiErrorPromise = tiny.response.kpi({
+		customer_id: userId,
+		// success: 0,
+		start_date: startTime,
+		end_date: endTime,
+	})
+
+	const timeseriesBySourcePromise = tiny.request.timeline({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,

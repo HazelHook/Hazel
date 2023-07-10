@@ -19,7 +19,7 @@ async function fetch({
 	customer_id: string
 	destination_id: string
 }) {
-	const destinations = await tiny.responses.get({
+	const destinations = await tiny.response.get({
 		customer_id,
 		destination_id,
 		request_id: undefined, // TODO

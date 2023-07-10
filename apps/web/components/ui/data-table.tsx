@@ -36,7 +36,7 @@ export function DataTable<TData, TValue>({ columns, data, rootPath }: DataTableP
 	})
 
 	const navigate = (data: TData) => () => {
-		router.push(`${rootPath}/${(data as any).id}`)
+		router.push(`${rootPath}/${(data as any).publicId}`)
 	}
 
 	return (

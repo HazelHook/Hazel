@@ -25,29 +25,29 @@ const SourcePage = async ({
 		redirect("/")
 	}
 
-	const startTime = sub(new Date(), { days: 7 })
+	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
-	const pRequestKpis = tiny.requests.kpi({
+	const pRequestKpis = tiny.request.kpi({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})
 
-	const pResponseKpis = tiny.responses.kpi({
+	const pResponseKpis = tiny.response.kpi({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
-		success: 1,
+		// success: 1,
 		start_date: startTime,
 	})
 
-	const pErrorResponseKpis = tiny.responses.kpi({
+	const pErrorResponseKpis = tiny.response.kpi({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
-		success: 0,
+		// success: 0,
 		start_date: startTime,
 	})
 
-	const pRequestTimeline = tiny.requests.timeline({
+	const pRequestTimeline = tiny.request.timeline({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,

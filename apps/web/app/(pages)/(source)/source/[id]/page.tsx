@@ -23,7 +23,7 @@ const SourcePage = async ({
 }) => {
 	const source = await getCachedSource({ publicId: params.id })
 
-	const startTime = sub(new Date(), { days: 7 })
+	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	const { userId } = auth()
 
@@ -37,7 +37,7 @@ const SourcePage = async ({
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
-	const req = await tiny.requests.timeline({
+	const req = await tiny.request.timeline({
 		customer_id: userId!,
 		source_id: source.publicId,
 		start_date: startTime,

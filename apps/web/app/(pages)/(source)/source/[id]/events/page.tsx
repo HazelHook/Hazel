@@ -20,14 +20,14 @@ async function fetchData({
 	source_id: string
 }) {
 	const [req, res] = await Promise.all([
-		tiny.requests.get({
+		tiny.request.get({
 			customer_id,
 			source_id,
 			limit: undefined,
 			offset: undefined, // TODO
 			request_id: undefined,
 		}),
-		tiny.responses.get({
+		tiny.response.get({
 			customer_id,
 			source_id,
 			destination_id: undefined, // TODO

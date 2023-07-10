@@ -32,7 +32,7 @@ export type ZodMapped<T extends SchemaRecordType> = {
 class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends SchemaRecordType> {
 	private _name: IndexableString
 	private _publish: ReturnType<typeof Tinybird.prototype.buildIngestEndpoint<TSchema>>
-	private _get: ReturnType<typeof Tinybird.prototype.buildPipe<ZodMapped<TParams>, ZodMapped<TSchema>>>
+	private _get: ReturnType<typeof Tinybird.prototype.buildPipe<z.infer<z.ZodObject<TParams>>, z.infer<z.ZodObject<TSchema>>>>
 
 	constructor({
 		name,
@@ -72,71 +72,29 @@ class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends SchemaR
 
 type IndexableString = string & {}
 
-export class TinybirdResourceBuilder<TSchema extends Record<IndexableString, TinybirdEndpoint<any, any>>> {
-	private _resource: TSchema
+export class TinybirdResourceBuilder {
 	private _tb: Tinybird
+	private _name: string
 
-	private constructor(resource: TSchema, tb: Tinybird) {
-		this._resource = resource
+	constructor({ tb, name }: { tb: Tinybird; name: string }) {
 		this._tb = tb
+		this._name = name
 	}
 
-	public add<TData extends SchemaRecordType, Name extends IndexableString>({
+	public build<TData extends SchemaRecordType, TParameters extends SchemaRecordType, Name extends IndexableString>({
 		name,
 		schema,
 		parameters,
 	}: {
 		name: Name
 		schema: TData
-		parameters: SchemaRecordType
-	}): TinybirdResourceBuilder<TSchema & { [K in Name]: TinybirdEndpoint<TData, SchemaRecordType> }> {
-		const endpoint = new TinybirdEndpoint({
+		parameters: TParameters
+	}): TinybirdEndpoint<TData, TParameters> {
+		return new TinybirdEndpoint({
 			tb: this._tb,
-			name,
+			name: `${name}_${this._name}`,
 			schema,
 			parameters,
 		})
-
-		const newResource = this._resource as any
-		newResource[name] = endpoint
-
-		const result = new TinybirdResourceBuilder(newResource, this._tb)
-
-		return result as any
-	}
-
-	public finalize(): {
-		[K in keyof TSchema]: TSchema[K]
-	} {
-		return this._resource as any
-	}
-
-	public static build<
-		TData extends SchemaRecordType,
-		Name extends IndexableString,
-		Parameters extends SchemaRecordType,
-	>({
-		tb,
-		name,
-		schema,
-		parameters,
-	}: {
-		tb: Tinybird
-		name: Name
-		schema: TData
-		parameters: Parameters
-	}): TinybirdResourceBuilder<
-		Record<IndexableString, TinybirdEndpoint<any, any>> & {
-			[K in Name]: TinybirdEndpoint<TData, Parameters>
-		}
-	> {
-		const result = new TinybirdResourceBuilder({}, tb)
-		result.add({
-			name,
-			schema,
-			parameters,
-		})
-
-		return result as any
 	}
 }

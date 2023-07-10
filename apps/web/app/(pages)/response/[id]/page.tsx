@@ -65,7 +65,7 @@ const RequestLink = async ({
 
 const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { userId } = auth()
-	const { data } = await tiny.responses.get({
+	const { data } = await tiny.response.get({
 		customer_id: userId,
 		response_id: params.id,
 		destination_id: undefined, // TODO
@@ -79,7 +79,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const res = data[0]
 
-	const req = tiny.requests.get({ customer_id: userId, request_id: res.request_id, limit: undefined, offset: undefined, source_id: undefined }) // TODO
+	const req = tiny.request.get({ customer_id: userId, request_id: res.request_id, limit: undefined, offset: undefined, source_id: undefined }) // TODO
 
 	const source = await getCachedSource({ publicId: res.source_id })
 	const destination = await getCachedDestination({
