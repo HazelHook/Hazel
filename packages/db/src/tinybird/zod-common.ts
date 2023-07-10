@@ -7,18 +7,6 @@ export const period = z
 	.describe("The period of time to group the data by.")
 export const hazelVersion = z.enum(["1.0"])
 
-// Utils
-export const timestamp = z
-	.union([z.number(), z.string()])
-	.transform((val) => {
-		if (typeof val === "number") {
-			return val
-		} else {
-			return Date.parse(val)
-		}
-	})
-	.describe("A timestamp in either number or string format")
-
 // Web requests
 export const body = z.string().describe("The request or response body of a web request")
 export const headers = z.string().describe("The headers of a web request")
@@ -30,7 +18,7 @@ export type ZodMapped<T extends SchemaRecordType> = {
 
 class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends SchemaRecordType> {
 	private _name: IndexableString
-	private _publish: ReturnType<typeof Tinybird.prototype.buildIngestEndpoint<TSchema>>
+	private _publish?: ReturnType<typeof Tinybird.prototype.buildIngestEndpoint<z.infer<z.ZodObject<TSchema>>>>
 	private _get: ReturnType<typeof Tinybird.prototype.buildPipe<z.infer<z.ZodObject<TParams>>, z.infer<z.ZodObject<TSchema>>>>
 
 	constructor({
@@ -38,19 +26,23 @@ class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends SchemaR
 		tb,
 		schema,
 		parameters,
+		datasource
 	}: {
 		name: IndexableString
+		datasource?: string
 		tb: Tinybird
 		schema: TSchema
 		parameters: TParams
 	}) {
 		this._name = name
 
-		this._publish = tb.buildIngestEndpoint({
-			datasource: this._name,
-			// @ts-ignore
-			event: schema,
-		})
+		if(datasource){
+			this._publish = tb.buildIngestEndpoint({
+				datasource,
+				// @ts-ignore
+				event: z.object(schema),
+			})
+		}
 
 		// @ts-ignore
 		this._get = tb.buildPipe({
@@ -82,10 +74,12 @@ export class TinybirdResourceBuilder {
 
 	public build<TData extends SchemaRecordType, TParameters extends SchemaRecordType, Name extends IndexableString>({
 		name,
+		datasource,
 		schema,
 		parameters,
 	}: {
 		name: Name
+		datasource?: string
 		schema: TData
 		parameters: TParameters
 	}): TinybirdEndpoint<TData, TParameters> {
@@ -94,6 +88,7 @@ export class TinybirdResourceBuilder {
 			name: `${name}_${this._name}`,
 			schema,
 			parameters,
+			datasource
 		})
 	}
 }

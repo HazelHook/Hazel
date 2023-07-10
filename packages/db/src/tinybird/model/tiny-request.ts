@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { TinybirdResourceBuilder, ZodMapped, body, hazelVersion, headers, period, timestamp } from "../zod-common"
+import { TinybirdResourceBuilder, ZodMapped, body, hazelVersion, headers, period } from "../zod-common"
 import { Tinybird } from "@chronark/zod-bird"
 
 const schema = {
@@ -13,7 +13,7 @@ const schema = {
 	version: hazelVersion,
 
 	// Timestamps
-	timestamp,
+	timestamp: z.string(),
 
 	// Status
 	validated: z.number(),
@@ -76,11 +76,12 @@ export const buildTinyBirdRequest = (tb: Tinybird) => {
 		name: "get",
 		schema: schema,
 		parameters: parameters,
+		datasource: "request_events"
 	})
 
 	return {
 		get: get.get,
-		publish: get.publish,
+		publish: get.publish!,
 		kpi: builder.build({
 			name: "kpi",
 			schema: kpiSchema,
