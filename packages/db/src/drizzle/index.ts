@@ -1,5 +1,5 @@
 import { connect } from "@planetscale/database"
-import { eq, InferModel } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
 
 import { DrizzleTable } from "./orm/db-table"

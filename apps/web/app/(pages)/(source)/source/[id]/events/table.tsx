@@ -81,7 +81,7 @@ const TableSheet = ({
 									description={
 										<Link href={`/source/${data.source_id}`}>
 											<Button size="xs" variant="link">
-												{source.name}
+												{source?.name}
 											</Button>
 										</Link>
 									}

@@ -106,7 +106,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 							description={
 								<Link href={`/source/${res.source_id}`}>
 									<Button size="xs" variant="link">
-										{source.name}
+										{source?.name}
 									</Button>
 								</Link>
 							}

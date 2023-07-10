@@ -71,7 +71,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 								<Suspense>
 									<Link href={`/source/${req.source_id}`}>
 										<Button size="xs" variant="link">
-											{(await source).name}
+											{(await source)?.name}
 										</Button>
 									</Link>
 								</Suspense>

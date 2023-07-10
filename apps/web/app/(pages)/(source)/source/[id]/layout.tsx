@@ -20,7 +20,7 @@ const ConnectionLayout = async ({
 			<div className="flex flex-row justify-between mb-4">
 				<div>
 					<h3 className="text-xl font-semibold">Source</h3>
-					<h4 className="text-lg text-muted-foreground">{source.name}</h4>
+					<h4 className="text-lg text-muted-foreground">{source?.name}</h4>
 				</div>
 			</div>
 			<NavTabs>
