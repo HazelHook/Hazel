@@ -46,51 +46,47 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		end_date: endTime,
 	})
 
-	const kpiResponsePromise = tiny.response.kpi({
+	const kpiResponse = tiny.response.kpi({
 		customer_id: userId,
 		// success: 1,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
-	const kpiErrorPromise = tiny.response.kpi({
+	const kpiError = tiny.response.kpi({
 		customer_id: userId,
 		// success: 0,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
-	const timeseriesBySourcePromise = tiny.request.timeline({
+	const user = currentUser()
+
+	const timelineBySources = await tiny.request.timeline({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
-	const userPromise = currentUser()
-
-	const [kpiResponses, kpiErrors, timelineBySources, user] = await Promise.all([
-		kpiResponsePromise,
-		kpiErrorPromise,
-		timeseriesBySourcePromise,
-		userPromise,
-	])
-
 	const chartData = transformSourcesChartData(timelineBySources.data)
+
 	return (
 		<main className="container p-8 space-y-4">
 			<div className="flex flex-row justify-between">
 				<div className="flex flex-row gap-2">
 					<Suspense fallback={<Skeleton className="w-16 h-16 rounded-full" />}>
 						<Avatar className="w-16 h-16">
-							<AvatarImage src={(await userPromise)?.profileImageUrl} />
+							<AvatarImage src={(await user)?.profileImageUrl} />
 							<AvatarFallback />
 						</Avatar>
 					</Suspense>
 
-					<div className="flex justify-center flex-col">
-						<h3 className="text-2xl">Welcome back, {user?.username}</h3>
-						<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
-					</div>
+					<Suspense>
+						<div className="flex justify-center flex-col">
+							<h3 className="text-2xl">Welcome back, {(await user)?.username}</h3>
+							<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
+						</div>
+					</Suspense>
 				</div>
 				<div>
 					<DatePicker />
@@ -115,37 +111,39 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					/>
 				</Suspense>
 
-				<Suspense fallback={<KpiLoadingCard color={chartColors[0]} title={"Request"} />}>
+				<Suspense fallback={<KpiLoadingCard color={chartColors[1]} title={"Request"} />}>
 					<KpiCard
 						color={chartColors[1]}
 						title={"Requests"}
-						subtitle={String(kpiResponses.data.reduce((curr, el) => curr + el.requests, 0))}
+						subtitle={String((await kpiResponse).data.reduce((curr, el) => curr + el.requests, 0))}
 						id={"req"}
 						group="kpis"
 						series={[
 							{
 								name: "Requests",
-								data: kpiResponses.data.map((datum) => datum.requests),
+								data: (await kpiResponse).data.map((datum) => datum.requests),
 							},
 						]}
-						labels={(await kpiRequest).data.map((datum) => formatDateTime(new Date(datum.date)))}
+						labels={(await kpiResponse).data.map((datum) => formatDateTime(new Date(datum.date)))}
 					/>
 				</Suspense>
 
-				<KpiCard
-					color={chartColors[3]}
-					title={"Errors"}
-					subtitle={String(kpiErrors.data.reduce((curr, el) => curr + el.requests, 0))}
-					id={"errors"}
-					group="kpis"
-					series={[
-						{
-							name: "Errors",
-							data: kpiErrors.data.map((datum) => datum.requests),
-						},
-					]}
-					labels={kpiErrors.data.map((datum) => formatDateTime(new Date(datum.date)))}
-				/>
+				<Suspense fallback={<KpiLoadingCard color={chartColors[3]} title={"Errors"} />}>
+					<KpiCard
+						color={chartColors[3]}
+						title={"Errors"}
+						subtitle={String((await kpiError).data.reduce((curr, el) => curr + el.requests, 0))}
+						id={"errors"}
+						group="kpis"
+						series={[
+							{
+								name: "Errors",
+								data: (await kpiError).data.map((datum) => datum.requests),
+							},
+						]}
+						labels={(await kpiError).data.map((datum) => formatDateTime(new Date(datum.date)))}
+					/>
+				</Suspense>
 			</div>
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3">
 				<Card className="col-span-2 w-full h-full overflow-hidden">
