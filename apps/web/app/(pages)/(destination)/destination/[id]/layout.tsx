@@ -19,7 +19,7 @@ const ConnectionLayout = async ({
 		<main className="p-4 space-y-4 h-full">
 			<div className="flex flex-row justify-between mb-4">
 				<div>
-					<h3 className="text-xl font-semibold">Source</h3>
+					<h3 className="text-xl font-semibold">Destination</h3>
 					<h4 className="text-lg text-muted-foreground">{destination.name}</h4>
 				</div>
 			</div>

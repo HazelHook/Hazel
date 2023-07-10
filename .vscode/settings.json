@@ -9,5 +9,25 @@
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true
 	},
-	"typescript.preferences.importModuleSpecifier": "non-relative"
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"hazel.pagesDir": "apps/web/app/(pages)",
+	"hazel.pageTypes": [
+		{
+			"name": "New",
+			"icon": "new-file",
+			"slug": "new"
+		},
+		{
+			"name": "Details",
+			"icon": "browser",
+			"slug": "[id]"
+		},
+		{
+			"name": "Events",
+			"icon": "zap",
+			"slug": "events"
+		}
+	],
+	"hazel.indentation": "    ",
+	"hazel.defaultIcon": ""
 }
