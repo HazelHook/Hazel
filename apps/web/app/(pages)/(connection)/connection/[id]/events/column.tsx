@@ -12,9 +12,9 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
-import { ResponseEvent } from "db/src/tinybird/response/zod-response-data"
+import { TBResponse } from "db/src/tinybird/model/tiny-response"
 
-export type Column = ResponseEvent
+export type Column = TBResponse
 
 export const columns: ColumnDef<Column>[] = [
 	{

@@ -37,7 +37,7 @@ const SourcePage = async ({
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 
-	const req = await tiny.requests.getTimeseries({
+	const req = await tiny.requests.timeline({
 		customer_id: userId!,
 		source_id: source.publicId,
 		start_date: startTime,

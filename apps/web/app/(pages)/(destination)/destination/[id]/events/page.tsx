@@ -22,12 +22,15 @@ async function fetch({
 	const destinations = await tiny.responses.get({
 		customer_id,
 		destination_id,
+		request_id: undefined, // TODO
+		response_id: undefined,
+		source_id: undefined,
 	})
 
 	return destinations
 }
 
-export type EventDataRowType = PromiseType<ReturnType<typeof fetch>>["data"]
+export type EventDataRowType = PromiseType<ReturnType<typeof fetch>>["data"][number]
 
 const EventsPage = async ({ params }: EventsPageProps) => {
 	const { userId } = auth()

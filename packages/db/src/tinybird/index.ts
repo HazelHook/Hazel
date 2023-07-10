@@ -21,6 +21,6 @@ export const Tiny = (token: string) => {
 			publish: responses.get_response.publish,
 			kpi: responses.kpi_response.get,
 			timeline: responses.timeline_response.get,
-		}
+		},
 	}
 }

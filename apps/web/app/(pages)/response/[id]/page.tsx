@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ExpandableList } from "@/components/ui/ExpandableList"
 import { Status } from "@/components/Status"
-import { RequestEvent } from "db/src/tinybird/request/zod-request-data"
+import { TBRequest } from "db/src/tinybird/model/tiny-request"
 
 const ListItem = ({
 	name,
@@ -38,7 +38,7 @@ interface ResponsePageProps {
 const RequestLink = async ({
 	request,
 }: {
-	request: Promise<{ data: RequestEvent[] }>
+	request: Promise<{ data: TBRequest[] }>
 }) => {
 	const res = await request
 
@@ -68,6 +68,9 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { data } = await tiny.responses.get({
 		customer_id: userId,
 		response_id: params.id,
+		destination_id: undefined, // TODO
+		source_id: undefined,
+		request_id: undefined,
 	})
 
 	if (data.length === 0) {
@@ -76,7 +79,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const res = data[0]
 
-	const req = tiny.requests.get({ customer_id: userId, request_id: res.request_id })
+	const req = tiny.requests.get({ customer_id: userId, request_id: res.request_id, limit: undefined, offset: undefined, source_id: undefined }) // TODO
 
 	const source = await getCachedSource({ publicId: res.source_id })
 	const destination = await getCachedDestination({

@@ -1,7 +1,7 @@
-import { RequestEventTimeSeries } from "db/src/tinybird/request/zod-request-data"
-import { ResponseEventTimeSeries } from "db/src/tinybird/response/zod-response-data"
+import { TBTimelineRequest } from "db/src/tinybird/model/tiny-request";
+import { TBTimelineResponse } from "db/src/tinybird/model/tiny-response";
 
-export const transformSourcesChartData = (data: RequestEventTimeSeries[]) => {
+export const transformSourcesChartData = (data: TBTimelineRequest[]) => {
 	return data.reduce(
 		(result: { series: any[]; categories: string[] }, obj) => {
 			let series = result.series.find((series) => series.name === obj.source_id)
@@ -19,17 +19,17 @@ export const transformSourcesChartData = (data: RequestEventTimeSeries[]) => {
 	)
 }
 
-export const transformDestinationsChartData = (data: ResponseEventTimeSeries[]) => {
+export const transformDestinationsChartData = (data: TBTimelineResponse[]) => {
 	return data.reduce(
 		(result: { series: any[]; categories: string[] }, obj) => {
-			let series = result.series.find((series) => series.name === obj.destination_id)
+			let series = result.series.find((series) => series.name === (obj as any).destination_id) // TODO
 			if (!series) {
-				series = { name: obj.destination_id, data: [] }
+				series = { name: (obj as any).destination_id, data: [] }
 				result.series.push(series)
 			}
 			series.data.push(obj.events)
-			if (!result.categories.includes(obj.date.toString())) {
-				result.categories.push(obj.date.toString())
+			if (!result.categories.includes(obj.date)) {
+				result.categories.push(obj.date)
 			}
 			return result
 		},

@@ -29,7 +29,7 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 			)
 		},
 		cell: ({ cell, table, row }) => {
-			const id = row.original.publicId
+			const id = row.original.id
 			return (
 				<div className="flex flex-row items-center">
 					<Avatar className="w-4 h-4 mr-2">

@@ -12,7 +12,7 @@ export const TableWrapper = ({
 	maxItems,
 	destination,
 }: {
-	data: EventDataRowType
+	data: EventDataRowType[]
 	maxItems: number
 	destination: CacheDestination
 }) => {

@@ -25,7 +25,7 @@ export const body = z.string().describe("The request or response body of a web r
 export const headers = z.string().describe("The headers of a web request")
 
 type SchemaRecordType = Record<string, ZodTypeAny>
-type ZodMapped<T extends SchemaRecordType> = {
+export type ZodMapped<T extends SchemaRecordType> = {
 	[K in keyof T]: z.infer<T[K]>
 }
 
@@ -89,14 +89,12 @@ export class TinybirdResourceBuilder<TSchema extends Record<IndexableString, Tin
 		name: Name
 		schema: TData
 		parameters: SchemaRecordType
-	}): TinybirdResourceBuilder<
-		TSchema & { [K in Name]: TinybirdEndpoint<TData, SchemaRecordType> }
-	> {
+	}): TinybirdResourceBuilder<TSchema & { [K in Name]: TinybirdEndpoint<TData, SchemaRecordType> }> {
 		const endpoint = new TinybirdEndpoint({
 			tb: this._tb,
 			name,
 			schema,
-			parameters
+			parameters,
 		})
 
 		const newResource = this._resource as any
@@ -116,7 +114,7 @@ export class TinybirdResourceBuilder<TSchema extends Record<IndexableString, Tin
 	public static build<
 		TData extends SchemaRecordType,
 		Name extends IndexableString,
-		Parameters extends SchemaRecordType
+		Parameters extends SchemaRecordType,
 	>({
 		tb,
 		name,

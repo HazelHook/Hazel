@@ -29,7 +29,7 @@ const DestinationsPage = async () => {
 					New Destination
 				</Link>
 			</div>
-			<DataTable rootPath="/destination" columns={columns} data={destinations} />
+			{/* <DataTable rootPath="/destination" columns={columns} data={destinations} /> */}
 		</main>
 	)
 }

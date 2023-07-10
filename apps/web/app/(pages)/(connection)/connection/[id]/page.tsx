@@ -27,40 +27,40 @@ const SourcePage = async ({
 
 	const startTime = sub(new Date(), { days: 7 })
 
-	const pRequestKpis = tiny.requests.getKpis({
+	const pRequestKpis = tiny.requests.kpi({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})
 
-	const pResponseKpis = tiny.responses.getKpis({
+	const pResponseKpis = tiny.responses.kpi({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		success: 1,
 		start_date: startTime,
 	})
 
-	const pErrorResponseKpis = tiny.responses.getKpis({
+	const pErrorResponseKpis = tiny.responses.kpi({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		success: 0,
 		start_date: startTime,
 	})
 
-	const pRequestTimeseries = tiny.requests.getTimeseries({
+	const pRequestTimeline = tiny.requests.timeline({
 		customer_id: userId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})
 
-	const [requestKpis, responseKpis, errorKpis, requestTimeseries] = await Promise.all([
+	const [requestKpis, responseKpis, errorKpis, requestTimeline] = await Promise.all([
 		pRequestKpis,
 		pResponseKpis,
 		pErrorResponseKpis,
-		pRequestTimeseries,
+		pRequestTimeline,
 	])
 
-	const chartData = transformSourcesChartData(requestTimeseries.data)
+	const chartData = transformSourcesChartData(requestTimeline.data)
 
 	return (
 		<div className="space-y-4">
@@ -77,7 +77,7 @@ const SourcePage = async ({
 							data: requestKpis.data.map((datum) => datum.events),
 						},
 					]}
-					labels={requestKpis.data.map((datum) => formatDateTime(datum.date))}
+					labels={requestKpis.data.map((datum) => formatDateTime(new Date(datum.date)))}
 				/>
 				<KpiCard
 					color={chartColors[1]}
@@ -91,7 +91,7 @@ const SourcePage = async ({
 							data: responseKpis.data.map((datum) => datum.requests),
 						},
 					]}
-					labels={requestKpis.data.map((datum) => formatDateTime(datum.date))}
+					labels={requestKpis.data.map((datum) => formatDateTime(new Date(datum.date)))}
 				/>
 				<KpiCard
 					color={chartColors[3]}
