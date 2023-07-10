@@ -40,15 +40,11 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 			const responses = cell.getValue() as EventDataRowType["responses"]
 			const succeeded = responses.filter((r) => r.success)
 
-			if (succeeded.length === responses.length) {
-				return (
-					<div className="w-full justify-center flex p0">
-						<Status status="success" />
-					</div>
-				)
-			}
-
-			return <Status status="error" />
+			return (
+				<div className="w-full justify-center flex p0">
+					{succeeded.length === responses.length ? <Status status="success" /> : <Status status="error" />}
+				</div>
+			)
 		},
 	},
 	{
