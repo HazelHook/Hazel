@@ -23,12 +23,12 @@ interface DashboardPageProps {
 const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const { userId } = auth()
 
-	const endTime = searchParams.date_to ? new Date(searchParams.date_to) : new Date()
-
-	const startTime = (() => {
-		if (searchParams.date_from) return new Date(searchParams.date_from)
-		if (searchParams.period) return subtractFromString(new Date(), searchParams.period)
-	})() ?? sub(new Date(), { days: 7 })
+	const endTime = searchParams.date_to || formatDateTime(new Date())
+	const startTime =
+		searchParams.date_from ||
+		formatDateTime(
+			searchParams.period ? subtractFromString(new Date(), searchParams.period)! : sub(new Date(), { days: 7 }),
+		)
 
 	const kpiRequestPromise = tiny.requests.getKpis({
 		customer_id: userId,
@@ -119,7 +119,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 							data: kpiErrors.data.map((datum) => datum.requests),
 						},
 					]}
-					labels={kpiErrors.data.map((datum) => datum.date)}
+					labels={kpiErrors.data.map((datum) => formatDateTime(datum.date))}
 				/>
 			</div>
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">

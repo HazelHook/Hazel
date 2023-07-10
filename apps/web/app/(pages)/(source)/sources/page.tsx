@@ -14,7 +14,7 @@ const SourcePage = async () => {
 
 	const sources = await db.source.getMany({ customerId: userId })
 
-	if(!sources) {
+	if (!sources) {
 		notFound()
 	}
 

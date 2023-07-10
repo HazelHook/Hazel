@@ -60,7 +60,7 @@ export function connectDB({
 					publicId,
 				})
 
-				return { res, publicId}
+				return { res, publicId }
 			},
 		},
 		destination: {
@@ -89,7 +89,7 @@ export function connectDB({
 					publicId,
 				})
 
-				return { res, publicId}
+				return { res, publicId }
 			},
 		},
 		connection: {
@@ -114,11 +114,11 @@ export function connectDB({
 			},
 			create: async (data: Omit<schema.InsertConnection, "publicId">) => {
 				const publicId = generatePublicId("con")
-				const res =await db.insert(schema.connection).values({
+				const res = await db.insert(schema.connection).values({
 					...data,
 					publicId,
 				})
-				return { res, publicId}
+				return { res, publicId }
 			},
 		},
 	}

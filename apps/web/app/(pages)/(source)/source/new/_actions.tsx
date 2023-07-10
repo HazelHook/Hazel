@@ -13,7 +13,11 @@ import { formSchema } from "./schema"
  */
 export const createSourceAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
-		const source = await db.source.create({name: opts.input.name, url: opts.input.url!, customerId: opts.ctx.auth.userId! })
+		const source = await db.source.create({
+			name: opts.input.name,
+			url: opts.input.url!,
+			customerId: opts.ctx.auth.userId!,
+		})
 
 		return {
 			id: source.publicId,

@@ -20,6 +20,8 @@ target/
 .DS_Store
 *.pem
 
+dev/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

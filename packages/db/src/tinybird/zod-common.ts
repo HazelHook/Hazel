@@ -1,5 +1,5 @@
 import { Tinybird } from "@chronark/zod-bird"
-import { ZodAny, ZodSchema, z } from "zod"
+import { ZodTypeAny, ZodOptional, z, AnyZodObject } from "zod"
 
 // Common
 export const period = z
@@ -24,60 +24,83 @@ export const timestamp = z
 export const body = z.string().describe("The request or response body of a web request")
 export const headers = z.string().describe("The headers of a web request")
 
-export class TinybirdView<
-	TSchema extends Record<string, any>,
-	TParams extends Record<string, any>,
-	TKpisSchema extends Record<string, any>,
-	TTimeseriesSchema extends Record<string, any>,
-> {
-	private _name: string
-	private _schema: ZodSchema<TSchema>
-	private _kpisSchema: ZodSchema<TKpisSchema>
-	private _timeseriesSchema: ZodSchema<TTimeseriesSchema>
+type SchemaRecordType = Record<string, ZodTypeAny>
+type ParameterSelectorType<TSchema> = Partial<Record<keyof TSchema, boolean>>
+
+type ParameterSelector<TSchema extends SchemaRecordType, TParams extends ParameterSelectorType<TSchema>> = {
+	[K in Extract<keyof TParams, keyof TSchema>]: TParams[K] extends true
+		? TSchema[K]
+		: TParams[K] extends false
+		? ZodOptional<TSchema[K]>
+		: never
+}
+
+function getParamFields<TSchema extends SchemaRecordType, TParams extends ParameterSelectorType<TSchema>>(
+	schema: TSchema,
+	params: TParams,
+): ParameterSelector<TSchema, TParams> {
+	return Object.entries(params).reduce((acc, [key, value]) => {
+		if (value === true) {
+			return {
+				...acc,
+				[key]: schema[key],
+			}
+		}
+
+		if (value === false) {
+			return {
+				...acc,
+				[key]: z.optional(schema[key]),
+			}
+		}
+
+		return acc
+	}, {} as ParameterSelector<TSchema, TParams>)
+}
+
+class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends ParameterSelectorType<TSchema>> {
+	private _name: IndexableString
 	private _tb: Tinybird
+	private _schema: TSchema
 	private _publish: ReturnType<typeof Tinybird.prototype.buildIngestEndpoint<TSchema>>
-	private _getKpis: ReturnType<typeof Tinybird.prototype.buildPipe<TParams, TKpisSchema>>
-	private _getTimeseries: ReturnType<typeof Tinybird.prototype.buildPipe<TParams, TTimeseriesSchema>>
+	private _get: ReturnType<typeof Tinybird.prototype.buildPipe<ParameterSelector<TSchema, TParams>, TSchema>>
 
 	constructor({
 		name,
-		schema,
 		tb,
-		requestParameters,
-		kpisSchema,
-		timeseriesSchema,
+		schema,
+		parameters,
 	}: {
-		name: string
-		schema: ZodSchema<TSchema>
+		name: IndexableString
 		tb: Tinybird
-		requestParameters: ZodSchema<TParams>
-		kpisSchema: ZodSchema<TKpisSchema>
-		timeseriesSchema: ZodSchema<TTimeseriesSchema>
+		schema: TSchema
+		parameters: TParams
 	}) {
 		this._name = name
-		this._schema = schema
-		this._kpisSchema = kpisSchema
-		this._timeseriesSchema = timeseriesSchema
 		this._tb = tb
+		this._schema = schema
+
 		this._publish = this._tb.buildIngestEndpoint({
-			datasource: `event_${this._name}`,
-			event: this._schema,
+			datasource: `get_${this._name}`,
+			// @ts-ignore
+			event: schema,
 		})
 
-		this._getKpis = this._tb.buildPipe({
+		const params = getParamFields(schema, parameters)
+
+		// @ts-ignore
+		this._get = this._tb.buildPipe({
 			pipe: `kpi_${this._name}`,
-			parameters: requestParameters,
-			data: this._kpisSchema,
-		})
-
-		this._getTimeseries = this._tb.buildPipe({
-			pipe: `timeline_${this._name}`,
-			parameters: requestParameters,
-			data: this._timeseriesSchema,
+			parameters: z.object(params) as AnyZodObject,
+			data: z.object(schema),
 		})
 	}
 
-	public get schema(): ZodSchema<TSchema> {
+	public get name() {
+		return this._name
+	}
+
+	public get schema() {
 		return this._schema
 	}
 
@@ -85,11 +108,88 @@ export class TinybirdView<
 		return this._publish
 	}
 
-	public get getKpis() {
-		return this._getKpis
+	public get get() {
+		return this._get
+	}
+}
+
+type IndexableString = string & {}
+
+export class TinybirdResourceBuilder<TSchema extends Record<IndexableString, TinybirdEndpoint<any, any>>> {
+	private _resource: TSchema
+	private _tb: Tinybird
+
+	private constructor(resource: TSchema, tb: Tinybird) {
+		this._resource = resource
+		this._tb = tb
 	}
 
-	public get getTimeseries() {
-		return this._getTimeseries
+	public add<TData extends SchemaRecordType, Name extends IndexableString, Additional extends SchemaRecordType>({
+		name,
+		schema,
+		parameters,
+		additional,
+	}: {
+		name: Name
+		schema: TData
+		parameters: ParameterSelectorType<TData>
+		additional?: Additional
+	}): TinybirdResourceBuilder<
+		TSchema & { [K in Name]: TinybirdEndpoint<TData, ParameterSelectorType<TData> & Additional> }
+	> {
+		const endpoint = new TinybirdEndpoint({
+			tb: this._tb,
+			name,
+			schema,
+			parameters: Object.fromEntries([
+				...Object.entries(parameters),
+				...(additional ? Object.entries(additional) : []),
+			]),
+		})
+
+		const newResource = this._resource as any
+		newResource[name] = endpoint
+
+		const result = new TinybirdResourceBuilder(newResource, this._tb)
+
+		return result as any
+	}
+
+	public finalize(): {
+		[K in keyof TSchema]: TSchema[K]
+	} {
+		return this._resource as any
+	}
+
+	public static build<
+		TData extends SchemaRecordType,
+		Name extends IndexableString,
+		Additional extends SchemaRecordType,
+	>({
+		tb,
+		name,
+		schema,
+		parameters,
+		additional,
+	}: {
+		tb: Tinybird
+		name: Name
+		schema: TData
+		parameters: ParameterSelectorType<TData>
+		additional?: Additional
+	}): TinybirdResourceBuilder<
+		Record<IndexableString, TinybirdEndpoint<any, any>> & {
+			[K in Name]: TinybirdEndpoint<TData, ParameterSelectorType<TData>>
+		}
+	> {
+		const result = new TinybirdResourceBuilder({}, tb)
+		result.add({
+			name,
+			schema,
+			parameters,
+			additional,
+		})
+
+		return result as any
 	}
 }

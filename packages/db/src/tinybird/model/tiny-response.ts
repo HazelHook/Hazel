@@ -1,71 +1,81 @@
 import { z } from "zod"
 
-import { TinybirdView, body, hazelVersion, headers, period, successState, timestamp } from "../zod-common"
+import { TinybirdResourceBuilder, body, hazelVersion, headers, period, successState, timestamp } from "../zod-common"
 import { Tinybird } from "@chronark/zod-bird"
 
-export const responseEventSchema = z.object({
-	// IDs
-	id: z.string(),
-	customer_id: z.string(),
-	source_id: z.string(),
-	destination_id: z.string(),
-	request_id: z.string(),
-
-	// Metadata
-	version: hazelVersion,
-
-	// Timestamps
-	response_time: timestamp,
-	timestamp: timestamp,
-
-	// Status
-	status: z.number(),
-	success: z.number(),
-
-	// Data
-	body,
-	headers,
-})
-export type ResponseEvent = z.infer<typeof responseEventSchema>
-
 export const buildTinyBirdResponse = (tb: Tinybird) => {
-	return new TinybirdView({
-		name: "responses",
-		schema: responseEventSchema,
+	return TinybirdResourceBuilder.build({
 		tb,
-		requestParameters: z.object({
-			id: z.string().optional(),
-			customer_id: z.string().optional(),
-			source_id: z.string().optional(),
-			destination_id: z.string().optional(),
-			request_id: z.string().optional(),
-
-			success: z.number().optional(),
-			start_date: z.date().optional(),
-			end_date: z.date().optional(),
-			
-		
-			limit: z.number().optional(),
-			offset: z.number().optional(),
-		}),
-		kpisSchema: z.object({
-			customer_id: z.string(),
-			
-			date: z.string(),
-
-			requests: z.number(),
-			sources: z.number(),
-		}),
-		timeseriesSchema: z
-		.object({
+		name: "get_response",
+		schema: {
+			// IDs
+			id: z.string(),
 			customer_id: z.string(),
 			source_id: z.string(),
 			destination_id: z.string(),
-	
-			date: z.date(),
-	
-			events: z.number(),
-			status: successState,
-		}),
+			request_id: z.string(),
+
+			// Metadata
+			version: hazelVersion,
+
+			// Timestamps
+			send_timestamp: timestamp,
+			timestamp: timestamp,
+
+			// Status
+			status: z.number(),
+			success: z.number(),
+
+			// Data
+			body,
+			headers,
+		},
+		parameters: {
+			customer_id: true,
+			destination_id: false,
+			request_id: false,
+			source_id: false,
+		},
+		additional: {
+			response_id: z.string().optional(),
+		},
 	})
+		.add({
+			name: "kpi_response",
+			schema: {
+				date: z.date(),
+				customer_id: z.string(),
+				requests: z.number(),
+				sources: z.number(),
+			},
+			parameters: {
+				customer_id: true,
+			},
+			additional: {
+				start_date: z.date(),
+				end_date: z.date().optional(),
+				period: period.default("daily").optional(),
+				source_id: z.string().optional(),
+			},
+		})
+		.add({
+			name: "timeline_response",
+			schema: {
+				id: z.string(),
+				source_id: z.string(),
+				customer_id: z.string(),
+				status: z.number(),
+				events: z.number(),
+			},
+			parameters: {
+				customer_id: true,
+			},
+			additional: {
+				start_date: z.date(),
+				end_date: z.date().optional(),
+				period: period.default("daily").optional(),
+				source_id: z.string().optional(),
+			},
+		})
+		.finalize()
 }

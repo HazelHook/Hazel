@@ -16,7 +16,7 @@ const DestinationsPage = async () => {
 		customerId: userId,
 	})
 
-	if(!destinations) {
+	if (!destinations) {
 		notFound()
 	}
 

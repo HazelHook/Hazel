@@ -1,5 +1,5 @@
 import { RequestEventTimeSeries } from "db/src/tinybird/request/zod-request-data"
-import { ResponseEventTimeSeries } from "db/src/tinybird/response/zod-response-data";
+import { ResponseEventTimeSeries } from "db/src/tinybird/response/zod-response-data"
 
 export const transformSourcesChartData = (data: RequestEventTimeSeries[]) => {
 	return data.reduce(
