@@ -137,4 +137,6 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	)
 }
 
+export const runtime = "edge"
+
 export default ResponsePage

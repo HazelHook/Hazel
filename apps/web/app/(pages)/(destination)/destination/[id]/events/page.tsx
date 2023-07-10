@@ -55,4 +55,6 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 	)
 }
 
+export const runtime = "edge"
+
 export default EventsPage

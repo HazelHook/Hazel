@@ -3,3 +3,5 @@ export const POST = () => {
 
 	return new Response("Hello Post")
 }
+
+export const runtime = "edge"
