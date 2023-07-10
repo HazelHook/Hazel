@@ -7,6 +7,6 @@ export const formSchema = z.object({
 			message: "Name must be between atleast 2 characters long",
 		})
 		.max(20),
-	publicSourceId: z.string(),
-	publiceDestinationId: z.string(),
+	publicSourceId: z.string().length(21, { message: "You need to Select/Create a Source" }),
+	publiceDestinationId: z.string().length(21, { message: "You need to Select/Create a Destination" }),
 })

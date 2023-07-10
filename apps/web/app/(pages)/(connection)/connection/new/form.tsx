@@ -45,8 +45,6 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 		},
 	})
 
-	console.log(form.getValues())
-
 	const createSource = useAction(action, {
 		onSuccess(data) {
 			router.push(`/connection/${data.id}/`)
@@ -84,32 +82,34 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Source</FormLabel>
-								<Select
-									onValueChange={(value) => {
-										if (value !== "") {
-											field.onChange(value)
-										}
-									}}
-									value={field.value}
-								>
-									<FormControl>
-										<SelectTrigger>
-											<SelectValue placeholder="Select a verified email to display" />
-										</SelectTrigger>
-									</FormControl>
-									<SelectContent>
-										{sources.map((source) => (
-											<SelectItem key={source.publicId} value={source.publicId}>
-												<div className="flex flex-row items-center">
-													<Avatar className="mr-2 w-4 h-4">
-														<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
-													</Avatar>
-													{source.name}
-												</div>
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
+								{sources.length > 0 && (
+									<Select
+										onValueChange={(value) => {
+											if (value !== "") {
+												field.onChange(value)
+											}
+										}}
+										value={field.value}
+									>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="Select a verified email to display" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											{sources.map((source) => (
+												<SelectItem key={source.publicId} value={source.publicId}>
+													<div className="flex flex-row items-center">
+														<Avatar className="mr-2 w-4 h-4">
+															<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+														</Avatar>
+														{source.name}
+													</div>
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+								)}
 								<FormMessage />
 							</FormItem>
 						)}
@@ -126,32 +126,35 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Destination</FormLabel>
-								<Select
-									onValueChange={(value) => {
-										if (value !== "") {
-											field.onChange(value)
-										}
-									}}
-									value={field.value}
-								>
-									<FormControl>
-										<SelectTrigger>
-											<SelectValue placeholder="Select a verified email to display" />
-										</SelectTrigger>
-									</FormControl>
-									<SelectContent>
-										{destinations.map((source) => (
-											<SelectItem key={source.publicId} value={source.publicId}>
-												<div className="flex flex-row items-center">
-													<Avatar className="mr-2 w-4 h-4">
-														<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
-													</Avatar>
-													{source.name}
-												</div>
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
+								{destinations.length > 0 && (
+									<Select
+										onValueChange={(value) => {
+											if (value !== "") {
+												field.onChange(value)
+											}
+										}}
+										value={field.value}
+									>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="Select a verified email to display" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											{destinations.map((source) => (
+												<SelectItem key={source.publicId} value={source.publicId}>
+													<div className="flex flex-row items-center">
+														<Avatar className="mr-2 w-4 h-4">
+															<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+														</Avatar>
+														{source.name}
+													</div>
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+								)}
+
 								<FormMessage />
 							</FormItem>
 						)}
@@ -186,10 +189,8 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 					<NewSourceForm
 						shouldRedirect={false}
 						onClose={(id) => {
-							console.log(id, "XD")
 							setSourceModal(false)
-							form.setValue("publicSourceId", id)
-							form.setValue("name", id)
+							form.setValue("publicSourceId", id, { shouldValidate: true })
 						}}
 						action={createSourceAction}
 					/>
@@ -202,7 +203,7 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 						onClose={(id) => {
 							console.log(id)
 							setDestinationModal(false)
-							form.setValue("publiceDestinationId", id)
+							form.setValue("publiceDestinationId", id, { shouldValidate: true })
 						}}
 						shouldRedirect={false}
 						action={createDestinationAction}
