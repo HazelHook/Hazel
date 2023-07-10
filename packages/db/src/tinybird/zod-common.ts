@@ -5,7 +5,6 @@ import { ZodTypeAny, ZodOptional, z, AnyZodObject } from "zod"
 export const period = z
 	.enum(["daily", "hourly", "weekly", "monthly"])
 	.describe("The period of time to group the data by.")
-export const successState = z.enum(["pending", "success", "error"])
 export const hazelVersion = z.enum(["1.0"])
 
 // Utils

@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { TinybirdResourceBuilder, ZodMapped, body, hazelVersion, headers, period, successState, timestamp } from "../zod-common"
+import { TinybirdResourceBuilder, ZodMapped, body, hazelVersion, headers, period, timestamp } from "../zod-common"
 import { Tinybird } from "@chronark/zod-bird"
 
 const schema = {
