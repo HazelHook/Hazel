@@ -1,14 +1,4 @@
-import { eq, iife, InferModel, TableConfig } from "drizzle-orm"
-import { _ } from "drizzle-orm/db.d-cf0abe10"
-import { AnyMySqlColumn, MySqlTableWithColumns } from "drizzle-orm/mysql-core"
-
-type IDFilter =
-	| {
-			publicId: string
-	  }
-	| {
-			customerId: string
-	  }
+import { MySqlTableWithColumns } from "drizzle-orm/mysql-core"
 
 import { DB } from ".."
 

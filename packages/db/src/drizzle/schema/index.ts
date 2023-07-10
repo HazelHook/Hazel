@@ -37,8 +37,8 @@ export const connection = buildMysqlTable(
 	{
 		name,
 
-		sourceId: int("destination_id").notNull(),
-		destinationId: int("source_id").notNull(),
+		sourceId: int("source_id").notNull(),
+		destinationId: int("destination_id").notNull(),
 
 		enabled: boolean("enabled").default(true).notNull(),
 
