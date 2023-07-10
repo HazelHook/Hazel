@@ -90,7 +90,12 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					subtitle={String(kpiRequests.data.reduce((curr, el) => curr + el.events, 0))}
 					group="kpis"
 					id={"events"}
-					series={[{ name: "Events", data: kpiRequests.data.map((datum) => datum.events) }]}
+					series={[
+						{
+							name: "Events",
+							data: kpiRequests.data.map((datum) => datum.events),
+						},
+					]}
 					labels={kpiRequests.data.map((datum) => formatDateTime(new Date(datum.date)))}
 				/>
 				<KpiCard

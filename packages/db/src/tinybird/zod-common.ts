@@ -1,5 +1,5 @@
 import { Tinybird } from "@chronark/zod-bird"
-import { ZodTypeAny, ZodOptional, z, AnyZodObject } from "zod"
+import { AnyZodObject, z, ZodOptional, ZodTypeAny } from "zod"
 
 // Common
 export const period = z
@@ -19,14 +19,16 @@ export type ZodMapped<T extends SchemaRecordType> = {
 class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends SchemaRecordType> {
 	private _name: IndexableString
 	private _publish?: ReturnType<typeof Tinybird.prototype.buildIngestEndpoint<z.infer<z.ZodObject<TSchema>>>>
-	private _get: ReturnType<typeof Tinybird.prototype.buildPipe<z.infer<z.ZodObject<TParams>>, z.infer<z.ZodObject<TSchema>>>>
+	private _get: ReturnType<
+		typeof Tinybird.prototype.buildPipe<z.infer<z.ZodObject<TParams>>, z.infer<z.ZodObject<TSchema>>>
+	>
 
 	constructor({
 		name,
 		tb,
 		schema,
 		parameters,
-		datasource
+		datasource,
 	}: {
 		name: IndexableString
 		datasource?: string
@@ -36,7 +38,7 @@ class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends SchemaR
 	}) {
 		this._name = name
 
-		if(datasource){
+		if (datasource) {
 			this._publish = tb.buildIngestEndpoint({
 				datasource,
 				// @ts-ignore
@@ -88,7 +90,7 @@ export class TinybirdResourceBuilder {
 			name: `${name}_${this._name}`,
 			schema,
 			parameters,
-			datasource
+			datasource,
 		})
 	}
 }

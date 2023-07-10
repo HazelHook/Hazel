@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Connection } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -8,7 +9,6 @@ import { ChevronRightIcon } from "@/components/icons/pika/chevronRight"
 
 import { SidebarItem } from "./Sidebar"
 import { Image } from "./ui/image"
-import { Connection } from "db/src/drizzle/schema"
 
 export interface SidebarProjectItemProps {
 	project: Connection

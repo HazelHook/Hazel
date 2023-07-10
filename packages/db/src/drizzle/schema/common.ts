@@ -1,5 +1,5 @@
 import { BuildColumns, sql } from "drizzle-orm"
-import { MySqlTableExtraConfig, mysqlTable, serial, timestamp, varchar } from "drizzle-orm/mysql-core"
+import { mysqlTable, MySqlTableExtraConfig, serial, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { nanoid } from "nanoid"
 
 const commonFields = {

@@ -1,9 +1,9 @@
 import { connect } from "@planetscale/database"
+import { eq, InferModel } from "drizzle-orm"
 import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
 
 import { DrizzleTable } from "./orm/db-table"
 import * as schema from "./schema"
-import { eq, InferModel } from "drizzle-orm"
 import { generatePublicId } from "./schema/common"
 
 export type DB = PlanetScaleDatabase<typeof schema>

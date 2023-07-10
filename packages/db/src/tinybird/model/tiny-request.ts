@@ -1,7 +1,7 @@
+import { Tinybird } from "@chronark/zod-bird"
 import { z } from "zod"
 
-import { TinybirdResourceBuilder, ZodMapped, body, hazelVersion, headers, period } from "../zod-common"
-import { Tinybird } from "@chronark/zod-bird"
+import { body, hazelVersion, headers, period, TinybirdResourceBuilder, ZodMapped } from "../zod-common"
 
 const schema = {
 	// IDs
@@ -65,7 +65,6 @@ const timelineParameters = {
 }
 export type TBTimelineRequestParameters = ZodMapped<typeof timelineParameters>
 
-
 export const buildTinyBirdRequest = (tb: Tinybird) => {
 	const builder = new TinybirdResourceBuilder({
 		tb,
@@ -76,7 +75,7 @@ export const buildTinyBirdRequest = (tb: Tinybird) => {
 		name: "get",
 		schema: schema,
 		parameters: parameters,
-		datasource: "request_events"
+		datasource: "request_events",
 	})
 
 	return {
@@ -90,7 +89,7 @@ export const buildTinyBirdRequest = (tb: Tinybird) => {
 		timeline: builder.build({
 			name: "timeline",
 			schema: timelineSchema,
-			parameters: timelineParameters
-		}).get
+			parameters: timelineParameters,
+		}).get,
 	}
 }

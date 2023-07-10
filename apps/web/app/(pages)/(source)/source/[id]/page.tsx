@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
 import { sub } from "date-fns"
+import { Destination } from "db/src/drizzle/schema"
 import { Tiny } from "db/src/tinybird"
 
 import { getCachedSource } from "@/lib/orm"
@@ -12,7 +13,6 @@ import { DataTable } from "@/components/ui/data-table"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
 
 import { columns } from "./column"
-import { Destination } from "db/src/drizzle/schema"
 
 const SourcePage = async ({
 	params,

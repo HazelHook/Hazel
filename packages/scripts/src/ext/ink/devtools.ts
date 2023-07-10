@@ -5,4 +5,5 @@ import "./devtools-window-polyfill.js"
 import devtools from "react-devtools-core"
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+
 ;(devtools as any).connectToDevTools()

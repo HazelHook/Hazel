@@ -1,6 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
+import { TBResponse } from "db/src/tinybird/model/tiny-response"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -12,7 +13,6 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
-import { TBResponse } from "db/src/tinybird/model/tiny-response"
 
 export type Column = TBResponse
 

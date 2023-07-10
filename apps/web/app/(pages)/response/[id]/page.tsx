@@ -2,6 +2,7 @@ import { ReactNode, Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Code } from "bright"
+import { TBRequest } from "db/src/tinybird/model/tiny-request"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination, getCachedSource } from "@/lib/orm"
@@ -12,7 +13,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ExpandableList } from "@/components/ui/ExpandableList"
 import { Status } from "@/components/Status"
-import { TBRequest } from "db/src/tinybird/model/tiny-request"
 
 const ListItem = ({
 	name,
@@ -79,7 +79,10 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const res = data[0]
 
-	const req = tiny.request.get({ customer_id: userId, request_id: res.request_id })
+	const req = tiny.request.get({
+		customer_id: userId,
+		request_id: res.request_id,
+	})
 
 	const source = await getCachedSource({ publicId: res.source_id })
 	const destination = await getCachedDestination({

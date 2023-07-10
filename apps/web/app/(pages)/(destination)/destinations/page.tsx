@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { notFound } from "next/navigation"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
@@ -7,7 +8,6 @@ import { DataTable } from "@/components/ui/data-table"
 import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"
-import { notFound } from "next/navigation"
 
 const DestinationsPage = async () => {
 	const { userId } = auth()
