@@ -1,19 +1,21 @@
+import { Suspense } from "react"
+import Link from "next/link"
 import { currentUser } from "@clerk/nextjs"
 import { formatDistanceToNow, sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
 import tiny from "@/lib/tiny"
-import { chartColors, formatDateTime, getSeededProfileImageUrl, subtractFromString } from "@/lib/utils"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { chartColors, formatDateTime, subtractFromString } from "@/lib/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
+import { Skeleton } from "@/components/ui/skeleton"
+import { StatusBadge } from "@/components/StatusBadge"
+import { SourceLink } from "@/app/(pages)/_component/SourceLink"
 
 import { DatePicker } from "./_component/DatePicker"
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
-import { StatusBadge } from "@/components/StatusBadge"
-import { SourceLink } from "@/app/(pages)/_component/SourceLink"
-import Link from "next/link"
 
 interface DashboardPageProps {
 	searchParams: {
@@ -79,9 +81,13 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		<main className="container p-8 space-y-4">
 			<div className="flex flex-row justify-between">
 				<div className="flex flex-row gap-2">
-					<Avatar className="w-16 h-16">
-						<AvatarImage src={getSeededProfileImageUrl(userId)} />
-					</Avatar>
+					<Suspense fallback={<Skeleton className="w-16 h-16 rounded-full" />}>
+						<Avatar className="w-16 h-16">
+							<AvatarImage src={(await userPromise)?.profileImageUrl} />
+							<AvatarFallback />
+						</Avatar>
+					</Suspense>
+
 					<div className="flex justify-center flex-col">
 						<h3 className="text-2xl">Welcome back, {user?.username}</h3>
 						<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
@@ -193,14 +199,23 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 								<div className="flex flex-row gap-4 justify-center items-center">
 									<div className="flex flex-col gap-1">
 										<SourceLink sourceId={request.source_id} />
-										<Link href={`/request/${request.id}`} className="text-muted-foreground text-sm underline-offset-4 hover:underline">
+										<Link
+											href={`/request/${request.id}`}
+											className="text-muted-foreground text-sm underline-offset-4 hover:underline"
+										>
 											{request.id.replace("req_", "")}
 										</Link>
 									</div>
 								</div>
 
 								<div className="flex flex-col gap-2 justify-end items-end">
-									{<p className="text-sm">{formatDistanceToNow(new Date(request.timestamp), { addSuffix: true })}</p>}
+									{
+										<p className="text-sm">
+											{formatDistanceToNow(new Date(request.timestamp), {
+												addSuffix: true,
+											})}
+										</p>
+									}
 									<StatusBadge status={request.rejected ? "error" : "success"} />
 								</div>
 							</div>
