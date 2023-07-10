@@ -1,16 +1,19 @@
 import { currentUser } from "@clerk/nextjs"
-import { sub } from "date-fns"
+import { formatDistanceToNow, sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
 import tiny from "@/lib/tiny"
 import { chartColors, formatDateTime, getSeededProfileImageUrl, subtractFromString } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 
 import { DatePicker } from "./_component/DatePicker"
 import { KpiCard } from "./_component/KpiCard"
 import { transformSourcesChartData } from "./_utils"
+import { StatusBadge } from "@/components/StatusBadge"
+import { SourceLink } from "@/app/(pages)/_component/SourceLink"
+import Link from "next/link"
 
 interface DashboardPageProps {
 	searchParams: {
@@ -30,11 +33,17 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 			searchParams.period ? subtractFromString(new Date(), searchParams.period)! : sub(new Date(), { days: 7 }),
 		)
 
+	const requests = tiny.request.get({
+		customer_id: userId,
+		limit: 5,
+	})
+
 	const kpiRequestPromise = tiny.request.kpi({
 		customer_id: userId,
 		start_date: startTime,
 		end_date: endTime,
 	})
+
 	const kpiResponsePromise = tiny.response.kpi({
 		customer_id: userId,
 		// success: 1,
@@ -127,8 +136,8 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					labels={kpiErrors.data.map((datum) => formatDateTime(new Date(datum.date)))}
 				/>
 			</div>
-			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-				<Card className="col-span-full w-full h-full overflow-hidden">
+			<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3">
+				<Card className="col-span-2 w-full h-full overflow-hidden">
 					<CardHeader>
 						<CardTitle>Usage Overview</CardTitle>
 					</CardHeader>
@@ -173,6 +182,30 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 							width={"100%"}
 						/>
 					</div>
+				</Card>
+				<Card className="col-span-1">
+					<CardHeader>
+						<CardTitle>Recent Events</CardTitle>
+					</CardHeader>
+					<CardContent className="flex flex-col gap-4">
+						{(await requests).data.map((request) => (
+							<div key={request.id} className="flex flex-row gap-2 justify-between">
+								<div className="flex flex-row gap-4 justify-center items-center">
+									<div className="flex flex-col gap-1">
+										<SourceLink sourceId={request.source_id} />
+										<Link href={`/request/${request.id}`} className="text-muted-foreground text-sm underline-offset-4 hover:underline">
+											{request.id.replace("req_", "")}
+										</Link>
+									</div>
+								</div>
+
+								<div className="flex flex-col gap-2 justify-end items-end">
+									{<p className="text-sm">{formatDistanceToNow(new Date(request.timestamp), { addSuffix: true })}</p>}
+									<StatusBadge status={request.rejected ? "error" : "success"} />
+								</div>
+							</div>
+						))}
+					</CardContent>
 				</Card>
 			</div>
 		</main>
