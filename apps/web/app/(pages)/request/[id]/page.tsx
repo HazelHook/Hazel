@@ -40,9 +40,6 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { data } = await tiny.request.get({
 		request_id: params.id,
 		customer_id: userId,
-		limit: undefined, // TODO
-		offset: undefined,
-		source_id: undefined,
 	})
 
 	if (data.length === 0) {
@@ -51,7 +48,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const req = data[0]
 
-	const { data: resData } = await tiny.response.get({ customer_id: userId, destination_id: undefined, request_id: undefined, response_id: undefined, source_id: undefined }) // TODO
+	const { data: resData } = await tiny.response.get({ customer_id: userId })
 
 	// TODO: ADD ACCEPETED/REJECTED TO TINYBIRD => Wasnt valid
 

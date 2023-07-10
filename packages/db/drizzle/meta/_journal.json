@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1688990305291,
+      "tag": "0000_warm_caretaker",
+      "breakpoints": true
+    }
+  ]
+}

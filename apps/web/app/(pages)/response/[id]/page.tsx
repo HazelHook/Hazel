@@ -79,7 +79,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const res = data[0]
 
-	const req = tiny.request.get({ customer_id: userId, request_id: res.request_id, limit: undefined, offset: undefined, source_id: undefined }) // TODO
+	const req = tiny.request.get({ customer_id: userId, request_id: res.request_id })
 
 	const source = await getCachedSource({ publicId: res.source_id })
 	const destination = await getCachedDestination({

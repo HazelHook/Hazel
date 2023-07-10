@@ -1,0 +1,53 @@
+TOKEN "untitled_pipe_9959_endpoint_read_0393" READ
+
+NODE endpoint
+SQL >
+
+    %
+            {% if not defined(customer_id) %}
+                {{ error('customer_id (String) query param is required') }}
+            {% end %}
+            {% if not defined(start_date) %}
+                {{ error('start_date (DateTime) query param is required') }}
+            {% end %}
+            SELECT
+                {% if period == 'daily' or period == 'hourly' or not defined(period) %}
+                    bucket
+                {% elif period == 'weekly' %} toStartOfWeek(bucket)
+                {% elif period == 'monthly' %} toStartOfMonth(bucket)
+                {% end %} date,
+                source_id,
+                customer_id,
+                countMerge(count) as events
+            {% if period == 'hourly' %} FROM hourly_req_mv
+            {% else %} FROM day_req_mv
+            {% end %} toStart
+            WHERE
+                {% if period == 'daily' or period == 'hourly' or not defined(period) %}
+                    bucket >= {{ DateTime(start_date, required=True) }}
+                    {% if defined(end_date) %}
+                        AND bucket < {{ DateTime(end_date, required=False) }}
+                    {% end %}
+                {% elif period == 'weekly' or period == 'monthly' %}
+                    bucket >= toDate({{ DateTime(start_date, required=True) }})
+                    {% if defined(end_date) %}
+                        AND bucket < toDate({{ DateTime(end_date, required=False) }})
+                    {% end %}
+                {% end %}
+                {% if defined(source_id) %}
+                    AND source_id
+                    = {{ String(source_id, description="Source ID", required=False) }}
+                {% end %}
+                AND customer_id
+                = {{
+                    String(
+                        customer_id,
+                        "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
+                        description="Customer ID",
+                        required=True,
+                    )
+                }}
+            GROUP BY bucket, source_id, customer_id, count
+            ORDER BY bucket
+
+

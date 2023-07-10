@@ -50,7 +50,7 @@ export const connection = buildMysqlTable(
 		customerIdIndex: index("conn_customer_id_idx").on(table.customerId),
 
 		sourceIdIndex: index("conn_source_id_idx").on(table.sourceId),
-		destinationIndex: index("conn_source_id_idx").on(table.destinationId),
+		destinationIndex: index("conn_destination_id_idx").on(table.destinationId),
 	}),
 )
 

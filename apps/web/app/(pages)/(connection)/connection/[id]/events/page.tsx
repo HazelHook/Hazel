@@ -27,8 +27,6 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 		customer_id: userId,
 		source_id: connection.source?.publicId,
 		destination_id: connection.destination?.publicId,
-		request_id: undefined, // TODO
-		response_id: undefined
 	})
 
 	return (

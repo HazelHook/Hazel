@@ -23,16 +23,10 @@ async function fetchData({
 		tiny.request.get({
 			customer_id,
 			source_id,
-			limit: undefined,
-			offset: undefined, // TODO
-			request_id: undefined,
 		}),
 		tiny.response.get({
 			customer_id,
 			source_id,
-			destination_id: undefined, // TODO
-			request_id: undefined,
-			response_id: undefined,
 		}),
 	])
 
