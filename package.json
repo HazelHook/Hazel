@@ -9,12 +9,12 @@
 		"rome:format:write": "rome format --write ./"
 	},
 	"devDependencies": {
-		"@ianvs/prettier-plugin-sort-imports": "^4.0.2",
-		"@turbo/gen": "^1.10.6",
-		"prettier": "^2.8.8",
-		"rome": "^12.1.3",
-		"tsup": "^7.1.0",
-		"turbo": "^1.10.6"
+		"@ianvs/prettier-plugin-sort-imports": "4.0.2",
+		"@turbo/gen": "1.10.7",
+		"prettier": "3.0.0",
+		"rome": "12.1.3",
+		"turbo": "1.10.7",
+		"tsup": "7.1.0"
 	},
 	"packageManager": "pnpm@8.6.5",
 	"name": "hazelhooks"

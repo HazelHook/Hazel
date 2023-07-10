@@ -7,7 +7,9 @@ const nextConfig = {
 	},
 	transpilePackages: ["ui"],
 	webpack: (config) => {
+		console.log(config.name)
 		if (config.name === "server") config.optimization.concatenateModules = false
+		if (config.name === "edge-server") config.optimization.concatenateModules = false
 
 		return config
 	},
