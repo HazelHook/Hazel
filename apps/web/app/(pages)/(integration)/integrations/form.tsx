@@ -1,16 +1,11 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Select, SelectIcon, SelectPortal, SelectTrigger } from "@radix-ui/react-select"
 import { useForm, UseFormReturn } from "react-hook-form"
 import * as z from "zod"
 
-import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
-import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
-import { LabeledSeparator } from "@/components/LabeledSeparator"
 import {
 	IntegrationFields,
 	IntegrationForm,
@@ -18,73 +13,86 @@ import {
 	IntegrationSchemaFromFields,
 } from "@/app/(pages)/(integration)/integrations/data/common"
 import { IntegrationMDText } from "@/app/(pages)/(integration)/integrations/data/integration-md-text"
+import { LabeledSeparator } from "@/components/LabeledSeparator"
+import {
+	Select,
+	SelectIcon,
+	SelectPortal,
+	SelectTrigger,
+} from "@radix-ui/react-select"
+import { SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
+import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
+import { useAction } from "@/server/client"
+import { createIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
+import { useRouter } from "next/navigation"
 
 function GetFieldComponent<TSchema extends IntegrationFields>({
-	field,
+	fieldDef,
 	pathKey,
 	form,
 }: {
-	field: IntegrationFormField
+	fieldDef: IntegrationFormField
 	pathKey: any
 	form: UseFormReturn<IntegrationSchemaFromFields<TSchema>, any, undefined>
 }) {
-	if (field.type === "text") {
+	if (fieldDef.type === "text") {
 		return (
 			<FormField
-				key={field.label}
-				control={form.control}
 				name={pathKey}
-				render={() => (
+				control={form.control}
+				key={pathKey}
+				render={({field}) => (
 					<FormItem className="mb-2">
 						<div className="flex justify-between ml-1 mr-1">
-							<FormLabel className="font-light text-gray-300">{field.label}</FormLabel>
-							<FormMessage />
+							<FormLabel className="font-light text-gray-300">{fieldDef.label}</FormLabel>
+							{/* <FormMessage/> */}
 						</div>
 						<FormControl>
-							<Input placeholder={field.placeholder} />
+							<Input placeholder={fieldDef.placeholder} {...field as any} />
 						</FormControl>
 						<FormDescription className="font-light ml-2 text-xs">
-							<IntegrationMDText description={field.description} />
+							<IntegrationMDText description={fieldDef.description} />
 						</FormDescription>
 					</FormItem>
 				)}
 			/>
 		)
-	} else if (field.type === "secret") {
+	} else if (fieldDef.type === "secret") {
 		return (
 			<FormField
-				key={field.label}
-				control={form.control}
 				name={pathKey}
-				render={() => (
+				control={form.control}
+				key={pathKey}
+				render={({field}) => (
 					<FormItem className="mb-2">
 						<div className="flex justify-between ml-1 mr-1">
-							<FormLabel className="font-light text-gray-300">{field.label}</FormLabel>
-							<FormMessage />
+							<FormLabel className="font-light text-gray-300">{fieldDef.label}</FormLabel>
+							{/* <FormMessage /> */}
 						</div>
 						<FormControl>
-							<Input placeholder={field.placeholder} type="password" />
+							<Input placeholder={fieldDef.placeholder} {...field as any} type="password" />
 						</FormControl>
 						<FormDescription className="font-light ml-2 text-xs">
-							<IntegrationMDText description={field.description} />
+							<IntegrationMDText description={fieldDef.description} />
 						</FormDescription>
 					</FormItem>
 				)}
 			/>
 		)
-	} else if (field.type === "select") {
+	} else if (fieldDef.type === "select") {
 		return (
 			<FormField
-				key={field.label}
-				control={form.control}
 				name={pathKey}
-				render={() => (
+				control={form.control}
+				key={pathKey}
+				render={({field}) => (
 					<FormItem className="flex flex-col mb-2">
 						<div className="flex justify-between ml-1 mr-1">
-							<FormLabel className="font-light text-gray-300">{field.label}</FormLabel>
-							<FormMessage />
+							<FormLabel className="font-light text-muted-foreground">{fieldDef.label}</FormLabel>
+							{/* <FormMessage /> */}
 						</div>
-						<Select>
+						<Select value={field.value as any} onValueChange={(v) => field.onChange(v as any)}>
 							<SelectTrigger className="flex flex-row justify-between p-2 h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50 text-muted-foreground">
 								<SelectValue placeholder="Select..." />
 								<SelectIcon className="SelectIcon">
@@ -93,7 +101,7 @@ function GetFieldComponent<TSchema extends IntegrationFields>({
 							</SelectTrigger>
 							<SelectPortal>
 								<SelectContent>
-									{field.options.map((option) => (
+									{fieldDef.options.map((option) => (
 										<SelectItem key={option} value={option}>
 											{option}
 										</SelectItem>
@@ -102,7 +110,7 @@ function GetFieldComponent<TSchema extends IntegrationFields>({
 							</SelectPortal>
 						</Select>
 						<FormDescription className="font-light ml-2 text-xs">
-							<IntegrationMDText description={field.description} />
+							<IntegrationMDText description={fieldDef.description} />
 						</FormDescription>
 					</FormItem>
 				)}
@@ -116,23 +124,32 @@ function GetFieldComponent<TSchema extends IntegrationFields>({
 export function IntegrationFormModal<T extends IntegrationForm<TSchema>, TSchema extends IntegrationFields>({
 	integration,
 }: { integration: T }) {
-	const form = useForm<typeof integration.config>({
-		resolver: zodResolver(z.object(integration.config)),
+	const schema = z.object(integration.config)
+	const router = useRouter()
+
+	const form = useForm({
+		resolver: zodResolver(schema),
+		defaultValues: Object.keys(integration.config).reduce((acc, key) => {
+			(acc as any)[key] = ""
+			return acc
+		}, {}) as any,
 	})
 
-	// const createSource = useAction(action, {
-	// 	onSuccess(data) {
-	// 		router.push(`/connection/${data.id}/`)
-	// 	},
-	// 	onError(error) {
-	// 		form.setError("root", error)
-	// 	},
-	// })
+	const createIntegration = useAction(createIntegrationAction, {
+		onSuccess(data) {
+			router.push('/integrations')
+		},
+		onError(error) {
+			form.setError("root", error)
+		},
+	})
 
-	function onSubmit(values: typeof integration.config) {
+	function onSubmit(values: z.infer<typeof schema>) {
 		console.log(values)
-
-		// createSource.mutate(values)
+		createIntegration.mutate({
+			data: values,
+			name: values.name!,
+		})
 	}
 
 	return (
@@ -140,11 +157,11 @@ export function IntegrationFormModal<T extends IntegrationForm<TSchema>, TSchema
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
 					{Object.entries(integration.general).map(([key, config]) => {
-						return <GetFieldComponent field={config} pathKey={key} form={form} key={key} />
+						return <GetFieldComponent fieldDef={config} pathKey={key} form={form} key={key} />
 					})}
 					<LabeledSeparator label="Configuration" className="mt-6 mb-4" />
 					{Object.entries(integration.fields).map(([key, integField]) => {
-						return <GetFieldComponent field={integField} pathKey={key} form={form} key={key} />
+						return <GetFieldComponent fieldDef={integField} pathKey={key} form={form} key={key} />
 					})}
 					{/* <FormMessage /> */}
 
