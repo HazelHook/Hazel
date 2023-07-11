@@ -121,5 +121,32 @@ export function connectDB({
 				return { res, publicId }
 			},
 		},
+		integrations: {
+			table: new DrizzleTable("integration", schema.integration, db),
+			getOne: async ({ publicId }: { publicId: string }) => {
+				return await db.query.integration.findFirst({
+					where: eq(schema.integration.publicId, publicId),
+					with: {
+						source: true,
+					},
+				})
+			},
+			getMany: async ({ customerId }: { customerId: string }) => {
+				return await db.query.integration.findMany({
+					where: eq(schema.integration.customerId, customerId),
+					with: {
+						source: true,
+					},
+				})
+			},
+			create: async (data: Omit<schema.InsertIntegration, "publicId">) => {
+				const publicId = generatePublicId("itg")
+				const res = await db.insert(schema.integration).values({
+					...data,
+					publicId,
+				})
+				return { res, publicId }
+			},
+		},
 	}
 }

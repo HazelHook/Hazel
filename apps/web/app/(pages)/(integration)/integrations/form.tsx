@@ -121,10 +121,8 @@ function GetFieldComponent<TSchema extends IntegrationFields>({
 export function IntegrationFormModal<T extends IntegrationForm<TSchema>, TSchema extends IntegrationFields>({
 	integration,
 }: { integration: T }) {
-	const formSchema = z.object(integration.config)
-
 	const form = useForm<typeof integration.config>({
-		resolver: zodResolver(formSchema),
+		resolver: zodResolver(z.object(integration.config)),
 	})
 
 	// const createSource = useAction(action, {
@@ -137,6 +135,8 @@ export function IntegrationFormModal<T extends IntegrationForm<TSchema>, TSchema
 	// })
 
 	function onSubmit(values: typeof integration.config) {
+		console.log(values)
+
 		// createSource.mutate(values)
 	}
 

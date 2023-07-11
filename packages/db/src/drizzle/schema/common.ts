@@ -26,6 +26,6 @@ export const buildMysqlTable = <TTableName extends string, TColumnsMap extends R
 	)
 }
 
-export const generatePublicId = (prefix: "src" | "dst" | "con") => {
+export const generatePublicId = (prefix: "src" | "dst" | "con" | "itg") => {
 	return `${prefix}_${nanoid(17)}`
 }
