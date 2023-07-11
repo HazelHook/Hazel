@@ -5,12 +5,14 @@ import { buildMysqlTable } from "./common"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 }).notNull()
+const enabled = boolean("enabled").default(true).notNull()
 
 export const source = buildMysqlTable(
 	"sources",
 	{
 		name,
 		url,
+		enabled,
 	},
 	(table) => ({
 		publicIdIndex: index("src_public_id_idx").on(table.publicId),
@@ -24,6 +26,7 @@ export const destination = buildMysqlTable(
 	{
 		name,
 		url,
+		enabled,
 	},
 	(table) => ({
 		publicIdIndex: index("dest_public_id_idx").on(table.publicId),
@@ -36,11 +39,10 @@ export const connection = buildMysqlTable(
 	"connections",
 	{
 		name,
+		enabled,
 
 		sourceId: int("source_id").notNull(),
 		destinationId: int("destination_id").notNull(),
-
-		enabled: boolean("enabled").default(true).notNull(),
 
 		fluxConfig: json("flux_config"),
 	},
