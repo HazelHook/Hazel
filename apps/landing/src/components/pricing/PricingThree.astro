@@ -1,0 +1,105 @@
+<section class="lg:p-8">
+  <div
+    x-data="{annual: false}"
+    class="mx-auto 2xl:max-w-7xl py-24 lg:px-16 md:px-12 px-8 xl:px-36 items-center lg:py-24 relative w-full">
+    <div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 pb-6 gap-12 border-b border-white/10 items-end">
+        <div>
+          <span class="text-white"> Pricing</span>
+          <h2
+            class="text-3xl mt-6 tracking-tighter font-light lg:text-4xl text-white">
+            Super Simple pricing <span class="block text-zinc-400"
+              >for practically everyrone</span
+            >
+          </h2>
+        </div>
+
+        <div
+          class="items-center inline-flex lg:w-1/2 lg:ml-auto lg:px-2 space-x-2">
+          <button
+            class="transition rounded-3xl ring-1 ring-white/10 w-full block bg-transparent text-white px-8 py-2 text-sm font-medium"
+            :class="annual == false ? 'bg-white/10 text-white ' : ''"
+            @click="annual = false"
+            type="button">Monthly</button
+          >
+          <button
+            class="transition rounded-3xl w-full block ring-1 ring-white/10 bg-transparent text-white px-8 py-2 text-sm font-medium"
+            :class="annual == true ? 'bg-white/10 text-white' : ''"
+            @click="annual = true"
+            type="button">Annual</button
+          >
+        </div>
+      </div>
+
+      <div class="pt-6">
+        <div
+          class="space-y-4 sm:space-y-0 text-left sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:grid-cols-2 ring-1 ring-white/10 rounded-3xl p-2">
+          <div class="p-4">
+            <div
+              class="grid items-center justify-center w-full grid-cols-1 p-6 lg:grid-cols-2">
+              <div>
+                <h2 class="text-white">Basic plan</h2>
+                <p class="mt-4 text-sm text-white">
+                  Suitable for those that want to grow steadily.
+                </p>
+              </div>
+              <div class="lg:ml-auto flex-col text-right">
+                <p class="text-3xl font-extrabold text-white">
+                  $<span x-text="annual ? '8.00' : '15.00'">15.00</span>
+                </p>
+                <p class="text-sm text-white">
+                  per month <span x-cloak x-show="annual"
+                    >(billed annually)</span
+                  >
+                </p>
+              </div>
+              <div class="flex mt-8 w-full col-span-full">
+                <a
+                  href="#"
+                  type="a"
+                  class="text-sm py-2 w-full px-4 border focus:ring-2 rounded-full border-transparent bg-white hover:bg-white/10 text-black duration-200 focus:ring-offset-2 focus:ring-white hover:text-white inline-flex items-center justify-center ring-1 ring-transparent">
+                  Get started
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="bg-ebony/50 shadow-inset rounded-3xl p-4">
+            <div
+              class="grid items-center justify-center w-full grid-cols-1 p-6 lg:grid-cols-2">
+              <div>
+                <h2 class="text-accent-400">
+                  Advanced plan <span
+                    class="font-medium inline-flex items-center bg-ebony border border-white/10 ml-4 px-3 py-0.5 rounded-full text-white text-xs">
+                    Popular
+                  </span>
+                </h2>
+                <p class="mt-4 text-sm text-white">
+                  Suitable for those that want to grow like a rocket.
+                </p>
+              </div>
+              <div class="lg:ml-auto flex-col text-right">
+                <p class="text-3xl font-extrabold text-white">
+                  $<span x-text="annual ? '28.00' : '35.00'">35.00</span>
+                </p>
+                <p class="text-sm text-white">
+                  per month <span x-cloak x-show="annual"
+                    >(billed annually)</span
+                  >
+                </p>
+              </div>
+              <div class="flex mt-8 w-full col-span-full">
+                <a
+                  href="#"
+                  type="a"
+                  class="text-sm py-2 w-full px-4 border focus:ring-2 rounded-full border-transparent bg-white hover:bg-white/10 text-black duration-200 focus:ring-offset-2 focus:ring-white hover:text-white inline-flex items-center justify-center ring-1 ring-transparent">
+                  Get started
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

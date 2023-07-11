@@ -1,0 +1,105 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+import LightLayout from "./LightLayout.astro";
+import CtaTwo from "@/components/ctas/CtaTwo.astro";
+const { frontmatter } = Astro.props;
+
+import { AstroSeo } from "@astrolib/seo";
+---
+
+<AstroSeo
+  title={frontmatter.title}
+  description={frontmatter.description}
+  canonical="https://www.lexingtonthemes.com"
+  openGraph={{
+    url: "https://www.lexingtonthemes.com",
+    title: "Title",
+    description: "description",
+    images: [
+      {
+        url: "https://www.lexingtonthemes.com/opengraph/social-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Social open graph",
+        type: "image/jpeg",
+      },
+      {
+        url: "https://www.lexingtonthemes.com/opengraph/twitter-og.jpg",
+        width: 4096,
+        height: 4096,
+        alt: "Twitter open graph",
+        type: "image/jpeg",
+      },
+      { url: "https://www.lexingtonthemes.com/opengraph/social-og.jpg" },
+      { url: "https://www.lexingtonthemes.com/opengraph/twitter-og.jpg" },
+    ],
+    site_name: "YourSitesName",
+  }}
+  twitter={{
+    handle: "@TwitterHandle",
+    site: "@site",
+    cardType: "summary_large_image",
+  }}
+/>
+<LightLayout>
+  <section class="bg-white">
+    <div
+      class="px-8 py-24 lg:py-36 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl grid grid-cols-1 md:grid-cols-4">
+      <div class="hidden md:block">
+        <div class="lg:sticker lg:sticky py-24 top-0">
+          <ul role="list" class="space-y-2">
+            {
+              tags.map((tag) => (
+                <li>
+                  <a
+                    class="text-xs  capitalize  text-black    hover:text-accent-500"
+                    href={`/tags/${tag}`}>
+                    {tag}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="md:col-span-3 lg:col-span-2 pt-24 lg:pt-0">
+        <div
+          class="mx-auto prose text-zinc-500 prose-a:font-semibold prose-a:text-acent-300 hover:prose-a:text-black prose-headings:text-black prose-blockquote:text-acent-400 prose-code:text-acent-400 prose-strong:text-accent-500 prose-img:rounded-3xl prose-pre:rounded-2xl">
+          <div class="pb-12 border-b">
+            <div class="space-x-1">
+              {
+                frontmatter.tags.map((tag) => (
+                  <a
+                    class="inline-flex items-center no-underline  rounded-full  px-6 py-2 text-xs font-medium text-black uppercase ring-1 ring-inset ring-black/10 "
+                    href={`/tags/${tag}`}>
+                    {tag}
+                  </a>
+                ))
+              }
+            </div>
+            <p
+              class="text-3xl tracking-tighter mt-6 font-light lg:text-4xl text-black">
+              {frontmatter.title}
+            </p>
+            <p class="text-zinc-500 -mt-6 font-light">
+              {frontmatter.description}
+            </p>
+            <p class="text-black mt-3 font-medium text-sm">
+              By {frontmatter.author} ⏤
+              <time
+                class="text-xs"
+                datetime={frontmatter.pubDate.toString().slice(0, 10)}
+                >{frontmatter.pubDate.toString().slice(0, 10)}</time
+              >
+            </p>
+          </div>
+          <slot />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaTwo />
+</LightLayout>

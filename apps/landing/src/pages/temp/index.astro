@@ -1,0 +1,59 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Hero from "@/components/landing/Hero.astro";
+import LogoCloud from "@/components/landing/LogoCloud.astro";
+import Integrations from "@/components/landing/Integrations.astro";
+import Testimonials from "@/components/landing/Testimonials.astro";
+import CLI from "@/components/landing/CLI.astro";
+import Pricing from "@/components/landing/Pricing.astro";
+import Faq from "@/components/landing/Faq.astro";
+import CtaFour from "@/components/ctas/CtaFour.astro";
+import { AstroSeo } from "@astrolib/seo";
+import Contact from "@/components/landing/Contact.astro";
+---
+
+
+<AstroSeo
+  title="HazelHooks"
+  description="TODO:"
+  canonical="https://www.hazelhook.dev"
+  openGraph={{
+    url: "https://www.hazelhook.dev",
+    title: "HazelHooks",
+    description: "Webhooks made easy",
+    images: [
+      {
+        url: "https://www.hazelhook.dev/opengraph/social-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Social open graph",
+        type: "image/jpeg",
+      },
+      {
+        url: "https://www.hazelhook.dev/opengraph/twitter-og.jpg",
+        width: 4096,
+        height: 4096,
+        alt: "Twitter open graph",
+        type: "image/jpeg",
+      },
+      { url: "https://www.hazelhook.dev/opengraph/social-og.jpg" },
+      { url: "https://www.hazelhook.dev/opengraph/twitter-og.jpg" },
+    ],
+    site_name: "HazelHook",
+  }}
+  twitter={{
+    handle: "@makisuo__",
+    site: "@makisuo__",
+    cardType: "summary_large_image",
+  }}
+/>
+<BaseLayout>
+  <Hero />
+  <LogoCloud />
+  <Integrations />
+  <!-- <FeatureNine /> -->
+  <CLI></CLI>
+  <Testimonials />
+  <Pricing />
+  <Contact />
+</BaseLayout>
