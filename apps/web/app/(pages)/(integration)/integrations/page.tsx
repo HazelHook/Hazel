@@ -1,4 +1,5 @@
 "use client"
+
 import { INTEGRATIONS } from "@/app/(pages)/(integration)/integrations/data"
 import { IntegrationCard } from "@/app/(pages)/_component/IntegrationCard"
 

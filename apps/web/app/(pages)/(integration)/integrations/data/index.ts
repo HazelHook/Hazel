@@ -1,4 +1,5 @@
 import { IntegrationForm } from "@/app/(pages)/(integration)/integrations/data/common"
+import { hmacForm } from "@/app/(pages)/(integration)/integrations/data/integrations/hmac"
 import { stripeForm } from "@/app/(pages)/(integration)/integrations/data/integrations/stripe"
 import { DatabaseIcon } from "@/components/icons/pika/database"
 import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
@@ -14,6 +15,7 @@ export const INTEGRATION_CATERGORIES = {
 	development: { name: "Development", slug: "development" },
 	project_management: { name: "Project Management", slug: "project_management" },
 	crm: { name: "CRM", slug: "crm" },
+	custom: { name: "Custom", slug: "custom" },
 }
 export type IntegrationCategory = keyof typeof INTEGRATION_CATERGORIES
 
@@ -48,6 +50,28 @@ export interface Integration {
 }
 
 export const INTEGRATIONS: Record<any, Integration> = {
+	hmac: {
+		slug: "hmac",
+		name: "HMAC",
+		categories: ["development", "custom"],
+		subtitle: "Verify the authenticity of the webhook request using HMAC.",
+		features: ["authentication"],
+		form: hmacForm
+	},
+	basic_auth: {
+		slug: "basic_auth",
+		name: "Basic Auth",
+		categories: ["development", "custom"],
+		subtitle: "Verify the authenticity of the webhook request using Basic Auth.",
+		features: ["authentication"],
+	},
+	api_key: {
+		slug: "api_key",
+		name: "API Key",
+		categories: ["development", "custom"],
+		subtitle: "Verify the authenticity of the webhook request using an API key.",
+		features: ["authentication"],
+	},
 	stripe: {
 		slug: "stripe",
 		name: "Stripe",

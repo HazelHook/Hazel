@@ -51,6 +51,6 @@ export function IntegrationMDText({description}: { description?: string }) {
     if(!description) return null
 
     return (
-        <p className="text-gray-500 text-sm">{parseMarkdown(description)}</p>
+        <p className="text-gray-500">{parseMarkdown(description)}</p>
     )
 }
