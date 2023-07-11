@@ -1,11 +1,16 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { UseFormReturn, useForm } from "react-hook-form"
+import { Select, SelectIcon, SelectPortal, SelectTrigger } from "@radix-ui/react-select"
+import { useForm, UseFormReturn } from "react-hook-form"
 import * as z from "zod"
 
+import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
+import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
+import { LabeledSeparator } from "@/components/LabeledSeparator"
 import {
 	IntegrationFields,
 	IntegrationForm,
@@ -13,16 +18,6 @@ import {
 	IntegrationSchemaFromFields,
 } from "@/app/(pages)/(integration)/integrations/data/common"
 import { IntegrationMDText } from "@/app/(pages)/(integration)/integrations/data/integration-md-text"
-import { LabeledSeparator } from "@/components/LabeledSeparator"
-import {
-	Select,
-	SelectIcon,
-	SelectPortal,
-	SelectTrigger,
-} from "@radix-ui/react-select"
-import { SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
-import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
 
 function GetFieldComponent<TSchema extends IntegrationFields>({
 	field,
@@ -91,7 +86,7 @@ function GetFieldComponent<TSchema extends IntegrationFields>({
 						</div>
 						<Select>
 							<SelectTrigger className="flex flex-row justify-between p-2 h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50 text-muted-foreground">
-								<SelectValue placeholder="Select..."/>
+								<SelectValue placeholder="Select..." />
 								<SelectIcon className="SelectIcon">
 									<ChevronDownIcon />
 								</SelectIcon>

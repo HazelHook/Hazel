@@ -1,13 +1,13 @@
 {
-  "version": "5",
-  "dialect": "mysql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1689083823850,
-      "tag": "0000_crazy_whirlwind",
-      "breakpoints": true
-    }
-  ]
+	"version": "5",
+	"dialect": "mysql",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1689083823850,
+			"tag": "0000_crazy_whirlwind",
+			"breakpoints": true
+		}
+	]
 }

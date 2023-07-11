@@ -1,8 +1,8 @@
+import { DatabaseIcon } from "@/components/icons/pika/database"
+import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
 import { IntegrationForm } from "@/app/(pages)/(integration)/integrations/data/common"
 import { hmacForm } from "@/app/(pages)/(integration)/integrations/data/integrations/hmac"
 import { stripeForm } from "@/app/(pages)/(integration)/integrations/data/integrations/stripe"
-import { DatabaseIcon } from "@/components/icons/pika/database"
-import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
 
 export interface IntegrationCategoryData {
 	name: string
@@ -13,7 +13,10 @@ export const INTEGRATION_CATERGORIES = {
 	communication: { name: "Communication", slug: "communication" },
 	email_marketing: { name: "Email Marketing", slug: "email_marketing" },
 	development: { name: "Development", slug: "development" },
-	project_management: { name: "Project Management", slug: "project_management" },
+	project_management: {
+		name: "Project Management",
+		slug: "project_management",
+	},
 	crm: { name: "CRM", slug: "crm" },
 	custom: { name: "Custom", slug: "custom" },
 }
@@ -56,7 +59,7 @@ export const INTEGRATIONS: Record<any, Integration> = {
 		categories: ["development", "custom"],
 		subtitle: "Verify the authenticity of the webhook request using HMAC.",
 		features: ["authentication"],
-		form: hmacForm
+		form: hmacForm,
 	},
 	basic_auth: {
 		slug: "basic_auth",
@@ -79,7 +82,7 @@ export const INTEGRATIONS: Record<any, Integration> = {
 		subtitle:
 			"Easily integrate and automate webhook processing for Stripe, a comprehensive solution for online payments, and manage transactions more efficiently.",
 		features: ["database", "authentication"],
-		form: stripeForm
+		form: stripeForm,
 	},
 	github: {
 		slug: "github",

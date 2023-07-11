@@ -1,6 +1,15 @@
+---
+import { Particles } from "@/components/react/Particles";
+import { HeroSection } from "@/components/react/HeroSection";
+
+---
 <section class="lg:p-8 overflow-hidden">
-    <div
-      class="mx-auto 2xl:max-w-7xl py-24 lg:px-16 md:px-12 px-8 xl:px-40 items-center lg:py-40 w-full bg-gradientdown rounded-[3rem] overflow-hidden relative">
+    <HeroSection client:load>
+      <Particles
+             client:load
+							className="absolute inset-0 -z-10 opacity-10 group-hover/section:opacity-100 transition-opacity duration-700 ease-in-out"
+							quantity={300}
+						/>
       <img
         class="sr-only lg:not-sr-only lg:absolute -mt-24 -right-64"
         src="/images/assets/cube.png"
@@ -35,6 +44,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </HeroSection>
   </section>
   

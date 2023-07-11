@@ -3,13 +3,16 @@ import tailwind from "@astrojs/tailwind"
 import image from "@astrojs/image"
 import compress from "astro-compress"
 import sitemap from "@astrojs/sitemap"
-import mdx from "@astrojs/mdx" // https://astro.build/config
+import mdx from "@astrojs/mdx"
 
-// https://astro.build/config
+import react from "@astrojs/react"
+
 export default defineConfig({
 	markdown: {
 		drafts: true,
-		shikiConfig: { theme: "css-variables" },
+		shikiConfig: {
+			theme: "css-variables",
+		},
 	},
 	shikiConfig: {
 		wrap: true,
@@ -17,5 +20,5 @@ export default defineConfig({
 		drafts: true,
 	},
 	site: "https://hazelhook.dev",
-	integrations: [tailwind(), image(), compress(), sitemap(), mdx()],
+	integrations: [tailwind(), image(), compress(), sitemap(), mdx(), react()],
 })

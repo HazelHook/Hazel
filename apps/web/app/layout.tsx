@@ -6,9 +6,9 @@ import { ClerkProvider } from "@clerk/nextjs"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import NextProgress from "@/components/NProgress"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import NextProgress from "@/components/NProgress"
 
 export const metadata: Metadata = {
 	title: {

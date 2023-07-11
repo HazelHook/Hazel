@@ -1,19 +1,20 @@
 "use client"
 
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import * as Tooltip from "@radix-ui/react-tooltip"
 import React, { useRef, useState } from "react"
-import {
-	INTEGRATIONS,
-	INTEGRATION_CATERGORIES,
-	INTEGRATION_FEATURES,
-	Integration,
-} from "@/app/(pages)/(integration)/integrations/data"
 import { Dialog, DialogContent, DialogPortal, Portal, Root, Trigger } from "@radix-ui/react-dialog"
-import { IntegrationFormModal } from "@/app/(pages)/(integration)/integrations/form"
+import * as Tooltip from "@radix-ui/react-tooltip"
+
+import { Badge } from "@/components/ui/badge"
+import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { MinusIcon } from "@/components/icons/pika/minus"
+import {
+	Integration,
+	INTEGRATION_CATERGORIES,
+	INTEGRATION_FEATURES,
+	INTEGRATIONS,
+} from "@/app/(pages)/(integration)/integrations/data"
+import { IntegrationFormModal } from "@/app/(pages)/(integration)/integrations/form"
 
 export const IntegrationCard = ({ slug, name, subtitle, categories, features, form }: Integration) => {
 	const [coords, setCoords] = useState({ x: 50, y: 50 })
@@ -114,13 +115,20 @@ export const IntegrationCard = ({ slug, name, subtitle, categories, features, fo
 				</Trigger>
 				<Portal>
 					{form ? (
-						<DialogContent className="absolute w-screen h-screen m-0 p-0 top-0 left-0 flex justify-center items-center z-50" style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}} onMouseDown={() => setSourceModalOpen(false)}>
-							<Card className="relative max-w-screen-sm p-4 flex flex-col gap-3 select-none" onMouseDown={(e) => e.stopPropagation()}>
+						<DialogContent
+							className="absolute w-screen h-screen m-0 p-0 top-0 left-0 flex justify-center items-center z-50"
+							style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+							onMouseDown={() => setSourceModalOpen(false)}
+						>
+							<Card
+								className="relative max-w-screen-sm p-4 flex flex-col gap-3 select-none"
+								onMouseDown={(e) => e.stopPropagation()}
+							>
 								<div className="flex flex-row gap-4 ml-1 mr-1">
 									<img src={`/assets/integrations/${slug}.svg`} alt={slug} className="w-7 h-7" />
 									<h3>Add {name} Integration</h3>
 									<div className="w-5 h-5 ml-auto" onMouseDown={() => setSourceModalOpen(false)}>
-										<MinusIcon className="w-5 h-5 hover:bg-g hover:bg-opacity-20 hover:bg-white rounded"/>
+										<MinusIcon className="w-5 h-5 hover:bg-g hover:bg-opacity-20 hover:bg-white rounded" />
 									</div>
 								</div>
 								<Separator />

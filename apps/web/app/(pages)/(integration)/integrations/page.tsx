@@ -1,7 +1,7 @@
 "use client"
 
-import { INTEGRATIONS } from "@/app/(pages)/(integration)/integrations/data"
 import { IntegrationCard } from "@/app/(pages)/_component/IntegrationCard"
+import { INTEGRATIONS } from "@/app/(pages)/(integration)/integrations/data"
 
 const IntegrationsPage = async () => {
 	return (
@@ -10,10 +10,7 @@ const IntegrationsPage = async () => {
 				<h3 className="text-xl font-semibold">Integrations</h3>
 				<div className="grid grid-flow-row-dense md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
 					{Object.values(INTEGRATIONS).map((item, index) => (
-						<IntegrationCard
-							key={index}
-							{...item}
-						/>
+						<IntegrationCard key={index} {...item} />
 					))}
 				</div>
 			</div>

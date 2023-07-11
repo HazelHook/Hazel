@@ -1,5 +1,6 @@
+import { z, ZodEnum, ZodObject, ZodSchema, ZodString, ZodTypeAny } from "zod"
+
 import { Integration, IntegrationSlug } from "@/app/(pages)/(integration)/integrations/data"
-import { ZodEnum, ZodObject, ZodSchema, ZodString, ZodTypeAny, z } from "zod"
 
 type IntegrationFormFieldText = {
 	type: "text"
@@ -43,16 +44,13 @@ export type IntegrationSchemaFromFields<T extends IntegrationFields> = {
 		: never
 }
 
-
 export interface IntegrationForm<T extends IntegrationFields> {
 	config: IntegrationSchemaFromFields<T>
 	general: GeneralIntegrationSchema
 	fields: T
 	name: IntegrationSlug
 }
-function generateSchemaFromFields<T extends IntegrationFields>(
-	fields: T,
-): IntegrationSchemaFromFields<T> {
+function generateSchemaFromFields<T extends IntegrationFields>(fields: T): IntegrationSchemaFromFields<T> {
 	const schema = {} as any
 	for (const [key, element] of Object.entries(fields)) {
 		if (element.type === "text") {
@@ -69,7 +67,10 @@ function generateSchemaFromFields<T extends IntegrationFields>(
 export function createIntegrationForm<T extends IntegrationFields>({
 	name,
 	schema,
-}: { name: IntegrationSlug; schema: T }): IntegrationForm<T> {
+}: {
+	name: IntegrationSlug
+	schema: T
+}): IntegrationForm<T> {
 	const fields = { name: nameField, ...schema }
 	const resultSchema = generateSchemaFromFields(fields)
 	return {

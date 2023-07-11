@@ -1,3 +1,9 @@
+---
+import { Particles } from "@/components/react/Particles";
+
+---
+
+
 <section class="lg:p-8">
   <div class="px-8 py-12 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl">
     <div class="lg:text-center max-w-2xl lg:mx-auto">
@@ -11,8 +17,14 @@
        Send webhooks to local ports, debug webhook validation and so much more.
       </p>
     </div>
+    <a href="https://docs.hazelhook.dev" target="_blank">
     <div
-      class="relative isolate overflow-hidden bg-gradientdown ring-1 ring-white/10 rounded-4xl px-6 pt-16 mt-12 shadow-2xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+      class="group/card relative isolate overflow-hidden bg-gradientdown ring-1 ring-white/10 rounded-4xl px-6 pt-16 mt-12 shadow-2xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+      <Particles
+      client:load
+       className="absolute inset-0 -z-10 opacity-10 group-hover/card:opacity-100 transition-opacity duration-700 ease-in-out"
+       quantity={300}
+     />
       <div
         class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
         <span class="text-accent-400">Get Started in just 3min</span>
@@ -28,12 +40,13 @@
       </div>
       <div class="relative mt-16 h-80 lg:mt-8">
         <img
-          class="absolute left-0 top-0 w-[57rem] max-w-none opacity-50 border border-white/10 rounded-3xl"
+          class="absolute left-0 top-0 w-[57rem] max-w-none opacity-50  group-hover/card:opacity-100 ease-in-out transition-opacity duration-1000  border border-white/10 rounded-3xl"
           src="/images/assets/darkcode.svg"
           alt="img"
         />
       </div>
     </div>
+  </a>
 
     <div class="mt-12">
       <div class="mx-auto lg:max-w-7xl">
