@@ -65,6 +65,12 @@ module.exports = {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 			},
+			scale: {
+				101: "1.002",
+			},
+			translate: {
+				'101': '-0.02%'
+			},
 		},
 	},
 	plugins: [require("tailwindcss-animate"), require("@tailwindcss/container-queries")],

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg baseProfile="tiny" height="200" version="1.2" width="200" xmlns="http://www.w3.org/2000/svg"
+    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs />
+    <rect fill="#FFFFFFDD" height="200" rx="30" ry="30" width="200" x="0" y="0" />
+    <text fill="black" font-family="Avenir" font-size="130px" font-weight="900" text-anchor="middle"
+        x="100px" y="153px" transform="scale(1,.93)">R</text>
+</svg>
