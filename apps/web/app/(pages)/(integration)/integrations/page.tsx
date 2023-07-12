@@ -1,11 +1,7 @@
-"use client"
-
-import { INTEGRATIONS, Integration } from "@/app/(pages)/(integration)/integrations/data"
-import { IntegrationCard } from "@/app/(pages)/_component/IntegrationCard"
-import { useState } from "react"
+import { IntegrationCard } from "@/app/(pages)/(integration)/_components/IntegrationCard"
+import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 
 const IntegrationsPage = async () => {
-	const [openIntegrationForm, setOpenIntegrationForm] = useState<Integration | null>(null)
 
 	return (
 		<main className="p-4">
@@ -16,8 +12,6 @@ const IntegrationsPage = async () => {
 						<IntegrationCard
 							key={index}
 							integration={item}
-							isModalOpen={openIntegrationForm === item}
-							setModalOpen={(open) => setOpenIntegrationForm(open ? item : null)}
 						/>
 					))}
 				</div>

@@ -1,65 +1,15 @@
-import { DatabaseIcon } from "@/components/icons/pika/database"
-import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
-import { IntegrationForm } from "@/app/(pages)/(integration)/integrations/data/common"
-import { hmacForm } from "@/app/(pages)/(integration)/integrations/data/integrations/hmac"
-import { stripeForm } from "@/app/(pages)/(integration)/integrations/data/integrations/stripe"
+import { IntegrationTool } from "./common"
+import { hmacForm } from "./custom/hmac"
+import { stripeForm } from "./vendor/stripe"
 
-export interface IntegrationCategoryData {
-	name: string
-	slug: string
-}
-export const INTEGRATION_CATERGORIES = {
-	payment: { name: "Payment", slug: "payment" },
-	communication: { name: "Communication", slug: "communication" },
-	email_marketing: { name: "Email Marketing", slug: "email_marketing" },
-	development: { name: "Development", slug: "development" },
-	project_management: {
-		name: "Project Management",
-		slug: "project_management",
-	},
-	crm: { name: "CRM", slug: "crm" },
-	custom: { name: "Custom", slug: "custom" },
-}
-export type IntegrationCategory = keyof typeof INTEGRATION_CATERGORIES
-
-export interface IntegrationFeatureData {
-	name: string
-	slug: string
-	icon: React.FC
-}
-export const INTEGRATION_FEATURES = {
-	authentication: {
-		name: "Authentication",
-		slug: "authentication",
-		icon: ShieldCheckIcon,
-		description: "Fully authenticates the webhook request.",
-	},
-	database: {
-		name: "Database",
-		slug: "database",
-		icon: DatabaseIcon,
-		description: "Stores the webhook request in your database.",
-	},
-}
-export type IntegrationFeature = keyof typeof INTEGRATION_FEATURES
-
-export interface Integration {
-	name: string & {}
-	slug: string
-	categories: IntegrationCategory[]
-	form?: IntegrationForm<any>
-	subtitle?: string
-	features?: IntegrationFeature[]
-}
-
-export const INTEGRATIONS: Record<any, Integration> = {
+export const INTEGRATIONS: Record<any, IntegrationTool> = {
 	hmac: {
 		slug: "hmac",
 		name: "HMAC",
 		categories: ["development", "custom"],
 		subtitle: "Verify the authenticity of the webhook request using HMAC.",
 		features: ["authentication"],
-		form: hmacForm,
+		config: hmacForm
 	},
 	basic_auth: {
 		slug: "basic_auth",
@@ -82,7 +32,7 @@ export const INTEGRATIONS: Record<any, Integration> = {
 		subtitle:
 			"Easily integrate and automate webhook processing for Stripe, a comprehensive solution for online payments, and manage transactions more efficiently.",
 		features: ["database", "authentication"],
-		form: stripeForm,
+		config: stripeForm
 	},
 	github: {
 		slug: "github",
@@ -182,4 +132,29 @@ export const INTEGRATIONS: Record<any, Integration> = {
 	},
 }
 
-export type IntegrationSlug = keyof typeof INTEGRATIONS
+export const INTEGRATION_FEATURES = {
+	authentication: {
+		name: "Authentication",
+		slug: "authentication",
+		description: "Fully authenticates the webhook request.",
+	},
+	database: {
+		name: "Database",
+		slug: "database",
+		description: "Stores the webhook request in your database.",
+	},
+}
+
+export const INTEGRATION_CATERGORIES = {
+	payment: { name: "Payment", slug: "payment" },
+	communication: { name: "Communication", slug: "communication" },
+	email_marketing: { name: "Email Marketing", slug: "email_marketing" },
+	development: { name: "Development", slug: "development" },
+	project_management: {
+		name: "Project Management",
+		slug: "project_management",
+	},
+	crm: { name: "CRM", slug: "crm" },
+	custom: { name: "Custom", slug: "custom" },
+}
+

@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "b71c7ef8-be1a-45e2-80d6-234579478650",
-  "prevId": "0adcb4c1-cfc4-4bc1-9aa5-458ff27c8cba",
+  "id": "a02c7096-4128-403b-8e87-2196f18bb85a",
+  "prevId": "ea059bfa-90a3-42bd-8276-a8127f77b0a4",
   "tables": {
     "connections": {
       "name": "connections",
@@ -83,29 +83,29 @@
         }
       },
       "indexes": {
-        "conn_public_id_idx": {
-          "name": "conn_public_id_idx",
+        "con_public_id_idx": {
+          "name": "con_public_id_idx",
           "columns": [
             "public_id"
           ],
           "isUnique": false
         },
-        "conn_customer_id_idx": {
-          "name": "conn_customer_id_idx",
+        "con_customer_id_idx": {
+          "name": "con_customer_id_idx",
           "columns": [
             "customer_id"
           ],
           "isUnique": false
         },
-        "conn_source_id_idx": {
-          "name": "conn_source_id_idx",
+        "con_source_id_idx": {
+          "name": "con_source_id_idx",
           "columns": [
             "source_id"
           ],
           "isUnique": false
         },
-        "conn_destination_id_idx": {
-          "name": "conn_destination_id_idx",
+        "con_destination_id_idx": {
+          "name": "con_destination_id_idx",
           "columns": [
             "destination_id"
           ],
@@ -180,15 +180,15 @@
         }
       },
       "indexes": {
-        "dest_public_id_idx": {
-          "name": "dest_public_id_idx",
+        "dst_public_id_idx": {
+          "name": "dst_public_id_idx",
           "columns": [
             "public_id"
           ],
           "isUnique": false
         },
-        "dest_customer_id_idx": {
-          "name": "dest_customer_id_idx",
+        "dst_customer_id_idx": {
+          "name": "dst_customer_id_idx",
           "columns": [
             "customer_id"
           ],
