@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  log: CollectionEntry<"changelogs">;
+}
+
+const { log } = Astro.props;
+
+const { title, date } = log.data;
+
+const formattedDate = Intl.DateTimeFormat("en", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(date);
+
+const { Content } = await log.render();
+---
+
+<section id={formattedDate} aria-labelledby={title} class="md:flex">
+  <h2 id={title} class="pl-7 md:w-1/4 md:pl-0 md:pr-12 md:text-right">
+    <a href={`/blog/changelog-${formattedDate}`}
+      >{
+        Intl.DateTimeFormat("en", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }).format(date)
+      }</a
+    >
+  </h2>
+  <div class="relative pt-2 pl-7 md:w-3/4 md:pt-0 md:pl-12 pb-16">
+    <div class="absolute bottom-0 left-0 w-px bg-white/20 -top-3 md:top-2.5">
+    </div>
+    <div
+      class="absolute -top-[1.0625rem] -left-1 h-[0.5625rem] w-[0.5625rem] rounded-full border-2 border-white/10 bg-black md:top-[0.4375rem]"
+    >
+    </div>
+    <Content />
+  </div>
+</section>

@@ -1,20 +1,23 @@
-<div
-  class="fixed top-4 inset-x-0 z-50 ">
-  <div class="lg:max-w-xl mx-auto px-8">
+<div class="fixed top-4 inset-x-0 z-50">
+  <div class="lg:max-w-2xl mx-auto px-8">
     <div class="w-full mx-auto">
       <div
         x-data="{ open: false }"
-        class="relative flex flex-col w-full p-3 mx-auto bg-black/70 border border-white/10 shadow-thick backdrop-blur-xl backdrop-filter rounded-xl md:rounded-full md:items-center md:justify-between md:flex-row md:px-6">
+        class="relative flex flex-col w-full p-3 mx-auto bg-black/70 border border-white/10 shadow-thick backdrop-blur-xl backdrop-filter rounded-xl md:rounded-full md:items-center md:justify-between md:flex-row md:px-6"
+      >
         <div
-          class="flex flex-row items-center justify-between md:justify-start">
+          class="flex flex-row items-center justify-between md:justify-start"
+        >
           <a
             class="text-white hover:text-white/50 items-center font-bold gap-3 inline-flex text-lg"
-            href="/">
+            href="/"
+          >
             <svg
               class="h-6"
               viewBox="0 0 92 93"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -28,23 +31,26 @@
                 fill-opacity="0.2"></path>
             </svg>
 
-            <span>HazelHooks</span>
+            <span>HazelHook</span>
           </a>
           <button
             @click="open = !open"
-            class="inline-flex items-center justify-center p-2 text-zinc-400 hover:text-accent-300 focus:outline-none focus:text-white md:hidden">
+            class="inline-flex items-center justify-center p-2 text-zinc-400 hover:text-accent-300 focus:outline-none focus:text-white md:hidden"
+          >
             <svg
               class="w-6 h-6"
               stroke="currentColor"
               fill="none"
-              viewBox="0 0 24 24">
+              viewBox="0 0 24 24"
+            >
               <path
                 :class="{'hidden': open, 'inline-flex': !open }"
                 class="inline-flex"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16">
+                d="M4 6h16M4 12h16M4 18h16"
+              >
               </path>
               <path
                 :class="{'hidden': !open, 'inline-flex': open }"
@@ -52,28 +58,42 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M6 18L18 6M6 6l12 12">
+                d="M6 18L18 6M6 6l12 12"
+              >
               </path>
             </svg>
           </button>
         </div>
         <nav
           :class="{'flex': open, 'hidden': !open}"
-          class="flex-col flex-grow hidden py-12 md:py-0 md:flex md:items-end justify-center md:flex-row">
+          class="flex-col flex-grow hidden py-12 md:py-0 md:flex md:items-end justify-center md:flex-row"
+        >
           <ul
-            class="space-y-2 list-none md:space-y-0 md:ml-auto items-center md:inline-flex justify-center text-center md:text-left gap-3">
+            class="space-y-2 list-none md:space-y-0 md:ml-auto items-center md:inline-flex justify-center text-center md:text-left gap-3"
+          >
             <li>
               <a
                 href="#pricing"
-                class="lg:py-10 text-xs text-white hover:text-accent-400">
+                class="lg:py-10 text-xs text-white hover:text-accent-400"
+              >
                 Pricing
+              </a>
+            </li>
+            <li>
+              <a
+                target="Changelog"
+                href="/changelog"
+                class="lg:py-10 text-xs text-white hover:text-accent-400"
+              >
+                Changelog
               </a>
             </li>
             <li>
               <a
                 target="_blank"
                 href="https://docs.hazelhook.dev"
-                class="lg:py-10 text-xs text-white hover:text-accent-400">
+                class="lg:py-10 text-xs text-white hover:text-accent-400"
+              >
                 Documentation
               </a>
             </li>
@@ -81,7 +101,8 @@
             <li>
               <a
                 href="https://app.hazelhook.dev"
-                class="py-1.5 px-4 border focus:ring-2 text-xs rounded-full border-transparent bg-white hover:bg-white/10 text-black duration-200 focus:ring-offset-2 focus:ring-white hover:text-white inline-flex items-center justify-center ring-1 ring-transparent lg:ml-auto">
+                class="py-1.5 px-4 border focus:ring-2 text-xs rounded-full border-transparent bg-white hover:bg-white/10 text-black duration-200 focus:ring-offset-2 focus:ring-white hover:text-white inline-flex items-center justify-center ring-1 ring-transparent lg:ml-auto"
+              >
                 Get Started
               </a>
             </li>

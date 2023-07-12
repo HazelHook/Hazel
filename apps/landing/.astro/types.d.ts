@@ -198,7 +198,23 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"posts": {
+		"changelogs": {
+"07-12-2023.md": {
+	id: "07-12-2023.md";
+  slug: "07-12-2023";
+  body: string;
+  collection: "changelogs";
+  data: InferEntrySchema<"changelogs">
+} & { render(): Render[".md"] };
+"08-12-2023..md": {
+	id: "08-12-2023..md";
+  slug: "08-12-2023";
+  body: string;
+  collection: "changelogs";
+  data: InferEntrySchema<"changelogs">
+} & { render(): Render[".md"] };
+};
+"posts": {
 "1.md": {
 	id: "1.md";
   slug: "1";
