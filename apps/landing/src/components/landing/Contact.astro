@@ -1,8 +1,19 @@
+---
+import { Particles } from "@/components/react/Particles";
+
+---
+
 <section class="lg:p-8">
   <div
     class="px-8 py-12 lg:py-32 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl">
+   
     <div
-      class="relative isolate bg-gradientdown ring-1 ring-white/10 rounded-4xl px-6 py-8 sm:px-16 xl:flex lg:gap-x-12 lg:px-24 lg:pt-0">
+      class="relative group/card isolate bg-gradientdown ring-1 ring-white/10 rounded-4xl px-6 py-8 sm:px-16 xl:flex lg:gap-x-12 lg:px-24 lg:pt-0">
+      <Particles
+      client:load
+       className="absolute inset-0 -z-10 opacity-10 group-hover/card:opacity-100 transition-opacity duration-700 ease-in-out"
+       quantity={300}
+     />
       <div
         class="mx-auto max-w-md text-center xl:mx-0 lg:flex-auto lg:py-32 xl:text-left">
         <span class="text-white"> Get started</span>
