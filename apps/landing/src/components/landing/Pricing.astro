@@ -1,28 +1,63 @@
 ---
 import PricingCard from "@/components/landing/PricingCard.astro";
-import { HighlightGroup } from "@/components/react/Highlighter";
 ---
+
 <section id="pricing" class="p-4 lg:p-8">
   <div
-  
-    class="mx-auto 2xl:max-w-7xl py-12 lg:px-16 md:px-12 px-8 xl:px-36 items-center relative w-full">
+    class="mx-auto 2xl:max-w-7xl py-12 lg:px-16 md:px-12 px-8 xl:px-36 items-center relative w-full"
+  >
     <div class="text-center max-w-xl mx-auto">
-      <span class="text-accent-400" data-aos="fade-down"> Pricing </span>
+      <span class="text-accent-400" data-aos="fade-down"> Pricing</span>
       <h2
-        class="text-3xl mt-6 tracking-tighter font-light lg:text-4xl text-white" data-aos="fade-down">
-       Pricing build for<span class="block text-zinc-400"
-          >everyone</span
-        >
+        class="text-3xl mt-6 tracking-tighter font-light lg:text-4xl text-white"
+        data-aos="fade-down"
+      >
+        Pricing build for<span class="block text-zinc-400">everyone</span>
       </h2>
     </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 -mx-4 sm:mx-auto lg:grid-cols-3 xl:mx-0 gap-2 mt-12">
-
-      <PricingCard name="Hobby" description="Perfect for Hobbist" price="free" items={["100k Events", 
-    "100k Requests", "1 Organization", "3 Members", "All Integrations"]}></PricingCard>
-    <PricingCard name="Pro" description="for Startups and indie makers" price="$44.99" primary items={["1m Events", 
-    "1m Requests", "3 Organization", "10 Members", "All Integrations"]} gradient tag="Popular"></PricingCard>
-     <PricingCard name="Pro" description="for Startups and indie makers" price="$44.99" items={["Custom Events", 
-     "Custom Requests", "Unlimited Organizations", "Unlimited Members", "All Integrations"]}  tag="Popular"></PricingCard>
-      </div>
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 -mx-4 sm:mx-auto lg:grid-cols-3 xl:mx-0 gap-2 mt-12"
+    >
+      <PricingCard
+        name="Hobby"
+        description="Perfect for Hobbist"
+        price="free"
+        items={[
+          "100k Events",
+          "100k Requests",
+          "1 Organization",
+          "3 Members",
+          "All Integrations",
+        ]}
+      />
+      <PricingCard
+        name="Pro"
+        description="for Startups and indie makers"
+        price="$44.99"
+        primary
+        items={[
+          "1m Events",
+          "1m Requests",
+          "3 Organization",
+          "10 Members",
+          "All Integrations",
+        ]}
+        gradient
+        tag="Popular"
+      />
+      <PricingCard
+        name="Enterprise"
+        description="for Enterprise Users"
+        price="Custom"
+        items={[
+          "Custom Events",
+          "Custom Requests",
+          "Unlimited Organizations",
+          "Unlimited Members",
+          "All Integrations",
+        ]}
+        tag="Popular"
+      />
+    </div>
   </div>
 </section>
