@@ -1,5 +1,5 @@
 {
-	"name": "scripts",
+	"name": "cli-net",
 	"type": "module",
 	"main": "dist/index.js",
 	"scripts": {
