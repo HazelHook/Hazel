@@ -25,7 +25,6 @@ import { Button } from "@/components/ui/button"
 import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
 import { useAction } from "@/server/client"
 import { createIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
-import { useRouter } from "next/navigation"
 
 function GetFieldComponent<TSchema extends IntegrationFields>({
 	fieldDef,
@@ -123,9 +122,8 @@ function GetFieldComponent<TSchema extends IntegrationFields>({
 
 export function IntegrationFormModal<T extends IntegrationForm<TSchema>, TSchema extends IntegrationFields>({
 	integration,
-}: { integration: T }) {
+}: { integration: T, onSubmit: () => void }) {
 	const schema = z.object(integration.config)
-	const router = useRouter()
 
 	const form = useForm({
 		resolver: zodResolver(schema),
@@ -137,7 +135,8 @@ export function IntegrationFormModal<T extends IntegrationForm<TSchema>, TSchema
 
 	const createIntegration = useAction(createIntegrationAction, {
 		onSuccess(data) {
-			router.push('/integrations')
+			// router.push('/integrations')
+			// ...
 		},
 		onError(error) {
 			form.setError("root", error)
@@ -145,7 +144,6 @@ export function IntegrationFormModal<T extends IntegrationForm<TSchema>, TSchema
 	})
 
 	function onSubmit(values: z.infer<typeof schema>) {
-		console.log(values)
 		createIntegration.mutate({
 			data: values,
 			name: values.name!,

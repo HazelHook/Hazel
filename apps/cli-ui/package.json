@@ -1,0 +1,20 @@
+{
+	"name": "scripts",
+	"type": "module",
+	"main": "dist/cli.js",
+	"scripts": {
+		"build": "tsup src --watch --format esm",
+		"dev": "doppler run -- node --inspect --watch --enable-source-maps dist/cli.js"
+	},
+	"dependencies": {
+		"hazel-clui": "workspace:*",
+		"react": "^18.2.0",
+		"tsconfig": "workspace:*"
+	},
+	"devDependencies": {
+		"@types/node": "^20.3.2",
+		"@types/react": "^18.2.14",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.6"
+	}
+}
