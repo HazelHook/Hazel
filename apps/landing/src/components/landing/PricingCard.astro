@@ -1,5 +1,4 @@
 ---
-import { HighlighterItem } from '@/components/react/Highlighter';
 import { Particles } from '@/components/react/Particles';
 interface Props {
   name: string;
@@ -15,6 +14,7 @@ const {name,price,description,items,gradient, tag,primary} = Astro.props
 ---
 
 <section
+data-aos="fade-down"
 class="group/card relative flex flex-col px-6 py-8 bg-ebony shadow-inset rounded-3xl lg:order-none">
 <Particles
 client:load

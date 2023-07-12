@@ -1,13 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root { font-family: 'Inter', sans-serif; }
-@supports (font-variation-settings: normal) {
-  :root { font-family: 'Inter var', sans-serif; }
+:root {
+  font-family: "Inter", sans-serif;
 }
-h1, h2, h3, h4, h5, h6, p, a, strong, em, span {
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: "Inter var", sans-serif;
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+strong,
+em,
+span {
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility
+  text-rendering: optimizeLegibility;
 }
 
 :root {
@@ -15,11 +29,11 @@ h1, h2, h3, h4, h5, h6, p, a, strong, em, span {
   --astro-code-color-background: #fafafa;
   --astro-code-token-constant: #1769ff;
   --astro-code-token-string: #4c4d58;
-  --astro-code-token-comment: #1AA9DA;
-  --astro-code-token-keyword: #8B9FE8;
-  --astro-code-token-parameter: #99BDFF;
-  --astro-code-token-function: #1AA9DA;
-  --astro-code-token-string-expression: #1769ff ;
+  --astro-code-token-comment: #1aa9da;
+  --astro-code-token-keyword: #8b9fe8;
+  --astro-code-token-parameter: #99bdff;
+  --astro-code-token-function: #1aa9da;
+  --astro-code-token-string-expression: #1769ff;
   --astro-code-token-punctuation: #4c4d58;
   --astro-code-token-link: #ffffff;
 }
