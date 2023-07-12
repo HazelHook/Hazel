@@ -62,13 +62,12 @@ export const HighlightGroup: React.FC<HighlightGroupProps> = ({
 				mouse.current.x = x
 				mouse.current.y = y
 				boxes.forEach((box) => {
-					console.log(box)
-					// const boxX = (-(box.getBoundingClientRect().left - rect.left) + mouse.current.x) * dampingFactor
-					// const boxY = (-(box.getBoundingClientRect().top - rect.top) + mouse.current.y) * dampingFactor
-					const boxX = (mouse.current.x / box.getBoundingClientRect().width) * dampingFactor * 100
-					const boxY = (mouse.current.y / box.getBoundingClientRect().height) * dampingFactor * 100
-					box.style.setProperty("--mouse-x", `${boxX}%`)
-					box.style.setProperty("--mouse-y", `${boxY}%`)
+					const boxX = -(box.getBoundingClientRect().left - rect.left) + mouse.current.x
+					const boxY = -(box.getBoundingClientRect().top - rect.top) + mouse.current.y
+					// const boxX = (mouse.current.x / box.getBoundingClientRect().width) * dampingFactor * 100
+					// const boxY = (mouse.current.y / box.getBoundingClientRect().height) * dampingFactor * 100
+					box.style.setProperty("--mouse-x", `${boxX}px`)
+					box.style.setProperty("--mouse-y", `${boxY}px`)
 				})
 			}
 		}
@@ -84,12 +83,19 @@ export const HighlightGroup: React.FC<HighlightGroupProps> = ({
 type HighlighterItemProps = {
 	children: React.ReactNode
 	className?: string
+	gradient?: boolean
 }
 
-export const HighlighterItem: React.FC<PropsWithChildren<HighlighterItemProps>> = ({ children, className = "" }) => {
+export const HighlighterItem: React.FC<PropsWithChildren<HighlighterItemProps>> = ({
+	children,
+	className = "",
+	gradient,
+}) => {
 	return (
 		<div
-			className={`relative bg-zinc-800 rounded-xl p-px before:absolute before:w-96 before:h-96 before:-left-48 before:-top-48 before:bg-mirage before:rounded-full before:opacity-0 before:pointer-events-none before:transition-opacity before:duration-500 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:hover:opacity-20 before:z-30 before:blur-[100px] after:absolute after:inset-0 after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-500 after:[background:_radial-gradient(250px_circle_at_var(--mouse-x)_var(--mouse-y),theme(colors.mirage/80),transparent)] after:group-hover:opacity-100 after:z-10 overflow-hidden ${className}`}
+			className={`flex flex-col px-6 relative py-8 bg-ebony shadow-inset rounded-3xl lg:order-none ${
+				gradient && "bg-gradientdown"
+			} before:absolute before:w-96 before:h-96 before:-left-48 before:-top-48 before:bg-white before:rounded-full before:opacity-0 before:pointer-events-none before:transition-opacity before:duration-500 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:hover:opacity-20 before:z-30 before:blur-[100px] after:absolute after:inset-0 after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-500 after:[background:_radial-gradient(250px_circle_at_var(--mouse-x)_var(--mouse-y),theme(colors.white),transparent)] after:group-hover:opacity-100 after:z-10 overflow-hidden ${className}`}
 		>
 			{children}
 		</div>

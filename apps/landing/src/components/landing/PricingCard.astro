@@ -1,20 +1,34 @@
 ---
+import { HighlighterItem } from '@/components/react/Highlighter';
+import { Particles } from '@/components/react/Particles';
 interface Props {
   name: string;
   description: string;
   price: string;
+  items: string[]
+  gradient?:boolean
+  tag?:string
+  primary?:boolean
 }
 
-const {name,price,description} = Astro.props;
-
+const {name,price,description,items,gradient, tag,primary} = Astro.props
 ---
 
 <section
-class="flex flex-col px-6 py-8 bg-ebony shadow-inset rounded-3xl lg:order-none">
-<div class="h-full">
+class="group/card relative flex flex-col px-6 py-8 bg-ebony shadow-inset rounded-3xl lg:order-none">
+<Particles
+client:load
+className="absolute inset-0 opacity-10 group-hover/card:opacity-100 transition-opacity duration-700 ease-in-out"
+quantity={20}></Particles>
+<div class="relative h-full w-full">
+   
+  
   <div class="gap-12 w-full">
     <div>
-      <h3 class="text-lg text-white">{name}</h3>
+      <h3 class={`text-lg ${primary ? "text-accent-400" : "text-white"}`}>{name}
+        {tag && <span
+        class="font-medium inline-flex items-center bg-ebony border border-white/10 ml-4 px-3 py-0.5 rounded-full text-white text-xs"
+        >{tag}</span>}</h3>
       <p class="mt-4 text-2xl font-light text-white">
         {price}<span class="text-sm text-zinc-400">/month</span>
       </p>
@@ -32,8 +46,9 @@ class="flex flex-col px-6 py-8 bg-ebony shadow-inset rounded-3xl lg:order-none">
 
   <ul
     role="list"
-    class="flex flex-col order-last text-sm mt-10 text-zinc-400 divide-y divide-white/10">
-    <li class="inline-flex items-center py-3">
+    class={`flex flex-col order-last text-sm mt-10 divide-y divide-white/10 ${!gradient ? "text-zinc-400" : "text-zinc-50"}`}>
+    {
+    items.map(item =>  <li class="inline-flex items-center py-3">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-check"
@@ -47,41 +62,9 @@ class="flex flex-col px-6 py-8 bg-ebony shadow-inset rounded-3xl lg:order-none">
         stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <path d="M5 12l5 5l10 -10"></path>
-      </svg><span class="ml-4"> Create 10 connections</span>
-    </li>
-
-    <li class="inline-flex items-center py-3">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-check"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M5 12l5 5l10 -10"></path>
-      </svg><span class="ml-4"> 10 Api connections</span>
-    </li>
-    <li class="inline-flex items-center py-3">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-check"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M5 12l5 5l10 -10"></path>
-      </svg><span class="ml-4"> 1 user</span>
-    </li>
+      </svg><span class="ml-4">{item}</span>
+    </li>)
+    }
   </ul>
 </div>
 </section>
