@@ -1,8 +1,8 @@
 import { IntegrationCard } from "@/app/(pages)/(integration)/_components/IntegrationCard"
-import { integrations } from "db/src/drizzle"
-import { INTEGRATIONS } from "db/src/drizzle/integrations"
+import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 
 const IntegrationsPage = async () => {
+
 	return (
 		<main className="p-4">
 			<div className="flex flex-col justify-between mb-4 gap-3 container p-8 space-y-4">

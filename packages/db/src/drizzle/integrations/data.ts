@@ -1,13 +1,15 @@
-import { z } from "zod"
-import { Integration, IntegrationFields, IntegrationForm, IntegrationSchemaFromFields, IntegrationSlug } from "./types"
+import { IntegrationTool } from "./common"
+import { hmacForm } from "./custom/hmac"
+import { stripeForm } from "./vendor/stripe"
 
-export const INTEGRATIONS: Record<any, Integration> = {
+export const INTEGRATIONS: Record<any, IntegrationTool> = {
 	hmac: {
 		slug: "hmac",
 		name: "HMAC",
 		categories: ["development", "custom"],
 		subtitle: "Verify the authenticity of the webhook request using HMAC.",
 		features: ["authentication"],
+		config: hmacForm
 	},
 	basic_auth: {
 		slug: "basic_auth",
@@ -30,6 +32,7 @@ export const INTEGRATIONS: Record<any, Integration> = {
 		subtitle:
 			"Easily integrate and automate webhook processing for Stripe, a comprehensive solution for online payments, and manage transactions more efficiently.",
 		features: ["database", "authentication"],
+		config: stripeForm
 	},
 	github: {
 		slug: "github",
@@ -154,41 +157,4 @@ export const INTEGRATION_CATERGORIES = {
 	crm: { name: "CRM", slug: "crm" },
 	custom: { name: "Custom", slug: "custom" },
 }
-
-function generateSchemaFromFields<T extends IntegrationFields>(fields: T): IntegrationSchemaFromFields<T> {
-	const schema = {} as any
-	for (const [key, element] of Object.entries(fields)) {
-		if (element.type === "text") {
-			schema[key] = z.string()
-		} else if (element.type === "secret") {
-			schema[key] = z.string()
-		} else if (element.type === "select") {
-			schema[key] = z.enum(element.options)
-		}
-	}
-	return schema
-}
-
-const nameField = {
-	type: "text",
-	label: "Integration Name",
-	placeholder: "Enter a name for this integration...",
-} as const
-export function createIntegrationForm<T extends IntegrationFields>({
-	name,
-	schema,
-}: {
-	name: IntegrationSlug
-	schema: T
-}): IntegrationForm<T> {
-	const fields = { name: nameField, ...schema }
-	const resultSchema = generateSchemaFromFields(fields)
-	return {
-		name,
-		fields: schema,
-		general: { name: nameField },
-		config: resultSchema,
-	}
-}
-
 

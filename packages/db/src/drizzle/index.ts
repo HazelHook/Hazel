@@ -6,7 +6,10 @@ import { DrizzleTable } from "./orm/db-table"
 import * as schema from "./schema"
 import { generatePublicId } from "./schema/common"
 
-import * as integrations from "./integrations"
+import * as integrationsData from "./integrations/data"
+export { integrationsData }
+
+import * as integrations from "./integrations/common"
 export { integrations }
 
 export type DB = PlanetScaleDatabase<typeof schema>
@@ -149,21 +152,6 @@ export function connectDB({
 					publicId,
 				})
 				return { res, publicId }
-			},
-		},
-		integrationTool: {
-			table: new DrizzleTable("integrationTool", schema.integrationTool, db),
-			getOne: async ({ slug }: { slug: string }) => {
-				return await db.query.integrationTool.findFirst({
-					where: eq(schema.integrationTool.slug, slug),
-				})
-			},
-			getMany: async () => {
-				return await db.query.integrationTool.findMany({})
-			},
-			create: async (data: schema.InsertIntegrationTool) => {
-				const res = await db.insert(schema.integrationTool).values(data)
-				return { res }
 			},
 		},
 	}

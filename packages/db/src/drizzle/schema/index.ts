@@ -1,7 +1,7 @@
 import { InferModel, relations } from "drizzle-orm"
 import { boolean, index, int, json, text, varchar } from "drizzle-orm/mysql-core"
 
-import { buildCustomMysqlTable, buildMysqlTable } from "./common"
+import { buildMysqlTable } from "./common"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 }).notNull()
@@ -33,15 +33,6 @@ export const integration = buildMysqlTable(
 	}),
 )
 
-export const integrationTool = buildCustomMysqlTable(
-	"integrationTools",
-	{
-		name,
-		slug: varchar("slug", { length: 64 }).notNull(),
-		schema: text("schema").notNull(),
-		version: int("version").notNull(),
-	},
-)
 
 export const destination = buildMysqlTable(
 	"destinations",
@@ -51,8 +42,8 @@ export const destination = buildMysqlTable(
 		enabled,
 	},
 	(table) => ({
-		publicIdIndex: index("dest_public_id_idx").on(table.publicId),
-		customerIdIndex: index("dest_customer_id_idx").on(table.customerId),
+		publicIdIndex: index("dst_public_id_idx").on(table.publicId),
+		customerIdIndex: index("dst_customer_id_idx").on(table.customerId),
 	}),
 )
 
@@ -68,12 +59,12 @@ export const connection = buildMysqlTable(
 		fluxConfig: json("flux_config"),
 	},
 	(table) => ({
-		publicIdIndex: index("conn_public_id_idx").on(table.publicId),
+		publicIdIndex: index("con_public_id_idx").on(table.publicId),
 
-		customerIdIndex: index("conn_customer_id_idx").on(table.customerId),
+		customerIdIndex: index("con_customer_id_idx").on(table.customerId),
 
-		sourceIdIndex: index("conn_source_id_idx").on(table.sourceId),
-		destinationIndex: index("conn_destination_id_idx").on(table.destinationId),
+		sourceIdIndex: index("con_source_id_idx").on(table.sourceId),
+		destinationIndex: index("con_destination_id_idx").on(table.destinationId),
 	}),
 )
 
@@ -87,7 +78,6 @@ export const destinationRelations = relations(destination, ({ many, one }) => ({
 export const integrationRelations = relations(integration, ({ one }) => ({
 	source: one(source),
 }))
-
 export const connectionRelations = relations(connection, ({ one }) => ({
 	destination: one(destination, {
 		fields: [connection.destinationId],
@@ -110,6 +100,3 @@ export type Source = InferModel<typeof source, "select">
 
 export type InsertIntegration = InferModel<typeof integration, "insert">
 export type Integration = InferModel<typeof integration, "select">
-
-export type InsertIntegrationTool = InferModel<typeof integrationTool, "insert">
-export type IntegrationTool = InferModel<typeof integrationTool, "select">

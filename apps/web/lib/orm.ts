@@ -49,16 +49,3 @@ export const getCachedDestination = cache(async ({ publicId }: { publicId: strin
 	return destination
 })
 export type CacheDestination = PromiseType<ReturnType<typeof getCachedDestination>>
-
-export type CacheIntegrationTool = PromiseType<ReturnType<typeof getCachedIntegrationTool>>
-export const getCachedIntegrationTool = cache(
-	async ({ slug }: { slug: string }) => {
-		const integrationTool = await db.integrationTool.getOne({ slug })
-
-		if (!integrationTool) {
-			notFound()
-		}
-
-		return integrationTool
-	},
-)
