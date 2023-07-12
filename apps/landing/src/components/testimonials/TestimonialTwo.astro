@@ -1,0 +1,467 @@
+<section class="lg:p-8">
+  <div
+    class="mx-auto 2xl:max-w-7xl py-24 lg:px-16 md:px-12 px-8 xl:px-36 items-center lg:py-24 relative w-full">
+    <div
+      x-data="{
+        skip: 1,
+        atBeginning: false,
+        atEnd: false,
+        next() {
+            this.to((current, offset) => current + (offset * this.skip))
+        },
+        prev() {
+            this.to((current, offset) => current - (offset * this.skip))
+        },
+        to(strategy) {
+            let slider = this.$refs.slider
+            let current = slider.scrollLeft
+            let offset = slider.firstElementChild.getBoundingClientRect().width
+            slider.scrollTo({ left: strategy(current, offset), behavior: 'smooth' })
+        },
+        focusableWhenVisible: {
+            'x-intersect:enter'() {
+                this.$el.removeAttribute('tabindex')
+            },
+            'x-intersect:leave'() {
+                this.$el.setAttribute('tabindex', '-1')
+            },
+        },
+        disableNextAndPreviousButtons: {
+            'x-intersect:enter.threshold.05'() {
+                let slideEls = this.$el.parentElement.children
+
+                // If this is the first slide.
+                if (slideEls[0] === this.$el) {
+                    this.atBeginning = true
+                // If this is the last slide.
+                } else if (slideEls[slideEls.length-1] === this.$el) {
+                    this.atEnd = true
+                }
+            },
+            'x-intersect:leave.threshold.05'() {
+                let slideEls = this.$el.parentElement.children
+
+                // If this is the first slide.
+                if (slideEls[0] === this.$el) {
+                    this.atBeginning = false
+                // If this is the last slide.
+                } else if (slideEls[slideEls.length-1] === this.$el) {
+                    this.atEnd = false
+                }
+            },
+        },
+    }"
+      class="flex w-full flex-col bg-gradientdown  ring-1 ring-white/10 rounded-4xl p-8 lg:p-20">
+      <div
+        x-on:keydown.right="next"
+        x-on:keydown.left="prev"
+        tabindex="0"
+        role="region"
+        aria-labelledby="carousel-label"
+        class="inline-flex items-center space-x-6">
+        <h2 id="carousel-label" class="sr-only" hidden>Carousel</h2>
+
+        <!-- Prev Button -->
+        <button
+          x-on:click="prev"
+          class="bg-white/5 hover:bg-white/10 focus:bg-transparent rounded-2xl inline-flex items-center text-center text-white p-4 ring-1 ring-white/10"
+          :aria-disabled="atBeginning"
+          :tabindex="atEnd ? -1 : 0"
+          :class="{ 'opacity-50 cursor-not-allowed': atBeginning }">
+          <span aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </span>
+          <span class="sr-only">Skip to previous slide page</span>
+        </button>
+
+        <span id="carousel-content-label" class="sr-only" hidden>Carousel</span>
+
+        <ul
+          x-ref="slider"
+          tabindex="0"
+          role="listbox"
+          aria-labelledby="carousel-content-label"
+          class="flex w-full snap-x snap-mandatory overflow-x-scroll scrollbar-hide">
+          <li
+            x-bind="disableNextAndPreviousButtons"
+            class="flex w-full shrink-0 snap-start flex-col items-center justify-center text-center"
+            role="option">
+            <figure>
+              <div class="h-full group">
+                <figcaption
+                  class="relative flex-col text-center flex items-center gap-4 pb-6">
+                  <div class="overflow-hidden lg:p-2">
+                    <img
+                      alt="amrit"
+                      src="https://d33wubrfki0l68.cloudfront.net/1a2e935392c14749028729b21b20ddbd4c54b70e/1a932/images/testimonials/amrit.jpeg"
+                      width="56"
+                      height="56"
+                      decoding="async"
+                      data-mining="future"
+                      class="object-cover rounded-full h-14 w-14 zincscale"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="text-lg font-medium leading-6 text-white">
+                      Amrit Nagi
+                    </div>
+                    <div class="mt-1">
+                      <a
+                        class="text-sm text-zinc-400 group-hover:text-sky-300"
+                        href="#">CEO of Tailwind Toolbox</a
+                      >
+                    </div>
+                  </div>
+                </figcaption>
+                <blockquote class="mt-2 space-y-3 max-w-xl text-center">
+                  <p
+                    class="text-xs sm:text-base text-white mx-auto text-center max-w-md">
+                    It's amazing just how quickly the quality and variety of his
+                    work has developed and evolved!
+                  </p>
+                </blockquote>
+              </div>
+            </figure>
+          </li>
+
+          <li
+            x-bind="disableNextAndPreviousButtons"
+            class="flex w-full shrink-0 snap-start flex-col items-center justify-center"
+            role="option">
+            <figure>
+              <div class="h-full group">
+                <figcaption
+                  class="relative flex-col text-center flex items-center gap-4 pb-6">
+                  <div class="overflow-hidden lg:p-2">
+                    <img
+                      alt="codeboje"
+                      src="https://d33wubrfki0l68.cloudfront.net/cabc8d70a84f6d78e56c5cd2db3f54ab6462325d/95045/images/testimonials/gabi.jpeg"
+                      width="56"
+                      height="56"
+                      decoding="async"
+                      data-mining="future"
+                      class="object-cover rounded-full h-14 w-14 zincscale"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="text-lg font-medium leading-6 text-white">
+                      Gabriel Perales
+                    </div>
+                    <div class="mt-1">
+                      <a
+                        class="text-sm text-zinc-400 group-hover:text-sky-300"
+                        href="#">Engineer at Cabify</a
+                      >
+                    </div>
+                  </div>
+                </figcaption>
+                <blockquote class="mt-2 space-y-3 max-w-xl text-center">
+                  <p
+                    class="text-xs sm:text-base text-white mx-auto text-center max-w-md">
+                    Mike has helped me with many designs, and I couldn't follow
+                    his working speed when we worked together.
+                  </p>
+                </blockquote>
+              </div>
+            </figure>
+          </li>
+
+          <li
+            x-bind="disableNextAndPreviousButtons"
+            class="flex w-full shrink-0 snap-start flex-col items-center justify-center"
+            role="option">
+            <figure>
+              <div class="h-full group">
+                <figcaption
+                  class="relative flex-col text-center flex items-center gap-4 pb-6">
+                  <div class="overflow-hidden lg:p-2">
+                    <img
+                      alt=""
+                      src="https://pbs.twimg.com/profile_images/1039477099768295424/DkFxqf2V_400x400.jpg"
+                      width="56"
+                      height="56"
+                      decoding="async"
+                      data-mining="future"
+                      class="object-cover rounded-full h-14 w-14 zincscale"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="text-lg font-medium leading-6 text-white">
+                      Volkan Kaya
+                    </div>
+                    <div class="mt-1">
+                      <a
+                        class="text-sm text-zinc-400 group-hover:text-sky-300"
+                        href="#">Founder of Versoly.com</a
+                      >
+                    </div>
+                  </div>
+                </figcaption>
+                <blockquote class="mt-2 space-y-3 max-w-xl text-center">
+                  <p
+                    class="text-xs sm:text-base text-white mx-auto text-center max-w-md">
+                    Mike leveraged his previous experience to build out a few
+                    landing pages very quickly for Versoly
+                  </p>
+                </blockquote>
+              </div>
+            </figure>
+          </li>
+
+          <li
+            x-bind="disableNextAndPreviousButtons"
+            class="flex w-full shrink-0 snap-start flex-col items-center justify-center"
+            role="option">
+            <figure>
+              <div class="h-full group">
+                <figcaption
+                  class="relative flex-col text-center flex items-center gap-4 pb-6">
+                  <div class="overflow-hidden lg:p-2">
+                    <img
+                      alt="gustavo"
+                      src="https://d33wubrfki0l68.cloudfront.net/05a6c2e973f7b38e7b5f5fb1923ed9507d6fc68d/10e85/images/testimonials/mike.png"
+                      width="56"
+                      height="56"
+                      decoding="async"
+                      data-mining="future"
+                      class="object-cover rounded-full h-14 w-14 zincscale"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="text-lg font-medium leading-6 text-white">
+                      Mike Jones
+                    </div>
+                    <div class="mt-1">
+                      <a
+                        class="text-sm text-zinc-400 group-hover:text-sky-300"
+                        href="#">Blogger at Raspada</a
+                      >
+                    </div>
+                  </div>
+                </figcaption>
+                <blockquote class="mt-2 space-y-3 max-w-xl text-center">
+                  <p
+                    class="text-xs sm:text-base text-white mx-auto text-center max-w-md">
+                    I have had the absolute pleasure of working with Mike in the
+                    past when building my blog Raspada. company.
+                  </p>
+                </blockquote>
+              </div>
+            </figure>
+          </li>
+
+          <li
+            x-bind="disableNextAndPreviousButtons"
+            class="flex w-full shrink-0 snap-start flex-col items-center justify-center"
+            role="option">
+            <figure>
+              <div class="h-full group">
+                <figcaption
+                  class="relative flex-col text-center flex items-center gap-4 pb-6">
+                  <div class="overflow-hidden lg:p-2">
+                    <img
+                      alt="amrit"
+                      src="https://d33wubrfki0l68.cloudfront.net/1a2e935392c14749028729b21b20ddbd4c54b70e/1a932/images/testimonials/amrit.jpeg"
+                      width="56"
+                      height="56"
+                      decoding="async"
+                      data-mining="future"
+                      class="object-cover rounded-full h-14 w-14 zincscale"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="text-lg font-medium leading-6 text-white">
+                      Amrit Nagi
+                    </div>
+                    <div class="mt-1">
+                      <a
+                        class="text-sm text-zinc-400 group-hover:text-sky-300"
+                        href="#">CEO of Tailwind Toolbox</a
+                      >
+                    </div>
+                  </div>
+                </figcaption>
+                <blockquote class="mt-2 space-y-3 max-w-xl text-center">
+                  <p
+                    class="text-xs sm:text-base text-white mx-auto text-center max-w-md">
+                    It's amazing just how quickly the quality and variety of his
+                    work has developed and evolved!
+                  </p>
+                </blockquote>
+              </div>
+            </figure>
+          </li>
+
+          <li
+            x-bind="disableNextAndPreviousButtons"
+            class="flex w-full shrink-0 snap-start flex-col items-center justify-center"
+            role="option">
+            <figure>
+              <div class="h-full group">
+                <figcaption
+                  class="relative flex-col text-center flex items-center gap-4 pb-6">
+                  <div class="overflow-hidden lg:p-2">
+                    <img
+                      alt="codeboje"
+                      src="https://d33wubrfki0l68.cloudfront.net/cabc8d70a84f6d78e56c5cd2db3f54ab6462325d/95045/images/testimonials/gabi.jpeg"
+                      width="56"
+                      height="56"
+                      decoding="async"
+                      data-mining="future"
+                      class="object-cover rounded-full h-14 w-14 zincscale"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="text-lg font-medium leading-6 text-white">
+                      Gabriel Perales
+                    </div>
+                    <div class="mt-1">
+                      <a
+                        class="text-sm text-zinc-400 group-hover:text-sky-300"
+                        href="#">Engineer at Cabify</a
+                      >
+                    </div>
+                  </div>
+                </figcaption>
+                <blockquote class="mt-2 space-y-3 max-w-xl text-center">
+                  <p
+                    class="text-xs sm:text-base text-white mx-auto text-center max-w-md">
+                    Mike has helped me with many designs, and I couldn't follow
+                    his working speed when we worked together.
+                  </p>
+                </blockquote>
+              </div>
+            </figure>
+          </li>
+
+          <li
+            x-bind="disableNextAndPreviousButtons"
+            class="flex w-full shrink-0 snap-start flex-col items-center justify-center"
+            role="option">
+            <figure>
+              <div class="h-full group">
+                <figcaption
+                  class="relative flex-col text-center flex items-center gap-4 pb-6">
+                  <div class="overflow-hidden lg:p-2">
+                    <img
+                      alt=""
+                      src="https://pbs.twimg.com/profile_images/1039477099768295424/DkFxqf2V_400x400.jpg"
+                      width="56"
+                      height="56"
+                      decoding="async"
+                      data-mining="future"
+                      class="object-cover rounded-full h-14 w-14 zincscale"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="text-lg font-medium leading-6 text-white">
+                      Volkan Kaya
+                    </div>
+                    <div class="mt-1">
+                      <a
+                        class="text-sm text-zinc-400 group-hover:text-sky-300"
+                        href="#">Founder of Versoly.com</a
+                      >
+                    </div>
+                  </div>
+                </figcaption>
+                <blockquote class="mt-2 space-y-3 max-w-xl text-center">
+                  <p
+                    class="text-xs sm:text-base text-white mx-auto text-center max-w-md">
+                    Mike leveraged his previous experience to build out a few
+                    landing pages very quickly for Versoly
+                  </p>
+                </blockquote>
+              </div>
+            </figure>
+          </li>
+
+          <li
+            x-bind="disableNextAndPreviousButtons"
+            class="flex w-full shrink-0 snap-start flex-col items-center justify-center"
+            role="option">
+            <figure>
+              <div class="h-full group">
+                <figcaption
+                  class="relative flex-col text-center flex items-center gap-4 pb-6">
+                  <div class="overflow-hidden lg:p-2">
+                    <img
+                      alt="gustavo"
+                      src="https://d33wubrfki0l68.cloudfront.net/05a6c2e973f7b38e7b5f5fb1923ed9507d6fc68d/10e85/images/testimonials/mike.png"
+                      width="56"
+                      height="56"
+                      decoding="async"
+                      data-mining="future"
+                      class="object-cover rounded-full h-14 w-14 zincscale"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="text-lg font-medium leading-6 text-white">
+                      Mike Jones
+                    </div>
+                    <div class="mt-1">
+                      <a
+                        class="text-sm text-zinc-400 group-hover:text-sky-300"
+                        href="#">Blogger at Raspada</a
+                      >
+                    </div>
+                  </div>
+                </figcaption>
+                <blockquote class="mt-2 space-y-3 max-w-xl text-center">
+                  <p
+                    class="text-xs sm:text-base text-white mx-auto text-center max-w-md">
+                    I have had the absolute pleasure of working with Mike in the
+                    past when building my blog Raspada. company.
+                  </p>
+                </blockquote>
+              </div>
+            </figure>
+          </li>
+        </ul>
+
+        <!-- Next Button -->
+        <button
+          x-on:click="next"
+          class="bg-white/5 hover:bg-white/10 focus:bg-transparent rounded-2xl inline-flex items-center text-center text-white p-4 ring-1 ring-white/10"
+          :aria-disabled="atEnd"
+          :tabindex="atEnd ? -1 : 0"
+          :class="{ 'opacity-50 cursor-not-allowed': atEnd }">
+          <span aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-zinc-600 hover:text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5l7 7-7 7"></path>
+            </svg>
+          </span>
+          <span class="sr-only">Skip to next slide page</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

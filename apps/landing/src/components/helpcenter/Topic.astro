@@ -1,0 +1,133 @@
+<section class="lg:p-8">
+  <div
+    class="px-8 py-12 lg:py-32 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl">
+    <div class="text-center mx-auto max-w-xl">
+      <h2
+        class="text-3xl mt-6 tracking-tighter font-light lg:text-4xl text-white">
+        Misunderstandings associated <span class="md:block text-zinc-400"
+          >with the architecture of Buio</span
+        >
+      </h2>
+    </div>
+
+    <div>
+      <div
+        class="mx-auto max-w-[40rem] mt-24 prose-sm prose text-zinc-400 prose-headings:text-white prose-a:font-semibold prose-a:text-accent-400 hover:prose-a:text-white prose-headings:font-medium">
+        <h2>Overview</h2>
+        <p>
+          Reference this document when you encounter unexpected or incorrect
+          flag evaluations and suspect network connectivity issues. Follow the
+          chronological steps below to identify the specific problem and its
+          location. If you need assistance at any point, reach out to Technical
+          Support.
+        </p>
+
+        <h3>Solution</h3>
+        <h4>Part 1: Identify</h4>
+        <ol>
+          <li>
+            If you answer NO to any of the following, it is likely that the
+            issue is not related to Buio's products or services, but rather to
+            your internal networking architecture.
+          </li>
+          <ul>
+            <li>
+              Have you previously used Buio in this area of your application
+              before the error(s) occurred? If YES, proceed to step 2. If NO,
+              review Part 2: Investigate with the engineering teams managing
+              your infrastructure. Inform these teams about your use of Buio in
+              your application or server.
+            </li>
+            <li>
+              Does the network request reach the Relay or Buio streaming/polling
+              endpoints from the SDK? You can enable debug logging to have the
+              relay print a log if it receives the request. If YES, proceed to
+              step 3. If NO, something in the architecture is likely blocking
+              the request. Proceed to Part 2: Investigate.
+            </li>
+            <li>
+              Did the destination encounter an error? To locate the error, check
+              the logging for the Relay or SDK. Verify network connectivity
+              using appropriate cURL commands (or their Windows equivalent) and
+              check if the same error appears in your logs. If YES, reach out to
+              Technical Support for further assistance. If NO, something in the
+              architecture is likely severing the request. Proceed to Part 2:
+              Investigate.
+            </li>
+          </ul>
+        </ol>
+
+        <h4>Part 2: Investigate</h4>
+        <ul>
+          <li>
+            Does the issue align with common misconceptions about Buio
+            architecture? Review the documentation on common misconceptions
+            about Buio architecture.
+          </li>
+          <li>
+            Do you encounter SSL errors or mentions of a certificate issued in
+            the error logs? Check with the application management team to
+            confirm if you use a managed trust store or certificate authority.
+            You may need to update the certificates to recognize Buio.
+          </li>
+          <li>
+            Does all network traffic from your corporate/organizational servers
+            go through a web proxy or web server that proxies requests? Confirm
+            if this web proxy or server allows a long-lived connection between
+            the SDK and Relay/Buio. This is where your architecture may block or
+            drop connections between the SDK and Relay/Buio.
+          </li>
+          <li>
+            Confirm that the web proxy or server does not terminate connections
+            before the heartbeat interval. Some web proxies, by default, may not
+            allow long-lived connections and silently sever them.
+          </li>
+          <li>
+            Do you have different firewalls or web proxies based on the app
+            environment (e.g., one firewall for development and another for
+            production)? Compare the configurations of a working environment
+            with those of non-working environments to identify any differences.
+            Inconsistent occurrences indicate that the problem is due to
+            different firewalls with varying configurations.
+          </li>
+          <li>
+            Do you have a load balancer between the SDK and the Relay Proxy
+            connections? Confirm if connectivity is lost when there is a change
+            to the Relay Proxy instance. If the Relay array is downscaled and
+            the load balancer is not rebalanced, traffic may be routed to a
+            non-existing node, causing the SDK to lose connectivity.
+          </li>
+          <li>
+            Is the issue specific to an end-user? Confirm whether the end user
+            had/still has stable network connectivity when the Buio errors
+            occurred. If they had limited network availability or no network
+            connection, Buio has no control over the end user's network.
+          </li>
+          <li>
+            If the end user uses the application within a secure, locked-down
+            environment, check if they have a firewall that blocks connections
+            to Buio client-side streaming endpoints. Similar to points 2, 3,
+            &amp; 4 above, the end user's architecture may drop or block the
+            connection.
+          </li>
+        </ul>
+
+        <h2>Resources</h2>
+        <ul>
+          <li>
+            <a href="#"> Contributor's guide</a> - High-level guide on how the SDKs
+            communicate with the Buio service.
+          </li>
+          <li>
+            <a href="">Domain list</a> - All the various endpoints that the SDKs
+            may utilize.
+          </li>
+          <li>
+            <a href="#">Public IP list</a> - An API to access the specific IPs that
+            Buio may use.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

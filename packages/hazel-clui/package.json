@@ -1,0 +1,32 @@
+{
+	"name": "hazel-clui",
+	"type": "module",
+	"scripts": {
+		"build": "tsup src --watch --format esm"
+	},
+	"devDependencies": {
+		"@types/lodash": "^4.14.195",
+		"@types/node": "^20.3.2",
+		"@types/react": "^18.2.14",
+		"@types/react-reconciler": "^0.28.2",
+		"@types/signal-exit": "^3.0.0",
+		"@types/stack-utils": "^2.0.1",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.6"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"ansi-styles": "^6.2.1",
+		"chalk": "^5.3.0",
+		"lodash": "^4.17.21",
+		"react": "^18.2.0",
+		"react-reconciler": "^0.29.0",
+		"signal-exit": "^3.0.7",
+		"stack-utils": "^2.0.6",
+		"tsconfig": "workspace:*",
+		"type-fest": "^3.12.0",
+		"yoga-layout-wasm": "^1.9.3-alpha.7"
+	}
+}

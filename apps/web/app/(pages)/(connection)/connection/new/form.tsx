@@ -203,7 +203,9 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 						onClose={(id) => {
 							console.log(id)
 							setDestinationModal(false)
-							form.setValue("publiceDestinationId", id, { shouldValidate: true })
+							form.setValue("publiceDestinationId", id, {
+								shouldValidate: true,
+							})
 						}}
 						shouldRedirect={false}
 						action={createDestinationAction}

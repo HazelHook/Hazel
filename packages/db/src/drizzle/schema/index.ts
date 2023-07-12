@@ -5,17 +5,31 @@ import { buildMysqlTable } from "./common"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 }).notNull()
+const enabled = boolean("enabled").default(true).notNull()
 
 export const source = buildMysqlTable(
 	"sources",
 	{
 		name,
 		url,
+		enabled,
+		integrationId: int("integration_id"),
 	},
 	(table) => ({
 		publicIdIndex: index("src_public_id_idx").on(table.publicId),
-
 		customerIdIndex: index("src_customer_id_idx").on(table.customerId),
+	}),
+)
+
+export const integration = buildMysqlTable(
+	"integrations",
+	{
+		name,
+		config: json("config"),
+	},
+	(table) => ({
+		publicIdIndex: index("itg_public_id_idx").on(table.publicId),
+		customerIdIndex: index("itg_customer_id_idx").on(table.customerId),
 	}),
 )
 
@@ -24,10 +38,10 @@ export const destination = buildMysqlTable(
 	{
 		name,
 		url,
+		enabled,
 	},
 	(table) => ({
 		publicIdIndex: index("dest_public_id_idx").on(table.publicId),
-
 		customerIdIndex: index("dest_customer_id_idx").on(table.customerId),
 	}),
 )
@@ -36,11 +50,10 @@ export const connection = buildMysqlTable(
 	"connections",
 	{
 		name,
+		enabled,
 
 		sourceId: int("source_id").notNull(),
 		destinationId: int("destination_id").notNull(),
-
-		enabled: boolean("enabled").default(true).notNull(),
 
 		fluxConfig: json("flux_config"),
 	},
@@ -56,9 +69,13 @@ export const connection = buildMysqlTable(
 
 export const sourceRelations = relations(source, ({ many, one }) => ({
 	connections: many(connection),
+	integration: one(integration),
 }))
 export const destinationRelations = relations(destination, ({ many, one }) => ({
 	connections: many(connection),
+}))
+export const integrationRelations = relations(integration, ({ one }) => ({
+	source: one(source),
 }))
 
 export const connectionRelations = relations(connection, ({ one }) => ({
@@ -80,3 +97,6 @@ export type Destination = InferModel<typeof destination, "select">
 
 export type InsertSource = InferModel<typeof source, "insert">
 export type Source = InferModel<typeof source, "select">
+
+export type InsertIntegration = InferModel<typeof integration, "insert">
+export type Integration = InferModel<typeof integration, "select">

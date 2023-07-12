@@ -1,0 +1,85 @@
+<section class="lg:p-8">
+  <div
+    class="mx-auto 2xl:max-w-7xl py-12 lg:px-16 md:px-12 px-8 xl:px-36 items-center relative w-full">
+    <div
+      class="relative isolate lg:flex-col overflow-hidden bg-gradientup ring-1 ring-white/10 rounded-4xl px-6 p-10 lg:flex lg:p-20 pb-0 lg:pb-0">
+      <div class="lg:text-center max-w-xl lg:mx-auto">
+        <span class="text-white"> Interactive Data Visualization</span>
+        <h2
+          class="text-3xl tracking-tighter mt-6 font-light lg:text-4xl text-white">
+          Dynamic charts with <span class="md:block text-zinc-300"
+            >interactive capabilities</span
+          >
+        </h2>
+      </div>
+      <div
+        class="flex flex-wrap w-full bg-black mt-12 py-32 px-10 relative rounded-t-2xl lg:rounded-t-[3rem] overflow-hidden shadow-thick">
+        <img
+          alt="gallery"
+          class="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+        />
+        <div class="text-center relative z-10 w-full">
+          <div x-data="{ open: false }" class="flex justify-center">
+            <!-- Trigger -->
+            <span x-on:click="open = true">
+              <div
+                class="p-0.5 rounded-full bg-gradient-to-r from-accent-300 via-accent-400 to-accent-500 cursor-pointer shadow-thick hover:shadow-none transition duration-500 ease-in-out transform">
+                <button
+                  type="button"
+                  class="inline-flex items-center w-full p-6 text-center text-white transition duration-500 ease-in-out transform rounded-full bg-mirage lg:w-auto focus:outline-none focus:ring-2 focus:ring-offset-4 ring-offset-black focus:bg-black focus:ring-sky-300 hover:text-sky-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-player-play lg:w-4 lg:h-4"
+                    viewBox="0 0 24 24"
+                    stroke-width="1"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M7 4v16l13 -8z"></path>
+                  </svg>
+                </button>
+              </div>
+            </span>
+
+            <!-- Modal -->
+            <div
+              x-show="open"
+              style="display: none"
+              x-on:keydown.escape.prevent.stop="open = false"
+              role="dialog"
+              aria-modal="true"
+              x-id="['modal-title']"
+              :aria-labelledby="$id('modal-title')"
+              class="fixed inset-0 z-10 overflow-y-auto">
+              <!-- Overlay -->
+              <div
+                x-show="open"
+                x-transition.opacity
+                class="fixed inset-0 bg-black bg-opacity-50">
+              </div>
+
+              <!-- Panel -->
+              <div
+                x-show="open"
+                x-transition
+                x-on:click="open = false"
+                class="relative flex min-h-screen items-center justify-center p-4">
+                <div
+                  x-on:click.stop
+                  x-trap.noscroll.inert="open"
+                  class="relative w-full max-w-7xl overflow-y-auto rounded-3xl bg-dark p-4 shadow-3xl">
+                  <iframe
+                    class="w-full aspect-video rounded-2xl"
+                    src="https://www.youtube.com/embed/d5gSJcJh93U"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

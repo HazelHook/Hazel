@@ -17,7 +17,13 @@ export const getCachedConnection = cache(async ({ publicId }: { publicId: string
 export type CacheConnection = PromiseType<ReturnType<typeof getCachedConnection>>
 
 export const getCachedSource = cache(
-	async ({ publicId, redirectMissing = true }: { publicId: string; redirectMissing?: boolean }) => {
+	async ({
+		publicId,
+		redirectMissing = true,
+	}: {
+		publicId: string
+		redirectMissing?: boolean
+	}) => {
 		const source = await db.source.getOne({ publicId })
 
 		if (!source) {
