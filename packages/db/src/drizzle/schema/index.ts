@@ -1,7 +1,7 @@
 import { InferModel, relations } from "drizzle-orm"
 import { boolean, index, int, json, text, varchar } from "drizzle-orm/mysql-core"
 
-import { buildMysqlTable } from "./common"
+import { buildCustomMysqlTable, buildMysqlTable } from "./common"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 }).notNull()
@@ -31,6 +31,16 @@ export const integration = buildMysqlTable(
 		publicIdIndex: index("itg_public_id_idx").on(table.publicId),
 		customerIdIndex: index("itg_customer_id_idx").on(table.customerId),
 	}),
+)
+
+export const integrationTool = buildCustomMysqlTable(
+	"integrationTools",
+	{
+		name,
+		slug: varchar("slug", { length: 64 }).notNull(),
+		schema: text("schema").notNull(),
+		version: int("version").notNull(),
+	},
 )
 
 export const destination = buildMysqlTable(
@@ -100,3 +110,6 @@ export type Source = InferModel<typeof source, "select">
 
 export type InsertIntegration = InferModel<typeof integration, "insert">
 export type Integration = InferModel<typeof integration, "select">
+
+export type InsertIntegrationTool = InferModel<typeof integrationTool, "insert">
+export type IntegrationTool = InferModel<typeof integrationTool, "select">

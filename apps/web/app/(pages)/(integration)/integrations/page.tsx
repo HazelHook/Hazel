@@ -1,35 +1,8 @@
-"use client"
 import { IntegrationCard } from "@/app/(pages)/(integration)/_components/IntegrationCard"
-import { INTEGRATIONS, INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "@/app/(pages)/(integration)/_statics"
-import { useState } from "react"
-
-export interface IntegrationCategoryData {
-	name: string
-	slug: string
-}
-
-export type IntegrationCategory = keyof typeof INTEGRATION_CATERGORIES
-
-export interface IntegrationFeatureData {
-	name: string
-	slug: string
-	icon: React.FC
-}
-
-export type IntegrationFeature = keyof typeof INTEGRATION_FEATURES
-
-export interface Integration {
-	name: string
-	slug: string
-	subtitle?: string
-	categories: IntegrationCategory[]
-	features?: IntegrationFeature[]
-}
-
+import { integrations } from "db/src/drizzle"
+import { INTEGRATIONS } from "db/src/drizzle/integrations"
 
 const IntegrationsPage = async () => {
-	const [openIntegrationForm, setOpenIntegrationForm] = useState<Integration | null>(null)
-
 	return (
 		<main className="p-4">
 			<div className="flex flex-col justify-between mb-4 gap-3 container p-8 space-y-4">
@@ -39,8 +12,6 @@ const IntegrationsPage = async () => {
 						<IntegrationCard
 							key={index}
 							integration={item}
-							isModalOpen={openIntegrationForm === item}
-							setModalOpen={(open) => setOpenIntegrationForm(open ? item : null)}
 						/>
 					))}
 				</div>

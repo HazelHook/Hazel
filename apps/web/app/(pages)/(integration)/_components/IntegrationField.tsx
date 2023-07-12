@@ -1,37 +1,18 @@
-"use client"
-
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, UseFormReturn } from "react-hook-form"
-import * as z from "zod"
-
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { IntegrationMDText } from "@/app/(pages)/(integration)/_components/IntegrationMdText"
+import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form"
+import { UseFormReturn } from "react-hook-form"
 import { Input } from "@/components/ui/input"
-import {
-	IntegrationFields,
-	IntegrationForm,
-	IntegrationFormField,
-	IntegrationSchemaFromFields,
-} from "@/app/(pages)/(integration)/integrations/data/common"
-import { IntegrationMDText } from "@/app/(pages)/(integration)/integrations/data/integration-md-text"
-import { LabeledSeparator } from "@/components/LabeledSeparator"
-import {
-	Select,
-	SelectIcon,
-	SelectPortal,
-	SelectTrigger,
-} from "@radix-ui/react-select"
-import { SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { SelectIcon, SelectPortal } from "@radix-ui/react-select"
 import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
-import { useAction } from "@/server/client"
-import { createIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
+import { AnyIntegrationFormField, IntegrationFields, IntegrationSchemaFromFields } from "db/src/drizzle/integrations/types"
 
-function GetFieldComponent<TSchema extends IntegrationFields>({
+export function IntegrationField<TSchema extends IntegrationFields>({
 	fieldDef,
 	pathKey,
 	form,
 }: {
-	fieldDef: IntegrationFormField
+	fieldDef: AnyIntegrationFormField
 	pathKey: any
 	form: UseFormReturn<IntegrationSchemaFromFields<TSchema>, any, undefined>
 }) {
@@ -118,56 +99,4 @@ function GetFieldComponent<TSchema extends IntegrationFields>({
 	}
 
 	return <></>
-}
-
-export function IntegrationFormModal<T extends IntegrationForm<TSchema>, TSchema extends IntegrationFields>({
-	integration,
-}: { integration: T, onSubmit: () => void }) {
-	const schema = z.object(integration.config)
-
-	const form = useForm({
-		resolver: zodResolver(schema),
-		defaultValues: Object.keys(integration.config).reduce((acc, key) => {
-			(acc as any)[key] = ""
-			return acc
-		}, {}) as any,
-	})
-
-	const createIntegration = useAction(createIntegrationAction, {
-		onSuccess(data) {
-			// router.push('/integrations')
-			// ...
-		},
-		onError(error) {
-			form.setError("root", error)
-		},
-	})
-
-	function onSubmit(values: z.infer<typeof schema>) {
-		createIntegration.mutate({
-			data: values,
-			name: values.name!,
-		})
-	}
-
-	return (
-		<>
-			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)}>
-					{Object.entries(integration.general).map(([key, config]) => {
-						return <GetFieldComponent fieldDef={config} pathKey={key} form={form} key={key} />
-					})}
-					<LabeledSeparator label="Configuration" className="mt-6 mb-4" />
-					{Object.entries(integration.fields).map(([key, integField]) => {
-						return <GetFieldComponent fieldDef={integField} pathKey={key} form={form} key={key} />
-					})}
-					{/* <FormMessage /> */}
-
-					<Button type="submit" disabled={false} loading={false} className="w-full mt-3" variant="outline">
-						Create Integration
-					</Button>
-				</form>
-			</Form>
-		</>
-	)
 }

@@ -26,6 +26,18 @@ export const buildMysqlTable = <TTableName extends string, TColumnsMap extends R
 	)
 }
 
+export const buildCustomMysqlTable = <TTableName extends string, TColumnsMap extends Record<string, any>>(
+	name: TTableName,
+	fields: TColumnsMap,
+	extraConfig?: (self: BuildColumns<TTableName, TColumnsMap>) => MySqlTableExtraConfig,
+) => {
+	return mysqlTable(
+		name,
+		fields,
+		extraConfig,
+	)
+}
+
 export const generatePublicId = (prefix: "src" | "dst" | "con" | "itg") => {
 	return `${prefix}_${nanoid(17)}`
 }

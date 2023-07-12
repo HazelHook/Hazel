@@ -10,7 +10,7 @@ export const createIntegrationAction = createAction(
         data: z.unknown()
     })).mutation(async (opts) => {
 		(opts as any).input.data['name'] = undefined
-		const integration = await db.integrations.create({
+		const integration = await db.integration.create({
 			customerId: opts.ctx.auth.userId!,
             name: opts.input.name,
             config: opts.input.data,

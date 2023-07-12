@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "@/app/(pages)/(integration)/integrations/data/common"
+import { createIntegrationForm } from "../common";
 
 export const hmacForm = createIntegrationForm({
 	name: "hmac",

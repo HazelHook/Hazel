@@ -6,6 +6,9 @@ import { DrizzleTable } from "./orm/db-table"
 import * as schema from "./schema"
 import { generatePublicId } from "./schema/common"
 
+import * as integrations from "./integrations"
+export { integrations }
+
 export type DB = PlanetScaleDatabase<typeof schema>
 
 export function connectDB({
@@ -121,7 +124,7 @@ export function connectDB({
 				return { res, publicId }
 			},
 		},
-		integrations: {
+		integration: {
 			table: new DrizzleTable("integration", schema.integration, db),
 			getOne: async ({ publicId }: { publicId: string }) => {
 				return await db.query.integration.findFirst({
@@ -146,6 +149,21 @@ export function connectDB({
 					publicId,
 				})
 				return { res, publicId }
+			},
+		},
+		integrationTool: {
+			table: new DrizzleTable("integrationTool", schema.integrationTool, db),
+			getOne: async ({ slug }: { slug: string }) => {
+				return await db.query.integrationTool.findFirst({
+					where: eq(schema.integrationTool.slug, slug),
+				})
+			},
+			getMany: async () => {
+				return await db.query.integrationTool.findMany({})
+			},
+			create: async (data: schema.InsertIntegrationTool) => {
+				const res = await db.insert(schema.integrationTool).values(data)
+				return { res }
 			},
 		},
 	}

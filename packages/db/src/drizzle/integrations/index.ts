@@ -1,125 +1,143 @@
-import { Integration } from "@/app/(pages)/(integration)/integrations/page"
-import { DatabaseIcon } from "@/components/icons/pika/database"
-import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
+import { z } from "zod"
+import { Integration, IntegrationFields, IntegrationForm, IntegrationSchemaFromFields, IntegrationSlug } from "./types"
 
-export const INTEGRATIONS: Integration[] = [
-	{
-		name: "Stripe",
+export const INTEGRATIONS: Record<any, Integration> = {
+	hmac: {
+		slug: "hmac",
+		name: "HMAC",
+		categories: ["development", "custom"],
+		subtitle: "Verify the authenticity of the webhook request using HMAC.",
+		features: ["authentication"],
+	},
+	basic_auth: {
+		slug: "basic_auth",
+		name: "Basic Auth",
+		categories: ["development", "custom"],
+		subtitle: "Verify the authenticity of the webhook request using Basic Auth.",
+		features: ["authentication"],
+	},
+	api_key: {
+		slug: "api_key",
+		name: "API Key",
+		categories: ["development", "custom"],
+		subtitle: "Verify the authenticity of the webhook request using an API key.",
+		features: ["authentication"],
+	},
+	stripe: {
 		slug: "stripe",
+		name: "Stripe",
 		categories: ["payment"],
 		subtitle:
 			"Easily integrate and automate webhook processing for Stripe, a comprehensive solution for online payments, and manage transactions more efficiently.",
 		features: ["database", "authentication"],
 	},
-	{
-		name: "GitHub",
+	github: {
 		slug: "github",
+		name: "GitHub",
 		categories: ["development", "project_management"],
 		subtitle:
 			"Streamline your development and project management processes with automated webhook handling for GitHub, a platform that revolutionized collaboration in coding.",
 		features: ["authentication"],
 	},
-	{
-		name: "Shopify",
+	shopify: {
 		slug: "shopify",
+		name: "Shopify",
 		categories: ["development", "payment"],
 		subtitle:
 			"Simplify e-commerce transaction processing by integrating Shopify's webhook services, making online store management and payments a breeze.",
 		features: ["authentication"],
 	},
-	{
-		name: "Jira",
+	jira: {
 		slug: "jira",
+		name: "Jira",
 		categories: ["project_management"],
 		subtitle:
 			"Enhance your project management workflows by integrating with Jira's webhook system, providing real-time updates and issue tracking capabilities.",
 		features: ["authentication"],
 	},
-	{
-		name: "Svix",
+	svix: {
 		slug: "svix",
+		name: "Svix",
 		categories: ["development"],
 		subtitle:
 			"Facilitate your development process with Svix, seamlessly connecting your application's webhook events, and reduce the overhead of webhook management.",
 		features: ["authentication"],
 	},
-	{
-		name: "GitLab",
+	gitlab: {
 		slug: "gitlab",
+		name: "GitLab",
 		categories: ["development", "project_management"],
 		subtitle:
 			"Supercharge your GitLab experience by integrating webhook processing, thereby accelerating your software development and project management tasks.",
 		features: ["authentication"],
 	},
-	{
-		name: "Linear",
+	linear: {
 		slug: "linear",
+		name: "Linear",
 		categories: ["project_management"],
 		subtitle:
 			"Empower your project management capabilities by integrating webhook processing for Linear, thereby ensuring seamless issue tracking and task assignments.",
 		features: ["authentication"],
 	},
-	{
-		name: "Postmark",
+	postmark: {
 		slug: "postmark",
+		name: "Postmark",
 		categories: ["crm", "communication"],
 		subtitle:
 			"Improve your CRM and communication processes with Postmark by enabling efficient webhook processing, ensuring timely email deliveries and customer interactions.",
 		features: ["authentication"],
 	},
-	{
-		name: "Typeform",
+	typeform: {
 		slug: "typeform",
+		name: "Typeform",
 		categories: ["development"],
 		subtitle:
 			"Enhance your application's interaction capabilities by integrating with Typeform's webhook services, turning responses into actionable insights quickly and easily.",
 		features: ["database", "authentication"],
 	},
-	{
-		name: "Ayden",
+	ayden: {
 		slug: "ayden",
+		name: "Ayden",
 		categories: ["payment"],
 		subtitle:
 			"Take control of your online payments by integrating Ayden's webhooks, enabling seamless and secure transaction processing for your business.",
 		features: ["authentication"],
 	},
-	{
-		name: "Mailgun",
+	mailgun: {
 		slug: "mailgun",
+		name: "Mailgun",
 		categories: ["crm", "communication"],
 		subtitle:
 			"Optimize your CRM and communication strategies by integrating Mailgun's webhook services, ensuring efficient email delivery and performance tracking.",
 		features: ["authentication"],
 	},
-	{
-		name: "Sendgrid",
+	sendgrid: {
 		slug: "sendgrid",
+		name: "Sendgrid",
 		categories: ["crm", "communication"],
 		subtitle:
 			"Enhance your email communication workflows with Sendgrid's webhooks, for more effective engagement tracking and customer communication.",
 		features: ["authentication"],
 	},
-	{
-		name: "Resend",
+	resend: {
 		slug: "resend",
+		name: "Resend",
 		categories: ["crm", "communication"],
 		subtitle:
 			"Boost your CRM and communication efforts by integrating Resend's webhook services, guaranteeing efficient message delivery and user engagement tracking.",
 		features: ["authentication"],
 	},
-]
+}
 
 export const INTEGRATION_FEATURES = {
 	authentication: {
 		name: "Authentication",
 		slug: "authentication",
-		icon: ShieldCheckIcon,
 		description: "Fully authenticates the webhook request.",
 	},
 	database: {
 		name: "Database",
 		slug: "database",
-		icon: DatabaseIcon,
 		description: "Stores the webhook request in your database.",
 	},
 }
@@ -129,6 +147,48 @@ export const INTEGRATION_CATERGORIES = {
 	communication: { name: "Communication", slug: "communication" },
 	email_marketing: { name: "Email Marketing", slug: "email_marketing" },
 	development: { name: "Development", slug: "development" },
-	project_management: { name: "Project Management", slug: "project_management" },
+	project_management: {
+		name: "Project Management",
+		slug: "project_management",
+	},
 	crm: { name: "CRM", slug: "crm" },
+	custom: { name: "Custom", slug: "custom" },
 }
+
+function generateSchemaFromFields<T extends IntegrationFields>(fields: T): IntegrationSchemaFromFields<T> {
+	const schema = {} as any
+	for (const [key, element] of Object.entries(fields)) {
+		if (element.type === "text") {
+			schema[key] = z.string()
+		} else if (element.type === "secret") {
+			schema[key] = z.string()
+		} else if (element.type === "select") {
+			schema[key] = z.enum(element.options)
+		}
+	}
+	return schema
+}
+
+const nameField = {
+	type: "text",
+	label: "Integration Name",
+	placeholder: "Enter a name for this integration...",
+} as const
+export function createIntegrationForm<T extends IntegrationFields>({
+	name,
+	schema,
+}: {
+	name: IntegrationSlug
+	schema: T
+}): IntegrationForm<T> {
+	const fields = { name: nameField, ...schema }
+	const resultSchema = generateSchemaFromFields(fields)
+	return {
+		name,
+		fields: schema,
+		general: { name: nameField },
+		config: resultSchema,
+	}
+}
+
+
