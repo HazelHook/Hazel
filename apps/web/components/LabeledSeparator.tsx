@@ -9,7 +9,7 @@ export const LabeledSeparator = ({
 }: { label: string } & React.HTMLProps<HTMLDivElement>) => {
 	return (
 		<div className={`justify-center items-center flex-row flex gap-2 ml-1 mr-2 ${className}`} {...props}>
-			<p className="text-xs font-light text-gray-400">{label}</p>
+			<p className="text-xs font-light text-muted-foreground">{label}</p>
 			<div
 				className="w-full"
 				style={{

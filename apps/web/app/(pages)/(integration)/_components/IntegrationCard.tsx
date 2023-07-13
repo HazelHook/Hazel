@@ -170,7 +170,7 @@ export const IntegrationCard = ({ integration }: { integration: IntegrationTool 
 					<Dialog.Content
 						className="absolute w-screen h-screen m-0 p-0 top-0 left-0 flex justify-center items-center z-50"
 						style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
-						// onMouseDown={() => setModalOpen(false)}
+						onMouseDown={() => setModalOpen(false)}
 					>
 						<Card
 							className="relative max-w-screen-sm p-4 flex flex-col gap-3 select-none"
