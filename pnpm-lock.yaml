@@ -142,9 +142,6 @@ importers:
       '@tailwindcss/forms':
         specifier: ^0.5.3
         version: 0.5.3(tailwindcss@3.3.2)
-      '@tailwindcss/line-clamp':
-        specifier: ^0.4.4
-        version: 0.4.4(tailwindcss@3.3.2)
       '@tailwindcss/typography':
         specifier: ^0.5.9
         version: 0.5.9(tailwindcss@3.3.2)
@@ -161,11 +158,11 @@ importers:
         specifier: ^2.8.1
         version: 2.8.1(@types/node@20.4.1)
       prettier:
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: ^2.8.8
+        version: 2.8.8
       prettier-plugin-astro:
-        specifier: ^0.11.0
-        version: 0.11.0
+        specifier: ^0.10.0
+        version: 0.10.0
 
   apps/web:
     dependencies:
@@ -3187,14 +3184,6 @@ packages:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.3.2
-    dev: true
-
-  /@tailwindcss/line-clamp@0.4.4(tailwindcss@3.3.2):
-    resolution: {integrity: sha512-5U6SY5z8N42VtrCrKlsTAA35gy2VSyYtHWCsg1H87NU1SXnEfekTVlrga9fzUDrrHcGi2Lb5KenUWb4lRQT5/g==}
-    peerDependencies:
-      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
-    dependencies:
       tailwindcss: 3.3.2
     dev: true
 
@@ -8376,12 +8365,12 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-astro@0.11.0:
-    resolution: {integrity: sha512-rl2hJ4Kty/aEfGjk3i4JS+bpng9MjgvwqLRNzeb9NqYhqKoWNwOR39cIJXFjU1vR3zYOPnwWNRMelKb0orunYA==}
+  /prettier-plugin-astro@0.10.0:
+    resolution: {integrity: sha512-dPzop0gKZyVGpTDQmfy+e7FKXC9JT3mlpfYA2diOVz+Ui+QR1U4G/s+OesKl2Hib2JJOtAYJs/l+ovgT0ljlFA==}
     engines: {node: ^14.15.0 || >=16.0.0, pnpm: '>=7.14.0'}
     dependencies:
       '@astrojs/compiler': 1.5.6
-      prettier: 3.0.0
+      prettier: 2.8.8
       sass-formatter: 0.7.6
     dev: true
 
