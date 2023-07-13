@@ -1,5 +1,6 @@
 ---
 import Logo from "@/components/global/Logo.astro";
+import { appConfig } from "@/lib/app";
 ---
 
 <footer class="bg-black lg:p-8">
@@ -7,7 +8,7 @@ import Logo from "@/components/global/Logo.astro";
     class="items-center px-8 mx-auto py-12 lg:py-24 md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl"
   >
     <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-      <div class="text-white">
+      <div class="text-white mb-4 xl:mb-0">
         <span
           class="text-lg inline-flex items-center gap-3 font-semibold lg:text-2xl italic"
         >
@@ -16,68 +17,27 @@ import Logo from "@/components/global/Logo.astro";
         >
       </div>
       <div class="grid grid-cols-2 gap-8 xl:col-span-2">
-        <div class="md:grid md:grid-cols-2 md:gap-8">
-          <div>
-            <h3 class="text-white text-sm">Navigation</h3>
+        <div class="md:grid md:grid-cols-3 md:gap-8">
+          {
+            appConfig.footer.map(foot => 
+            <div>
+            <h3 class="text-white text-sm">{foot.title}</h3>
             <ul role="list" class="mt-4 text-xs space-y-2">
-              <li>
-                <a href="/" class="text-zinc-400 hover:text-white"> Home</a>
-              </li>
+              {
+                foot.item.map(({name,...rest}) =>  <li>
+                <a {...rest} class="text-zinc-400 hover:text-white">{name}</a>
+              </li>)
+              }
+             
 
-              <li>
-                <a href="/#pricing" class="text-zinc-400 hover:text-white">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://docs.hazelhook.dev"
-                  class="text-zinc-400 hover:text-white"
-                >
-                  Documentation
-                </a>
-              </li>
+              
             </ul>
-          </div>
-          <div class="mt-12 md:mt-0">
-            <h3 class="text-white text-sm">Stay Updated</h3>
-            <ul role="list" class="mt-4 text-xs space-y-2">
-              <li>
-                <a href="/changelog" class="text-zinc-400 hover:text-white">
-                  Changelog
-                </a>
-              </li>
-              <li>
-                <a href="/changelog" class="text-zinc-400 hover:text-white">
-                  Roadmap
-                </a>
-              </li>
-            </ul>
-          </div>
+          </div> )
+          }
+        
+         
         </div>
-        <div class="md:grid md:grid-cols-2 md:gap-8">
-          <div class="mt-12 md:mt-0">
-            <h3 class="text-white text-sm">Socials</h3>
-            <ul role="list" class="mt-4 text-xs space-y-2">
-              <li>
-                <a
-                  href="https://twitter.com/HazelHook"
-                  class="text-zinc-400 hover:text-white"
-                >
-                  @HazelHook
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://twitter.com/@makisuo_"
-                  class="text-zinc-400 hover:text-white"
-                >
-                  @makisuo__
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+     
       </div>
     </div>
   </div>
@@ -87,11 +47,12 @@ import Logo from "@/components/global/Logo.astro";
   <div
     class="items-center px-8 py-6 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl"
   >
-    <nav class="flex flex-col lg:flex-row gap-8">
+    <nav class="flex flex-col md:flex-row gap-8 justify-between">
       <p class="text-xs text-zinc-400">
         © 2023 Hazelhook. All rights reserved.
       </p>
-      <a
+      <div class="flex flex-row gap-8">
+        <a
         class="relative -my-2 -mx-3 rounded-lg px-3 py-2 text-xs text-zinc-400 transition-colors delay-150 hover:delay-[0ms] hover:bg-mirage"
         href="/terms"
         ><span class="relative z-10">Terms fo use</span>
@@ -101,6 +62,8 @@ import Logo from "@/components/global/Logo.astro";
         href="/privacy"
         ><span class="relative z-10">Privacy policy</span>
       </a>
+      </div>
+     
     </nav>
   </div>
 </footer>

@@ -46,11 +46,11 @@ import { AstroSeo } from "@astrolib/seo";
     <div class="px-8 py-24 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl">
       <div class="space-y-24">
         <div>
-          <span class="text-black"> Our blog</span>
+          <span class="text-black">Hazel blog</span>
           <h2
             class="text-3xl mt-6 tracking-tighter font-light lg:text-4xl text-black">
-            All the best news about charts <span class="md:block text-zinc-400"
-              >in one quality place</span
+            Learn all about <span class="md:block text-zinc-400"
+              >all sort of stuff.</span
             >
           </h2>
         </div>
@@ -75,7 +75,7 @@ import { AstroSeo } from "@astrolib/seo";
                 .slice()
                 .map((post) => (
                   <EntriesOne
-                    url={"/posts/" + post.slug}
+                    url={`/posts/${post.slug}`}
                     title={post.data.title}
                     description={post.data.description}
                     alt={post.data.title}

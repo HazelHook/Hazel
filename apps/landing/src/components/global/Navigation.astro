@@ -1,5 +1,6 @@
 ---
 import Logo from "@/components/global/Logo.astro";
+import { appConfig } from "@/lib/app";
 ---
 
 <div class="fixed top-4 inset-x-0 z-50">
@@ -7,13 +8,13 @@ import Logo from "@/components/global/Logo.astro";
     <div class="w-full mx-auto">
       <div
         x-data="{ open: false }"
-        class="relative flex flex-col w-full p-3 mx-auto bg-black/70 border border-white/10 shadow-thick backdrop-blur-xl backdrop-filter rounded-xl md:rounded-full md:items-center md:justify-between md:flex-row md:px-6"
+        class="relative flex flex-col w-full p-3 mx-auto bg-background/70 border border-white/10 shadow-thick backdrop-blur-xl backdrop-filter rounded-xl md:rounded-full md:items-center md:justify-between md:flex-row md:px-6"
       >
         <div
           class="flex flex-row items-center justify-between md:justify-start"
         >
           <a
-            class="text-white hover:text-white/50 items-center font-bold gap-2 inline-flex text-lg"
+            class="text-foreground hover:text-white/50 items-center font-bold gap-2 inline-flex text-lg"
             href="/"
           >
             <Logo className="h-6 w-6" />
@@ -58,41 +59,24 @@ import Logo from "@/components/global/Logo.astro";
           <ul
             class="space-y-2 list-none md:space-y-0 md:ml-auto items-center md:inline-flex justify-center text-center md:text-left gap-3"
           >
-            <li>
+          {
+            appConfig.navbar.map(({name, ...rest}) => <li>
               <a
-                href="#pricing"
                 class="lg:py-10 text-xs text-white hover:text-accent-400"
+                {...rest}
               >
-                Pricing
+                {name}
               </a>
-            </li>
-            <li>
-              <a
-                target="Changelog"
-                href="/changelog"
-                class="lg:py-10 text-xs text-white hover:text-accent-400"
-              >
-                Changelog
-              </a>
-            </li>
-            <li>
-              <a
-                target="_blank"
-                href="https://docs.hazelhook.dev"
-                class="lg:py-10 text-xs text-white hover:text-accent-400"
-              >
-                Documentation
-              </a>
-            </li>
-
-            <li>
-              <a
-                href="https://app.hazelhook.dev"
-                class="py-1.5 px-4 border focus:ring-2 text-xs rounded-full border-transparent bg-white hover:bg-white/10 text-black duration-200 focus:ring-offset-2 focus:ring-white hover:text-white inline-flex items-center justify-center ring-1 ring-transparent lg:ml-auto"
-              >
-                Get Started
-              </a>
-            </li>
+            </li>)
+          }
+           <li>
+            <a
+              href="https://app.hazelhook.dev"
+              class="py-1.5 px-4 border focus:ring-2 text-xs rounded-full border-transparent bg-white hover:bg-white/10 text-black duration-200 focus:ring-offset-2 focus:ring-white hover:text-white inline-flex items-center justify-center ring-1 ring-transparent lg:ml-auto"
+            >
+              Get Started
+            </a>
+          </li>
           </ul>
         </nav>
       </div>
