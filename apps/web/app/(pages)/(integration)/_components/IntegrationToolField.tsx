@@ -7,7 +7,7 @@ import { SelectPortal } from "@radix-ui/react-select"
 import { AnyIntegrationFormField } from "db/src/drizzle/integrations/common"
 import * as Form from "@radix-ui/react-form"
 
-export function IntegrationField({
+export function IntegrationToolField({
 	fieldDef,
 	pathKey,
 }: {

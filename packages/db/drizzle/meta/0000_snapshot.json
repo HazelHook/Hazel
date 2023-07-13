@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "ea059bfa-90a3-42bd-8276-a8127f77b0a4",
+  "id": "16364ce0-555b-4a45-a5e7-824596989f95",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "connections": {
@@ -83,29 +83,29 @@
         }
       },
       "indexes": {
-        "conn_public_id_idx": {
-          "name": "conn_public_id_idx",
+        "con_public_id_idx": {
+          "name": "con_public_id_idx",
           "columns": [
             "public_id"
           ],
           "isUnique": false
         },
-        "conn_customer_id_idx": {
-          "name": "conn_customer_id_idx",
+        "con_customer_id_idx": {
+          "name": "con_customer_id_idx",
           "columns": [
             "customer_id"
           ],
           "isUnique": false
         },
-        "conn_source_id_idx": {
-          "name": "conn_source_id_idx",
+        "con_source_id_idx": {
+          "name": "con_source_id_idx",
           "columns": [
             "source_id"
           ],
           "isUnique": false
         },
-        "conn_destination_id_idx": {
-          "name": "conn_destination_id_idx",
+        "con_destination_id_idx": {
+          "name": "con_destination_id_idx",
           "columns": [
             "destination_id"
           ],
@@ -113,7 +113,15 @@
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {}
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sources_public_id_unique": {
+          "name": "sources_public_id_unique",
+          "columns": [
+            "public_id"
+          ]
+        }
+      }
     },
     "destinations": {
       "name": "destinations",
@@ -180,15 +188,15 @@
         }
       },
       "indexes": {
-        "dest_public_id_idx": {
-          "name": "dest_public_id_idx",
+        "dst_public_id_idx": {
+          "name": "dst_public_id_idx",
           "columns": [
             "public_id"
           ],
           "isUnique": false
         },
-        "dest_customer_id_idx": {
-          "name": "dest_customer_id_idx",
+        "dst_customer_id_idx": {
+          "name": "dst_customer_id_idx",
           "columns": [
             "customer_id"
           ],
@@ -196,7 +204,15 @@
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {}
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sources_public_id_unique": {
+          "name": "sources_public_id_unique",
+          "columns": [
+            "public_id"
+          ]
+        }
+      }
     },
     "integrations": {
       "name": "integrations",
@@ -268,46 +284,25 @@
             "customer_id"
           ],
           "isUnique": false
+        },
+        "itg_name_idx": {
+          "name": "itg_name_idx",
+          "columns": [
+            "name"
+          ],
+          "isUnique": false
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {}
-    },
-    "integrationTools": {
-      "name": "integrationTools",
-      "columns": {
-        "name": {
-          "name": "name",
-          "type": "varchar(64)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "slug": {
-          "name": "slug",
-          "type": "varchar(64)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "schema": {
-          "name": "schema",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "version": {
-          "name": "version",
-          "type": "int",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sources_public_id_unique": {
+          "name": "sources_public_id_unique",
+          "columns": [
+            "public_id"
+          ]
         }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {}
+      }
     },
     "sources": {
       "name": "sources",
@@ -394,10 +389,25 @@
             "customer_id"
           ],
           "isUnique": false
+        },
+        "src_integration_id_idx": {
+          "name": "src_integration_id_idx",
+          "columns": [
+            "integration_id"
+          ],
+          "isUnique": false
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {}
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sources_public_id_unique": {
+          "name": "sources_public_id_unique",
+          "columns": [
+            "public_id"
+          ]
+        }
+      }
     }
   },
   "schemas": {},

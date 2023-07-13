@@ -1,0 +1,1 @@
+ALTER TABLE `integrations` ADD `tool` enum('hmac','basic_auth','api_key','stripe','github','shopify','jira','svix','gitlab','linear','postmark','typeform','ayden','mailgun','sendgrid','resend');

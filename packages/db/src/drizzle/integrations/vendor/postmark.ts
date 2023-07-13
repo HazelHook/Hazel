@@ -1,16 +1,16 @@
 import { createIntegrationForm } from "../common";
 
 
-export const apiKeyForm = createIntegrationForm({
-	name: "api_key",
+export const postmarkForm = createIntegrationForm({
+	name: "postmark",
 	schema: {
 		username: {
 			type: "text",
-			label: "API Key Header",
+			label: "Username",
 		},
 		password: {
 			type: "secret",
-			label: "API Key",
+			label: "Password",
 		},
 	},
 })

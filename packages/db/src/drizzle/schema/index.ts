@@ -1,7 +1,8 @@
 import { InferModel, relations } from "drizzle-orm"
-import { boolean, index, int, json, text, varchar } from "drizzle-orm/mysql-core"
+import { boolean, index, int, json, text, varchar, mysqlEnum } from "drizzle-orm/mysql-core"
 
 import { buildMysqlTable } from "./common"
+import { INTEGRATIONS } from "../integrations/data"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 }).notNull()
@@ -18,6 +19,8 @@ export const source = buildMysqlTable(
 	(table) => ({
 		publicIdIndex: index("src_public_id_idx").on(table.publicId),
 		customerIdIndex: index("src_customer_id_idx").on(table.customerId),
+
+		integrationIdIndex: index("src_integration_id_idx").on(table.integrationId),
 	}),
 )
 
@@ -25,11 +28,14 @@ export const integration = buildMysqlTable(
 	"integrations",
 	{
 		name,
+		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]),
 		config: json("config"),
 	},
 	(table) => ({
 		publicIdIndex: index("itg_public_id_idx").on(table.publicId),
 		customerIdIndex: index("itg_customer_id_idx").on(table.customerId),
+
+		nameIndex: index("itg_name_idx").on(table.name),
 	}),
 )
 
@@ -70,13 +76,16 @@ export const connection = buildMysqlTable(
 
 export const sourceRelations = relations(source, ({ many, one }) => ({
 	connections: many(connection),
-	integration: one(integration),
+	integration: one(integration, {
+		fields: [source.integrationId],
+		references: [integration.id],
+	}),
 }))
 export const destinationRelations = relations(destination, ({ many, one }) => ({
 	connections: many(connection),
 }))
-export const integrationRelations = relations(integration, ({ one }) => ({
-	source: one(source),
+export const integrationRelations = relations(integration, ({ many }) => ({
+	source: many(source),
 }))
 export const connectionRelations = relations(connection, ({ one }) => ({
 	destination: one(destination, {

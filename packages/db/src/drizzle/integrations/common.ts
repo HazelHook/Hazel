@@ -19,6 +19,7 @@ export interface IntegrationTool {
 	name: string & {}
 	config?: IntegrationToolForm<any>
 	slug: string
+	disabled?: boolean
 	categories: IntegrationToolCategory[]
 	subtitle?: string
 	features?: IntegrationToolFeature[]
