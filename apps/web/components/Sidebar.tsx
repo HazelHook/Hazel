@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-import { MapleLogoIcon } from "@/components/icons/Logo"
+import { LogoIcon } from "@/components/icons/Logo"
 import { BarChartDownIcon } from "@/components/icons/pika/barChartDown"
 import { CardIcon } from "@/components/icons/pika/card"
 import { HomeIcon } from "@/components/icons/pika/home"
@@ -64,13 +64,13 @@ export async function Sidebar({ className, params }: SidebarProps) {
 			<div className="h-full w-full max-w-full space-y-2 pb-4 lg:space-y-4">
 				<Link className="cursor-pointer" href={"/"}>
 					<div className="hidden flex-row items-center gap-2 px-4 py-2 lg:flex">
-						<MapleLogoIcon className="h-12 w-12" />
+						<LogoIcon className="h-12 w-12" />
 
 						<h1 className="text-3xl font-semibold tracking-tight">Hazel</h1>
 					</div>
 
-					<div className="flex justify-center pb-2 lg:hidden">
-						<MapleLogoIcon className="h-6 w-6" />
+					<div className="flex justify-center py-2 lg:hidden">
+						<LogoIcon className="h-6 w-6" />
 					</div>
 				</Link>
 
