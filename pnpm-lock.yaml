@@ -101,10 +101,10 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^0.19.7
-        version: 0.19.7(astro@2.8.0)
+        version: 0.19.7(astro@2.8.1)
       '@astrojs/react':
         specifier: ^2.2.1
-        version: 2.2.1(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+        version: 2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
       '@astrojs/rss':
         specifier: ^2.4.3
         version: 2.4.3
@@ -113,13 +113,7 @@ importers:
         version: 1.3.3
       '@astrolib/seo':
         specifier: ^0.4.0
-        version: 0.4.0(astro@2.8.0)
-      '@types/react':
-        specifier: ^18.0.21
-        version: 18.2.14
-      '@types/react-dom':
-        specifier: ^18.0.6
-        version: 18.2.6
+        version: 0.4.0(astro@2.8.1)
       aos:
         specifier: ^2.3.4
         version: 2.3.4
@@ -127,10 +121,10 @@ importers:
         specifier: ^1.1.49
         version: 1.1.49
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       tailwind-scrollbar-hide:
         specifier: ^1.1.7
@@ -141,10 +135,10 @@ importers:
     devDependencies:
       '@astrojs/image':
         specifier: ^0.17.2
-        version: 0.17.2(astro@2.8.0)
+        version: 0.17.2(astro@2.8.1)
       '@astrojs/tailwind':
         specifier: ^4.0.0
-        version: 4.0.0(astro@2.8.0)(tailwindcss@3.3.2)
+        version: 4.0.0(astro@2.8.1)(tailwindcss@3.3.2)
       '@tailwindcss/forms':
         specifier: ^0.5.3
         version: 0.5.3(tailwindcss@3.3.2)
@@ -157,15 +151,21 @@ importers:
       '@types/alpinejs':
         specifier: ^3.7.2
         version: 3.7.2
+      '@types/react':
+        specifier: ^18.2.14
+        version: 18.2.14
+      '@types/react-dom':
+        specifier: ^18.2.7
+        version: 18.2.7
       astro:
-        specifier: ^2.8.0
-        version: 2.8.0(@types/node@20.4.1)
+        specifier: ^2.8.1
+        version: 2.8.1(@types/node@20.4.1)
       prettier:
-        specifier: 2.8.8
-        version: 2.8.8
+        specifier: 3.0.0
+        version: 3.0.0
       prettier-plugin-astro:
-        specifier: ^0.10.0
-        version: 0.10.0
+        specifier: ^0.11.0
+        version: 0.11.0
 
   apps/web:
     dependencies:
@@ -356,18 +356,15 @@ importers:
       '@chronark/zod-bird':
         specifier: ^0.1.1
         version: 0.1.1
-      '@cloudflare/workers-types':
-        specifier: ^4.20230518.0
-        version: 4.20230518.0
       '@planetscale/database':
         specifier: ^1.8.0
         version: 1.8.0
       drizzle-orm:
-        specifier: ^0.27.0
-        version: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.8.0)
+        specifier: ^0.27.2
+        version: 0.27.2(@planetscale/database@1.8.0)
       drizzle-zod:
         specifier: ^0.4.4
-        version: 0.4.4(drizzle-orm@0.27.0)(zod@3.21.4)
+        version: 0.4.4(drizzle-orm@0.27.2)(zod@3.21.4)
       nanoid:
         specifier: ^4.0.2
         version: 4.0.2
@@ -379,8 +376,8 @@ importers:
         specifier: ^16.3.1
         version: 16.3.1
       drizzle-kit:
-        specifier: ^0.19.2
-        version: 0.19.2
+        specifier: ^0.19.5
+        version: 0.19.5
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@20.4.1)(typescript@5.1.6)
@@ -729,7 +726,7 @@ packages:
   /@astrojs/compiler@1.5.6:
     resolution: {integrity: sha512-gtcpm20y4EUUQNc7evn+ffSJLTlrZRKfBS6kT7r1aB9u+AAeP2BZIiyuSdgXJUS679pCV4sqbM80u8Iek575lg==}
 
-  /@astrojs/image@0.17.2(astro@2.8.0):
+  /@astrojs/image@0.17.2(astro@2.8.1):
     resolution: {integrity: sha512-hw5vGBlyPwyt9E4ux7eej7dJrcSlTAaMYKYd8OWIJVsFSbV75sXNi+5lwbpNjDLGVIS6Baa4nzayjN5Gxo73MQ==}
     peerDependencies:
       astro: ^2.7.3
@@ -739,7 +736,7 @@ packages:
         optional: true
     dependencies:
       '@altano/tiny-async-pool': 1.0.2
-      astro: 2.8.0(@types/node@20.4.1)
+      astro: 2.8.1(@types/node@20.4.1)
       http-cache-semantics: 4.1.1
       image-size: 1.0.2
       kleur: 4.1.5
@@ -768,13 +765,13 @@ packages:
       vscode-languageserver-types: 3.17.3
       vscode-uri: 3.0.7
 
-  /@astrojs/markdown-remark@2.2.1(astro@2.8.0):
+  /@astrojs/markdown-remark@2.2.1(astro@2.8.1):
     resolution: {integrity: sha512-VF0HRv4GpC1XEMLnsKf6jth7JSmlt9qpqP0josQgA2eSpCIAC/Et+y94mgdBIZVBYH/yFnMoIxgKVe93xfO2GA==}
     peerDependencies:
       astro: ^2.5.0
     dependencies:
       '@astrojs/prism': 2.1.2
-      astro: 2.8.0(@types/node@20.4.1)
+      astro: 2.8.1(@types/node@20.4.1)
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.2
       rehype-raw: 6.1.1
@@ -790,11 +787,11 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/mdx@0.19.7(astro@2.8.0):
+  /@astrojs/mdx@0.19.7(astro@2.8.1):
     resolution: {integrity: sha512-mfEbBD7oi8yBHhcJucEjnrquREkJ3os+jioURP8BR2B8tOV2rV2j8trvmLUgfS+P/+HevGObxCTjcRYxn6T7eg==}
     engines: {node: '>=16.12.0'}
     dependencies:
-      '@astrojs/markdown-remark': 2.2.1(astro@2.8.0)
+      '@astrojs/markdown-remark': 2.2.1(astro@2.8.1)
       '@astrojs/prism': 2.1.2
       '@mdx-js/mdx': 2.3.0
       acorn: 8.10.0
@@ -823,7 +820,7 @@ packages:
     dependencies:
       prismjs: 1.29.0
 
-  /@astrojs/react@2.2.1(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
+  /@astrojs/react@2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nq5Zr8iWdwjSp5fh1NReaCplwsnL4w5PXAY5XWu1jE/frxEfF/ycGHrrhwWW0uJHX9G+kUtmQLR0GBhlR4FmAw==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
@@ -835,7 +832,7 @@ packages:
       '@babel/core': 7.22.5
       '@babel/plugin-transform-react-jsx': 7.22.5(@babel/core@7.22.5)
       '@types/react': 18.2.14
-      '@types/react-dom': 18.2.6
+      '@types/react-dom': 18.2.7
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -856,13 +853,13 @@ packages:
       zod: 3.21.4
     dev: false
 
-  /@astrojs/tailwind@4.0.0(astro@2.8.0)(tailwindcss@3.3.2):
+  /@astrojs/tailwind@4.0.0(astro@2.8.1)(tailwindcss@3.3.2):
     resolution: {integrity: sha512-HmCAXFFes7MUBt5ihdfH1goa8QyGkHejIpz6Z4XBKK9VNYY9G2E3brCn8+pNn5zAOzcwl3FYcuH2AiOa/NGoMQ==}
     peerDependencies:
       astro: ^2.6.5
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 2.8.0(@types/node@20.4.1)
+      astro: 2.8.1(@types/node@20.4.1)
       autoprefixer: 10.4.14(postcss@8.4.25)
       postcss: 8.4.25
       postcss-load-config: 4.0.1(postcss@8.4.25)
@@ -891,12 +888,12 @@ packages:
     dependencies:
       undici: 5.22.1
 
-  /@astrolib/seo@0.4.0(astro@2.8.0):
+  /@astrolib/seo@0.4.0(astro@2.8.1):
     resolution: {integrity: sha512-pLErJ8X0+MbC36D5ZPX39rOrSk8Dx8wV4ssaNceNgavVEn70C2udupn5Jsw4bSOrEaxU8ovdciEvb9wMKV+BEQ==}
     peerDependencies:
       astro: ^1.2.1 || ^2.0.0
     dependencies:
-      astro: 2.8.0(@types/node@20.4.1)
+      astro: 2.8.1(@types/node@20.4.1)
     dev: false
 
   /@babel/code-frame@7.22.5:
@@ -1231,10 +1228,6 @@ packages:
     dependencies:
       csstype: 3.1.1
 
-  /@cloudflare/workers-types@4.20230518.0:
-    resolution: {integrity: sha512-A0w1V+5SUawGaaPRlhFhSC/SCDT9oQG8TMoWOKFLA4qbqagELqEAFD4KySBIkeVOvCBLT1DZSYBMCxbXddl0kw==}
-    dev: false
-
   /@code-hike/lighter@0.6.6:
     resolution: {integrity: sha512-dLkSpowP4NaWDUgay3Mebb8V+wYqVGRD+Tl8wSfWdtIH0z4OUU3UznSsmvvGpCgkdUIF5DhOPRGRowqkNWQsrg==}
     dev: false
@@ -1251,6 +1244,10 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+    dev: true
+
+  /@drizzle-team/studio@0.0.1:
+    resolution: {integrity: sha512-cHgGezy2ojBFMaU6PZyBkksgFsg2CQ8IRN4mS7WdbA/Zv6xUK6fCNmpEWS/FftbxoA4B8Z0XGnuKsaTJEZsGgA==}
     dev: true
 
   /@emmetio/abbreviation@2.3.3:
@@ -3785,6 +3782,11 @@ packages:
     dependencies:
       '@types/react': 18.2.14
 
+  /@types/react-dom@18.2.7:
+    resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
+    dependencies:
+      '@types/react': 18.2.14
+
   /@types/react-reconciler@0.28.2:
     resolution: {integrity: sha512-8tu6lHzEgYPlfDf/J6GOQdIc+gs+S2yAqlby3zTsB3SP2svlqTYe5fwZNtZyfactP74ShooP2vvi1BOp9ZemWw==}
     dependencies:
@@ -4167,8 +4169,8 @@ packages:
       terser: 5.18.2
     dev: false
 
-  /astro@2.8.0(@types/node@20.4.1):
-    resolution: {integrity: sha512-bqdhE9039dzi0mqaWGO9rMk5HKxTn5TckxFmRPUdsV1qmbpghXtwuERHblfJu5etQofV6WVEyTrouG+BLRkqfA==}
+  /astro@2.8.1(@types/node@20.4.1):
+    resolution: {integrity: sha512-qHG9bw/eidVKs3wc4shOlK4zuX2SaXDGWfbDLoJIISlQuEDD09LIXv8K39O7lLRSMFRgjfv0QYXP3g05VtOBzg==}
     engines: {node: '>=16.12.0', npm: '>=6.14.0'}
     hasBin: true
     peerDependencies:
@@ -4180,7 +4182,7 @@ packages:
       '@astrojs/compiler': 1.5.6
       '@astrojs/internal-helpers': 0.1.1
       '@astrojs/language-server': 1.0.8
-      '@astrojs/markdown-remark': 2.2.1(astro@2.8.0)
+      '@astrojs/markdown-remark': 2.2.1(astro@2.8.1)
       '@astrojs/telemetry': 2.1.1
       '@astrojs/webapi': 2.2.0
       '@babel/core': 7.22.5
@@ -5222,16 +5224,17 @@ packages:
       wordwrap: 1.0.0
     dev: true
 
-  /drizzle-kit@0.19.2:
-    resolution: {integrity: sha512-o+T/+Xc6hlLj2ocvGEo3kyWgTIAFjmsVK/HdBjU7gmbolmFZHv6T3lhaAsAD4mWfOX69uC7IggCmIqLq+zcM4Q==}
+  /drizzle-kit@0.19.5:
+    resolution: {integrity: sha512-eX+M4QpPLbbZwLUamCxRhS9Y98ppZLk3jew2FghKoAr7bGEC3omFIm+YPiwtrhe/alZZgrJCn/1TDTRHwo1r9w==}
     hasBin: true
     dependencies:
+      '@drizzle-team/studio': 0.0.1
       '@esbuild-kit/esm-loader': 2.5.5
       camelcase: 7.0.1
       chalk: 5.3.0
       commander: 9.5.0
-      esbuild: 0.18.6
-      esbuild-register: 3.4.2(esbuild@0.18.6)
+      esbuild: 0.18.11
+      esbuild-register: 3.4.2(esbuild@0.18.11)
       glob: 8.1.0
       hanji: 0.0.5
       json-diff: 0.9.0
@@ -5241,8 +5244,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.8.0):
-    resolution: {integrity: sha512-LGiJ0icB+wQwgbSCOvAjONY8Ec6G/EDzQQP5PmUaQYeI9OqgpVKHC2T1fFIbvk5dabWsbokJ5NOciVAxriStig==}
+  /drizzle-orm@0.27.2(@planetscale/database@1.8.0):
+    resolution: {integrity: sha512-ZvBvceff+JlgP7FxHKe0zOU9CkZ4RcOtibumIrqfYzDGuOeF0YUY0F9iMqYpRM7pxnLRfC+oO7rWOUH3T5oFQA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -5303,17 +5306,16 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@cloudflare/workers-types': 4.20230518.0
       '@planetscale/database': 1.8.0
     dev: false
 
-  /drizzle-zod@0.4.4(drizzle-orm@0.27.0)(zod@3.21.4):
+  /drizzle-zod@0.4.4(drizzle-orm@0.27.2)(zod@3.21.4):
     resolution: {integrity: sha512-XNn0mjQ306Hvg+CuyKV98wnsWBWeTqv+kgE/N79Zj0EdCvjD2kaoN5sFDGFkMVqPQuP7IB1IPs0lEcOij1RvBA==}
     peerDependencies:
       drizzle-orm: '>=0.23.13'
       zod: '*'
     dependencies:
-      drizzle-orm: 0.27.0(@cloudflare/workers-types@4.20230518.0)(@planetscale/database@1.8.0)
+      drizzle-orm: 0.27.2(@planetscale/database@1.8.0)
       zod: 3.21.4
     dev: false
 
@@ -5406,13 +5408,13 @@ packages:
       es6-symbol: 3.1.3
     dev: true
 
-  /esbuild-register@3.4.2(esbuild@0.18.6):
+  /esbuild-register@3.4.2(esbuild@0.18.11):
     resolution: {integrity: sha512-kG/XyTDyz6+YDuyfB9ZoSIOOmgyFCH+xPRtsCa8W85HLRV5Csp+o3jWVbOSHgSLfyLc5DmP+KFDNwty4mEjC+Q==}
     peerDependencies:
       esbuild: '>=0.12 <1'
     dependencies:
       debug: 4.3.4
-      esbuild: 0.18.6
+      esbuild: 0.18.11
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8374,12 +8376,12 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-astro@0.10.0:
-    resolution: {integrity: sha512-dPzop0gKZyVGpTDQmfy+e7FKXC9JT3mlpfYA2diOVz+Ui+QR1U4G/s+OesKl2Hib2JJOtAYJs/l+ovgT0ljlFA==}
+  /prettier-plugin-astro@0.11.0:
+    resolution: {integrity: sha512-rl2hJ4Kty/aEfGjk3i4JS+bpng9MjgvwqLRNzeb9NqYhqKoWNwOR39cIJXFjU1vR3zYOPnwWNRMelKb0orunYA==}
     engines: {node: ^14.15.0 || >=16.0.0, pnpm: '>=7.14.0'}
     dependencies:
       '@astrojs/compiler': 1.5.6
-      prettier: 2.8.8
+      prettier: 3.0.0
       sass-formatter: 0.7.6
     dev: true
 

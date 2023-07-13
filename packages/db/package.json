@@ -9,16 +9,15 @@
 	},
 	"dependencies": {
 		"@chronark/zod-bird": "^0.1.1",
-		"@cloudflare/workers-types": "^4.20230518.0",
 		"@planetscale/database": "^1.8.0",
-		"drizzle-orm": "^0.27.0",
+		"drizzle-orm": "^0.27.2",
 		"drizzle-zod": "^0.4.4",
 		"nanoid": "^4.0.2",
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
 		"dotenv": "^16.3.1",
-		"drizzle-kit": "^0.19.2",
+		"drizzle-kit": "^0.19.5",
 		"ts-node": "^10.9.1",
 		"typescript": "5.1.6"
 	}

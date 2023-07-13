@@ -5,7 +5,7 @@ import { nanoid } from "nanoid"
 const commonFields = {
 	id: serial("id").primaryKey().autoincrement(),
 	customerId: varchar("customer_id", { length: 128 }).notNull(),
-	publicId: varchar("public_id", { length: 21 }).notNull(),
+	publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 
 	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
 	updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -31,11 +31,7 @@ export const buildCustomMysqlTable = <TTableName extends string, TColumnsMap ext
 	fields: TColumnsMap,
 	extraConfig?: (self: BuildColumns<TTableName, TColumnsMap>) => MySqlTableExtraConfig,
 ) => {
-	return mysqlTable(
-		name,
-		fields,
-		extraConfig,
-	)
+	return mysqlTable(name, fields, extraConfig)
 }
 
 export const generatePublicId = (prefix: "src" | "dst" | "con" | "itg") => {

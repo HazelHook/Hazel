@@ -16,8 +16,5 @@ SQL >
 
 TYPE materialized
 DATASOURCE daily_res_mv
-ENGINE "AggregatingMergeTree"
-ENGINE_PARTITION_KEY "toYYYYMM(bucket)"
-ENGINE_SORTING_KEY "bucket, source_id, customer_id, status"
-ENGINE_TTL "bucket + toIntervalDay(120)"
+
 
