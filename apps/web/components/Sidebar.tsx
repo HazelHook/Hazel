@@ -15,6 +15,7 @@ import { AutomationIcon } from "./icons/pika/automation"
 import { GitCommitIcon } from "./icons/pika/gitCommit"
 import { SidebarClientItem } from "./SidebarItem"
 import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
+import { Separator } from "@/components/ui/separator"
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	params: {
@@ -78,49 +79,30 @@ export async function Sidebar({ className, params }: SidebarProps) {
 				<div className="py-2 lg:px-4">
 					<div className="space-y-1">
 						<SidebarItem href={"/"} title={"Overview"} icon={HomeIcon} />
-						<SidebarItem href="https://docs.maple.dev" target="__blank" title={"Documentation"} icon={PaperBagIcon} />
-						<SidebarItem href={"/connections"} title={"Connections"} icon={LinkChainIcon} />
-						<SidebarItem href={"/sources"} title={"Sources"} icon={GitCommitIcon} />
-						<SidebarItem href={"/destinations"} title={"Destinations"} icon={AutomationIcon} />
 						<SidebarItem href={"/integrations"} title={"Integrations"} icon={DashboardSimpleIcon} />
 					</div>
 				</div>
-				<div className="py-2 space-y-2">
-					{/* <ScrollArea className={"max-w-[300px] lg:px-2"}>
-						<div className="space-y-1 py-2 lg:px-2">
-							{connections.map((project) => (
-								<SidebarProjectItem key={project.id} project={project} params={params} />
-							))}
-						</div>
-					</ScrollArea> */}
+
+				<Separator/>
+
+				<div className="py-2 lg:px-4">
+				<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Setup</h2>
+					<div className="space-y-1">
+						<SidebarItem href={"/connections"} title={"Connections"} icon={LinkChainIcon} />
+						<SidebarItem href={"/sources"} title={"Sources"} icon={GitCommitIcon} />
+						<SidebarItem href={"/destinations"} title={"Destinations"} icon={AutomationIcon} />
+					</div>
 				</div>
+				
+				<Separator/>
+
 				<div className="py-2 lg:px-4">
 					<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Settings</h2>
 					<div className="space-y-1">
 						<SidebarItem href={"/app/settings"} title={"Settings"} icon={Settings01Icon} />
-						<SidebarItem href={"/app/settings/usage"} title={"Usage"} icon={BarChartDownIcon} />
-						<SidebarItem href={"/app/settings/billing"} title={"Billing"} icon={CardIcon} />
-						<SidebarItem href={"/app/settings/invoices"} title={"Invoices"} icon={PaperclipIcon} />
-						<SidebarItem href={"/app/settings/members"} title={"Members"} icon={PaperclipIcon} />
-						<SidebarItem href={"/app/settings/invites"} title={"Invites"} icon={PaperclipIcon} />
+						<SidebarItem href="ttps://docs.maple.dev" target="__blank" title={"Documentation"} icon={PaperBagIcon} />
 					</div>
 				</div>
-
-				{/* <div className="py-2">
-					<h2 className="relative px-6 text-lg font-semibold tracking-tight">Your Teams</h2>
-					<ScrollArea className="h-[300px] px-2">
-						<div className="space-y-1 p-2">
-							{organizations.map(({ organization }) => (
-								<Button key={organization.id} variant="ghost" size="sm" className="w-full justify-start font-normal">
-									<Avatar className="mr-2 h-4 w-4 rounded-[3px]">
-										<AvatarImage src={getSeededProfileImageUrl(organization.id)}></AvatarImage>
-									</Avatar>
-									{organization.name}
-								</Button>
-							))}
-						</div>
-					</ScrollArea>
-				</div> */}
 			</div>
 			<div className="hidden p-2 lg:block">{/* <TeamSwitcher className="lg:w-full" /> */}</div>
 		</div>
