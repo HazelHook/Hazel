@@ -12,14 +12,19 @@ import { Input } from "@/components/ui/input"
 
 import type { createSourceAction } from "./_actions"
 import { formSchema } from "./schema"
+import { IntegrationTools } from "db/src/drizzle/integrations/data"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { getCachedIntegrations } from "@/lib/orm"
+import { PromiseType } from "@/lib/ts/helpers"
 
 interface NewSourceFormProps {
 	action: typeof createSourceAction
+	integrations: PromiseType<ReturnType<typeof getCachedIntegrations>>
 	shouldRedirect?: boolean
 	onClose?: (id: string) => void
 }
 
-export function NewSourceForm({ onClose, action, shouldRedirect = true }: NewSourceFormProps) {
+export function NewSourceForm({ onClose, action, shouldRedirect = true, integrations }: NewSourceFormProps) {
 	const router = useRouter()
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -77,6 +82,42 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true }: NewSou
 								<Input placeholder="Url" {...field} />
 							</FormControl>
 							<FormDescription>HTTP endpoint that will send the webhooks</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="tool"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Integration</FormLabel>
+							{IntegrationTools.length > 0 && (
+								<Select
+									onValueChange={(value) => {
+										if (value !== "") {
+											field.onChange(value as any)
+										}
+									}}
+									value={field.value}
+								>
+									<FormControl>
+										<SelectTrigger>
+											<SelectValue
+												placeholder={<p className="text-muted-foreground">Connect an integration</p>}
+												className="focus:text-muted-foreground"
+											/>
+										</SelectTrigger>
+									</FormControl>
+									<SelectContent className="max-h-96">
+										{integrations.map((integration) => (
+											<SelectItem key={integration.id} value={integration.name}>
+												<div className="flex flex-row items-center">{integration.name}</div>
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							)}
 							<FormMessage />
 						</FormItem>
 					)}

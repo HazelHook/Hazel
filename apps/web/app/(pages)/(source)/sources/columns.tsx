@@ -43,9 +43,21 @@ export const columns: ColumnDef<Column>[] = [
 		},
 	},
 	{
-		accessorKey: "type",
+		accessorKey: "tool",
 		header: "Type",
-		cell: "TODO:TYPE HERE",
+		cell: ({ cell }) => {
+			if(!cell.getValue()) return (
+				<p>
+					Default
+				</p>
+			)
+
+			return (
+				<div className="flex flex-row items-center">
+					
+				</div>
+			)
+		}
 	},
 	{
 		accessorKey: "connections",
@@ -57,9 +69,9 @@ export const columns: ColumnDef<Column>[] = [
 
 			return (
 				<div className="flex flex-row gap-1">
-					<div className="bg-secondary rounded-xl text-ellipsis w-fit min-w-[24px] h-6 flex justify-center items-center">
+					{/* <div className="bg-secondary rounded-xl text-ellipsis w-fit min-w-[24px] h-6 flex justify-center items-center">
 						<p>{connections.length}</p>
-					</div>
+					</div> */}
 					<div className="flex flex-row gap-1 flex-wrap">
 						{connections.map((conn) => (
 							<Badge variant="outline" key={`badge-${conn.publicId}`}>

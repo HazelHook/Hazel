@@ -63,7 +63,7 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 															<IntegrationFeatureIcon slug={feature} className="w-4 h-4" />
 															<p className="text-sm font-semibold">{INTEGRATION_FEATURES[feature].name}</p>
 														</div>
-														<p className="text-xs text-gray-400 ml-6">{INTEGRATION_FEATURES[feature].description}</p>
+														<p className="text-xs text-muted-foreground ml-6">{INTEGRATION_FEATURES[feature].description}</p>
 													</div>
 												</Card>
 												<Tooltip.Arrow className="TooltipArrow" />
@@ -75,7 +75,7 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 						</div>
 					</div>
 					<div className="mt-2 mb-2">
-						<p className="text-sm text-gray-400">{subtitle}</p>
+						<p className="text-sm text-muted-foreground">{subtitle}</p>
 					</div>
 					<div className="flex gap-2 mt-auto ml-auto">
 						{categories.map((category) => (

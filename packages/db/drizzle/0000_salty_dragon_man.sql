@@ -4,6 +4,7 @@ CREATE TABLE `connections` (
 	`public_id` varchar(21) NOT NULL,
 	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`deleted_at` timestamp,
 	`name` varchar(64) NOT NULL,
 	`enabled` boolean NOT NULL DEFAULT true,
 	`source_id` int NOT NULL,
@@ -18,6 +19,7 @@ CREATE TABLE `destinations` (
 	`public_id` varchar(21) NOT NULL,
 	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`deleted_at` timestamp,
 	`name` varchar(64) NOT NULL,
 	`url` varchar(128) NOT NULL,
 	`enabled` boolean NOT NULL DEFAULT true,
@@ -30,7 +32,9 @@ CREATE TABLE `integrations` (
 	`public_id` varchar(21) NOT NULL,
 	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`deleted_at` timestamp,
 	`name` varchar(64) NOT NULL,
+	`tool` enum('hmac','basic_auth','api_key','stripe','github','shopify','gitlab','linear','postmark','typeform','mailgun','sendgrid','resend','ayden','jira','svix'),
 	`config` json,
 	CONSTRAINT `sources_public_id_unique` UNIQUE(`public_id`)
 );
@@ -41,6 +45,7 @@ CREATE TABLE `sources` (
 	`public_id` varchar(21) NOT NULL,
 	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`deleted_at` timestamp,
 	`name` varchar(64) NOT NULL,
 	`url` varchar(128) NOT NULL,
 	`enabled` boolean NOT NULL DEFAULT true,

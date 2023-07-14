@@ -62,7 +62,7 @@ export function DataTable<TData, TValue>({ columns, data, rootPath, disableRedir
 						table.getRowModel().rows.map((row) => (
 							<TableRow
 								className="cursor-pointer"
-								onClick={disableRedirect ? navigate(row.original) : undefined}
+								onClick={navigate(row.original)}
 								key={row.id}
 								data-state={row.getIsSelected() && "selected"}
 							>

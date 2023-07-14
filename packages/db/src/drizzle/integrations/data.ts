@@ -16,8 +16,28 @@ import { stripeForm } from "./vendor/stripe"
 import { svixForm } from "./vendor/svix"
 import { typeformForm } from "./vendor/typeform"
 
-export const INTEGRATIONS: Record<any, IntegrationTool> = {
-	hmac: {
+export const IntegrationTools = [
+	"hmac",
+	"basic_auth",
+	"api_key",
+	"stripe",
+	"github",
+	"shopify",
+	"gitlab",
+	"linear",
+	"postmark",
+	"typeform",
+	"mailgun",
+	"sendgrid",
+	"resend",
+	"ayden",
+	"jira",
+	"svix",
+] as const
+export type IntegrationTools = typeof IntegrationTools[number]
+
+export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
+	"hmac": {
 		slug: "hmac",
 		name: "HMAC",
 		categories: ["development", "custom"],
@@ -188,4 +208,3 @@ export const INTEGRATION_CATERGORIES = {
 	crm: { name: "CRM", slug: "crm" },
 	custom: { name: "Custom", slug: "custom" },
 }
-

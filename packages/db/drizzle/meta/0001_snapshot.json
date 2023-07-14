@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "7f2e11bf-7531-4624-a88b-df26bb240afa",
-  "prevId": "16364ce0-555b-4a45-a5e7-824596989f95",
+  "id": "f131acbc-9550-4bb8-a425-7e26d3778b23",
+  "prevId": "116a631c-89e1-4250-8b96-0175b7d56bbd",
   "tables": {
     "connections": {
       "name": "connections",
@@ -44,6 +44,13 @@
           "notNull": true,
           "autoincrement": false,
           "default": "CURRENT_TIMESTAMP"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         },
         "name": {
           "name": "name",
@@ -164,6 +171,13 @@
           "autoincrement": false,
           "default": "CURRENT_TIMESTAMP"
         },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "name": {
           "name": "name",
           "type": "varchar(64)",
@@ -255,6 +269,13 @@
           "autoincrement": false,
           "default": "CURRENT_TIMESTAMP"
         },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "name": {
           "name": "name",
           "type": "varchar(64)",
@@ -264,7 +285,7 @@
         },
         "tool": {
           "name": "tool",
-          "type": "enum('hmac','basic_auth','api_key','stripe','github','shopify','jira','svix','gitlab','linear','postmark','typeform','ayden','mailgun','sendgrid','resend')",
+          "type": "enum('hmac','basic_auth','api_key','stripe','github','shopify','gitlab','linear','postmark','typeform','mailgun','sendgrid','resend','ayden','jira','svix')",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -352,6 +373,13 @@
           "autoincrement": false,
           "default": "CURRENT_TIMESTAMP"
         },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "name": {
           "name": "name",
           "type": "varchar(64)",
@@ -377,6 +405,13 @@
         "integration_id": {
           "name": "integration_id",
           "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tool": {
+          "name": "tool",
+          "type": "enum('hmac','basic_auth','api_key','stripe','github','shopify','gitlab','linear','postmark','typeform','mailgun','sendgrid','resend','ayden','jira','svix')",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false

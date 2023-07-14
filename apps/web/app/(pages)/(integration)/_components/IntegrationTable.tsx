@@ -13,18 +13,16 @@ export const IntegrationsTable = ({
     integrations: IntegrationToolColumn[]
 }) => {
 	const router = useRouter()
-    
 	const deleteIntegration = useAction(deleteIntegrationAction, {
 		onSuccess(data) {}, // TODO
 		onError(error) {}, // TODO
 	})
 
-
 	return (
         <>
-        
-        <DataTable disableRedirect rootPath="/integrations" columns={columns(deleteIntegration, router)} data={integrations as any} />
-        </>
+			
+        	<DataTable disableRedirect rootPath="/integrations" columns={columns(deleteIntegration, router)} data={integrations as any} />
+        </> 
 	)
 }
 

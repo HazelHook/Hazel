@@ -20,7 +20,7 @@ export const hmacForm = createIntegrationForm({
 			type: "text",
 			label: "Signature Header Key",
 			placeholder: "Enter the header key...",
-			description: "The header key that contains the signature. This is usually `X-Hub-Signature`.",
+			description: "The header key that contains the signature. This is usually `X-API-Signature`.",
 		},
 		signature_secret: {
 			type: "secret",

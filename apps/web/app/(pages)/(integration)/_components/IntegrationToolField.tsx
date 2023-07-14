@@ -36,7 +36,7 @@ export function IntegrationToolField({
 					{/* <FormMessage /> */}
 				</div>
 				<Select>
-					<SelectTrigger className="aria-expanded:border-white focus:ring-0 ring-0 flex flex-row justify-between p-2 h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50" placeholder="jsddjsdsj">
+					<SelectTrigger className="aria-expanded:border-white focus:ring-0 ring-0 flex flex-row justify-between p-2 h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50">
 						<SelectValue  placeholder={(
 							<p className="text-muted-foreground">Select...</p>
 						)}/>

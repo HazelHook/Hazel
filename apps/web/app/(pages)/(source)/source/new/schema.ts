@@ -1,3 +1,4 @@
+import { IntegrationTools } from "db/src/drizzle/integrations/data"
 import { z } from "zod"
 
 export const formSchema = z.object({
@@ -8,4 +9,5 @@ export const formSchema = z.object({
 		})
 		.max(20),
 	url: z.string().url().optional(),
+	tool: z.enum(IntegrationTools).optional()
 })

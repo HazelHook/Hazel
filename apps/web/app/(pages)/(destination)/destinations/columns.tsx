@@ -31,7 +31,7 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 		cell: ({ cell, table, row }) => {
 			const id = row.original.id
 			return (
-				<div className="flex flex-row items-center">
+				<div className="flex flex-row items-center ml-4">
 					<Avatar className="w-4 h-4 mr-2">
 						<AvatarImage src={getSeededProfileImageUrl(id)} />
 					</Avatar>
@@ -39,11 +39,6 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 				</div>
 			)
 		},
-	},
-	{
-		accessorKey: "type",
-		header: "Type",
-		cell: "TODO:TYPE HERE",
 	},
 	{
 		accessorKey: "group",
@@ -60,7 +55,7 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 			)
 		},
 		cell: ({ cell }) => {
-			return <p>-</p>
+			return <p className="ml-4">-</p>
 		},
 	},
 	{

@@ -14,6 +14,7 @@ import { IconProps } from "@/components/icons/pika/types"
 import { AutomationIcon } from "./icons/pika/automation"
 import { GitCommitIcon } from "./icons/pika/gitCommit"
 import { SidebarClientItem } from "./SidebarItem"
+import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	params: {
@@ -81,6 +82,7 @@ export async function Sidebar({ className, params }: SidebarProps) {
 						<SidebarItem href={"/connections"} title={"Connections"} icon={LinkChainIcon} />
 						<SidebarItem href={"/sources"} title={"Sources"} icon={GitCommitIcon} />
 						<SidebarItem href={"/destinations"} title={"Destinations"} icon={AutomationIcon} />
+						<SidebarItem href={"/integrations"} title={"Integrations"} icon={DashboardSimpleIcon} />
 					</div>
 				</div>
 				<div className="py-2 space-y-2">
