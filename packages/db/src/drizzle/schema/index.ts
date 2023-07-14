@@ -5,14 +5,14 @@ import { buildMysqlTable } from "./common"
 import { INTEGRATIONS } from "../integrations/data"
 
 const name = varchar("name", { length: 64 }).notNull()
-const url = varchar("url", { length: 128 }).notNull()
+const url = varchar("url", { length: 128 })
 const enabled = boolean("enabled").default(true).notNull()
 
 export const source = buildMysqlTable(
 	"sources",
 	{
 		name,
-		url,
+		url: url.notNull(),
 		enabled,
 		integrationId: int("integration_id"),
 		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]),

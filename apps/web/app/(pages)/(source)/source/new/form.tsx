@@ -77,11 +77,11 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 					name="url"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Source Url</FormLabel>
+							<FormLabel>Source URL - Optional</FormLabel>
 							<FormControl>
-								<Input placeholder="Url" {...field} />
+								<Input placeholder="URL" {...field} />
 							</FormControl>
-							<FormDescription>HTTP endpoint that will send the webhooks</FormDescription>
+							<FormDescription>HTTP endpoint that will send the webhooks.</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -91,7 +91,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 					name="tool"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Integration</FormLabel>
+							<FormLabel>Integration - Optional</FormLabel>
 							{IntegrationTools.length > 0 && (
 								<Select
 									onValueChange={(value) => {
