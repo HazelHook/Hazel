@@ -10,16 +10,21 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-import type { createSourceAction } from "./_actions"
 import { formSchema } from "./schema"
+import { IntegrationTools } from "db/src/drizzle/integrations/data"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Integration } from "db/src/drizzle/schema"
+import { editSourceAction } from "@/app/(pages)/(source)/source/[id]/settings/_actions"
+import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 
 interface NewSourceFormProps {
 	action: typeof createSourceAction
+	integrations: Integration[]
 	shouldRedirect?: boolean
 	onClose?: (id: string) => void
 }
 
-export function NewSourceForm({ onClose, action, shouldRedirect = true }: NewSourceFormProps) {
+export function NewSourceForm({ onClose, action, shouldRedirect = true, integrations }: NewSourceFormProps) {
 	const router = useRouter()
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +65,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true }: NewSou
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Source ..." {...field} />
+								<Input placeholder="Source Name" {...field} required />
 							</FormControl>
 							<FormDescription>A name to identify your sources.</FormDescription>
 							<FormMessage />
@@ -72,11 +77,43 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true }: NewSou
 					name="url"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Source Url</FormLabel>
+							<FormLabel>Source URL - Optional</FormLabel>
 							<FormControl>
-								<Input placeholder="Url" {...field} />
+								<Input placeholder="E.g. example.com" {...field}/>
 							</FormControl>
-							<FormDescription>HTTP endpoint that will send the webhooks</FormDescription>
+							<FormDescription>The endpoint that will send the webhooks.</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="integrationId"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Integration - Optional</FormLabel>
+							{IntegrationTools.length > 0 && (
+								<Select
+									onValueChange={field.onChange}
+									value={field.value}
+								>
+									<FormControl>
+										<SelectTrigger>
+											<SelectValue
+												placeholder={<p className="text-muted-foreground">Connect...</p>}
+												className="focus:text-muted-foreground"
+											/>
+										</SelectTrigger>
+									</FormControl>
+									<SelectContent className="max-h-96">
+										{integrations.map((integration) => (
+											<SelectItem key={integration.publicId} value={integration.publicId}>
+												<div className="flex flex-row items-center">{integration.name}</div>
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							)}
 							<FormMessage />
 						</FormItem>
 					)}

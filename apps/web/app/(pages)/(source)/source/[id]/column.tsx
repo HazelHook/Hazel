@@ -37,7 +37,6 @@ export const columns: ColumnDef<Column>[] = [
 			)
 		},
 	},
-
 	{
 		accessorKey: "publicId",
 		header: ({ column }) => {

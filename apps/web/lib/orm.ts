@@ -49,3 +49,14 @@ export const getCachedDestination = cache(async ({ publicId }: { publicId: strin
 	return destination
 })
 export type CacheDestination = PromiseType<ReturnType<typeof getCachedDestination>>
+
+export const getCachedIntegrations = cache(async ({customerId}: { customerId: string }) => {
+	const integration = await db.integration.getMany({customerId})
+
+	if (!integration) {
+		notFound()
+	}
+
+	return integration
+})
+export type CacheIntegrations = PromiseType<ReturnType<typeof getCachedIntegrations>>

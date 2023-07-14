@@ -18,11 +18,9 @@ const DestinationPage = async ({
 	}
 }) => {
 	const destination = await getCachedDestination({ publicId: params.id })
-
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	const { userId } = auth()
-
 	if (!destination) {
 		notFound()
 	}
@@ -32,10 +30,8 @@ const DestinationPage = async ({
 	}
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
-
 	const req = await tiny.response.timeline({
 		customer_id: userId,
-
 		start_date: startTime,
 	})
 
@@ -47,14 +43,8 @@ const DestinationPage = async ({
 				<div className="p-2">
 					<p className="text-lg font-semibold">Overview</p>
 				</div>
-				<div className={buttonVariants()}>Add Destination TODO:</div>
 			</div>
 			<div className="flex flex-row gap-2 w-full">
-				{/* <DataTable
-					rootPath="/destination"
-					columns={columns}
-					data={(destination.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []}
-				/> */}
 				<div className="w-full">
 					<Card className="col-span-full w-full h-full overflow-hidden">
 						<CardHeader>

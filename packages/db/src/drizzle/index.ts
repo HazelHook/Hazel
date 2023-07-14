@@ -1,5 +1,5 @@
 import { connect } from "@planetscale/database"
-import { eq } from "drizzle-orm"
+import { eq, isNull, and } from "drizzle-orm"
 import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
 
 import { DrizzleTable } from "./orm/db-table"
@@ -44,6 +44,7 @@ export function connectDB({
 								destination: true,
 							},
 						},
+						integration: true,
 					},
 				})
 			},
@@ -56,6 +57,7 @@ export function connectDB({
 								destination: true,
 							},
 						},
+						integration: true,
 					},
 				})
 			},
@@ -68,6 +70,22 @@ export function connectDB({
 
 				return { res, publicId }
 			},
+			update: async (data: schema.InsertSource) => {
+				const {publicId, ...rest} = data
+				const res = await db.update(schema.source).set(rest).where(
+					eq(schema.source.publicId, publicId)
+				)
+
+				return { res, publicId }
+			},
+			markAsDeleted: async ({ publicId }: { publicId: string }) => {
+				const res = await db.update(schema.integration).set({
+					deletedAt: new Date(),
+				}).where(
+					eq(schema.integration.publicId, publicId)
+				)
+				return { res }
+			}
 		},
 		destination: {
 			table: new DrizzleTable("destination", schema.destination, db),
@@ -97,6 +115,14 @@ export function connectDB({
 
 				return { res, publicId }
 			},
+			markAsDeleted: async ({ publicId }: { publicId: string }) => {
+				const res = await db.update(schema.integration).set({
+					deletedAt: new Date(),
+				}).where(
+					eq(schema.integration.publicId, publicId)
+				)
+				return { res }
+			}
 		},
 		connection: {
 			table: new DrizzleTable("connection", schema.connection, db),
@@ -126,20 +152,55 @@ export function connectDB({
 				})
 				return { res, publicId }
 			},
+			update: async (data: schema.InsertConnection) => {
+				const {publicId, ...rest} = data
+				const res = await db.update(schema.connection).set(rest).where(
+					eq(schema.connection.publicId, publicId)
+				)
+				return { res, publicId }
+			},
+			markAsDeleted: async ({ publicId }: { publicId: string }) => {
+				const res = await db.update(schema.integration).set({
+					deletedAt: new Date(),
+				}).where(
+					eq(schema.integration.publicId, publicId)
+				)
+				return { res }
+			}
 		},
 		integration: {
 			table: new DrizzleTable("integration", schema.integration, db),
-			getOne: async ({ publicId }: { publicId: string }) => {
+			getOne: async ({ publicId, includeDeleted = false}: { publicId: string, includeDeleted?: boolean }) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(
+						eq(schema.integration.publicId, publicId),
+						isNull(schema.integration.deletedAt)
+					)
+				} else{
+					filter = eq(schema.integration.publicId, publicId)
+				}
+
 				return await db.query.integration.findFirst({
-					where: eq(schema.integration.publicId, publicId),
+					where: filter,
 					with: {
 						source: true,
 					},
 				})
 			},
-			getMany: async ({ customerId }: { customerId: string }) => {
+			getMany: async ({ customerId, includeDeleted = false }: { customerId: string, includeDeleted?: boolean }) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(
+						eq(schema.integration.customerId, customerId),
+						isNull(schema.integration.deletedAt)
+					)
+				} else{
+					filter = eq(schema.integration.customerId, customerId)
+				}
+
 				return await db.query.integration.findMany({
-					where: eq(schema.integration.customerId, customerId),
+					where: filter,
 					with: {
 						source: true,
 					},
@@ -153,6 +214,14 @@ export function connectDB({
 				})
 				return { res, publicId }
 			},
+			markAsDeleted: async ({ publicId }: { publicId: string }) => {
+				const res = await db.update(schema.integration).set({
+					deletedAt: new Date(),
+				}).where(
+					eq(schema.integration.publicId, publicId)
+				)
+				return { res }
+			}
 		},
 	}
 }

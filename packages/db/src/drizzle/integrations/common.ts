@@ -1,4 +1,3 @@
-import { ZodEnum, ZodString, z } from "zod"
 import { INTEGRATIONS, INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "./data"
 
 
@@ -19,6 +18,7 @@ export interface IntegrationTool {
 	name: string & {}
 	config?: IntegrationToolForm<any>
 	slug: string
+	disabled?: boolean
 	categories: IntegrationToolCategory[]
 	subtitle?: string
 	features?: IntegrationToolFeature[]

@@ -1,8 +1,6 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import { useParams } from "next/navigation"
 import { useAuth, useUser } from "@clerk/nextjs"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
@@ -18,21 +16,18 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { AddCircleIcon } from "@/components/icons/pika/addCircle"
-import { BarChartDownIcon } from "@/components/icons/pika/barChartDown"
-import { CardExportIcon } from "@/components/icons/pika/cardExport"
 import { HomeIcon } from "@/components/icons/pika/home"
 import { LogOutRightIcon } from "@/components/icons/pika/logOutRight"
 import { Settings01Icon } from "@/components/icons/pika/settings01"
+import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
+import { LinkChainIcon } from "@/components/icons/pika/linkChain"
+import { GitCommitIcon } from "@/components/icons/pika/gitCommit"
+import { AutomationIcon } from "@/components/icons/pika/automation"
 
 export function UserNav() {
 	const { signOut } = useAuth()
 
-	const params = useParams()
-
 	const { user } = useUser()
-
-	const [teamModal, setTeamModal] = useState(false)
 
 	if (!user) {
 		return (
@@ -46,7 +41,6 @@ export function UserNav() {
 
 	return (
 		<>
-			{/* <CreateOrganizationModal open={teamModal} setOpen={setTeamModal} /> */}
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button variant="ghost" className="relative h-8 w-8 rounded-full">
@@ -65,52 +59,60 @@ export function UserNav() {
 							</p>
 						</div>
 					</DropdownMenuLabel>
+
+					<DropdownMenuSeparator />
+					<DropdownMenuItem asChild>
+						<Link href={"/"}>
+							<HomeIcon className="mr-2 h-4 w-4" />
+							<span>Overview</span>
+							<DropdownMenuShortcut>⇧⌘H</DropdownMenuShortcut>
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem asChild>
+						<Link href={"integrations/"}>
+							<DashboardSimpleIcon className="mr-2 h-4 w-4" />
+							<span>Integrations</span>
+						</Link>
+					</DropdownMenuItem>
+
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
 						<DropdownMenuItem asChild>
-							<Link href={`/${params.org}`}>
-								<HomeIcon className="mr-2 h-4 w-4" />
-								<span>Home</span>
-								<DropdownMenuShortcut>⇧⌘H</DropdownMenuShortcut>
-							</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem asChild>
-							<Link href={`/${params.org}/settings/billing`}>
-								<CardExportIcon className="mr-2 h-4 w-4" />
-								<span>Billing</span>
+							<DropdownMenuItem asChild>
+								<Link href={"sources/"}>
+									<GitCommitIcon className="mr-2 h-4 w-4" />
+									<span>Sources</span>
 
-								<DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-							</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem asChild>
-							<Link href={`/${params.org}/settings/usage`}>
-								<BarChartDownIcon className="mr-2 h-4 w-4" />
-								<span>Usage</span>
+									<DropdownMenuShortcut>⇧⌘S</DropdownMenuShortcut>
+								</Link>
+							</DropdownMenuItem>
+							<Link href={"connections/"}>
+								<LinkChainIcon className="mr-2 h-4 w-4" />
+								<span>Connections</span>
 
-								<DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+								<DropdownMenuShortcut>⇧⌘X</DropdownMenuShortcut>
 							</Link>
 						</DropdownMenuItem>
 						<DropdownMenuItem asChild>
-							<Link href={`/${params.org}/settings`}>
-								<Settings01Icon className="mr-2 h-4 w-4" />
-								<span>Settings</span>
-								<DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+							<Link href={"sources/"}>
+								<AutomationIcon className="mr-2 h-4 w-4" />
+								<span>Destinations</span>
+
+								<DropdownMenuShortcut>⇧⌘Z</DropdownMenuShortcut>
 							</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem
-							onClick={() => {
-								setTeamModal(true)
-							}}
-						>
-							<AddCircleIcon className="mr-2 h-4 w-4" />
-							<span>New Team</span>
 						</DropdownMenuItem>
 					</DropdownMenuGroup>
+
 					<DropdownMenuSeparator />
+					<DropdownMenuItem asChild>
+						<Link href={"settings/"}>
+							<Settings01Icon className="mr-2 h-4 w-4" />
+							<span>Settings</span>
+						</Link>
+					</DropdownMenuItem>
 					<DropdownMenuItem onClick={() => signOut()}>
 						<LogOutRightIcon className="mr-2 h-4 w-4" />
 						<span>Log out</span>
-						<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>

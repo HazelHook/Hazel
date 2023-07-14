@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Destination, Source } from "db/src/drizzle/schema"
+import { Destination, Integration, Source } from "db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -28,9 +28,10 @@ interface NewSourceFormProps {
 	action: typeof createConnectionAction
 	sources: Source[]
 	destinations: Destination[]
+	integrations: Integration[]
 }
 
-export function NewConnectionForm({ action, sources, destinations }: NewSourceFormProps) {
+export function NewConnectionForm({ action, sources, destinations, integrations }: NewSourceFormProps) {
 	const [sourceModal, setSourceModal] = useState(false)
 	const [destinationModal, setDestinationModal] = useState(false)
 
@@ -69,7 +70,7 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 							<FormItem>
 								<FormLabel>Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Connection ..." {...field} />
+									<Input placeholder="Connection ..." {...field} required/>
 								</FormControl>
 								<FormDescription>A name to identify your connection.</FormDescription>
 								<FormMessage />
@@ -193,6 +194,7 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 							form.setValue("publicSourceId", id, { shouldValidate: true })
 						}}
 						action={createSourceAction}
+						integrations={integrations}
 					/>
 				</DialogContent>
 			</Dialog>
@@ -201,7 +203,6 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 				<DialogContent>
 					<NewDestinationForm
 						onClose={(id) => {
-							console.log(id)
 							setDestinationModal(false)
 							form.setValue("publiceDestinationId", id, {
 								shouldValidate: true,

@@ -60,7 +60,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Destination ..." {...field} />
+								<Input placeholder="Destination ..." {...field} required/>
 							</FormControl>
 							<FormDescription>A name to identify your destination.</FormDescription>
 							<FormMessage />
@@ -74,7 +74,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 						<FormItem>
 							<FormLabel>Destination Url</FormLabel>
 							<FormControl>
-								<Input placeholder="Url" {...field} />
+								<Input placeholder="Url" {...field} required/>
 							</FormControl>
 							<FormDescription>HTTP endpoint of your backend or api</FormDescription>
 							<FormMessage />

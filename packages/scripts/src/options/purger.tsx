@@ -116,7 +116,6 @@ export function Purger({
 						name="Purge Datasources"
 						selected={selectedOption === elementCount - 1 && engaged}
 						onClick={async () => {
-							console.log(selectedCheckboxTab1)
 							for (const index of selectedCheckboxTab1) {
 								if (index < datasources.datasources.length) truncate(datasources.datasources[index].name, cascadeDelete)
 							}

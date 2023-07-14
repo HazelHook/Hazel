@@ -7,5 +7,6 @@ export const formSchema = z.object({
 			message: "Name must be between atleast 2 characters long",
 		})
 		.max(20),
-	url: z.string().url().optional(),
+	url: z.union([z.literal(""), z.string().trim().url()]).optional(),
+	integrationId: z.string().optional()
 })

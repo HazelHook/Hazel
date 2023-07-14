@@ -17,9 +17,9 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 				<div className="grid grow lg:grid-cols-5">
 					<Sidebar
 						params={params}
-						className="fixed flex w-12 flex-col justify-between transition-[width] duration-1000 lg:w-64"
+						className="fixed flex w-12 flex-col justify-between transition-[width] duration-300 lg:w-64"
 					/>
-					<div className="col-span-full ml-12 border-l h-full transition-[margin] duration-1000 lg:ml-64">
+					<div className="col-span-full ml-12 border-l h-full transition-[margin] duration-300 lg:ml-64">
 						<SiteHeader />
 
 						{children}

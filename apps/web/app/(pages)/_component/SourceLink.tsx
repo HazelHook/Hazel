@@ -4,7 +4,6 @@ import { Suspense } from "react"
 import Link from "next/link"
 
 import { getCachedSource } from "@/lib/orm"
-import { Button } from "@/components/ui/button"
 
 interface SourceLinkProps {
 	sourceId: string

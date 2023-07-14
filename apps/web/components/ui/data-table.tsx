@@ -17,9 +17,10 @@ interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
 	rootPath: string
+	disableRedirect?: boolean
 }
 
-export function DataTable<TData, TValue>({ columns, data, rootPath }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data, rootPath, disableRedirect }: DataTableProps<TData, TValue>) {
 	const router = useRouter()
 	const [sorting, setSorting] = useState<SortingState>([])
 
@@ -36,6 +37,7 @@ export function DataTable<TData, TValue>({ columns, data, rootPath }: DataTableP
 	})
 
 	const navigate = (data: TData) => () => {
+		if(disableRedirect) return
 		router.push(`${rootPath}/${(data as any).publicId}`)
 	}
 
