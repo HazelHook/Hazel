@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "116a631c-89e1-4250-8b96-0175b7d56bbd",
+  "id": "7a867a03-d656-458c-be31-f500b37c84e3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "connections": {
@@ -391,7 +391,7 @@
           "name": "url",
           "type": "varchar(128)",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "enabled": {

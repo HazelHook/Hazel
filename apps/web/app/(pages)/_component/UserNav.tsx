@@ -29,7 +29,6 @@ export function UserNav() {
 
 	const { user } = useUser()
 
-
 	if (!user) {
 		return (
 			<Button variant="ghost" className="relative h-8 w-8 rounded-full">
@@ -60,27 +59,34 @@ export function UserNav() {
 							</p>
 						</div>
 					</DropdownMenuLabel>
-					
+
 					<DropdownMenuSeparator />
 					<DropdownMenuItem asChild>
-							<Link href={'/'}>
-								<HomeIcon className="mr-2 h-4 w-4" />
-								<span>Overview</span>
-								<DropdownMenuShortcut>⇧⌘H</DropdownMenuShortcut>
-							</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem asChild>
-							<Link href={'integrations/'}>
-								<DashboardSimpleIcon className="mr-2 h-4 w-4" />
-								<span>Integrations</span>
-							</Link>
-						</DropdownMenuItem>
+						<Link href={"/"}>
+							<HomeIcon className="mr-2 h-4 w-4" />
+							<span>Overview</span>
+							<DropdownMenuShortcut>⇧⌘H</DropdownMenuShortcut>
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem asChild>
+						<Link href={"integrations/"}>
+							<DashboardSimpleIcon className="mr-2 h-4 w-4" />
+							<span>Integrations</span>
+						</Link>
+					</DropdownMenuItem>
 
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
-
 						<DropdownMenuItem asChild>
-							<Link href={'connections/'}>
+							<DropdownMenuItem asChild>
+								<Link href={"sources/"}>
+									<GitCommitIcon className="mr-2 h-4 w-4" />
+									<span>Sources</span>
+
+									<DropdownMenuShortcut>⇧⌘S</DropdownMenuShortcut>
+								</Link>
+							</DropdownMenuItem>
+							<Link href={"connections/"}>
 								<LinkChainIcon className="mr-2 h-4 w-4" />
 								<span>Connections</span>
 
@@ -88,15 +94,7 @@ export function UserNav() {
 							</Link>
 						</DropdownMenuItem>
 						<DropdownMenuItem asChild>
-							<Link href={'sources/'}>
-								<GitCommitIcon className="mr-2 h-4 w-4" />
-								<span>Sources</span>
-
-								<DropdownMenuShortcut>⇧⌘S</DropdownMenuShortcut>
-							</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem asChild>
-							<Link href={'sources/'}>
+							<Link href={"sources/"}>
 								<AutomationIcon className="mr-2 h-4 w-4" />
 								<span>Destinations</span>
 
@@ -106,12 +104,12 @@ export function UserNav() {
 					</DropdownMenuGroup>
 
 					<DropdownMenuSeparator />
-						<DropdownMenuItem asChild>
-							<Link href={'settings/'}>
-								<Settings01Icon className="mr-2 h-4 w-4" />
-								<span>Settings</span>
-							</Link>
-						</DropdownMenuItem>
+					<DropdownMenuItem asChild>
+						<Link href={"settings/"}>
+							<Settings01Icon className="mr-2 h-4 w-4" />
+							<span>Settings</span>
+						</Link>
+					</DropdownMenuItem>
 					<DropdownMenuItem onClick={() => signOut()}>
 						<LogOutRightIcon className="mr-2 h-4 w-4" />
 						<span>Log out</span>

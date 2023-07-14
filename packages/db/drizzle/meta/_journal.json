@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1689291830203,
-      "tag": "0000_salty_dragon_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1689292714998,
-      "tag": "0001_brave_zemo",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1689299106464,
-      "tag": "0002_concerned_adam_destine",
+      "when": 1689301453484,
+      "tag": "0000_friendly_layla_miller",
       "breakpoints": true
     }
   ]

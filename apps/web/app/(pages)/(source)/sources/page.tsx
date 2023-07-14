@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { notFound, redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
@@ -13,6 +13,7 @@ const SourcePage = async () => {
 	const { userId } = auth()
 
 	const sources = await db.source.getMany({ customerId: userId })
+	console.log(sources)
 
 	if (!sources) {
 		notFound()

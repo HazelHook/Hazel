@@ -7,7 +7,6 @@ export const apiKeyForm = createIntegrationForm({
 		username: {
 			type: "text",
 			label: "API Key Header",
-			description: "The header key that contains the signature. This is usually `X-API-Signature`.",
 		},
 		password: {
 			type: "secret",

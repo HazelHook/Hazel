@@ -37,7 +37,7 @@ export const IntegrationTools = [
 export type IntegrationTools = typeof IntegrationTools[number]
 
 export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
-	"hmac": {
+	hmac: {
 		slug: "hmac",
 		name: "HMAC",
 		categories: ["development", "custom"],

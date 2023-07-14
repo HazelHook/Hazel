@@ -15,7 +15,6 @@ export const source = buildMysqlTable(
 		url,
 		enabled,
 		integrationId: int("integration_id"),
-		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]),
 	},
 	(table) => ({
 		publicIdIndex: index("src_public_id_idx").on(table.publicId),

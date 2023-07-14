@@ -1,4 +1,3 @@
-import { IntegrationTools } from "db/src/drizzle/integrations/data"
 import { z } from "zod"
 
 export const formSchema = z.object({
@@ -8,6 +7,6 @@ export const formSchema = z.object({
 			message: "Name must be between atleast 2 characters long",
 		})
 		.max(20),
-	url: z.string().url().optional(),
-	tool: z.enum(IntegrationTools).optional()
+	url: z.union([z.literal(""), z.string().trim().url()]).optional(),
+	integrationId: z.string().optional()
 })

@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input"
 
 import type { createDestinationAction } from "./_actions"
 import { formSchema } from "./schema"
-import { cleanFormData } from "@/lib/formatters"
 
 interface NewDestinationFormProps {
 	action: typeof createDestinationAction
@@ -48,7 +47,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 
 	// 2. Define a submit handler.
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		createSource.mutate(cleanFormData(values))
+		createSource.mutate(values)
 	}
 
 	return (
@@ -61,7 +60,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Destination ..." {...field} />
+								<Input placeholder="Destination ..." {...field} required/>
 							</FormControl>
 							<FormDescription>A name to identify your destination.</FormDescription>
 							<FormMessage />
@@ -75,7 +74,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 						<FormItem>
 							<FormLabel>Destination Url</FormLabel>
 							<FormControl>
-								<Input placeholder="Url" {...field} />
+								<Input placeholder="Url" {...field} required/>
 							</FormControl>
 							<FormDescription>HTTP endpoint of your backend or api</FormDescription>
 							<FormMessage />

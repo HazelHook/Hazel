@@ -44,6 +44,7 @@ export function connectDB({
 								destination: true,
 							},
 						},
+						integration: true,
 					},
 				})
 			},
@@ -56,6 +57,7 @@ export function connectDB({
 								destination: true,
 							},
 						},
+						integration: true,
 					},
 				})
 			},

@@ -14,7 +14,6 @@ import type { createSourceAction } from "./_actions"
 import { formSchema } from "./schema"
 import { IntegrationTools } from "db/src/drizzle/integrations/data"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { cleanFormData } from "@/lib/formatters"
 import { Integration } from "db/src/drizzle/schema"
 
 interface NewSourceFormProps {
@@ -52,7 +51,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 
 	// 2. Define a submit handler.
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		createSource.mutate(cleanFormData(values))
+		createSource.mutate(values)
 	}
 
 	return (
@@ -65,7 +64,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Source Name" {...field} />
+								<Input placeholder="Source Name" {...field} required />
 							</FormControl>
 							<FormDescription>A name to identify your sources.</FormDescription>
 							<FormMessage />
@@ -79,7 +78,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Source URL - Optional</FormLabel>
 							<FormControl>
-								<Input placeholder="E.g. example.com" {...field} />
+								<Input placeholder="E.g. example.com" {...field}/>
 							</FormControl>
 							<FormDescription>The endpoint that will send the webhooks.</FormDescription>
 							<FormMessage />
@@ -88,17 +87,13 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 				/>
 				<FormField
 					control={form.control}
-					name="tool"
+					name="integrationId"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Integration - Optional</FormLabel>
 							{IntegrationTools.length > 0 && (
 								<Select
-									onValueChange={(value) => {
-										if (value !== "") {
-											field.onChange(value as any)
-										}
-									}}
+									onValueChange={field.onChange}
 									value={field.value}
 								>
 									<FormControl>
@@ -111,7 +106,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 									</FormControl>
 									<SelectContent className="max-h-96">
 										{integrations.map((integration) => (
-											<SelectItem key={integration.id} value={integration.name}>
+											<SelectItem key={integration.publicId} value={integration.publicId}>
 												<div className="flex flex-row items-center">{integration.name}</div>
 											</SelectItem>
 										))}

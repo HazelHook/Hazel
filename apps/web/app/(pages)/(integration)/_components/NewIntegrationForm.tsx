@@ -8,6 +8,9 @@ import { IntegrationTool } from "db/src/drizzle/integrations/common"
 import { notFound, useRouter } from "next/navigation"
 import * as Form from "@radix-ui/react-form"
 import { Button } from "@/components/ui/button"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
 
 export const NewIntegrationForm = ({
 	integration: {

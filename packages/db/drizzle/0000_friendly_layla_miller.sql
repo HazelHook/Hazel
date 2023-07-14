@@ -47,7 +47,7 @@ CREATE TABLE `sources` (
 	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`deleted_at` timestamp,
 	`name` varchar(64) NOT NULL,
-	`url` varchar(128) NOT NULL,
+	`url` varchar(128),
 	`enabled` boolean NOT NULL DEFAULT true,
 	`integration_id` int,
 	CONSTRAINT `sources_public_id_unique` UNIQUE(`public_id`)

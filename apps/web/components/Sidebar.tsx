@@ -49,15 +49,7 @@ export const SidebarItem = ({
 	)
 }
 
-export async function Sidebar({ className, params }: SidebarProps) {
-	// const user = await currentUser()
-
-	// const organizations = await clerkClient.users.getOrganizationMembershipList({
-	// 	userId: user?.id,
-	// })
-
-	// const isOrg!== "personal"
-
+export async function Sidebar({ className }: SidebarProps) {
 	return (
 		<div
 			className={cn("flex w-full flex-col justify-between gap-4", className)}
@@ -88,8 +80,8 @@ export async function Sidebar({ className, params }: SidebarProps) {
 				<div className="py-2 lg:px-4">
 				<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Setup</h2>
 					<div className="space-y-1">
-						<SidebarItem href={"/connections"} title={"Connections"} icon={LinkChainIcon} />
 						<SidebarItem href={"/sources"} title={"Sources"} icon={GitCommitIcon} />
+						<SidebarItem href={"/connections"} title={"Connections"} icon={LinkChainIcon} />
 						<SidebarItem href={"/destinations"} title={"Destinations"} icon={AutomationIcon} />
 					</div>
 				</div>

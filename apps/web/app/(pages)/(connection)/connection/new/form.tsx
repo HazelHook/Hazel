@@ -23,7 +23,6 @@ import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import type { createConnectionAction } from "./_actions"
 import { formSchema } from "./schema"
-import { cleanFormData } from "@/lib/formatters"
 
 interface NewSourceFormProps {
 	action: typeof createConnectionAction
@@ -57,7 +56,7 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 	})
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		createSource.mutate(cleanFormData(values))
+		createSource.mutate(values)
 	}
 
 	return (
@@ -71,7 +70,7 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 							<FormItem>
 								<FormLabel>Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Connection ..." {...field} />
+									<Input placeholder="Connection ..." {...field} required/>
 								</FormControl>
 								<FormDescription>A name to identify your connection.</FormDescription>
 								<FormMessage />

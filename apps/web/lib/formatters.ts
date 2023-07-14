@@ -18,31 +18,3 @@ export const dateFormatter = (locale = "en") => {
 		year: "numeric",
 	})
 }
-
-export const cleanFormData = (data: any) => {
-	const result: any = {}
-	Object.keys(data).forEach((key) => {
-		if(data.key === undefined){
-			return
-		}
-
-		if(data.key === null){
-			result[key] = null
-			return
-		}
-
-		if(typeof data.key === "string"){
-			if(data.key.trim() === ""){
-				result[key] = null
-				return
-			}
-
-			result[key] = data.key.trim()
-			return
-		}
-
-		result[key] = data.key
-	})
-
-	return result
-}
