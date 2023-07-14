@@ -1,0 +1,1 @@
+ALTER TABLE `sources` MODIFY COLUMN `url` varchar(128);

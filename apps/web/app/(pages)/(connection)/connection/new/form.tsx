@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Destination, Source } from "db/src/drizzle/schema"
+import { Destination, Integration, Source } from "db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -23,14 +23,16 @@ import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import type { createConnectionAction } from "./_actions"
 import { formSchema } from "./schema"
+import { cleanFormData } from "@/lib/formatters"
 
 interface NewSourceFormProps {
 	action: typeof createConnectionAction
 	sources: Source[]
 	destinations: Destination[]
+	integrations: Integration[]
 }
 
-export function NewConnectionForm({ action, sources, destinations }: NewSourceFormProps) {
+export function NewConnectionForm({ action, sources, destinations, integrations }: NewSourceFormProps) {
 	const [sourceModal, setSourceModal] = useState(false)
 	const [destinationModal, setDestinationModal] = useState(false)
 
@@ -55,7 +57,7 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 	})
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		createSource.mutate(values)
+		createSource.mutate(cleanFormData(values))
 	}
 
 	return (
@@ -193,6 +195,7 @@ export function NewConnectionForm({ action, sources, destinations }: NewSourceFo
 							form.setValue("publicSourceId", id, { shouldValidate: true })
 						}}
 						action={createSourceAction}
+						integrations={integrations}
 					/>
 				</DialogContent>
 			</Dialog>

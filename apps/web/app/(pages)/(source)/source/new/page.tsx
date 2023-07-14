@@ -11,7 +11,7 @@ const NewSourcePage = async () => {
 
 	return (
 		<main className="p-4">
-			<NewSourceForm action={createSourceAction} integrations={integrations} />
+			<NewSourceForm action={createSourceAction} integrations={integrations}/>
 		</main>
 	)
 }

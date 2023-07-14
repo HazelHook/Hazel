@@ -14,12 +14,12 @@ import type { createSourceAction } from "./_actions"
 import { formSchema } from "./schema"
 import { IntegrationTools } from "db/src/drizzle/integrations/data"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { getCachedIntegrations } from "@/lib/orm"
-import { PromiseType } from "@/lib/ts/helpers"
+import { cleanFormData } from "@/lib/formatters"
+import { Integration } from "db/src/drizzle/schema"
 
 interface NewSourceFormProps {
 	action: typeof createSourceAction
-	integrations: PromiseType<ReturnType<typeof getCachedIntegrations>>
+	integrations: Integration[]
 	shouldRedirect?: boolean
 	onClose?: (id: string) => void
 }
@@ -52,7 +52,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 
 	// 2. Define a submit handler.
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		createSource.mutate(values)
+		createSource.mutate(cleanFormData(values))
 	}
 
 	return (
@@ -65,7 +65,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Source ..." {...field} />
+								<Input placeholder="Source Name" {...field} />
 							</FormControl>
 							<FormDescription>A name to identify your sources.</FormDescription>
 							<FormMessage />
@@ -79,9 +79,9 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Source URL - Optional</FormLabel>
 							<FormControl>
-								<Input placeholder="URL" {...field} />
+								<Input placeholder="E.g. example.com" {...field} />
 							</FormControl>
-							<FormDescription>HTTP endpoint that will send the webhooks.</FormDescription>
+							<FormDescription>The endpoint that will send the webhooks.</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -104,7 +104,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 									<FormControl>
 										<SelectTrigger>
 											<SelectValue
-												placeholder={<p className="text-muted-foreground">Connect an integration</p>}
+												placeholder={<p className="text-muted-foreground">Connect...</p>}
 												className="focus:text-muted-foreground"
 											/>
 										</SelectTrigger>

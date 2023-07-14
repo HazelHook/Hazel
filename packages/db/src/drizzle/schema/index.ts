@@ -12,7 +12,7 @@ export const source = buildMysqlTable(
 	"sources",
 	{
 		name,
-		url: url.notNull(),
+		url,
 		enabled,
 		integrationId: int("integration_id"),
 		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]),
@@ -45,7 +45,7 @@ export const destination = buildMysqlTable(
 	"destinations",
 	{
 		name,
-		url,
+		url: url.notNull(),
 		enabled,
 	},
 	(table) => ({

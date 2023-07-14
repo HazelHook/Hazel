@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"
 
 import type { createDestinationAction } from "./_actions"
 import { formSchema } from "./schema"
+import { cleanFormData } from "@/lib/formatters"
 
 interface NewDestinationFormProps {
 	action: typeof createDestinationAction
@@ -47,7 +48,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 
 	// 2. Define a submit handler.
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		createSource.mutate(values)
+		createSource.mutate(cleanFormData(values))
 	}
 
 	return (
