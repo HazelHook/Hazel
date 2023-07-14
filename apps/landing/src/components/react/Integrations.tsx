@@ -1,4 +1,5 @@
 import { MagicCard, MagicContainer } from "@/components/react/ui/MagicCard"
+import { AnimatePresence, animate, motion } from "framer-motion"
 import { useState } from "react"
 
 interface Integration {
@@ -15,25 +16,31 @@ const integrations: Integration[] = [
 		logoPath: "/images/assets/integrations/stripe.svg",
 	},
 	{
-		name: "Stripe",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-	{
-		name: "Stripe",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-	{
-		name: "Stripe",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-	{
 		name: "Github",
+		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+		url: "https://stripe.com",
+		logoPath: "/images/assets/integrations/stripe.svg",
+	},
+	{
+		name: "Linear",
+		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+		url: "https://stripe.com",
+		logoPath: "/images/assets/integrations/stripe.svg",
+	},
+	{
+		name: "Discord",
+		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+		url: "https://stripe.com",
+		logoPath: "/images/assets/integrations/stripe.svg",
+	},
+	{
+		name: "Svix",
+		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+		url: "https://stripe.com",
+		logoPath: "/images/assets/integrations/stripe.svg",
+	},
+	{
+		name: "Amazon",
 		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
 		url: "https://stripe.com",
 		logoPath: "/images/assets/integrations/stripe.svg",
@@ -44,6 +51,12 @@ function chunk<T>(arr: T[], size: number): T[][] {
 }
 
 const chunkedIntegrations = chunk(integrations, 4)
+
+const swipeConfidenceThreshold = 10000
+
+const swipePower = (offset: number, velocity: number) => {
+	return Math.abs(offset) * velocity
+}
 
 export const Integrations = () => {
 	const [page, setPage] = useState(0)
@@ -64,9 +77,9 @@ export const Integrations = () => {
 		}
 	}
 	return (
-		<section className="lg:p-8">
+		<section className="hidden sm:block lg:p-8">
 			<div className="mx-auto 2xl:max-w-7xl py-12 lg:px-16 md:px-12 px-8 xl:px-40 items-center w-full">
-				<div>
+				<div className="mb-4 lg:mb-0">
 					<span className="text-accent-400" data-aos="fade-down">
 						Integrations
 					</span>
@@ -131,55 +144,75 @@ export const Integrations = () => {
 							</div>
 						</div>
 						<div
-							className="flex gap-3 overflow-x-scroll pb-24 pt-12 scrollbar-hide snap-mandatory snap-x w-full"
+							className="flex gap-3 relative overflow-x-scroll pb-24 pt-12 scrollbar-hide snap-mandatory snap-x w-full"
 							role="listbox"
 							aria-labelledby="carousel-content-label"
 							x-ref="slider"
 						>
-							<MagicContainer
-								update={page}
-								className={"grid grid-cols-1 lg:grid-cols-4 gap-3 group h-full w-full min-h-[500px] lg:min-h-[250px]"}
-							>
-								{chunkedIntegrations[page].map((integration, index) => (
-									<MagicCard
-										key={integration.logoPath + index}
-										className="cursor-pointer bg-ebony shadow-inset rounded-3xl p-4"
-									>
-										<div className="h-full flex flex-col justify-between">
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-circle-check text-white"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												strokeWidth="2"
-												stroke="currentColor"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<title>Icon</title>
-												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-												<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-												<path d="M9 12l2 2l4 -4" />
-											</svg>
-											<div className="mt-24">
-												<div className="flex flex-row gap-4">
-													<img
-														className="w-8 h-8"
-														alt={`${integration.name} Logo`}
-														src={integration.logoPath}
-														width={32}
-														height={32}
-													/>
-													<p className="font-medium leading-6 text-white">{integration.name}</p>
+							{
+								<MagicContainer
+									update={page}
+									as={motion.div}
+									drag="x"
+									dragConstraints={{ left: 0, right: 0 }}
+									dragElastic={1}
+									onDragEnd={(e, { offset, velocity }) => {
+										const swipe = swipePower(offset.x, velocity.x)
+
+										if (swipe < -swipeConfidenceThreshold) {
+											handleNext()
+										} else if (swipe > swipeConfidenceThreshold) {
+											handlePrevious()
+										}
+									}}
+									// animate={{ x: `-${page * 100}%` }}
+									// transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+									className={
+										"grid grid-flow-col gap-3 group h-full min-h-[150px] md:min-h-[250px] w-full grid-cols-4 md:grid-cols-4"
+									}
+								>
+									{chunkedIntegrations[page].map((integration, index) => (
+										<MagicCard
+											data-aos="fade-down"
+											key={integration.name + index}
+											className="cursor-pointer bg-ebony shadow-inset rounded-3xl p-4"
+										>
+											<div className="h-full flex flex-col justify-between">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													className="icon icon-tabler icon-tabler-circle-check text-white"
+													width="16"
+													height="16"
+													viewBox="0 0 24 24"
+													strokeWidth="2"
+													stroke="currentColor"
+													fill="none"
+													strokeLinecap="round"
+													strokeLinejoin="round"
+												>
+													<title>Icon</title>
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+													<path d="M9 12l2 2l4 -4" />
+												</svg>
+												<div className="md:mt-24">
+													<div className="flex flex-row gap-4">
+														<img
+															className="w-8 h-8"
+															alt={`${integration.name} Logo`}
+															src={integration.logoPath}
+															width={32}
+															height={32}
+														/>
+														<p className="font-medium leading-6 text-white">{integration.name}</p>
+													</div>
+													<p className="text-xs mt-2 text-zinc-300 hidden md:block">{integration.description}</p>
 												</div>
-												<p className="text-xs mt-2 text-zinc-300">{integration.description}</p>
 											</div>
-										</div>
-									</MagicCard>
-								))}
-							</MagicContainer>
+										</MagicCard>
+									))}
+								</MagicContainer>
+							}
 						</div>
 					</div>
 				</div>

@@ -2,7 +2,7 @@
 
 import clsx, { ClassValue } from "clsx"
 import { motion } from "framer-motion"
-import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react"
+import { CSSProperties, ComponentProps, ReactNode, useEffect, useRef, useState } from "react"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
@@ -35,13 +35,20 @@ function useMousePosition(): MousePosition {
 	return mousePosition
 }
 
-interface MagicContainerProps {
+type MagicContainerProps<T extends React.ElementType> = {
+	as?: T
 	children?: ReactNode
 	className?: any
 	update?: any
-}
+} & ComponentProps<T>
 
-const MagicContainer = ({ children, className, update }: MagicContainerProps) => {
+function MagicContainer<T extends React.ElementType = "div">({
+	as: Tag = "div",
+	children,
+	className,
+	update,
+	...props
+}: MagicContainerProps<T>) {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const mousePosition = useMousePosition()
 	const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
@@ -99,20 +106,14 @@ const MagicContainer = ({ children, className, update }: MagicContainerProps) =>
 	}
 
 	return (
-		<motion.div
-			initial={{ x: -1000 }}
-			animate={{ x: 0 }}
-			exit={{ x: 1000 }}
-			key={"wow"}
-			className={className}
-			ref={containerRef}
-		>
+		<Tag className={className} ref={containerRef as any} {...props}>
 			{children}
-		</motion.div>
+		</Tag>
 	)
 }
 
-interface MagicCardProps {
+type MagicCardProps<T extends React.ElementType> = {
+	as?: T
 	/**
 	 * @default ""
 	 * @type string
@@ -192,9 +193,9 @@ interface MagicCardProps {
 	 * The background of the card
 	 * */
 	background?: string
-}
+} & ComponentProps<T>
 
-const MagicCard = ({
+function MagicCard<T extends React.ElementType = "div">({
 	className,
 	children,
 	size = 600,
@@ -205,7 +206,7 @@ const MagicCard = ({
 	spotlightColor = "rgba(120,119,198,0.08)",
 	isolated = true,
 	background = "rgba(120,119,198, 0.2)",
-}: MagicCardProps) => {
+}: MagicCardProps<T>) {
 	const spotlightStyles =
 		"before:pointer-events-none before:absolute before:w-full before:h-full before:rounded-[var(--border-radius)] before:top-0 before:left-0 before:duration-500 before:transition-opacity before:bg-[radial-gradient(var(--mask-size)_circle_at_var(--mouse-x)_var(--mouse-y),var(--spotlight-color),transparent_40%)] before:z-[3] before:blur-xs"
 
