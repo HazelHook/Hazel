@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import LightLayout from "@/layouts/LightLayout.astro";
-import CtaTwo from "@/components/ctas/CtaTwo.astro";
+import NewsletterCta from "@/components/complex/NewsletterCta.astro";
 import EntriesOne from "@/components/entries/EntriesOne.astro";
 const allPosts = await getCollection("posts");
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
@@ -91,5 +91,5 @@ import { AstroSeo } from "@astrolib/seo";
     </div>
   </section>
 
-  <CtaTwo />
+  <NewsletterCta />
 </LightLayout>
