@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Destination, Integration, Source } from "db/src/drizzle/schema"
+import { Connection, Destination, Integration, Source } from "db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -21,34 +21,37 @@ import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/
 import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
-import type { createConnectionAction } from "./_actions"
 import { formSchema } from "./schema"
+import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
+import { PromiseType } from "@/lib/ts/helpers"
+import { getCachedConnection } from "@/lib/orm"
 
 interface NewSourceFormProps {
-	action: typeof createConnectionAction
+	action: typeof editConnectionAction
 	sources: Source[]
 	destinations: Destination[]
 	integrations: Integration[]
+	connection: PromiseType<ReturnType<typeof getCachedConnection>>
 }
 
-export function NewConnectionForm({ action, sources, destinations, integrations }: NewSourceFormProps) {
+export function EditConnectionForm({ action, sources, destinations, integrations, connection }: NewSourceFormProps) {
 	const [sourceModal, setSourceModal] = useState(false)
 	const [destinationModal, setDestinationModal] = useState(false)
 
 	const router = useRouter()
-
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			name: "",
-			publicSourceId: sources[0]?.publicId || "",
-			publiceDestinationId: destinations[0]?.publicId || "",
+			name: connection.name,
+			publicSourceId: connection.source.publicId,
+			publiceDestinationId: connection.destination.publicId,
+			publicId: connection.publicId,
 		},
 	})
 
 	const createSource = useAction(action, {
 		onSuccess(data) {
-			router.push(`/connection/${data.id}/`)
+			router.push(`/connection/${data.id}`)
 		},
 		onError(error) {
 			form.setError("root", error)
@@ -97,6 +100,7 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 												<SelectValue placeholder="Select a verified email to display" />
 											</SelectTrigger>
 										</FormControl>
+										<FormDescription>The source of the incoming request.</FormDescription>
 										<SelectContent>
 											{sources.map((source) => (
 												<SelectItem key={source.publicId} value={source.publicId}>
@@ -115,12 +119,13 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 							</FormItem>
 						)}
 					/>
-					<div className="flex justify-center">
+					<div className="flex">
 						<Button variant="outline" type="button" onClick={() => setSourceModal(true)}>
 							<AddIcon className="w-5 h-5 mr-2" />
 							Create New Source
 						</Button>
 					</div>
+					
 					<FormField
 						control={form.control}
 						name="publiceDestinationId"
@@ -141,6 +146,7 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 												<SelectValue placeholder="Select a verified email to display" />
 											</SelectTrigger>
 										</FormControl>
+										<FormDescription>The intended destination of the request.</FormDescription>
 										<SelectContent>
 											{destinations.map((source) => (
 												<SelectItem key={source.publicId} value={source.publicId}>
@@ -162,7 +168,7 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 					/>
 					<FormMessage />
 
-					<div className="flex justify-center">
+					<div className="flex">
 						<Button
 							variant="outline"
 							type="button"

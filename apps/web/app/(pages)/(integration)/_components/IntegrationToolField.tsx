@@ -1,11 +1,11 @@
 "use client"
 
-import { IntegrationMDText } from "@/app/(pages)/(integration)/_components/IntegrationMdText"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { SelectPortal } from "@radix-ui/react-select"
 import { AnyIntegrationFormField } from "db/src/drizzle/integrations/common"
 import * as Form from "@radix-ui/react-form"
+import { IntegrationMDText } from "@/app/(pages)/(integration)/_components/IntegrationMdText"
 
 export function IntegrationToolField({
 	fieldDef,

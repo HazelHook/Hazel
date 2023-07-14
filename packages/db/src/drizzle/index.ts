@@ -70,6 +70,14 @@ export function connectDB({
 
 				return { res, publicId }
 			},
+			update: async (data: schema.InsertSource) => {
+				const {publicId, ...rest} = data
+				const res = await db.update(schema.source).set(rest).where(
+					eq(schema.source.publicId, publicId)
+				)
+
+				return { res, publicId }
+			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {
 				const res = await db.update(schema.integration).set({
 					deletedAt: new Date(),
@@ -142,6 +150,13 @@ export function connectDB({
 					...data,
 					publicId,
 				})
+				return { res, publicId }
+			},
+			update: async (data: schema.InsertConnection) => {
+				const {publicId, ...rest} = data
+				const res = await db.update(schema.connection).set(rest).where(
+					eq(schema.connection.publicId, publicId)
+				)
 				return { res, publicId }
 			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {

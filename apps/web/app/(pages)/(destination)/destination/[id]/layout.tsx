@@ -16,7 +16,7 @@ const ConnectionLayout = async ({
 	const destination = await getCachedDestination({ publicId: params.id })
 
 	return (
-		<main className="p-4 space-y-4 h-full">
+		<main className="p-4 space-y-4">
 			<div className="flex flex-row justify-between mb-4">
 				<div>
 					<h3 className="text-xl font-semibold">Destination</h3>

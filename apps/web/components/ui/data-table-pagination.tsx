@@ -14,7 +14,7 @@ interface DataTablePaginationProps<TData> {
 export function DataTablePagination<TData>({ table, hasFilter, maxCount }: DataTablePaginationProps<TData>) {
 	return (
 		<div className="flex w-full items-center justify-between px-2">
-			{hasFilter && <div className="flex-1 text-sm text-muted-foreground">{maxCount}</div>}
+			{hasFilter && <div className="flex-1 text-sm text-muted-foreground">{maxCount} elements</div>}
 
 			<div className="flex items-center space-x-6 lg:space-x-8">
 				<div className="flex items-center space-x-2">

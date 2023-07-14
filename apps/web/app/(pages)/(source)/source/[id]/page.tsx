@@ -22,11 +22,9 @@ const SourcePage = async ({
 	}
 }) => {
 	const source = await getCachedSource({ publicId: params.id })
-
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	const { userId } = auth()
-
 	if (!source) {
 		notFound()
 	}
@@ -36,7 +34,6 @@ const SourcePage = async ({
 	}
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
-
 	const req = await tiny.request.timeline({
 		customer_id: userId!,
 		source_id: source.publicId,
@@ -51,7 +48,6 @@ const SourcePage = async ({
 				<div className="p-2">
 					<p className="text-lg font-semibold">Overview</p>
 				</div>
-				<div className={buttonVariants()}>Add Destination TODO:</div>
 			</div>
 			<div className="flex flex-row gap-2 w-full">
 				<DataTable

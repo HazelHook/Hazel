@@ -43,8 +43,6 @@ export const DatePicker = () => {
 			: undefined,
 	)
 
-	console.log(pathname)
-
 	const createQueryStr = useCallback((name: string, value: string) => {
 		const params = new URLSearchParams()
 		params.set(name, value)

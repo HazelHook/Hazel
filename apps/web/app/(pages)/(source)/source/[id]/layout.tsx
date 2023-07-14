@@ -14,14 +14,19 @@ const ConnectionLayout = async ({
 	}
 }) => {
 	const source = await getCachedSource({ publicId: params.id })
-
+	const slug = source?.integration?.tool
 	return (
-		<main className="p-4 space-y-4 h-full">
+		<main className="p-4 space-y-4">
 			<div className="flex flex-row justify-between mb-4">
 				<div>
 					<h3 className="text-xl font-semibold">Source</h3>
 					<h4 className="text-lg text-muted-foreground">{source?.name}</h4>
 				</div>
+				{/* {slug && (
+					<div className="h-7 flex gap-4 mb-auto">
+						<img src={`/assets/integrations/${slug}.svg`} className="w-7 h-7" />
+					</div>
+				)} */}
 			</div>
 			<NavTabs>
 				<LinkTab href={`/source/${params.id}`}>Overview</LinkTab>

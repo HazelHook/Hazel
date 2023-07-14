@@ -13,7 +13,6 @@ const SourcePage = async () => {
 	const { userId } = auth()
 
 	const sources = await db.source.getMany({ customerId: userId })
-	console.log(sources)
 
 	if (!sources) {
 		notFound()

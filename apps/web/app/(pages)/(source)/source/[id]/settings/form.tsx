@@ -10,32 +10,40 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
+import type { editSourceAction } from "./_actions"
 import { formSchema } from "./schema"
 import { IntegrationTools } from "db/src/drizzle/integrations/data"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Integration } from "db/src/drizzle/schema"
-import { editSourceAction } from "@/app/(pages)/(source)/source/[id]/settings/_actions"
-import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
+import { PromiseType } from "@/lib/ts/helpers"
+import { getCachedSource } from "@/lib/orm"
 
-interface NewSourceFormProps {
-	action: typeof createSourceAction
+interface EditSourceFormProps {
+	action: typeof editSourceAction
 	integrations: Integration[]
+	source: PromiseType<ReturnType<typeof getCachedSource>>
 	shouldRedirect?: boolean
 	onClose?: (id: string) => void
 }
 
-export function NewSourceForm({ onClose, action, shouldRedirect = true, integrations }: NewSourceFormProps) {
+export function EditSourceForm({ onClose, action, shouldRedirect = true, integrations, source }: EditSourceFormProps) {
 	const router = useRouter()
+
+	if(!source) {
+		return null
+	}
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			name: "",
-			url: "",
+			name: source.name,
+			url: source.url || undefined,
+			integrationId: source.integration?.publicId,
+			publicId: source.publicId,
 		},
 	})
 
-	const createSource = useAction(action, {
+	const editSource = useAction(action, {
 		onSuccess(data) {
 			router.refresh()
 
@@ -52,7 +60,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 
 	// 2. Define a submit handler.
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		createSource.mutate(values)
+		editSource.mutate(values)
 	}
 
 	return (
@@ -65,7 +73,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Source Name" {...field} required />
+								<Input placeholder="Source Name" {...field} required/>
 							</FormControl>
 							<FormDescription>A name to identify your sources.</FormDescription>
 							<FormMessage />
@@ -95,7 +103,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 							{IntegrationTools.length > 0 && (
 								<Select
 									onValueChange={field.onChange}
-									value={field.value}
+									value={field.value || undefined}
 								>
 									<FormControl>
 										<SelectTrigger>
@@ -120,8 +128,8 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 				/>
 				<FormMessage />
 
-				<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
-					Create
+				<Button type="submit" disabled={editSource.status === "loading"} loading={editSource.status === "loading"}>
+					Save
 				</Button>
 			</form>
 		</Form>
