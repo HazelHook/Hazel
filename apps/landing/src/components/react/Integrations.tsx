@@ -1,4 +1,5 @@
 import { MagicCard, MagicContainer } from "@/components/react/ui/MagicCard"
+import { Meteors } from "@/components/react/ui/Meteors"
 import { appConfig } from "@/lib/app"
 import { Integration } from "@/lib/app.types"
 import { AnimatePresence, animate, motion } from "framer-motion"
@@ -125,7 +126,7 @@ export const Integrations = () => {
 									// animate={{ x: `-${page * 100}%` }}
 									// transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
 									className={
-										"grid grid-flow-col gap-3 group h-full min-h-[150px] md:min-h-[250px] w-full grid-cols-4 md:grid-cols-4"
+										"group grid grid-flow-col gap-3 group h-full min-h-[150px] md:min-h-[250px] w-full grid-cols-4 md:grid-cols-4"
 									}
 								>
 									{chunkedIntegrations[page].map((integration, index) => (
@@ -134,7 +135,7 @@ export const Integrations = () => {
 											key={integration.name + index}
 											className="cursor-pointer bg-ebony shadow-inset rounded-3xl p-4"
 										>
-											<div className="h-full flex flex-col justify-between">
+											<div className="relative h-full flex flex-col justify-between">
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
 													className="icon icon-tabler icon-tabler-circle-check text-white"
@@ -165,6 +166,7 @@ export const Integrations = () => {
 													</div>
 													<p className="text-xs mt-2 text-zinc-300 hidden md:block">{integration.description}</p>
 												</div>
+												<Meteors className="opacity-10 group-hover:opacity-100 transition-opacity duration-700" />
 											</div>
 										</MagicCard>
 									))}

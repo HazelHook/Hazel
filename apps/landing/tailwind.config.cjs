@@ -18,6 +18,7 @@ module.exports = {
 				scroller: "scroller 15s linear infinite",
 				scroller2: "scroller2 20s linear infinite",
 				"fade-in": "fade-in 0.5s linear forwards",
+				meteor: "meteor 5s linear infinite",
 			},
 			keyframes: {
 				marquee: {
@@ -68,6 +69,13 @@ module.exports = {
 				"spin-reverse": {
 					to: {
 						transform: "rotate(-360deg)",
+					},
+				},
+				meteor: {
+					"0%": { transform: "rotate(215deg) translateX(0)" },
+					"70%": {},
+					"100%": {
+						transform: "rotate(215deg) translateX(-500px)",
 					},
 				},
 			},
