@@ -1,56 +1,14 @@
 import { MagicCard, MagicContainer } from "@/components/react/ui/MagicCard"
+import { appConfig } from "@/lib/app"
+import { Integration } from "@/lib/app.types"
 import { AnimatePresence, animate, motion } from "framer-motion"
 import { useState } from "react"
 
-interface Integration {
-	name: string
-	description: string
-	logoPath: `/images/assets/integrations/${string}`
-	url: string
-}
-const integrations: Integration[] = [
-	{
-		name: "Stripe",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-	{
-		name: "Github",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-	{
-		name: "Linear",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-	{
-		name: "Discord",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-	{
-		name: "Svix",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-	{
-		name: "Amazon",
-		description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
-		url: "https://stripe.com",
-		logoPath: "/images/assets/integrations/stripe.svg",
-	},
-]
 function chunk<T>(arr: T[], size: number): T[][] {
 	return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size))
 }
 
-const chunkedIntegrations = chunk(integrations, 4)
+const chunkedIntegrations = chunk(appConfig.landing.integrations, 4)
 
 const swipeConfidenceThreshold = 10000
 
@@ -147,7 +105,6 @@ export const Integrations = () => {
 							className="flex gap-3 relative overflow-x-scroll pb-24 pt-12 scrollbar-hide snap-mandatory snap-x w-full"
 							role="listbox"
 							aria-labelledby="carousel-content-label"
-							x-ref="slider"
 						>
 							{
 								<MagicContainer
@@ -196,7 +153,7 @@ export const Integrations = () => {
 													<path d="M9 12l2 2l4 -4" />
 												</svg>
 												<div className="md:mt-24">
-													<div className="flex flex-row gap-4">
+													<div className="flex flex-row gap-2 items-center mb-1">
 														<img
 															className="w-8 h-8"
 															alt={`${integration.name} Logo`}
@@ -204,7 +161,7 @@ export const Integrations = () => {
 															width={32}
 															height={32}
 														/>
-														<p className="font-medium leading-6 text-white">{integration.name}</p>
+														<p className="font-semibold text-lg leading-6 text-white">{integration.name}</p>
 													</div>
 													<p className="text-xs mt-2 text-zinc-300 hidden md:block">{integration.description}</p>
 												</div>

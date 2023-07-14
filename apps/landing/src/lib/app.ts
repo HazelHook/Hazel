@@ -1,18 +1,4 @@
-interface NavbarItem {
-	name: string
-	href: string
-	[key: string]: any
-}
-
-interface FooterItem {
-	title: string
-	item: NavbarItem[]
-}
-
-interface AppConfig {
-	navbar: NavbarItem[]
-	footer: FooterItem[]
-}
+import { AppConfig } from "@/lib/app.types"
 
 export const appConfig: AppConfig = {
 	navbar: [
@@ -47,4 +33,44 @@ export const appConfig: AppConfig = {
 			],
 		},
 	],
+	landing: {
+		integrations: [
+			{
+				name: "Stripe",
+				description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+				url: "https://stripe.com",
+				logoPath: "/images/assets/integrations/stripe.svg",
+			},
+			{
+				name: "Github",
+				description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+				url: "https://stripe.com",
+				logoPath: "/images/assets/integrations/github.svg",
+			},
+			{
+				name: "Linear",
+				description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+				url: "https://stripe.com",
+				logoPath: "/images/assets/integrations/linear.svg",
+			},
+			{
+				name: "Discord",
+				description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+				url: "https://stripe.com",
+				logoPath: "/images/assets/integrations/stripe.svg",
+			},
+			{
+				name: "Svix",
+				description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+				url: "https://stripe.com",
+				logoPath: "/images/assets/integrations/stripe.svg",
+			},
+			{
+				name: "Amazon",
+				description: "Tap into capital opportunities spanning various industries, including SaaS, eCommerce, and more.",
+				url: "https://stripe.com",
+				logoPath: "/images/assets/integrations/stripe.svg",
+			},
+		],
+	},
 }
