@@ -1,14 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { AstroSeo } from "@astrolib/seo";
+import CLI from "@/components/landing/CLI.astro";
+import Contact from "@/components/landing/Contact.astro";
 import Hero from "@/components/landing/Hero.astro";
 import LogoCloud from "@/components/landing/LogoCloud.astro";
-import Integrations from "@/components/landing/Integrations.astro";
-import Testimonials from "@/components/landing/Testimonials.astro";
-import CLI from "@/components/landing/CLI.astro";
 import Pricing from "@/components/landing/Pricing.astro";
-import { AstroSeo } from "@astrolib/seo";
-import Contact from "@/components/landing/Contact.astro";
-import FeatureEight from "@/components/features/FeatureEight.astro";
+import Testimonials from "@/components/landing/Testimonials.astro";
+import { Integrations } from "@/components/react/Integrations";
 ---
 
 <AstroSeo
@@ -48,10 +47,11 @@ import FeatureEight from "@/components/features/FeatureEight.astro";
 <BaseLayout>
   <Hero />
   <LogoCloud />
-  <Integrations />
+  <!-- <FeatureTwelve />
+  <FeatureNine /> -->
+  <Integrations client:load />
   <CLI />
   <Testimonials />
   <Pricing />
   <Contact />
-  <FeatureEight />
 </BaseLayout>
