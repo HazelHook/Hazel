@@ -28,7 +28,7 @@ export const integration = buildMysqlTable(
 	"integrations",
 	{
 		name,
-		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]),
+		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]).notNull(),
 		config: json("config"),
 	},
 	(table) => ({

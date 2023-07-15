@@ -65,7 +65,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Source Name" {...field} required />
+								<Input placeholder="Source Name" {...field} />
 							</FormControl>
 							<FormDescription>A name to identify your sources.</FormDescription>
 							<FormMessage />

@@ -20,6 +20,11 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog"
 import { toast } from "sonner"
+import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import { NewIntegrationForm } from "@/app/(pages)/(integration)/_components/NewIntegrationForm"
+import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
+import { IntegrationTool } from "db/src/drizzle/integrations/common"
+import { UpdateIntegrationForm } from "@/app/(pages)/(integration)/_components/UpdateIntegrationForm"
 
 export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any) => ColumnDef<IntegrationToolColumn>[] =
 	(deleteIntegration, router) => [
@@ -79,9 +84,36 @@ export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any)
 			header: () => <p className="text-right">Actions</p>,
 			cell: ({ cell, row }) => {
 				const integration = row.original
-				console.log(integration.source.length)
+				const tool = integration.tool as keyof typeof INTEGRATIONS
 				return (
 					<div className="flex justify-end">
+						<Dialog>
+							<DialogTrigger asChild>
+								<Button variant="ghost">
+									<EditPencilIcon className="h-4 w-4" />
+								</Button>
+							</DialogTrigger>
+							<DialogContent className="max-w-sm">
+								<UpdateIntegrationForm integration={INTEGRATIONS[tool]} onClose={() => {}} />
+								<DialogFooter>
+									<DialogClose asChild>
+										<Button variant="outline">Cancel</Button>
+									</DialogClose>
+									<Button
+										type="submit"
+										onClick={() => {
+											toast.promise(async () => {}, {
+												loading: "Update Integration...",
+												success: "Integration Successfully Updated",
+												error: "There was an error updating your Integration. Please try again or contact us.",
+											})
+										}}
+									>
+										Update
+									</Button>
+								</DialogFooter>
+							</DialogContent>
+						</Dialog>
 						<Dialog>
 							<DialogTrigger asChild>
 								<Button variant="ghost" disabled={integration.source.length > 0}>
