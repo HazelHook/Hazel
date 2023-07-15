@@ -11,20 +11,18 @@ import { Button } from "@/components/ui/button"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
-import { EventDataRowType } from "@/app/(pages)/(destination)/destination/[id]/events/page"
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Settings03Icon } from "@/components/icons/pika/settings03"
-import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
-import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 
-export const columns: ColumnDef<EventDataRowType>[] = [
+import { DestinationsActions } from "@/app/(pages)/(destination)/_components/DestinationsActions"
+import { TRPCResponse, TRPC_ERROR_CODE_NUMBER } from "@trpc/server/rpc"
+import { typeToFlattenedError } from "zod"
+import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
+import Link from "next/link"
+import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
+
+export const columns: (
+	deleteAction: typeof deleteDestinationAction,
+	updateAction: typeof updateDestinationAction,
+) => ColumnDef<DestinationsDataRowType>[] = (deleteAction, updateAction) => [
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
@@ -39,15 +37,18 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 				</Button>
 			)
 		},
-		cell: ({ cell, table, row }) => {
-			const id = row.original.id
+		cell: ({ cell, row }) => {
 			return (
-				<div className="flex flex-row items-center ml-4">
+				<Link
+					prefetch={false}
+					href={`/destination/${row.original.publicId}`}
+					className="flex flex-row items-center ml-4"
+				>
 					<Avatar className="w-4 h-4 mr-2">
-						<AvatarImage src={getSeededProfileImageUrl(id)} />
+						<AvatarImage src={getSeededProfileImageUrl(row.original.publicId)} />
 					</Avatar>
-					{cell.getValue<string>()}
-				</div>
+					<Button variant="link">{cell.getValue<string>()}</Button>
+				</Link>
 			)
 		},
 	},
@@ -89,29 +90,9 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 		id: "actions",
 		header: "Actions",
 		cell: ({ row }) => {
-			const destionation = row.original
+			const destination = row.original
 
-			return (
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button variant="ghost" className="h-8 w-8 p-0">
-							<span className="sr-only">Open menu</span>
-							<FilterVerticalIcon className="h-4 w-4" />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						<DropdownMenuLabel>Actions</DropdownMenuLabel>
-						<DropdownMenuItem onClick={() => navigator.clipboard.writeText(destionation.id)}>Copy ID</DropdownMenuItem>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem asChild>
-							<div className="flex flex-row items-center">
-								<DeleteDustbinIcon className="w-4 h-4 mr-2" />
-								Delete
-							</div>
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
-			)
+			return <DestinationsActions data={destination} updateAction={updateAction} deleteAction={deleteAction} />
 		},
 	},
 ]

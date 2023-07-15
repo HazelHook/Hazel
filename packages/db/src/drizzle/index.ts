@@ -14,6 +14,8 @@ export { integrations }
 
 export type DB = PlanetScaleDatabase<typeof schema>
 
+export type OptionalExceptFor<T, K extends keyof T> = Partial<T> & Pick<T, K>
+
 export function connectDB({
 	username,
 	host,
@@ -35,9 +37,16 @@ export function connectDB({
 		db,
 		source: {
 			table: new DrizzleTable("source", schema.source, db),
-			getOne: async ({ publicId }: { publicId: string }) => {
+			getOne: async ({ publicId, includeDeleted }: { publicId: string; includeDeleted?: boolean }) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(eq(schema.source.publicId, publicId), isNull(schema.source.deletedAt))
+				} else {
+					filter = eq(schema.source.publicId, publicId)
+				}
+
 				return await db.query.source.findFirst({
-					where: eq(schema.source.publicId, publicId),
+					where: filter,
 					with: {
 						connections: {
 							with: {
@@ -48,9 +57,16 @@ export function connectDB({
 					},
 				})
 			},
-			getMany: async ({ customerId }: { customerId: string }) => {
+			getMany: async ({ customerId, includeDeleted }: { customerId: string; includeDeleted?: boolean }) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(eq(schema.source.customerId, customerId), isNull(schema.source.deletedAt))
+				} else {
+					filter = eq(schema.source.customerId, customerId)
+				}
+
 				return await db.query.source.findMany({
-					where: eq(schema.source.customerId, customerId),
+					where: filter,
 					with: {
 						connections: {
 							with: {
@@ -78,24 +94,38 @@ export function connectDB({
 			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {
 				const res = await db
-					.update(schema.integration)
+					.update(schema.source)
 					.set({
 						deletedAt: new Date(),
 					})
-					.where(eq(schema.integration.publicId, publicId))
+					.where(eq(schema.source.publicId, publicId))
 				return { res }
 			},
 		},
 		destination: {
 			table: new DrizzleTable("destination", schema.destination, db),
-			getOne: async ({ publicId }: { publicId: string }) => {
+			getOne: async ({ publicId, includeDeleted }: { publicId: string; includeDeleted?: boolean }) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(eq(schema.destination.publicId, publicId), isNull(schema.destination.deletedAt))
+				} else {
+					filter = eq(schema.destination.publicId, publicId)
+				}
+
 				return await db.query.destination.findFirst({
-					where: eq(schema.destination.publicId, publicId),
+					where: filter,
 				})
 			},
-			getMany: async ({ customerId }: { customerId: string }) => {
+			getMany: async ({ customerId, includeDeleted }: { customerId: string; includeDeleted?: boolean }) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(eq(schema.destination.customerId, customerId), isNull(schema.destination.deletedAt))
+				} else {
+					filter = eq(schema.destination.customerId, customerId)
+				}
+
 				return await db.query.destination.findMany({
-					where: eq(schema.destination.customerId, customerId),
+					where: filter,
 					with: {
 						connections: {
 							with: {
@@ -114,30 +144,50 @@ export function connectDB({
 
 				return { res, publicId }
 			},
+			update: async (data: OptionalExceptFor<schema.InsertDestination, "publicId">) => {
+				const { publicId, ...rest } = data
+				const res = await db.update(schema.destination).set(rest).where(eq(schema.destination.publicId, publicId))
+
+				return { res, publicId }
+			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {
 				const res = await db
-					.update(schema.integration)
+					.update(schema.destination)
 					.set({
 						deletedAt: new Date(),
 					})
-					.where(eq(schema.integration.publicId, publicId))
+					.where(eq(schema.destination.publicId, publicId))
 				return { res }
 			},
 		},
 		connection: {
 			table: new DrizzleTable("connection", schema.connection, db),
-			getOne: async ({ publicId }: { publicId: string }) => {
+			getOne: async ({ publicId, includeDeleted }: { publicId: string; includeDeleted?: boolean }) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(eq(schema.connection.publicId, publicId), isNull(schema.connection.deletedAt))
+				} else {
+					filter = eq(schema.connection.publicId, publicId)
+				}
+
 				return await db.query.connection.findFirst({
-					where: eq(schema.connection.publicId, publicId),
+					where: filter,
 					with: {
 						destination: true,
 						source: true,
 					},
 				})
 			},
-			getMany: async ({ customerId }: { customerId: string }) => {
+			getMany: async ({ customerId, includeDeleted }: { customerId: string; includeDeleted?: boolean }) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(eq(schema.connection.customerId, customerId), isNull(schema.connection.deletedAt))
+				} else {
+					filter = eq(schema.connection.customerId, customerId)
+				}
+
 				return await db.query.connection.findMany({
-					where: eq(schema.connection.customerId, customerId),
+					where: filter,
 					with: {
 						destination: true,
 						source: true,
@@ -152,7 +202,7 @@ export function connectDB({
 				})
 				return { res, publicId }
 			},
-			update: async (data: schema.InsertConnection) => {
+			update: async (data: OptionalExceptFor<schema.InsertConnection, "publicId">) => {
 				const { publicId, ...rest } = data
 				const res = await db.update(schema.connection).set(rest).where(eq(schema.connection.publicId, publicId))
 				return { res, publicId }
@@ -207,7 +257,7 @@ export function connectDB({
 				})
 				return { res, publicId }
 			},
-			update: async (data: Omit<schema.InsertIntegration, "customerId">) => {
+			update: async (data: OptionalExceptFor<Omit<schema.InsertIntegration, "customerId">, "publicId">) => {
 				const res = await db.update(schema.integration).set(data).where(eq(schema.integration.publicId, data.publicId))
 				return { res }
 			},

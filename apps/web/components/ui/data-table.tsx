@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { MouseEventHandler, useState } from "react"
 import { useRouter } from "next/navigation"
 import {
 	ColumnDef,
@@ -16,7 +16,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
-	rootPath: string
+	rootPath?: string
 	disableRedirect?: boolean
 }
 
@@ -36,8 +36,8 @@ export function DataTable<TData, TValue>({ columns, data, rootPath, disableRedir
 		},
 	})
 
-	const navigate = (data: TData) => () => {
-		if(disableRedirect) return
+	const navigate = (data: TData) => (e: any) => {
+		if (disableRedirect) return
 		router.push(`${rootPath}/${(data as any).publicId}`)
 	}
 

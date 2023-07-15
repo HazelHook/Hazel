@@ -19,9 +19,22 @@ export const createDestinationAction = createAction(
 	}),
 )
 
+export const updateDestinationAction = createAction(
+	protectedProcedure.input(z.object({ publicId: z.string() }).merge(formSchema)).mutation(async (opts) => {
+		const destination = await db.destination.update({
+			...opts.input,
+			customerId: opts.ctx.auth.userId,
+		})
+
+		return {
+			id: destination.publicId,
+		}
+	}),
+)
+
 export const deleteDestinationAction = createAction(
 	protectedProcedure.input(z.string()).mutation(async (opts) => {
-		await db.integration.markAsDeleted({
+		await db.destination.markAsDeleted({
 			publicId: opts.input,
 		})
 	}),
