@@ -79,7 +79,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Source URL - Optional</FormLabel>
 							<FormControl>
-								<Input placeholder="E.g. example.com" {...field}/>
+								<Input placeholder="E.g. example.com" {...field} />
 							</FormControl>
 							<FormDescription>The endpoint that will send the webhooks.</FormDescription>
 							<FormMessage />
@@ -93,10 +93,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Integration - Optional</FormLabel>
 							{IntegrationTools.length > 0 && (
-								<Select
-									onValueChange={field.onChange}
-									value={field.value}
-								>
+								<Select onValueChange={field.onChange} value={field.value}>
 									<FormControl>
 										<SelectTrigger>
 											<SelectValue

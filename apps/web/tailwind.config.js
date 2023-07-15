@@ -11,6 +11,9 @@ module.exports = {
 			},
 		},
 		extend: {
+			boxShadow: {
+				badgeHover: "0 0 0 1px rgba(190, 190, 210, 0.15)",
+			},
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",

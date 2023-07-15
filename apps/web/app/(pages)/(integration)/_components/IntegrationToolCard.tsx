@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
 import { DatabaseIcon } from "@/components/icons/pika/database"
-import { MinusIcon } from "@/components/icons/pika/minus"
 import { Separator } from "@/components/ui/separator"
 import { NewIntegrationForm } from "@/app/(pages)/(integration)/_components/NewIntegrationForm"
 import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "db/src/drizzle/integrations/data"
@@ -24,7 +23,6 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 	const { slug, name, subtitle, categories, features, disabled } = integration
 
 	const [coords, setCoords] = useState({ x: 50, y: 50 })
-	const [isHovered, setIsHovered] = useState(false)
 	const [modalOpen, setModalOpen] = useState<boolean>(false)
 
 	const borderStyle = {
@@ -34,12 +32,10 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 	return (
 		<>
 			<Card
-				className={`w-full h-full cursor-pointer select-none shadow-sm transition-all hover:shadow-gray-200 ${
+				className={`group w-full h-full cursor-pointer select-none shadow-sm transition-all hover:shadow-gray-200 ${
 					disabled && "opacity-50"
 				}`}
 				onMouseMove={() => setCoords({ x: 50, y: 50 })}
-				onMouseEnter={() => setIsHovered(true)}
-				onMouseLeave={() => setIsHovered(false)}
 				onMouseDown={() => setModalOpen(true)}
 				style={borderStyle}
 			>
@@ -80,14 +76,7 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 							<Badge
 								variant="outline"
 								key={`badge-${category}`}
-								className="transition-all"
-								style={
-									isHovered
-										? {
-												boxShadow: "0 0 0 1px rgba(190, 190, 210, 0.15)",
-										  }
-										: {}
-								}
+								className="transition-all group-hover:shadow-badgeHover"
 							>
 								{INTEGRATION_CATERGORIES[category].name}
 							</Badge>
