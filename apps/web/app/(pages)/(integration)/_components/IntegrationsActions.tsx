@@ -1,5 +1,8 @@
 import { UpdateIntegrationForm } from "@/app/(pages)/(integration)/_components/UpdateIntegrationForm"
-import type { deleteIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
+import type {
+	deleteIntegrationAction,
+	updateIntegrationAction,
+} from "@/app/(pages)/(integration)/integrations/_actions"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
 import { Button } from "@/components/ui/button"
@@ -15,27 +18,31 @@ import {
 } from "@/components/ui/dialog"
 import { useAction } from "@/server/client"
 import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
+import { Integration } from "db/src/drizzle/schema"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 export const IntegrationsActions = ({
+	updateAction,
 	deleteAction,
 	tool,
 	numOfSources,
 	integrationId,
+	data,
 }: {
+	data: Integration
 	tool: keyof typeof INTEGRATIONS
 	numOfSources: number
 	integrationId: string
+	updateAction: typeof updateIntegrationAction
 	deleteAction: typeof deleteIntegrationAction
 }) => {
 	const router = useRouter()
 
 	const deleteIntegration = useAction(deleteAction, {
-		onSuccess(data) {
+		onSuccess() {
 			router.refresh()
-		}, // TODO
-		onError(error) {}, // TODO
+		},
 	})
 
 	return (
@@ -47,24 +54,12 @@ export const IntegrationsActions = ({
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">
-					<UpdateIntegrationForm integration={INTEGRATIONS[tool]} onClose={() => {}} />
-					<DialogFooter>
-						<DialogClose asChild>
-							<Button variant="outline">Cancel</Button>
-						</DialogClose>
-						<Button
-							type="submit"
-							onClick={() => {
-								toast.promise(async () => {}, {
-									loading: "Update Integration...",
-									success: "Integration Successfully Updated",
-									error: "There was an error updating your Integration. Please try again or contact us.",
-								})
-							}}
-						>
-							Update
-						</Button>
-					</DialogFooter>
+					<UpdateIntegrationForm
+						data={data}
+						integration={INTEGRATIONS[tool]}
+						onClose={() => {}}
+						updateAction={updateAction}
+					/>
 				</DialogContent>
 			</Dialog>
 			<Dialog>

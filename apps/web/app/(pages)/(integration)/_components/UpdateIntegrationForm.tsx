@@ -1,7 +1,7 @@
 "use client"
 
 import { IntegrationToolField } from "@/app/(pages)/(integration)/_components/IntegrationToolField"
-import { createIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
+import { createIntegrationAction, updateIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
 import { LabeledSeparator } from "@/components/LabeledSeparator"
 import { useAction } from "@/server/client"
 import { IntegrationTool } from "db/src/drizzle/integrations/common"
@@ -12,12 +12,18 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Input } from "@/components/ui/input"
+import { toast } from "sonner"
+import { Integration } from "db/src/drizzle/schema"
 
 export const UpdateIntegrationForm = ({
+	data,
 	integration,
+	updateAction,
 	onClose,
 }: {
+	data: Integration
 	integration: IntegrationTool
+	updateAction: typeof updateIntegrationAction
 	onClose?: (id: string) => void
 }) => {
 	const { config, slug } = integration
@@ -26,26 +32,32 @@ export const UpdateIntegrationForm = ({
 	if (!config) return notFound()
 
 	const form = useForm({
-		defaultValues: {
-			name: "",
-			url: "",
-		},
+		defaultValues: data as any,
 	})
 
-	const createIntegration = useAction(createIntegrationAction, {
-		onSuccess(data) {
-			onClose?.(data.id)
+	const updateIntegration = useAction(updateAction, {
+		onSuccess() {
+			onClose?.(data.publicId)
 			router.refresh()
 		},
 	})
 
 	function onSubmit(values: any) {
-		const { name, ...data } = Object.fromEntries(new FormData(values.currentTarget))
-		createIntegration.mutate({
-			config: data,
-			tool: slug as any,
-			name: name as string,
-		})
+		const { name, ...rest } = values
+
+		toast.promise(
+			updateIntegration.mutateAsync({
+				publicId: data.publicId,
+				config: rest,
+				tool: slug as any,
+				name: name as string,
+			}),
+			{
+				loading: "Update Integration...",
+				success: "Integration Successfully Updated",
+				error: "There was an error updating your Integration. Please try again or contact us.",
+			},
+		)
 	}
 
 	return (
@@ -62,8 +74,8 @@ export const UpdateIntegrationForm = ({
 				<div className="flex justify-end">
 					<Button
 						type="submit"
-						disabled={createIntegration.status === "loading"}
-						loading={createIntegration.status === "loading"}
+						disabled={updateIntegration.status === "loading"}
+						loading={updateIntegration.status === "loading"}
 					>
 						Update
 					</Button>

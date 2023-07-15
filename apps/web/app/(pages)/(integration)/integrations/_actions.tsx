@@ -23,6 +23,14 @@ export const createIntegrationAction = createAction(
 	}),
 )
 
+export const updateIntegrationAction = createAction(
+	protectedProcedure.input(formSchema.merge(z.object({ publicId: z.string() }))).mutation(async (opts) => {
+		const integrationResult = await db.integration.update(opts.input)
+
+		return { res: integrationResult.res }
+	}),
+)
+
 export const deleteIntegrationAction = createAction(
 	protectedProcedure.input(z.string()).mutation(async (opts) => {
 		await db.integration.markAsDeleted({
