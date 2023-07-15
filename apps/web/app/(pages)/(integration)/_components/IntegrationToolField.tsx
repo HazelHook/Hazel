@@ -21,7 +21,11 @@ export function IntegrationToolField({
 					<Form.Label className="font-light">{fieldDef.label}</Form.Label>
 				</div>
 				<Form.Control asChild>
-					<Input placeholder={fieldDef.placeholder} type={fieldDef.type === 'secret' ? 'password' : 'text'} className="focus:border-white focus-visible:ring-0"/>
+					<Input
+						placeholder={fieldDef.placeholder}
+						type={fieldDef.type === "secret" ? "password" : "text"}
+						className="focus:border-white focus-visible:ring-0"
+					/>
 				</Form.Control>
 				<div className="font-light text-xs mt-1 ml-2">
 					<IntegrationMDText description={fieldDef.description} />
@@ -37,12 +41,10 @@ export function IntegrationToolField({
 				</div>
 				<Select>
 					<SelectTrigger className="aria-expanded:border-white focus:ring-0 ring-0 flex flex-row justify-between p-2 h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50">
-						<SelectValue  placeholder={(
-							<p className="text-muted-foreground">Select...</p>
-						)}/>
+						<SelectValue placeholder={<p className="text-muted-foreground">Select...</p>} />
 					</SelectTrigger>
 					<SelectPortal>
-						<SelectContent >
+						<SelectContent>
 							{fieldDef.options.map((option) => (
 								<SelectItem key={option} value={option}>
 									{option}

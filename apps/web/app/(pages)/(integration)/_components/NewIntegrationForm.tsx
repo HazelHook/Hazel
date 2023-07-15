@@ -8,16 +8,10 @@ import { IntegrationTool } from "db/src/drizzle/integrations/common"
 import { notFound, useRouter } from "next/navigation"
 import * as Form from "@radix-ui/react-form"
 import { Button } from "@/components/ui/button"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 
 export const NewIntegrationForm = ({
-	integration: {
-		config,
-		slug
-	},
-	onClose
+	integration: { config, slug },
+	onClose,
 }: {
 	integration: IntegrationTool
 	onClose?: (id: string) => void
@@ -29,12 +23,12 @@ export const NewIntegrationForm = ({
 	const createIntegration = useAction(createIntegrationAction, {
 		onSuccess(data) {
 			onClose?.(data.id)
-			router.replace('/integrations')
+			router.replace("/integrations")
 		},
 	})
 
 	function onSubmit(values: any) {
-		const {name, ...data} = Object.fromEntries(new FormData(values.currentTarget));
+		const { name, ...data } = Object.fromEntries(new FormData(values.currentTarget))
 		createIntegration.mutate({
 			config: data,
 			tool: slug as any,
@@ -43,17 +37,17 @@ export const NewIntegrationForm = ({
 	}
 
 	return (
-		<Form.Root className="space-y-2" onSubmit={(onSubmit)}>
-			{Object.entries(config.general).map(([key, config]) => {
-				return <IntegrationToolField fieldDef={config} pathKey={key} key={key} />
-			})}
+		<Form.Root className="space-y-2 w-full" onSubmit={onSubmit}>
+			{Object.entries(config.general).map(([key, config]) => (
+				<IntegrationToolField fieldDef={config} pathKey={key} key={key} />
+			))}
 			<LabeledSeparator label="Configuration" className="pt-4" />
-			{Object.entries(config.fields).map(([key, integField]) => {
-				return <IntegrationToolField fieldDef={integField as any} pathKey={key} key={key} />
-			})}
+			{Object.entries(config.fields).map(([key, integField]) => (
+				<IntegrationToolField fieldDef={integField as any} pathKey={key} key={key} />
+			))}
 
 			<Form.Submit type="submit" disabled={createIntegration.status === "loading"} className="w-full">
-				<Button type="submit" disabled={createIntegration.status === "loading"} className="w-full mt-5" >
+				<Button type="submit" disabled={createIntegration.status === "loading"} className="w-full mt-5">
 					Create Integration
 				</Button>
 			</Form.Submit>
