@@ -1,10 +1,7 @@
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
+import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
 import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
-import { UpdateIntegrationForm } from "@/app/(pages)/(integration)/_components/UpdateIntegrationForm"
-import type {
-	deleteIntegrationAction,
-	updateIntegrationAction,
-} from "@/app/(pages)/(integration)/integrations/_actions"
+
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
 import { Button } from "@/components/ui/button"
@@ -19,8 +16,10 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog"
 import { useAction } from "@/server/client"
+import { TRPCResponse, TRPC_ERROR_CODE_NUMBER } from "@trpc/server/rpc"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+import { typeToFlattenedError } from "zod"
 
 export const DestinationsActions = ({
 	updateAction,
@@ -48,12 +47,7 @@ export const DestinationsActions = ({
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">
-					{/* <UpdateIntegrationForm
-						data={data}
-						integration={INTEGRATIONS[tool]}
-						onClose={() => {}}
-						updateAction={updateAction}
-					/> */}
+					<UpdateDestinationForm data={data} updateAction={updateAction} />
 				</DialogContent>
 			</Dialog>
 			<Dialog>

@@ -88,7 +88,7 @@ export const columns: (
 	},
 	{
 		id: "actions",
-		header: "Actions",
+		header: () => <p className="text-right">Actions</p>,
 		cell: ({ row }) => {
 			const destination = row.original
 
