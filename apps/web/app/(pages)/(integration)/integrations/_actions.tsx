@@ -7,19 +7,27 @@ import { z } from "zod"
 const formSchema = z.object({
 	name: z.string(),
 	tool: z.string(),
-	config: z.any()
+	config: z.any(),
 })
 
 export const createIntegrationAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
 		const integrationResult = await db.integration.create({
 			customerId: opts.ctx.auth.userId,
-			...opts.input
+			...opts.input,
 		})
 
 		return {
 			id: integrationResult.publicId,
 		}
+	}),
+)
+
+export const updateIntegrationAction = createAction(
+	protectedProcedure.input(formSchema.merge(z.object({ publicId: z.string() }))).mutation(async (opts) => {
+		const integrationResult = await db.integration.update(opts.input)
+
+		return { res: integrationResult.res }
 	}),
 )
 

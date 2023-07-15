@@ -6,13 +6,14 @@ import { Tiny } from "db/src/tinybird"
 
 import { getCachedSource } from "@/lib/orm"
 import { chartColors, formatDateTime } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 import { DataTable } from "@/components/ui/data-table"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
 
 import { columns } from "./column"
+import Link from "next/link"
 
 const SourcePage = async ({
 	params,

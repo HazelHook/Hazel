@@ -1,6 +1,7 @@
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Sidebar } from "@/components/Sidebar"
 import { SiteHeader } from "@/components/site-header"
+import { Toaster } from "sonner"
 
 interface RootLayoutProps {
 	children: React.ReactNode
@@ -25,7 +26,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 						{children}
 					</div>
 				</div>
-				{/* <Toaster position="top-center" /> */}
+				<Toaster position="top-center" />
 			</div>
 		</TooltipProvider>
 	)

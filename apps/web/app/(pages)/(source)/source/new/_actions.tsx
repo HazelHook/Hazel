@@ -13,9 +13,11 @@ import { formSchema } from "./schema"
  */
 export const createSourceAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
-		const integrationResult = opts.input.integrationId ? await db.db.query.integration.findFirst({
-			where: (integration, { eq }) => eq(integration.publicId, opts.input.integrationId as string),
-		}) : undefined
+		const integrationResult = opts.input.integrationId
+			? await db.db.query.integration.findFirst({
+					where: (integration, { eq }) => eq(integration.publicId, opts.input.integrationId as string),
+			  })
+			: undefined
 
 		const source = await db.source.create({
 			name: opts.input.name,
@@ -23,6 +25,8 @@ export const createSourceAction = createAction(
 			integrationId: integrationResult?.id!,
 			customerId: opts.ctx.auth.userId!,
 		})
+
+		console.log(source)
 
 		return {
 			id: source.publicId,

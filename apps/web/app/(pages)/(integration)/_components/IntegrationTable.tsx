@@ -3,26 +3,25 @@
 import { DataTable } from "@/components/ui/data-table"
 import { columns } from "@/app/(pages)/(integration)/integrations/columns"
 import { IntegrationToolColumn } from "@/app/(pages)/(integration)/integrations/page"
-import { useAction } from "@/server/client"
-import { deleteIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
-import { useRouter } from "next/navigation"
+import { deleteIntegrationAction, updateIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
 
 export const IntegrationsTable = ({
-    integrations
+	integrations,
+	updateAction,
+	deleteAction,
 }: {
-    integrations: IntegrationToolColumn[]
+	integrations: IntegrationToolColumn[]
+	updateAction: typeof updateIntegrationAction
+	deleteAction: typeof deleteIntegrationAction
 }) => {
-	const router = useRouter()
-	const deleteIntegration = useAction(deleteIntegrationAction, {
-		onSuccess(data) {}, // TODO
-		onError(error) {}, // TODO
-	})
-
 	return (
-        <>
-			
-        	<DataTable disableRedirect rootPath="/integrations" columns={columns(deleteIntegration, router)} data={integrations as any} />
-        </> 
+		<>
+			<DataTable
+				disableRedirect
+				rootPath="/integrations"
+				columns={columns(deleteAction, updateAction)}
+				data={integrations as any}
+			/>
+		</>
 	)
 }
-

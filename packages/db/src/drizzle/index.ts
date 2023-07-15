@@ -71,21 +71,20 @@ export function connectDB({
 				return { res, publicId }
 			},
 			update: async (data: schema.InsertSource) => {
-				const {publicId, ...rest} = data
-				const res = await db.update(schema.source).set(rest).where(
-					eq(schema.source.publicId, publicId)
-				)
+				const { publicId, ...rest } = data
+				const res = await db.update(schema.source).set(rest).where(eq(schema.source.publicId, publicId))
 
 				return { res, publicId }
 			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {
-				const res = await db.update(schema.integration).set({
-					deletedAt: new Date(),
-				}).where(
-					eq(schema.integration.publicId, publicId)
-				)
+				const res = await db
+					.update(schema.integration)
+					.set({
+						deletedAt: new Date(),
+					})
+					.where(eq(schema.integration.publicId, publicId))
 				return { res }
-			}
+			},
 		},
 		destination: {
 			table: new DrizzleTable("destination", schema.destination, db),
@@ -116,13 +115,14 @@ export function connectDB({
 				return { res, publicId }
 			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {
-				const res = await db.update(schema.integration).set({
-					deletedAt: new Date(),
-				}).where(
-					eq(schema.integration.publicId, publicId)
-				)
+				const res = await db
+					.update(schema.integration)
+					.set({
+						deletedAt: new Date(),
+					})
+					.where(eq(schema.integration.publicId, publicId))
 				return { res }
-			}
+			},
 		},
 		connection: {
 			table: new DrizzleTable("connection", schema.connection, db),
@@ -153,31 +153,27 @@ export function connectDB({
 				return { res, publicId }
 			},
 			update: async (data: schema.InsertConnection) => {
-				const {publicId, ...rest} = data
-				const res = await db.update(schema.connection).set(rest).where(
-					eq(schema.connection.publicId, publicId)
-				)
+				const { publicId, ...rest } = data
+				const res = await db.update(schema.connection).set(rest).where(eq(schema.connection.publicId, publicId))
 				return { res, publicId }
 			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {
-				const res = await db.update(schema.integration).set({
-					deletedAt: new Date(),
-				}).where(
-					eq(schema.integration.publicId, publicId)
-				)
+				const res = await db
+					.update(schema.integration)
+					.set({
+						deletedAt: new Date(),
+					})
+					.where(eq(schema.integration.publicId, publicId))
 				return { res }
-			}
+			},
 		},
 		integration: {
 			table: new DrizzleTable("integration", schema.integration, db),
-			getOne: async ({ publicId, includeDeleted = false}: { publicId: string, includeDeleted?: boolean }) => {
+			getOne: async ({ publicId, includeDeleted = false }: { publicId: string; includeDeleted?: boolean }) => {
 				let filter
 				if (!includeDeleted) {
-					filter = and(
-						eq(schema.integration.publicId, publicId),
-						isNull(schema.integration.deletedAt)
-					)
-				} else{
+					filter = and(eq(schema.integration.publicId, publicId), isNull(schema.integration.deletedAt))
+				} else {
 					filter = eq(schema.integration.publicId, publicId)
 				}
 
@@ -188,14 +184,11 @@ export function connectDB({
 					},
 				})
 			},
-			getMany: async ({ customerId, includeDeleted = false }: { customerId: string, includeDeleted?: boolean }) => {
+			getMany: async ({ customerId, includeDeleted = false }: { customerId: string; includeDeleted?: boolean }) => {
 				let filter
 				if (!includeDeleted) {
-					filter = and(
-						eq(schema.integration.customerId, customerId),
-						isNull(schema.integration.deletedAt)
-					)
-				} else{
+					filter = and(eq(schema.integration.customerId, customerId), isNull(schema.integration.deletedAt))
+				} else {
 					filter = eq(schema.integration.customerId, customerId)
 				}
 
@@ -214,14 +207,19 @@ export function connectDB({
 				})
 				return { res, publicId }
 			},
-			markAsDeleted: async ({ publicId }: { publicId: string }) => {
-				const res = await db.update(schema.integration).set({
-					deletedAt: new Date(),
-				}).where(
-					eq(schema.integration.publicId, publicId)
-				)
+			update: async (data: Omit<schema.InsertIntegration, "customerId">) => {
+				const res = await db.update(schema.integration).set(data).where(eq(schema.integration.publicId, data.publicId))
 				return { res }
-			}
+			},
+			markAsDeleted: async ({ publicId }: { publicId: string }) => {
+				const res = await db
+					.update(schema.integration)
+					.set({
+						deletedAt: new Date(),
+					})
+					.where(eq(schema.integration.publicId, publicId))
+				return { res }
+			},
 		},
 	}
 }

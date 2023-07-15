@@ -6,16 +6,14 @@ import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
 import { DatabaseIcon } from "@/components/icons/pika/database"
-import { IconProps } from "@/components/icons/pika/types"
-import { MinusIcon } from "@/components/icons/pika/minus"
 import { Separator } from "@/components/ui/separator"
-import * as Tooltip from "@radix-ui/react-tooltip"
-import * as Dialog from "@radix-ui/react-dialog"
 import { NewIntegrationForm } from "@/app/(pages)/(integration)/_components/NewIntegrationForm"
 import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "db/src/drizzle/integrations/data"
 import { IntegrationTool } from "db/src/drizzle/integrations/common"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
-const IntegrationFeatureIcon = (props: { slug: string, className: string }) =>
+const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	({
 		authentication: <ShieldCheckIcon {...props} />,
 		database: <DatabaseIcon {...props} />,
@@ -25,7 +23,6 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 	const { slug, name, subtitle, categories, features, disabled } = integration
 
 	const [coords, setCoords] = useState({ x: 50, y: 50 })
-	const [isHovered, setIsHovered] = useState(false)
 	const [modalOpen, setModalOpen] = useState<boolean>(false)
 
 	const borderStyle = {
@@ -35,10 +32,10 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 	return (
 		<>
 			<Card
-				className={`w-full h-full cursor-pointer select-none shadow-sm transition-all hover:shadow-gray-200 ${(disabled ? "opacity-50" : "")}`}
+				className={`group w-full h-full cursor-pointer select-none shadow-sm transition-all hover:shadow-gray-200 ${
+					disabled && "opacity-50"
+				}`}
 				onMouseMove={() => setCoords({ x: 50, y: 50 })}
-				onMouseEnter={() => setIsHovered(true)}
-				onMouseLeave={() => setIsHovered(false)}
 				onMouseDown={() => setModalOpen(true)}
 				style={borderStyle}
 			>
@@ -50,27 +47,24 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 						</div>
 						<div className="flex ml-auto gap-2">
 							{features?.map((feature) => (
-								<Tooltip.Provider delayDuration={200} key={feature}>
-									<Tooltip.Root>
-										<Tooltip.Trigger asChild>
+								<TooltipProvider key={feature}>
+									<Tooltip delayDuration={100}>
+										<TooltipTrigger>
 											<IntegrationFeatureIcon slug={feature} className="w-4 h-4" />
-										</Tooltip.Trigger>
-										<Tooltip.Portal>
-											<Tooltip.Content className="TooltipContent" sideOffset={5}>
-												<Card className="p-2">
-													<div className="flex flex-col gap-1">
-														<div className="flex flex-row h-full gap-2 items-center">
-															<IntegrationFeatureIcon slug={feature} className="w-4 h-4" />
-															<p className="text-sm font-semibold">{INTEGRATION_FEATURES[feature].name}</p>
-														</div>
-														<p className="text-xs text-muted-foreground ml-6">{INTEGRATION_FEATURES[feature].description}</p>
-													</div>
-												</Card>
-												<Tooltip.Arrow className="TooltipArrow" />
-											</Tooltip.Content>
-										</Tooltip.Portal>
-									</Tooltip.Root>
-								</Tooltip.Provider>
+										</TooltipTrigger>
+										<TooltipContent sideOffset={5}>
+											<div className="flex flex-col gap-1">
+												<div className="flex flex-row h-full gap-2 items-center">
+													<IntegrationFeatureIcon slug={feature} className="w-4 h-4" />
+													<p className="text-sm font-semibold">{INTEGRATION_FEATURES[feature].name}</p>
+												</div>
+												<p className="text-xs text-muted-foreground ml-6">
+													{INTEGRATION_FEATURES[feature].description}
+												</p>
+											</div>
+										</TooltipContent>
+									</Tooltip>
+								</TooltipProvider>
 							))}
 						</div>
 					</div>
@@ -82,14 +76,7 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 							<Badge
 								variant="outline"
 								key={`badge-${category}`}
-								className="transition-all"
-								style={
-									isHovered
-										? {
-												boxShadow: "0 0 0 1px rgba(190, 190, 210, 0.15)",
-										  }
-										: {}
-								}
+								className="transition-all group-hover:shadow-badgeHover"
 							>
 								{INTEGRATION_CATERGORIES[category].name}
 							</Badge>
@@ -98,29 +85,20 @@ export const IntegrationToolCard = ({ integration }: { integration: IntegrationT
 				</div>
 			</Card>
 
-			{integration.config && (!integration.disabled) ? (
-				<Dialog.Root open={modalOpen} onOpenChange={(open) => setModalOpen(open)}>
-					<Dialog.Content
-						className="w-screen h-screen m-0 p-0 top-0 left-0 flex justify-center items-center z-50 fixed"
-						style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
-						onMouseDown={() => setModalOpen(false)}
-					>
-						<Card
-							className="max-w-screen-sm p-4 flex flex-col gap-3 select-none fixed"
-							onMouseDown={(e) => e.stopPropagation()}
-						>
-							<div className="flex flex-row gap-4 ml-1 mr-1">
+			{integration.config && !integration.disabled ? (
+				<Dialog open={modalOpen} onOpenChange={(open) => setModalOpen(open)}>
+					<DialogContent className="flex flex-col justify-center items-center">
+						<DialogHeader className="w-full">
+							<div className="flex flex-row gap-4 ml-1 mr-1 justify-start w-full">
 								<img src={`/assets/integrations/${slug}.svg`} alt={slug} className="w-7 h-7" />
 								<h3>Add {name} Integration</h3>
-								<div className="w-5 h-5 ml-auto" onMouseDown={() => setModalOpen(false)}>
-									<MinusIcon className="w-5 h-5 hover:bg-g hover:bg-opacity-20 hover:bg-white rounded" />
-								</div>
 							</div>
-							<Separator />
-							<NewIntegrationForm integration={integration} onClose={() => setModalOpen(false)} />
-						</Card>
-					</Dialog.Content>
-				</Dialog.Root>
+						</DialogHeader>
+
+						<Separator />
+						<NewIntegrationForm integration={integration} onClose={() => setModalOpen(false)} />
+					</DialogContent>
+				</Dialog>
 			) : null}
 		</>
 	)

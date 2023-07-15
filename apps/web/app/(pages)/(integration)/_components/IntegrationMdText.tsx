@@ -35,7 +35,13 @@ function parseMarkdown(markdown: string) {
 					accumulator = ""
 				}
 				elements.push(
-					<a href={markdown.substring(endText + 2, endUrl)} rel="noreferrer" target="_blank" className="underline">
+					<a
+						key={`link-${elements.length}`}
+						href={markdown.substring(endText + 2, endUrl)}
+						rel="noreferrer"
+						target="_blank"
+						className="underline"
+					>
 						{markdown.substring(i + 1, endText)}
 					</a>,
 				)

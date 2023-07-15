@@ -7,14 +7,18 @@ import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
 import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { IntegrationToolColumn } from "@/app/(pages)/(integration)/integrations/page"
-import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
-import { UseTRPCActionResult } from "@trpc/next/app-dir/client"
- 
 
-export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any) => ColumnDef<IntegrationToolColumn>[] = (
-	deleteIntegration,
-	router
-) => [
+import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
+import { IntegrationsActions } from "@/app/(pages)/(integration)/_components/IntegrationsActions"
+import type {
+	deleteIntegrationAction,
+	updateIntegrationAction,
+} from "@/app/(pages)/(integration)/integrations/_actions"
+
+export const columns: (
+	deleteAction: typeof deleteIntegrationAction,
+	updateAction: typeof updateIntegrationAction,
+) => ColumnDef<IntegrationToolColumn>[] = (deleteAction, updateAction) => [
 	{
 		accessorKey: "tool",
 		header: "Tool",
@@ -53,7 +57,7 @@ export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any)
 		},
 	},
 	{
-		accessorKey: "sources",
+		accessorKey: "source",
 		header: "Sources",
 		cell: ({ cell }) => {
 			const sources = (cell.getValue() as any[]) ?? []
@@ -68,20 +72,19 @@ export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any)
 	},
 	{
 		accessorKey: "publicId",
-		header: "",
-		cell: ({ cell }) => {
+		header: () => <p className="text-right">Actions</p>,
+		cell: ({ row }) => {
+			const integration = row.original
+			const tool = integration.tool as keyof typeof INTEGRATIONS
 			return (
-				<div className="float-right">
-					<Button
-						variant="ghost"
-						onClick={() => {
-							deleteIntegration.mutate(cell.getValue())
-							router.refresh()
-						}}
-					>
-						<DeleteDustbinIcon className="h-4 w-4" />
-					</Button>
-				</div>
+				<IntegrationsActions
+					tool={tool}
+					numOfSources={integration.source.length}
+					integrationId={integration.publicId}
+					updateAction={updateAction}
+					deleteAction={deleteAction}
+					data={integration}
+				/>
 			)
 		},
 	},

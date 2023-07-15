@@ -4,20 +4,17 @@ import { IntegrationToolField } from "@/app/(pages)/(integration)/_components/In
 import { createIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
 import { LabeledSeparator } from "@/components/LabeledSeparator"
 import { useAction } from "@/server/client"
-import { IntegrationTool } from "db/src/drizzle/integrations/common"
+import { IntegrationTool, createZodIntegrationSchema } from "db/src/drizzle/integrations/common"
 import { notFound, useRouter } from "next/navigation"
-import * as Form from "@radix-ui/react-form"
 import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 
 export const NewIntegrationForm = ({
-	integration: {
-		config,
-		slug
-	},
-	onClose
+	integration: { config, slug },
+	onClose,
 }: {
 	integration: IntegrationTool
 	onClose?: (id: string) => void
@@ -29,34 +26,43 @@ export const NewIntegrationForm = ({
 	const createIntegration = useAction(createIntegrationAction, {
 		onSuccess(data) {
 			onClose?.(data.id)
-			router.replace('/integrations')
+			router.refresh()
 		},
 	})
 
-	function onSubmit(values: any) {
-		const {name, ...data} = Object.fromEntries(new FormData(values.currentTarget));
+	function onSubmit({ name, ...data }: any) {
 		createIntegration.mutate({
 			config: data,
-			tool: slug as any,
-			name: name as string,
+			tool: slug,
+			name: name,
 		})
 	}
+	const schema = createZodIntegrationSchema(config)
+
+	const form = useForm<z.infer<typeof schema>>({
+		resolver: zodResolver(schema),
+	})
 
 	return (
-		<Form.Root className="space-y-2" onSubmit={(onSubmit)}>
-			{Object.entries(config.general).map(([key, config]) => {
-				return <IntegrationToolField fieldDef={config} pathKey={key} key={key} />
-			})}
-			<LabeledSeparator label="Configuration" className="pt-4" />
-			{Object.entries(config.fields).map(([key, integField]) => {
-				return <IntegrationToolField fieldDef={integField as any} pathKey={key} key={key} />
-			})}
+		<Form {...form}>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full">
+				{Object.entries(config.general).map(([key, config]) => (
+					<IntegrationToolField control={form.control} fieldDef={config} pathKey={key} key={key} />
+				))}
+				<LabeledSeparator label="Configuration" className="pt-4" />
+				{Object.entries(config.fields).map(([key, integField]) => (
+					<IntegrationToolField control={form.control} fieldDef={integField as any} pathKey={key} key={key} />
+				))}
 
-			<Form.Submit type="submit" disabled={createIntegration.status === "loading"} className="w-full">
-				<Button type="submit" disabled={createIntegration.status === "loading"} className="w-full mt-5" >
+				<Button
+					type="submit"
+					disabled={createIntegration.status === "loading"}
+					loading={createIntegration.status === "loading"}
+					className="w-full mt-5"
+				>
 					Create Integration
 				</Button>
-			</Form.Submit>
-		</Form.Root>
+			</form>
+		</Form>
 	)
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Destination, Integration, Source } from "db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
@@ -32,6 +32,7 @@ interface NewSourceFormProps {
 }
 
 export function NewConnectionForm({ action, sources, destinations, integrations }: NewSourceFormProps) {
+	const searchParams = useSearchParams()
 	const [sourceModal, setSourceModal] = useState(false)
 	const [destinationModal, setDestinationModal] = useState(false)
 
@@ -41,8 +42,8 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			name: "",
-			publicSourceId: sources[0]?.publicId || "",
-			publiceDestinationId: destinations[0]?.publicId || "",
+			publicSourceId: searchParams.get("source") || sources[0]?.publicId || "",
+			publiceDestinationId: searchParams.get("destination") || destinations[0]?.publicId || "",
 		},
 	})
 
@@ -70,7 +71,7 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 							<FormItem>
 								<FormLabel>Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Connection ..." {...field} required/>
+									<Input placeholder="Connection ..." {...field} required />
 								</FormControl>
 								<FormDescription>A name to identify your connection.</FormDescription>
 								<FormMessage />

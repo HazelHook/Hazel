@@ -15,7 +15,12 @@ const NewConnectionPage = async () => {
 
 	return (
 		<main className="p-4">
-			<NewConnectionForm action={createConnectionAction} destinations={destinations} sources={sources} integrations={integrations}/>
+			<NewConnectionForm
+				action={createConnectionAction}
+				destinations={destinations}
+				sources={sources}
+				integrations={integrations}
+			/>
 		</main>
 	)
 }
