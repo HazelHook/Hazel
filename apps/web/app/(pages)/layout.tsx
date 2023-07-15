@@ -26,7 +26,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 						{children}
 					</div>
 				</div>
-				<Toaster position="top-right" />
+				<Toaster position="top-center" />
 			</div>
 		</TooltipProvider>
 	)
