@@ -4,7 +4,7 @@ import { IntegrationToolField } from "@/app/(pages)/(integration)/_components/In
 import { createIntegrationAction, updateIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
 import { LabeledSeparator } from "@/components/LabeledSeparator"
 import { useAction } from "@/server/client"
-import { IntegrationTool } from "db/src/drizzle/integrations/common"
+import { IntegrationTool, createZodIntegrationSchema } from "db/src/drizzle/integrations/common"
 import { notFound, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
@@ -31,7 +31,10 @@ export const UpdateIntegrationForm = ({
 
 	if (!config) return notFound()
 
-	const form = useForm({
+	const schema = createZodIntegrationSchema(integration.config!)
+
+	const form = useForm<z.infer<typeof schema>>({
+		resolver: zodResolver(schema),
 		defaultValues: data as any,
 	})
 

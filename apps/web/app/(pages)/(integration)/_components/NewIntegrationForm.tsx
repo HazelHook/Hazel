@@ -4,11 +4,13 @@ import { IntegrationToolField } from "@/app/(pages)/(integration)/_components/In
 import { createIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
 import { LabeledSeparator } from "@/components/LabeledSeparator"
 import { useAction } from "@/server/client"
-import { IntegrationTool } from "db/src/drizzle/integrations/common"
+import { IntegrationTool, createZodIntegrationSchema } from "db/src/drizzle/integrations/common"
 import { notFound, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
 
 export const NewIntegrationForm = ({
 	integration: { config, slug },
@@ -35,8 +37,11 @@ export const NewIntegrationForm = ({
 			name: name,
 		})
 	}
+	const schema = createZodIntegrationSchema(config)
 
-	const form = useForm({})
+	const form = useForm<z.infer<typeof schema>>({
+		resolver: zodResolver(schema),
+	})
 
 	return (
 		<Form {...form}>
