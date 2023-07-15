@@ -8,21 +8,28 @@ import { deleteIntegrationAction } from "@/app/(pages)/(integration)/integration
 import { useRouter } from "next/navigation"
 
 export const IntegrationsTable = ({
-    integrations
+	integrations,
+	deleteAction,
 }: {
-    integrations: IntegrationToolColumn[]
+	integrations: IntegrationToolColumn[]
+	deleteAction: typeof deleteIntegrationAction
 }) => {
 	const router = useRouter()
-	const deleteIntegration = useAction(deleteIntegrationAction, {
-		onSuccess(data) {}, // TODO
+	const deleteIntegration = useAction(deleteAction, {
+		onSuccess(data) {
+			router.refresh()
+		}, // TODO
 		onError(error) {}, // TODO
 	})
 
 	return (
-        <>
-			
-        	<DataTable disableRedirect rootPath="/integrations" columns={columns(deleteIntegration, router)} data={integrations as any} />
-        </> 
+		<>
+			<DataTable
+				disableRedirect
+				rootPath="/integrations"
+				columns={columns(deleteIntegration, router)}
+				data={integrations as any}
+			/>
+		</>
 	)
 }
-
