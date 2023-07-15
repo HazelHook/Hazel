@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
+import Link, { LinkProps } from "next/link"
 import { usePathname } from "next/navigation"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
 
@@ -21,13 +21,14 @@ const LinkTabList = React.forwardRef<
 	/>
 ))
 
-const LinkTab = React.forwardRef<React.ElementRef<typeof Link>, React.ComponentPropsWithoutRef<typeof Link>>(
+const LinkTab = React.forwardRef<LinkProps, React.ComponentPropsWithoutRef<React.ElementType>>(
 	({ className, ...props }, ref) => {
 		const href = props.href
 		const pathname = usePathname()
 
 		return (
 			<Link
+				// @ts-expect-error
 				ref={ref}
 				className={cn(
 					"inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
