@@ -19,6 +19,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog"
+import { toast } from "sonner"
 
 export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any) => ColumnDef<IntegrationToolColumn>[] =
 	(deleteIntegration, router) => [
@@ -101,7 +102,11 @@ export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any)
 									<Button
 										type="submit"
 										onClick={() => {
-											deleteIntegration.mutate(cell.getValue())
+											toast.promise(deleteIntegration.mutateAsync(cell.getValue()), {
+												loading: "Deleting Integration...",
+												success: "Integration Successfully Integrated",
+												error: "There was an error deleting your Integration. Please try again or contact us.",
+											})
 										}}
 										variant="destructive"
 									>
