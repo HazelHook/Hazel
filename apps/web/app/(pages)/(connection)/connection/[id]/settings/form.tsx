@@ -16,7 +16,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AddIcon } from "@/components/icons/pika/add"
-import { createDestinationAction } from "@/app/(pages)/(destination)/destination/new/_actions"
+import { createDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
 import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
@@ -73,7 +73,7 @@ export function EditConnectionForm({ action, sources, destinations, integrations
 							<FormItem>
 								<FormLabel>Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Connection ..." {...field} required/>
+									<Input placeholder="Connection ..." {...field} required />
 								</FormControl>
 								<FormDescription>A name to identify your connection.</FormDescription>
 								<FormMessage />
@@ -125,7 +125,7 @@ export function EditConnectionForm({ action, sources, destinations, integrations
 							Create New Source
 						</Button>
 					</div>
-					
+
 					<FormField
 						control={form.control}
 						name="publiceDestinationId"

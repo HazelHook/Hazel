@@ -1,10 +1,10 @@
 "use server"
 
 import { createAction, protectedProcedure } from "@/server/trpc"
-import { appConfig } from "@/lib/config"
 import db from "@/lib/db"
 
-import { formSchema } from "./schema"
+import { formSchema } from "./destination/new/schema"
+import { z } from "zod"
 
 export const createDestinationAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
@@ -16,5 +16,13 @@ export const createDestinationAction = createAction(
 		return {
 			id: source.publicId,
 		}
+	}),
+)
+
+export const deleteDestinationAction = createAction(
+	protectedProcedure.input(z.string()).mutation(async (opts) => {
+		await db.integration.markAsDeleted({
+			publicId: opts.input,
+		})
 	}),
 )

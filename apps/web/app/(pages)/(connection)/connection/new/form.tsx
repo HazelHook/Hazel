@@ -16,7 +16,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AddIcon } from "@/components/icons/pika/add"
-import { createDestinationAction } from "@/app/(pages)/(destination)/destination/new/_actions"
+import { createDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
 import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"

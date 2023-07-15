@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-import type { createDestinationAction } from "./_actions"
+import type { createDestinationAction } from "../../_actions"
 import { formSchema } from "./schema"
 
 interface NewDestinationFormProps {
@@ -60,7 +60,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Destination ..." {...field} required/>
+								<Input placeholder="Destination ..." {...field} required />
 							</FormControl>
 							<FormDescription>A name to identify your destination.</FormDescription>
 							<FormMessage />
@@ -74,7 +74,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 						<FormItem>
 							<FormLabel>Destination Url</FormLabel>
 							<FormControl>
-								<Input placeholder="Url" {...field} required/>
+								<Input placeholder="Url" {...field} required />
 							</FormControl>
 							<FormDescription>HTTP endpoint of your backend or api</FormDescription>
 							<FormMessage />
