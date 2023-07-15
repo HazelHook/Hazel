@@ -20,6 +20,7 @@ const DestinationPage = async ({
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	const { userId } = auth()
+
 	if (!destination) {
 		notFound()
 	}
