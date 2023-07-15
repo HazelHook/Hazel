@@ -1,8 +1,11 @@
 "use client"
 
+import Link from "next/link"
 import { ColumnDef } from "@tanstack/react-table"
+import { TRPC_ERROR_CODE_NUMBER, TRPCResponse } from "@trpc/server/rpc"
 import { Destination } from "db/src/drizzle/schema"
 import { Connection } from "reactflow"
+import { typeToFlattenedError } from "zod"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
@@ -11,13 +14,9 @@ import { Button } from "@/components/ui/button"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
-
-import { DestinationsActions } from "@/app/(pages)/(destination)/_components/DestinationsActions"
-import { TRPCResponse, TRPC_ERROR_CODE_NUMBER } from "@trpc/server/rpc"
-import { typeToFlattenedError } from "zod"
-import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
-import Link from "next/link"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
+import { DestinationsActions } from "@/app/(pages)/(destination)/_components/DestinationsActions"
+import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
 
 export const columns: (
 	deleteAction: typeof deleteDestinationAction,

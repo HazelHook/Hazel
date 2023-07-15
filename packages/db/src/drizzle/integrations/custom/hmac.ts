@@ -1,5 +1,4 @@
-import { createIntegrationForm } from "../common";
-
+import { createIntegrationForm } from "../common"
 
 export const hmacForm = createIntegrationForm({
 	name: "hmac",

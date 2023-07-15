@@ -9,7 +9,7 @@ const commonFields = {
 
 	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
 	updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
-	deletedAt: timestamp("deleted_at")
+	deletedAt: timestamp("deleted_at"),
 }
 
 export const buildMysqlTable = <TTableName extends string, TColumnsMap extends Record<string, any>>(

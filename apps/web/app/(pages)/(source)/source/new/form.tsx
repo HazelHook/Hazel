@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { IntegrationTools } from "db/src/drizzle/integrations/data"
+import { Integration } from "db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -9,13 +11,11 @@ import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-
-import { formSchema } from "./schema"
-import { IntegrationTools } from "db/src/drizzle/integrations/data"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Integration } from "db/src/drizzle/schema"
 import { editSourceAction } from "@/app/(pages)/(source)/source/[id]/settings/_actions"
 import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
+
+import { formSchema } from "./schema"
 
 interface NewSourceFormProps {
 	action: typeof createSourceAction

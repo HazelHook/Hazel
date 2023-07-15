@@ -1,8 +1,8 @@
 import { InferModel, relations } from "drizzle-orm"
-import { boolean, index, int, json, text, varchar, mysqlEnum } from "drizzle-orm/mysql-core"
+import { boolean, index, int, json, mysqlEnum, text, varchar } from "drizzle-orm/mysql-core"
 
-import { buildMysqlTable } from "./common"
 import { INTEGRATIONS } from "../integrations/data"
+import { buildMysqlTable } from "./common"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 })

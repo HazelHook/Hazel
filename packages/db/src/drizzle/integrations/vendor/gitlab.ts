@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "../common";
+import { createIntegrationForm } from "../common"
 
 export const gitlabForm = createIntegrationForm({
 	name: "gitlab",
@@ -7,8 +7,7 @@ export const gitlabForm = createIntegrationForm({
 			type: "secret",
 			label: "API key",
 			placeholder: "API key...",
-			description:
-				"The webhook signing secret for your GitLab account.",
+			description: "The webhook signing secret for your GitLab account.",
 		},
 	},
 })

@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "../common";
+import { createIntegrationForm } from "../common"
 
 export const typeformForm = createIntegrationForm({
 	name: "typeform",
@@ -7,8 +7,7 @@ export const typeformForm = createIntegrationForm({
 			type: "secret",
 			label: "Webhook Signing Secret",
 			placeholder: "Secret key...",
-			description:
-				"The webhook signing secret for your Typeform account.",
+			description: "The webhook signing secret for your Typeform account.",
 		},
 	},
 })

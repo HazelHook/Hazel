@@ -43,7 +43,8 @@ export const Integrations = () => {
 						Integrations
 					</span>
 					<h2 data-aos="fade-down" className="text-3xl tracking-tighter mt-6 font-light lg:text-4xl text-white">
-						Easily integrates<span className="md:block text-zinc-400">with all your providers</span>
+						Easily integrates
+						<span className="md:block text-zinc-400">with all your providers</span>
 					</h2>
 					<p className="mt-4 text-base text-white max-w-md" data-aos="fade-down" data-aos-delay="100">
 						Easily validate webhooks automatically by using one of our integrations. If one is still missing just let us

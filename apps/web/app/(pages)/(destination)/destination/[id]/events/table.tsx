@@ -16,13 +16,7 @@ export const TableWrapper = ({
 	maxItems: number
 	destination: CacheDestination
 }) => {
-	return (
-		<DataTable
-			columns={columns}
-			data={data}
-			maxItems={maxItems}
-		/>
-	)
+	return <DataTable columns={columns} data={data} maxItems={maxItems} />
 }
 
 const ListItem = ({

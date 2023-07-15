@@ -1,10 +1,9 @@
-import { UpdateIntegrationForm } from "@/app/(pages)/(integration)/_components/UpdateIntegrationForm"
-import type {
-	deleteIntegrationAction,
-	updateIntegrationAction,
-} from "@/app/(pages)/(integration)/integrations/_actions"
-import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
-import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import { useRouter } from "next/navigation"
+import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
+import { Integration } from "db/src/drizzle/schema"
+import { toast } from "sonner"
+
+import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
 import {
 	Dialog,
@@ -16,11 +15,13 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog"
-import { useAction } from "@/server/client"
-import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
-import { Integration } from "db/src/drizzle/schema"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
+import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
+import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import { UpdateIntegrationForm } from "@/app/(pages)/(integration)/_components/UpdateIntegrationForm"
+import type {
+	deleteIntegrationAction,
+	updateIntegrationAction,
+} from "@/app/(pages)/(integration)/integrations/_actions"
 
 export const IntegrationsActions = ({
 	updateAction,

@@ -43,7 +43,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		categories: ["development", "custom"],
 		subtitle: "Verify the authenticity of the webhook request using HMAC.",
 		features: ["authentication"],
-		config: hmacForm
+		config: hmacForm,
 	},
 	basic_auth: {
 		slug: "basic_auth",
@@ -51,7 +51,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		categories: ["development", "custom"],
 		subtitle: "Verify the authenticity of the webhook request using Basic Auth.",
 		features: ["authentication"],
-		config: basicAuthForm
+		config: basicAuthForm,
 	},
 	api_key: {
 		slug: "api_key",
@@ -59,7 +59,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		categories: ["development", "custom"],
 		subtitle: "Verify the authenticity of the webhook request using an API key.",
 		features: ["authentication"],
-		config: apiKeyForm
+		config: apiKeyForm,
 	},
 	stripe: {
 		slug: "stripe",
@@ -68,7 +68,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Easily integrate and automate webhook processing for Stripe, a comprehensive solution for online payments, and manage transactions more efficiently.",
 		features: ["database", "authentication"],
-		config: stripeForm
+		config: stripeForm,
 	},
 	github: {
 		slug: "github",
@@ -77,7 +77,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Streamline your development and project management processes with automated webhook handling for GitHub, a platform that revolutionized collaboration in coding.",
 		features: ["authentication"],
-		config: githubForm
+		config: githubForm,
 	},
 	shopify: {
 		slug: "shopify",
@@ -86,7 +86,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Simplify e-commerce transaction processing by integrating Shopify's webhook services, making online store management and payments a breeze.",
 		features: ["authentication"],
-		config: shopifyForm
+		config: shopifyForm,
 	},
 	gitlab: {
 		slug: "gitlab",
@@ -104,7 +104,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Empower your project management capabilities by integrating webhook processing for Linear, thereby ensuring seamless issue tracking and task assignments.",
 		features: ["authentication"],
-		config: linearForm
+		config: linearForm,
 	},
 	postmark: {
 		slug: "postmark",
@@ -113,7 +113,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Improve your CRM and communication processes with Postmark by enabling efficient webhook processing, ensuring timely email deliveries and customer interactions.",
 		features: ["authentication"],
-		config: postmarkForm
+		config: postmarkForm,
 	},
 	typeform: {
 		slug: "typeform",
@@ -122,7 +122,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Enhance your application's interaction capabilities by integrating with Typeform's webhook services, turning responses into actionable insights quickly and easily.",
 		features: ["database", "authentication"],
-		config: typeformForm
+		config: typeformForm,
 	},
 	mailgun: {
 		slug: "mailgun",
@@ -131,7 +131,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Optimize your CRM and communication strategies by integrating Mailgun's webhook services, ensuring efficient email delivery and performance tracking.",
 		features: ["authentication"],
-		config: mailgunForm
+		config: mailgunForm,
 	},
 	sendgrid: {
 		slug: "sendgrid",
@@ -140,7 +140,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Enhance your email communication workflows with Sendgrid's webhooks, for more effective engagement tracking and customer communication.",
 		features: ["authentication"],
-		config: sendgridForm
+		config: sendgridForm,
 	},
 	resend: {
 		slug: "resend",
@@ -149,7 +149,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle:
 			"Boost your CRM and communication efforts by integrating Resend's webhook services, guaranteeing efficient message delivery and user engagement tracking.",
 		features: ["authentication"],
-		config: resendForm
+		config: resendForm,
 	},
 	ayden: {
 		slug: "ayden",
@@ -159,7 +159,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 			"Take control of your online payments by integrating Ayden's webhooks, enabling seamless and secure transaction processing for your business.",
 		features: ["authentication"],
 		disabled: true,
-		config: aydenForm
+		config: aydenForm,
 	},
 	jira: {
 		slug: "jira",
@@ -169,7 +169,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 			"Enhance your project management workflows by integrating with Jira's webhook system, providing real-time updates and issue tracking capabilities.",
 		features: ["authentication"],
 		config: jiraForm,
-		disabled: true
+		disabled: true,
 	},
 	svix: {
 		slug: "svix",
@@ -179,7 +179,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 			"Facilitate your development process with Svix, seamlessly connecting your application's webhook events, and reduce the overhead of webhook management.",
 		features: ["authentication"],
 		config: svixForm,
-		disabled: true
+		disabled: true,
 	},
 }
 

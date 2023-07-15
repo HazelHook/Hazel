@@ -1,8 +1,9 @@
 "use server"
 
+import { z } from "zod"
+
 import { createAction, protectedProcedure } from "@/server/trpc"
 import db from "@/lib/db"
-import { z } from "zod"
 
 const formSchema = z.object({
 	name: z.string(),

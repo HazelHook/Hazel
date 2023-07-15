@@ -1,9 +1,11 @@
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
+import { Separator } from "@/components/ui/separator"
 import { LogoIcon } from "@/components/icons/Logo"
 import { BarChartDownIcon } from "@/components/icons/pika/barChartDown"
 import { CardIcon } from "@/components/icons/pika/card"
+import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
 import { HomeIcon } from "@/components/icons/pika/home"
 import { LinkChainIcon } from "@/components/icons/pika/linkChain"
 import { PaperBagIcon } from "@/components/icons/pika/paperBag"
@@ -14,8 +16,6 @@ import { IconProps } from "@/components/icons/pika/types"
 import { AutomationIcon } from "./icons/pika/automation"
 import { GitCommitIcon } from "./icons/pika/gitCommit"
 import { SidebarClientItem } from "./SidebarItem"
-import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
-import { Separator } from "@/components/ui/separator"
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	params: {
@@ -75,18 +75,18 @@ export async function Sidebar({ className }: SidebarProps) {
 					</div>
 				</div>
 
-				<Separator/>
+				<Separator />
 
 				<div className="py-2 lg:px-4">
-				<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Setup</h2>
+					<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Setup</h2>
 					<div className="space-y-1">
 						<SidebarItem href={"/sources"} title={"Sources"} icon={GitCommitIcon} />
 						<SidebarItem href={"/connections"} title={"Connections"} icon={LinkChainIcon} />
 						<SidebarItem href={"/destinations"} title={"Destinations"} icon={AutomationIcon} />
 					</div>
 				</div>
-				
-				<Separator/>
+
+				<Separator />
 
 				<div className="py-2 lg:px-4">
 					<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Settings</h2>

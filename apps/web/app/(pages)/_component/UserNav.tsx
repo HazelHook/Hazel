@@ -16,13 +16,13 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { AutomationIcon } from "@/components/icons/pika/automation"
+import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
+import { GitCommitIcon } from "@/components/icons/pika/gitCommit"
 import { HomeIcon } from "@/components/icons/pika/home"
+import { LinkChainIcon } from "@/components/icons/pika/linkChain"
 import { LogOutRightIcon } from "@/components/icons/pika/logOutRight"
 import { Settings01Icon } from "@/components/icons/pika/settings01"
-import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
-import { LinkChainIcon } from "@/components/icons/pika/linkChain"
-import { GitCommitIcon } from "@/components/icons/pika/gitCommit"
-import { AutomationIcon } from "@/components/icons/pika/automation"
 
 export function UserNav() {
 	const { signOut } = useAuth()

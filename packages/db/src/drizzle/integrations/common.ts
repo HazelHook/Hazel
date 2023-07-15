@@ -1,5 +1,7 @@
-import { INTEGRATIONS, INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "./data"
 import { z } from "zod"
+
+import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES, INTEGRATIONS } from "./data"
+
 export interface IntegrationToolCategoryData {
 	name: string
 	slug: string

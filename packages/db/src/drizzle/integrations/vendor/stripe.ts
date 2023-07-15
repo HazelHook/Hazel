@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "../common";
+import { createIntegrationForm } from "../common"
 
 export const stripeForm = createIntegrationForm({
 	name: "stripe",

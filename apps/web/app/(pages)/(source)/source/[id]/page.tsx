@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
 import { sub } from "date-fns"
@@ -13,7 +14,6 @@ import { DataTable } from "@/components/ui/data-table"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
 
 import { columns } from "./column"
-import Link from "next/link"
 
 const SourcePage = async ({
 	params,

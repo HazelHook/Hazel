@@ -1,24 +1,25 @@
-import React, {useMemo, useState, useLayoutEffect, type ReactNode} from 'react';
-import {type Styles} from '../styles.js';
+import React, { useLayoutEffect, useMemo, useState, type ReactNode } from "react"
+
+import { type Styles } from "../styles.js"
 
 export type Props<T> = {
 	/**
 	 * Array of items of any type to render using a function you pass as a component child.
 	 */
-	readonly items: T[];
+	readonly items: T[]
 
 	/**
 	 * Styles to apply to a container of child elements. See <Box> for supported properties.
 	 */
-	readonly style?: Styles;
+	readonly style?: Styles
 
 	/**
 	 * Function that is called to render every item in `items` array.
 	 * First argument is an item itself and second argument is index of that item in `items` array.
 	 * Note that `key` must be assigned to the root component.
 	 */
-	readonly children: (item: T, index: number) => ReactNode;
-};
+	readonly children: (item: T, index: number) => ReactNode
+}
 
 /**
  * `<Static>` component permanently renders its output above everything else.
@@ -33,33 +34,33 @@ export type Props<T> = {
  * to display a list of generated pages, while still displaying a live progress bar.
  */
 export default function Static<T>(props: Props<T>) {
-	const {items, children: render, style: customStyle} = props;
-	const [index, setIndex] = useState(0);
+	const { items, children: render, style: customStyle } = props
+	const [index, setIndex] = useState(0)
 
 	const itemsToRender: T[] = useMemo(() => {
-		return items.slice(index);
-	}, [items, index]);
+		return items.slice(index)
+	}, [items, index])
 
 	useLayoutEffect(() => {
-		setIndex(items.length);
-	}, [items.length]);
+		setIndex(items.length)
+	}, [items.length])
 
 	const children = itemsToRender.map((item, itemIndex) => {
-		return render(item, index + itemIndex);
-	});
+		return render(item, index + itemIndex)
+	})
 
 	const style: Styles = useMemo(
 		() => ({
-			position: 'absolute',
-			flexDirection: 'column',
-			...customStyle
+			position: "absolute",
+			flexDirection: "column",
+			...customStyle,
 		}),
-		[customStyle]
-	);
+		[customStyle],
+	)
 
 	return (
 		<ink-box internal_static style={style}>
 			{children}
 		</ink-box>
-	);
+	)
 }

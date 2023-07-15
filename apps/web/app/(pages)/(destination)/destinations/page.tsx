@@ -3,19 +3,14 @@ import { notFound } from "next/navigation"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { buttonVariants } from "@/components/ui/button"
-import { AddIcon } from "@/components/icons/pika/add"
-
 import { PromiseType } from "@/lib/ts/helpers"
+import { buttonVariants } from "@/components/ui/button"
+import { Container } from "@/components/ui/container"
+import { AddIcon } from "@/components/icons/pika/add"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { DestinationTable } from "@/app/(pages)/(destination)/_components/DestinationTable"
-import { Container } from "@/components/ui/container"
 
-async function dataFetch({
-	customerId,
-}: {
-	customerId: string
-}) {
+async function dataFetch({ customerId }: { customerId: string }) {
 	const destinations = await db.destination.getMany({
 		customerId,
 	})

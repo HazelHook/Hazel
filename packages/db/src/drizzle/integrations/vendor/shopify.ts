@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "../common";
+import { createIntegrationForm } from "../common"
 
 export const shopifyForm = createIntegrationForm({
 	name: "shopify",
@@ -7,8 +7,7 @@ export const shopifyForm = createIntegrationForm({
 			type: "secret",
 			label: "Webhook Signing Secret",
 			placeholder: "Secret key...",
-			description:
-				"The webhook signing secret for your Shopify account.",
+			description: "The webhook signing secret for your Shopify account.",
 		},
 	},
 })

@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { useAction } from "@/server/client"
+import { getCachedConnection } from "@/lib/orm"
+import { PromiseType } from "@/lib/ts/helpers"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -16,15 +18,13 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AddIcon } from "@/components/icons/pika/add"
+import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
 import { createDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
 import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import { formSchema } from "./schema"
-import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
-import { PromiseType } from "@/lib/ts/helpers"
-import { getCachedConnection } from "@/lib/orm"
 
 interface NewSourceFormProps {
 	action: typeof editConnectionAction

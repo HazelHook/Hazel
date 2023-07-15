@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "../common";
+import { createIntegrationForm } from "../common"
 
 export const svixForm = createIntegrationForm({
 	name: "svix",

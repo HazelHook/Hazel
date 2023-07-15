@@ -1,17 +1,17 @@
 "use client"
 
 import React, { useState } from "react"
+import { IntegrationTool } from "db/src/drizzle/integrations/common"
+import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "db/src/drizzle/integrations/data"
 
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
-import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
-import { DatabaseIcon } from "@/components/icons/pika/database"
-import { Separator } from "@/components/ui/separator"
-import { NewIntegrationForm } from "@/app/(pages)/(integration)/_components/NewIntegrationForm"
-import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "db/src/drizzle/integrations/data"
-import { IntegrationTool } from "db/src/drizzle/integrations/common"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Separator } from "@/components/ui/separator"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { DatabaseIcon } from "@/components/icons/pika/database"
+import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
+import { NewIntegrationForm } from "@/app/(pages)/(integration)/_components/NewIntegrationForm"
 
 const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	({
@@ -19,7 +19,11 @@ const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 		database: <DatabaseIcon {...props} />,
 	})[props.slug] || null
 
-export const IntegrationToolCard = ({ integration }: { integration: IntegrationTool }) => {
+export const IntegrationToolCard = ({
+	integration,
+}: {
+	integration: IntegrationTool
+}) => {
 	const { slug, name, subtitle, categories, features, disabled } = integration
 
 	const [coords, setCoords] = useState({ x: 50, y: 50 })

@@ -1,6 +1,8 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
+import { IntegrationToolSlug } from "db/src/drizzle/integrations/common"
+import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 import { Connection, Destination, Integration, Source } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
@@ -10,8 +12,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
-import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
-import { IntegrationToolSlug } from "db/src/drizzle/integrations/common"
 
 export type Column = Source & {
 	connections: Connection[]
@@ -103,7 +103,11 @@ export const columns: ColumnDef<Column>[] = [
 		accessorKey: "group",
 		header: ({ column }) => {
 			return (
-				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} className="w-full justify-center flex">
+				<Button
+					variant="ghost"
+					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+					className="w-full justify-center flex"
+				>
 					Group
 					{column.getIsSorted() === "asc" ? (
 						<ArrowUpIcon className="ml-2 h-4 w-4" />
@@ -114,9 +118,11 @@ export const columns: ColumnDef<Column>[] = [
 			)
 		},
 		cell: ({ cell }) => {
-			return <div className="w-full justify-center flex">
-				<p>-</p>
-			</div>
+			return (
+				<div className="w-full justify-center flex">
+					<p>-</p>
+				</div>
+			)
 		},
 	},
 	{

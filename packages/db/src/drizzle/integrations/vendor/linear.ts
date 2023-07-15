@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "../common";
+import { createIntegrationForm } from "../common"
 
 export const linearForm = createIntegrationForm({
 	name: "linear",
@@ -7,8 +7,7 @@ export const linearForm = createIntegrationForm({
 			type: "secret",
 			label: "Webhook Signing Secret",
 			placeholder: "Secret key...",
-			description:
-				"The webhook signing secret for your Linear account.",
+			description: "The webhook signing secret for your Linear account.",
 		},
 	},
 })

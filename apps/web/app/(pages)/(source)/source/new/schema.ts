@@ -8,5 +8,5 @@ export const formSchema = z.object({
 		})
 		.max(20),
 	url: z.union([z.literal(""), z.string().trim().url()]).optional(),
-	integrationId: z.string().optional()
+	integrationId: z.string().optional(),
 })

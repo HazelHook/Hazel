@@ -1,10 +1,11 @@
 "use server"
 
+import { z } from "zod"
+
 import { createAction, protectedProcedure } from "@/server/trpc"
 import db from "@/lib/db"
 
 import { formSchema } from "./destination/new/schema"
-import { z } from "zod"
 
 export const createDestinationAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {

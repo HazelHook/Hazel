@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "../common";
+import { createIntegrationForm } from "../common"
 
 export const githubForm = createIntegrationForm({
 	name: "github",
@@ -7,8 +7,7 @@ export const githubForm = createIntegrationForm({
 			type: "secret",
 			label: "Webhook Signing Secret",
 			placeholder: "Secret key...",
-			description:
-				"The webhook signing secret for your GitHub account.",
+			description: "The webhook signing secret for your GitHub account.",
 		},
 	},
 })

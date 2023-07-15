@@ -2,21 +2,21 @@
 	Style of the box border.
 	*/
 export interface BoxStyle {
-  readonly topLeft: string;
-  readonly top: string;
-  readonly topRight: string;
-  readonly right: string;
-  readonly bottomRight: string;
-  readonly bottom: string;
-  readonly bottomLeft: string;
-  readonly left: string;
+	readonly topLeft: string
+	readonly top: string
+	readonly topRight: string
+	readonly right: string
+	readonly bottomRight: string
+	readonly bottom: string
+	readonly bottomLeft: string
+	readonly left: string
 }
 
 /**
 	All box styles.
 	*/
 export interface Boxes {
-  /**
+	/**
 		@example
 		```
 		┌────┐
@@ -24,9 +24,9 @@ export interface Boxes {
 		└────┘
 		```
 		*/
-  readonly single: BoxStyle;
+	readonly single: BoxStyle
 
-  /**
+	/**
 		@example
 		```
 		╔════╗
@@ -34,9 +34,9 @@ export interface Boxes {
 		╚════╝
 		```
 		*/
-  readonly double: BoxStyle;
+	readonly double: BoxStyle
 
-  /**
+	/**
 		@example
 		```
 		╭────╮
@@ -44,9 +44,9 @@ export interface Boxes {
 		╰────╯
 		```
 		*/
-  readonly round: BoxStyle;
+	readonly round: BoxStyle
 
-  /**
+	/**
 		@example
 		```
 		┏━━━━┓
@@ -54,9 +54,9 @@ export interface Boxes {
 		┗━━━━┛
 		```
 		*/
-  readonly bold: BoxStyle;
+	readonly bold: BoxStyle
 
-  /**
+	/**
 		@example
 		```
 		╓────╖
@@ -64,9 +64,9 @@ export interface Boxes {
 		╙────╜
 		```
 		*/
-  readonly singleDouble: BoxStyle;
+	readonly singleDouble: BoxStyle
 
-  /**
+	/**
 		@example
 		```
 		╒════╕
@@ -74,9 +74,9 @@ export interface Boxes {
 		╘════╛
 		```
 		*/
-  readonly doubleSingle: BoxStyle;
+	readonly doubleSingle: BoxStyle
 
-  /**
+	/**
 		@example
 		```
 		+----+
@@ -84,9 +84,9 @@ export interface Boxes {
 		+----+
 		```
 		*/
-  readonly classic: BoxStyle;
+	readonly classic: BoxStyle
 
-  /**
+	/**
 		@example
 		```
 		↘↓↓↓↓↙
@@ -94,7 +94,7 @@ export interface Boxes {
 		↗↑↑↑↑↖
 		```
 		*/
-  readonly arrow: BoxStyle;
+	readonly arrow: BoxStyle
 }
 
 /**
@@ -118,84 +118,84 @@ console.log(cliBoxes.single);
 ```
 */
 export const cliBoxes: Boxes = {
-  single: {
-    topLeft: "┌",
-    top: "─",
-    topRight: "┐",
-    right: "│",
-    bottomRight: "┘",
-    bottom: "─",
-    bottomLeft: "└",
-    left: "│",
-  },
-  double: {
-    topLeft: "╔",
-    top: "═",
-    topRight: "╗",
-    right: "║",
-    bottomRight: "╝",
-    bottom: "═",
-    bottomLeft: "╚",
-    left: "║",
-  },
-  round: {
-    topLeft: "╭",
-    top: "─",
-    topRight: "╮",
-    right: "│",
-    bottomRight: "╯",
-    bottom: "─",
-    bottomLeft: "╰",
-    left: "│",
-  },
-  bold: {
-    topLeft: "┏",
-    top: "━",
-    topRight: "┓",
-    right: "┃",
-    bottomRight: "┛",
-    bottom: "━",
-    bottomLeft: "┗",
-    left: "┃",
-  },
-  singleDouble: {
-    topLeft: "╓",
-    top: "─",
-    topRight: "╖",
-    right: "║",
-    bottomRight: "╜",
-    bottom: "─",
-    bottomLeft: "╙",
-    left: "║",
-  },
-  doubleSingle: {
-    topLeft: "╒",
-    top: "═",
-    topRight: "╕",
-    right: "│",
-    bottomRight: "╛",
-    bottom: "═",
-    bottomLeft: "╘",
-    left: "│",
-  },
-  classic: {
-    topLeft: "+",
-    top: "-",
-    topRight: "+",
-    right: "|",
-    bottomRight: "+",
-    bottom: "-",
-    bottomLeft: "+",
-    left: "|",
-  },
-  arrow: {
-    topLeft: "↘",
-    top: "↓",
-    topRight: "↙",
-    right: "←",
-    bottomRight: "↖",
-    bottom: "↑",
-    bottomLeft: "↗",
-    left: "→",
-  },
-};
+	single: {
+		topLeft: "┌",
+		top: "─",
+		topRight: "┐",
+		right: "│",
+		bottomRight: "┘",
+		bottom: "─",
+		bottomLeft: "└",
+		left: "│",
+	},
+	double: {
+		topLeft: "╔",
+		top: "═",
+		topRight: "╗",
+		right: "║",
+		bottomRight: "╝",
+		bottom: "═",
+		bottomLeft: "╚",
+		left: "║",
+	},
+	round: {
+		topLeft: "╭",
+		top: "─",
+		topRight: "╮",
+		right: "│",
+		bottomRight: "╯",
+		bottom: "─",
+		bottomLeft: "╰",
+		left: "│",
+	},
+	bold: {
+		topLeft: "┏",
+		top: "━",
+		topRight: "┓",
+		right: "┃",
+		bottomRight: "┛",
+		bottom: "━",
+		bottomLeft: "┗",
+		left: "┃",
+	},
+	singleDouble: {
+		topLeft: "╓",
+		top: "─",
+		topRight: "╖",
+		right: "║",
+		bottomRight: "╜",
+		bottom: "─",
+		bottomLeft: "╙",
+		left: "║",
+	},
+	doubleSingle: {
+		topLeft: "╒",
+		top: "═",
+		topRight: "╕",
+		right: "│",
+		bottomRight: "╛",
+		bottom: "═",
+		bottomLeft: "╘",
+		left: "│",
+	},
+	classic: {
+		topLeft: "+",
+		top: "-",
+		topRight: "+",
+		right: "|",
+		bottomRight: "+",
+		bottom: "-",
+		bottomLeft: "+",
+		left: "|",
+	},
+	arrow: {
+		topLeft: "↘",
+		top: "↓",
+		topRight: "↙",
+		right: "←",
+		bottomRight: "↖",
+		bottom: "↑",
+		bottomLeft: "↗",
+		left: "→",
+	},
+}

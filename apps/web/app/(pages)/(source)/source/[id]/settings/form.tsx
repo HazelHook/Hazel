@@ -2,21 +2,21 @@
 
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { IntegrationTools } from "db/src/drizzle/integrations/data"
+import { Integration } from "db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { useAction } from "@/server/client"
+import { getCachedSource } from "@/lib/orm"
+import { PromiseType } from "@/lib/ts/helpers"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 import type { editSourceAction } from "./_actions"
 import { formSchema } from "./schema"
-import { IntegrationTools } from "db/src/drizzle/integrations/data"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Integration } from "db/src/drizzle/schema"
-import { PromiseType } from "@/lib/ts/helpers"
-import { getCachedSource } from "@/lib/orm"
 
 interface EditSourceFormProps {
 	action: typeof editSourceAction
@@ -29,7 +29,7 @@ interface EditSourceFormProps {
 export function EditSourceForm({ onClose, action, shouldRedirect = true, integrations, source }: EditSourceFormProps) {
 	const router = useRouter()
 
-	if(!source) {
+	if (!source) {
 		return null
 	}
 
@@ -73,7 +73,7 @@ export function EditSourceForm({ onClose, action, shouldRedirect = true, integra
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Source Name" {...field} required/>
+								<Input placeholder="Source Name" {...field} required />
 							</FormControl>
 							<FormDescription>A name to identify your sources.</FormDescription>
 							<FormMessage />
@@ -87,7 +87,7 @@ export function EditSourceForm({ onClose, action, shouldRedirect = true, integra
 						<FormItem>
 							<FormLabel>Source URL - Optional</FormLabel>
 							<FormControl>
-								<Input placeholder="E.g. example.com" {...field}/>
+								<Input placeholder="E.g. example.com" {...field} />
 							</FormControl>
 							<FormDescription>The endpoint that will send the webhooks.</FormDescription>
 							<FormMessage />
@@ -101,10 +101,7 @@ export function EditSourceForm({ onClose, action, shouldRedirect = true, integra
 						<FormItem>
 							<FormLabel>Integration - Optional</FormLabel>
 							{IntegrationTools.length > 0 && (
-								<Select
-									onValueChange={field.onChange}
-									value={field.value || undefined}
-								>
+								<Select onValueChange={field.onChange} value={field.value || undefined}>
 									<FormControl>
 										<SelectTrigger>
 											<SelectValue

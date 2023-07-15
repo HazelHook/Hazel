@@ -1,14 +1,16 @@
 // @ts-nocheck
 
-import React from "react"
-import { render } from "ink"
-import meow from "meow"
-import App from "./app.js"
 import http from "http"
-import portfinder from "portfinder"
-import keytar from "keytar"
+import React from "react"
 import axios from "axios"
 import express from "express"
+import { render } from "ink"
+import keytar from "keytar"
+import meow from "meow"
+import portfinder from "portfinder"
+
+import App from "./app.js"
+
 const app = express()
 
 const client = axios.create({
@@ -31,15 +33,19 @@ async function storeToken(token: {
 }) {
 	const expires_at = new Date().getTime() + token.expires_in * 1000
 
-	await keytar.setPassword('hazel', 'token', JSON.stringify({
-		access_token: token.access_token,
-		refresh_token: token.refresh_token,
-		expires_at,
-	}));
+	await keytar.setPassword(
+		"hazel",
+		"token",
+		JSON.stringify({
+			access_token: token.access_token,
+			refresh_token: token.refresh_token,
+			expires_at,
+		}),
+	)
 }
 
 async function getToken(): Token {
-	return JSON.parse(await keytar.getPassword('hazel', 'token'));
+	return JSON.parse(await keytar.getPassword("hazel", "token"))
 }
 const token = await getToken()
 
@@ -92,10 +98,10 @@ meow(
 )
 
 app.get("/oauth2/callback?", async (req, res) => {
-		res.writeHead(200, {
-			"Content-Type": "text/html",
-		})
-		res.end(`
+	res.writeHead(200, {
+		"Content-Type": "text/html",
+	})
+	res.end(`
 		<!DOCTYPE html>
 		<html lang="en">
 		<head>
@@ -129,22 +135,22 @@ app.get("/oauth2/callback?", async (req, res) => {
 		
 		`)
 
-		const code = req.query['code']		
-		const token = await client.post(`http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`, {
-			token: code,
-			token_type: "code"
-		})
-
-		console.log(token)
-
-		await storeToken({
-			access_token: token.data.access_token,
-			refresh_token: token.data.refresh_token,
-			expires_in: token.data.expires_in,
-		})
-
-		return
+	const code = req.query["code"]
+	const token = await client.post(`http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`, {
+		token: code,
+		token_type: "code",
 	})
+
+	console.log(token)
+
+	await storeToken({
+		access_token: token.data.access_token,
+		refresh_token: token.data.refresh_token,
+		expires_in: token.data.expires_in,
+	})
+
+	return
+})
 
 const port = await getUnusedPort()
 process.env["PORT"] = port.toString()

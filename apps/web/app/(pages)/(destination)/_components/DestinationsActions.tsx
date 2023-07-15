@@ -1,9 +1,9 @@
-import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
-import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
-import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
+import { useRouter } from "next/navigation"
+import { TRPC_ERROR_CODE_NUMBER, TRPCResponse } from "@trpc/server/rpc"
+import { toast } from "sonner"
+import { typeToFlattenedError } from "zod"
 
-import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
-import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
 import {
 	Dialog,
@@ -15,11 +15,11 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog"
-import { useAction } from "@/server/client"
-import { TRPCResponse, TRPC_ERROR_CODE_NUMBER } from "@trpc/server/rpc"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
-import { typeToFlattenedError } from "zod"
+import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
+import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
+import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
+import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
 
 export const DestinationsActions = ({
 	updateAction,
