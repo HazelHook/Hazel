@@ -199,12 +199,12 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					<CardContent className="flex flex-col gap-4">
 						{(await requests).data.map((request) => (
 							<div key={request.id} className="flex flex-row gap-2 justify-between">
-								<div className="flex flex-row gap-4 justify-center items-center">
+								<div className="flex flex-row gap-4 justify-center items-center max-w-[70%] overflow-hidden">
 									<div className="flex flex-col gap-1">
 										<SourceLink sourceId={request.source_id} />
 										<Link
 											href={`/request/${request.id}`}
-											className="text-muted-foreground text-sm underline-offset-4 hover:underline"
+											className="text-muted-foreground text-sm underline-offset-4 text-ellipsis hover:underline"
 										>
 											{request.id.replace("req_", "")}
 										</Link>

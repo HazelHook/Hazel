@@ -23,7 +23,7 @@ export const NewIntegrationForm = ({
 	const createIntegration = useAction(createIntegrationAction, {
 		onSuccess(data) {
 			onClose?.(data.id)
-			router.replace("/integrations")
+			router.refresh()
 		},
 	})
 
