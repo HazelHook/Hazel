@@ -1,6 +1,5 @@
 import { INTEGRATIONS, INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "./data"
-
-
+import { z } from "zod"
 export interface IntegrationToolCategoryData {
 	name: string
 	slug: string
@@ -25,8 +24,6 @@ export interface IntegrationTool {
 }
 
 export type IntegrationToolSlug = keyof typeof INTEGRATIONS
-
-
 
 type IntegrationFormFieldText = {
 	type: "text"
@@ -68,8 +65,6 @@ const nameField = {
 	placeholder: "Enter a name for this integration...",
 } as const
 
-
-
 export function createIntegrationForm<T extends IntegrationToolFields>({
 	name,
 	schema,
@@ -85,3 +80,18 @@ export function createIntegrationForm<T extends IntegrationToolFields>({
 	}
 }
 
+export function createZodIntegrationSchema<T extends IntegrationToolForm<any>>(schema: T) {
+	const data: Record<keyof T["config"], z.ZodString | z.ZodEnum<any>> = {} as any
+
+	for (const [name, field] of Object.entries(schema.config)) {
+		if (field.type === "text") {
+			data[name as keyof T["config"]] = z.string().nonempty()
+		} else if (field.type === "secret") {
+			data[name as keyof T["config"]] = z.string().nonempty()
+		} else if (field.type === "select") {
+			data[name as keyof T["config"]] = z.enum(field.options)
+		}
+	}
+
+	return z.object(data)
+}
