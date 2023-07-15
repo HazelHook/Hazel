@@ -9,6 +9,7 @@ import { AddIcon } from "@/components/icons/pika/add"
 import { PromiseType } from "@/lib/ts/helpers"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { DestinationTable } from "@/app/(pages)/(destination)/_components/DestinationTable"
+import { Container } from "@/components/ui/container"
 
 async function dataFetch({
 	customerId,
@@ -36,7 +37,7 @@ const DestinationsPage = async () => {
 	}
 
 	return (
-		<main className="py-8 container space-y-6">
+		<Container>
 			<div className="flex flex-row justify-between p-1">
 				<h3 className="text-xl font-semibold">Destinations</h3>
 				<Link href="/destination/new" className={buttonVariants()}>
@@ -49,7 +50,7 @@ const DestinationsPage = async () => {
 				deleteAction={deleteDestinationAction}
 				destination={destinations}
 			/>
-		</main>
+		</Container>
 	)
 }
 

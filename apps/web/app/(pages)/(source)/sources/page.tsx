@@ -8,6 +8,7 @@ import { DataTable } from "@/components/ui/data-table"
 import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"
+import { Container } from "@/components/ui/container"
 
 const SourcePage = async () => {
 	const { userId } = auth()
@@ -19,8 +20,8 @@ const SourcePage = async () => {
 	}
 
 	return (
-		<main className="p-4">
-			<div className="flex flex-row justify-between mb-4">
+		<Container>
+			<div className="flex flex-row justify-between p-1">
 				<h3 className="text-xl font-semibold">Sources</h3>
 				<Link href="/source/new" className={buttonVariants()}>
 					<AddIcon className="mr-2" />
@@ -28,7 +29,7 @@ const SourcePage = async () => {
 				</Link>
 			</div>
 			<DataTable rootPath="/source" columns={columns as any} data={sources} />
-		</main>
+		</Container>
 	)
 }
 

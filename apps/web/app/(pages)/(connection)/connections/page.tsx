@@ -7,6 +7,7 @@ import { DataTable } from "@/components/ui/data-table"
 import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"
+import { Container } from "@/components/ui/container"
 
 const ConnectionsPage = async () => {
 	const { userId } = auth()
@@ -15,8 +16,8 @@ const ConnectionsPage = async () => {
 	})
 
 	return (
-		<main className="p-4">
-			<div className="flex flex-row justify-between mb-4">
+		<Container>
+			<div className="flex flex-row justify-between p-1">
 				<h3 className="text-xl font-semibold">Connections</h3>
 				<Link href="/connection/new" className={buttonVariants()}>
 					<AddIcon className="mr-2" />
@@ -24,7 +25,7 @@ const ConnectionsPage = async () => {
 				</Link>
 			</div>
 			<DataTable rootPath="/connection" columns={columns} data={connections} />
-		</main>
+		</Container>
 	)
 }
 
