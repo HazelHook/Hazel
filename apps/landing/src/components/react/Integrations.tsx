@@ -166,7 +166,7 @@ export const Integrations = () => {
 													</div>
 													<p className="text-xs mt-2 text-zinc-300 hidden md:block">{integration.description}</p>
 												</div>
-												<Meteors className="opacity-10 group-hover:opacity-100 transition-opacity duration-700" />
+												<Meteors className="opacity-20 group-hover:opacity-100 transition-opacity duration-700" />
 											</div>
 										</MagicCard>
 									))}
