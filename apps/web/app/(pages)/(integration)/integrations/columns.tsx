@@ -60,7 +60,7 @@ export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any)
 			},
 		},
 		{
-			accessorKey: "sources",
+			accessorKey: "source",
 			header: "Sources",
 			cell: ({ cell }) => {
 				const sources = (cell.getValue() as any[]) ?? []
@@ -76,12 +76,14 @@ export const columns: (deleteIntegration: UseTRPCActionResult<any>, router: any)
 		{
 			accessorKey: "publicId",
 			header: () => <p className="text-right">Actions</p>,
-			cell: ({ cell }) => {
+			cell: ({ cell, row }) => {
+				const integration = row.original
+				console.log(integration.source.length)
 				return (
 					<div className="flex justify-end">
 						<Dialog>
 							<DialogTrigger asChild>
-								<Button variant="ghost">
+								<Button variant="ghost" disabled={integration.source.length > 0}>
 									<DeleteDustbinIcon className="h-4 w-4" />
 								</Button>
 							</DialogTrigger>

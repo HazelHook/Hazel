@@ -39,7 +39,6 @@ export const integration = buildMysqlTable(
 	}),
 )
 
-
 export const destination = buildMysqlTable(
 	"destinations",
 	{
