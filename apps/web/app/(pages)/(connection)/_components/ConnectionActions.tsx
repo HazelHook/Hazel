@@ -20,12 +20,10 @@ import Link from "next/link"
 import { ConnectionDataRowType } from "@conn/connections/page"
 
 export const ConnectionActions = ({
-	updateAction,
 	deleteAction,
 	data,
 }: {
 	data: ConnectionDataRowType
-	updateAction: typeof updateConnectionAction
 	deleteAction: typeof deleteConnectionAction
 }) => {
 	const router = useRouter()

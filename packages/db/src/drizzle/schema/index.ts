@@ -13,7 +13,6 @@ export const source = buildMysqlTable(
 	{
 		name,
 		url,
-		enabled,
 		integrationId: int("integration_id"),
 	},
 	(table) => ({
@@ -44,7 +43,6 @@ export const destination = buildMysqlTable(
 	{
 		name,
 		url: url.notNull(),
-		enabled,
 	},
 	(table) => ({
 		publicIdIndex: index("dst_public_id_idx").on(table.publicId),

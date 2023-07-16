@@ -20,10 +20,9 @@ export type Column = Connection & {
 	destination: Destination | null
 }
 
-export const columns: (
-	deleteAction: typeof deleteConnectionAction,
-	updateAction: typeof updateConnectionAction,
-) => ColumnDef<ConnectionDataRowType>[] = (deleteAction, updateAction) => [
+export const columns: (deleteAction: typeof deleteConnectionAction) => ColumnDef<ConnectionDataRowType>[] = (
+	deleteAction,
+) => [
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
@@ -104,7 +103,7 @@ export const columns: (
 		cell: ({ row }) => {
 			const connection = row.original
 
-			return <ConnectionActions data={connection} updateAction={updateAction} deleteAction={deleteAction} />
+			return <ConnectionActions data={connection} deleteAction={deleteAction} />
 		},
 	},
 ]

@@ -14,5 +14,5 @@ export const ConnectionTable = ({
 	updateAction: typeof updateConnectionAction
 	deleteAction: typeof deleteConnectionAction
 }) => {
-	return <DataTable rootPath="/connection" disableRedirect columns={columns(deleteAction, updateAction)} data={data} />
+	return <DataTable rootPath="/connection" disableRedirect columns={columns(deleteAction)} data={data} />
 }

@@ -25,6 +25,7 @@ import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import { formSchema } from "./schema"
+import { Switch } from "@/components/ui/switch"
 
 interface NewSourceFormProps {
 	action: typeof editConnectionAction
@@ -54,6 +55,7 @@ export function UpdateConnectionForm({
 			publicSourceId: connection.source.publicId,
 			publiceDestinationId: connection.destination.publicId,
 			publicId: connection.publicId,
+			enabled: connection.enabled,
 		},
 	})
 
@@ -85,10 +87,23 @@ export function UpdateConnectionForm({
 							<FormItem>
 								<FormLabel>Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Connection ..." {...field} required />
+									<Input placeholder="Connection ..." {...field} />
 								</FormControl>
 								<FormDescription>A name to identify your connection.</FormDescription>
 								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="enabled"
+						render={({ field }) => (
+							<FormItem className="flex flex-col gap-2">
+								<FormLabel>Enabled</FormLabel>
+								<FormControl>
+									<Switch checked={field.value} onCheckedChange={field.onChange} />
+								</FormControl>
+								<FormDescription>Pause the connection.</FormDescription>
 							</FormItem>
 						)}
 					/>
