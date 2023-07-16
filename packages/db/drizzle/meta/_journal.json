@@ -1,13 +1,34 @@
 {
-	"version": "5",
-	"dialect": "mysql",
-	"entries": [
-		{
-			"idx": 0,
-			"version": "5",
-			"when": 1689301453484,
-			"tag": "0000_friendly_layla_miller",
-			"breakpoints": true
-		}
-	]
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1689301453484,
+      "tag": "0000_friendly_layla_miller",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1689464808941,
+      "tag": "0001_mean_roughhouse",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1689472321113,
+      "tag": "0002_green_logan",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1689472378180,
+      "tag": "0003_chubby_switch",
+      "breakpoints": true
+    }
+  ]
 }

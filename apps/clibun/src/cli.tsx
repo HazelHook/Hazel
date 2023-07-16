@@ -1,6 +1,4 @@
-// @ts-nocheck
 
-import http from "http"
 import React from "react"
 import axios from "axios"
 import express from "express"
@@ -9,7 +7,7 @@ import keytar from "keytar"
 import meow from "meow"
 import portfinder from "portfinder"
 
-import App from "./app.js"
+import App, { Token } from "./app.js"
 
 const app = express()
 
@@ -20,12 +18,6 @@ const client = axios.create({
 		"Content-Type": "application/json",
 	},
 })
-
-interface Token {
-	access_token: string
-	refresh_token: string
-	expires_at: number
-}
 async function storeToken(token: {
 	access_token: string
 	refresh_token: string
@@ -44,8 +36,38 @@ async function storeToken(token: {
 	)
 }
 
-async function getToken(): Token {
-	return JSON.parse(await keytar.getPassword("hazel", "token"))
+async function getToken(): Promise<Token | null> {
+	const token: Token = JSON.parse(await keytar.getPassword('hazel', 'token'));
+
+	if (!token) {
+		return null
+	}
+
+	if (token.expires_at < new Date().getTime()) {
+		try{
+			const newToken = await client.post(`http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`, {
+				token: token.refresh_token,
+				token_type: "refresh_token"
+			})
+
+			await storeToken({
+				access_token: newToken.data.access_token,
+				refresh_token: newToken.data.refresh_token,
+				expires_in: newToken.data.expires_in,
+			})
+	
+			return {
+				access_token: newToken.data.access_token,
+				refresh_token: newToken.data.refresh_token,
+				expires_at: new Date().getTime() + newToken.data.expires_in * 1000,
+			}
+		}catch(e){
+			console.error(e)
+			return null
+		}
+	}
+	
+	return token
 }
 const token = await getToken()
 
@@ -135,26 +157,28 @@ app.get("/oauth2/callback?", async (req, res) => {
 		
 		`)
 
-	const code = req.query["code"]
-	const token = await client.post(`http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`, {
-		token: code,
-		token_type: "code",
+		const code = req.query['code']		
+		const token = await client.post(`http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`, {
+			token: code,
+			token_type: "code"
+		})
+
+		await storeToken({
+			access_token: token.data.access_token,
+			refresh_token: token.data.refresh_token,
+			expires_in: token.data.expires_in,
+		})
+
+		return
 	})
-
-	console.log(token)
-
-	await storeToken({
-		access_token: token.data.access_token,
-		refresh_token: token.data.refresh_token,
-		expires_in: token.data.expires_in,
-	})
-
-	return
-})
+	
 
 const port = await getUnusedPort()
 process.env["PORT"] = port.toString()
 
 app.listen(port, () => {
-	render(<App client={client} token={token} />)
+	render(<App client={client} token={token} openWebsocket={(d) => console.log(d)} />, {
+		patchConsole: false
+		,
+	})
 })

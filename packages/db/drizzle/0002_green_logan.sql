@@ -1,0 +1,1 @@
+ALTER TABLE `destinations` ADD `ws_destinations` text NOT NULL;

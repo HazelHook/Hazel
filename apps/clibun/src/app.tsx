@@ -1,43 +1,76 @@
-import { exec } from "child_process"
-import React from "react"
+import React, { useEffect } from "react"
 import { AxiosInstance } from "axios"
-import { Box, Text, useInput } from "ink"
+import { Text, useInput } from "ink"
+import { Login } from "./login.js"
 
-export default function App({ client }: { client: AxiosInstance }) {
+export interface Token {
+	access_token: string
+	refresh_token: string
+	expires_at: number
+}
+
+export default function App({ client, token, openWebsocket }: { client: AxiosInstance; token: Token | null; openWebsocket: (id: string) => void }) {
+	const [destinations, setDestinations] = React.useState(null)
 	const [state, setState] = React.useState(0)
 
 	useInput(async (_, key) => {
-		if (key.return) {
-			if (state === 1) {
-				process.exit(0)
-			} else {
-				try {
-					const data = await client.get(`http://127.0.0.1:3003/v1/oauth-url/${process.env["PORT"]}`)
+		const max = destinations?.length
 
-					if (data.status !== 200) {
-						throw new Error(`Failed to get oauth url: ${data?.data?.message ?? data.status}`)
-					}
-
-					const redirect_uri = `http://localhost:${process.env["PORT"]}/oauth2/callback`
-					const url = `${data.data.auth_url}?response_type=code&client_id=${data.data.client_id}&redirect_uri=${redirect_uri}&scope=profile%20email`
-
-					// Open in browser
-					exec(`open "${url}"`)
-				} catch (e) {
-					console.error(e)
-				}
-			}
+		if (key.return && destinations) {
+			openWebsocket(destinations[state].id)
+		}else if (key.upArrow) {
+			setState(state === 0 ? max - 1 : state - 1)
+		} else if (key.downArrow) {
+			setState(state === max - 1 ? 0 : state + 1)
 		}
+
 
 		const newState = state + (key.upArrow ? -1 : key.downArrow ? 1 : 0)
 		setState(newState < 0 ? 1 : newState > 1 ? 0 : newState)
 	})
 
+	useEffect(() => {
+		if(!token) {
+			return
+		}
+
+		client
+			.post(`/v1/webhook-destinations/${process.env["PORT"]}`, {
+				token: token.access_token,
+			})
+			.then((destinations) => {
+				if (destinations.status !== 200) {
+					throw new Error(`Failed to get destinations: ${destinations?.data?.message ?? destinations.status}`)
+				}
+				setDestinations(destinations.data)
+			})
+	}, [token])
+
+	if (!token) {
+		return <Login client={client} />
+	}
+
+	if (!destinations) {
+		return (
+			<>
+				<Text>Loading...</Text>
+			</>
+		)
+	}
+
+	if (destinations.length === 0) {
+		return (
+			<>
+				<Text>No destinations found. Please create one in the Hazel web app.</Text>
+			</>
+		)
+	}
+
 	return (
-		<Box flexDirection="column">
-			<Text>You need to login to access the Hazel CLI. Would you like to continue?</Text>
-			<Text color={state === 0 ? "greenBright" : "white"}> Login</Text>
-			<Text color={state === 1 ? "greenBright" : "white"}> Cancel</Text>
-		</Box>
+		<>
+			{destinations.map((destination) => {
+				return <Text key={destination.id}>{destination.name}</Text>
+			})}
+		</>
 	)
 }
