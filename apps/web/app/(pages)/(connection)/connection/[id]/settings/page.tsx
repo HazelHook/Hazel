@@ -1,7 +1,5 @@
-import { auth } from "@/lib/auth"
-import db from "@/lib/db"
-import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
-import { EditConnectionForm } from "@/app/(pages)/(connection)/connection/[id]/settings/form"
+import { ConnectionSettingsPage } from "@/components/pages/connection/SettingsPage"
+import { Container } from "@/components/ui/container"
 
 const EditConnectionPage = async ({
 	params,
@@ -10,33 +8,13 @@ const EditConnectionPage = async ({
 		id: string
 	}
 }) => {
-	const { userId } = auth()
-
-	const pSources = db.source.getMany({ customerId: userId })
-	const pDestinations = db.destination.getMany({ customerId: userId })
-	const pIntegrations = db.integration.getMany({ customerId: userId })
-	const pConnection = db.connection.getOne({ publicId: params.id })
-
-	const [sources, destinations, integrations, connection] = await Promise.all([
-		pSources,
-		pDestinations,
-		pIntegrations,
-		pConnection,
-	])
-
 	return (
-		<main className="p-4">
-			<EditConnectionForm
-				connection={connection as any}
-				action={editConnectionAction}
-				destinations={destinations}
-				sources={sources}
-				integrations={integrations}
-			/>
-		</main>
+		<Container>
+			<ConnectionSettingsPage id={params.id} />
+		</Container>
 	)
 }
 
-export const runtime = "edge"
-
 export default EditConnectionPage
+
+export const runtime = "edge"

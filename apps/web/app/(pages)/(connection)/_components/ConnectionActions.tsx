@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 import { useAction } from "@/server/client"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -17,6 +17,7 @@ import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
 import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
 import type { deleteConnectionAction, updateConnectionAction } from "@/app/(pages)/(connection)/_actions"
+import Link from "next/link"
 
 export const ConnectionActions = ({
 	updateAction,
@@ -37,16 +38,9 @@ export const ConnectionActions = ({
 
 	return (
 		<div className="flex justify-end">
-			<Dialog>
-				<DialogTrigger asChild>
-					<Button variant="ghost">
-						<EditPencilIcon className="h-4 w-4" />
-					</Button>
-				</DialogTrigger>
-				<DialogContent className="max-w-sm">
-					{/* <UpdateDestinationForm data={data} updateAction={updateAction} /> */}
-				</DialogContent>
-			</Dialog>
+			<Link href={`/connection/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
+				<EditPencilIcon className="h-4 w-4" />
+			</Link>
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button variant="ghost">

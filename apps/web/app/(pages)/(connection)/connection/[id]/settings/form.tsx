@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Connection, Destination, Integration, Source } from "db/src/drizzle/schema"
+import { Destination, Integration, Source } from "db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -13,7 +13,7 @@ import { PromiseType } from "@/lib/ts/helpers"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -32,9 +32,17 @@ interface NewSourceFormProps {
 	destinations: Destination[]
 	integrations: Integration[]
 	connection: PromiseType<ReturnType<typeof getCachedConnection>>
+	isModal?: boolean
 }
 
-export function EditConnectionForm({ action, sources, destinations, integrations, connection }: NewSourceFormProps) {
+export function UpdateConnectionForm({
+	action,
+	sources,
+	isModal,
+	destinations,
+	integrations,
+	connection,
+}: NewSourceFormProps) {
 	const [sourceModal, setSourceModal] = useState(false)
 	const [destinationModal, setDestinationModal] = useState(false)
 
@@ -51,7 +59,11 @@ export function EditConnectionForm({ action, sources, destinations, integrations
 
 	const createSource = useAction(action, {
 		onSuccess(data) {
-			router.push(`/connection/${data.id}`)
+			if (isModal) {
+				router.back()
+			}
+
+			router.refresh()
 		},
 		onError(error) {
 			form.setError("root", error)
@@ -186,7 +198,7 @@ export function EditConnectionForm({ action, sources, destinations, integrations
 						disabled={createSource.status === "loading"}
 						loading={createSource.status === "loading"}
 					>
-						Create
+						Update
 					</Button>
 				</form>
 			</Form>

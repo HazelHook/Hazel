@@ -1,10 +1,17 @@
+import { ConnectionSettingsPage, SettingsProps } from "@/components/pages/connection/SettingsPage"
 import { Dialog, InterceptedDialogContent } from "@/components/ui/dialog"
 
-const ConnectionUpdateFormPage = () => {
+const ConnectionUpdateFormPage = ({
+	params,
+}: {
+	params: {
+		id: string
+	}
+}) => {
 	return (
 		<Dialog open>
 			<InterceptedDialogContent>
-				<p>WOOOW</p>
+				<ConnectionSettingsPage isModal id={params.id} />
 			</InterceptedDialogContent>
 		</Dialog>
 	)
