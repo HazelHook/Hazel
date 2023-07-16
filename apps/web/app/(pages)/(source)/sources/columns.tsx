@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { Cell, SortableHeader } from "@/components/ui/data-table"
 
 export type Column = Source & {
 	connections: Connection[]
@@ -22,38 +23,24 @@ export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
-			return (
-				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-					Name
-					{column.getIsSorted() === "asc" ? (
-						<ArrowUpIcon className="ml-2 h-4 w-4" />
-					) : (
-						<ArrowDownIcon className="ml-2 h-4 w-4" />
-					)}
-				</Button>
-			)
+			return <SortableHeader name={"Name"} column={column} />
 		},
-		cell: ({ cell, table, row }) => {
+		cell: ({ cell, row }) => {
 			const id = row.original.publicId
 			return (
-				<div className="flex flex-row items-center ml-4">
+				<Cell>
 					<Avatar className="w-4 h-4 mr-2">
 						<AvatarImage src={getSeededProfileImageUrl(id)} />
 					</Avatar>
 					{cell.getValue<string>()}
-				</div>
+				</Cell>
 			)
 		},
 	},
 	{
 		accessorKey: "integration",
-		header: () => {
-			return (
-				<Button variant="ghost" className="justify-center w-full">
-					Type
-					<ArrowDownIcon className="ml-2 h-4 w-4" />
-				</Button>
-			)
+		header: ({ column }) => {
+			return <SortableHeader name={"Type"} column={column} />
 		},
 		cell: ({ cell }) => {
 			const value = cell.getValue() as Integration
@@ -62,13 +49,13 @@ export const columns: ColumnDef<Column>[] = [
 			const integrationDefinition = INTEGRATIONS[value.tool as IntegrationToolSlug]
 
 			return (
-				<div className="flex flex-row justify-center">
+				<Cell>
 					<img
 						src={`/assets/integrations/${integrationDefinition.slug}.svg`}
 						alt={integrationDefinition.slug}
 						className="w-7 h-7"
 					/>
-				</div>
+				</Cell>
 			)
 		},
 	},
@@ -102,26 +89,13 @@ export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: "group",
 		header: ({ column }) => {
-			return (
-				<Button
-					variant="ghost"
-					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-					className="w-full justify-center flex"
-				>
-					Group
-					{column.getIsSorted() === "asc" ? (
-						<ArrowUpIcon className="ml-2 h-4 w-4" />
-					) : (
-						<ArrowDownIcon className="ml-2 h-4 w-4" />
-					)}
-				</Button>
-			)
+			return <SortableHeader name={"Group"} column={column} />
 		},
 		cell: ({ cell }) => {
 			return (
-				<div className="w-full justify-center flex">
+				<Cell>
 					<p>-</p>
-				</div>
+				</Cell>
 			)
 		},
 	},

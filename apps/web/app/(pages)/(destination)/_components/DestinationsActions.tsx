@@ -52,7 +52,7 @@ export const DestinationsActions = ({
 			</Dialog>
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button variant="ghost" disabled={data.connections.length > 0} onClick={(e) => e.stopPropagation()}>
+					<Button variant="ghost" disabled={data.connections.length > 0}>
 						<DeleteDustbinIcon className="h-4 w-4" />
 					</Button>
 				</DialogTrigger>

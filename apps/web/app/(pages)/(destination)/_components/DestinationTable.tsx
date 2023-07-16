@@ -16,8 +16,8 @@ export const DestinationTable = ({
 }) => {
 	return (
 		<DataTable
+			rootPath="/destination"
 			disableRedirect
-			rootPath="/integrations"
 			columns={columns(deleteAction, updateAction)}
 			data={destination as any}
 		/>

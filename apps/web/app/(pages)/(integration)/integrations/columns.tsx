@@ -14,6 +14,7 @@ import type {
 	updateIntegrationAction,
 } from "@/app/(pages)/(integration)/integrations/_actions"
 import { IntegrationToolColumn } from "@/app/(pages)/(integration)/integrations/page"
+import { SortableHeader } from "@/components/ui/data-table"
 
 export const columns: (
 	deleteAction: typeof deleteIntegrationAction,
@@ -35,22 +36,13 @@ export const columns: (
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
-			return (
-				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-					Name
-					{column.getIsSorted() === "asc" ? (
-						<ArrowUpSquareIcon className="ml-2 h-4 w-4" />
-					) : (
-						<ArrowDownSquareIcon className="ml-2 h-4 w-4" />
-					)}
-				</Button>
-			)
+			return <SortableHeader name={"Name"} column={column} />
 		},
 		cell: ({ cell }) => {
 			const name = cell.getValue() as any
 
 			return (
-				<div className="ml-4">
+				<div>
 					<p>{name}</p>
 				</div>
 			)

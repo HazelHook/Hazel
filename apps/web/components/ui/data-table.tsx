@@ -1,8 +1,9 @@
 "use client"
 
-import { MouseEventHandler, useState } from "react"
+import { MouseEventHandler, ReactNode, useState } from "react"
 import { useRouter } from "next/navigation"
 import {
+	Column,
 	ColumnDef,
 	flexRender,
 	getCoreRowModel,
@@ -12,6 +13,9 @@ import {
 } from "@tanstack/react-table"
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
+import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
+import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -73,7 +77,7 @@ export function DataTable<TData, TValue>({ columns, data, rootPath, disableRedir
 						))
 					) : (
 						<TableRow>
-							<TableCell colSpan={columns.length} className="h-24 text-center">
+							<TableCell colSpan={columns.length} className="h-24 text-center px-4">
 								No results.
 							</TableCell>
 						</TableRow>
@@ -82,4 +86,31 @@ export function DataTable<TData, TValue>({ columns, data, rootPath, disableRedir
 			</Table>
 		</div>
 	)
+}
+
+export const SortableHeader = ({
+	column,
+	name,
+	className,
+}: { column: Column<any, unknown>; name: string; className?: string }) => {
+	return (
+		<div className="flex justify-start w-full">
+			<Button
+				className={className}
+				variant="ghost"
+				onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+			>
+				{name}
+				{column.getIsSorted() === "asc" ? (
+					<ArrowUpSquareIcon className="ml-2 h-4 w-4" />
+				) : (
+					<ArrowDownSquareIcon className="ml-2 h-4 w-4" />
+				)}
+			</Button>
+		</div>
+	)
+}
+
+export const Cell = ({ children }: { children: ReactNode }) => {
+	return <div className="flex flex-row items-center px-6 gap-2">{children}</div>
 }

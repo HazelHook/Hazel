@@ -17,6 +17,7 @@ import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { DestinationsActions } from "@/app/(pages)/(destination)/_components/DestinationsActions"
 import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
+import { SortableHeader } from "@/components/ui/data-table"
 
 export const columns: (
 	deleteAction: typeof deleteDestinationAction,
@@ -25,16 +26,7 @@ export const columns: (
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
-			return (
-				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-					Name
-					{column.getIsSorted() === "asc" ? (
-						<ArrowUpIcon className="ml-2 h-4 w-4" />
-					) : (
-						<ArrowDownIcon className="ml-2 h-4 w-4" />
-					)}
-				</Button>
-			)
+			return <SortableHeader name={"Name"} column={column} />
 		},
 		cell: ({ cell, row }) => {
 			return (
@@ -54,19 +46,10 @@ export const columns: (
 	{
 		accessorKey: "group",
 		header: ({ column }) => {
-			return (
-				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-					Group
-					{column.getIsSorted() === "asc" ? (
-						<ArrowUpIcon className="ml-2 h-4 w-4" />
-					) : (
-						<ArrowDownIcon className="ml-2 h-4 w-4" />
-					)}
-				</Button>
-			)
+			return <SortableHeader name={"Group"} column={column} />
 		},
 		cell: ({ cell }) => {
-			return <p className="ml-4">-</p>
+			return <p>-</p>
 		},
 	},
 	{

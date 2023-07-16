@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
 import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { Cell, SortableHeader } from "@/components/ui/data-table"
 
 export type Column = Connection & {
 	source: Source | null
@@ -22,16 +23,7 @@ export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
-			return (
-				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-					Name
-					{column.getIsSorted() === "asc" ? (
-						<ArrowUpSquareIcon className="ml-2 h-4 w-4" />
-					) : (
-						<ArrowDownSquareIcon className="ml-2 h-4 w-4" />
-					)}
-				</Button>
-			)
+			return <SortableHeader name={"Name"} column={column} />
 		},
 	},
 	{
@@ -78,19 +70,10 @@ export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: "group",
 		header: ({ column }) => {
-			return (
-				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-					Group
-					{column.getIsSorted() === "asc" ? (
-						<ArrowUpSquareIcon className="ml-2 h-4 w-4" />
-					) : (
-						<ArrowDownSquareIcon className="ml-2 h-4 w-4" />
-					)}
-				</Button>
-			)
+			return <SortableHeader name={"Group"} column={column} />
 		},
 		cell: ({ cell }) => {
-			return <p>-</p>
+			return <Cell>-</Cell>
 		},
 	},
 	{
