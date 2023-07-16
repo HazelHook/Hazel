@@ -1,33 +1,33 @@
 {
-	"doppler.autocomplete.enable": true,
-	"doppler.hover.enable": true,
-	"files.exclude": {
-		"**/.git": false,
-		"**/.svn": true,
-		"**/.hg": true,
-		"**/CVS": true,
-		"**/.DS_Store": true,
-		"**/Thumbs.db": true
-	},
-	"typescript.preferences.importModuleSpecifier": "non-relative",
-	"hazel.pagesDir": "apps/web/app/(pages)",
-	"hazel.pageTypes": [
-		{
-			"name": "New",
-			"icon": "new-file",
-			"slug": "new"
-		},
-		{
-			"name": "Details",
-			"icon": "browser",
-			"slug": "[id]"
-		},
-		{
-			"name": "Events",
-			"icon": "zap",
-			"slug": "events"
-		}
-	],
-	"hazel.indentation": "    ",
-	"hazel.defaultIcon": ""
+  "doppler.autocomplete.enable": true,
+  "doppler.hover.enable": true,
+  "files.exclude": {
+    "**/.git": false,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "hazel.pagesDir": "apps/web/app/(pages)",
+  "hazel.pageTypes": [
+    {
+      "name": "New",
+      "icon": "new-file",
+      "slug": "new"
+    },
+    {
+      "name": "Details",
+      "icon": "browser",
+      "slug": "[id]"
+    },
+    {
+      "name": "Events",
+      "icon": "zap",
+      "slug": "events"
+    }
+  ],
+  "hazel.indentation": "    ",
+  "hazel.defaultIcon": ""
 }

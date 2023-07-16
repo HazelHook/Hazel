@@ -12,15 +12,17 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { formSchema } from "@/app/(pages)/(destination)/destination/new/schema"
-import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
+import { Destination } from "db/src/drizzle/schema"
 
 export const UpdateDestinationForm = ({
 	data,
 	updateAction,
 	onClose,
+	isModal,
 }: {
-	data: DestinationsDataRowType
+	data: Destination
 	updateAction: typeof updateDestinationAction
+	isModal?: boolean
 	onClose?: (id: string) => void
 }) => {
 	const router = useRouter()
@@ -33,6 +35,11 @@ export const UpdateDestinationForm = ({
 	const updateDestination = useAction(updateAction, {
 		onSuccess() {
 			onClose?.(data.publicId)
+
+			if (isModal) {
+				router.back()
+			}
+
 			router.refresh()
 		},
 	})

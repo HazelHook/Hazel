@@ -4,7 +4,7 @@ import { toast } from "sonner"
 import { typeToFlattenedError } from "zod"
 
 import { useAction } from "@/server/client"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -20,6 +20,7 @@ import { EditPencilIcon } from "@/components/icons/pika/editPencil"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
 import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
+import Link from "next/link"
 
 export const DestinationsActions = ({
 	updateAction,
@@ -40,16 +41,10 @@ export const DestinationsActions = ({
 
 	return (
 		<div className="flex justify-end">
-			<Dialog>
-				<DialogTrigger asChild>
-					<Button variant="ghost">
-						<EditPencilIcon className="h-4 w-4" />
-					</Button>
-				</DialogTrigger>
-				<DialogContent className="max-w-sm">
-					<UpdateDestinationForm data={data} updateAction={updateAction} />
-				</DialogContent>
-			</Dialog>
+			<Link href={`/destination/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
+				<EditPencilIcon className="h-4 w-4" />
+			</Link>
+
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button variant="ghost" disabled={data.connections.length > 0}>
