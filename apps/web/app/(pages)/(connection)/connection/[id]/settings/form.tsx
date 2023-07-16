@@ -124,6 +124,15 @@ export function UpdateConnectionForm({
 													</div>
 												</SelectItem>
 											))}
+											<Button
+												variant="ghost"
+												className="w-full flex flex-row justify-start py-0 px-2"
+												type="button"
+												onClick={() => setSourceModal(true)}
+											>
+												<AddIcon className="w-5 h-5 mr-2" />
+												Create New Source
+											</Button>
 										</SelectContent>
 									</Select>
 								)}
@@ -131,12 +140,6 @@ export function UpdateConnectionForm({
 							</FormItem>
 						)}
 					/>
-					<div className="flex">
-						<Button variant="outline" type="button" onClick={() => setSourceModal(true)}>
-							<AddIcon className="w-5 h-5 mr-2" />
-							Create New Source
-						</Button>
-					</div>
 
 					<FormField
 						control={form.control}
@@ -170,6 +173,15 @@ export function UpdateConnectionForm({
 													</div>
 												</SelectItem>
 											))}
+											<Button
+												variant="ghost"
+												className="w-full flex flex-row justify-start py-0 px-2"
+												type="button"
+												onClick={() => setDestinationModal(true)}
+											>
+												<AddIcon className="w-5 h-5 mr-2" />
+												Create New Destination
+											</Button>
 										</SelectContent>
 									</Select>
 								)}
@@ -179,20 +191,6 @@ export function UpdateConnectionForm({
 						)}
 					/>
 					<FormMessage />
-
-					<div className="flex">
-						<Button
-							variant="outline"
-							type="button"
-							onClick={() => {
-								setDestinationModal(true)
-							}}
-						>
-							<AddIcon className="w-5 h-5 mr-2" />
-							Create New Destination
-						</Button>
-					</div>
-
 					<Button
 						type="submit"
 						disabled={createSource.status === "loading"}
