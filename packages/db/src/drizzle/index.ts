@@ -245,11 +245,11 @@ export function connectDB({
 			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {
 				const res = await db
-					.update(schema.integration)
+					.update(schema.connection)
 					.set({
 						deletedAt: new Date(),
 					})
-					.where(eq(schema.integration.publicId, publicId))
+					.where(eq(schema.connection.publicId, publicId))
 				return { res }
 			},
 		},

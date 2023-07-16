@@ -8,10 +8,22 @@ import { DataTable } from "@/components/ui/data-table"
 import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"
+import { PromiseType } from "@/lib/ts/helpers"
+import { deleteConnectionAction, updateConnectionAction } from "@/app/(pages)/(connection)/_actions"
+import { ConnectionTable } from "@/app/(pages)/(connection)/_components/ConnectionTable"
+
+const fetchData = async ({ customerId }: { customerId: string }) => {
+	return await db.connection.getMany({
+		customerId,
+	})
+}
+
+export type ConnectionDataRowType = PromiseType<ReturnType<typeof fetchData>>[number]
 
 const ConnectionsPage = async () => {
 	const { userId } = auth()
-	const connections = await db.connection.getMany({
+
+	const connections = await fetchData({
 		customerId: userId,
 	})
 
@@ -24,7 +36,8 @@ const ConnectionsPage = async () => {
 					New Connection
 				</Link>
 			</div>
-			<DataTable rootPath="/connection" columns={columns} data={connections} />
+			<Link href="/connection/12/settings">Test</Link>
+			<ConnectionTable deleteAction={deleteConnectionAction} updateAction={updateConnectionAction} data={connections} />
 		</Container>
 	)
 }

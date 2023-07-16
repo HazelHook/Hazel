@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 
-import { createConnectionAction } from "./_actions"
+import { createConnectionAction } from "../../_actions"
 import { NewConnectionForm } from "./form"
 
 const NewConnectionPage = async () => {

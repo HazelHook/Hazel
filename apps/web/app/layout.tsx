@@ -37,17 +37,17 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
-		<ClerkProvider>
-			<html lang="en" suppressHydrationWarning>
-				<head />
-				<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+		<html lang="en" suppressHydrationWarning>
+			<head />
+			<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+				<ClerkProvider>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						<NextProgress />
 						{children}
 						<TailwindIndicator />
 					</ThemeProvider>
-				</body>
-			</html>
-		</ClerkProvider>
+				</ClerkProvider>
+			</body>
+		</html>
 	)
 }

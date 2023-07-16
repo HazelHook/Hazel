@@ -8,23 +8,32 @@ import { Connection, Destination, Source } from "db/src/drizzle/schema"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
-import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { Cell, SortableHeader } from "@/components/ui/data-table"
+import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
+import { deleteConnectionAction, updateConnectionAction } from "@/app/(pages)/(connection)/_actions"
+import { ConnectionActions } from "@/app/(pages)/(connection)/_components/ConnectionActions"
+import { Button } from "@/components/ui/button"
 
 export type Column = Connection & {
 	source: Source | null
 	destination: Destination | null
 }
 
-export const columns: ColumnDef<Column>[] = [
+export const columns: (
+	deleteAction: typeof deleteConnectionAction,
+	updateAction: typeof updateConnectionAction,
+) => ColumnDef<ConnectionDataRowType>[] = (deleteAction, updateAction) => [
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
 			return <SortableHeader name={"Name"} column={column} />
 		},
+		cell: ({ cell, row }) => (
+			<Link prefetch={false} href={`/connection/${row.original.publicId}`} className="flex flex-row items-center">
+				<Button variant="link">{cell.getValue<string>()}</Button>
+			</Link>
+		),
 	},
 	{
 		accessorKey: "source",
@@ -87,6 +96,15 @@ export const columns: ColumnDef<Column>[] = [
 					<CheckTickIcon className="w-4 h-4 mr-2" />
 				</Badge>
 			)
+		},
+	},
+	{
+		id: "actions",
+		header: () => <p className="text-right">Actions</p>,
+		cell: ({ row }) => {
+			const connection = row.original
+
+			return <ConnectionActions data={connection} updateAction={updateAction} deleteAction={deleteAction} />
 		},
 	},
 ]

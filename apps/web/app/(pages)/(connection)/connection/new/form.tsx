@@ -21,7 +21,7 @@ import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/
 import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
-import type { createConnectionAction } from "./_actions"
+import type { createConnectionAction } from "../../_actions"
 import { formSchema } from "./schema"
 
 interface NewSourceFormProps {
