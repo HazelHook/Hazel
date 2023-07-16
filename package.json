@@ -1,4 +1,5 @@
 {
+	"name": "hazelhooks",
 	"private": true,
 	"scripts": {
 		"build": "turbo run build",
@@ -17,9 +18,5 @@
 		"turbo": "1.10.7"
 	},
 	"packageManager": "pnpm@8.6.5",
-	"name": "hazelhooks",
-	"dependencies": {
-		"framer-motion": "^10.12.18",
-		"landing": "workspace:^"
-	}
+	"workspaces": ["apps/backend", "packages/db"]
 }

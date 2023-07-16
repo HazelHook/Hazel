@@ -14,3 +14,5 @@ export const Tiny = (token: string) => {
 		response,
 	}
 }
+
+export default Tiny(process.env.TINY_TOKEN as string)
