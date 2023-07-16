@@ -15,7 +15,11 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@conn/*": ["./app/(pages)/(connection)/*"],
+      "@dest/*": ["./app/(pages)/(destionation)/*"],
+      "@source/*": ["./app/(pages)/(source)/*"],
+      "@integration/*": ["./app/(pages)/(integration)/*"]
     },
     "plugins": [
       {

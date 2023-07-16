@@ -15,9 +15,9 @@ import {
 } from "@/components/ui/dialog"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
-import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
-import type { deleteConnectionAction, updateConnectionAction } from "@/app/(pages)/(connection)/_actions"
+import type { deleteConnectionAction, updateConnectionAction } from "@conn/_actions"
 import Link from "next/link"
+import { ConnectionDataRowType } from "@conn/connections/page"
 
 export const ConnectionActions = ({
 	updateAction,

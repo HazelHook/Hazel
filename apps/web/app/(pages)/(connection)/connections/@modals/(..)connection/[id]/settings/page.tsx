@@ -1,4 +1,4 @@
-import { ConnectionSettingsPage, SettingsProps } from "@/components/pages/connection/SettingsPage"
+import { ConnectionSettingsPage } from "@/components/pages/connection/SettingsPage"
 import { Dialog, InterceptedDialogContent } from "@/components/ui/dialog"
 
 const ConnectionUpdateFormPage = ({
