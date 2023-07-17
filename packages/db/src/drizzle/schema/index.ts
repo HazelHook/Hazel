@@ -43,7 +43,6 @@ export const destination = buildMysqlTable(
 	{
 		name,
 		url: url.notNull(),
-		enabled,
 		websocket_connection: boolean("websocket_connection").default(false).notNull(),
 	},
 	(table) => ({
