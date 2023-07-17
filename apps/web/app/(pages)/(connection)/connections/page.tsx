@@ -34,7 +34,6 @@ const ConnectionsPage = async () => {
 					New Connection
 				</Link>
 			</div>
-			<Link href="/connection/12/settings">Test</Link>
 			<ConnectionTable deleteAction={deleteConnectionAction} updateAction={updateConnectionAction} data={connections} />
 		</Container>
 	)
