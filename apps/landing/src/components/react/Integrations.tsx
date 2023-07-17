@@ -1,7 +1,7 @@
 import { MagicCard, MagicContainer } from "@/components/react/ui/MagicCard"
 import { Meteors } from "@/components/react/ui/Meteors"
 import { appConfig } from "@/lib/app"
-import { AnimatePresence, animate, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useState } from "react"
 
 function chunk<T>(arr: T[], size: number): T[][] {

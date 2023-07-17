@@ -10,13 +10,13 @@
 		"rome:format:write": "rome format --write ./"
 	},
 	"devDependencies": {
-		"@ianvs/prettier-plugin-sort-imports": "4.0.2",
-		"@turbo/gen": "1.10.7",
+		"@ianvs/prettier-plugin-sort-imports": "4.1.0",
+		"@turbo/gen": "1.10.8",
 		"prettier": "3.0.0",
 		"rome": "12.1.3",
 		"tsup": "7.1.0",
-		"turbo": "1.10.7"
+		"turbo": "1.10.8"
 	},
 	"packageManager": "pnpm@8.6.5",
-	"workspaces": ["apps/backend", "apps/landing", "packages/db"]
+	"workspaces": ["apps/backend", "packages/db"]
 }
