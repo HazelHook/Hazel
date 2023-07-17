@@ -18,5 +18,5 @@
 		"turbo": "1.10.7"
 	},
 	"packageManager": "pnpm@8.6.5",
-	"workspaces": ["apps/backend", "packages/db"]
+	"workspaces": ["apps/backend", "apps/landing", "packages/db"]
 }

@@ -1,7 +1,6 @@
 import { MagicCard, MagicContainer } from "@/components/react/ui/MagicCard"
 import { Meteors } from "@/components/react/ui/Meteors"
 import { appConfig } from "@/lib/app"
-import { Integration } from "@/lib/app.types"
 import { AnimatePresence, animate, motion } from "framer-motion"
 import { useState } from "react"
 
@@ -159,7 +158,7 @@ export const Integrations = () => {
 														<img
 															className="w-8 h-8"
 															alt={`${integration.name} Logo`}
-															src={integration.logoPath}
+															src={`/images/assets/integrations/${integration.id}.svg`}
 															width={32}
 															height={32}
 														/>
