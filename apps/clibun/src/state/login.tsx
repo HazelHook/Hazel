@@ -12,7 +12,7 @@ export function Login({ client }: { client: AxiosInstance }) {
 				process.exit(0)
 			} else {
 				try {
-					const data = await client.get(`/v1/oauth-url/${process.env["PORT"]}`)
+					const data = await client.get(`/v1/cli/oauth-url/${process.env["PORT"]}`)
 
 					if(data.status !== 200) {
 						throw new Error(`Failed to get oauth url: ${data?.data?.message ?? data.status}`)

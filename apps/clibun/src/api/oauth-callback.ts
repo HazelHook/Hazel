@@ -43,7 +43,7 @@ export const oauthCallback = (client: AxiosInstance, onSuccess: () => void) => a
 
   const code = req.query["code"];
   const token = await client.post(
-    `http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`,
+    `http://127.0.0.1:3003/v1/cli/token/${process.env["PORT"]}`,
     {
       token: code,
       token_type: "code",

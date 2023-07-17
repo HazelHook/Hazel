@@ -34,8 +34,8 @@ export default function Menu({ client, token, openWebsocket }: { client: AxiosIn
 		}
 
 		client
-			.post(`/v1/webhook-destinations/${process.env["PORT"]}`, {
-				token: token.access_token,
+			.post(`/v1/cli/webhook-destinations/${process.env["PORT"]}`, {
+				access_token: token.access_token,
 			})
 			.then((destinations) => {
 				if (destinations.status !== 200) {
