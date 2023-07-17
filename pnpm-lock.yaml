@@ -38,6 +38,9 @@ importers:
       bullmq:
         specifier: ^4.3.0
         version: 4.3.0
+      db:
+        specifier: workspace:*
+        version: link:../../packages/db
       drizzle-orm:
         specifier: ^0.27.0
         version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.6.14)
@@ -347,6 +350,34 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
+
+  apps/worker:
+    dependencies:
+      '@chronark/zod-bird':
+        specifier: ^0.1.1
+        version: 0.1.1
+      '@planetscale/database':
+        specifier: ^1.8.0
+        version: 1.8.0
+      bullmq:
+        specifier: ^4.3.0
+        version: 4.3.0
+      db:
+        specifier: workspace:*
+        version: link:../../packages/db
+      drizzle-orm:
+        specifier: ^0.27.0
+        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.6.14)
+      elysia:
+        specifier: latest
+        version: 0.5.22(typescript@5.1.6)
+      nanoid:
+        specifier: ^4.0.2
+        version: 4.0.2
+    devDependencies:
+      bun-types:
+        specifier: latest
+        version: 0.6.14
 
   packages/db:
     dependencies:
