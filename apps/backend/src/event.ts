@@ -31,7 +31,7 @@ const sourceQueue = new Queue("source_queue", {
 
 export const sendEvent = async ({ connection, sourceId, requestId, customerId, request }: Event) => {
 	try {
-		const sendTime = Date.now().toString()
+		const sendTime = new Date().toISOString()
 		const res = await fetch(connection.destination.url, request.clone())
 
 		const headersObj: Record<string, string> = {}
@@ -41,7 +41,7 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 
 		await tiny.response.publish({
 			id: `res_${nanoid(17)}`,
-			timestamp: Date.now().toString(),
+			timestamp: new Date().toISOString(),
 			send_timestamp: sendTime,
 			source_id: sourceId,
 			customer_id: customerId,
@@ -58,21 +58,22 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 			const data: { connectionId: string; requestId: string; request: string } = {
 				requestId,
 				connectionId: connection.publicId,
-				request: await handleRequest(request),
+				request: await handleRequest(connection.destination.url, request),
 			}
 
-			console.log(data)
+			console.log("hi")
 
-			sourceQueue.add(requestId, data, { delay: 10 })
+			sourceQueue.add(requestId, data, { delay: 10, attempts: 5 })
 		}
 	} catch (error) {
+		console.log(error)
 		// TODO: LOG ERORS HERE ON OUR SIDE
 
 		const data: { connectionId: string; requestId: string; request: string } = {
 			requestId,
 			connectionId: connection.publicId,
-			request: await handleRequest(request),
+			request: await handleRequest(connection.destination.url, request),
 		}
-		sourceQueue.add(requestId, data, { delay: 10 })
+		sourceQueue.add(requestId, data, { delay: 10, attempts: 5 })
 	}
 }

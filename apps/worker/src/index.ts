@@ -19,19 +19,19 @@ const redisConnection: ConnectionOptions = {
 const worker = new Worker<{ connectionId: string; requestId: string; request: string }>(
 	"source_queue",
 	async (job) => {
+		console.log(job.id)
 		const connection = await db.connection.getOne({ publicId: job.data.connectionId })
-
-		console.log(connection)
 
 		if (!connection) {
 			// Connection was probably deleted, so we can just discard it
 			return
 		}
 
-		const sendTime = Date.now().toString()
-		const res = await consumeBase64(job.data.connectionId)
+		const sendTime = new Date().toISOString()
+		const res = await consumeBase64(job.data.request)
 
-		console.log(res)
+		console.log(res.ok)
+
 		const headersObj: Record<string, string> = {}
 		res.headers.forEach((value, key) => {
 			headersObj[key] = value
@@ -39,7 +39,7 @@ const worker = new Worker<{ connectionId: string; requestId: string; request: st
 
 		await tiny.response.publish({
 			id: `res_${nanoid(17)}`,
-			timestamp: Date.now().toString(),
+			timestamp: new Date().toISOString(),
 			send_timestamp: sendTime,
 			source_id: connection.source.publicId,
 			customer_id: connection.customerId,
@@ -51,6 +51,12 @@ const worker = new Worker<{ connectionId: string; requestId: string; request: st
 			status: res.status,
 			success: Number(res.ok),
 		})
+
+		if (!res.ok) {
+			throw new Error("Requeue Message")
+		}
+
+		return
 	},
 	{
 		connection: redisConnection,

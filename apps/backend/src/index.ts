@@ -19,7 +19,6 @@ const app = new Elysia()
 				const source = await db.source.getOne({
 					publicId: params.sourceId,
 				})
-				// console.timeEnd("Test")
 
 				if (!source) {
 					set.status = 404
@@ -29,13 +28,12 @@ const app = new Elysia()
 					}
 				}
 
-				//:!! Comment this out for  dev ya know @JeremyFunk
-				if (source.url !== request.url) {
-					// set.status = 403
-					// return {
-					// 	status: "403",
-					// 	message: `${request.url} doesn't match Source (${source.url})`,
-					// }
+				if (source.url && source.url !== request.url) {
+					set.status = 403
+					return {
+						status: "403",
+						message: `${request.url} doesn't match Source (${source.url})`,
+					}
 				}
 
 				if (source.connections.length === 0) {
@@ -57,7 +55,7 @@ const app = new Elysia()
 
 				await tiny.request.publish({
 					id: requestId,
-					timestamp: Date.now().toString(),
+					timestamp: new Date().toISOString(),
 					source_id: source.publicId,
 					customer_id: source.customerId,
 					version: "1.0",
@@ -80,7 +78,7 @@ const app = new Elysia()
 
 					await sendEvent({
 						request,
-						connection: connection as any,
+						connection: connection,
 						data: data,
 						requestId,
 						customerId: source.customerId,
