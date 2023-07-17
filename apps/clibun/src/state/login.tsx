@@ -3,7 +3,7 @@ import { Box, Text, useInput } from "ink"
 import {AxiosInstance} from "axios"
 import { exec } from "child_process"
 
-export function Login({client}: {client: AxiosInstance}) {
+export function Login({ client }: { client: AxiosInstance }) {
     const [state, setState] = React.useState(0)
 
 	useInput(async (_, key) => {

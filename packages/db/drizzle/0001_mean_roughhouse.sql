@@ -1,1 +1,0 @@
-ALTER TABLE `integrations` MODIFY COLUMN `tool` enum('hmac','basic_auth','api_key','stripe','github','shopify','gitlab','linear','postmark','typeform','mailgun','sendgrid','resend','ayden','jira','svix') NOT NULL;

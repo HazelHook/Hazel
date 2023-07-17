@@ -60,6 +60,9 @@ importers:
       '@types/express':
         specifier: ^4.17.17
         version: 4.17.17
+      '@types/ws':
+        specifier: ^8.5.5
+        version: 8.5.5
       axios:
         specifier: ^1.4.0
         version: 1.4.0
@@ -81,6 +84,9 @@ importers:
       react:
         specifier: ^18.2.0
         version: 18.2.0
+      ws:
+        specifier: ^8.13.0
+        version: 8.13.0
     devDependencies:
       '@sindresorhus/tsconfig':
         specifier: ^3.0.1
@@ -3867,6 +3873,12 @@ packages:
 
   /@types/unist@3.0.0:
     resolution: {integrity: sha512-MFETx3tbTjE7Uk6vvnWINA/1iJ7LuMdO4fcq8UfF0pRbj01aGLduVvQcRyswuACJdpnHgg8E3rQLhaRdNEJS0w==}
+
+  /@types/ws@8.5.5:
+    resolution: {integrity: sha512-lwhs8hktwxSjf9UaZ9tG5M03PGogvFaH8gUgLNbN9HKIg0dvv6q+gkSuJ8HN4/VbyxkuLzCjlN7GquQ0gUJfIg==}
+    dependencies:
+      '@types/node': 20.4.2
+    dev: false
 
   /@types/yargs-parser@21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}

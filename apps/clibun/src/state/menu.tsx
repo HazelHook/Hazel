@@ -9,7 +9,7 @@ export interface Token {
 	expires_at: number
 }
 
-export default function App({ client, token, openWebsocket }: { client: AxiosInstance; token: Token | null; openWebsocket: (id: string) => void }) {
+export default function Menu({ client, token, openWebsocket }: { client: AxiosInstance; token: Token | null; openWebsocket: (id: string) => void }) {
 	const [destinations, setDestinations] = React.useState(null)
 	const [state, setState] = React.useState(0)
 
@@ -17,13 +17,12 @@ export default function App({ client, token, openWebsocket }: { client: AxiosIns
 		const max = destinations?.length
 
 		if (key.return && destinations) {
-			openWebsocket(destinations[state].id)
+			openWebsocket(destinations[state].publicId)
 		}else if (key.upArrow) {
 			setState(state === 0 ? max - 1 : state - 1)
 		} else if (key.downArrow) {
 			setState(state === max - 1 ? 0 : state + 1)
 		}
-
 
 		const newState = state + (key.upArrow ? -1 : key.downArrow ? 1 : 0)
 		setState(newState < 0 ? 1 : newState > 1 ? 0 : newState)
