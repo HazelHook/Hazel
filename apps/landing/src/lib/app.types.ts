@@ -30,6 +30,8 @@ export interface Integration {
 		| "jira"
 		| "svix"
 	url: string
+	categories: string[]
+	features: string[]
 }
 
 export interface AppConfig {
