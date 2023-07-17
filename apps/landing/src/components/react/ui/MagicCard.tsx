@@ -226,7 +226,7 @@ function MagicCard<T extends React.ElementType = "div">({
 				} as CSSProperties
 			}
 			className={cn(
-				"relative rounded-[var(--border-radius)] overflow-hidden",
+				"w-full h-full relative rounded-[var(--border-radius)] overflow-hidden",
 				isolated && [borderStyles, "after:opacity-0 after:hover:opacity-100"],
 				isolated && spotlight && [spotlightStyles, "before:opacity-0 before:hover:opacity-100"],
 				!isolated && [borderStyles, "after:opacity-[var(--opacity)]"],
