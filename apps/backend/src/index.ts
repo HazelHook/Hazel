@@ -78,6 +78,7 @@ const app = new Elysia()
 
 					await sendEvent({
 						request,
+						body: data,
 						connection: connection,
 						data: data,
 						requestId,

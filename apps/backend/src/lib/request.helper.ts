@@ -16,12 +16,12 @@ import { Buffer } from "buffer"
 // 	return null
 // }
 
-export async function handleRequest(url: string, request: Request): Promise<string> {
+export async function handleRequest(url: string, request: Request, body: string): Promise<string> {
 	const data = {
 		method: request.method,
 		url: url,
 		headers: [...request.headers],
-		body: request.body,
+		body: body,
 	}
 
 	// Convert the JSON object to a string

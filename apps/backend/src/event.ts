@@ -10,6 +10,7 @@ interface Event {
 		destination: Destination
 	}
 	request: Request
+	body: string
 	sourceId: string
 	requestId: string
 	customerId: string
@@ -29,7 +30,7 @@ const sourceQueue = new Queue("source_queue", {
 	connection: redisConnection,
 })
 
-export const sendEvent = async ({ connection, sourceId, requestId, customerId, request }: Event) => {
+export const sendEvent = async ({ connection, sourceId, requestId, customerId, request, body }: Event) => {
 	try {
 		const sendTime = new Date().toISOString()
 		const res = await fetch(connection.destination.url, request.clone())
@@ -48,17 +49,19 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 			version: "1.0",
 			request_id: requestId,
 			destination_id: connection.destination.publicId,
-			body: await res.text(),
+			body: body,
 			headers: JSON.stringify(headersObj),
 			status: res.status,
 			success: Number(res.ok),
 		})
 
+		console.log(body)
+
 		if (!res.ok) {
 			const data: { connectionId: string; requestId: string; request: string } = {
 				requestId,
 				connectionId: connection.publicId,
-				request: await handleRequest(connection.destination.url, request),
+				request: await handleRequest(connection.destination.url, request, body),
 			}
 
 			console.log("hi")
@@ -72,7 +75,7 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 		const data: { connectionId: string; requestId: string; request: string } = {
 			requestId,
 			connectionId: connection.publicId,
-			request: await handleRequest(connection.destination.url, request),
+			request: await handleRequest(connection.destination.url, request, body),
 		}
 		sourceQueue.add(requestId, data, { delay: 10, attempts: 5 })
 	}

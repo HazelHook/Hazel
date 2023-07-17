@@ -19,7 +19,6 @@ const redisConnection: ConnectionOptions = {
 const worker = new Worker<{ connectionId: string; requestId: string; request: string }>(
 	"source_queue",
 	async (job) => {
-		console.log(job.id)
 		const connection = await db.connection.getOne({ publicId: job.data.connectionId })
 
 		if (!connection) {
