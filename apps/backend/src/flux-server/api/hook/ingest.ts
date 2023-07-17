@@ -98,6 +98,10 @@ export function addHookIngestEndpoint(elysia: Elysia){
                     requestId,
                     data,
                     headers: headersObj,
+                    sourceId: source.publicId,
+                    source: source.name,
+                    method: "POST",
+                    timestamp: Date.now()
                 })
             })
         }

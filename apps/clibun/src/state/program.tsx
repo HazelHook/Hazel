@@ -5,6 +5,7 @@ import { render } from "ink"
 import { Login } from "./login.js"
 import WebSocket from "ws"
 import Menu from "./menu.js"
+import { DummyWebhook } from "./webhook.js"
 
 export type ProgramState = "starting" | "menu" | "webhook"
 
@@ -21,6 +22,9 @@ export class Program {
 	}
 
 	async executeState() {
+		render(<DummyWebhook/>)
+		return
+
 		if (this.state === "starting") {
 			this.token = await tryGetToken(this.client)
 			if (!this.token) {
@@ -42,7 +46,7 @@ export class Program {
 			)
 			this.unmount = rend.unmount
 		} else if (this.state === "webhook") {
-			console.log("Not sure")
+			// this is handled the webhook message event
 		}
 	}
 
@@ -57,8 +61,7 @@ export class Program {
 		this.ws = new WebSocket(`${process.env["BACKEND_WEBSOCKET_URL_WS"]}/ws/${id}`)
 
 		this.ws.on("message", (data) => {
-			console.log("Data received")
-			console.log(data)
+			console.log(data.toString())
 		})
 
 		this.ws.on("open", () => {

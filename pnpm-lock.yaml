@@ -81,6 +81,9 @@ importers:
       ink:
         specifier: ^4.1.0
         version: 4.1.0(@types/react@18.2.14)(react@18.2.0)
+      ink-table:
+        specifier: ^3.0.0
+        version: 3.0.0(ink@4.1.0)(react@18.2.0)
       keytar:
         specifier: ^7.9.0
         version: 7.9.0
@@ -6683,6 +6686,17 @@ packages:
   /ini@1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
 
+  /ink-table@3.0.0(ink@4.1.0)(react@18.2.0):
+    resolution: {integrity: sha512-RtcYjenHKZWjnwVNQ6zSYWMOLKwkWscDAJsqUQXftyjkYho1gGrluGss87NOoIzss0IKr74lKasd6MtlQYALiA==}
+    peerDependencies:
+      ink: '>=3.0.0'
+      react: '>=16.8.0'
+    dependencies:
+      ink: 4.1.0(@types/react@18.2.14)(react@18.2.0)
+      object-hash: 2.2.0
+      react: 18.2.0
+    dev: false
+
   /ink-testing-library@3.0.0(@types/react@18.2.14):
     resolution: {integrity: sha512-ItyyoOmcm6yftb7c5mZI2HU22BWzue8PBbO3DStmY8B9xaqfKr7QJONiWOXcwVsOk/6HuVQ0v7N5xhPaR3jycA==}
     engines: {node: '>=14.16'}
@@ -8328,6 +8342,11 @@ packages:
   /object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
+
+  /object-hash@2.2.0:
+    resolution: {integrity: sha512-gScRMn0bS5fH+IuwyIFgnh9zBdo4DV+6GhygmWM9HyNJSgS0hScp1f5vjtm7oIIOiT9trXrShAkLFSc2IqKNgw==}
+    engines: {node: '>= 6'}
+    dev: false
 
   /object-hash@3.0.0:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
