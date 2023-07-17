@@ -43,6 +43,7 @@ export const destination = buildMysqlTable(
 	{
 		name,
 		url: url.notNull(),
+		websocket_connection: boolean("websocket_connection").default(false).notNull(),
 	},
 	(table) => ({
 		publicIdIndex: index("dst_public_id_idx").on(table.publicId),

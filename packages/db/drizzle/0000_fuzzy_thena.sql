@@ -23,6 +23,7 @@ CREATE TABLE `destinations` (
 	`name` varchar(64) NOT NULL,
 	`url` varchar(128) NOT NULL,
 	`enabled` boolean NOT NULL DEFAULT true,
+	`websocket_connection` boolean NOT NULL DEFAULT false,
 	CONSTRAINT `sources_public_id_unique` UNIQUE(`public_id`)
 );
 --> statement-breakpoint
@@ -34,7 +35,7 @@ CREATE TABLE `integrations` (
 	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`deleted_at` timestamp,
 	`name` varchar(64) NOT NULL,
-	`tool` enum('hmac','basic_auth','api_key','stripe','github','shopify','gitlab','linear','postmark','typeform','mailgun','sendgrid','resend','ayden','jira','svix'),
+	`tool` enum('hmac','basic_auth','api_key','stripe','github','shopify','gitlab','linear','postmark','typeform','mailgun','sendgrid','resend','ayden','jira','svix') NOT NULL,
 	`config` json,
 	CONSTRAINT `sources_public_id_unique` UNIQUE(`public_id`)
 );
@@ -48,7 +49,6 @@ CREATE TABLE `sources` (
 	`deleted_at` timestamp,
 	`name` varchar(64) NOT NULL,
 	`url` varchar(128),
-	`enabled` boolean NOT NULL DEFAULT true,
 	`integration_id` int,
 	CONSTRAINT `sources_public_id_unique` UNIQUE(`public_id`)
 );

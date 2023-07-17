@@ -1,10 +1,10 @@
-import { exec } from "child_process"
 import React from "react"
-import { AxiosInstance } from "axios"
 import { Box, Text, useInput } from "ink"
+import {AxiosInstance} from "axios"
+import { exec } from "child_process"
 
-export default function App({ client }: { client: AxiosInstance }) {
-	const [state, setState] = React.useState(0)
+export function Login({ client }: { client: AxiosInstance }) {
+    const [state, setState] = React.useState(0)
 
 	useInput(async (_, key) => {
 		if (key.return) {
@@ -12,15 +12,15 @@ export default function App({ client }: { client: AxiosInstance }) {
 				process.exit(0)
 			} else {
 				try {
-					const data = await client.get(`http://127.0.0.1:3003/v1/oauth-url/${process.env["PORT"]}`)
+					const data = await client.get(`/v1/oauth-url/${process.env["PORT"]}`)
 
-					if (data.status !== 200) {
+					if(data.status !== 200) {
 						throw new Error(`Failed to get oauth url: ${data?.data?.message ?? data.status}`)
 					}
-
+					
 					const redirect_uri = `http://localhost:${process.env["PORT"]}/oauth2/callback`
 					const url = `${data.data.auth_url}?response_type=code&client_id=${data.data.client_id}&redirect_uri=${redirect_uri}&scope=profile%20email`
-
+					
 					// Open in browser
 					exec(`open "${url}"`)
 				} catch (e) {

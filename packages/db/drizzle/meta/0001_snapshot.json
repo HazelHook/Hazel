@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "e9e796be-d46f-478f-b6ce-7438ce4ed4e9",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "c0c1f4b2-5238-4cc7-8d1c-781f27688590",
+  "prevId": "e9e796be-d46f-478f-b6ce-7438ce4ed4e9",
   "tables": {
     "connections": {
       "name": "connections",
@@ -191,14 +191,6 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
-        },
-        "enabled": {
-          "name": "enabled",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": true
         },
         "websocket_connection": {
           "name": "websocket_connection",
