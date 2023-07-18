@@ -1,41 +1,53 @@
 ---
 import { Particles } from "@/components/react/Particles";
-
 ---
 
 <section class="lg:p-8">
   <div
-    class="px-8 py-12 lg:py-32 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl">
-   
+    class="px-8 py-12 lg:py-32 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl"
+  >
     <div
-    data-aos="fade-down"
-      class="relative group/card isolate bg-gradientdown ring-1 ring-white/10 rounded-4xl px-6 py-8 sm:px-16 xl:flex lg:gap-x-12 lg:px-24 lg:pt-0">
+      data-aos="fade-down"
+      class="relative group/card isolate bg-gradientdown ring-1 ring-white/10 rounded-4xl px-6 py-8 sm:px-16 xl:flex lg:gap-x-12 lg:px-24 lg:pt-0"
+    >
       <Particles
-      client:load
-       className="absolute inset-0 -z-10 opacity-10 group-hover/card:opacity-100 transition-opacity duration-700 ease-in-out"
-       quantity={300}
-     />
+        client:load
+        className="absolute inset-0 -z-10 opacity-10 group-hover/card:opacity-100 transition-opacity duration-700 ease-in-out"
+        quantity={300}
+      />
       <div
-        class="mx-auto max-w-md text-center xl:mx-0 lg:flex-auto lg:py-32 xl:text-left">
+        class="mx-auto max-w-md text-center xl:mx-0 lg:flex-auto lg:py-32 xl:text-left"
+      >
         <span class="text-white"> Get started</span>
         <h2
-          class="text-3xl mt-6 tracking-tighter font-light lg:text-4xl text-white">
+          class="text-3xl mt-6 tracking-tighter font-light lg:text-4xl text-white"
+        >
           Want to learn more?
         </h2>
         <p class="mt-4 text-base text-white">
-         Book a call or fill out the form and we will contact you  and our team will promptly get in touch with you, providing an enablement pack tailored to your specific requirements.
+          Book a call or fill out the form and we will contact you and our team
+          will promptly get in touch with you, providing an enablement pack
+          tailored to your specific requirements.
         </p>
         <div class="inline-flex flex-wrap items-center mt-8">
           <a
             href="/contact"
             type="a"
-            class="text-sm py-2 px-4 border focus:ring-2 rounded-full border-transparent bg-white hover:bg-white/10 text-black duration-200 focus:ring-offset-2 focus:ring-white hover:text-white inline-flex items-center justify-center ring-1 ring-transparent">
+            class="text-sm py-2 px-4 border focus:ring-2 rounded-full border-transparent bg-white hover:bg-white/10 text-black duration-200 focus:ring-offset-2 focus:ring-white hover:text-white inline-flex items-center justify-center ring-1 ring-transparent"
+          >
             Book a call
           </a>
         </div>
       </div>
-      <div class="mt-16 lg:-mt-24 bg-white rounded-3xl w-full mx-auto" data-aos="fade-down" data-aos-delay="100">
-        <form class="bg-white rounded-3xl p-8 overflow-hidden">
+      <div
+        class="mt-16 lg:-mt-24 bg-white rounded-3xl w-full mx-auto"
+        data-aos="fade-down"
+        data-aos-delay="100"
+      >
+        <form
+          action="https://formsubmit.co/david@hazelapp.dev"
+          class="bg-white rounded-3xl p-8 overflow-hidden"
+        >
           <div class="space-y-6">
             <div class="w-full flex-row flex gap-3">
               <div class="w-full">
@@ -67,8 +79,7 @@ import { Particles } from "@/components/react/Particles";
                 />
               </div>
             </div><div>
-              <label
-                class="text-sm block font-medium mb-3 text-slate-600"
+              <label class="text-sm block font-medium mb-3 text-slate-600"
                 >Company</label
               >
               <input
@@ -77,9 +88,8 @@ import { Particles } from "@/components/react/Particles";
                 placeholder="Type here..."
               />
             </div><div class="col-span-full">
-              <label
-                class="text-sm block font-medium mb-3 text-slate-600"
-               >Email</label
+              <label class="text-sm block font-medium mb-3 text-slate-600"
+                >Email</label
               >
               <input
                 type="email"
@@ -111,14 +121,17 @@ import { Particles } from "@/components/react/Particles";
                   placeholder="+1 (555) 987-6543"
                 />
               </div>
-            <div
-              class="inline-flex flex-wrap col-span-full items-center mt-8 w-full">
-              <a
-                href="/"
-                type="a"
-                class="text-sm py-2 px-4 border focus:ring-2 rounded-full border-zinc-100 bg-black hover:bg-black/10 text-white duration-200 focus:ring-offset-2 focus:ring-white hover:text-black w-full inline-flex items-center justify-center ring-1 ring-transparent">
-                Submit
-              </a>
+              <div
+                class="inline-flex flex-wrap col-span-full items-center mt-8 w-full"
+              >
+                <a
+                  href="/"
+                  type="a"
+                  class="text-sm py-2 px-4 border focus:ring-2 rounded-full border-zinc-100 bg-black hover:bg-black/10 text-white duration-200 focus:ring-offset-2 focus:ring-white hover:text-black w-full inline-flex items-center justify-center ring-1 ring-transparent"
+                >
+                  Submit
+                </a>
+              </div>
             </div>
           </div>
         </form>

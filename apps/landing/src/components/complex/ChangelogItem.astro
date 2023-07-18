@@ -37,6 +37,9 @@ const { Content } = await log.render();
       class="absolute -top-[1.0625rem] -left-1 h-[0.5625rem] w-[0.5625rem] rounded-full border-2 border-white/10 bg-black md:top-[0.4375rem]"
     >
     </div>
-    <Content />
+    <div>
+      <h3 class="text-lg font-bold">{log.data.title}</h3>
+      <Content />
+    </div>
   </div>
 </section>

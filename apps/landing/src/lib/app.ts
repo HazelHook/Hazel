@@ -5,7 +5,7 @@ export const appConfig: AppConfig = {
 		{ name: "Pricing", href: "/#pricing" },
 		{ name: "Docs", href: "https://docs.hazelhook.dev", target: "__blank" },
 		{ name: "Blog", href: "/blog" },
-		{ name: "Changelog", href: "/changelog" },
+		// { name: "Changelog", href: "/changelog" },
 	],
 	footer: [
 		{
@@ -21,7 +21,7 @@ export const appConfig: AppConfig = {
 		{
 			title: "Stay Updated",
 			item: [
-				{ name: "Changelog", href: "/changelog" },
+				// { name: "Changelog", href: "/changelog" },
 				{ name: "Roadmap", href: "/roadmap" },
 			],
 		},
