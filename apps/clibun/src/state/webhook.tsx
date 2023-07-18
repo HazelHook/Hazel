@@ -28,6 +28,7 @@ export function handleWebhookMessage(data: WebSocket.RawData, url?: string) {
 		headers: deserialized.headers,
 	}
 
+	console.log(`SENDING TO ${url}`)
 	if (url) {
 		fetch(url, {
 			method: msg.method,

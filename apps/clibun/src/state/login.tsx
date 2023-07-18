@@ -35,9 +35,9 @@ export function Login({ client }: { client: AxiosInstance }) {
 
 	return (
 		<Box flexDirection="column" borderStyle="round">
-			<Text>You need to login to access the Hazel CLI. Would you like to continue?</Text>
-			<Text color={state === 0 ? "greenBright" : "white"}> Login</Text>
-			<Text color={state === 1 ? "greenBright" : "white"}> Cancel</Text>
+			<Text> You need to login to access the Hazel CLI. Please confirm.</Text>
+			<Text color={state === 0 ? "greenBright" : "white"}>  Login</Text>
+			<Text color={state === 1 ? "greenBright" : "white"}>  Exit</Text>
 		</Box>
 	)
 }

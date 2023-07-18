@@ -28,10 +28,10 @@ export async function storeToken(token: {
 
 export async function tryGetToken(client: AxiosInstance): Promise<Token | null> {
 	const token: Token = JSON.parse(await getPassword("hazel", "token"))
-
+	
 	if (token?.expires_at < new Date().getTime()) {
 		try {
-			const newToken = await client.post(`http://127.0.0.1:3003/cli/token/${process.env["PORT"]}`, {
+			const newToken = await client.post(`v1/cli/token/${process.env["PORT"]}`, {
 				token: token.refresh_token,
 				token_type: "refresh_token",
 			})
@@ -47,6 +47,7 @@ export async function tryGetToken(client: AxiosInstance): Promise<Token | null> 
 				expires_at: new Date().getTime() + newToken.data.expires_in * 1000,
 			}
 		} catch (e) {
+			console.log(e)
 			return null
 		}
 	}
