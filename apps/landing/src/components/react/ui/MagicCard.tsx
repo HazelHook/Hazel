@@ -1,7 +1,6 @@
 "use client"
 
 import clsx, { ClassValue } from "clsx"
-import { motion } from "framer-motion"
 import { CSSProperties, ComponentProps, ReactNode, useEffect, useRef, useState } from "react"
 import { twMerge } from "tailwind-merge"
 

@@ -3,6 +3,8 @@ import { Meteors } from "@/components/react/ui/Meteors"
 import { appConfig } from "@/lib/app"
 import { motion } from "framer-motion"
 import { useState } from "react"
+import { GridPattern } from "./ui/GridPattern"
+import { twMerge } from "tailwind-merge"
 
 function chunk<T>(arr: T[], size: number): T[][] {
 	return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size))
