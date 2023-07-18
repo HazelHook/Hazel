@@ -66,7 +66,7 @@ export const PricingCard = ({ name, price, description, items, gradient, tag, pr
 					}`}
 				>
 					{items.map((item) => (
-						<li className="inline-flex items-center py-3">
+						<li className="inline-flex items-center py-3" key={item}>
 							<>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
