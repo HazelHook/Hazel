@@ -1,11 +1,11 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import { AxiosInstance } from "axios"
 import { Token, tryGetToken } from "../token.js"
-import { render } from "ink"
+import { Box, render, Text } from "ink"
 import { Login } from "./login.js"
 import WebSocket from "ws"
-import Menu from "./menu.js"
-import { DummyWebhook } from "./webhook.js"
+import Menu from "../menu/menu.js"
+import { handleWebhookMessage, renderWebhook } from "./webhook.js"
 
 export type ProgramState = "starting" | "menu" | "webhook"
 
@@ -13,7 +13,7 @@ export class Program {
 	state: ProgramState = "starting"
 	client: AxiosInstance
 	token: Token | null = null
-	unmount: () => void
+	rerender: (node: ReactNode) => void
 	ws: WebSocket | null = null
 
 	constructor(client: AxiosInstance) {
@@ -22,53 +22,60 @@ export class Program {
 	}
 
 	async executeState() {
-		render(<DummyWebhook/>)
-		return
+		// render(<DummyWebhook/>)
+		// return
 
 		if (this.state === "starting") {
+			const rend = render(<Box borderStyle="round">
+				<Text>Logging in...</Text>
+			</Box>)
+			this.rerender = rend.rerender
+
 			this.token = await tryGetToken(this.client)
+
 			if (!this.token) {
-				const rend = render(<Login client={this.client} />)
-				this.unmount = rend.unmount
+				this.rerender(<Login client={this.client} />)
 			} else {
 				this.state = "menu"
-				await this.executeState()
+				this.executeState()
 			}
 		} else if (this.state === "menu") {
-			const rend = render(
+			this.rerender(
 				<Menu
 					client={this.client}
 					token={this.token}
-					openWebsocket={(id) => {
-						this.websocket(id)
+					openWebsocket={(id: string, url?: string) => {
+						this.websocket(id, url)
 					}}
 				/>,
 			)
-			this.unmount = rend.unmount
 		} else if (this.state === "webhook") {
-			// this is handled the webhook message event
+			renderWebhook(this.rerender, () => {
+				this.state = "menu"
+				this.executeState()
+			})
 		}
 	}
 
 	async loggedIn() {
 		console.log("logged in")
 		this.state = "menu"
-		this.unmount()
+		await this.executeState()
 	}
 
-	async websocket(id: string) {
+	async websocket(id: string, url?: string) {
 		this.state = "webhook"
 		this.ws = new WebSocket(`${process.env["BACKEND_WEBSOCKET_URL_WS"]}/ws/${id}`)
 
 		this.ws.on("message", (data) => {
-			console.log(data.toString())
+			handleWebhookMessage(data, url)
+			this.executeState()
 		})
 
 		this.ws.on("open", () => {
 			console.log("Websocket opened")
 		})
 
-		this.unmount()
 		await this.executeState()
 	}
 }

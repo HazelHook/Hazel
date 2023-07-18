@@ -19,10 +19,6 @@ app.get("/oauth2/callback?", oauthCallback(client, () => {
 	console.log("logged in")
     program.loggedIn()
 }))
-// app.get("/ws/:id", (req) => {
-// 	console.log("websocket", req.params.id)
-// 	program.websocket(req.params.id)
-// })
 
 const port = await getUnusedPort()
 process.env["PORT"] = port.toString()
