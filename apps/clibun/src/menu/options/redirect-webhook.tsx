@@ -27,7 +27,7 @@ export default function MenuRedirectWebhook({
 					setSelectedDestination(i)
 					setHoveredElement(destinations.length)
 				} else {
-					openWebsocket(destinations[selectedDestination], url)
+					openWebsocket(destinations[selectedDestination].publicId, url)
 				}
 			},
 		},

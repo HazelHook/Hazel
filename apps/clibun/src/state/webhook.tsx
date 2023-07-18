@@ -3,6 +3,7 @@ import { Box, Text, useInput } from "ink"
 import WebSocket from "ws"
 import { exec } from "child_process"
 import { Divider } from "./divider.js"
+import axios from "axios"
 
 type Message = {
 	requestId: string
@@ -28,13 +29,19 @@ export function handleWebhookMessage(data: WebSocket.RawData, url?: string) {
 		headers: deserialized.headers,
 	}
 
-	console.log(`SENDING TO ${url}`)
 	if (url) {
-		fetch(url, {
-			method: msg.method,
-			headers: msg.headers,
-			body,
-		})
+		if(msg.method === 'POST') {
+			axios.post(url, deserialized.data, {
+				headers: msg.headers,
+				
+			})
+		}
+		if(msg.method === 'GET') {
+			axios.get(url, {
+				headers: msg.headers,
+				data: deserialized.data
+			})
+		}
 	}
 
 	messages.push(msg)
