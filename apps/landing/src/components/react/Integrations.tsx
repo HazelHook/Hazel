@@ -125,8 +125,11 @@ export const Integrations = () => {
 									transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
 									className="flex gap-2 "
 								>
-									{chunkedIntegrations.map((chunk) => (
-										<div className="items-center justify-center w-full flex flex-col shrink-0 snap-start">
+									{chunkedIntegrations.map((chunk, index) => (
+										<div
+											key={`chunk-${index}`}
+											className="items-center justify-center w-full flex flex-col shrink-0 snap-start"
+										>
 											<div className="grid grid-cols-1 lg:grid-cols-4 gap-2 group h-full">
 												{chunk.map((integration, index) => (
 													<MagicContainer update={page} className="h-[250px] min-w-[250px]" key={integration.id}>
