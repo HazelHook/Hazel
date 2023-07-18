@@ -15,20 +15,30 @@ import {
 } from "@/components/ui/dialog"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
-import type { deleteConnectionAction, updateConnectionAction } from "@conn/_actions"
+import type { deleteConnectionAction, pauseConnectionAction } from "@conn/_actions"
 import Link from "next/link"
 import { ConnectionDataRowType } from "@conn/connections/page"
+import { ClockIcon } from "@/components/icons/pika/clock"
+import { PlayBigIcon } from "@/components/icons/pika/playBig"
 
 export const ConnectionActions = ({
 	deleteAction,
+	pauseAction,
 	data,
 }: {
 	data: ConnectionDataRowType
 	deleteAction: typeof deleteConnectionAction
+	pauseAction: typeof pauseConnectionAction
 }) => {
 	const router = useRouter()
 
 	const handleDelete = useAction(deleteAction, {
+		onSuccess() {
+			router.refresh()
+		},
+	})
+
+	const handlePause = useAction(pauseAction, {
 		onSuccess() {
 			router.refresh()
 		},
@@ -39,6 +49,18 @@ export const ConnectionActions = ({
 			<Link href={`/connection/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
 				<EditPencilIcon className="h-4 w-4" />
 			</Link>
+			<Button
+				onClick={() =>
+					handlePause.mutate({
+						publicId: data.publicId,
+						enabled: !data.enabled,
+					})
+				}
+				variant="ghost"
+			>
+				{data.enabled ? <ClockIcon className="h-4 w-4" /> : <PlayBigIcon className="h-4 w-4" />}
+			</Button>
+
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button variant="ghost">

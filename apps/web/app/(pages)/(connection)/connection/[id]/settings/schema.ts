@@ -8,7 +8,6 @@ export const formSchema = z.object({
 		})
 		.max(20),
 	publicId: z.string(),
-	enabled: z.boolean().optional().default(true),
 	publicSourceId: z.string().length(21, { message: "You need to Select/Create a Source" }),
 	publiceDestinationId: z.string().length(21, { message: "You need to Select/Create a Destination" }),
 })

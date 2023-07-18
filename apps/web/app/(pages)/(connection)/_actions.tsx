@@ -39,6 +39,19 @@ export const createConnectionAction = createAction(
 	}),
 )
 
+export const pauseConnectionAction = createAction(
+	protectedProcedure.input(z.object({ publicId: z.string(), enabled: z.boolean() })).mutation(async (opts) => {
+		const connection = await db.connection.update({
+			enabled: opts.input.enabled,
+			publicId: opts.input.publicId,
+		})
+
+		return {
+			id: connection.publicId,
+		}
+	}),
+)
+
 export const updateConnectionAction = createAction(
 	protectedProcedure.input(z.object({ publicId: z.string() }).merge(formSchema)).mutation(async (opts) => {
 		const source = await db.db.query.source.findFirst({

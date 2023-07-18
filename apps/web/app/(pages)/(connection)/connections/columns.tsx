@@ -11,7 +11,11 @@ import { Badge } from "@/components/ui/badge"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { Cell, SortableHeader } from "@/components/ui/data-table"
 import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
-import { deleteConnectionAction, updateConnectionAction } from "@/app/(pages)/(connection)/_actions"
+import {
+	deleteConnectionAction,
+	pauseConnectionAction,
+	updateConnectionAction,
+} from "@/app/(pages)/(connection)/_actions"
 import { ConnectionActions } from "@/app/(pages)/(connection)/_components/ConnectionActions"
 import { Button } from "@/components/ui/button"
 
@@ -20,9 +24,10 @@ export type Column = Connection & {
 	destination: Destination | null
 }
 
-export const columns: (deleteAction: typeof deleteConnectionAction) => ColumnDef<ConnectionDataRowType>[] = (
-	deleteAction,
-) => [
+export const columns: (
+	deleteAction: typeof deleteConnectionAction,
+	pauseAction: typeof pauseConnectionAction,
+) => ColumnDef<ConnectionDataRowType>[] = (deleteAction, pauseAction) => [
 	{
 		accessorKey: "name",
 		header: ({ column }) => {
@@ -103,7 +108,7 @@ export const columns: (deleteAction: typeof deleteConnectionAction) => ColumnDef
 		cell: ({ row }) => {
 			const connection = row.original
 
-			return <ConnectionActions data={connection} deleteAction={deleteAction} />
+			return <ConnectionActions data={connection} deleteAction={deleteAction} pauseAction={pauseAction} />
 		},
 	},
 ]

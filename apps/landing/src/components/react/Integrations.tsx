@@ -136,6 +136,7 @@ export const Integrations = () => {
 												{chunk.map((integration, index) => (
 													<MagicContainer update={page} className="h-[250px] min-w-[250px]" key={integration.id}>
 														<MagicCard
+															isolated={false}
 															data-aos="fade-down"
 															key={integration.name + index}
 															className="cursor-pointer bg-ebony shadow-inset rounded-3xl p-4"

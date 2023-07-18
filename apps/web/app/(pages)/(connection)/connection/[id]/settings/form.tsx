@@ -55,7 +55,6 @@ export function UpdateConnectionForm({
 			publicSourceId: connection.source.publicId,
 			publiceDestinationId: connection.destination.publicId,
 			publicId: connection.publicId,
-			enabled: connection.enabled,
 		},
 	})
 
@@ -91,19 +90,6 @@ export function UpdateConnectionForm({
 								</FormControl>
 								<FormDescription>A name to identify your connection.</FormDescription>
 								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="enabled"
-						render={({ field }) => (
-							<FormItem className="flex flex-col gap-2">
-								<FormLabel>Enabled</FormLabel>
-								<FormControl>
-									<Switch checked={field.value} onCheckedChange={field.onChange} />
-								</FormControl>
-								<FormDescription>Pause the connection.</FormDescription>
 							</FormItem>
 						)}
 					/>

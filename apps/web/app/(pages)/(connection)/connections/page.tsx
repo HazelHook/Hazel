@@ -7,7 +7,11 @@ import { Container } from "@/components/ui/container"
 import { AddIcon } from "@/components/icons/pika/add"
 
 import { PromiseType } from "@/lib/ts/helpers"
-import { deleteConnectionAction, updateConnectionAction } from "@/app/(pages)/(connection)/_actions"
+import {
+	deleteConnectionAction,
+	pauseConnectionAction,
+	updateConnectionAction,
+} from "@/app/(pages)/(connection)/_actions"
 import { ConnectionTable } from "@/app/(pages)/(connection)/_components/ConnectionTable"
 
 const fetchData = async ({ customerId }: { customerId: string }) => {
@@ -34,7 +38,7 @@ const ConnectionsPage = async () => {
 					New Connection
 				</Link>
 			</div>
-			<ConnectionTable deleteAction={deleteConnectionAction} updateAction={updateConnectionAction} data={connections} />
+			<ConnectionTable deleteAction={deleteConnectionAction} pauseAction={pauseConnectionAction} data={connections} />
 		</Container>
 	)
 }
