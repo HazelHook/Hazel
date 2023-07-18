@@ -1,13 +1,12 @@
-import { AxiosInstance } from "axios";
-import { storeToken } from "../token.js";
-import { Request, Response } from "express";
-
+import { AxiosInstance } from "axios"
+import { storeToken } from "../token.js"
+import { Request, Response } from "express"
 
 export const oauthCallback = (client: AxiosInstance, onSuccess: () => void) => async (req: Request, res: Response) => {
-  res.writeHead(200, {
-    "Content-Type": "text/html",
-  });
-  res.end(`
+	res.writeHead(200, {
+		"Content-Type": "text/html",
+	})
+	res.end(`
 		<!DOCTYPE html>
 		<html lang="en">
 		<head>
@@ -39,23 +38,20 @@ export const oauthCallback = (client: AxiosInstance, onSuccess: () => void) => a
 		</body>
 		</html>
 		
-		`);
+		`)
 
-  const code = req.query["code"];
-  const token = await client.post(
-    `http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`,
-    {
-      token: code,
-      token_type: "code",
-    },
-  );
+	const code = req.query["code"]
+	const token = await client.post(`http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`, {
+		token: code,
+		token_type: "code",
+	})
 
-  await storeToken({
-    access_token: token.data.access_token,
-    refresh_token: token.data.refresh_token,
-    expires_in: token.data.expires_in,
-  });
+	await storeToken({
+		access_token: token.data.access_token,
+		refresh_token: token.data.refresh_token,
+		expires_in: token.data.expires_in,
+	})
 
-  onSuccess();
-  return;
+	onSuccess()
+	return
 }

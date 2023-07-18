@@ -4,6 +4,7 @@
 	"scripts": {
 		"build": "turbo run build",
 		"dev": "turbo run dev",
+		"dev:backend": "turbo run dev --filter backend --filter worker",
 		"lint": "turbo run lint",
 		"format": "pnpm prettier:write && pnpm rome:format:write",
 		"prettier:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",

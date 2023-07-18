@@ -1,4 +1,4 @@
-import { ConnectionOptions, Worker } from "bullmq"
+import { ConnectionOptions, MetricsTime, Worker } from "bullmq"
 
 import tiny from "db/src/tinybird"
 import db from "db/src/drizzle"
@@ -59,6 +59,9 @@ const worker = new Worker<{ connectionId: string; requestId: string; request: st
 	},
 	{
 		connection: redisConnection,
+		metrics: {
+			maxDataPoints: MetricsTime.ONE_WEEK * 2,
+		},
 	},
 )
 

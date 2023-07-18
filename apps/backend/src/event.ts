@@ -2,8 +2,8 @@ import { nanoid } from "nanoid"
 
 import type { Connection, Destination } from "db/src/drizzle/schema"
 import tiny from "db/src/tinybird"
-import { ConnectionOptions, Queue } from "bullmq"
 import { handleRequest } from "./lib/request.helper"
+import { sourceQueue } from "./lib/queue"
 
 interface Event {
 	connection: Connection & {
@@ -16,19 +16,6 @@ interface Event {
 	customerId: string
 	data: string
 }
-
-const redisConnection: ConnectionOptions = {
-	username: process.env.REDIS_USERNAME,
-	password: process.env.REDIS_PASSWORD,
-	tls: {
-		host: process.env.REDIS_HOST,
-		port: Number(process.env.REDIS_PORT),
-	},
-}
-
-const sourceQueue = new Queue("source_queue", {
-	connection: redisConnection,
-})
 
 export const sendEvent = async ({ connection, sourceId, requestId, customerId, request, body }: Event) => {
 	try {
@@ -55,16 +42,12 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 			success: Number(res.ok),
 		})
 
-		console.log(body)
-
 		if (!res.ok) {
 			const data: { connectionId: string; requestId: string; request: string } = {
 				requestId,
 				connectionId: connection.publicId,
 				request: await handleRequest(connection.destination.url, request, body),
 			}
-
-			console.log("hi")
 
 			sourceQueue.add(requestId, data, { delay: 10, attempts: 5 })
 		}

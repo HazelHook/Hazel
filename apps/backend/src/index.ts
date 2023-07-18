@@ -1,11 +1,11 @@
 import { Elysia } from "elysia"
-import { eq } from "drizzle-orm"
 
 import { nanoid } from "nanoid"
 import { sendEvent } from "./event"
 
 import db from "db/src/drizzle"
 import tiny from "db/src/tinybird"
+import { sourceQueue } from "./lib/queue"
 
 const app = new Elysia()
 	.get("/", async () => {
@@ -13,9 +13,14 @@ const app = new Elysia()
 	})
 	.group("v1", (app) =>
 		app
-			.get("/", () => "V1 API")
+			.get("/", () => {
+				console.log("/")
+				return "V1 API"
+			})
 			.get("/status", () => `Uptime: ${process.uptime().toFixed()}s`)
 			.post("/hook/:sourceId", async ({ params, set, request }) => {
+				console.log("hi")
+
 				const source = await db.source.getOne({
 					publicId: params.sourceId,
 				})
@@ -93,6 +98,18 @@ const app = new Elysia()
 					request_id: requestId,
 				}
 			}),
+	)
+	.group("internal", (app) =>
+		app.group("queue", (app) =>
+			app.get("/metrics", async () => {
+				const metrics = {
+					current: await sourceQueue.getJobCounts(),
+					failed: await sourceQueue.getMetrics("failed"),
+					successful: await sourceQueue.getMetrics("completed"),
+				}
+				return metrics
+			}),
+		),
 	)
 	.listen(3003)
 
