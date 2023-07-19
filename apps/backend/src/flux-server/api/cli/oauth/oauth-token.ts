@@ -3,6 +3,7 @@ import { ElysiaCLIHandler } from ".."
 import qs from "qs"
 
 const TOKEN_URL = process.env["CLERK_OAUTH2_TOKEN_URL"] as string
+const USERINFO_URL = process.env["CLERK_OAUTH2_USERINFO_URL"] as string
 
 export function getOAuthToken(elysia: ElysiaCLIHandler) {
 	return elysia.post(
@@ -41,5 +42,32 @@ export function getOAuthToken(elysia: ElysiaCLIHandler) {
 				token_type: t.Union([t.Literal("code"), t.Literal("refresh_token")]),
 			}),
 		},
-    ) as any as ElysiaCLIHandler
+    ).post(
+		"/verify/:port",
+		async ({ params, set, body: { token }, oauthClient }) => {
+			try{
+				await fetch(USERINFO_URL, {
+					method: "GET",
+					headers: {
+						"Authorization": `Bearer ${token}`
+					},
+				})
+
+				set.status = 200
+				return {
+					message: "Token is valid."
+				}
+			}catch(e) {
+				set.status = 401
+				return {
+					message: "Token is invalid."
+				}
+			}
+		},
+		{
+			body: t.Object({
+				token: t.String(),
+			}),
+		},
+	) as any as ElysiaCLIHandler
 }

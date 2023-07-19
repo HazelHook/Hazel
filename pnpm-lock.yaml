@@ -96,6 +96,73 @@ importers:
       portfinder:
         specifier: ^1.0.32
         version: 1.0.32
+      prompt-sync:
+        specifier: ^4.2.0
+        version: 4.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      ws:
+        specifier: ^8.13.0
+        version: 8.13.0
+    devDependencies:
+      '@sindresorhus/tsconfig':
+        specifier: ^3.0.1
+        version: 3.0.1
+      '@types/react':
+        specifier: ^18.0.32
+        version: 18.2.14
+      chalk:
+        specifier: ^5.2.0
+        version: 5.3.0
+      ink-testing-library:
+        specifier: ^3.0.0
+        version: 3.0.0(@types/react@18.2.14)
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.1(@types/node@20.4.2)(typescript@5.1.6)
+      typescript:
+        specifier: ^5.0.3
+        version: 5.1.6
+
+  apps/clibun-v2:
+    dependencies:
+      '@types/express':
+        specifier: ^4.17.17
+        version: 4.17.17
+      '@types/prompt-sync':
+        specifier: ^4.2.0
+        version: 4.2.0
+      '@types/ws':
+        specifier: ^8.5.5
+        version: 8.5.5
+      axios:
+        specifier: ^1.4.0
+        version: 1.4.0
+      express:
+        specifier: ^4.18.2
+        version: 4.18.2
+      ink:
+        specifier: ^4.1.0
+        version: 4.1.0(@types/react@18.2.14)(react@18.2.0)
+      ink-table:
+        specifier: ^3.0.0
+        version: 3.0.0(ink@4.1.0)(react@18.2.0)
+      ink-text-input:
+        specifier: ^5.0.1
+        version: 5.0.1(ink@4.1.0)(react@18.2.0)
+      keytar:
+        specifier: ^7.9.0
+        version: 7.9.0
+      meow:
+        specifier: ^11.0.0
+        version: 11.0.0
+      portfinder:
+        specifier: ^1.0.32
+        version: 1.0.32
+      prompt-sync:
+        specifier: ^4.2.0
+        version: 4.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -3807,6 +3874,10 @@ packages:
   /@types/parse5@6.0.3:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
 
+  /@types/prompt-sync@4.2.0:
+    resolution: {integrity: sha512-5RPQYDT7MNkt+vq6xp58tSPx4THANyQcBSaw3Ni+KV7MUAgvUUbmCsQmcPVrcc8dwuURSPixz2qTJdJF6ABSKw==}
+    dev: false
+
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
@@ -4078,6 +4149,11 @@ packages:
     engines: {node: '>=14.16'}
     dependencies:
       type-fest: 3.12.0
+    dev: false
+
+  /ansi-regex@4.1.1:
+    resolution: {integrity: sha512-ILlv4k/3f6vfQ4OoP2AGvirOktlQ98ZEL1k9FaQjxa3L1abBgbuTDAdPOpvbGncC0BTVQrl+OM8xZGK6tWXt7g==}
+    engines: {node: '>=6'}
     dev: false
 
   /ansi-regex@5.0.1:
@@ -8826,6 +8902,12 @@ packages:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
     engines: {node: '>=6'}
 
+  /prompt-sync@4.2.0:
+    resolution: {integrity: sha512-BuEzzc5zptP5LsgV5MZETjDaKSWfchl5U9Luiu8SKp7iZWD5tZalOxvNcZRwv+d2phNFr8xlbxmFNcRKfJOzJw==}
+    dependencies:
+      strip-ansi: 5.2.0
+    dev: false
+
   /prompts@2.4.2:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
     engines: {node: '>= 6'}
@@ -9809,6 +9891,13 @@ packages:
     dependencies:
       character-entities-html4: 2.1.0
       character-entities-legacy: 3.0.0
+
+  /strip-ansi@5.2.0:
+    resolution: {integrity: sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==}
+    engines: {node: '>=6'}
+    dependencies:
+      ansi-regex: 4.1.1
+    dev: false
 
   /strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
