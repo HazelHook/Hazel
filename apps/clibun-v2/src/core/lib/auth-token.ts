@@ -56,9 +56,9 @@ export async function getToken(client: RequestClient): Promise<Token | null> {
 				token_type: "refresh_token",
 			})
 			return await storeToken({
-				access_token: newToken.data.access_token,
-				refresh_token: newToken.data.refresh_token,
-				expires_in: newToken.data.expires_in,
+				access_token: newToken.access_token,
+				refresh_token: newToken.refresh_token,
+				expires_in: newToken.expires_in,
 			})
 		}
 

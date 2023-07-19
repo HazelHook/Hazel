@@ -127,6 +127,9 @@ importers:
 
   apps/clibun-v2:
     dependencies:
+      '@types/blessed':
+        specifier: ^0.1.22
+        version: 0.1.22
       '@types/express':
         specifier: ^4.17.17
         version: 4.17.17
@@ -139,6 +142,9 @@ importers:
       axios:
         specifier: ^1.4.0
         version: 1.4.0
+      blessed:
+        specifier: ^0.1.81
+        version: 0.1.81
       express:
         specifier: ^4.18.2
         version: 4.18.2
@@ -151,6 +157,9 @@ importers:
       ink-text-input:
         specifier: ^5.0.1
         version: 5.0.1(ink@4.1.0)(react@18.2.0)
+      ink-use-stdout-dimensions:
+        specifier: ^1.0.5
+        version: 1.0.5(ink@4.1.0)(react@18.2.0)
       keytar:
         specifier: ^7.9.0
         version: 7.9.0
@@ -3508,6 +3517,12 @@ packages:
     dependencies:
       '@babel/types': 7.22.5
 
+  /@types/blessed@0.1.22:
+    resolution: {integrity: sha512-BsCmBwdn2ELV94FvMXGX1L1UIF/KO7kZvd1PKRbNG9lgiVYoyzcg8Y77S8VeWxX3zS8PUMIdZy1cWpSdvaOx9Q==}
+    dependencies:
+      '@types/node': 20.4.2
+    dev: false
+
   /@types/body-parser@1.19.2:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
@@ -4448,6 +4463,12 @@ packages:
 
   /blacklist@1.1.4:
     resolution: {integrity: sha512-DWdfwimA1WQxVC69Vs1Fy525NbYwisMSCdYQmW9zyzOByz9OB/tQwrKZ3T3pbTkuFjnkJFlJuyiDjPiXL5kzew==}
+    dev: false
+
+  /blessed@0.1.81:
+    resolution: {integrity: sha512-LoF5gae+hlmfORcG1M5+5XZi4LBmvlXTzwJWzUlPryN/SJdSflZvROM2TwkT0GMpq7oqT48NRd4GS7BiVBc5OQ==}
+    engines: {node: '>= 0.8.0'}
+    hasBin: true
     dev: false
 
   /body-parser@1.20.1:
@@ -6799,6 +6820,16 @@ packages:
       ink: 4.1.0(@types/react@18.2.14)(react@18.2.0)
       react: 18.2.0
       type-fest: 3.12.0
+    dev: false
+
+  /ink-use-stdout-dimensions@1.0.5(ink@4.1.0)(react@18.2.0):
+    resolution: {integrity: sha512-rVsqnw4tQEAJUoknU09+zHdDf30GJdkumkHr0iz/TOYMYEZJkYqziQSGJAM+Z+M603EDfO89+Nxyn/Ko2Zknfw==}
+    peerDependencies:
+      ink: '>=2.0.0'
+      react: '>=16.0.0'
+    dependencies:
+      ink: 4.1.0(@types/react@18.2.14)(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /ink@4.1.0(@types/react@18.2.14)(react@18.2.0):

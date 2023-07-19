@@ -20,6 +20,7 @@ export async function handleRequestEvent(event: CLIRequestEvent, client: Request
 		const data = await client.post(`/v1/cli/user/${process.env["PORT"]}`, {
 			access_token: token.access_token,
 		})
+
 		global.hazelModule.onResponseEvent({
 			data,
 			type: "user-data",

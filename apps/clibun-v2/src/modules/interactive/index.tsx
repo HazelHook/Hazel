@@ -1,10 +1,14 @@
+import React from "react";
+import { render } from "ink";
 import { RequestClient } from "../../core/lib/request-client.js";
 import { CLIRequestEvent, CLIResponseEvent, Module, ModuleData } from "../module.js";
 import { handelUserDataReceived } from "./menu.js";
+import { Window } from "./components/Window.js";
+import { TextList } from "./components/TextList.js";
 
 global.hazelModuleInitialized = false
 
-export class BasicModule extends Module {
+export class InteractiveModule extends Module {
     private triggerEvent: (event: CLIRequestEvent) => void;
     private client: RequestClient;
 
@@ -22,32 +26,28 @@ export class BasicModule extends Module {
     }
 
     override onResponseEvent(event: CLIResponseEvent): void {
-        if(event.type === "login"){
-            console.log("Logged in!")
-        } else if(event.type === "user-data"){
+        if(event.type === "user-data"){
             handelUserDataReceived(event, this)
         }
     }
 
     override start(token?: string) {
-        if(!token){
-            console.log("To use the Hazel CLI, please login.")
-            console.log("Confirm with Y/n")
-            const stdin = process.openStdin()
-            stdin.addListener("data", async (data) => {
-                const input = data.toString().trim()
-                if(input.toUpperCase() === "Y"){
-                    this.triggerEvent({
-                        type: "login"
-                    })
-                }else {
-                    console.log("Exiting.")
-                    process.exit(0)
-                }
+        if(token){
+            render(<Window title=" Hazel CLI Login " focused>
+                <TextList items={["Login", "Exit"]} onSelect={(index) => {
+                    if(index === 0){
+                        this.triggerEvent({
+                            type: "login"
+                        })
+                    }else {
+                        process.exit(0)
+                    }
+                }} vertical />
+            </Window>, {
+                patchConsole: true  
             })
         }else {
             this.client.setToken(token)
-            console.log("Loading user data...")
             this.triggerEvent({
                 type: "user-data"
             })
@@ -58,11 +58,11 @@ export class BasicModule extends Module {
         this.triggerEvent(event)
     }
 
-    static create(): BasicModule {
+    static create(): InteractiveModule {
         if(global.hazelModuleInitialized){
             throw new Error("Module already initialized.")
         }
 
-        return new BasicModule();
+        return new InteractiveModule();
     }
 }

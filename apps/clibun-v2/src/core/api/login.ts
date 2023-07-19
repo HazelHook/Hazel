@@ -52,8 +52,6 @@ export const handleOAuthCallback = (client: RequestClient, onSuccess: () => void
     },
   );
 
-  console.log("Ayy")
-  console.log(token)
   await storeToken(token);
 
   onSuccess();

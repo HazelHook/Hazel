@@ -1,6 +1,6 @@
-import { BasicModule } from "./basic/index.js";
+import { BlessedModule } from "./blessed/index.js";
 import { Module } from "./module.js";
 
 export function getModule(): Module {
-    return BasicModule.create()
+    return BlessedModule.create()
 }
