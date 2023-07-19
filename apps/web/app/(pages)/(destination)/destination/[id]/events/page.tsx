@@ -12,7 +12,7 @@ interface EventsPageProps {
 	}
 }
 
-async function fetch({
+async function fetchData({
 	customer_id,
 	destination_id,
 }: {
@@ -27,7 +27,7 @@ async function fetch({
 	return destinations
 }
 
-export type EventDataRowType = PromiseType<ReturnType<typeof fetch>>["data"][number]
+export type EventDataRowType = PromiseType<ReturnType<typeof fetchData>>["data"][number]
 
 const EventsPage = async ({ params }: EventsPageProps) => {
 	const { userId } = auth()
@@ -37,7 +37,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 		notFound()
 	}
 
-	const destinations = await fetch({
+	const destinations = await fetchData({
 		customer_id: userId,
 		destination_id: params.id,
 	})
@@ -48,7 +48,6 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 				<TableWrapper
 					data={destinations.data}
 					maxItems={destinations.rows_before_limit_at_least || destinations.data.length}
-					destination={destination}
 				/>
 			</div>
 		</div>

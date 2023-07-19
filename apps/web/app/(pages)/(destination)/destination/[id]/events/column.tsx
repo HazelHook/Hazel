@@ -29,25 +29,16 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 		accessorKey: "timestamp",
 		header: "Timestamp",
 		cell: ({ cell }) => {
-			const date = new Date(cell.getValue<string>())
 			return <p>{cell.getValue<string>()}</p>
 		},
 	},
 	{
-		accessorKey: "responses",
+		accessorKey: "success",
 		header: () => <div className="text-center">Status</div>,
-		cell: ({ cell, row }) => {
-			const response = cell.getValue() as EventDataRowType
+		cell: ({ cell }) => {
+			const success = Boolean(cell.getValue() as number)
 
-			if (response.success) {
-				return (
-					<div className="w-full justify-center flex p0">
-						<Status status="success" />
-					</div>
-				)
-			}
-
-			return <Status status="error" />
+			return <Status status={success ? "success" : "error"} />
 		},
 	},
 	{

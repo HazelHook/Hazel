@@ -12,7 +12,7 @@ import {
 } from "@tanstack/react-table"
 
 import { DataTablePagination } from "@/components/ui/data-table-pagination"
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
+import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 interface DataTableProps<TData, TValue> {
