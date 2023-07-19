@@ -20,6 +20,7 @@ import Link from "next/link"
 import { ConnectionDataRowType } from "@conn/connections/page"
 import { ClockIcon } from "@/components/icons/pika/clock"
 import { PlayBigIcon } from "@/components/icons/pika/playBig"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const ConnectionActions = ({
 	deleteAction,
@@ -46,26 +47,42 @@ export const ConnectionActions = ({
 
 	return (
 		<div className="flex justify-end">
-			<Link href={`/connection/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
-				<EditPencilIcon className="h-4 w-4" />
-			</Link>
-			<Button
-				onClick={() =>
-					handlePause.mutate({
-						publicId: data.publicId,
-						enabled: !data.enabled,
-					})
-				}
-				variant="ghost"
-			>
-				{data.enabled ? <ClockIcon className="h-4 w-4" /> : <PlayBigIcon className="h-4 w-4" />}
-			</Button>
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<Link href={`/connection/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
+						<EditPencilIcon className="h-4 w-4" />
+					</Link>
+				</TooltipTrigger>
+				<TooltipContent>Edit Connection</TooltipContent>
+			</Tooltip>
+
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<Button
+						onClick={() =>
+							handlePause.mutate({
+								publicId: data.publicId,
+								enabled: !data.enabled,
+							})
+						}
+						variant="ghost"
+					>
+						{data.enabled ? <ClockIcon className="h-4 w-4" /> : <PlayBigIcon className="h-4 w-4" />}
+					</Button>
+				</TooltipTrigger>
+				<TooltipContent>{data.enabled ? "Pause Connection" : "Resume Connection"}</TooltipContent>
+			</Tooltip>
 
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button variant="ghost">
-						<DeleteDustbinIcon className="h-4 w-4" />
-					</Button>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button variant="destructive_ghost">
+								<DeleteDustbinIcon className="h-4 w-4" />
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>Delete Connection</TooltipContent>
+					</Tooltip>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">
 					<DialogHeader>

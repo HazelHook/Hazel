@@ -18,6 +18,8 @@ import {
 } from "@/app/(pages)/(connection)/_actions"
 import { ConnectionActions } from "@/app/(pages)/(connection)/_components/ConnectionActions"
 import { Button } from "@/components/ui/button"
+import { EyeOpenIcon } from "@/components/icons/pika/eyeOpen"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export type Column = Connection & {
 	source: Source | null
@@ -35,7 +37,15 @@ export const columns: (
 		},
 		cell: ({ cell, row }) => (
 			<Link prefetch={false} href={`/connection/${row.original.publicId}`} className="flex flex-row items-center">
-				<Button variant="link">{cell.getValue<string>()}</Button>
+				<Tooltip delayDuration={200}>
+					<TooltipTrigger>
+						<Button variant="ghost">
+							<EyeOpenIcon className="mr-2" />
+							{cell.getValue<string>()}
+						</Button>
+					</TooltipTrigger>
+					<TooltipContent>View Detailed</TooltipContent>
+				</Tooltip>
 			</Link>
 		),
 	},
@@ -81,12 +91,13 @@ export const columns: (
 	},
 
 	{
-		accessorKey: "group",
+		accessorKey: "enabled",
 		header: ({ column }) => {
-			return <SortableHeader name={"Group"} column={column} />
+			return <SortableHeader name={"Active"} column={column} />
 		},
 		cell: ({ cell }) => {
-			return <Cell>-</Cell>
+			const enabled = cell.getValue() as boolean
+			return <Cell>{enabled ? "Running" : "Paused"}</Cell>
 		},
 	},
 	{
