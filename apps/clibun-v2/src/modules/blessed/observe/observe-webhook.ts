@@ -91,16 +91,15 @@ function buildMessageBox(_: UserData, _m: Module) {
 	messages = messages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
 
 
-    const requestList = blessed.list({
-        top: 0,
-        left: 0,
-        width: 12,
-        height: messages.length + 2,
-        mouse: true,
+    const box = blessed.box({
+        tags: true,
         keys: true,
         vi: true,
         alwaysScroll: true,
         scrollable: true,
+        mouse: true,
+        width: 13,
+        height: "100%",
         scrollbar: {
             ch: " ",
             track: {
@@ -113,25 +112,47 @@ function buildMessageBox(_: UserData, _m: Module) {
         style: {
             fg: "white",
         },
+        border: {
+            type: "line",
+        },
+        align: "center"
+    })
+
+    const requestList = blessed.list({
+        top: 0,
+        left: 0,
+        width: 9,
+        height: messages.length,
+        style: {
+            fg: "white",
+        },
         padding: {
             left: 1,
         },
-        align: "center",
-        border: {
-            type: "line",
-        }
     })
+    box.append(requestList)
+
+    const requests = []
 
     let index = 0
     for(const m of messages){
-        requestList.append(blessed.text({
+        requests.push(blessed.text({
             top: index++,
             content: prettyTimestamp(m.timestamp),
             style: {
-                fg: "red",
+                fg: "#990000",
+                hover: {
+                    fg: "#EE3333",
+                }
             },
         }))
+
+        requestList.append(requests[requests.length - 1])
     }
 
-    return requestList
+    requestList.on("select", (item, index) => {
+        console.log("selected", index, item)
+    })
+
+    return box
 }
