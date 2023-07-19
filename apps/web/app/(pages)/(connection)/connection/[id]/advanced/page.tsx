@@ -82,10 +82,10 @@ const AdvancedPage = async ({ params }: { params: { id: string } }) => {
 	const { nodes, edges } = transformProjectsToFlowElements(connection)
 
 	return (
-		<main className="h-full max-h-[80%]">
+		<main className="relative h-full max-h-[80%] w-full">
 			<FlowProvider>
 				<div className="flex flex-row gap-2 w-full h-full">
-					<Card className="h-full w-full overflow-hidden">
+					<Card className="w-full overflow-hidden">
 						<Flow initalNodes={nodes} initalEdges={edges} />
 					</Card>
 				</div>

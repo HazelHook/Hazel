@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { TBResponse } from "db/src/tinybird/model/tiny-response"
 
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -13,6 +13,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
+import Link from "next/link"
 
 export type Column = TBResponse
 
@@ -20,19 +21,27 @@ export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: "id",
 		header: "Request ID",
-		cell: ({ cell, row }) => {
+		cell: ({ cell }) => {
 			const requestId = cell.getValue() as string
 
-			return <div>{requestId}</div>
+			return (
+				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/request/${requestId}`}>
+					{requestId}
+				</Link>
+			)
 		},
 	},
 	{
 		accessorKey: "destination_id",
 		header: "Destination ID",
-		cell: ({ cell, row }) => {
+		cell: ({ cell }) => {
 			const destinationId = cell.getValue() as string
 
-			return <div>{destinationId}</div>
+			return (
+				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/destination/${destinationId}`}>
+					{destinationId}
+				</Link>
+			)
 		},
 	},
 

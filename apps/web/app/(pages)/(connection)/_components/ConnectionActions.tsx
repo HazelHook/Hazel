@@ -60,10 +60,17 @@ export const ConnectionActions = ({
 				<TooltipTrigger asChild>
 					<Button
 						onClick={() =>
-							handlePause.mutate({
-								publicId: data.publicId,
-								enabled: !data.enabled,
-							})
+							toast.promise(
+								handlePause.mutateAsync({
+									publicId: data.publicId,
+									enabled: !data.enabled,
+								}),
+								{
+									loading: data.enabled ? "Pausing Connection..." : "Enabling Connection",
+									success: data.enabled ? "Connection Successfully Paused..." : "Connection Successfully Enabled",
+									error: "There was an error changing the status of your Connection	. Please try again or contact us.",
+								},
+							)
 						}
 						variant="ghost"
 					>
