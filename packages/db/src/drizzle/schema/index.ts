@@ -60,6 +60,12 @@ export const connection = buildMysqlTable(
 		sourceId: int("source_id").notNull(),
 		destinationId: int("destination_id").notNull(),
 
+		delay: int("delay"),
+
+		retyCount: int("retry_count"),
+		retryDelay: int("retry_delay"),
+		retryType: mysqlEnum("retry_type", ["fixed", "exponential"]),
+
 		fluxConfig: json("flux_config"),
 	},
 	(table) => ({

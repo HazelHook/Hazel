@@ -13,6 +13,24 @@ const SelectGroup = SelectPrimitive.Group
 
 const SelectValue = SelectPrimitive.Value
 
+const TextSelectTrigger = React.forwardRef<
+	React.ElementRef<typeof SelectPrimitive.Trigger>,
+	React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+	<SelectPrimitive.Trigger
+		ref={ref}
+		className={cn(
+			"underline-offset-4 mx-1 hover:underline text-primary flex justify-between items-center bg-transparent placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+			className,
+		)}
+		{...props}
+	>
+		{children}
+		<SelectPrimitive.Icon asChild>
+			<ChevronDownIcon className="h-4 w-4 opacity-80 text-primary" />
+		</SelectPrimitive.Icon>
+	</SelectPrimitive.Trigger>
+))
 const SelectTrigger = React.forwardRef<
 	React.ElementRef<typeof SelectPrimitive.Trigger>,
 	React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
@@ -101,4 +119,14 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
-export { Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectLabel, SelectItem, SelectSeparator }
+export {
+	Select,
+	SelectGroup,
+	SelectValue,
+	SelectTrigger,
+	SelectContent,
+	SelectLabel,
+	SelectItem,
+	SelectSeparator,
+	TextSelectTrigger,
+}

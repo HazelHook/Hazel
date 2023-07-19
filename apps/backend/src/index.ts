@@ -19,8 +19,6 @@ const app = new Elysia()
 			})
 			.get("/status", () => `Uptime: ${process.uptime().toFixed()}s`)
 			.post("/hook/:sourceId", async ({ params, set, request }) => {
-				console.log("hi")
-
 				const source = await db.source.getOne({
 					publicId: params.sourceId,
 				})

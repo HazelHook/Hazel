@@ -49,7 +49,14 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 				request: await handleRequest(connection.destination.url, request, body),
 			}
 
-			sourceQueue.add(requestId, data, { delay: 10, attempts: 5 })
+			sourceQueue.add(requestId, data, {
+				delay: connection.delay as any,
+				attempts: connection.retyCount as any,
+				backoff: {
+					type: connection.retryType || "fixed",
+					delay: connection.retryDelay as any,
+				},
+			})
 		}
 	} catch (error) {
 		console.log(error)

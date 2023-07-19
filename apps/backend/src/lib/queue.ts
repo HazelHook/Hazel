@@ -11,4 +11,11 @@ export const redisConnection: ConnectionOptions = {
 
 export const sourceQueue = new Queue("source_queue", {
 	connection: redisConnection,
+	defaultJobOptions: {
+		attempts: 5,
+		backoff: {
+			type: "exponential",
+			delay: 300000, // 5min
+		},
+	},
 })

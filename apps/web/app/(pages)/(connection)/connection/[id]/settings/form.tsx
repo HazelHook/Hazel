@@ -16,7 +16,16 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+	TextSelectTrigger,
+} from "@/components/ui/select"
 import { AddIcon } from "@/components/icons/pika/add"
 import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
 import { createDestinationAction } from "@/app/(pages)/(destination)/_actions"
@@ -25,7 +34,7 @@ import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import { formSchema } from "./schema"
-import { Switch } from "@/components/ui/switch"
+import { RefreshIcon } from "@/components/icons/pika/refresh"
 
 interface NewSourceFormProps {
 	action: typeof editConnectionAction
@@ -191,6 +200,63 @@ export function UpdateConnectionForm({
 							</FormItem>
 						)}
 					/>
+					{/* <FormField
+						control={form.control}
+						name="delay"
+						render={({ field }) => (
+							<FormItem>
+								<RefreshIcon />
+								<div className="flex flex-row items-center gap-1">
+									Retry
+									<Select>
+										<TextSelectTrigger>
+											<SelectValue placeholder="exponentially" />
+										</TextSelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectItem value="apple">Apple</SelectItem>
+												<SelectItem value="banana">Banana</SelectItem>
+												<SelectItem value="blueberry">Blueberry</SelectItem>
+												<SelectItem value="grapes">Grapes</SelectItem>
+												<SelectItem value="pineapple">Pineapple</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+									every
+									<Select>
+										<TextSelectTrigger>
+											<SelectValue placeholder="1 day" />
+										</TextSelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectItem value="apple">Apple</SelectItem>
+												<SelectItem value="banana">Banana</SelectItem>
+												<SelectItem value="blueberry">Blueberry</SelectItem>
+												<SelectItem value="grapes">Grapes</SelectItem>
+												<SelectItem value="pineapple">Pineapple</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+									up to
+									<Select>
+										<TextSelectTrigger>
+											<SelectValue placeholder="5" />
+										</TextSelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectItem value="5">Apple</SelectItem>
+												<SelectItem value="banana">Banana</SelectItem>
+												<SelectItem value="blueberry">Blueberry</SelectItem>
+												<SelectItem value="grapes">Grapes</SelectItem>
+												<SelectItem value="pineapple">Pineapple</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+									times
+								</div>
+							</FormItem>
+						)}
+					/> */}
 					<FormMessage />
 					<Button
 						type="submit"
