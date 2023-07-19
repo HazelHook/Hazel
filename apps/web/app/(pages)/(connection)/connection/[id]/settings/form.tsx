@@ -34,7 +34,6 @@ import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import { formSchema } from "./schema"
-import { RefreshIcon } from "@/components/icons/pika/refresh"
 
 interface NewSourceFormProps {
 	action: typeof editConnectionAction
@@ -196,6 +195,61 @@ export function UpdateConnectionForm({
 									</Select>
 								)}
 
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="delay"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Delay</FormLabel>
+								<FormControl>
+									<Input
+										type="number"
+										placeholder="Delay ..."
+										{...field}
+										onChange={(event) => field.onChange(+event.target.value)}
+									/>
+								</FormControl>
+								<FormDescription>Add a delay to your webhook delivery.</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="retryDelay"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Retry Delay</FormLabel>
+								<FormControl>
+									<Input
+										type="number"
+										placeholder="Delay ..."
+										{...field}
+										onChange={(event) => field.onChange(+event.target.value)}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="retryCount"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Retry Count</FormLabel>
+								<FormControl>
+									<Input
+										type="number"
+										placeholder="Retry Counts ..."
+										{...field}
+										onChange={(event) => field.onChange(+event.target.value)}
+									/>
+								</FormControl>
 								<FormMessage />
 							</FormItem>
 						)}

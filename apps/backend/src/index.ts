@@ -6,6 +6,7 @@ import { sendEvent } from "./event"
 import db from "db/src/drizzle"
 import tiny from "db/src/tinybird"
 import { sourceQueue } from "./lib/queue"
+import { handleRequest } from "./lib/request.helper"
 
 const app = new Elysia()
 	.get("/", async () => {
@@ -79,15 +80,32 @@ const app = new Elysia()
 						return
 					}
 
-					await sendEvent({
-						request,
-						body: data,
-						connection: connection,
-						data: data,
-						requestId,
-						customerId: source.customerId,
-						sourceId: source.publicId,
-					})
+					if (connection.delay && connection.delay > 0) {
+						const parsed: { connectionId: string; requestId: string; request: string } = {
+							requestId,
+							connectionId: connection.publicId,
+							request: await handleRequest(connection.destination.url, request, data),
+						}
+
+						await sourceQueue.add(requestId, parsed, {
+							delay: connection.delay as any,
+							attempts: connection.retyCount as any,
+							backoff: {
+								type: connection.retryType || "fixed",
+								delay: connection.retryDelay as any,
+							},
+						})
+					} else {
+						await sendEvent({
+							request,
+							body: data,
+							connection: connection,
+							data: data,
+							requestId,
+							customerId: source.customerId,
+							sourceId: source.publicId,
+						})
+					}
 				}
 
 				return {
