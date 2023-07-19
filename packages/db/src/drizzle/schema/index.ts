@@ -1,5 +1,5 @@
 import { InferModel, relations } from "drizzle-orm"
-import { boolean, index, int, json, mysqlEnum, text, varchar } from "drizzle-orm/mysql-core"
+import { boolean, index, int, json, mysqlEnum, text, unique, varchar } from "drizzle-orm/mysql-core"
 
 import { INTEGRATIONS } from "../integrations/data"
 import { buildMysqlTable } from "./common"
@@ -69,6 +69,8 @@ export const connection = buildMysqlTable(
 
 		sourceIdIndex: index("con_source_id_idx").on(table.sourceId),
 		destinationIndex: index("con_destination_id_idx").on(table.destinationId),
+
+		unq: unique().on(table.sourceId, table.destinationId),
 	}),
 )
 
