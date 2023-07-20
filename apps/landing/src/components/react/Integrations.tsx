@@ -37,7 +37,7 @@ export const Integrations = () => {
 		}
 	}
 	return (
-		<section className="hidden sm:block lg:p-8">
+		<section className="hidden sm:block">
 			<div className="mx-auto 2xl:max-w-7xl py-12 lg:px-16 md:px-12 px-8 xl:px-40 items-center w-full">
 				<div className="mb-4 lg:mb-0">
 					<span className="text-accent-400" data-aos="fade-down">
@@ -45,7 +45,7 @@ export const Integrations = () => {
 					</span>
 					<h2 data-aos="fade-down" className="text-3xl tracking-tighter mt-6 font-light lg:text-4xl text-white">
 						Easily integrates
-						<span className="md:block text-zinc-400">with all your providers</span>
+						<span className="md:block text-zinc-400 ml-2 md:ml-0">with all your providers</span>
 					</h2>
 					<p className="mt-4 text-base text-white max-w-md" data-aos="fade-down" data-aos-delay="100">
 						Easily validate webhooks automatically by using one of our integrations. If one is still missing just let us
@@ -105,7 +105,7 @@ export const Integrations = () => {
 							</div>
 						</div>
 						<div
-							className="flex gap-3 relative overflow-hidden pb-24 pt-12 scrollbar-hide snap-mandatory snap-x"
+							className="flex gap-2 mx-[-100px] relative overflow-hidden pb-24 pt-12 scrollbar-hide snap-mandatory snap-x"
 							role="listbox"
 							aria-labelledby="carousel-content-label"
 						>
