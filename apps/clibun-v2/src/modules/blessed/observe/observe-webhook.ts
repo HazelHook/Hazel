@@ -1,8 +1,11 @@
 import { prettyTimestamp } from "../../../core/lib/print-util.js";
+import { openInBrowser } from "../../../core/lib/util.js";
 import { Message, Module, UserData } from "../../module.js";
 import blessed from "blessed"
 
 const messages: Message[] = []
+let selectedMessage = 0
+let selectedMenu = 0
 
 export function observeWebhook(userData: UserData, module: Module, destinationId: string, rerender: (box: blessed.Widgets.BoxElement) => void) {
     module.triggerRequestEvent({
@@ -10,95 +13,98 @@ export function observeWebhook(userData: UserData, module: Module, destinationId
         destinationId,
         onMessage(data) {
             messages.push(data)
-            rerender(buildMessageBox(userData, module))
+            rerender(buildMessageBox(userData, module, rerender))
         },
         onClose() {
         },
         onOpen() {
         }
     })
-    rerender(buildMessageBox(userData, module))
+    rerender(buildMessageBox(userData, module, rerender))
 }
 
-function buildMessageBox(_: UserData, _m: Module) {
-    const uniques: Message[] = [
-		{
-			timestamp: new Date(1689607812776),
-			requestId: "req_QhHhMpmTC4rWVoaFolMhQ",
-			source: "Kombo",
-			method: "POST",
-			headers: {
-				accept: "*/*",
-				"accept-encoding": "gzip, deflate, br",
-				connection: "keep-alive",
-				"content-length": "21",
-				"content-type": "application/json",
-				host: "127.0.0.1:3003",
-				"user-agent": "PostmanRuntime/7.32.2",
-			},
-			data: {
-				id: "5gjAtURLPbnTiwgkaBfiA3WJ",
-				type: "sync-finished",
-				data: {
-					sync_id: "EY2KfFEZ5Vc2FVfVUQFpRduM",
-					sync_state: "SUCCEEDED",
-					sync_started_at: "2022-11-02T10:50:10.242Z",
-					sync_ended_at: "2022-11-02T10:50:14.751Z",
-					sync_duration_seconds: 14.509,
-					integration_id: "personio:hris-dev",
-					integration_tool: "personio",
-					integration_category: "HRIS",
-				},
-			},
-		},
-		{
-			timestamp: new Date(1689607812776),
-			requestId: "req_QhHhMpmTCsdklk2olMhQ",
-			source: "Stripe",
-			method: "GET",
-			headers: {
-				accept: "*/*",
-				"accept-encoding": "gzip, deflate, br",
-				connection: "keep-alive",
-				"content-length": "21",
-				"content-type": "application/json",
-				host: "127.0.0.1:3003",
-				"user-agent": "PostmanRuntime/7.32.2",
-			},
-			data: {
-				id: "5gjAtURfdfdTiwgkaBfiA3WJ",
-				type: "customer-acquired",
-				data: {
-					customer_id: "usr_sdkl32d0pe2ss",
-					level: "premium",
-					plan: "yearly",
-					state: "confirmed",
-				},
-			},
-		},
-	]
+const uniques: Message[] = [
+    {
+        timestamp: new Date(1689607812776),
+        requestId: "req_QhHhMpmTC4rWVoaFolMhQ",
+        source: "Kombo",
+        method: "POST",
+        headers: {
+            accept: "*/*",
+            "accept-encoding": "gzip, deflate, br",
+            connection: "keep-alive",
+            "content-length": "21",
+            "content-type": "application/json",
+            host: "127.0.0.1:3003",
+            "user-agent": "PostmanRuntime/7.32.2",
+        },
+        data: {
+            id: "5gjAtURLPbnTiwgkaBfiA3WJ",
+            type: "sync-finished",
+            data: {
+                sync_id: "EY2KfFEZ5Vc2FVfVUQFpRduM",
+                sync_state: "SUCCEEDED",
+                sync_started_at: "2022-11-02T10:50:10.242Z",
+                sync_ended_at: "2022-11-02T10:50:14.751Z",
+                sync_duration_seconds: 14.509,
+                integration_id: "personio:hris-dev",
+                integration_tool: "personio",
+                integration_category: "HRIS",
+            },
+        },
+    },
+    {
+        timestamp: new Date(1689607812776),
+        requestId: "req_QhHhMpmTCsdklk2olMhQ",
+        source: "Stripe",
+        method: "GET",
+        headers: {
+            accept: "*/*",
+            "accept-encoding": "gzip, deflate, br",
+            connection: "keep-alive",
+            "content-length": "21",
+            "content-type": "application/json",
+            host: "127.0.0.1:3003",
+            "user-agent": "PostmanRuntime/7.32.2",
+        },
+        data: {
+            id: "5gjAtURfdfdTiwgkaBfiA3WJ",
+            type: "customer-acquired",
+            data: {
+                customer_id: "usr_sdkl32d0pe2ss",
+                level: "premium",
+                plan: "yearly",
+                state: "confirmed",
+            },
+        },
+    },
+]
 
-	let messages: Message[] = []
+for (let i = 0; i < 25; i++) {
+    const current = {
+        ...uniques[i % uniques.length],
+    }
+    current.timestamp = new Date(current.timestamp.getTime() + 1000 * 3600 * 1.0 * Math.random())
+    // messages.push(current)
+}
 
-	for (let i = 0; i < 25; i++) {
-		const current = {
-			...uniques[i % uniques.length],
-		}
-		current.timestamp = new Date(current.timestamp.getTime() + 1000 * 3600 * 1.0 * Math.random())
-		messages.push(current)
-	}
-
-	messages = messages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
+// messages = messages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
 
 
-    const box = blessed.box({
+function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed.Widgets.BoxElement) => void): blessed.Widgets.BoxElement {
+
+    const requestList = blessed.list({
+        padding: {
+            left: 1,
+        },
+        items: messages.map(m => prettyTimestamp(m.timestamp)),
         tags: true,
         keys: true,
         vi: true,
+        width: 13,
+        mouse: true,
         alwaysScroll: true,
         scrollable: true,
-        mouse: true,
-        width: 13,
         height: "100%",
         scrollbar: {
             ch: " ",
@@ -107,51 +113,236 @@ function buildMessageBox(_: UserData, _m: Module) {
             },
             style: {
                 inverse: true,
+                fg: "white",
             },
         },
         style: {
-            fg: "white",
+            fg: "gray",
+            selected: {
+                fg: "white",
+            }
         },
         border: {
             type: "line",
         },
-        align: "center"
+    })
+    requestList.select(selectedMessage)
+
+    requestList.on("select item", (_, index) => {
+        selectedMessage = index
+        rerender(buildMessageBox(data, module, rerender))
     })
 
-    const requestList = blessed.list({
-        top: 0,
-        left: 0,
-        width: 9,
-        height: messages.length,
-        style: {
-            fg: "white",
-        },
-        padding: {
-            left: 1,
-        },
-    })
-    box.append(requestList)
-
-    const requests = []
-
-    let index = 0
-    for(const m of messages){
-        requests.push(blessed.text({
-            top: index++,
-            content: prettyTimestamp(m.timestamp),
-            style: {
-                fg: "#990000",
-                hover: {
-                    fg: "#EE3333",
-                }
-            },
-        }))
-
-        requestList.append(requests[requests.length - 1])
+    if(messages.length === 0){
+        requestList.setContent("Waiting..")
     }
 
-    requestList.on("select", (item, index) => {
-        console.log("selected", index, item)
+
+    const navbar = blessed.box({
+        padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+        },
+        left: 12,
+        tags: true,
+        keys: true,
+        vi: true,
+        mouse: true,
+        width: "100%-12",
+        height: 3,
+        style: {
+            fg: "gray",
+        },
+        border: {
+            type: "line",
+        },
+    })
+
+    const menuItems = [
+        "Details",
+        "Headers",
+        "Body",
+    ]
+    const biggestItem = menuItems.reduce((a, b) => a.length > b.length ? a : b).length
+    const message = messages[selectedMessage]
+
+    let width = 0
+    menuItems.forEach((item) => {
+        const menuItem = blessed.box({
+            content: item,
+            width: biggestItem + 4,
+            top: -1,
+            padding: {
+                left: 1,
+                right: 1,
+            },
+            height: 3,
+            left: width - 1,
+            style: {
+                fg: selectedMenu === menuItems.indexOf(item) ? "white" : "gray",
+                hover: {
+                    fg: "white",
+                }
+            },
+            border: {
+                type: "line",
+            },
+            align: "center",
+        })
+
+        menuItem.on("click", () => {
+            selectedMenu = menuItems.indexOf(item)
+            rerender(buildMessageBox(data, module, rerender))
+        })
+
+
+        navbar.append(menuItem)
+        width += biggestItem + 3
+
+    })
+
+    navbar.append(blessed.box({
+        left: width - 1,
+        width: `100%-${width}`,
+        height: 3,
+        top: -1,
+        tags: true,
+        content: messages.length === 0 ? '' : `${message.method}  658 ms  {green-fg}200 OK{/green-fg}`,
+        style: {
+            fg: "gray",
+        },
+        border: {
+            type: "line",
+        },
+        align: "right",
+        padding: {
+            right: 1,
+        }
+    }))
+
+    const detail = blessed.box({
+        top: 2,
+        content: "",
+        left: 12,
+        tags: true,
+        keys: true,
+        vi: true,
+        mouse: true,
+        scrollable: true,
+        width: "100%-12",
+        height: "100%-4",
+        padding: {
+            left: 1,
+
+        },
+        scrollbar: {
+            ch: " ",
+            track: {
+                bg: "gray",
+            },
+            style: {
+                inverse: true,
+                fg: "white",
+            },
+        },
+        style: {
+            fg: "gray",
+        },
+        border: {
+            type: "line",
+        },
+    })
+
+    if(messages.length === 0){
+        detail.setContent("No messages received yet.")
+    } else if (selectedMenu === 0) {
+        const data = {
+            "Receieved at": `${message.timestamp.toDateString()} ${prettyTimestamp(message.timestamp)}:${message.timestamp.getMilliseconds()}`,
+            "Source": message.source,
+            "Method": message.method,
+        }
+        const longest = Object.keys(data).reduce((a, b) => a.length > b.length ? a : b).length + 1
+        const content = Object.keys(data).map(key => `${key.padEnd(longest)}: ${data[key]}`).join("\n")
+
+        detail.setContent(`{bold}Request details{/bold}\n\n${content}`)
+    } else if (selectedMenu === 1) {
+        const longest = Object.keys(message.headers).reduce((a, b) => a.length > b.length ? a : b).length + 1
+        const content = Object.keys(message.headers).map(key => `${key.padEnd(longest)}: ${message.headers[key]}`).join("\n")
+
+        detail.setContent(`{bold}Request headers{/bold}\n\n${content}`)
+    } else if (selectedMenu === 2) {
+        detail.setContent(`{bold}Request body{/bold}\n\n${JSON.stringify(message.data, null, 2)}`)
+    }
+
+    const borderHide = blessed.box({
+        left: selectedMenu * (biggestItem + 3) + 13,
+        width: biggestItem + 2,
+        height: 1,
+        top: 2,
+        content: " ",
+    })
+    borderHide.setFront()
+
+    const controls = [
+        "Dashboard",
+        "Retry Request",
+        "Copy cURL",
+        "Copy Body",
+    ]
+    const controlBar = blessed.box({
+        top: "100%-3",
+        left: 12,
+        tags: true,
+        mouse: true,
+        width: "100%-12",
+        border: {
+            type: "line",
+        },
+    })
+
+    let controlWidth = 0
+    controls.forEach((item) => {
+        const menuItem = blessed.box({
+            content: item,
+            width: item.length + 4,
+            top: -1,
+            padding: {
+                left: 1,
+                right: 1,
+            },
+            clickable: true,
+            mouse: true,
+            height: 3,
+            left: controlWidth - 1,
+            style: {
+                fg: "gray",
+                hover: {
+                    fg: "white",
+                }
+            },
+            border: {
+                type: "line",
+            },
+            align: "center",
+        })
+
+        menuItem.on("click", () => {
+            if (item === "Dashboard") {
+                openInBrowser(`http://localhost:3001/request/${message.requestId}`)
+            }
+        })
+
+        controlBar.append(menuItem)
+        controlWidth += item.length + 3
+    })
+
+
+    const box = blessed.box({
+        width: "100%",
+        height: "100%",
+        children: [requestList, navbar, detail, borderHide, controlBar],
     })
 
     return box

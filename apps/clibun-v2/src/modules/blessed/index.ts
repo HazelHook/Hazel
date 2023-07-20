@@ -21,6 +21,7 @@ export class BlessedModule extends Module {
 		this.screen = blessed.screen({
 			smartCSR: true,
 			title: "Hazel CLI",
+			dockBorders: true,
 		})
 		this.screen.key(["escape", "q", "C-c"], function () {
 			return process.exit(0)
@@ -39,6 +40,14 @@ export class BlessedModule extends Module {
 				} 
 				this.screen.append(box)
 				this.screen.render()
+			})
+		} else if (event.type === "login"){
+			for(const child of this.screen.children){
+				child.detach()
+			} 
+			this.screen.render()
+			this.triggerEvent({
+				type: "user-data",
 			})
 		}
 	}

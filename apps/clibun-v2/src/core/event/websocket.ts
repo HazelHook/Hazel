@@ -16,7 +16,7 @@ export function handleWebsocketRequestEvent(event: WebsocketRequestEvent) {
 			requestId: deserialized.requestId,
 			method: deserialized.method,
 			source: deserialized.source,
-			data: deserialized.data,
+			data: JSON.parse(deserialized.data),
 			timestamp: new Date(deserialized.timestamp),
 			headers: deserialized.headers,
 		}

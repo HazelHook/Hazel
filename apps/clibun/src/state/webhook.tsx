@@ -47,8 +47,9 @@ export function handleWebhookMessage(data: WebSocket.RawData, url?: string) {
 	messages.push(msg)
 }
 
-export function renderWebhook(rerender: (node: ReactNode) => void, exit: () => void) {
-	return rerender(<Webhook messages={messages} exit={exit} />)
+export function renderWebhook(rerender: (node: ReactNode) => void, _: () => void) {
+	// return rerender(<Webhook messages={messages} exit={exit} />)
+	return rerender(<DummyWebhook />)
 }
 
 function DateTime({ date, selected }: { date: Date; minTime: Date; maxTime: Date; selected: boolean }) {

@@ -45,14 +45,14 @@ export default function Menu({
 		}
 
 		client
-			.post(`/v1/cli/webhook-destinations/${process.env["PORT"]}`, {
+			.post(`/v1/cli/user/${process.env["PORT"]}`, {
 				access_token: token.access_token,
 			})
 			.then((destinations) => {
 				if (destinations.status !== 200) {
 					throw new Error(`Failed to get destinations: ${destinations?.data?.message ?? destinations.status}`)
 				}
-				setDestinations(destinations.data)
+				setDestinations(destinations.data.destinations)
 			})
 	}, [token])
 
