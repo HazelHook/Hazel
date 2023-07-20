@@ -91,7 +91,7 @@ export async function Sidebar({ className }: SidebarProps) {
 				<div className="py-2 lg:px-4">
 					<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">Settings</h2>
 					<div className="space-y-1">
-						<SidebarItem href={"/app/settings"} title={"Settings"} icon={Settings01Icon} />
+						<SidebarItem href={"/settings"} title={"Settings"} icon={Settings01Icon} />
 						<SidebarItem href="ttps://docs.maple.dev" target="__blank" title={"Documentation"} icon={PaperBagIcon} />
 					</div>
 				</div>

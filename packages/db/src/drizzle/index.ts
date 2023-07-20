@@ -319,6 +319,56 @@ export function connectDB({
 				return { res }
 			},
 		},
+		api: {
+			getOne: async ({
+				publicId,
+			}: {
+				publicId: string
+			}) => {
+				return await db.query.apiKeys.findFirst({
+					where: and(eq(schema.apiKeys.publicId, publicId), isNull(schema.apiKeys.deletedAt)),
+				})
+			},
+			getMany: async ({
+				customerId,
+				includeDeleted = false,
+			}: {
+				customerId: string
+				includeDeleted?: boolean
+			}) => {
+				let filter
+				if (!includeDeleted) {
+					filter = and(eq(schema.apiKeys.customerId, customerId), isNull(schema.apiKeys.deletedAt))
+				} else {
+					filter = eq(schema.apiKeys.customerId, customerId)
+				}
+
+				return await db.query.apiKeys.findMany({
+					where: filter,
+				})
+			},
+			create: async (data: Omit<schema.InsertApiKey, "publicId">) => {
+				const publicId = generatePublicId("sk")
+				const res = await db.insert(schema.apiKeys).values({
+					...data,
+					publicId,
+				})
+				return { res, publicId }
+			},
+			update: async (data: OptionalExceptFor<Omit<schema.InsertApiKey, "customerId">, "publicId">) => {
+				const res = await db.update(schema.apiKeys).set(data).where(eq(schema.apiKeys.publicId, data.publicId))
+				return { res }
+			},
+			markAsDeleted: async ({ publicId }: { publicId: string }) => {
+				const res = await db
+					.update(schema.apiKeys)
+					.set({
+						deletedAt: new Date(),
+					})
+					.where(eq(schema.apiKeys.publicId, publicId))
+				return { res }
+			},
+		},
 	}
 }
 
