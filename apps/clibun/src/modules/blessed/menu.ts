@@ -2,6 +2,7 @@ import { Module, UserDataResponseEvent } from "../module.js";
 import blessed from "blessed"
 import { StyledButton } from "./components/button.js";
 import { getObserveMenu } from "./observe/observe.js";
+import { getForwardMenu } from "./forward/forward.js";
 
 
 export function getMenu(event: UserDataResponseEvent, module: Module, rerender: (element: blessed.Widgets.BoxElement) => void){
@@ -51,7 +52,7 @@ export function getMenu(event: UserDataResponseEvent, module: Module, rerender: 
         hoverText: "Forward webhook to localhost, similar to tools like ngrok."
     })
     forward.on("click", () => {
-
+        getForwardMenu(event.data, module, rerender)
     })
 
     // const form = blessed.form({

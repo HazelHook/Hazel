@@ -35,3 +35,13 @@ export function openInBrowser(url: string) {
 export function copyToClipboard(text: string) {
 	clipboard.writeSync(text)
 }
+
+export function maxStringLength(element: string[]) {
+	let max = 0
+	for (const e of element) {
+		if (e.length > max) {
+			max = e.length
+		}
+	}
+	return max
+}
