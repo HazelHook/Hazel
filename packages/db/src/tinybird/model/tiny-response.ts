@@ -15,8 +15,9 @@ const schema = {
 	version: hazelVersion,
 
 	// Timestamps
-	send_timestamp: z.string(),
-	timestamp: z.string(),
+	received_at: z.string(),
+	request_at: z.string(),
+	response_at: z.string(),
 
 	// Status
 	status: z.number(),

@@ -3,13 +3,15 @@ import { Destination } from "db/src/drizzle/schema"
 export type ForwardResult = {
 	result?: Response
 	resultError?: undefined
-	time: string
-	sendTime: string
+	response_at: string
+	request_at: string
+	destinationId: string
 } | {
 	resultError?: any
 	result?: undefined
-	time: string
-	sendTime: string
+	response_at: string
+	request_at: string
+	destinationId: string
 }
 
 /**
@@ -18,21 +20,24 @@ export type ForwardResult = {
 export async function forwardToDestinations({
 	request,
 	destinations,
-}: { request: Request; destinations: Destination[] }): Promise<ForwardResult[]> {
+	queryString
+}: { request: Request; destinations: Destination[]; queryString: string }): Promise<ForwardResult[]> {
 	const promises = destinations.map(async (d): Promise<ForwardResult> => {
-		const sendTime = Date.now().toString()
+		const requestStart = Date.now().toString()
 		try {
-			const result = await fetch(d.url, request)
+			const result = await fetch(`${d.url}?${queryString}`, request)
 			return {
 				result,
-				time: Date.now().toString(),
-				sendTime,
+				response_at: Date.now().toString(),
+				request_at: requestStart,
+				destinationId: d.publicId,
 			}
 		} catch (e) {
 			return {
 				resultError: e,
-				time: Date.now().toString(),
-				sendTime,
+				response_at: Date.now().toString(),
+				request_at: requestStart,
+				destinationId: d.publicId,
 			}
 		}
 	})

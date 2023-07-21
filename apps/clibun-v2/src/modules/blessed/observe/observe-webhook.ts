@@ -25,10 +25,16 @@ export function observeWebhook(userData: UserData, module: Module, destinationId
 
 const uniques: Message[] = [
     {
-        timestamp: new Date(1689607812776),
+        received_at: new Date(1689607812776),
+        response_at: new Date(1689607812776),
         requestId: "req_QhHhMpmTC4rWVoaFolMhQ",
-        source: "Kombo",
+        sourceId: "Kombo",
         method: "POST",
+        query: {
+            "param1": "value1",
+            "param2": "value2",
+        },
+        responseId: "res_QhHhMpmTC4rWVoaFolMhQ",
         headers: {
             accept: "*/*",
             "accept-encoding": "gzip, deflate, br",
@@ -54,10 +60,16 @@ const uniques: Message[] = [
         },
     },
     {
-        timestamp: new Date(1689607812776),
+        received_at: new Date(1689607812776),
+        response_at: new Date(1689607812776),
         requestId: "req_QhHhMpmTCsdklk2olMhQ",
-        source: "Stripe",
+        sourceId: "Stripe",
         method: "GET",
+        query: {
+            "param1": "value1",
+            "param2": "value2",
+        },
+        responseId: "res_QhHhMpmTC4rWVoaFolMhQ",
         headers: {
             accept: "*/*",
             "accept-encoding": "gzip, deflate, br",
@@ -84,7 +96,8 @@ for (let i = 0; i < 25; i++) {
     const current = {
         ...uniques[i % uniques.length],
     }
-    current.timestamp = new Date(current.timestamp.getTime() + 1000 * 3600 * 1.0 * Math.random())
+    current.received_at = new Date(current.received_at.getTime() + 1000 * 3600 * 1.0 * Math.random())
+    current.response_at = new Date(current.received_at.getTime() + 2000 * Math.random())
     // messages.push(current)
 }
 
@@ -97,7 +110,7 @@ function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed
         padding: {
             left: 1,
         },
-        items: messages.map(m => prettyTimestamp(m.timestamp)),
+        items: messages.map(m => prettyTimestamp(m.received_at)),
         tags: true,
         keys: true,
         vi: true,
@@ -259,8 +272,8 @@ function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed
         detail.setContent("No messages received yet.")
     } else if (selectedMenu === 0) {
         const data = {
-            "Receieved at": `${message.timestamp.toDateString()} ${prettyTimestamp(message.timestamp)}:${message.timestamp.getMilliseconds()}`,
-            "Source": message.source,
+            "Receieved at": `${message.received_at.toDateString()} ${prettyTimestamp(message.received_at)}:${message.received_at.getMilliseconds()}`,
+            "Source": message.sourceId,
             "Method": message.method,
         }
         const longest = Object.keys(data).reduce((a, b) => a.length > b.length ? a : b).length + 1

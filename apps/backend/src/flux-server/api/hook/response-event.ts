@@ -8,8 +8,9 @@ export interface ResponseResult {
 	headers: string
 	id: string
 	request_id: string
-	timestamp: string
-	send_timestamp: string
+	request_at: string
+	response_at: string
+	received_at: string
 	status: number
 	success: number
 	destination_id: string
@@ -25,26 +26,27 @@ export async function logTinybirdEvents({
 	customerId,
 	requestId,
 	destinations,
-}: { results: ForwardResult[]; sourceId: string; customerId: string; requestId: string; destinations: Destination[] }): Promise<ResponseResult[]> {
+	requestStart,
+}: { results: ForwardResult[]; sourceId: string; customerId: string; requestId: string; destinations: Destination[]; requestStart: string }) {
 	let i = 0
+	const responseIds = []
 	const tinyResponsePromises = []
-	const responseResults: ResponseResult[] = []
-	for (const { result, resultError, time, sendTime } of results) {
+	for (const { result, resultError, request_at, response_at } of results) {
+		const responseId = `res_${nanoid(17)}`
 		const responseResult: ResponseResult = {
             body: (result ? await result.text() : resultError.toString()),
             headers: JSON.stringify(result?.headers ?? {}),
             success: Number(result?.ok ?? !resultError),
             status: result?.status ?? 500,
 
-            id: `res_${nanoid(17)}`,
+            id: responseId,
             request_id: requestId,
-            timestamp: time,
-            send_timestamp: sendTime,
+			received_at: requestStart,
+			request_at,
+			response_at,
             destination_id: destinations[i].publicId,
             source_id: sourceId,
         }
-
-		responseResults.push(responseResult)
 
 		tinyResponsePromises.push(
 			tiny.response.publish({
@@ -54,9 +56,11 @@ export async function logTinybirdEvents({
 			}),
 		)
 
+		responseIds.push(responseId)
+
 		i++
 	}
 
 	await Promise.all(tinyResponsePromises)
-	return responseResults
+	return responseIds
 }

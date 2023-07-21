@@ -9,7 +9,13 @@ import { forwardToDevServer } from "./forward-dev"
 
 
 export function addHookIngestEndpoint(elysia: Elysia) {
-	return elysia.post("/:sourceId", async ({ params, set, request }) => {
+	return elysia.
+	// Before the request is handled, we add a timestamp to the store
+	onRequest((c) => {
+		(c.store as any).request_start = Date.now().toString()
+	}).
+	post("/:sourceId", async ({ params, set, request, store }) => {
+		const requestStart = (store as any).request_start
 		const source = await db.source.getOne({
 			publicId: params.sourceId,
 		})
@@ -43,13 +49,23 @@ export function addHookIngestEndpoint(elysia: Elysia) {
 		const destinations = source.connections.filter((c) => c.enabled).flatMap((connection) => connection.destination)
 		const requestId = `req_${nanoid()}`
 
+		const queryString = request.url.split("?")[1] ?? ""
+
 		await handleRequest({
 			request,
 			customerId: source.customerId,
 			requestId,
 			destinations,
 			sourceId: source.publicId,
+			queryString,
+			requestStart
 		})
+
+		return {
+			status: "SUCCESS",
+			message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestId}`,
+			request_id: requestId,
+		}
 	})
 }
 
@@ -59,18 +75,21 @@ export async function handleRequest({
 	sourceId,
 	customerId,
 	requestId,
-}: { request: Request; destinations: Destination[]; sourceId: string; customerId: string; requestId: string }) {
+	queryString,
+	requestStart
+}: { request: Request; destinations: Destination[]; sourceId: string; customerId: string; requestId: string; queryString: string; requestStart: string }) {
 	try {
 		const cloned = request.clone()
-		const results = await forwardToDestinations({ request: cloned, destinations })
-		const responses = await logTinybirdEvents({
+		const results = await forwardToDestinations({ request: cloned, destinations, queryString })
+		const responseIds = await logTinybirdEvents({
 			results,
 			customerId,
 			destinations,
 			requestId,
 			sourceId,
+			requestStart
 		})
-		await forwardToDevServer({ destinations, responses })
+		await forwardToDevServer({ destinations, results, responseIds, request, requestId, queryString, sourceId, requestStart })
 	} catch (e) {
 		console.log(e)
 	}

@@ -11,14 +11,24 @@ export function handleWebsocketRequestEvent(event: WebsocketRequestEvent) {
 
 	ws.onmessage = (message) => {
 		const deserialized = JSON.parse(message.data.toString())
+		const parameters = deserialized.query.split("&")
+		const query: Record<string, string> = {}
+		for (const parameter of parameters) {
+			const [key, value] = parameter.split("=")
+			query[key] = value
+		}
 
 		const msg: Message = {
 			requestId: deserialized.requestId,
 			method: deserialized.method,
-			source: deserialized.source,
-			data: JSON.parse(deserialized.data),
-			timestamp: new Date(deserialized.timestamp),
+			sourceId: deserialized.sourceId,
+			responseId: deserialized.responseId,
+			data: JSON.parse(deserialized.body),
 			headers: deserialized.headers,
+			received_at: new Date(deserialized.received_at),
+			response_at: new Date(deserialized.response_at),
+			request_at: new Date(deserialized.request_at),
+			query
 		}
 
 		event.onMessage(msg)

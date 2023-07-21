@@ -3,10 +3,14 @@ import { RequestClient } from "../core/lib/request-client.js";
 
 export type Message = {
 	requestId: string
-	source: string
+	sourceId: string
+    responseId: string
+    query: Record<string, string>
 	data: any
 	headers: Record<string, string>
-	timestamp: Date
+	received_at: Date
+    response_at: Date
+    request_at: Date
 	method: "GET" | "POST"
 }
 

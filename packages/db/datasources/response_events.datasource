@@ -5,9 +5,8 @@ DESCRIPTION >
 
 SCHEMA >
     `id` String `json:$.id`,
-    `received_at` DateTime64(3) `json:$.received_at`,
-    `send_at` DateTime64(3) `json:$.send_at`,
-    `response_at` DateTime64(3) `json:$.response_at`,
+    `timestamp` DateTime64(3) `json:$.timestamp`,
+    `send_timestamp` DateTime64(3) `json:$.send_timestamp`,
     `version` LowCardinality(String) `json:$.version`,
     `request_id` String `json:$.request_id`,
     `customer_id` String `json:$.customer_id`,
@@ -19,6 +18,6 @@ SCHEMA >
     `headers` String `json:$.headers`
 
 ENGINE "MergeTree"
-ENGINE_PARTITION_KEY "toYYYYMM(received_at)"
-ENGINE_SORTING_KEY "received_at, customer_id, source_id, request_id"
-ENGINE_TTL "toDateTime(received_at) + toIntervalDay(60)"
+ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
+ENGINE_SORTING_KEY "timestamp, customer_id, source_id, request_id"
+ENGINE_TTL "toDateTime(timestamp) + toIntervalDay(60)"
