@@ -8,7 +8,7 @@ export interface ResponseResult {
 	headers: string
 	id: string
 	request_id: string
-	request_at: string
+	send_at: string
 	response_at: string
 	received_at: string
 	status: number
@@ -26,12 +26,12 @@ export async function logTinybirdEvents({
 	customerId,
 	requestId,
 	destinations,
-	requestStart,
-}: { results: ForwardResult[]; sourceId: string; customerId: string; requestId: string; destinations: Destination[]; requestStart: string }) {
+	receivedAt,
+}: { results: ForwardResult[]; sourceId: string; customerId: string; requestId: string; destinations: Destination[]; receivedAt: string }) {
 	let i = 0
 	const responseIds = []
 	const tinyResponsePromises = []
-	for (const { result, resultError, request_at, response_at } of results) {
+	for (const { result, resultError, send_at, response_at } of results) {
 		const responseId = `res_${nanoid(17)}`
 		const responseResult: ResponseResult = {
             body: (result ? await result.text() : resultError.toString()),
@@ -41,8 +41,8 @@ export async function logTinybirdEvents({
 
             id: responseId,
             request_id: requestId,
-			received_at: requestStart,
-			request_at,
+			received_at: receivedAt,
+			send_at,
 			response_at,
             destination_id: destinations[i].publicId,
             source_id: sourceId,

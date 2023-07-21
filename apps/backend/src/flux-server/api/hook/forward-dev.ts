@@ -11,8 +11,8 @@ export async function forwardToDevServer({
 	queryString,
 	sourceId,
 	results,
-	requestStart
-}: { destinations: Destination[]; request: Request; results: ForwardResult[]; responseIds: string[]; requestId: string; queryString: string; sourceId: string; requestStart: string }) {
+	receivedAt
+}: { destinations: Destination[]; request: Request; results: ForwardResult[]; responseIds: string[]; requestId: string; queryString: string; sourceId: string; receivedAt: string }) {
 	const filteredDestinations = destinations.filter((d) => d.websocket_connection)
 	
 	if (filteredDestinations.length > 0) {
@@ -22,12 +22,13 @@ export async function forwardToDevServer({
 			body: JSON.stringify({
 				body: await request.text(),
 				requestId,
+				received_at: receivedAt,
 				destinations: destinations.map((d, i) => ({
 					id: d.publicId,
 					responseId: responseIds[i],
-					received_at: requestStart,
-					request_at: results.find(r => r.destinationId === d.publicId)?.request_at,
+					send_at: results.find(r => r.destinationId === d.publicId)?.send_at,
 					response_at: results.find(r => r.destinationId === d.publicId)?.response_at,
+					status: results.find(r => r.destinationId === d.publicId)?.status,
 				})),
 				sourceId,
 				query: queryString,

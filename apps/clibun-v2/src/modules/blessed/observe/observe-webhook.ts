@@ -27,6 +27,8 @@ const uniques: Message[] = [
     {
         received_at: new Date(1689607812776),
         response_at: new Date(1689607812776),
+        send_at: new Date(1689607812776),
+        status: 200,
         requestId: "req_QhHhMpmTC4rWVoaFolMhQ",
         sourceId: "Kombo",
         method: "POST",
@@ -62,6 +64,8 @@ const uniques: Message[] = [
     {
         received_at: new Date(1689607812776),
         response_at: new Date(1689607812776),
+        send_at: new Date(1689607812776),
+        status: 200,
         requestId: "req_QhHhMpmTCsdklk2olMhQ",
         sourceId: "Stripe",
         method: "GET",
@@ -97,7 +101,8 @@ for (let i = 0; i < 25; i++) {
         ...uniques[i % uniques.length],
     }
     current.received_at = new Date(current.received_at.getTime() + 1000 * 3600 * 1.0 * Math.random())
-    current.response_at = new Date(current.received_at.getTime() + 2000 * Math.random())
+    current.send_at = new Date(current.received_at.getTime() + 200 * Math.random())
+    current.response_at = new Date(current.send_at.getTime() + 2000 * (Math.random() * Math.random()))
     // messages.push(current)
 }
 
@@ -216,13 +221,16 @@ function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed
 
     })
 
+    const statusColor = message.status >= 200 && message.status < 300 ? "green" : message.status >= 300 && message.status < 400 ? "yellow" : "red"
     navbar.append(blessed.box({
         left: width - 1,
         width: `100%-${width}`,
         height: 3,
         top: -1,
         tags: true,
-        content: messages.length === 0 ? '' : `${message.method}  658 ms  {green-fg}200 OK{/green-fg}`,
+        content: messages.length === 0 ? '' : `${message.method}  ${
+            message.send_at.getTime() - message.received_at.getTime()
+        } ms  {${statusColor}-fg}200 OK{/${statusColor}-fg}`,
         style: {
             fg: "gray",
         },
@@ -277,9 +285,12 @@ function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed
             "Method": message.method,
         }
         const longest = Object.keys(data).reduce((a, b) => a.length > b.length ? a : b).length + 1
-        const content = Object.keys(data).map(key => `${key.padEnd(longest)}: ${data[key]}`).join("\n")
+        const requests = Object.keys(data).map(key => `${key.padEnd(longest)}: ${data[key]}`).join("\n")
 
-        detail.setContent(`{bold}Request details{/bold}\n\n${content}`)
+        const longestQuery = Object.keys(message.query).reduce((a, b) => a.length > b.length ? a : b).length + 1
+        const query = Object.keys(message.query).map(key => `${key.padEnd(longestQuery)}: ${message.query[key]}`).join("\n")
+
+        detail.setContent(`{bold}Request details{/bold}\n\n${requests}\n\n{bold}Query Params{/bold}\n\n${query}`)
     } else if (selectedMenu === 1) {
         const longest = Object.keys(message.headers).reduce((a, b) => a.length > b.length ? a : b).length + 1
         const content = Object.keys(message.headers).map(key => `${key.padEnd(longest)}: ${message.headers[key]}`).join("\n")

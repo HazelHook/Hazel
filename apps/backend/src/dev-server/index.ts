@@ -25,8 +25,10 @@ const app = new Elysia()
 						headers: body.headers,
 						responseId: destination.responseId,
 						query: body.query,
-						received_time: destination.received_time,
-						response_time: destination.response_time,
+						received_at: body.received_at,
+						send_at: destination.send_at,
+						response_at: destination.response_at,
+						status: destination.status,
 					})
 				}
 			}
@@ -41,11 +43,13 @@ const app = new Elysia()
 				sourceId: t.String(),
 				body: t.Any(),
 				headers: t.Any(),
+				received_at: t.String(),
 				destinations: t.Array(t.Object({
 					id: t.String(),
 					responseId: t.String(),
-					received_time: t.String(),
-					response_time: t.String(),
+					send_at: t.String(),
+					response_at: t.String(),
+					status: t.Number(),
 				})),
 				query: t.String(),
 			})

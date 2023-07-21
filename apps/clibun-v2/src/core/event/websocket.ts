@@ -27,7 +27,8 @@ export function handleWebsocketRequestEvent(event: WebsocketRequestEvent) {
 			headers: deserialized.headers,
 			received_at: new Date(deserialized.received_at),
 			response_at: new Date(deserialized.response_at),
-			request_at: new Date(deserialized.request_at),
+			send_at: new Date(deserialized.send_at),
+			status: deserialized.status,
 			query
 		}
 

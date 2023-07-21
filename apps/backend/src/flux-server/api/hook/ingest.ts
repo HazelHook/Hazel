@@ -12,10 +12,10 @@ export function addHookIngestEndpoint(elysia: Elysia) {
 	return elysia.
 	// Before the request is handled, we add a timestamp to the store
 	onRequest((c) => {
-		(c.store as any).request_start = Date.now().toString()
+		(c.store as any).request_start = new Date().toISOString()
 	}).
 	post("/:sourceId", async ({ params, set, request, store }) => {
-		const requestStart = (store as any).request_start
+		const receivedAt = (store as any).request_start
 		const source = await db.source.getOne({
 			publicId: params.sourceId,
 		})
@@ -58,7 +58,7 @@ export function addHookIngestEndpoint(elysia: Elysia) {
 			destinations,
 			sourceId: source.publicId,
 			queryString,
-			requestStart
+			receivedAt
 		})
 
 		return {
@@ -76,8 +76,8 @@ export async function handleRequest({
 	customerId,
 	requestId,
 	queryString,
-	requestStart
-}: { request: Request; destinations: Destination[]; sourceId: string; customerId: string; requestId: string; queryString: string; requestStart: string }) {
+	receivedAt
+}: { request: Request; destinations: Destination[]; sourceId: string; customerId: string; requestId: string; queryString: string; receivedAt: string }) {
 	try {
 		const cloned = request.clone()
 		const results = await forwardToDestinations({ request: cloned, destinations, queryString })
@@ -87,9 +87,9 @@ export async function handleRequest({
 			destinations,
 			requestId,
 			sourceId,
-			requestStart
+			receivedAt
 		})
-		await forwardToDevServer({ destinations, results, responseIds, request, requestId, queryString, sourceId, requestStart })
+		await forwardToDevServer({ destinations, results, responseIds, request, requestId, queryString, sourceId, receivedAt })
 	} catch (e) {
 		console.log(e)
 	}

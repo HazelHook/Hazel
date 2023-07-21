@@ -16,7 +16,7 @@ const schema = {
 
 	// Timestamps
 	received_at: z.string(),
-	request_at: z.string(),
+	send_at: z.string(),
 	response_at: z.string(),
 
 	// Status

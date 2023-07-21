@@ -10,7 +10,8 @@ export type Message = {
 	headers: Record<string, string>
 	received_at: Date
     response_at: Date
-    request_at: Date
+    send_at: Date
+    status: number
 	method: "GET" | "POST"
 }
 
