@@ -10,7 +10,7 @@ SCHEMA >
     `response_at` DateTime64(3) `json:$.response_at`,
     `version` LowCardinality(String) `json:$.version`,
     `request_id` String `json:$.request_id`,
-    `customer_id` String `json:$.customer_id`,
+    `workspace_id` String `json:$.workspace_id`,
     `source_id` String `json:$.source_id`,
     `destination_id` String `json:$.destination_id`,
     `status` Int32 `json:$.status`,
@@ -20,5 +20,5 @@ SCHEMA >
 
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(received_at)"
-ENGINE_SORTING_KEY "received_at, customer_id, source_id, request_id"
+ENGINE_SORTING_KEY "received_at, workspace_id, source_id, request_id"
 ENGINE_TTL "toDateTime(received_at) + toIntervalDay(60)"

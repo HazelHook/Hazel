@@ -9,8 +9,8 @@ DESCRIPTION >
 SQL >
 
     %
-            {% if not defined(customer_id) %}
-                {{ error('customer_id (String) query param is required') }}
+            {% if not defined(workspace_id) %}
+                {{ error('workspace_id (String) query param is required') }}
             {% end %}
             {% if not defined(start_date) %}
                 {{ error('start_date (DateTime) query param is required') }}
@@ -18,10 +18,10 @@ SQL >
             SELECT *
             FROM response_events
             WHERE
-                customer_id
+                workspace_id
                 = {{
                     String(
-                        customer_id,
+                        workspace_id,
                         "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
                         description="Customer ID",
                         required=True,
@@ -33,9 +33,9 @@ SQL >
                     AND
                 {% end %}
                 {% if period == 'daily' or period == 'hourly' or not defined(period) %}
-                    timestamp >= {{ DateTime(start_date, required=True) }}
+                    received_at >= {{ DateTime(start_date, required=True) }}
                     {% if defined(end_date) %}
-                        AND timestamp < {{ DateTime(end_date, required=False) }}
+                        AND received_at < {{ DateTime(end_date, required=False) }}
                     {% end %}
                 {% elif period == 'weekly' or period == 'monthly' %}
                     bucket >= toDate({{ DateTime(start_date, required=True) }})
@@ -54,17 +54,17 @@ SQL >
 
     %
                              WITH 
-                                    toDate(`timestamp`) AS date
+                                    toDate(`received_at`) AS date
                                 SELECT 
                                     date,
-                                    `customer_id`,
+                                    `workspace_id`,
                                     count() AS requests,
                                     uniq(source_id) As sources
                                 FROM 
                                     filtered
                                 GROUP BY 
                                     date, 
-                                    `customer_id`, 
+                                    `workspace_id`, 
                                     `success`
                                 ORDER BY 
                                     date DESC,

@@ -4,8 +4,8 @@ NODE endpoint
 SQL >
 
     %
-            {% if not defined(customer_id) %}
-                {{ error('customer_id (String) query param is required') }}
+            {% if not defined(workspace_id) %}
+                {{ error('workspace_id (String) query param is required') }}
             {% end %}
             {% if not defined(start_date) %}
                 {{ error('start_date (DateTime) query param is required') }}
@@ -17,7 +17,7 @@ SQL >
                 {% elif period == 'monthly' %} toStartOfMonth(bucket)
                 {% end %} date,
                 source_id,
-                customer_id,
+                workspace_id,
                 status,
                 countMerge(count) as events
             {% if period == 'hourly' %} FROM hourly_res_mv
@@ -39,16 +39,16 @@ SQL >
                     AND source_id
                     = {{ String(source_id, description="Source ID", required=False) }}
                 {% end %}
-                AND customer_id
+                AND workspace_id
                 = {{
                     String(
-                        customer_id,
+                        workspace_id,
                         "cus_8NiWC2t_SZVKALuy",
                         description="Customer ID",
                         required=True,
                     )
                 }}
-            GROUP BY bucket, source_id, customer_id, status, count
+            GROUP BY bucket, source_id, workspace_id, status, count
             ORDER BY bucket
 
 

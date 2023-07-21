@@ -5,10 +5,10 @@ SQL >
     SELECT *
     FROM request_events
     WHERE
-        customer_id
+        workspace_id
         = {{
             String(
-                customer_id,
+                workspace_id,
                 "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
                 description="Customer ID",
                 required=True,

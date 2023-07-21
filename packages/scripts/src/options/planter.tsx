@@ -210,7 +210,7 @@ export function Planter({
 
 					promises.push(
 						tb.requests.publish({
-							customer_id: customerId,
+							workspace_id: customerId,
 							source_id: generatedSourceIds[i % generatedSourceIds.length],
 							request_id: generatedRequestIds[i],
 							version: "1.0",
@@ -224,7 +224,7 @@ export function Planter({
 
 					promises.push(
 						tb.responses.publish({
-							customer_id: customerId,
+							workspace_id: customerId,
 							source_id: generatedSourceIds[i % generatedSourceIds.length],
 							destination_id: generatedDestinationIds[i % generatedDestinationIds.length],
 							request_id: generatedRequestIds[i],

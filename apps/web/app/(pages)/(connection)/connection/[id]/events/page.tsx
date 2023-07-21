@@ -24,7 +24,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 	}
 
 	const { data, rows_before_limit_at_least } = await tiny.response.get({
-		customer_id: userId,
+		workspace_id: userId,
 		source_id: connection.source?.publicId,
 		destination_id: connection.destination?.publicId,
 	})

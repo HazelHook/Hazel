@@ -39,7 +39,7 @@
 			}
 		]
 	},
-	"customer_id": {
+	"workspace_id": {
 		"type": "mockingbird.pick",
 		"params": [
 			{

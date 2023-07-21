@@ -1,12 +1,12 @@
 
 SCHEMA >
     `bucket` DateTime,
-    `customer_id` String,
+    `workspace_id` String,
     `source_id` String,
     `status` Int32,
     `count` AggregateFunction(count)
 
 ENGINE "AggregatingMergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(bucket)"
-ENGINE_SORTING_KEY "bucket, source_id, customer_id, status"
+ENGINE_SORTING_KEY "bucket, source_id, workspace_id, status"
 ENGINE_TTL "bucket + toIntervalDay(120)"

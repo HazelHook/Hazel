@@ -13,19 +13,19 @@ interface EventsPageProps {
 }
 
 async function fetchData({
-	customer_id,
+	workspace_id,
 	source_id,
 }: {
-	customer_id: string
+	workspace_id: string
 	source_id: string
 }) {
 	const [req, res] = await Promise.all([
 		tiny.request.get({
-			customer_id,
+			workspace_id,
 			source_id,
 		}),
 		tiny.response.get({
-			customer_id,
+			workspace_id,
 			source_id,
 		}),
 	])
@@ -53,7 +53,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 	}
 
 	const sources = await fetchData({
-		customer_id: userId,
+		workspace_id: userId,
 		source_id: params.id,
 	})
 

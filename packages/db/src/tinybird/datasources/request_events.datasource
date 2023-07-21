@@ -7,7 +7,7 @@ SCHEMA >
     `id` String `json:$.id`,
     `timestamp` DateTime64(3) `json:$.timestamp`,
     `version` LowCardinality(String) `json:$.version`,
-    `customer_id` String `json:$.customer_id`,
+    `workspace_id` String `json:$.workspace_id`,
     `source_id` String `json:$.source_id`,
     `body` String `json:$.body`,
     `headers` String `json:$.headers`,
@@ -16,5 +16,5 @@ SCHEMA >
 
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
-ENGINE_SORTING_KEY "timestamp, customer_id, source_id, id"
+ENGINE_SORTING_KEY "timestamp, workspace_id, source_id, id"
 ENGINE_TTL "toDateTime(timestamp) + toIntervalDay(60)"

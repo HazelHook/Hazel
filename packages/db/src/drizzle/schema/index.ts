@@ -28,7 +28,7 @@ export const source = buildMysqlTable(
 	},
 	(table) => ({
 		publicIdIndex: index("src_public_id_idx").on(table.publicId),
-		customerIdIndex: index("src_customer_id_idx").on(table.customerId),
+		customerIdIndex: index("src_workspace_id_idx").on(table.customerId),
 
 		integrationIdIndex: index("src_integration_id_idx").on(table.integrationId),
 	}),
@@ -43,7 +43,7 @@ export const integration = buildMysqlTable(
 	},
 	(table) => ({
 		publicIdIndex: index("itg_public_id_idx").on(table.publicId),
-		customerIdIndex: index("itg_customer_id_idx").on(table.customerId),
+		customerIdIndex: index("itg_workspace_id_idx").on(table.customerId),
 
 		nameIndex: index("itg_name_idx").on(table.name),
 	}),
@@ -58,7 +58,7 @@ export const destination = buildMysqlTable(
 	},
 	(table) => ({
 		publicIdIndex: index("dst_public_id_idx").on(table.publicId),
-		customerIdIndex: index("dst_customer_id_idx").on(table.customerId),
+		customerIdIndex: index("dst_workspace_id_idx").on(table.customerId),
 	}),
 )
 
@@ -82,7 +82,7 @@ export const connection = buildMysqlTable(
 	(table) => ({
 		publicIdIndex: uniqueIndex("con_public_id_idx").on(table.publicId),
 
-		customerIdIndex: index("con_customer_id_idx").on(table.customerId),
+		customerIdIndex: index("con_workspace_id_idx").on(table.customerId),
 
 		sourceIdIndex: index("con_source_id_idx").on(table.sourceId),
 		destinationIndex: index("con_destination_id_idx").on(table.destinationId),

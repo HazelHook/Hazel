@@ -6,7 +6,7 @@ import { body, hazelVersion, headers, period, TinybirdResourceBuilder, ZodMapped
 const schema = {
 	// IDs
 	id: z.string(),
-	customer_id: z.string(),
+	workspace_id: z.string(),
 	source_id: z.string(),
 	destination_id: z.string(),
 	request_id: z.string(),
@@ -29,7 +29,7 @@ const schema = {
 }
 export type TBResponse = ZodMapped<typeof schema>
 const parameters = {
-	customer_id: z.string(),
+	workspace_id: z.string(),
 	destination_id: z.string().optional(),
 	request_id: z.string().optional(),
 	source_id: z.string().optional(),
@@ -39,13 +39,13 @@ export type TBResponseParameters = ZodMapped<typeof parameters>
 
 const kpiSchema = {
 	date: z.string(),
-	customer_id: z.string(),
+	workspace_id: z.string(),
 	requests: z.number(),
 	sources: z.number(),
 }
 export type TBKpiResponse = ZodMapped<typeof kpiSchema>
 const kpiParameters = {
-	customer_id: z.string(),
+	workspace_id: z.string(),
 	start_date: z.string(),
 	end_date: z.string().optional(),
 	period: period.default("daily").optional(),
@@ -56,13 +56,13 @@ export type TBKpiResponseParameters = ZodMapped<typeof kpiParameters>
 const timelineSchema = {
 	date: z.string(),
 	source_id: z.string(),
-	customer_id: z.string(),
+	workspace_id: z.string(),
 	status: z.number(),
 	events: z.number(),
 }
 export type TBTimelineResponse = ZodMapped<typeof timelineSchema>
 const timelineParameters = {
-	customer_id: z.string(),
+	workspace_id: z.string(),
 	start_date: z.string(),
 	end_date: z.string().optional(),
 	period: period.default("daily").optional(),

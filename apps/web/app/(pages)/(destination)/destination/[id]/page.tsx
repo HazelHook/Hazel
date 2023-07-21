@@ -31,7 +31,7 @@ const DestinationPage = async ({
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 	const req = await tiny.response.timeline({
-		customer_id: userId,
+		workspace_id: userId,
 		start_date: startTime,
 	})
 
