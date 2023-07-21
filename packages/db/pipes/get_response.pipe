@@ -32,7 +32,7 @@ SQL >
             AND id
             = {{ String(response_id, description="Response ID", required=False) }}
         {% end %}
-    ORDER BY timestamp DESC
+    ORDER BY received_at DESC
     LIMIT {{ Int32(limit, 100, description="Limit of Entries", required=False) }}
     OFFSET {{ Int32(offset, 0, description="Offset", required=False) }}
 

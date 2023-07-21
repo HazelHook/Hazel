@@ -14,7 +14,4 @@ SQL >
         customer_id,
         status
 
-TYPE materialized
-DATASOURCE hourly_res_mv
-
 

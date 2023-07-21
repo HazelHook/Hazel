@@ -33,9 +33,9 @@ SQL >
                     AND
                 {% end %}
                 {% if period == 'daily' or period == 'hourly' or not defined(period) %}
-                    timestamp >= {{ DateTime(start_date, required=True) }}
+                    received_at >= {{ DateTime(start_date, required=True) }}
                     {% if defined(end_date) %}
-                        AND timestamp < {{ DateTime(end_date, required=False) }}
+                        AND received_at < {{ DateTime(end_date, required=False) }}
                     {% end %}
                 {% elif period == 'weekly' or period == 'monthly' %}
                     bucket >= toDate({{ DateTime(start_date, required=True) }})
@@ -54,7 +54,7 @@ SQL >
 
     %
                              WITH 
-                                    toDate(`timestamp`) AS date
+                                    toDate(`received_at`) AS date
                                 SELECT 
                                     date,
                                     `customer_id`,

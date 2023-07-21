@@ -2,7 +2,7 @@ NODE daily_res
 SQL >
 
     SELECT
-        toStartOfDay(timestamp) AS bucket,
+        toStartOfDay(received_at) AS bucket,
         customer_id,
         source_id,
         status,
