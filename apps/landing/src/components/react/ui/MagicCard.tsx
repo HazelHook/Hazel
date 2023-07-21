@@ -1,12 +1,7 @@
 "use client"
 
-import { clsx, ClassValue } from "clsx"
 import { CSSProperties, ComponentProps, ReactNode, useEffect, useRef, useState } from "react"
 import { twMerge } from "tailwind-merge"
-
-export function cn(...inputs: ClassValue[]) {
-	return twMerge(clsx(inputs))
-}
 
 interface MousePosition {
 	x: number
@@ -224,7 +219,7 @@ function MagicCard<T extends React.ElementType = "div">({
 					background,
 				} as CSSProperties
 			}
-			className={cn(
+			className={twMerge(
 				"w-full h-full relative rounded-[var(--border-radius)] overflow-hidden",
 				isolated && [borderStyles, "after:opacity-0 after:hover:opacity-100"],
 				isolated && spotlight && [spotlightStyles, "before:opacity-0 before:hover:opacity-100"],
@@ -232,7 +227,7 @@ function MagicCard<T extends React.ElementType = "div">({
 				!isolated && spotlight && [spotlightStyles, "before:opacity-[var(--opacity)]"],
 			)}
 		>
-			<div className={cn("absolute inset-[var(--border-width)] rounded-[var(--border-radius)] z-[2]", className)}>
+			<div className={twMerge("absolute inset-[var(--border-width)] rounded-[var(--border-radius)] z-[2]", className)}>
 				{children}
 			</div>
 		</div>
