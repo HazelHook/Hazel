@@ -3,14 +3,14 @@ SQL >
 
     SELECT
         toStartOfHour(timestamp) AS bucket,
-        customer_id,
+        workspace_id,
         source_id,
         countState() AS count
     FROM request_events
     GROUP BY
         bucket,
         source_id,
-        customer_id
+        workspace_id
 
 TYPE materialized
 DATASOURCE hourly_req_mv

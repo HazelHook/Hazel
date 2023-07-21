@@ -29,10 +29,10 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 
 		await tiny.response.publish({
 			id: `res_${nanoid(17)}`,
-			timestamp: new Date().toISOString(),
-			send_timestamp: sendTime,
+			received_at: sendTime,
+			response_at: new Date().toISOString(),
 			source_id: sourceId,
-			customer_id: customerId,
+			workspace_id: customerId,
 			version: "1.0",
 			request_id: requestId,
 			destination_id: connection.destination.publicId,
@@ -40,6 +40,7 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 			headers: JSON.stringify(headersObj),
 			status: res.status,
 			success: Number(res.ok),
+			send_at: sendTime,
 		})
 
 		if (!res.ok) {

@@ -3,16 +3,13 @@ SQL >
 
     SELECT
         toStartOfDay(timestamp) AS bucket,
-        customer_id,
+        workspace_id,
         source_id,
         countState() AS count
     FROM request_events
     GROUP BY
         bucket,
         source_id,
-        customer_id
-
-TYPE materialized
-DATASOURCE daily_req_mv
+        workspace_id
 
 

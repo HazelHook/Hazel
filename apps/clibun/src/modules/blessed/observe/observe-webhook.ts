@@ -1,4 +1,5 @@
 import { prettyTimestamp } from "../../../core/lib/print-util.js"
+import { openInBrowser } from "../../../core/lib/util.js"
 import { Message, Module, UserData } from "../../module.js"
 import blessed from "blessed"
 import { ScrollableList } from "../components/scrollable-list.js"

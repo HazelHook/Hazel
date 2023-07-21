@@ -34,7 +34,7 @@ const SourcePage = async ({
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 	const req = await tiny.request.timeline({
-		customer_id: userId!,
+		workspace_id: userId!,
 		source_id: source.publicId,
 		start_date: startTime,
 	})

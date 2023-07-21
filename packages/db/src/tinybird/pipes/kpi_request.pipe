@@ -5,8 +5,8 @@ DESCRIPTION >
 SQL >
 
     %
-            {% if not defined(customer_id) %}
-                {{ error('customer_id (String) query param is required') }}
+            {% if not defined(workspace_id) %}
+                {{ error('workspace_id (String) query param is required') }}
             {% end %}
             {% if not defined(start_date) %}
                 {{ error('start_date (DateTime) query param is required') }}
@@ -14,10 +14,10 @@ SQL >
             SELECT *
             FROM hourly_req_mv
             WHERE
-                customer_id
+                workspace_id
                 = {{
                     String(
-                        customer_id,
+                        workspace_id,
                         "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
                         description="Customer ID",
                         required=True,
@@ -50,9 +50,9 @@ SQL >
 
     %
                         WITH toDate(`bucket`) AS date
-                        SELECT date, customer_id, countMerge(count) AS events, uniq(source_id) AS sources
+                        SELECT date, workspace_id, countMerge(count) AS events, uniq(source_id) AS sources
                         FROM filtered
-                        GROUP BY date, customer_id
+                        GROUP BY date, workspace_id
                         ORDER BY date DESC, events DESC
 
 

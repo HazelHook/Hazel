@@ -28,27 +28,27 @@ const SourcePage = async ({
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	const pRequestKpis = tiny.request.kpi({
-		customer_id: userId,
+		workspace_id: userId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})
 
 	const pResponseKpis = tiny.response.kpi({
-		customer_id: userId,
+		workspace_id: userId,
 		source_id: connection.source?.publicId || "",
 		// success: 1,
 		start_date: startTime,
 	})
 
 	const pErrorResponseKpis = tiny.response.kpi({
-		customer_id: userId,
+		workspace_id: userId,
 		source_id: connection.source?.publicId || "",
 		// success: 0,
 		start_date: startTime,
 	})
 
 	const pRequestTimeline = tiny.request.timeline({
-		customer_id: userId,
+		workspace_id: userId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})

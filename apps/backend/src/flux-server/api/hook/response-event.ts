@@ -1,7 +1,7 @@
-import { nanoid } from "nanoid";
-import { ForwardResult } from "./forward";
+import { nanoid } from "nanoid"
+import { ForwardResult } from "./forward"
 import tiny from "db/src/tinybird"
-import { Destination } from "db/src/drizzle/schema";
+import { Destination } from "db/src/drizzle/schema"
 
 export interface ResponseResult {
 	body: string
@@ -27,31 +27,38 @@ export async function logTinybirdEvents({
 	requestId,
 	destinations,
 	receivedAt,
-}: { results: ForwardResult[]; sourceId: string; customerId: string; requestId: string; destinations: Destination[]; receivedAt: string }) {
+}: {
+	results: ForwardResult[]
+	sourceId: string
+	customerId: string
+	requestId: string
+	destinations: Destination[]
+	receivedAt: string
+}) {
 	let i = 0
 	const responseIds = []
 	const tinyResponsePromises = []
 	for (const { result, resultError, send_at, response_at } of results) {
 		const responseId = `res_${nanoid(17)}`
 		const responseResult: ResponseResult = {
-            body: (result ? await result.text() : resultError.toString()),
-            headers: JSON.stringify(result?.headers ?? {}),
-            success: Number(result?.ok ?? !resultError),
-            status: result?.status ?? 500,
+			body: result ? await result.text() : resultError.toString(),
+			headers: JSON.stringify(result?.headers ?? {}),
+			success: Number(result?.ok ?? !resultError),
+			status: result?.status ?? 500,
 
-            id: responseId,
-            request_id: requestId,
+			id: responseId,
+			request_id: requestId,
 			received_at: receivedAt,
 			send_at,
 			response_at,
-            destination_id: destinations[i].publicId,
-            source_id: sourceId,
-        }
+			destination_id: destinations[i].publicId,
+			source_id: sourceId,
+		}
 
 		tinyResponsePromises.push(
 			tiny.response.publish({
 				...responseResult,
-				customer_id: customerId,
+				workspace_id: customerId,
 				version: "1.0",
 			}),
 		)

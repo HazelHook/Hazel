@@ -41,7 +41,7 @@ const worker = new Worker<{ connectionId: string; requestId: string; request: st
 			timestamp: new Date().toISOString(),
 			send_timestamp: sendTime,
 			source_id: connection.source.publicId,
-			customer_id: connection.customerId,
+			workspace_id: connection.customerId,
 			version: "1.0",
 			request_id: job.data.requestId,
 			destination_id: connection.destination.publicId,

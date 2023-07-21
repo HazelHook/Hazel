@@ -36,25 +36,25 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		)
 
 	const requests = tiny.request.get({
-		customer_id: userId,
+		workspace_id: userId,
 		limit: 5,
 	})
 
 	const kpiRequest = tiny.request.kpi({
-		customer_id: userId,
+		workspace_id: userId,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
 	const kpiResponse = tiny.response.kpi({
-		customer_id: userId,
+		workspace_id: userId,
 		// success: 1,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
 	const kpiError = tiny.response.kpi({
-		customer_id: userId,
+		workspace_id: userId,
 		// success: 0,
 		start_date: startTime,
 		end_date: endTime,
@@ -63,7 +63,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const user = currentUser()
 
 	const timelineBySources = await tiny.request.timeline({
-		customer_id: userId,
+		workspace_id: userId,
 		start_date: startTime,
 		end_date: endTime,
 	})

@@ -2,8 +2,8 @@ NODE hourly_res
 SQL >
 
     SELECT
-        toStartOfHour(timestamp) AS bucket,
-        customer_id,
+        toStartOfHour(received_at) AS bucket,
+        workspace_id,
         source_id,
         status,
         countState() AS count
@@ -11,10 +11,7 @@ SQL >
     GROUP BY
         bucket,
         source_id,
-        customer_id,
+        workspace_id,
         status
-
-TYPE materialized
-DATASOURCE hourly_res_mv
 
 

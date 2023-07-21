@@ -32,6 +32,9 @@ importers:
       '@elysiajs/bearer':
         specifier: ^0.5.2
         version: 0.5.2(elysia@0.5.22)
+      '@elysiajs/swagger':
+        specifier: ^0.5.2
+        version: 0.5.2(elysia@0.5.22)
       db:
         specifier: workspace:*
         version: link:../../packages/db
@@ -732,10 +735,10 @@ importers:
         version: 0.5.0(@builder.io/qwik@1.2.2)(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
       '@hookform/resolvers':
         specifier: ^3.1.1
-        version: 3.1.1(react-hook-form@7.45.1)
+        version: 3.1.1(react-hook-form@7.45.2)
       react-hook-form:
         specifier: ^7.45.1
-        version: 7.45.1(react@18.2.0)
+        version: 7.45.2(react@18.2.0)
     devDependencies:
       '@builder.io/qwik':
         specifier: ^1.2.2
@@ -1304,6 +1307,14 @@ packages:
 
   /@elysiajs/bearer@0.5.2(elysia@0.5.22):
     resolution: {integrity: sha512-RsTzXbi+gfu9fzXhqXphYTqWF69r7Pvn5JYJYgywFWBYAFJSUQlsGXt9arduA1JWiwZboBePa74e4sCWtBvQbg==}
+    peerDependencies:
+      elysia: '>= 0.5.12'
+    dependencies:
+      elysia: 0.5.22(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+    dev: false
+
+  /@elysiajs/swagger@0.5.2(elysia@0.5.22):
+    resolution: {integrity: sha512-5LyxGs/J4wrk6xLjn74hFPyCsTnPJlvWa6EBblM1lmoK6e7Rl2d5IFf6i+f30+Nye5isoWkRnuLB3qeNqVBgYA==}
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
@@ -1957,15 +1968,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
-
-  /@hookform/resolvers@3.1.1(react-hook-form@7.45.1):
-    resolution: {integrity: sha512-tS16bAUkqjITNSvbJuO1x7MXbn7Oe8ZziDTJdA9mMvsoYthnOOiznOTGBYwbdlYBgU+tgpI/BtTU3paRbCuSlg==}
-    peerDependencies:
-      react-hook-form: ^7.0.0
-    dependencies:
-      react-hook-form: 7.45.1(react@18.2.0)
-    dev: false
-    optional: true
 
   /@hookform/resolvers@3.1.1(react-hook-form@7.45.2):
     resolution: {integrity: sha512-tS16bAUkqjITNSvbJuO1x7MXbn7Oe8ZziDTJdA9mMvsoYthnOOiznOTGBYwbdlYBgU+tgpI/BtTU3paRbCuSlg==}
@@ -8908,17 +8910,6 @@ packages:
       react: 18.2.0
       scheduler: 0.23.0
     dev: false
-
-  /react-hook-form@7.45.1(react@18.2.0):
-    resolution: {integrity: sha512-6dWoFJwycbuFfw/iKMcl+RdAOAOHDiF11KWYhNDRN/OkUt+Di5qsZHwA0OwsVnu9y135gkHpTw9DJA+WzCeR9w==}
-    engines: {node: '>=12.22.0'}
-    requiresBuild: true
-    peerDependencies:
-      react: ^16.8.0 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
-    dev: false
-    optional: true
 
   /react-hook-form@7.45.2(react@18.2.0):
     resolution: {integrity: sha512-9s45OdTaKN+4NSTbXVqeDITd/nwIg++nxJGL8+OD5uf1DxvhsXQ641kaYHk5K28cpIOTYm71O/fYk7rFaygb3A==}
