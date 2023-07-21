@@ -46,7 +46,8 @@ import { AstroSeo } from "@astrolib/seo";
 <LightLayout>
   <section class="bg-white">
     <div
-      class="px-8 py-24 lg:py-36 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl grid grid-cols-1 md:grid-cols-4">
+      class="px-8 py-24 lg:py-36 mx-auto md:px-12 lg:px-16 xl:px-36 2xl:max-w-7xl grid grid-cols-1 md:grid-cols-4"
+    >
       <div class="hidden md:block">
         <div class="lg:sticker lg:sticky py-24 top-0">
           <ul role="list" class="space-y-2">
@@ -55,7 +56,8 @@ import { AstroSeo } from "@astrolib/seo";
                 <li>
                   <a
                     class="text-xs  capitalize  text-black    hover:text-accent-500"
-                    href={`/tags/${tag}`}>
+                    href={`/tags/${tag}`}
+                  >
                     {tag}
                   </a>
                 </li>
@@ -66,21 +68,24 @@ import { AstroSeo } from "@astrolib/seo";
       </div>
       <div class="md:col-span-3 lg:col-span-2 pt-24 lg:pt-0">
         <div
-          class="mx-auto prose text-zinc-500 prose-a:font-semibold prose-a:text-acent-300 hover:prose-a:text-black prose-headings:text-black prose-blockquote:text-acent-400 prose-code:text-acent-400 prose-strong:text-accent-500 prose-img:rounded-3xl prose-pre:rounded-2xl">
+          class="mx-auto prose text-zinc-500 prose-a:font-semibold prose-a:text-acent-300 hover:prose-a:text-black prose-headings:text-black prose-blockquote:text-acent-400 prose-code:text-acent-400 prose-strong:text-accent-500 prose-img:rounded-3xl prose-pre:rounded-2xl"
+        >
           <div class="pb-12 border-b">
             <div class="space-x-1">
               {
                 frontmatter.tags.map((tag) => (
                   <a
                     class="inline-flex items-center no-underline  rounded-full  px-6 py-2 text-xs font-medium text-black uppercase ring-1 ring-inset ring-black/10 "
-                    href={`/tags/${tag}`}>
+                    href={`/tags/${tag}`}
+                  >
                     {tag}
                   </a>
                 ))
               }
             </div>
             <p
-              class="text-3xl tracking-tighter mt-6 font-light lg:text-4xl text-black">
+              class="text-3xl tracking-tighter mt-6 font-light lg:text-4xl text-black"
+            >
               {frontmatter.title}
             </p>
             <p class="text-zinc-500 -mt-6 font-light">

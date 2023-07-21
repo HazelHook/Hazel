@@ -15,9 +15,10 @@ interface Event {
 	requestId: string
 	customerId: string
 	data: string
+	received_at: string
 }
 
-export const sendEvent = async ({ connection, sourceId, requestId, customerId, request, body }: Event) => {
+export const sendEvent = async ({ connection, sourceId, requestId, customerId, request, body, received_at }: Event) => {
 	try {
 		const sendTime = new Date().toISOString()
 		const res = await fetch(connection.destination.url, request.clone())
@@ -29,7 +30,8 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 
 		await tiny.response.publish({
 			id: `res_${nanoid(17)}`,
-			received_at: sendTime,
+			received_at: received_at,
+			send_at: sendTime,
 			response_at: new Date().toISOString(),
 			source_id: sourceId,
 			workspace_id: customerId,
@@ -40,7 +42,6 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 			headers: JSON.stringify(headersObj),
 			status: res.status,
 			success: Number(res.ok),
-			send_at: sendTime,
 		})
 
 		if (!res.ok) {

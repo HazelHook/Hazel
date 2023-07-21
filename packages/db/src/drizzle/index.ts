@@ -44,6 +44,7 @@ export function connectDB({
 				publicId: string
 				includeDeleted?: boolean
 			}) => {
+				console.log("HI")
 				let filter
 				if (!includeDeleted) {
 					filter = and(eq(schema.source.publicId, publicId), isNull(schema.source.deletedAt))
@@ -51,7 +52,7 @@ export function connectDB({
 					filter = eq(schema.source.publicId, publicId)
 				}
 
-				return await db.query.source.findFirst({
+				return db.query.source.findFirst({
 					where: filter,
 					with: {
 						connections: {

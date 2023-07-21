@@ -10,13 +10,10 @@ console.log("Hazel Worked startin up....")
 const redisConnection: ConnectionOptions = {
 	username: process.env.REDIS_USERNAME,
 	password: process.env.REDIS_PASSWORD,
-	tls: {
-		host: process.env.REDIS_HOST,
-		port: Number(process.env.REDIS_PORT),
-	},
+	port: Number(process.env.REDIS_PORT),
 }
 
-const worker = new Worker<{ connectionId: string; requestId: string; request: string }>(
+const worker = new Worker<{ connectionId: string; requestId: string; request: string; received_at: string }>(
 	"source_queue",
 	async (job) => {
 		const connection = await db.connection.getOne({ publicId: job.data.connectionId })
@@ -38,8 +35,9 @@ const worker = new Worker<{ connectionId: string; requestId: string; request: st
 
 		await tiny.response.publish({
 			id: `res_${nanoid(17)}`,
-			timestamp: new Date().toISOString(),
-			send_timestamp: sendTime,
+			received_at: job.data.received_at,
+			send_at: sendTime,
+			response_at: new Date().toISOString(),
 			source_id: connection.source.publicId,
 			workspace_id: connection.customerId,
 			version: "1.0",

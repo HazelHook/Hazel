@@ -27,12 +27,8 @@ export function retryRequest(elyisa: ElysiaCLIHandler) {
 			const pConnections = db.connection.getMany({
 				customerId: userInfoJson.user_id,
 			})
-			
-			const [destinations, sources, connections] = await Promise.all([
-				pDestinations,
-				pSources,
-				pConnections,
-			])
+
+			const [destinations, sources, connections] = await Promise.all([pDestinations, pSources, pConnections])
 
 			return {
 				sources: sources.map((source) => ({
@@ -52,8 +48,13 @@ export function retryRequest(elyisa: ElysiaCLIHandler) {
 				})),
 			}
 		},
-		{ body: t.Composite([CLIAuthenticatedDTO, t.Object({
-            requestId: t.String()
-        })]) },
+		{
+			body: t.Composite([
+				CLIAuthenticatedDTO,
+				t.Object({
+					requestId: t.String(),
+				}),
+			]),
+		},
 	) as any as ElysiaCLIHandler
 }

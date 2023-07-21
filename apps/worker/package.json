@@ -8,8 +8,8 @@
 	"dependencies": {
 		"@chronark/zod-bird": "^0.1.1",
 		"@planetscale/database": "^1.8.0",
-		"bullmq": "^4.3.0",
-		"drizzle-orm": "^0.27.0",
+		"bullmq": "^4.6.0",
+		"drizzle-orm": "^0.27.2",
 		"elysia": "latest",
 		"nanoid": "^4.0.2",
 		"db": "workspace:*"
