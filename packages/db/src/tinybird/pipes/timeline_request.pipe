@@ -20,7 +20,7 @@ SQL >
                 customer_id,
                 countMerge(count) as events
             {% if period == 'hourly' %} FROM hourly_req_mv
-            {% else %} FROM day_req_mv
+            {% else %} FROM daily_req_mv
             {% end %} toStart
             WHERE
                 {% if period == 'daily' or period == 'hourly' or not defined(period) %}

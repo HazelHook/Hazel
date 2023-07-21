@@ -1,4 +1,4 @@
-NODE day_req
+NODE daily_req
 SQL >
 
     SELECT
