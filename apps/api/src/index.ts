@@ -1,10 +1,10 @@
 import { Elysia } from "elysia"
 
 import { connectionRouter } from "./routes/connections.route"
-import { authGuard } from "./guard/authGuard"
+import swagger from "@elysiajs/swagger"
 
 const app = new Elysia()
-
+	.use(swagger())
 	.onError(({ code, error, set }) => {
 		let statusCode = 400
 		switch (code) {

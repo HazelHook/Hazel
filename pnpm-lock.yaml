@@ -29,6 +29,15 @@ importers:
 
   apps/api:
     dependencies:
+      '@elysiajs/bearer':
+        specifier: ^0.5.2
+        version: 0.5.2(elysia@0.5.22)
+      '@elysiajs/swagger':
+        specifier: ^0.5.2
+        version: 0.5.2(elysia@0.5.22)
+      db:
+        specifier: workspace:*
+        version: link:../../packages/db
       elysia:
         specifier: latest
         version: 0.5.22(typescript@5.1.6)
@@ -1298,6 +1307,22 @@ packages:
   /@drizzle-team/studio@0.0.1:
     resolution: {integrity: sha512-cHgGezy2ojBFMaU6PZyBkksgFsg2CQ8IRN4mS7WdbA/Zv6xUK6fCNmpEWS/FftbxoA4B8Z0XGnuKsaTJEZsGgA==}
     dev: true
+
+  /@elysiajs/bearer@0.5.2(elysia@0.5.22):
+    resolution: {integrity: sha512-RsTzXbi+gfu9fzXhqXphYTqWF69r7Pvn5JYJYgywFWBYAFJSUQlsGXt9arduA1JWiwZboBePa74e4sCWtBvQbg==}
+    peerDependencies:
+      elysia: '>= 0.5.12'
+    dependencies:
+      elysia: 0.5.22(typescript@5.1.6)
+    dev: false
+
+  /@elysiajs/swagger@0.5.2(elysia@0.5.22):
+    resolution: {integrity: sha512-5LyxGs/J4wrk6xLjn74hFPyCsTnPJlvWa6EBblM1lmoK6e7Rl2d5IFf6i+f30+Nye5isoWkRnuLB3qeNqVBgYA==}
+    peerDependencies:
+      elysia: '>= 0.5.12'
+    dependencies:
+      elysia: 0.5.22(typescript@5.1.6)
+    dev: false
 
   /@emmetio/abbreviation@2.3.3:
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}

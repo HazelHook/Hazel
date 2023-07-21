@@ -7,6 +7,7 @@
 	},
 	"dependencies": {
 		"@elysiajs/bearer": "^0.5.2",
+		"@elysiajs/swagger": "^0.5.2",
 		"db": "workspace:*",
 		"elysia": "latest"
 	},

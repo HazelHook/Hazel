@@ -5,6 +5,7 @@
 		"dark": "/logo/dark.svg",
 		"light": "/logo/light.svg"
 	},
+	"openapi": "http://localhost:3006/swagger",
 	"favicon": "/favicon.png",
 	"colors": {
 		"primary": "#12A7D3",
