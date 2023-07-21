@@ -6,8 +6,9 @@ export type Message = {
 	sourceId: string
     responseId: string
     query: Record<string, string>
-	data: any
 	headers: Record<string, string>
+	data: any
+    url: string
 	received_at: Date
     response_at: Date
     send_at: Date

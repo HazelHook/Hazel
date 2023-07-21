@@ -29,6 +29,7 @@ export async function forwardToDevServer({
 					send_at: results.find(r => r.destinationId === d.publicId)?.send_at,
 					response_at: results.find(r => r.destinationId === d.publicId)?.response_at,
 					status: results.find(r => r.destinationId === d.publicId)?.status,
+					url: d.url,
 				})),
 				sourceId,
 				query: queryString,

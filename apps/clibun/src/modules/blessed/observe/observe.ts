@@ -2,42 +2,18 @@ import blessed from 'blessed';
 import { Module, UserData } from '../../module.js';
 import { customTable } from '../components/table.js';
 import { observeWebhook } from './observe-webhook.js';
+import { Text } from '../components/text.js';
 
 export function getObserveMenu(data: UserData, module: Module, rerender: (box: blessed.Widgets.BoxElement) => void) {
     const box = blessed.box({
-        padding: {
-            left: 1,
-            right: 1,
-        },
-        tags: true,
-        keys: true,
-        vi: true,
-        alwaysScroll:true,
-        scrollable: true,
-        mouse: true,
-        scrollbar: {
-            ch: " ",
-            track: {
-                bg: "gray",
-            },
-            style: {
-                inverse: true,
-            },
-        },
-        style: {
-            fg: "white",
-        },
-        align: "center"
+        width: "100%",
+        height: "100%",
     })
 
-    const title = blessed.text({
+    box.append(Text({
         content: "Select the destination you want to observe.",
-        tags: true,
-        style: {
-            fg: "white",
-        },
-    })
-    box.append(title)
+        variant: "title"
+    }))
 
     const destinationTable: string[][] = []
     for(const d of data.destinations){
@@ -53,17 +29,5 @@ export function getObserveMenu(data: UserData, module: Module, rerender: (box: b
     table.top = 3
 
     box.append(table)
-
-    const screenBox = blessed.box({
-        width: "100%",
-        height: "100%",
-        top: 0,
-        left: 0,
-        tags: true,
-        style: {
-            fg: "white",
-        },
-    })
-    screenBox.append(box)
-    rerender(screenBox)
+    rerender(box)
 }

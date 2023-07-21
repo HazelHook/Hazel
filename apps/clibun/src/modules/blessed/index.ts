@@ -66,8 +66,10 @@ export class BlessedModule extends Module {
 			this.client.setToken(token)
 			this.screen.append(
 				blessed.box({
-					top: "center",
-					left: "center",
+					width: "100%",
+					height: "100%",
+					align: "center",
+					valign: "middle",
 					content: "Loading...",
 					tags: true,
 					style: {

@@ -22,6 +22,7 @@ export function handleWebsocketRequestEvent(event: WebsocketRequestEvent) {
 			requestId: deserialized.requestId,
 			method: deserialized.method,
 			sourceId: deserialized.sourceId,
+			url: deserialized.url,
 			responseId: deserialized.responseId,
 			data: JSON.parse(deserialized.body),
 			headers: deserialized.headers,

@@ -1,5 +1,6 @@
 import portfinder from "portfinder"
 import { exec } from "child_process"
+import clipboard from "clipboardy"
 
 export const getUnusedPort = async () => {
 	try {
@@ -29,4 +30,18 @@ export const getUnusedPort = async () => {
 
 export function openInBrowser(url: string) {
 	exec(`open "${url}"`)
+}
+
+export function copyToClipboard(text: string) {
+	clipboard.writeSync(text)
+}
+
+export function maxStringLength(element: string[]) {
+	let max = 0
+	for (const e of element) {
+		if (e.length > max) {
+			max = e.length
+		}
+	}
+	return max
 }
