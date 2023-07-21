@@ -1,4 +1,4 @@
-TOKEN "untitled_pipe_9959_endpoint_read_0393" READ
+TOKEN "res_timeline_endpoint_read_8918" READ
 
 NODE endpoint
 SQL >
@@ -18,10 +18,11 @@ SQL >
                 {% end %} date,
                 source_id,
                 customer_id,
+                status,
                 countMerge(count) as events
-            {% if period == 'hourly' %} FROM hourly_req_mv
-            {% else %} FROM daily_req_mv
-            {% end %} toStart
+            {% if period == 'hourly' %} FROM hourly_res_mv
+            {% else %} FROM daily_res_mv
+            {% end %}
             WHERE
                 {% if period == 'daily' or period == 'hourly' or not defined(period) %}
                     bucket >= {{ DateTime(start_date, required=True) }}
@@ -42,12 +43,12 @@ SQL >
                 = {{
                     String(
                         customer_id,
-                        "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
+                        "cus_8NiWC2t_SZVKALuy",
                         description="Customer ID",
                         required=True,
                     )
                 }}
-            GROUP BY bucket, source_id, customer_id, count
+            GROUP BY bucket, source_id, customer_id, status, count
             ORDER BY bucket
 
 

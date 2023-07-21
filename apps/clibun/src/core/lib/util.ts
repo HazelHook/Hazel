@@ -1,4 +1,5 @@
 import portfinder from "portfinder"
+import { exec } from "child_process"
 
 export const getUnusedPort = async () => {
 	try {
@@ -24,4 +25,8 @@ export const getUnusedPort = async () => {
 		console.error(e)
 		throw new Error("Failed to find unused port. Please free a port in range 38404:38414.")
 	}
+}
+
+export function openInBrowser(url: string) {
+	exec(`open "${url}"`)
 }
