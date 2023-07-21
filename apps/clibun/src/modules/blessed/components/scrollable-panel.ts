@@ -6,8 +6,8 @@ export function ScrollablePanel({
     top = 0,
     left = 0,
 }: {
-    top: number,
-    left: number,
+    top: number | string,
+    left: number | string,
     width: number | string,
     height: number | string,
 }) {

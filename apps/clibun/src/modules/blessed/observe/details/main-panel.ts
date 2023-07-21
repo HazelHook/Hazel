@@ -1,7 +1,7 @@
 
 
 
-import { prettyTimestamp } from "../../../../core/lib/print-util.js"
+import { prettyTimestamp, renderList } from "../../../../core/lib/print-util.js"
 import { maxStringLength } from "../../../../core/lib/util.js"
 import { Message } from "../../../module.js"
 import { ScrollablePanel } from "../../components/scrollable-panel.js"
@@ -58,11 +58,4 @@ function renderDetails(message: Message){
     const query = renderList(message.query)
 
     return `Request details\n\n${request}\n\nQuery Params\n\n${query}`
-}
-
-function renderList(data: Record<string, string>){
-    const longest = maxStringLength(Object.keys(data)) + 1
-    return Object.keys(data)
-        .map((key) => `${key.padEnd(longest)}: ${data[key]}`)
-        .join("\n")
 }

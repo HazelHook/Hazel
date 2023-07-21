@@ -6,11 +6,13 @@ export function ScrollableList({
     onSelect,
     selected,
     placeholder,
+    noSelectColor,
 }: {
     items: string[],
     onSelect: (item: string, index: number) => void,
     selected?: number,
     placeholder?: string,
+    noSelectColor?: boolean,
 }) {
     const width = maxStringLength([...items, placeholder ?? "..."])
 
