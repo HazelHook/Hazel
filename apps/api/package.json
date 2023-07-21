@@ -9,6 +9,7 @@
 		"@elysiajs/bearer": "^0.5.2",
 		"@elysiajs/swagger": "^0.5.2",
 		"@upstash/ratelimit": "0.4.3",
+		"@upstash/redis": "^1.22.0",
 		"db": "workspace:*",
 		"elysia": "latest"
 	},

@@ -30,6 +30,10 @@ const app = new Elysia()
 			set.status = 401
 		}
 
+		if (error.message === "Ratelimit") {
+			set.status = 429
+		}
+
 		return new Response(error.message, { status: statusCode, statusText: error.cause as string })
 	})
 	.get("/", () => "Hello Elysia")

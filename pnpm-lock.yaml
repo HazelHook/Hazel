@@ -31,23 +31,26 @@ importers:
     dependencies:
       '@elysiajs/bearer':
         specifier: ^0.5.2
-        version: 0.5.2(elysia@0.5.22)
+        version: 0.5.2(elysia@0.5.23)
       '@elysiajs/swagger':
         specifier: ^0.5.2
-        version: 0.5.2(elysia@0.5.22)
+        version: 0.5.2(elysia@0.5.23)
       '@upstash/ratelimit':
         specifier: 0.4.3
         version: 0.4.3
+      '@upstash/redis':
+        specifier: ^1.22.0
+        version: 1.22.0
       db:
         specifier: workspace:*
         version: link:../../packages/db
       elysia:
         specifier: latest
-        version: 0.5.22(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+        version: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
     devDependencies:
       bun-types:
         specifier: latest
-        version: 0.6.14
+        version: 0.7.0
 
   apps/backend:
     dependencies:
@@ -71,10 +74,10 @@ importers:
         version: link:../../packages/db
       drizzle-orm:
         specifier: ^0.27.0
-        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.6.14)
+        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.0)
       elysia:
         specifier: latest
-        version: 0.5.22(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+        version: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
       nanoid:
         specifier: ^4.0.2
         version: 4.0.2
@@ -84,7 +87,7 @@ importers:
     devDependencies:
       bun-types:
         specifier: latest
-        version: 0.6.14
+        version: 0.7.0
 
   apps/clibun:
     dependencies:
@@ -384,31 +387,22 @@ importers:
 
   apps/worker:
     dependencies:
-      '@chronark/zod-bird':
-        specifier: ^0.1.1
-        version: 0.1.1
-      '@planetscale/database':
-        specifier: ^1.8.0
-        version: 1.8.0
       bullmq:
-        specifier: ^4.3.0
-        version: 4.3.0
+        specifier: ^4.6.0
+        version: 4.6.0
       db:
         specifier: workspace:*
         version: link:../../packages/db
-      drizzle-orm:
-        specifier: ^0.27.0
-        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.6.14)
-      elysia:
-        specifier: latest
-        version: 0.5.22(@sinclair/typebox@0.29.4)(typescript@5.1.6)
       nanoid:
         specifier: ^4.0.2
         version: 4.0.2
+      zod:
+        specifier: ^3.21.4
+        version: 3.21.4
     devDependencies:
       bun-types:
         specifier: latest
-        version: 0.6.14
+        version: 0.7.0
 
   packages/db:
     dependencies:
@@ -420,7 +414,7 @@ importers:
         version: 1.8.0
       drizzle-orm:
         specifier: ^0.27.2
-        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.6.14)
+        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.0)
       drizzle-zod:
         specifier: ^0.4.4
         version: 0.4.4(drizzle-orm@0.27.2)(zod@3.21.4)
@@ -435,11 +429,8 @@ importers:
         specifier: ^16.3.1
         version: 16.3.1
       drizzle-kit:
-        specifier: ^0.19.5
-        version: 0.19.5
-      ts-node:
-        specifier: ^10.9.1
-        version: 10.9.1(@types/node@20.4.2)(typescript@5.1.6)
+        specifier: ^0.19.10
+        version: 0.19.10
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -1304,24 +1295,24 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@drizzle-team/studio@0.0.1:
-    resolution: {integrity: sha512-cHgGezy2ojBFMaU6PZyBkksgFsg2CQ8IRN4mS7WdbA/Zv6xUK6fCNmpEWS/FftbxoA4B8Z0XGnuKsaTJEZsGgA==}
+  /@drizzle-team/studio@0.0.5:
+    resolution: {integrity: sha512-ps5qF0tMxWRVu+V5gvCRrQNqlY92aTnIKdq27gm9LZMSdaKYZt6AVvSK1dlUMzs6Rt0Jm80b+eWct6xShBKhIw==}
     dev: true
 
-  /@elysiajs/bearer@0.5.2(elysia@0.5.22):
+  /@elysiajs/bearer@0.5.2(elysia@0.5.23):
     resolution: {integrity: sha512-RsTzXbi+gfu9fzXhqXphYTqWF69r7Pvn5JYJYgywFWBYAFJSUQlsGXt9arduA1JWiwZboBePa74e4sCWtBvQbg==}
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.5.22(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+      elysia: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
     dev: false
 
-  /@elysiajs/swagger@0.5.2(elysia@0.5.22):
+  /@elysiajs/swagger@0.5.2(elysia@0.5.23):
     resolution: {integrity: sha512-5LyxGs/J4wrk6xLjn74hFPyCsTnPJlvWa6EBblM1lmoK6e7Rl2d5IFf6i+f30+Nye5isoWkRnuLB3qeNqVBgYA==}
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.5.22(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+      elysia: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
     dev: false
 
   /@emmetio/abbreviation@2.3.3:
@@ -4558,8 +4549,23 @@ packages:
       - supports-color
     dev: false
 
-  /bun-types@0.6.14:
-    resolution: {integrity: sha512-sRdvu+t59+H/TVOe7FSGFWYITbqkhiCx9NxVUHt2+JOXM9gUOe5uMPvVvcr/hGngnh+/yb5a7uPE4JaS6uxujg==}
+  /bullmq@4.6.0:
+    resolution: {integrity: sha512-RVJSC/DhruJpSoIWYS69NMZ+qTVZpWF4fZ9WKxP9QqY7WHK6Hbm+S5D7W4XN1HAExIGHTmWYZMiqKnBgxEi9XA==}
+    dependencies:
+      cron-parser: 4.8.1
+      glob: 8.1.0
+      ioredis: 5.3.2
+      lodash: 4.17.21
+      msgpackr: 1.9.5
+      semver: 7.5.4
+      tslib: 2.6.0
+      uuid: 9.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /bun-types@0.7.0:
+    resolution: {integrity: sha512-jXFiYtwSUQtD/Y3LHRWeWNwhFaUYvcO96zI7y3gSPgTq+ozxXpuTGDxABLdIKmFc672Q7Qp/OgrfJFEjg4Mnkg==}
 
   /bundle-name@3.0.0:
     resolution: {integrity: sha512-PKA4BeSvBpQKQ8iPOGCSiell+N8P+Tf1DlwqmYhpe2gAhKPHn8EYOxVT+ShuGmhg8lN8XiSlS80yiExKXrURlw==}
@@ -5435,11 +5441,11 @@ packages:
       wordwrap: 1.0.0
     dev: true
 
-  /drizzle-kit@0.19.5:
-    resolution: {integrity: sha512-eX+M4QpPLbbZwLUamCxRhS9Y98ppZLk3jew2FghKoAr7bGEC3omFIm+YPiwtrhe/alZZgrJCn/1TDTRHwo1r9w==}
+  /drizzle-kit@0.19.10:
+    resolution: {integrity: sha512-v7bd+7YUO3NJJTY7hwt9k+DPJVw+31iejG/ztkvNS0hK8zWjJvA6NAECYZVswKQ+efCjzLgPCx+I9X105Zqt6Q==}
     hasBin: true
     dependencies:
-      '@drizzle-team/studio': 0.0.1
+      '@drizzle-team/studio': 0.0.5
       '@esbuild-kit/esm-loader': 2.5.5
       camelcase: 7.0.1
       chalk: 5.3.0
@@ -5455,7 +5461,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.27.2(@planetscale/database@1.8.0)(bun-types@0.6.14):
+  /drizzle-orm@0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.0):
     resolution: {integrity: sha512-ZvBvceff+JlgP7FxHKe0zOU9CkZ4RcOtibumIrqfYzDGuOeF0YUY0F9iMqYpRM7pxnLRfC+oO7rWOUH3T5oFQA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -5518,7 +5524,7 @@ packages:
         optional: true
     dependencies:
       '@planetscale/database': 1.8.0
-      bun-types: 0.6.14
+      bun-types: 0.7.0
     dev: false
 
   /drizzle-zod@0.4.4(drizzle-orm@0.27.2)(zod@3.21.4):
@@ -5527,7 +5533,7 @@ packages:
       drizzle-orm: '>=0.23.13'
       zod: '*'
     dependencies:
-      drizzle-orm: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.6.14)
+      drizzle-orm: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.0)
       zod: 3.21.4
     dev: false
 
@@ -5549,8 +5555,8 @@ packages:
     resolution: {integrity: sha512-L6uRgvZTH+4OF5NE/MBbzQx/WYpru1xCBE9respNj6qznEewGUIfhzmm7horWWxbNO2M0WckQypGctR8lH79xQ==}
     dev: false
 
-  /elysia@0.5.22(@sinclair/typebox@0.29.4)(typescript@5.1.6):
-    resolution: {integrity: sha512-CEqgUdqvDB/cBKLna3SgBKOnrzi6U5tDqcvgzXFYwRm0qI1vRNte8AOVEW7FmwbEn5wSXcxn0l0LLm9M+lm2Vw==}
+  /elysia@0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6):
+    resolution: {integrity: sha512-y174lgobsKDjk6dFTznydxIJZwVq99FrFo3fHwYJ8n0R7YAWo51JJLJS1rjTfVL//J2Rca42ooCgSSTpO+EGfw==}
     peerDependencies:
       '@elysiajs/fn': '*'
       '@sinclair/typebox': '>= 0.28.10'

@@ -2,6 +2,7 @@ import bearer from "@elysiajs/bearer"
 import Elysia from "elysia"
 
 import db from "db/src/drizzle"
+import { ratelimit } from "./ratelimit.guard"
 
 export const authGuard = (app: Elysia) =>
 	app.use(bearer()).derive(async ({ bearer }) => {
@@ -13,6 +14,12 @@ export const authGuard = (app: Elysia) =>
 
 		if (!apiKey) {
 			throw new Error("Unauthorized")
+		}
+
+		const { success } = await ratelimit.limit(apiKey.customerId)
+
+		if (!success) {
+			throw new Error("Ratelimit")
 		}
 
 		return {
