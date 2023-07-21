@@ -1,5 +1,5 @@
 import { prettyTimestamp } from "../../../core/lib/print-util.js";
-import { openInBrowser } from "../../../core/lib/util.js";
+import { copyToClipboard, openInBrowser } from "../../../core/lib/util.js";
 import { Message, Module, UserData } from "../../module.js";
 import blessed from "blessed"
 
@@ -28,6 +28,7 @@ const uniques: Message[] = [
         received_at: new Date(1689607812776),
         response_at: new Date(1689607812776),
         send_at: new Date(1689607812776),
+        url: "http://localhost:3003",
         status: 200,
         requestId: "req_QhHhMpmTC4rWVoaFolMhQ",
         sourceId: "Kombo",
@@ -65,6 +66,7 @@ const uniques: Message[] = [
         received_at: new Date(1689607812776),
         response_at: new Date(1689607812776),
         send_at: new Date(1689607812776),
+        url: "http://localhost:3003",
         status: 200,
         requestId: "req_QhHhMpmTCsdklk2olMhQ",
         sourceId: "Stripe",
@@ -110,7 +112,6 @@ for (let i = 0; i < 25; i++) {
 
 
 function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed.Widgets.BoxElement) => void): blessed.Widgets.BoxElement {
-
     const requestList = blessed.list({
         padding: {
             left: 1,
@@ -221,7 +222,7 @@ function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed
 
     })
 
-    const statusColor = message.status >= 200 && message.status < 300 ? "green" : message.status >= 300 && message.status < 400 ? "yellow" : "red"
+    const statusColor = message ? (message.status >= 200 && message.status < 300 ? "green" : message.status >= 300 && message.status < 400 ? "yellow" : "red") : "gray"
     navbar.append(blessed.box({
         left: width - 1,
         width: `100%-${width}`,
@@ -230,7 +231,7 @@ function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed
         tags: true,
         content: messages.length === 0 ? '' : `${message.method}  ${
             message.send_at.getTime() - message.received_at.getTime()
-        } ms  {${statusColor}-fg}200 OK{/${statusColor}-fg}`,
+        } ms  {${statusColor}-fg}${message.status} OK{/${statusColor}-fg}`,
         style: {
             fg: "gray",
         },
@@ -311,9 +312,8 @@ function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed
 
     const controls = [
         "Dashboard",
-        "Retry Request",
         "Copy cURL",
-        "Copy Body",
+        "Copy body",
     ]
     const controlBar = blessed.box({
         top: "100%-3",
@@ -355,6 +355,15 @@ function buildMessageBox(data: UserData, module: Module, rerender: (box: blessed
         menuItem.on("click", () => {
             if (item === "Dashboard") {
                 openInBrowser(`http://localhost:3001/request/${message.requestId}`)
+            } else if(item === "Copy cURL"){
+                const curl = `curl -X ${message.method} "${message.url}?${
+                    Object.entries(message.query).map(([key, value]) => `${key}=${value}`).join("&")
+                }" ${
+                    Object.entries(message.headers).map(([key, value]) => `-H "${key}: ${value}"`).join(" ")
+                } -d '${JSON.stringify(message.data)}'`
+                copyToClipboard(curl)
+            } else if(item === "Copy body"){
+                copyToClipboard(JSON.stringify(message.data))
             }
         })
 
