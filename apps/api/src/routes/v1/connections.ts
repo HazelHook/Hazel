@@ -1,12 +1,10 @@
 import Elysia, { t } from "elysia"
-import { authGuard } from "../guard/authGuard"
+import { authGuard } from "../../guard/authGuard"
 
 import db from "db/src/drizzle"
 
 export const connectionRouter = (app: Elysia) =>
-	app.use(authGuard)
-
-	.group("connections", (app) =>
+	app.use(authGuard).group("connections", (app) =>
 		app
 			.get("/", async ({ workspace_id }) => {
 				const connections = await db.connection.getMany({ customerId: workspace_id })
@@ -60,7 +58,19 @@ export const connectionRouter = (app: Elysia) =>
 				const connection = await db.connection.getOne({ publicId: params.id })
 				return connection
 			})
-			.put("/:id", () => {})
+			.put(
+				"/:id",
+				async ({ params, body }) => {
+					const res = await db.connection.update({ publicId: params.id, ...body })
+					return res
+				},
+				{
+					body: t.Object({
+						name: t.Optional(t.String({ maxLength: 15, minLength: 3 })),
+						url: t.Optional(t.String()),
+					}),
+				},
+			)
 			.delete("/:id", async ({ params }) => {
 				const res = await db.connection.markAsDeleted({ publicId: params.id })
 				return res

@@ -98,7 +98,7 @@ export function connectDB({
 
 				return { res, publicId }
 			},
-			update: async (data: schema.InsertSource) => {
+			update: async (data: OptionalExceptFor<schema.InsertSource, "publicId">) => {
 				const { publicId, ...rest } = data
 				const res = await db.update(schema.source).set(rest).where(eq(schema.source.publicId, publicId))
 

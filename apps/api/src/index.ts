@@ -1,6 +1,6 @@
 import { Elysia } from "elysia"
 
-import { connectionRouter } from "./routes/connections.route"
+import { connectionRouter } from "./routes/v1/connections"
 import swagger from "@elysiajs/swagger"
 
 const app = new Elysia()
@@ -33,7 +33,8 @@ const app = new Elysia()
 		return new Response(error.message, { status: statusCode, statusText: error.cause as string })
 	})
 	.get("/", () => "Hello Elysia")
-	.use(connectionRouter)
+	.group("v1", (app) => app.use(connectionRouter))
+
 	.listen(3006)
 
 console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`)
