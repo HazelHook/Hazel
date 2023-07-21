@@ -1,4 +1,4 @@
-NODE day_req
+NODE daily_req
 SQL >
 
     SELECT
@@ -13,6 +13,6 @@ SQL >
         customer_id
 
 TYPE materialized
-DATASOURCE day_req_mv
+DATASOURCE daily_req_mv
 
 

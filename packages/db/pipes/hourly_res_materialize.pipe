@@ -1,0 +1,17 @@
+NODE hourly_res
+SQL >
+
+    SELECT
+        toStartOfHour(timestamp) AS bucket,
+        customer_id,
+        source_id,
+        status,
+        countState() AS count
+    FROM response_events
+    GROUP BY
+        bucket,
+        source_id,
+        customer_id,
+        status
+
+

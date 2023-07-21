@@ -1,12 +1,13 @@
-import { AxiosInstance } from "axios"
-import { storeToken } from "../token.js"
-import { Request, Response } from "express"
+import { Request, Response } from "express";
+import { storeToken } from "../lib/auth-token.js";
+import { RequestClient } from "../lib/request-client.js";
 
-export const oauthCallback = (client: AxiosInstance, onSuccess: () => void) => async (req: Request, res: Response) => {
-	res.writeHead(200, {
-		"Content-Type": "text/html",
-	})
-	res.end(`
+
+export const handleOAuthCallback = (client: RequestClient, onSuccess: () => void) => async (req: Request, res: Response) => {
+  res.writeHead(200, {
+    "Content-Type": "text/html",
+  });
+  res.end(`
 		<!DOCTYPE html>
 		<html lang="en">
 		<head>
@@ -38,20 +39,20 @@ export const oauthCallback = (client: AxiosInstance, onSuccess: () => void) => a
 		</body>
 		</html>
 		
-		`)
+		`);
 
-	const code = req.query["code"]
-	const token = await client.post(`http://127.0.0.1:3003/v1/oauth-token/${process.env["PORT"]}`, {
-		token: code,
-		token_type: "code",
-	})
+  const code = req.query["code"];
 
-	await storeToken({
-		access_token: token.data.access_token,
-		refresh_token: token.data.refresh_token,
-		expires_in: token.data.expires_in,
-	})
+  // Call the backend to convert the code to a token
+  const token = await client.post(
+    `/v1/cli/token/${process.env["PORT"]}`,
+    {
+      token: code,
+      token_type: "code",
+    },
+  );
 
-	onSuccess()
-	return
+  await storeToken(token);
+
+  onSuccess();
 }
