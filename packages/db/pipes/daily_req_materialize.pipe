@@ -12,7 +12,4 @@ SQL >
         source_id,
         customer_id
 
-TYPE materialized
-DATASOURCE daily_req_mv
-
 
