@@ -12,8 +12,26 @@ export interface FooterItem {
 export interface Integration {
 	name: string
 	description: string
-	logoPath: `/images/assets/integrations/${string}`
+	id:
+		| "hmac"
+		| "basic_auth"
+		| "api_key"
+		| "stripe"
+		| "github"
+		| "shopify"
+		| "gitlab"
+		| "linear"
+		| "postmark"
+		| "typeform"
+		| "mailgun"
+		| "sendgrid"
+		| "resend"
+		| "ayden"
+		| "jira"
+		| "svix"
 	url: string
+	categories: string[]
+	features: string[]
 }
 
 export interface AppConfig {

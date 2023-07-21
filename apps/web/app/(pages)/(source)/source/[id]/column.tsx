@@ -8,10 +8,6 @@ import { Destination } from "db/src/drizzle/schema"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
-import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 export type Column = Destination
@@ -24,7 +20,7 @@ export const columns: ColumnDef<Column>[] = [
 			const publicId = cell.getValue() as string
 
 			return (
-				<div className="flex flex-row gap-1">
+				<div className="flex flex-row gap-1 w-full">
 					<Link href={`/destination/${publicId}`}>
 						<Badge variant="secondary">
 							<Avatar className="w-3 h-3 mr-2">
@@ -38,24 +34,6 @@ export const columns: ColumnDef<Column>[] = [
 		},
 	},
 	{
-		accessorKey: "publicId",
-		header: ({ column }) => {
-			return (
-				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-					Group
-					{column.getIsSorted() === "asc" ? (
-						<ArrowUpIcon className="ml-2 h-4 w-4" />
-					) : (
-						<ArrowDownIcon className="ml-2 h-4 w-4" />
-					)}
-				</Button>
-			)
-		},
-		cell: ({ cell }) => {
-			return <p>-</p>
-		},
-	},
-	{
 		accessorKey: "id",
 		header: "Status",
 		cell: ({ cell }) => {
@@ -64,13 +42,6 @@ export const columns: ColumnDef<Column>[] = [
 					<CheckTickIcon className="w-4 h-4 mr-2" />
 				</Badge>
 			)
-		},
-	},
-	{
-		accessorKey: "id",
-		header: "Enabled",
-		cell: ({ cell }) => {
-			return <Switch />
 		},
 	},
 ]

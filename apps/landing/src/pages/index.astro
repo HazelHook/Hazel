@@ -5,14 +5,13 @@ import CLI from "@/components/landing/CLI.astro";
 import Contact from "@/components/landing/Contact.astro";
 import Hero from "@/components/landing/Hero.astro";
 import LogoCloud from "@/components/landing/LogoCloud.astro";
-import Pricing from "@/components/landing/Pricing.astro";
-import Testimonials from "@/components/landing/Testimonials.astro";
+import { Pricing } from "@/components/landing/Pricing.tsx";
 import { Integrations } from "@/components/react/Integrations";
 ---
 
 <AstroSeo
   title="HazelHooks"
-  description="TODO:"
+  description="Webhooks made simple."
   canonical="https://www.hazelhook.dev"
   openGraph={{
     url: "https://www.hazelhook.dev",
@@ -49,9 +48,9 @@ import { Integrations } from "@/components/react/Integrations";
   <LogoCloud />
   <!-- <FeatureTwelve />
   <FeatureNine /> -->
-  <Integrations client:load />
+  <Integrations client:idle />
   <CLI />
-  <Testimonials />
-  <Pricing />
+  <!-- <Testimonials /> -->
+  <Pricing client:idle />
   <Contact />
 </BaseLayout>

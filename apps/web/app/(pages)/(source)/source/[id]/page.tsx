@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
 import { sub } from "date-fns"
@@ -7,7 +6,6 @@ import { Tiny } from "db/src/tinybird"
 
 import { getCachedSource } from "@/lib/orm"
 import { chartColors, formatDateTime } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 import { DataTable } from "@/components/ui/data-table"
@@ -51,11 +49,14 @@ const SourcePage = async ({
 				</div>
 			</div>
 			<div className="flex flex-row gap-2 w-full">
-				<DataTable
-					rootPath="/destination"
-					columns={columns}
-					data={(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []}
-				/>
+				<div className="min-w-max">
+					<DataTable
+						rootPath="/destination"
+						columns={columns}
+						data={(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []}
+					/>
+				</div>
+
 				<div className="w-full">
 					<Card className="col-span-full w-full h-full overflow-hidden">
 						<CardHeader>

@@ -1,9 +1,10 @@
 import { MagicCard, MagicContainer } from "@/components/react/ui/MagicCard"
 import { Meteors } from "@/components/react/ui/Meteors"
 import { appConfig } from "@/lib/app"
-import { Integration } from "@/lib/app.types"
-import { AnimatePresence, animate, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useState } from "react"
+import { GridPattern } from "./ui/GridPattern"
+import { twMerge } from "tailwind-merge"
 
 function chunk<T>(arr: T[], size: number): T[][] {
 	return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size))
@@ -36,7 +37,7 @@ export const Integrations = () => {
 		}
 	}
 	return (
-		<section className="hidden sm:block lg:p-8">
+		<section className="hidden sm:block">
 			<div className="mx-auto 2xl:max-w-7xl py-12 lg:px-16 md:px-12 px-8 xl:px-40 items-center w-full">
 				<div className="mb-4 lg:mb-0">
 					<span className="text-accent-400" data-aos="fade-down">
@@ -44,7 +45,7 @@ export const Integrations = () => {
 					</span>
 					<h2 data-aos="fade-down" className="text-3xl tracking-tighter mt-6 font-light lg:text-4xl text-white">
 						Easily integrates
-						<span className="md:block text-zinc-400">with all your providers</span>
+						<span className="md:block text-zinc-400 ml-2 md:ml-0">with all your providers</span>
 					</h2>
 					<p className="mt-4 text-base text-white max-w-md" data-aos="fade-down" data-aos-delay="100">
 						Easily validate webhooks automatically by using one of our integrations. If one is still missing just let us
@@ -104,14 +105,12 @@ export const Integrations = () => {
 							</div>
 						</div>
 						<div
-							className="flex gap-3 relative overflow-x-scroll pb-24 pt-12 scrollbar-hide snap-mandatory snap-x w-full"
+							className="flex gap-2 mx-[-100px] relative overflow-hidden pb-24 pt-12 scrollbar-hide snap-mandatory snap-x"
 							role="listbox"
 							aria-labelledby="carousel-content-label"
 						>
 							{
-								<MagicContainer
-									update={page}
-									as={motion.div}
+								<motion.div
 									drag="x"
 									dragConstraints={{ left: 0, right: 0 }}
 									dragElastic={1}
@@ -124,54 +123,66 @@ export const Integrations = () => {
 											handlePrevious()
 										}
 									}}
-									// animate={{ x: `-${page * 100}%` }}
-									// transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-									className={
-										"group grid grid-flow-col gap-3 group h-full min-h-[150px] md:min-h-[250px] w-full grid-cols-4 md:grid-cols-4"
-									}
+									animate={{ x: `-${page * 100}%` }}
+									transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+									className="flex gap-2 "
 								>
-									{chunkedIntegrations[page].map((integration, index) => (
-										<MagicCard
-											data-aos="fade-down"
-											key={integration.name + index}
-											className="cursor-pointer bg-ebony shadow-inset rounded-3xl p-4"
+									{chunkedIntegrations.map((chunk, index) => (
+										<div
+											key={`chunk-${index}`}
+											className="items-center justify-center w-full flex flex-col shrink-0 snap-start"
 										>
-											<div className="relative h-full flex flex-col justify-between">
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													className="icon icon-tabler icon-tabler-circle-check text-white"
-													width="16"
-													height="16"
-													viewBox="0 0 24 24"
-													strokeWidth="2"
-													stroke="currentColor"
-													fill="none"
-													strokeLinecap="round"
-													strokeLinejoin="round"
-												>
-													<title>Icon</title>
-													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-													<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-													<path d="M9 12l2 2l4 -4" />
-												</svg>
-												<div className="md:mt-24">
-													<div className="flex flex-row gap-2 items-center mb-1">
-														<img
-															className="w-8 h-8"
-															alt={`${integration.name} Logo`}
-															src={integration.logoPath}
-															width={32}
-															height={32}
-														/>
-														<p className="font-semibold text-lg leading-6 text-white">{integration.name}</p>
-													</div>
-													<p className="text-xs mt-2 text-zinc-300 hidden md:block">{integration.description}</p>
-												</div>
-												<Meteors className="opacity-20 group-hover:opacity-100 transition-opacity duration-700" />
+											<div className="grid grid-cols-1 lg:grid-cols-4 gap-2 group h-full">
+												{chunk.map((integration, index) => (
+													<MagicContainer update={page} className="h-[250px] min-w-[250px]" key={integration.id}>
+														<MagicCard
+															isolated={false}
+															data-aos="fade-down"
+															key={integration.name + index}
+															className="cursor-pointer bg-ebony shadow-inset rounded-3xl p-4"
+														>
+															<div className="relative h-full flex flex-col justify-between">
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	className="icon icon-tabler icon-tabler-circle-check text-white"
+																	width="16"
+																	height="16"
+																	viewBox="0 0 24 24"
+																	strokeWidth="2"
+																	stroke="currentColor"
+																	fill="none"
+																	strokeLinecap="round"
+																	strokeLinejoin="round"
+																>
+																	<title>Icon</title>
+																	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																	<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+																	<path d="M9 12l2 2l4 -4" />
+																</svg>
+																<div className="md:mt-24">
+																	<div className="flex flex-row gap-2 items-center mb-1">
+																		<img
+																			className="w-8 h-8"
+																			alt={`${integration.name} Logo`}
+																			src={`/images/assets/integrations/${integration.id}.svg`}
+																			width={32}
+																			height={32}
+																		/>
+																		<p className="font-semibold text-lg leading-6 text-white">{integration.name}</p>
+																	</div>
+																	<p className="text-xs mt-2 text-zinc-300 hidden md:block">
+																		{integration.description}
+																	</p>
+																</div>
+																<Meteors className="opacity-20 group-hover:opacity-100 transition-opacity duration-700" />
+															</div>
+														</MagicCard>
+													</MagicContainer>
+												))}
 											</div>
-										</MagicCard>
+										</div>
 									))}
-								</MagicContainer>
+								</motion.div>
 							}
 						</div>
 					</div>

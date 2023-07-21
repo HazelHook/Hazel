@@ -2,17 +2,13 @@
 
 import Link from "next/link"
 import { ColumnDef } from "@tanstack/react-table"
-import { TRPC_ERROR_CODE_NUMBER, TRPCResponse } from "@trpc/server/rpc"
 import { Destination } from "db/src/drizzle/schema"
 import { Connection } from "reactflow"
-import { typeToFlattenedError } from "zod"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
-import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { DestinationsActions } from "@/app/(pages)/(destination)/_components/DestinationsActions"
@@ -33,23 +29,36 @@ export const columns: (
 				<Link
 					prefetch={false}
 					href={`/destination/${row.original.publicId}`}
-					className="flex flex-row items-center ml-4"
+					className={buttonVariants({ variant: "ghost", className: "flex flex-row gap-2 items-center" })}
 				>
-					<Avatar className="w-4 h-4 mr-2">
+					<Avatar className="w-4 h-4">
 						<AvatarImage src={getSeededProfileImageUrl(row.original.publicId)} />
 					</Avatar>
-					<Button variant="link">{cell.getValue<string>()}</Button>
+					{cell.getValue<string>()}
 				</Link>
 			)
 		},
 	},
 	{
-		accessorKey: "group",
-		header: ({ column }) => {
-			return <SortableHeader name={"Group"} column={column} />
-		},
-		cell: ({ cell }) => {
-			return <p>-</p>
+		accessorKey: "connections",
+		header: "Connected Sources",
+		cell: ({ row }) => {
+			const connections = row.original.connections
+
+			return (
+				<div className="flex flex-row gap-1">
+					{connections.map((connection) => (
+						<Link key={connection.sourceId} href={`/source/${connection.source.publicId}`}>
+							<Badge variant="secondary">
+								<Avatar className="w-3 h-3 mr-2">
+									<AvatarImage src={getSeededProfileImageUrl(connection.source.publicId)} />
+								</Avatar>
+								{connection.source.name}
+							</Badge>
+						</Link>
+					))}
+				</div>
+			)
 		},
 	},
 	{

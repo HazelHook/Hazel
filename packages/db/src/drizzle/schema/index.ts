@@ -1,5 +1,16 @@
 import { InferModel, relations } from "drizzle-orm"
-import { boolean, index, int, json, mysqlEnum, text, varchar } from "drizzle-orm/mysql-core"
+import {
+	boolean,
+	datetime,
+	index,
+	int,
+	json,
+	mysqlEnum,
+	text,
+	unique,
+	uniqueIndex,
+	varchar,
+} from "drizzle-orm/mysql-core"
 
 import { INTEGRATIONS } from "../integrations/data"
 import { buildMysqlTable } from "./common"
@@ -60,15 +71,35 @@ export const connection = buildMysqlTable(
 		sourceId: int("source_id").notNull(),
 		destinationId: int("destination_id").notNull(),
 
+		delay: int("delay"),
+
+		retyCount: int("retry_count"),
+		retryDelay: int("retry_delay"),
+		retryType: mysqlEnum("retry_type", ["fixed", "exponential"]),
+
 		fluxConfig: json("flux_config"),
 	},
 	(table) => ({
-		publicIdIndex: index("con_public_id_idx").on(table.publicId),
+		publicIdIndex: uniqueIndex("con_public_id_idx").on(table.publicId),
 
 		customerIdIndex: index("con_customer_id_idx").on(table.customerId),
 
 		sourceIdIndex: index("con_source_id_idx").on(table.sourceId),
 		destinationIndex: index("con_destination_id_idx").on(table.destinationId),
+
+		unq: unique().on(table.sourceId, table.destinationId),
+	}),
+)
+
+export const apiKeys = buildMysqlTable(
+	"api_keys",
+	{
+		ownerId: varchar("owner_id", { length: 128 }),
+		name: varchar("name", { length: 128 }),
+		expires: datetime("expires", { fsp: 3 }),
+	},
+	(table) => ({
+		publicIdx: uniqueIndex("api_public_idx").on(table.publicId),
 	}),
 )
 
@@ -107,3 +138,6 @@ export type Source = InferModel<typeof source, "select">
 
 export type InsertIntegration = InferModel<typeof integration, "insert">
 export type Integration = InferModel<typeof integration, "select">
+
+export type InsertApiKey = InferModel<typeof apiKeys, "insert">
+export type ApiKey = InferModel<typeof apiKeys, "select">

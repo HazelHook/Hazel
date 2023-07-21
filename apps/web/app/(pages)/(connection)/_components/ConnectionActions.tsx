@@ -15,16 +15,21 @@ import {
 } from "@/components/ui/dialog"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
-import type { deleteConnectionAction, updateConnectionAction } from "@conn/_actions"
+import type { deleteConnectionAction, pauseConnectionAction } from "@conn/_actions"
 import Link from "next/link"
 import { ConnectionDataRowType } from "@conn/connections/page"
+import { ClockIcon } from "@/components/icons/pika/clock"
+import { PlayBigIcon } from "@/components/icons/pika/playBig"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const ConnectionActions = ({
 	deleteAction,
+	pauseAction,
 	data,
 }: {
 	data: ConnectionDataRowType
 	deleteAction: typeof deleteConnectionAction
+	pauseAction: typeof pauseConnectionAction
 }) => {
 	const router = useRouter()
 
@@ -34,16 +39,57 @@ export const ConnectionActions = ({
 		},
 	})
 
+	const handlePause = useAction(pauseAction, {
+		onSuccess() {
+			router.refresh()
+		},
+	})
+
 	return (
 		<div className="flex justify-end">
-			<Link href={`/connection/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
-				<EditPencilIcon className="h-4 w-4" />
-			</Link>
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<Link href={`/connection/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
+						<EditPencilIcon className="h-4 w-4" />
+					</Link>
+				</TooltipTrigger>
+				<TooltipContent>Edit Connection</TooltipContent>
+			</Tooltip>
+
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<Button
+						onClick={() =>
+							toast.promise(
+								handlePause.mutateAsync({
+									publicId: data.publicId,
+									enabled: !data.enabled,
+								}),
+								{
+									loading: data.enabled ? "Pausing Connection..." : "Enabling Connection",
+									success: data.enabled ? "Connection Successfully Paused..." : "Connection Successfully Enabled",
+									error: "There was an error changing the status of your Connection	. Please try again or contact us.",
+								},
+							)
+						}
+						variant="ghost"
+					>
+						{data.enabled ? <ClockIcon className="h-4 w-4" /> : <PlayBigIcon className="h-4 w-4" />}
+					</Button>
+				</TooltipTrigger>
+				<TooltipContent>{data.enabled ? "Pause Connection" : "Resume Connection"}</TooltipContent>
+			</Tooltip>
+
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button variant="ghost">
-						<DeleteDustbinIcon className="h-4 w-4" />
-					</Button>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button variant="destructive_ghost">
+								<DeleteDustbinIcon className="h-4 w-4" />
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>Delete Connection</TooltipContent>
+					</Tooltip>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">
 					<DialogHeader>
