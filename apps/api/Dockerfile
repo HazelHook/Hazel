@@ -22,6 +22,6 @@ COPY packed packed
 
 
 ENV ENV production
-CMD ["./bun", "packed/index.js"]
+CMD ["./bun", "./packed/index.js"]
 
 EXPOSE 3006
