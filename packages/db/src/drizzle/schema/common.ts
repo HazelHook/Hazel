@@ -35,6 +35,6 @@ export const buildCustomMysqlTable = <TTableName extends string, TColumnsMap ext
 	return mysqlTable(name, fields, extraConfig)
 }
 
-export const generatePublicId = (prefix: "src" | "dst" | "con" | "itg" | "sk") => {
-	return `${prefix}_${nanoid(17)}`
+export const generatePublicId = (prefix: "src" | "dst" | "con" | "itg" | "sk" | "org") => {
+	return `${prefix}_${nanoid(21 - (prefix.length + 1))}`
 }

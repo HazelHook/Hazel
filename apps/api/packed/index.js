@@ -11600,6 +11600,36 @@ __export(exports_schema, {
       return source;
     }
   },
+  organizations: () => {
+    {
+      return organizations;
+    }
+  },
+  organizationRelations: () => {
+    {
+      return organizationRelations;
+    }
+  },
+  organizationMembers: () => {
+    {
+      return organizationMembers;
+    }
+  },
+  organizationMemberRelations: () => {
+    {
+      return organizationMemberRelations;
+    }
+  },
+  organizationInvites: () => {
+    {
+      return organizationInvites;
+    }
+  },
+  organizationInviteRelations: () => {
+    {
+      return organizationInviteRelations;
+    }
+  },
   integrationRelations: () => {
     {
       return integrationRelations;
@@ -12068,8 +12098,11 @@ var buildMysqlTable = (name2, fields, extraConfig) => {
     ...fields
   }, extraConfig);
 };
+var buildCustomMysqlTable = (name2, fields, extraConfig) => {
+  return mysqlTable(name2, fields, extraConfig);
+};
 var generatePublicId = (prefix) => {
-  return `${prefix}_${nanoid(17)}`;
+  return `${prefix}_${nanoid(21 - (prefix.length + 1))}`;
 };
 
 // /Users/makisuo/Documents/GitHub/Hazel/packages/db/src/drizzle/schema/index.ts
@@ -12126,6 +12159,61 @@ var apiKeys = buildMysqlTable("api_keys", {
 }, (table) => ({
   publicIdx: uniqueIndex("api_public_idx").on(table.publicId)
 }));
+var organizations = buildCustomMysqlTable("organizations", {
+  id: serial("id").primaryKey().autoincrement(),
+  publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
+  updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+  deletedAt: timestamp("deleted_at"),
+  name: varchar("name", { length: 128 }).notNull(),
+  slug: varchar("slug", { length: 128 }).notNull()
+}, (table) => ({
+  slugIdx: uniqueIndex("org_slug_idx").on(table.slug),
+  publicIdx: uniqueIndex("public_idx").on(table.publicId)
+}));
+var organizationMembers = buildMysqlTable("organization_members", {
+  id: serial("id").primaryKey().autoincrement(),
+  publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
+  updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+  deletedAt: timestamp("deleted_at"),
+  customerId: varchar("customer_id", { length: 128 }).notNull(),
+  organizationId: int("organization_id").notNull(),
+  role: mysqlEnum("role", ["owner", "admin", "member"]).notNull()
+}, (table) => ({
+  publicIdx: uniqueIndex("public_idx").on(table.publicId),
+  customerIdx: uniqueIndex("customer_id_idx").on(table.customerId),
+  roleIdx: uniqueIndex("role_id_idx").on(table.role),
+  organizationIdx: uniqueIndex("org_id_idx").on(table.organizationId)
+}));
+var organizationInvites = buildMysqlTable("organization_invites", {
+  id: serial("id").primaryKey().autoincrement(),
+  publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
+  revokedAt: timestamp("revoked_at"),
+  email: varchar("email", { length: 128 }).notNull(),
+  role: mysqlEnum("role", ["owner", "admin", "member"]).notNull(),
+  organizationId: int("organization_id").notNull()
+}, (table) => ({
+  publicIdx: uniqueIndex("public_idx").on(table.publicId),
+  emailIdx: uniqueIndex("email_idx").on(table.email)
+}));
+var organizationRelations = relations(organizations, ({ many }) => ({
+  members: many(organizationMembers),
+  invites: many(organizationInvites)
+}));
+var organizationMemberRelations = relations(organizationMembers, ({ one }) => ({
+  organization: one(organizations, {
+    fields: [organizationMembers.organizationId],
+    references: [organizations.id]
+  })
+}));
+var organizationInviteRelations = relations(organizationInvites, ({ one }) => ({
+  organization: one(organizations, {
+    fields: [organizationInvites.organizationId],
+    references: [organizations.id]
+  })
+}));
 var sourceRelations = relations(source, ({ many, one }) => ({
   connections: many(connection),
   integration: one(integration, {
@@ -12170,7 +12258,6 @@ function connectDB({
         publicId,
         includeDeleted
       }) => {
-        console.log("HI");
         let filter;
         if (!includeDeleted) {
           filter = and(eq(source.publicId, publicId), isNull3(source.deletedAt));
@@ -12433,6 +12520,40 @@ function connectDB({
       },
       update: async (data2) => {
         const res = await db.update(apiKeys).set(data2).where(eq(apiKeys.publicId, data2.publicId));
+        return { res };
+      },
+      markAsDeleted: async ({ publicId }) => {
+        const res = await db.update(apiKeys).set({
+          deletedAt: new Date
+        }).where(eq(apiKeys.publicId, publicId));
+        return { res };
+      }
+    },
+    organization: {
+      getOne: async ({
+        publicId
+      }) => {
+        return db.query.organizations.findFirst({
+          where: and(eq(organizations.publicId, publicId), isNull3(organizations.deletedAt))
+        });
+      },
+      getMany: async ({
+        customerId
+      }) => {
+        return db.query.organizations.findMany({
+          where: eq(organizations.customerId, customerId)
+        });
+      },
+      create: async (data2) => {
+        const publicId = generatePublicId("org");
+        const res = await db.insert(organizations).values({
+          ...data2,
+          publicId
+        });
+        return { res, publicId };
+      },
+      update: async (data2) => {
+        const res = await db.update(organizations).set(data2).where(eq(apiKeys.publicId, data2.publicId));
         return { res };
       },
       markAsDeleted: async ({ publicId }) => {

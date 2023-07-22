@@ -44,7 +44,6 @@ export function connectDB({
 				publicId: string
 				includeDeleted?: boolean
 			}) => {
-				console.log("HI")
 				let filter
 				if (!includeDeleted) {
 					filter = and(eq(schema.source.publicId, publicId), isNull(schema.source.deletedAt))
@@ -358,6 +357,48 @@ export function connectDB({
 			},
 			update: async (data: OptionalExceptFor<Omit<schema.InsertApiKey, "customerId">, "publicId">) => {
 				const res = await db.update(schema.apiKeys).set(data).where(eq(schema.apiKeys.publicId, data.publicId))
+				return { res }
+			},
+			markAsDeleted: async ({ publicId }: { publicId: string }) => {
+				const res = await db
+					.update(schema.apiKeys)
+					.set({
+						deletedAt: new Date(),
+					})
+					.where(eq(schema.apiKeys.publicId, publicId))
+				return { res }
+			},
+		},
+		organization: {
+			getOne: async ({
+				publicId,
+			}: {
+				publicId: string
+			}) => {
+				return db.query.organizations.findFirst({
+					where: and(eq(schema.organizations.publicId, publicId), isNull(schema.organizations.deletedAt)),
+				})
+			},
+			// getMany: async ({
+			// 	customerId,
+			// }: {
+			// 	customerId: string
+			// 	includeDeleted?: boolean
+			// }) => {
+			// 	return db.query.organizations.findMany({
+			// 		where: eq(schema.organizations., customerId),
+			// 	})
+			// },
+			create: async (data: Omit<schema.InsertOrganization, "publicId">) => {
+				const publicId = generatePublicId("org")
+				const res = await db.insert(schema.organizations).values({
+					...data,
+					publicId,
+				})
+				return { res, publicId }
+			},
+			update: async (data: OptionalExceptFor<Omit<schema.InsertOrganization, "customerId">, "publicId">) => {
+				const res = await db.update(schema.organizations).set(data).where(eq(schema.apiKeys.publicId, data.publicId))
 				return { res }
 			},
 			markAsDeleted: async ({ publicId }: { publicId: string }) => {

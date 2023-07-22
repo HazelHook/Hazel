@@ -1,4 +1,4 @@
-import { InferModel, relations } from "drizzle-orm"
+import { InferModel, relations, sql } from "drizzle-orm"
 import {
 	boolean,
 	datetime,
@@ -6,14 +6,15 @@ import {
 	int,
 	json,
 	mysqlEnum,
-	text,
+	serial,
+	timestamp,
 	unique,
 	uniqueIndex,
 	varchar,
 } from "drizzle-orm/mysql-core"
 
 import { INTEGRATIONS } from "../integrations/data"
-import { buildMysqlTable } from "./common"
+import { buildCustomMysqlTable, buildMysqlTable } from "./common"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 })
@@ -103,6 +104,84 @@ export const apiKeys = buildMysqlTable(
 	}),
 )
 
+export const organizations = buildCustomMysqlTable(
+	"organizations",
+	{
+		id: serial("id").primaryKey().autoincrement(),
+		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+
+		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
+		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+		deletedAt: timestamp("deleted_at"),
+		name: varchar("name", { length: 128 }).notNull(),
+		slug: varchar("slug", { length: 128 }).notNull(),
+	},
+	(table) => ({
+		slugIdx: uniqueIndex("org_slug_idx").on(table.slug),
+		publicIdx: uniqueIndex("public_idx").on(table.publicId),
+	}),
+)
+
+export const organizationMembers = buildMysqlTable(
+	"organization_members",
+	{
+		id: serial("id").primaryKey().autoincrement(),
+		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+
+		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
+		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+		deletedAt: timestamp("deleted_at"),
+
+		customerId: varchar("customer_id", { length: 128 }).notNull(),
+		organizationId: int("organization_id").notNull(),
+		role: mysqlEnum("role", ["owner", "admin", "member"]).notNull(),
+	},
+	(table) => ({
+		publicIdx: uniqueIndex("public_idx").on(table.publicId),
+		customerIdx: uniqueIndex("customer_id_idx").on(table.customerId),
+		roleIdx: uniqueIndex("role_id_idx").on(table.role),
+		organizationIdx: uniqueIndex("org_id_idx").on(table.organizationId),
+	}),
+)
+
+export const organizationInvites = buildMysqlTable(
+	"organization_invites",
+	{
+		id: serial("id").primaryKey().autoincrement(),
+		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+
+		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
+		revokedAt: timestamp("revoked_at"),
+
+		email: varchar("email", { length: 128 }).notNull(),
+		role: mysqlEnum("role", ["owner", "admin", "member"]).notNull(),
+		organizationId: int("organization_id").notNull(),
+	},
+	(table) => ({
+		publicIdx: uniqueIndex("public_idx").on(table.publicId),
+		emailIdx: uniqueIndex("email_idx").on(table.email),
+	}),
+)
+
+export const organizationRelations = relations(organizations, ({ many }) => ({
+	members: many(organizationMembers),
+	invites: many(organizationInvites),
+}))
+
+export const organizationMemberRelations = relations(organizationMembers, ({ one }) => ({
+	organization: one(organizations, {
+		fields: [organizationMembers.organizationId],
+		references: [organizations.id],
+	}),
+}))
+
+export const organizationInviteRelations = relations(organizationInvites, ({ one }) => ({
+	organization: one(organizations, {
+		fields: [organizationInvites.organizationId],
+		references: [organizations.id],
+	}),
+}))
+
 export const sourceRelations = relations(source, ({ many, one }) => ({
 	connections: many(connection),
 	integration: one(integration, {
@@ -141,3 +220,12 @@ export type Integration = InferModel<typeof integration, "select">
 
 export type InsertApiKey = InferModel<typeof apiKeys, "insert">
 export type ApiKey = InferModel<typeof apiKeys, "select">
+
+export type InsertOrganization = InferModel<typeof organizations, "insert">
+export type Organization = InferModel<typeof organizations, "select">
+
+export type InsertOrganizationInvite = InferModel<typeof organizationInvites, "insert">
+export type OrganizationInvite = InferModel<typeof organizationInvites, "select">
+
+export type InsertOrganizationMember = InferModel<typeof organizationMembers, "insert">
+export type OrganizationMember = InferModel<typeof organizationMembers, "select">
