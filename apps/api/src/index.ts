@@ -1,7 +1,7 @@
+import swagger from "@elysiajs/swagger"
 import { Elysia } from "elysia"
 
 import { connectionRouter } from "./routes/v1/connections"
-import swagger from "@elysiajs/swagger"
 
 const app = new Elysia()
 	.use(swagger())
@@ -34,7 +34,10 @@ const app = new Elysia()
 			set.status = 429
 		}
 
-		return new Response(error.message, { status: statusCode, statusText: error.cause as string })
+		return new Response(error.message, {
+			status: statusCode,
+			statusText: error.cause as string,
+		})
 	})
 	.get("/", () => "Hello Elysia")
 	.group("v1", (app) => app.use(connectionRouter))

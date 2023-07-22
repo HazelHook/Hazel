@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { TRPC_ERROR_CODE_NUMBER, TRPCResponse } from "@trpc/server/rpc"
 import { toast } from "sonner"
@@ -20,7 +21,6 @@ import { EditPencilIcon } from "@/components/icons/pika/editPencil"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
 import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
-import Link from "next/link"
 
 export const DestinationsActions = ({
 	updateAction,

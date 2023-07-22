@@ -1,4 +1,7 @@
+import Link from "next/link"
 import { useRouter } from "next/navigation"
+import type { deleteConnectionAction, pauseConnectionAction } from "@conn/_actions"
+import { ConnectionDataRowType } from "@conn/connections/page"
 import { toast } from "sonner"
 
 import { useAction } from "@/server/client"
@@ -13,14 +16,11 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { ClockIcon } from "@/components/icons/pika/clock"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
-import type { deleteConnectionAction, pauseConnectionAction } from "@conn/_actions"
-import Link from "next/link"
-import { ConnectionDataRowType } from "@conn/connections/page"
-import { ClockIcon } from "@/components/icons/pika/clock"
 import { PlayBigIcon } from "@/components/icons/pika/playBig"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const ConnectionActions = ({
 	deleteAction,

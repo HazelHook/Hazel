@@ -2,11 +2,10 @@ import Link from "next/link"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
+import { PromiseType } from "@/lib/ts/helpers"
 import { buttonVariants } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
 import { AddIcon } from "@/components/icons/pika/add"
-
-import { PromiseType } from "@/lib/ts/helpers"
 import {
 	deleteConnectionAction,
 	pauseConnectionAction,

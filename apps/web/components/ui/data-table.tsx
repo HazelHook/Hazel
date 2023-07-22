@@ -12,10 +12,10 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
+import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -92,7 +92,11 @@ export const SortableHeader = ({
 	column,
 	name,
 	className,
-}: { column: Column<any, unknown>; name: string; className?: string }) => {
+}: {
+	column: Column<any, unknown>
+	name: string
+	className?: string
+}) => {
 	return (
 		<div className="flex justify-start w-full">
 			<Button

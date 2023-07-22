@@ -2,8 +2,8 @@ import "server-only"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { UpdateConnectionForm } from "@/app/(pages)/(connection)/connection/[id]/settings/form"
 import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
+import { UpdateConnectionForm } from "@/app/(pages)/(connection)/connection/[id]/settings/form"
 
 export interface SettingsProps {
 	id: string

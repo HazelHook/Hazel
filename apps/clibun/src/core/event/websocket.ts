@@ -1,5 +1,6 @@
-import { Message, WebsocketRequestEvent } from "../../modules/module.js"
 import WebSocket from "ws"
+
+import { Message, WebsocketRequestEvent } from "../../modules/module.js"
 
 const WEBSOCKET_BACKEND = process.env["BACKEND_WEBSOCKET_URL_WS"]
 
@@ -30,7 +31,7 @@ export function handleWebsocketRequestEvent(event: WebsocketRequestEvent) {
 			response_at: new Date(deserialized.response_at),
 			send_at: new Date(deserialized.send_at),
 			status: deserialized.status,
-			query
+			query,
 		}
 
 		event.onMessage(msg)

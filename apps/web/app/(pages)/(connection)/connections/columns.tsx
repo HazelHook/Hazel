@@ -8,18 +8,18 @@ import { Connection, Destination, Source } from "db/src/drizzle/schema"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { Button } from "@/components/ui/button"
 import { Cell, SortableHeader } from "@/components/ui/data-table"
-import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { EyeOpenIcon } from "@/components/icons/pika/eyeOpen"
 import {
 	deleteConnectionAction,
 	pauseConnectionAction,
 	updateConnectionAction,
 } from "@/app/(pages)/(connection)/_actions"
 import { ConnectionActions } from "@/app/(pages)/(connection)/_components/ConnectionActions"
-import { Button } from "@/components/ui/button"
-import { EyeOpenIcon } from "@/components/icons/pika/eyeOpen"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
 
 export type Column = Connection & {
 	source: Source | null

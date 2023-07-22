@@ -11,7 +11,8 @@ export const Pricing = () => {
 						Pricing
 					</span>
 					<h2 className="text-3xl mt-6 tracking-tighter font-light lg:text-4xl text-white" data-aos="fade-down">
-						Pricing build for<span className="block text-zinc-400">everyone</span>
+						Pricing build for
+						<span className="block text-zinc-400">everyone</span>
 					</h2>
 				</div>
 				<MagicContainer className="grid grid-cols-1 md:grid-cols-2 h-[500px] -mx-4 sm:mx-auto lg:grid-cols-3 xl:mx-0 gap-2 mt-12">

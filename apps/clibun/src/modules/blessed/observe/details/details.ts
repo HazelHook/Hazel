@@ -7,15 +7,12 @@ let selectedMenu = 0
 
 export function DetailsPanel({
 	rerender,
-    message
+	message,
 }: {
-	rerender: () => void,
-    message: Message
+	rerender: () => void
+	message: Message
 }) {
-	const {
-		hidebox,
-		navbar
-	} = TopbarPanel({
+	const { hidebox, navbar } = TopbarPanel({
 		select: (index: number) => {
 			selectedMenu = index
 			rerender()
@@ -24,13 +21,8 @@ export function DetailsPanel({
 		selectedMenu,
 	})
 
-	const details = MainPanel({message, selectedMenu})
-	const controls = ControlsPanel({message})
+	const details = MainPanel({ message, selectedMenu })
+	const controls = ControlsPanel({ message })
 
-	return [
-		navbar,
-		hidebox,
-		details,
-		controls
-	]
+	return [navbar, hidebox, details, controls]
 }

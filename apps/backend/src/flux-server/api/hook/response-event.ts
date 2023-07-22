@@ -1,7 +1,8 @@
-import { nanoid } from "nanoid"
-import { ForwardResult } from "./forward"
-import tiny from "db/src/tinybird"
 import { Destination } from "db/src/drizzle/schema"
+import tiny from "db/src/tinybird"
+import { nanoid } from "nanoid"
+
+import { ForwardResult } from "./forward"
 
 export interface ResponseResult {
 	body: string

@@ -1,6 +1,6 @@
-import portfinder from "portfinder"
 import { exec } from "child_process"
 import clipboard from "clipboardy"
+import portfinder from "portfinder"
 
 export const getUnusedPort = async () => {
 	try {

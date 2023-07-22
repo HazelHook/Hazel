@@ -1,7 +1,8 @@
-import { ElysiaCLIHandler } from ".."
-import { CLIAuthenticatedDTO } from "."
 import db from "db/src/drizzle"
 import { t } from "elysia"
+
+import { CLIAuthenticatedDTO } from "."
+import { ElysiaCLIHandler } from ".."
 
 const USERINFO_URL = process.env["CLERK_OAUTH2_USERINFO_URL"] as string
 

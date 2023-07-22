@@ -1,7 +1,8 @@
+import blessed from "blessed"
+
 import { prettyTimestamp } from "../../../core/lib/print-util.js"
 import { openInBrowser } from "../../../core/lib/util.js"
 import { Message, Module, UserData } from "../../module.js"
-import blessed from "blessed"
 import { ScrollableList } from "../components/scrollable-list.js"
 import { DetailsPanel } from "./details/details.js"
 
@@ -35,16 +36,16 @@ function buildMessageBox(
 	const requestList = ScrollableList({
 		items: messages.map((m) => prettyTimestamp(m.received_at)),
 		selected: selectedMessage,
-        placeholder: "Waiting...",
+		placeholder: "Waiting...",
 		onSelect(_, index) {
 			selectedMessage = index
 			rerender(buildMessageBox(data, module, rerender))
-		}
+		},
 	})
 
 	const details = DetailsPanel({
 		rerender: () => rerender(buildMessageBox(data, module, rerender)),
-		message: messages[selectedMessage]
+		message: messages[selectedMessage],
 	})
 
 	const box = blessed.box({

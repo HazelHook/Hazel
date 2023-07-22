@@ -1,9 +1,9 @@
-import { nanoid } from "nanoid"
-
 import type { Connection, Destination } from "db/src/drizzle/schema"
 import tiny from "db/src/tinybird"
-import { handleRequest } from "./lib/request.helper"
+import { nanoid } from "nanoid"
+
 import { sourceQueue } from "./lib/queue"
+import { handleRequest } from "./lib/request.helper"
 
 interface Event {
 	connection: Connection & {

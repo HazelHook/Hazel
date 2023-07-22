@@ -1,4 +1,5 @@
 import { Elysia } from "elysia"
+
 import { addCLIEndpoints } from "./api/cli"
 import { addHookEndpoints } from "./api/hook"
 

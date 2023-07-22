@@ -1,20 +1,22 @@
 import { Destination } from "db/src/drizzle/schema"
 
-export type ForwardResult = {
-	result?: Response
-	resultError?: undefined
-	response_at: string
-	send_at: string
-	destinationId: string
-	status: number
-} | {
-	resultError?: any
-	result?: undefined
-	response_at: string
-	send_at: string
-	destinationId: string
-	status: number
-}
+export type ForwardResult =
+	| {
+			result?: Response
+			resultError?: undefined
+			response_at: string
+			send_at: string
+			destinationId: string
+			status: number
+	  }
+	| {
+			resultError?: any
+			result?: undefined
+			response_at: string
+			send_at: string
+			destinationId: string
+			status: number
+	  }
 
 /**
  * Forwards a request to a list of destinations.
@@ -22,8 +24,12 @@ export type ForwardResult = {
 export async function forwardToDestinations({
 	request,
 	destinations,
-	queryString
-}: { request: Request; destinations: Destination[]; queryString: string }): Promise<ForwardResult[]> {
+	queryString,
+}: {
+	request: Request
+	destinations: Destination[]
+	queryString: string
+}): Promise<ForwardResult[]> {
 	const promises = destinations.map(async (d): Promise<ForwardResult> => {
 		const requestStart = new Date().toISOString()
 		try {
@@ -33,7 +39,7 @@ export async function forwardToDestinations({
 				response_at: new Date().toISOString(),
 				send_at: requestStart,
 				destinationId: d.publicId,
-				status: result.status
+				status: result.status,
 			}
 		} catch (e) {
 			return {
@@ -41,7 +47,7 @@ export async function forwardToDestinations({
 				response_at: new Date().toISOString(),
 				send_at: requestStart,
 				destinationId: d.publicId,
-				status: 500
+				status: 500,
 			}
 		}
 	})

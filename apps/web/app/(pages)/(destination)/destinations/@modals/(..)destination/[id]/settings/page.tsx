@@ -1,5 +1,5 @@
-import { DestinationSettingsPage } from "@/components/pages/destination/SettingsPage"
 import { Dialog, InterceptedDialogContent } from "@/components/ui/dialog"
+import { DestinationSettingsPage } from "@/components/pages/destination/SettingsPage"
 
 const ConnectionUpdateFormPage = ({
 	params,

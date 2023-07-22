@@ -1,33 +1,32 @@
+import blessed from "blessed"
 
 import { Message } from "../../../module.js"
 import { ControlsBar } from "../../components/controls-bar.js"
-import blessed from 'blessed'
 
 export function TopbarPanel({
 	select,
-    message,
-    selectedMenu,
+	message,
+	selectedMenu,
 }: {
-	select: (index: number) => void,
-    message: Message,
-    selectedMenu: number,
+	select: (index: number) => void
+	message: Message
+	selectedMenu: number
 }) {
-    const menuItems = [
+	const menuItems = [
 		{
 			name: "Details",
-			onSelect: () => select(0)
+			onSelect: () => select(0),
 		},
 		{
 			name: "Headers",
-			onSelect: () => select(1)
+			onSelect: () => select(1),
 		},
 		{
 			name: "Body",
-			onSelect: () => select(2)
+			onSelect: () => select(2),
 		},
 	]
 
-    
 	const topBarInfo = (() => {
 		if (!message) return " "
 
@@ -51,13 +50,12 @@ export function TopbarPanel({
 		selectedItem: selectedMenu,
 	})
 
-
 	const detailsLeft = itemWidth * menuItems.length
 	const details = blessed.box({
-		width: `100%-${detailsLeft+2}`,
+		width: `100%-${detailsLeft + 2}`,
 		height: 1,
 		padding: {
-			right: 1
+			right: 1,
 		},
 		left: detailsLeft,
 		tags: true,
@@ -65,7 +63,6 @@ export function TopbarPanel({
 		content: topBarInfo,
 	})
 	navbar.append(details)
-
 
 	const hidebox = blessed.box({
 		left: selectedMenu * itemWidth + 13,
@@ -78,6 +75,6 @@ export function TopbarPanel({
 	return {
 		navbar,
 		hidebox,
-		details
+		details,
 	}
 }

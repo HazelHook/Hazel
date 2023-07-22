@@ -9,11 +9,11 @@ import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { SortableHeader } from "@/components/ui/data-table"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { DestinationsActions } from "@/app/(pages)/(destination)/_components/DestinationsActions"
 import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
-import { SortableHeader } from "@/components/ui/data-table"
 
 export const columns: (
 	deleteAction: typeof deleteDestinationAction,
@@ -29,7 +29,10 @@ export const columns: (
 				<Link
 					prefetch={false}
 					href={`/destination/${row.original.publicId}`}
-					className={buttonVariants({ variant: "ghost", className: "flex flex-row gap-2 items-center" })}
+					className={buttonVariants({
+						variant: "ghost",
+						className: "flex flex-row gap-2 items-center",
+					})}
 				>
 					<Avatar className="w-4 h-4">
 						<AvatarImage src={getSeededProfileImageUrl(row.original.publicId)} />

@@ -1,17 +1,17 @@
-import blessed from 'blessed'
+import blessed from "blessed"
 
 export function ScrollablePanel({
-    width = "100%",
-    height = "100%",
-    top = 0,
-    left = 0,
+	width = "100%",
+	height = "100%",
+	top = 0,
+	left = 0,
 }: {
-    top: number | string,
-    left: number | string,
-    width: number | string,
-    height: number | string,
+	top: number | string
+	left: number | string
+	width: number | string
+	height: number | string
 }) {
-    return blessed.box({
+	return blessed.box({
 		top,
 		left,
 		tags: true,
@@ -23,7 +23,7 @@ export function ScrollablePanel({
 		height,
 		padding: {
 			left: 1,
-            right: 1,
+			right: 1,
 		},
 		scrollbar: {
 			ch: " ",

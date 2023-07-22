@@ -1,25 +1,26 @@
-import blessed from 'blessed'
-import { maxStringLength } from '../../../core/lib/util.js'
+import blessed from "blessed"
+
+import { maxStringLength } from "../../../core/lib/util.js"
 
 export function ControlsBar({
-    width,
-    left,
+	width,
+	left,
 	top,
-    items,
-    selectedItem,
+	items,
+	selectedItem,
 }: {
-    width: number | string,
-	top?: number | string,
-    left: number | string,
-    items: {
-        name: string,
-        onSelect: () => void,
-    }[],
-    selectedItem?: number,
+	width: number | string
+	top?: number | string
+	left: number | string
+	items: {
+		name: string
+		onSelect: () => void
+	}[]
+	selectedItem?: number
 }) {
-    const maxLength = maxStringLength(items.map(i => i.name))
+	const maxLength = maxStringLength(items.map((i) => i.name))
 
-    const navbar = blessed.box({
+	const navbar = blessed.box({
 		padding: {
 			left: 0,
 			right: 0,
@@ -42,8 +43,8 @@ export function ControlsBar({
 		},
 	})
 
-    let curWidth = 0
-    items.forEach((item, index) => {
+	let curWidth = 0
+	items.forEach((item, index) => {
 		const menuItem = blessed.box({
 			content: item.name,
 			width: maxLength + 4,
@@ -69,10 +70,10 @@ export function ControlsBar({
 		menuItem.on("click", item.onSelect)
 
 		navbar.append(menuItem)
-        curWidth += maxLength + 3
-    })
-    return {
-        navbar,
-        itemWidth: maxLength + 3,
-    }
+		curWidth += maxLength + 3
+	})
+	return {
+		navbar,
+		itemWidth: maxLength + 3,
+	}
 }

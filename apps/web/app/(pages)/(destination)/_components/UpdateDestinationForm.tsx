@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Destination } from "db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
@@ -12,7 +13,6 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { formSchema } from "@/app/(pages)/(destination)/destination/new/schema"
-import { Destination } from "db/src/drizzle/schema"
 
 export const UpdateDestinationForm = ({
 	data,

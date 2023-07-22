@@ -5,6 +5,7 @@ import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { SortableHeader } from "@/components/ui/data-table"
 import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
 import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
@@ -14,7 +15,6 @@ import type {
 	updateIntegrationAction,
 } from "@/app/(pages)/(integration)/integrations/_actions"
 import { IntegrationToolColumn } from "@/app/(pages)/(integration)/integrations/page"
-import { SortableHeader } from "@/components/ui/data-table"
 
 export const columns: (
 	deleteAction: typeof deleteIntegrationAction,

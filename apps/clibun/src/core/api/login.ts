@@ -1,13 +1,14 @@
-import { Request, Response } from "express";
-import { storeToken } from "../lib/auth-token.js";
-import { RequestClient } from "../lib/request-client.js";
+import { Request, Response } from "express"
 
+import { storeToken } from "../lib/auth-token.js"
+import { RequestClient } from "../lib/request-client.js"
 
-export const handleOAuthCallback = (client: RequestClient, onSuccess: () => void) => async (req: Request, res: Response) => {
-  res.writeHead(200, {
-    "Content-Type": "text/html",
-  });
-  res.end(`
+export const handleOAuthCallback =
+	(client: RequestClient, onSuccess: () => void) => async (req: Request, res: Response) => {
+		res.writeHead(200, {
+			"Content-Type": "text/html",
+		})
+		res.end(`
 		<!DOCTYPE html>
 		<html lang="en">
 		<head>
@@ -39,20 +40,17 @@ export const handleOAuthCallback = (client: RequestClient, onSuccess: () => void
 		</body>
 		</html>
 		
-		`);
+		`)
 
-  const code = req.query["code"];
+		const code = req.query["code"]
 
-  // Call the backend to convert the code to a token
-  const token = await client.post(
-    `/v1/cli/token/${process.env["PORT"]}`,
-    {
-      token: code,
-      token_type: "code",
-    },
-  );
+		// Call the backend to convert the code to a token
+		const token = await client.post(`/v1/cli/token/${process.env["PORT"]}`, {
+			token: code,
+			token_type: "code",
+		})
 
-  await storeToken(token);
+		await storeToken(token)
 
-  onSuccess();
-}
+		onSuccess()
+	}

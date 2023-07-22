@@ -1,8 +1,8 @@
 import { ConnectionOptions, MetricsTime, Worker } from "bullmq"
-
-import tiny from "db/src/tinybird"
 import db from "db/src/drizzle"
+import tiny from "db/src/tinybird"
 import { nanoid } from "nanoid"
+
 import { consumeBase64 } from "./lib/request.helper"
 
 console.log("Hazel Worked startin up....")
@@ -13,10 +13,17 @@ const redisConnection: ConnectionOptions = {
 	port: Number(process.env.REDIS_PORT),
 }
 
-const worker = new Worker<{ connectionId: string; requestId: string; request: string; received_at: string }>(
+const worker = new Worker<{
+	connectionId: string
+	requestId: string
+	request: string
+	received_at: string
+}>(
 	"source_queue",
 	async (job) => {
-		const connection = await db.connection.getOne({ publicId: job.data.connectionId })
+		const connection = await db.connection.getOne({
+			publicId: job.data.connectionId,
+		})
 
 		if (!connection) {
 			// Connection was probably deleted, so we can just discard it

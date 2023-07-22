@@ -1,6 +1,7 @@
-import { ElysiaCLIHandler } from ".."
-import { CLIAuthenticatedDTO } from "."
 import db from "db/src/drizzle"
+
+import { CLIAuthenticatedDTO } from "."
+import { ElysiaCLIHandler } from ".."
 
 const USERINFO_URL = process.env["CLERK_OAUTH2_USERINFO_URL"] as string
 
@@ -26,12 +27,8 @@ export function getUser(elyisa: ElysiaCLIHandler) {
 			const pConnections = db.connection.getMany({
 				customerId: userInfoJson.user_id,
 			})
-			
-			const [destinations, sources, connections] = await Promise.all([
-				pDestinations,
-				pSources,
-				pConnections,
-			])
+
+			const [destinations, sources, connections] = await Promise.all([pDestinations, pSources, pConnections])
 
 			return {
 				sources: sources.map((source) => ({

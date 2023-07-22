@@ -48,7 +48,10 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 
 	const req = data[0]
 
-	const { data: resData } = await tiny.response.get({ workspace_id: userId, request_id: params.id })
+	const { data: resData } = await tiny.response.get({
+		workspace_id: userId,
+		request_id: params.id,
+	})
 
 	// TODO: ADD ACCEPETED/REJECTED TO TINYBIRD => Wasnt valid
 

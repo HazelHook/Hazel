@@ -1,13 +1,15 @@
-import Elysia, { t } from "elysia"
-import { authGuard } from "../../guard/authGuard"
-
 import db from "db/src/drizzle"
+import Elysia, { t } from "elysia"
+
+import { authGuard } from "../../guard/authGuard"
 
 export const sourceRouter = (app: Elysia) =>
 	app.use(authGuard).group("sources", (app) =>
 		app
 			.get("/", async ({ workspace_id }) => {
-				const connections = await db.source.getMany({ customerId: workspace_id })
+				const connections = await db.source.getMany({
+					customerId: workspace_id,
+				})
 				return connections
 			})
 			.post(

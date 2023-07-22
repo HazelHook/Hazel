@@ -1,13 +1,8 @@
-
 import { copyToClipboard, openInBrowser } from "../../../../core/lib/util.js"
 import { Message } from "../../../module.js"
 import { ControlsBar } from "../../components/controls-bar.js"
 
-export function ControlsPanel({
-    message,
-}: {
-    message: Message,
-}) {
+export function ControlsPanel({ message }: { message: Message }) {
 	const controls = [
 		{
 			name: "Dashboard",
@@ -40,5 +35,5 @@ export function ControlsPanel({
 		items: controls,
 		selectedItem: -1,
 	})
-    return controlBar
+	return controlBar
 }

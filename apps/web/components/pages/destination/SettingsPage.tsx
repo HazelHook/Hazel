@@ -1,9 +1,10 @@
 import "server-only"
 
-import db from "@/lib/db"
-import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
-import { updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { notFound } from "next/navigation"
+
+import db from "@/lib/db"
+import { updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
+import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
 
 export interface SettingsProps {
 	id: string

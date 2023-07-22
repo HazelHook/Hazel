@@ -1,7 +1,7 @@
 import bearer from "@elysiajs/bearer"
+import db from "db/src/drizzle"
 import Elysia from "elysia"
 
-import db from "db/src/drizzle"
 import { ratelimit } from "./ratelimit.guard"
 
 export const authGuard = (app: Elysia) =>

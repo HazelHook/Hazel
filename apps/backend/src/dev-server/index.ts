@@ -1,6 +1,6 @@
+import db from "db/src/drizzle"
 import Elysia, { t, ws } from "elysia"
 import { ElysiaWS } from "elysia/dist/ws"
-import db from "db/src/drizzle"
 
 const sockets = new Map<string, ElysiaWS<any>>()
 
@@ -45,17 +45,19 @@ const app = new Elysia()
 				body: t.Any(),
 				headers: t.Any(),
 				received_at: t.String(),
-				destinations: t.Array(t.Object({
-					id: t.String(),
-					responseId: t.String(),
-					send_at: t.String(),
-					url: t.String(),
-					response_at: t.String(),
-					status: t.Number(),
-				})),
+				destinations: t.Array(
+					t.Object({
+						id: t.String(),
+						responseId: t.String(),
+						send_at: t.String(),
+						url: t.String(),
+						response_at: t.String(),
+						status: t.Number(),
+					}),
+				),
 				query: t.String(),
-			})
-		}
+			}),
+		},
 	)
 	.use(ws())
 	.ws("/ws/:destination_id", {

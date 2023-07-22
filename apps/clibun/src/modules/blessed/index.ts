@@ -1,7 +1,8 @@
+import blessed from "blessed"
+
 import { RequestClient } from "../../core/lib/request-client.js"
 import { CLIRequestEvent, CLIResponseEvent, Module, ModuleData } from "../module.js"
 import { login } from "./components/login.js"
-import blessed from "blessed"
 import { getMenu } from "./menu.js"
 
 global.hazelModuleInitialized = false
@@ -35,16 +36,16 @@ export class BlessedModule extends Module {
 	override onResponseEvent(event: CLIResponseEvent): void {
 		if (event.type === "user-data") {
 			getMenu(event, this, (box) => {
-				for(const child of this.screen.children){
+				for (const child of this.screen.children) {
 					child.detach()
-				} 
+				}
 				this.screen.append(box)
 				this.screen.render()
 			})
-		} else if (event.type === "login"){
-			for(const child of this.screen.children){
+		} else if (event.type === "login") {
+			for (const child of this.screen.children) {
 				child.detach()
-			} 
+			}
 			this.screen.render()
 			this.triggerEvent({
 				type: "user-data",

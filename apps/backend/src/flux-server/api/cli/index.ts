@@ -1,4 +1,5 @@
 import Elysia, { ElysiaInstance, Handler } from "elysia"
+
 import { getUser } from "./authenticated/user"
 import { addCLIOAuthEndpoints } from "./oauth"
 
@@ -56,7 +57,6 @@ export function addCLIEndpoints(elysia: Elysia) {
 		// We add the oauth-url endpoint to the Elysia instance
 		const withOauthEndpoints = addCLIOAuthEndpoints(withClient)
 		const withAuthenticatedEndpoints = getUser(withOauthEndpoints)
-		
 
 		return withAuthenticatedEndpoints
 	})

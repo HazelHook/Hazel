@@ -29,11 +29,9 @@ type Restore = () => void
 const patchConsole = (callback: Callback): Restore => {
 	const stdout = new PassThrough()
 	const stderr = new PassThrough()
-
 	;(stdout as any).write = (data: string): void => {
 		callback("stdout", data)
 	}
-
 	;(stderr as any).write = (data: string): void => {
 		callback("stderr", data)
 	}

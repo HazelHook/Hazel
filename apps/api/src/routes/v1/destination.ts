@@ -1,13 +1,15 @@
-import Elysia, { t } from "elysia"
-import { authGuard } from "../../guard/authGuard"
-
 import db from "db/src/drizzle"
+import Elysia, { t } from "elysia"
+
+import { authGuard } from "../../guard/authGuard"
 
 export const destinationRouter = (app: Elysia) =>
 	app.use(authGuard).group("sources", (app) =>
 		app
 			.get("/", async ({ workspace_id }) => {
-				const destination = await db.destination.getMany({ customerId: workspace_id })
+				const destination = await db.destination.getMany({
+					customerId: workspace_id,
+				})
 				return destination
 			})
 			.post(
@@ -37,13 +39,18 @@ export const destinationRouter = (app: Elysia) =>
 				},
 			)
 			.get("/:id", async ({ params }) => {
-				const destination = await db.destination.getOne({ publicId: params.id })
+				const destination = await db.destination.getOne({
+					publicId: params.id,
+				})
 				return destination
 			})
 			.put(
 				"/:id",
 				async ({ params, body }) => {
-					const res = await db.destination.update({ publicId: params.id, ...body })
+					const res = await db.destination.update({
+						publicId: params.id,
+						...body,
+					})
 					return res
 				},
 				{

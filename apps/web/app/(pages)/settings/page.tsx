@@ -1,7 +1,8 @@
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { ApiKeyForm } from "./_form"
+
 import { createApiKeyAction } from "./_actions"
+import { ApiKeyForm } from "./_form"
 
 const SettingsPage = async () => {
 	const { userId } = auth()

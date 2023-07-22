@@ -6,8 +6,8 @@ import {
 	pauseConnectionAction,
 	updateConnectionAction,
 } from "@/app/(pages)/(connection)/_actions"
-import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
 import { columns } from "@/app/(pages)/(connection)/connections/columns"
+import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
 
 export const ConnectionTable = ({
 	data,

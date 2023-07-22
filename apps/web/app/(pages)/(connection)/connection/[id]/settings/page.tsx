@@ -1,5 +1,5 @@
-import { ConnectionSettingsPage } from "@/components/pages/connection/SettingsPage"
 import { Container } from "@/components/ui/container"
+import { ConnectionSettingsPage } from "@/components/pages/connection/SettingsPage"
 
 const EditConnectionPage = async ({
 	params,

@@ -1,4 +1,5 @@
 import keytar from "keytar"
+
 import { RequestClient } from "./request-client.js"
 import { openInBrowser } from "./util.js"
 
@@ -20,11 +21,7 @@ export async function storeToken(tokenData: {
 		expires_at,
 	}
 
-	await keytar.setPassword(
-		"hazel",
-		"token",
-		JSON.stringify(token),
-	)
+	await keytar.setPassword("hazel", "token", JSON.stringify(token))
 
 	return token
 }
@@ -43,7 +40,7 @@ async function verifyToken(client: RequestClient, token: string): Promise<void> 
 export async function getToken(client: RequestClient): Promise<Token | null> {
 	try {
 		const tokenString = await keytar.getPassword("hazel", "token")
-		if(!tokenString){
+		if (!tokenString) {
 			return null
 		}
 
@@ -67,20 +64,17 @@ export async function getToken(client: RequestClient): Promise<Token | null> {
 		return token
 	} catch (e) {
 		console.log(e)
-		await keytar.deletePassword(
-			"hazel",
-			"token"
-		)
+		await keytar.deletePassword("hazel", "token")
 		return null
 	}
 }
 
-export async function openLogin(client: RequestClient){
+export async function openLogin(client: RequestClient) {
 	try {
 		const data = await client.get(`/v1/cli/oauth-url/${process.env["PORT"]}`)
 		const redirect_uri = `http://localhost:${process.env["PORT"]}/oauth2/callback`
 		const url = `${data.auth_url}?response_type=code&client_id=${data.client_id}&redirect_uri=${redirect_uri}&scope=profile%20email`
-		
+
 		// Open in browser
 		openInBrowser(url)
 	} catch (e) {

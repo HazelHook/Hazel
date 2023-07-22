@@ -1,10 +1,9 @@
-import { Elysia } from "elysia"
-
-import { nanoid } from "nanoid"
-import { sendEvent } from "./event"
-
 import db from "db/src/drizzle"
 import tiny from "db/src/tinybird"
+import { Elysia } from "elysia"
+import { nanoid } from "nanoid"
+
+import { sendEvent } from "./event"
 import { sourceQueue } from "./lib/queue"
 import { handleRequest } from "./lib/request.helper"
 
@@ -83,7 +82,11 @@ const app = new Elysia()
 					}
 
 					if (connection.delay && connection.delay > 0) {
-						const parsed: { connectionId: string; requestId: string; request: string } = {
+						const parsed: {
+							connectionId: string
+							requestId: string
+							request: string
+						} = {
 							requestId,
 							connectionId: connection.publicId,
 							request: await handleRequest(connection.destination.url, request, data),
