@@ -8,12 +8,11 @@
 		"node": ">=16"
 	},
 	"scripts": {
-		"build": "tsc --watch",
+		"build:watch": "tsc --watch",
+		"build": "tsc",
 		"dev": "doppler run -- node dist/index.js"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"dependencies": {
 		"@types/blessed": "^0.1.22",
 		"@types/express": "^4.17.17",

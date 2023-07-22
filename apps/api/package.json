@@ -2,11 +2,14 @@
 	"name": "api",
 	"version": "0.0.1",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "doppler run -- bun run --watch src/index.ts"
+		"dev": "doppler run -- bun run --watch src/index.ts",
+		"build": "bun build ./src/index.ts --outdir ./build",
+		"start": "doppler run -- bun run build/index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {
 		"@elysiajs/bearer": "^0.5.2",
+		"@elysiajs/fn": "^0.5.2",
 		"@elysiajs/swagger": "^0.5.2",
 		"@upstash/ratelimit": "0.4.3",
 		"@upstash/redis": "^1.22.0",

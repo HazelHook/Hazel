@@ -2,7 +2,8 @@
 	"name": "hazel-clui",
 	"type": "module",
 	"scripts": {
-		"build": "tsup src --watch --format esm"
+		"build": "tsup src  --format esm",
+		"build:watch": "tsup src --watch --format esm"
 	},
 	"devDependencies": {
 		"@types/lodash": "^4.14.195",

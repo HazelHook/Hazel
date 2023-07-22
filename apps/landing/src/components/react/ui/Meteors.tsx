@@ -1,5 +1,5 @@
-import clsx from "clsx"
 import { useEffect, useState } from "react"
+import { twMerge } from "tailwind-merge"
 
 interface MeteorsProps {
 	className?: string
@@ -24,7 +24,7 @@ export const Meteors = ({ number = 10, className }: MeteorsProps) => {
 				// Meteor Head
 				<div
 					key={idx}
-					className={clsx(
+					className={twMerge(
 						"absolute top-1/2 left-1/2 h-0.5 w-0.5 rotate-[215deg] animate-meteor rounded-[9999px] bg-slate-500 shadow-[0_0_0_1px_#ffffff10]",
 						className,
 					)}

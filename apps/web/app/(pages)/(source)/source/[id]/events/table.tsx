@@ -103,7 +103,7 @@ const TableSheet = ({
 								<ListItem
 									name="Added Latency"
 									description={`${
-										new Date(data.responses[0]?.send_timestamp).getTime() - new Date(data.timestamp).getTime()
+										new Date(data.responses[0]?.send_at).getTime() - new Date(data.timestamp).getTime()
 									}ms`}
 								/>
 								<ListItem name="Verified" description={capitalizeFirstLetter(String(!!data.validated))} />

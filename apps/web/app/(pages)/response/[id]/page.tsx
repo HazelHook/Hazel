@@ -130,11 +130,11 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 								hour: "numeric",
 								minute: "numeric",
 								second: "numeric",
-							}).format(new Date(res.timestamp))}
+							}).format(new Date(res.received_at))}
 						/>
 						<ListItem
 							name="Added Latency"
-							description={`${new Date(res.timestamp).getTime() - new Date(res.send_timestamp).getTime()}ms`}
+							description={`${new Date(res.received_at).getTime() - new Date(res.send_at).getTime()}ms`}
 						/>
 						<ListItem name="Status" description={res.status} />
 					</div>

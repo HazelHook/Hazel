@@ -32,6 +32,9 @@ importers:
       '@elysiajs/bearer':
         specifier: ^0.5.2
         version: 0.5.2(elysia@0.5.23)
+      '@elysiajs/fn':
+        specifier: ^0.5.2
+        version: 0.5.2(elysia@0.5.23)
       '@elysiajs/swagger':
         specifier: ^0.5.2
         version: 0.5.2(elysia@0.5.23)
@@ -46,7 +49,7 @@ importers:
         version: link:../../packages/db
       elysia:
         specifier: latest
-        version: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+        version: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6)
     devDependencies:
       bun-types:
         specifier: latest
@@ -1310,7 +1313,19 @@ packages:
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6)
+    dev: false
+
+  /@elysiajs/fn@0.5.2(elysia@0.5.23):
+    resolution: {integrity: sha512-LG7Tbl9z0lZYANf1ku4x5BCXn4UDGk6cgRQuzir/uBRyFxHB6UadA8sJKVcE4+CjDsm82wjcKLlw+JRgVIT4HQ==}
+    peerDependencies:
+      elysia: '>= 0.5.0'
+      superjson: '>= 1.12.0'
+    peerDependenciesMeta:
+      superjson:
+        optional: true
+    dependencies:
+      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6)
     dev: false
 
   /@elysiajs/swagger@0.5.2(elysia@0.5.23):
@@ -1318,7 +1333,7 @@ packages:
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6)
     dev: false
 
   /@emmetio/abbreviation@2.3.3:
@@ -5587,6 +5602,31 @@ packages:
 
   /elkjs@0.8.2:
     resolution: {integrity: sha512-L6uRgvZTH+4OF5NE/MBbzQx/WYpru1xCBE9respNj6qznEewGUIfhzmm7horWWxbNO2M0WckQypGctR8lH79xQ==}
+    dev: false
+
+  /elysia@0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6):
+    resolution: {integrity: sha512-y174lgobsKDjk6dFTznydxIJZwVq99FrFo3fHwYJ8n0R7YAWo51JJLJS1rjTfVL//J2Rca42ooCgSSTpO+EGfw==}
+    peerDependencies:
+      '@elysiajs/fn': '*'
+      '@sinclair/typebox': '>= 0.28.10'
+      openapi-types: '>= 12.0.0'
+      typescript: '>= 5.0.0'
+    peerDependenciesMeta:
+      '@elysiajs/fn':
+        optional: true
+      '@sinclair/typebox':
+        optional: true
+      openapi-types:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@elysiajs/fn': 0.5.2(elysia@0.5.23)
+      '@types/lodash.clonedeep': 4.5.7
+      fast-querystring: 1.1.2
+      lodash.clonedeep: 4.5.0
+      memoirist: 0.1.4
+      typescript: 5.1.6
     dev: false
 
   /elysia@0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6):
