@@ -19,8 +19,6 @@ COPY --from=builder /root/.bun/bin/bun bun
 
 COPY packed packed
 
-
-
 ENV ENV production
 CMD ["./bun", "./packed/index.js"]
 
