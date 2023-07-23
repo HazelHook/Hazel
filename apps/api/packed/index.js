@@ -16103,19 +16103,19 @@ var authGuard = (app) => app.use(dist_default3()).derive(async ({ bearer: bearer
   if (!apiKey) {
     throw new Error("Unauthorized");
   }
-  const { success } = await ratelimit2.limit(apiKey.customerId);
+  const { success } = await ratelimit2.limit(apiKey.workspaceId);
   if (!success) {
     throw new Error("Ratelimit");
   }
   return {
-    workspace_id: apiKey.customerId
+    workspace_id: apiKey.workspaceId
   };
 });
 
 // src/routes/v1/connections.ts
 var connectionRouter = (app) => app.use(authGuard).group("connections", (app2) => app2.get("/", async ({ workspace_id }) => {
   const connections = await drizzle_default.connection.getMany({
-    customerId: workspace_id
+    workspaceId: workspace_id
   });
   return connections;
 }).post("/", async ({ body, set: set2, workspace_id }) => {
@@ -16137,14 +16137,14 @@ var connectionRouter = (app) => app.use(authGuard).group("connections", (app2) =
     name: body.name,
     sourceId: source2.id,
     destinationId: destination2.id,
-    customerId: workspace_id
+    workspaceId: workspace_id
   });
   return {
     id: connection2.publicId,
     name: body.name,
     sourceId: source2.id,
     destinationId: destination2.id,
-    customerId: workspace_id
+    workspaceId: workspace_id
   };
 }, {
   body: typebox3.Type.Object({

@@ -33,8 +33,6 @@ const worker = new Worker<{
 		const sendTime = new Date().toISOString()
 		const res = await consumeBase64(job.data.request)
 
-		console.log(res.ok)
-
 		const headersObj: Record<string, string> = {}
 		res.headers.forEach((value, key) => {
 			headersObj[key] = value
@@ -46,7 +44,7 @@ const worker = new Worker<{
 			send_at: sendTime,
 			response_at: new Date().toISOString(),
 			source_id: connection.source.publicId,
-			workspace_id: connection.customerId,
+			workspace_id: connection.workspaceId,
 			version: "1.0",
 			request_id: job.data.requestId,
 			destination_id: connection.destination.publicId,

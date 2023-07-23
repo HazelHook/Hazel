@@ -62,7 +62,7 @@ const app = new Elysia()
 					id: requestId,
 					timestamp: new Date().toISOString(),
 					source_id: source.publicId,
-					workspace_id: source.customerId,
+					workspace_id: source.workspaceId,
 					version: "1.0",
 					body: data,
 					headers: JSON.stringify(headersObj),
@@ -107,7 +107,7 @@ const app = new Elysia()
 							connection: connection,
 							data: data,
 							requestId,
-							customerId: source.customerId,
+							workspaceId: source.workspaceId,
 							sourceId: source.publicId,
 							received_at,
 						})

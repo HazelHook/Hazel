@@ -8,7 +8,7 @@ export const integrationRouter = (app: Elysia) =>
 		app
 			.get("/", async ({ workspace_id }) => {
 				const integrations = await db.integration.getMany({
-					customerId: workspace_id,
+					workspaceId: workspace_id,
 				})
 				return integrations
 			})

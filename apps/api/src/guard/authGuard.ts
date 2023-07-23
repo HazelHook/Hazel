@@ -16,13 +16,13 @@ export const authGuard = (app: Elysia) =>
 			throw new Error("Unauthorized")
 		}
 
-		const { success } = await ratelimit.limit(apiKey.customerId)
+		const { success } = await ratelimit.limit(apiKey.workspaceId)
 
 		if (!success) {
 			throw new Error("Ratelimit")
 		}
 
 		return {
-			workspace_id: apiKey.customerId,
+			workspace_id: apiKey.workspaceId,
 		}
 	})

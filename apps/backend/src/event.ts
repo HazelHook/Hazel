@@ -13,12 +13,20 @@ interface Event {
 	body: string
 	sourceId: string
 	requestId: string
-	customerId: string
+	workspaceId: string
 	data: string
 	received_at: string
 }
 
-export const sendEvent = async ({ connection, sourceId, requestId, customerId, request, body, received_at }: Event) => {
+export const sendEvent = async ({
+	connection,
+	sourceId,
+	requestId,
+	workspaceId,
+	request,
+	body,
+	received_at,
+}: Event) => {
 	try {
 		const sendTime = new Date().toISOString()
 		const res = await fetch(connection.destination.url, request.clone())
@@ -34,7 +42,7 @@ export const sendEvent = async ({ connection, sourceId, requestId, customerId, r
 			send_at: sendTime,
 			response_at: new Date().toISOString(),
 			source_id: sourceId,
-			workspace_id: customerId,
+			workspace_id: workspaceId,
 			version: "1.0",
 			request_id: requestId,
 			destination_id: connection.destination.publicId,

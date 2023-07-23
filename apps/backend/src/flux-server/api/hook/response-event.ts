@@ -24,14 +24,14 @@ export interface ResponseResult {
 export async function logTinybirdEvents({
 	results,
 	sourceId,
-	customerId,
+	workspaceId,
 	requestId,
 	destinations,
 	receivedAt,
 }: {
 	results: ForwardResult[]
 	sourceId: string
-	customerId: string
+	workspaceId: string
 	requestId: string
 	destinations: Destination[]
 	receivedAt: string
@@ -59,7 +59,7 @@ export async function logTinybirdEvents({
 		tinyResponsePromises.push(
 			tiny.response.publish({
 				...responseResult,
-				workspace_id: customerId,
+				workspace_id: workspaceId,
 				version: "1.0",
 			}),
 		)

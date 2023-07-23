@@ -17,15 +17,17 @@ export function getUser(elyisa: ElysiaCLIHandler) {
 			})
 			const userInfoJson = (await userInfo.json()) as any
 
+			// TODO: @Actyc WORKSPACEID NEEDS TO BE IMPLEMENTED PROBS IDK WHAT UR DOING HERE
+
 			set.status = 200
 			const pDestinations = db.destination.getMany({
-				customerId: userInfoJson.user_id,
+				workspaceId: userInfoJson.workspaceId,
 			})
 			const pSources = db.source.getMany({
-				customerId: userInfoJson.user_id,
+				workspaceId: userInfoJson.workspaceId,
 			})
 			const pConnections = db.connection.getMany({
-				customerId: userInfoJson.user_id,
+				workspaceId: userInfoJson.workspaceId,
 			})
 
 			const [destinations, sources, connections] = await Promise.all([pDestinations, pSources, pConnections])

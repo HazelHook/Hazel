@@ -9,9 +9,7 @@
     "lib": ["esnext"],
     "jsx": "react-jsx",
     "incremental": true,                              
-    "composite": true,  
-    "declaration": true,     
-    "declarationMap": true,
+
     "jsxImportSource": "hono/jsx"
   }
 }

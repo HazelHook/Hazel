@@ -53,7 +53,7 @@ export function addHookIngestEndpoint(elysia: Elysia) {
 
 				await handleRequest({
 					request,
-					customerId: source.customerId,
+					workspaceId: source.workspaceId,
 					requestId,
 					destinations,
 					sourceId: source.publicId,
@@ -74,7 +74,7 @@ export async function handleRequest({
 	request,
 	destinations,
 	sourceId,
-	customerId,
+	workspaceId,
 	requestId,
 	queryString,
 	receivedAt,
@@ -82,7 +82,7 @@ export async function handleRequest({
 	request: Request
 	destinations: Destination[]
 	sourceId: string
-	customerId: string
+	workspaceId: string
 	requestId: string
 	queryString: string
 	receivedAt: string
@@ -96,7 +96,7 @@ export async function handleRequest({
 		})
 		const responseIds = await logTinybirdEvents({
 			results,
-			customerId,
+			workspaceId,
 			destinations,
 			requestId,
 			sourceId,

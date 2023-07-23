@@ -8,7 +8,7 @@ export const destinationRouter = (app: Elysia) =>
 		app
 			.get("/", async ({ workspace_id }) => {
 				const destination = await db.destination.getMany({
-					customerId: workspace_id,
+					workspaceId: workspace_id,
 				})
 				return destination
 			})
@@ -18,14 +18,14 @@ export const destinationRouter = (app: Elysia) =>
 					const destination = await db.destination.create({
 						name: body.name,
 						url: body.url,
-						customerId: workspace_id,
+						workspaceId: workspace_id,
 					})
 
 					return {
 						id: destination.publicId,
 						name: body.name,
 						url: body.url,
-						customerId: workspace_id,
+						workspaceId: workspace_id,
 					}
 				},
 				{

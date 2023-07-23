@@ -8,7 +8,7 @@ export const connectionRouter = (app: Elysia) =>
 		app
 			.get("/", async ({ workspace_id }) => {
 				const connections = await db.connection.getMany({
-					customerId: workspace_id,
+					workspaceId: workspace_id,
 				})
 				return connections
 			})
@@ -38,7 +38,7 @@ export const connectionRouter = (app: Elysia) =>
 						name: body.name,
 						sourceId: source.id,
 						destinationId: destination.id,
-						customerId: workspace_id,
+						workspaceId: workspace_id,
 					})
 
 					return {
@@ -46,7 +46,7 @@ export const connectionRouter = (app: Elysia) =>
 						name: body.name,
 						sourceId: source.id,
 						destinationId: destination.id,
-						customerId: workspace_id,
+						workspaceId: workspace_id,
 					}
 				},
 				{
