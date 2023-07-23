@@ -64,17 +64,17 @@ export function connectDB({
 				})
 			},
 			getMany: async ({
-				customerId,
+				workspaceId,
 				includeDeleted,
 			}: {
-				customerId: string
+				workspaceId: string
 				includeDeleted?: boolean
 			}) => {
 				let filter
 				if (!includeDeleted) {
-					filter = and(eq(schema.source.customerId, customerId), isNull(schema.source.deletedAt))
+					filter = and(eq(schema.source.workspaceId, workspaceId), isNull(schema.source.deletedAt))
 				} else {
-					filter = eq(schema.source.customerId, customerId)
+					filter = eq(schema.source.workspaceId, workspaceId)
 				}
 
 				return await db.query.source.findMany({
@@ -135,17 +135,17 @@ export function connectDB({
 				})
 			},
 			getMany: async ({
-				customerId,
+				workspaceId,
 				includeDeleted,
 			}: {
-				customerId: string
+				workspaceId: string
 				includeDeleted?: boolean
 			}) => {
 				let filter
 				if (!includeDeleted) {
-					filter = and(eq(schema.destination.customerId, customerId), isNull(schema.destination.deletedAt))
+					filter = and(eq(schema.destination.workspaceId, workspaceId), isNull(schema.destination.deletedAt))
 				} else {
-					filter = eq(schema.destination.customerId, customerId)
+					filter = eq(schema.destination.workspaceId, workspaceId)
 				}
 
 				return await db.query.destination.findMany({
@@ -209,17 +209,17 @@ export function connectDB({
 				})
 			},
 			getMany: async ({
-				customerId,
+				workspaceId,
 				includeDeleted,
 			}: {
-				customerId: string
+				workspaceId: string
 				includeDeleted?: boolean
 			}) => {
 				let filter
 				if (!includeDeleted) {
-					filter = and(eq(schema.connection.customerId, customerId), isNull(schema.connection.deletedAt))
+					filter = and(eq(schema.connection.workspaceId, workspaceId), isNull(schema.connection.deletedAt))
 				} else {
-					filter = eq(schema.connection.customerId, customerId)
+					filter = eq(schema.connection.workspaceId, workspaceId)
 				}
 
 				return await db.query.connection.findMany({
@@ -277,17 +277,17 @@ export function connectDB({
 				})
 			},
 			getMany: async ({
-				customerId,
+				workspaceId,
 				includeDeleted = false,
 			}: {
-				customerId: string
+				workspaceId: string
 				includeDeleted?: boolean
 			}) => {
 				let filter
 				if (!includeDeleted) {
-					filter = and(eq(schema.integration.customerId, customerId), isNull(schema.integration.deletedAt))
+					filter = and(eq(schema.integration.workspaceId, workspaceId), isNull(schema.integration.deletedAt))
 				} else {
-					filter = eq(schema.integration.customerId, customerId)
+					filter = eq(schema.integration.workspaceId, workspaceId)
 				}
 
 				return await db.query.integration.findMany({
@@ -305,7 +305,7 @@ export function connectDB({
 				})
 				return { res, publicId }
 			},
-			update: async (data: OptionalExceptFor<Omit<schema.InsertIntegration, "customerId">, "publicId">) => {
+			update: async (data: OptionalExceptFor<Omit<schema.InsertIntegration, "workspaceId">, "publicId">) => {
 				const res = await db.update(schema.integration).set(data).where(eq(schema.integration.publicId, data.publicId))
 				return { res }
 			},
@@ -330,17 +330,17 @@ export function connectDB({
 				})
 			},
 			getMany: async ({
-				customerId,
+				workspaceId,
 				includeDeleted = false,
 			}: {
-				customerId: string
+				workspaceId: string
 				includeDeleted?: boolean
 			}) => {
 				let filter
 				if (!includeDeleted) {
-					filter = and(eq(schema.apiKeys.customerId, customerId), isNull(schema.apiKeys.deletedAt))
+					filter = and(eq(schema.apiKeys.workspaceId, workspaceId), isNull(schema.apiKeys.deletedAt))
 				} else {
-					filter = eq(schema.apiKeys.customerId, customerId)
+					filter = eq(schema.apiKeys.workspaceId, workspaceId)
 				}
 
 				return await db.query.apiKeys.findMany({
@@ -381,6 +381,19 @@ export function connectDB({
 						members: true,
 						invites: true,
 					},
+				})
+			},
+			getPersonal: async ({
+				customerId,
+			}: {
+				customerId: string
+			}) => {
+				return db.query.organizations.findFirst({
+					where: and(eq(schema.organizations.ownerId, customerId), eq(schema.organizations.personal, true)),
+					// with: {
+					// 	members: true,
+					// 	invites: true,
+					// },
 				})
 			},
 			create: async (data: Omit<schema.InsertOrganization, "publicId">) => {

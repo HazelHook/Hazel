@@ -14,7 +14,7 @@ interface EventsPageProps {
 }
 
 const EventsPage = async ({ params }: EventsPageProps) => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 	const tiny = Tiny(process.env.TINY_TOKEN as string)
 
 	const connection = await getCachedConnection({ publicId: params.id })
@@ -24,7 +24,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 	}
 
 	const { data, rows_before_limit_at_least } = await tiny.response.get({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		source_id: connection.source?.publicId,
 		destination_id: connection.destination?.publicId,
 	})

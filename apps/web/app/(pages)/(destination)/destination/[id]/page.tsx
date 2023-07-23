@@ -1,6 +1,5 @@
 import { notFound, redirect } from "next/navigation"
 import { sub } from "date-fns"
-import { Tiny } from "db/src/tinybird"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination } from "@/lib/orm"
@@ -8,6 +7,7 @@ import { chartColors, formatDateTime } from "@/lib/utils"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Chart } from "@/components/ui/chart"
 import { transformDestinationsChartData, transformSourcesChartData } from "@/app/(pages)/_utils"
+import tiny from "@/lib/tiny"
 
 const DestinationPage = async ({
 	params,
@@ -19,19 +19,18 @@ const DestinationPage = async ({
 	const destination = await getCachedDestination({ publicId: params.id })
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
-	const { userId } = auth()
-
 	if (!destination) {
 		notFound()
 	}
 
-	if (destination.customerId !== userId) {
+	const { workspaceId } = await auth()
+
+	if (destination.workspaceId !== workspaceId) {
 		redirect("/")
 	}
 
-	const tiny = Tiny(process.env.TINY_TOKEN!)
 	const req = await tiny.response.timeline({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		start_date: startTime,
 	})
 

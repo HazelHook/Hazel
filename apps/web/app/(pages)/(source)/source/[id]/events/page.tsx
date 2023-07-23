@@ -45,7 +45,7 @@ async function fetchData({
 export type EventDataRowType = PromiseType<ReturnType<typeof fetchData>>["data"][number]
 
 const EventsPage = async ({ params }: EventsPageProps) => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 	const source = await getCachedSource({ publicId: params.id })
 
 	if (!source) {
@@ -53,7 +53,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 	}
 
 	const sources = await fetchData({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		source_id: params.id,
 	})
 

@@ -14,7 +14,7 @@ const formSchema = z.object({
 export const createIntegrationAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
 		const integrationResult = await db.integration.create({
-			customerId: opts.ctx.auth.userId,
+			workspaceId: opts.ctx.auth.workspaceId,
 			...opts.input,
 		})
 

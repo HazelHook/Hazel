@@ -16,7 +16,7 @@ export const editSourceAction = createAction(
 			integrationId: integration?.id,
 			name: opts.input.name,
 			url: opts.input.url,
-			customerId: opts.ctx.auth.userId,
+			workspaceId: opts.ctx.auth.workspaceId,
 			publicId: opts.input.publicId,
 		})
 

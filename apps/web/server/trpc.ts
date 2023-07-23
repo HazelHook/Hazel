@@ -1,11 +1,12 @@
 import { headers } from "next/headers"
-import { auth } from "@clerk/nextjs"
 import { experimental_createServerActionHandler } from "@trpc/next/app-dir/server"
 import { initTRPC, TRPCError } from "@trpc/server"
 import superjson from "superjson"
 import { ZodError } from "zod"
 
 import { Context } from "./context"
+import { auth as clerkAuth } from "@clerk/nextjs"
+import db from "@/lib/db"
 
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,
@@ -22,26 +23,40 @@ const t = initTRPC.context<Context>().create({
 })
 
 export const createAction = experimental_createServerActionHandler(t, {
-	createContext() {
+	async createContext() {
 		const newHeaders = new Map(headers())
 
 		// If you're using Node 18 before 18.15.0, omit the "connection" header
 		newHeaders.delete("connection")
 
+		const auth = clerkAuth()
+		const organization = await db.organization.getPersonal({ customerId: auth.userId || "" })
+
 		return {
 			headers: Object.fromEntries(newHeaders),
-			auth: auth(),
+			auth: {
+				workspaceId: organization?.publicId,
+				customerid: auth.userId,
+			},
 		}
 	},
 })
 
 const isAuthed = t.middleware(({ next, ctx }) => {
-	if (!ctx.auth.userId) {
+	if (!ctx.auth.workspaceId || !ctx.auth.customerid) {
 		throw new TRPCError({ code: "UNAUTHORIZED" })
 	}
+
+	if (!ctx.auth.workspaceId) {
+		throw new TRPCError({ code: "UNAUTHORIZED" })
+	}
+
 	return next({
 		ctx: {
-			auth: ctx.auth,
+			auth: {
+				workspaceId: ctx.auth.workspaceId,
+				customerId: ctx.auth.customerid,
+			},
 		},
 	})
 })

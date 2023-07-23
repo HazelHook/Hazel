@@ -50,8 +50,8 @@ export const getCachedDestination = cache(async ({ publicId }: { publicId: strin
 })
 export type CacheDestination = PromiseType<ReturnType<typeof getCachedDestination>>
 
-export const getCachedIntegrations = cache(async ({ customerId }: { customerId: string }) => {
-	const integration = await db.integration.getMany({ customerId })
+export const getCachedIntegrations = cache(async ({ workspaceId }: { workspaceId: string }) => {
+	const integration = await db.integration.getMany({ workspaceId })
 
 	if (!integration) {
 		notFound()

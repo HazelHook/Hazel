@@ -86,9 +86,9 @@ const transformProjectsToFlowElements = (connections: FullConnection[]): { nodes
 }
 
 const ConnectionsOverview = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 	const connections = await db.connection.getMany({
-		customerId: userId,
+		workspaceId: workspaceId,
 	})
 
 	const { nodes, edges } = transformProjectsToFlowElements(connections)

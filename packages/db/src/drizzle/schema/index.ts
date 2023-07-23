@@ -29,7 +29,7 @@ export const source = buildMysqlTable(
 	},
 	(table) => ({
 		publicIdIndex: index("src_public_id_idx").on(table.publicId),
-		customerIdIndex: index("src_workspace_id_idx").on(table.customerId),
+		workspaceIdIndex: index("src_workspace_id_idx").on(table.workspaceId),
 
 		integrationIdIndex: index("src_integration_id_idx").on(table.integrationId),
 	}),
@@ -44,7 +44,7 @@ export const integration = buildMysqlTable(
 	},
 	(table) => ({
 		publicIdIndex: index("itg_public_id_idx").on(table.publicId),
-		customerIdIndex: index("itg_workspace_id_idx").on(table.customerId),
+		workspaceIdIndex: index("itg_workspace_id_idx").on(table.workspaceId),
 
 		nameIndex: index("itg_name_idx").on(table.name),
 	}),
@@ -59,7 +59,7 @@ export const destination = buildMysqlTable(
 	},
 	(table) => ({
 		publicIdIndex: index("dst_public_id_idx").on(table.publicId),
-		customerIdIndex: index("dst_workspace_id_idx").on(table.customerId),
+		workspaceIdIndex: index("dst_workspace_id_idx").on(table.workspaceId),
 	}),
 )
 
@@ -83,7 +83,7 @@ export const connection = buildMysqlTable(
 	(table) => ({
 		publicIdIndex: uniqueIndex("con_public_id_idx").on(table.publicId),
 
-		customerIdIndex: index("con_workspace_id_idx").on(table.customerId),
+		workspaceIdIndex: index("con_workspace_id_idx").on(table.workspaceId),
 
 		sourceIdIndex: index("con_source_id_idx").on(table.sourceId),
 		destinationIndex: index("con_destination_id_idx").on(table.destinationId),
@@ -109,6 +109,9 @@ export const organizations = buildCustomMysqlTable(
 	{
 		id: serial("id").primaryKey().autoincrement(),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+
+		ownerId: varchar("owner_id", { length: 128 }).notNull(),
+		personal: boolean("personal").default(false).notNull(),
 
 		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
 		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),

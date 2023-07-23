@@ -10,9 +10,9 @@ import { AddIcon } from "@/components/icons/pika/add"
 import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { DestinationTable } from "@/app/(pages)/(destination)/_components/DestinationTable"
 
-async function dataFetch({ customerId }: { customerId: string }) {
+async function dataFetch({ workspaceId }: { workspaceId: string }) {
 	const destinations = await db.destination.getMany({
-		customerId,
+		workspaceId,
 	})
 
 	return destinations
@@ -21,10 +21,10 @@ async function dataFetch({ customerId }: { customerId: string }) {
 export type DestinationsDataRowType = PromiseType<ReturnType<typeof dataFetch>>[number]
 
 const DestinationsPage = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
 	const destinations = await dataFetch({
-		customerId: userId,
+		workspaceId,
 	})
 
 	if (!destinations) {

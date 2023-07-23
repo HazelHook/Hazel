@@ -17,6 +17,7 @@
 		"outDir": "dist",
 		"module": "esnext",
 		"strict": false,
+		"incremental": true, 
 		"typeRoots": ["src/global.d.ts"],
 		"target": "ES2022"
 	},

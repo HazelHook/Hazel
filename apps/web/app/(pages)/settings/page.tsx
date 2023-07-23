@@ -5,9 +5,9 @@ import { createApiKeyAction } from "./_actions"
 import { ApiKeyForm } from "./_form"
 
 const SettingsPage = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
-	const apiKeys = await db.api.getMany({ customerId: userId })
+	const apiKeys = await db.api.getMany({ workspaceId: workspaceId })
 	return (
 		<div className="container">
 			{apiKeys.map((key) => (
@@ -15,7 +15,7 @@ const SettingsPage = async () => {
 			))}
 			<p>Create API KEY</p>
 
-			<ApiKeyForm customerId={userId} createAction={createApiKeyAction} />
+			<ApiKeyForm workspaceId={workspaceId} createAction={createApiKeyAction} />
 		</div>
 	)
 }

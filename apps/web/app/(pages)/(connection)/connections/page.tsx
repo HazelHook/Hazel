@@ -13,19 +13,19 @@ import {
 } from "@/app/(pages)/(connection)/_actions"
 import { ConnectionTable } from "@/app/(pages)/(connection)/_components/ConnectionTable"
 
-const fetchData = async ({ customerId }: { customerId: string }) => {
+const fetchData = async ({ workspaceId }: { workspaceId: string }) => {
 	return await db.connection.getMany({
-		customerId,
+		workspaceId,
 	})
 }
 
 export type ConnectionDataRowType = PromiseType<ReturnType<typeof fetchData>>[number]
 
 const ConnectionsPage = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
 	const connections = await fetchData({
-		customerId: userId,
+		workspaceId,
 	})
 
 	return (

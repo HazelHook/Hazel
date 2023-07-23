@@ -11,10 +11,10 @@ import type { createApiKeyAction } from "./_actions"
 
 export const ApiKeyForm = ({
 	createAction,
-	customerId,
+	workspaceId,
 }: {
 	createAction: typeof createApiKeyAction
-	customerId: string
+	workspaceId: string
 }) => {
 	const router = useRouter()
 
@@ -38,7 +38,7 @@ export const ApiKeyForm = ({
 						onClick={() =>
 							toast.promise(
 								createSource.mutateAsync({
-									customerId,
+									workspaceId,
 								}),
 								{
 									loading: "Creating new API Key...",

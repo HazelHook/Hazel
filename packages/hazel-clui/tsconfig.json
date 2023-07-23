@@ -7,6 +7,10 @@
 		"module": "node16",
 		"outDir": "build",
 		"sourceMap": true,
+		"incremental": true,                              
+		"composite": true,  
+		"declaration": true,     
+		"declarationMap": true,
 		"jsx": "react"
 	},
 	"exclude": ["node_modules"]

@@ -11,9 +11,9 @@ import { AddIcon } from "@/components/icons/pika/add"
 import { columns } from "./columns"
 
 const SourcePage = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
-	const sources = await db.source.getMany({ customerId: userId })
+	const sources = await db.source.getMany({ workspaceId })
 
 	if (!sources) {
 		notFound()

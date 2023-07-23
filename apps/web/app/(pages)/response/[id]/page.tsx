@@ -64,9 +64,9 @@ const RequestLink = async ({
 }
 
 const ResponsePage = async ({ params }: ResponsePageProps) => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 	const { data } = await tiny.response.get({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		response_id: params.id,
 		destination_id: undefined, // TODO
 		source_id: undefined,
@@ -80,7 +80,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const res = data[0]
 
 	const req = tiny.request.get({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		request_id: res.request_id,
 	})
 

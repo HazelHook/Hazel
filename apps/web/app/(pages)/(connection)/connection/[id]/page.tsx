@@ -19,36 +19,36 @@ const SourcePage = async ({
 }) => {
 	const connection = await getCachedConnection({ publicId: params.id })
 
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
-	if (connection.customerId !== userId) {
+	if (connection.workspaceId !== workspaceId) {
 		redirect("/")
 	}
 
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	const pRequestKpis = tiny.request.kpi({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})
 
 	const pResponseKpis = tiny.response.kpi({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		source_id: connection.source?.publicId || "",
 		// success: 1,
 		start_date: startTime,
 	})
 
 	const pErrorResponseKpis = tiny.response.kpi({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		source_id: connection.source?.publicId || "",
 		// success: 0,
 		start_date: startTime,
 	})
 
 	const pRequestTimeline = tiny.request.timeline({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		source_id: connection.source?.publicId || "",
 		start_date: startTime,
 	})

@@ -36,10 +36,10 @@ interface ResponsePageProps {
 }
 
 const ResponsePage = async ({ params }: ResponsePageProps) => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 	const { data } = await tiny.request.get({
 		request_id: params.id,
-		workspace_id: userId,
+		workspace_id: workspaceId,
 	})
 
 	if (data.length === 0) {
@@ -49,7 +49,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const req = data[0]
 
 	const { data: resData } = await tiny.response.get({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		request_id: params.id,
 	})
 

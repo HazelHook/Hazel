@@ -5,11 +5,11 @@ import { createConnectionAction } from "../../_actions"
 import { NewConnectionForm } from "./form"
 
 const NewConnectionPage = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
-	const pSources = db.source.getMany({ customerId: userId })
-	const pDestinations = db.destination.getMany({ customerId: userId })
-	const pIntegrations = db.integration.getMany({ customerId: userId })
+	const pSources = db.source.getMany({ workspaceId: workspaceId })
+	const pDestinations = db.destination.getMany({ workspaceId: workspaceId })
+	const pIntegrations = db.integration.getMany({ workspaceId: workspaceId })
 
 	const [sources, destinations, integrations] = await Promise.all([pSources, pDestinations, pIntegrations])
 

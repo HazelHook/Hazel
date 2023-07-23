@@ -10,9 +10,10 @@ import { deleteIntegrationAction, updateIntegrationAction } from "@/app/(pages)/
 export type IntegrationToolColumn = PromiseType<ReturnType<typeof db.integration.getMany>>[number]
 
 const IntegrationsPage = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
+
 	const integrations = await db.integration.getMany({
-		customerId: userId,
+		workspaceId: workspaceId,
 	})
 
 	return (

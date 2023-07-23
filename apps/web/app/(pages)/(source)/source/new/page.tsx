@@ -5,9 +5,9 @@ import { createSourceAction } from "./_actions"
 import { NewSourceForm } from "./form"
 
 const NewSourcePage = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 	const integrations = await getCachedIntegrations({
-		customerId: userId,
+		workspaceId: workspaceId,
 	})
 
 	return (

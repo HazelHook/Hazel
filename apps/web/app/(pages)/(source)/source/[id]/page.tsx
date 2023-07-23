@@ -1,5 +1,4 @@
 import { notFound, redirect } from "next/navigation"
-import { auth } from "@clerk/nextjs"
 import { sub } from "date-fns"
 import { Destination } from "db/src/drizzle/schema"
 import { Tiny } from "db/src/tinybird"
@@ -12,6 +11,7 @@ import { DataTable } from "@/components/ui/data-table"
 import { transformSourcesChartData } from "@/app/(pages)/_utils"
 
 import { columns } from "./column"
+import { auth } from "@/lib/auth"
 
 const SourcePage = async ({
 	params,
@@ -23,18 +23,19 @@ const SourcePage = async ({
 	const source = await getCachedSource({ publicId: params.id })
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
-	const { userId } = auth()
 	if (!source) {
 		notFound()
 	}
 
-	if (source.customerId !== userId) {
+	const { workspaceId } = await auth()
+
+	if (source.workspaceId !== workspaceId) {
 		redirect("/")
 	}
 
 	const tiny = Tiny(process.env.TINY_TOKEN!)
 	const req = await tiny.request.timeline({
-		workspace_id: userId!,
+		workspace_id: workspaceId,
 		source_id: source.publicId,
 		start_date: startTime,
 	})

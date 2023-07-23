@@ -31,7 +31,7 @@ export const createConnectionAction = createAction(
 			name: opts.input.name,
 			sourceId: source.id,
 			destinationId: destination.id,
-			customerId: opts.ctx.auth.userId,
+			workspaceId: opts.ctx.auth.workspaceId,
 		})
 
 		return {
@@ -71,7 +71,7 @@ export const updateConnectionAction = createAction(
 			name: opts.input.name,
 			sourceId: source.id,
 			destinationId: destination.id,
-			customerId: opts.ctx.auth.userId,
+			workspaceId: opts.ctx.auth.workspaceId,
 			publicId: opts.input.publicId,
 		})
 

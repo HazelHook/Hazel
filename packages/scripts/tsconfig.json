@@ -6,5 +6,9 @@
 		"outDir": "dist",
 		"strict": false,
 		"esModuleInterop": true,
+		"incremental": true,                              
+		"composite": true,  
+		"declaration": true,     
+		"declarationMap": true,
 	}
   }

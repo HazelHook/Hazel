@@ -11,11 +11,11 @@ export interface SettingsProps {
 }
 
 export const ConnectionSettingsPage = async ({ id, isModal }: SettingsProps) => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
-	const pSources = db.source.getMany({ customerId: userId })
-	const pDestinations = db.destination.getMany({ customerId: userId })
-	const pIntegrations = db.integration.getMany({ customerId: userId })
+	const pSources = db.source.getMany({ workspaceId })
+	const pDestinations = db.destination.getMany({ workspaceId })
+	const pIntegrations = db.integration.getMany({ workspaceId })
 	const pConnection = db.connection.getOne({ publicId: id })
 
 	const [sources, destinations, integrations, connection] = await Promise.all([

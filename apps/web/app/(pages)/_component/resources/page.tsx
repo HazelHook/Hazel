@@ -9,9 +9,9 @@ import { AddIcon } from "@/components/icons/pika/add"
 import { columns } from "./columns"
 
 const SourcePage = async () => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
-	const sources = await db.source.getMany({ customerId: userId })
+	const sources = await db.source.getMany({ workspaceId })
 	return (
 		<main className="p-4">
 			<div className="flex flex-row justify-between mb-4">

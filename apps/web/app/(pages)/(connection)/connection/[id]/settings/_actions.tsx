@@ -29,7 +29,7 @@ export const editConnectionAction = createAction(
 			name: opts.input.name,
 			sourceId: source.id,
 			destinationId: destination.id,
-			customerId: opts.ctx.auth.userId,
+			workspaceId: opts.ctx.auth.workspaceId,
 			publicId: opts.input.publicId,
 		})
 

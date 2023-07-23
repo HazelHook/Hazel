@@ -26,7 +26,7 @@ interface DashboardPageProps {
 }
 
 const Dashboard = async ({ searchParams }: DashboardPageProps) => {
-	const { userId } = auth()
+	const { workspaceId } = await auth()
 
 	const endTime = searchParams.date_to || formatDateTime(new Date())
 	const startTime =
@@ -36,25 +36,25 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		)
 
 	const requests = tiny.request.get({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		limit: 5,
 	})
 
 	const kpiRequest = tiny.request.kpi({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
 	const kpiResponse = tiny.response.kpi({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		// success: 1,
 		start_date: startTime,
 		end_date: endTime,
 	})
 
 	const kpiError = tiny.response.kpi({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		// success: 0,
 		start_date: startTime,
 		end_date: endTime,
@@ -63,7 +63,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const user = currentUser()
 
 	const timelineBySources = await tiny.request.timeline({
-		workspace_id: userId,
+		workspace_id: workspaceId,
 		start_date: startTime,
 		end_date: endTime,
 	})
@@ -96,6 +96,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 			<div className="flex gap-4 flex-col md:flex-row">
 				<Suspense fallback={<KpiLoadingCard color={chartColors[0]} title={"Events"} />}>
 					<KpiCard
+						key={"events"}
 						color={chartColors[0]}
 						title={"Events"}
 						subtitle={String((await kpiRequest).data.reduce((curr, el) => curr + el.events, 0))}
@@ -113,6 +114,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 				<Suspense fallback={<KpiLoadingCard color={chartColors[1]} title={"Request"} />}>
 					<KpiCard
+						key={"requests"}
 						color={chartColors[1]}
 						title={"Requests"}
 						subtitle={String((await kpiResponse).data.reduce((curr, el) => curr + el.requests, 0))}
@@ -130,6 +132,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 				<Suspense fallback={<KpiLoadingCard color={chartColors[3]} title={"Errors"} />}>
 					<KpiCard
+						key={"errors"}
 						color={chartColors[3]}
 						title={"Errors"}
 						subtitle={String((await kpiError).data.reduce((curr, el) => curr + el.requests, 0))}

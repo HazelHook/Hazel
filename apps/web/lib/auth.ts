@@ -1,12 +1,39 @@
+import "server-only"
+
 import { redirect } from "next/navigation"
-import { auth as clerkAuth } from "@clerk/nextjs"
+import { auth as clerkAuth, currentUser } from "@clerk/nextjs"
+import { retry } from "radash"
+import { randColor } from "@ngneat/falso"
 
-export const auth = () => {
-	const res = clerkAuth()
+import db from "./db"
 
-	if (!res.userId) {
+export const auth = async () => {
+	const { userId } = clerkAuth()
+
+	if (!userId) {
 		redirect("/log-in")
 	}
 
-	return res
+	let organization = await db.organization.getPersonal({ customerId: userId })
+
+	if (!organization) {
+		const user = await currentUser()
+		await retry({}, () =>
+			db.organization.create({
+				name: `${user!.username}'s Organization`,
+				ownerId: userId,
+				slug: `${user!.username}_${randColor().toLowerCase()}`,
+				personal: true,
+			}),
+		)
+
+		organization = await db.organization.getPersonal({ customerId: userId })
+	}
+
+	// This should never happen
+	if (!organization) {
+		redirect("/someroutetoshowerrormessagetocontactus")
+	}
+
+	return { organization, workspaceId: organization.publicId }
 }

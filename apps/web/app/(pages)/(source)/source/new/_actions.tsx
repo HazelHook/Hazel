@@ -22,11 +22,9 @@ export const createSourceAction = createAction(
 		const source = await db.source.create({
 			name: opts.input.name,
 			url: opts.input.url!,
-			integrationId: integrationResult?.id!,
-			customerId: opts.ctx.auth.userId!,
+			integrationId: integrationResult?.id,
+			workspaceId: opts.ctx.auth.workspaceId,
 		})
-
-		console.log(source)
 
 		return {
 			id: source.publicId,
