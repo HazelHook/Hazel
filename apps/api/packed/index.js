@@ -12250,7 +12250,6 @@ var organizations = buildCustomMysqlTable("organizations", {
   id: serial("id").primaryKey().autoincrement(),
   publicId: varchar("public_id", { length: 21 }).unique().notNull(),
   ownerId: varchar("owner_id", { length: 128 }).notNull(),
-  personal: boolean("personal").default(false).notNull(),
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
   updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
   deletedAt: timestamp("deleted_at"),
@@ -12260,12 +12259,13 @@ var organizations = buildCustomMysqlTable("organizations", {
   slugIdx: uniqueIndex("org_slug_idx").on(table.slug),
   publicIdx: uniqueIndex("public_idx").on(table.publicId)
 }));
-var organizationMembers = buildMysqlTable("organization_members", {
+var organizationMembers = buildCustomMysqlTable("organization_members", {
   id: serial("id").primaryKey().autoincrement(),
   publicId: varchar("public_id", { length: 21 }).unique().notNull(),
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
   updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
   deletedAt: timestamp("deleted_at"),
+  personal: boolean("personal").default(false).notNull(),
   customerId: varchar("customer_id", { length: 128 }).notNull(),
   organizationId: int("organization_id").notNull(),
   role: mysqlEnum("role", ["owner", "admin", "member"]).notNull()
@@ -12620,10 +12620,10 @@ function connectDB({
     },
     organization: {
       getOne: async ({
-        publicId
+        slug
       }) => {
         return db.query.organizations.findFirst({
-          where: and(eq(organizations.publicId, publicId), isNull3(organizations.deletedAt)),
+          where: and(eq(organizations.slug, slug), isNull3(organizations.deletedAt)),
           with: {
             members: true,
             invites: true
@@ -12633,9 +12633,16 @@ function connectDB({
       getPersonal: async ({
         customerId
       }) => {
-        return db.query.organizations.findFirst({
-          where: and(eq(organizations.ownerId, customerId), eq(organizations.personal, true))
+        const data2 = await db.query.organizationMembers.findFirst({
+          where: and(eq(organizationMembers.customerId, customerId), eq(organizationMembers.personal, true)),
+          with: {
+            organization: true
+          }
         });
+        if (!data2 || !data2?.organization) {
+          return null;
+        }
+        return data2.organization;
       },
       create: async (data2) => {
         const publicId = generatePublicId("org");
@@ -12657,10 +12664,20 @@ function connectDB({
       },
       memberships: {
         getMany: async ({
-          customerId
+          customerId,
+          orgId
         }) => {
+          if (!customerId && !orgId) {
+            throw new Error("Either customerId or organizationId must be provided.");
+          }
+          let whereClause;
+          if (customerId) {
+            whereClause = eq(organizationMembers.customerId, customerId);
+          } else if (orgId) {
+            whereClause = eq(organizationMembers.organizationId, orgId);
+          }
           const memberShips = db.query.organizationMembers.findMany({
-            where: eq(organizationMembers.customerId, customerId),
+            where: and(whereClause, isNull3(organizationMembers.deletedAt)),
             with: {
               organization: true
             }

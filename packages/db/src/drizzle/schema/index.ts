@@ -111,7 +111,6 @@ export const organizations = buildCustomMysqlTable(
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 
 		ownerId: varchar("owner_id", { length: 128 }).notNull(),
-		personal: boolean("personal").default(false).notNull(),
 
 		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
 		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -125,7 +124,7 @@ export const organizations = buildCustomMysqlTable(
 	}),
 )
 
-export const organizationMembers = buildMysqlTable(
+export const organizationMembers = buildCustomMysqlTable(
 	"organization_members",
 	{
 		id: serial("id").primaryKey().autoincrement(),
@@ -134,6 +133,8 @@ export const organizationMembers = buildMysqlTable(
 		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
 		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		deletedAt: timestamp("deleted_at"),
+
+		personal: boolean("personal").default(false).notNull(),
 
 		customerId: varchar("customer_id", { length: 128 }).notNull(),
 		organizationId: int("organization_id").notNull(),

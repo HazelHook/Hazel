@@ -1,19 +1,16 @@
 import { z } from "zod"
 
 import { publicProcedure, router } from "../trpc"
+import { clerkClient } from "@clerk/nextjs"
 
-export const createPost = publicProcedure
+export const getUser = publicProcedure
 	.input(
 		z.object({
-			title: z.string(),
-			content: z.string(),
+			userId: z.string(),
 		}),
 	)
-	.mutation(async (opts) => {
-		return {
-			id: "1",
-			...opts.input,
-		}
+	.query(async (opts) => {
+		return await clerkClient.users.getUser(opts.input.userId)
 	})
 
 export const appRouter = router({
@@ -27,7 +24,7 @@ export const appRouter = router({
 			return `hello ${opts.input.text}`
 		}),
 
-	createPost,
+	getUser,
 })
 
 export type AppRouter = typeof appRouter

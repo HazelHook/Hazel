@@ -6,6 +6,8 @@ import { retry } from "radash"
 import { randColor } from "@ngneat/falso"
 
 import db from "./db"
+import { generatePublicId } from "db/src/drizzle/schema/common"
+import * as schema from "db/src/drizzle/schema"
 
 export const auth = async () => {
 	const { userId } = clerkAuth()
@@ -18,14 +20,28 @@ export const auth = async () => {
 
 	if (!organization) {
 		const user = await currentUser()
-		await retry({}, () =>
-			db.organization.create({
-				name: `${user!.username}'s Organization`,
-				ownerId: userId,
-				slug: `${user!.username}_${randColor().toLowerCase()}`,
-				personal: true,
-			}),
-		)
+		await retry({}, async () => {
+			await db.db.transaction(async (tx) => {
+				const orgPublicId = generatePublicId("org")
+				console.log(orgPublicId)
+				const res = await tx.insert(schema.organizations).values({
+					name: `${user!.username}'s Organization`,
+					ownerId: userId,
+					slug: `${user!.username}_${randColor().toLowerCase()}`,
+					publicId: orgPublicId,
+				})
+
+				const orgMembershipPublicId = generatePublicId("mem")
+
+				await tx.insert(schema.organizationMembers).values({
+					publicId: orgMembershipPublicId,
+					customerId: userId,
+					organizationId: Number(res.insertId),
+					personal: true,
+					role: "admin",
+				})
+			})
+		})
 
 		organization = await db.organization.getPersonal({ customerId: userId })
 	}

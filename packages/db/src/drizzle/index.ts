@@ -371,12 +371,12 @@ export function connectDB({
 		},
 		organization: {
 			getOne: async ({
-				publicId,
+				slug,
 			}: {
-				publicId: string
+				slug: string
 			}) => {
 				return db.query.organizations.findFirst({
-					where: and(eq(schema.organizations.publicId, publicId), isNull(schema.organizations.deletedAt)),
+					where: and(eq(schema.organizations.slug, slug), isNull(schema.organizations.deletedAt)),
 					with: {
 						members: true,
 						invites: true,
@@ -388,13 +388,21 @@ export function connectDB({
 			}: {
 				customerId: string
 			}) => {
-				return db.query.organizations.findFirst({
-					where: and(eq(schema.organizations.ownerId, customerId), eq(schema.organizations.personal, true)),
-					// with: {
-					// 	members: true,
-					// 	invites: true,
-					// },
+				const data = await db.query.organizationMembers.findFirst({
+					where: and(
+						eq(schema.organizationMembers.customerId, customerId),
+						eq(schema.organizationMembers.personal, true),
+					),
+					with: {
+						organization: true,
+					},
 				})
+
+				if (!data || !data?.organization) {
+					return null
+				}
+
+				return data.organization
 			},
 			create: async (data: Omit<schema.InsertOrganization, "publicId">) => {
 				const publicId = generatePublicId("org")
@@ -423,12 +431,25 @@ export function connectDB({
 			memberships: {
 				getMany: async ({
 					customerId,
+					orgId,
 				}: {
-					customerId: string
-					includeDeleted?: boolean
+					customerId?: string
+					orgId?: number
 				}) => {
+					if (!customerId && !orgId) {
+						throw new Error("Either customerId or organizationId must be provided.")
+					}
+
+					let whereClause
+
+					if (customerId) {
+						whereClause = eq(schema.organizationMembers.customerId, customerId)
+					} else if (orgId) {
+						whereClause = eq(schema.organizationMembers.organizationId, orgId)
+					}
+
 					const memberShips = db.query.organizationMembers.findMany({
-						where: eq(schema.organizationMembers.customerId, customerId),
+						where: and(whereClause, isNull(schema.organizationMembers.deletedAt)),
 						with: {
 							organization: true,
 						},
