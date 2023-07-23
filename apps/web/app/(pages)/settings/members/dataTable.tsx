@@ -18,14 +18,16 @@ import { Button } from "@/components/ui/button"
 import { AddIcon } from "@/components/icons/pika/add"
 import { usePagination } from "@/lib/hooks/usePagination"
 import { OrganizationInviteModal } from "@/components/modals/OrganizationInviteModal"
+import { createOrganizationInvite } from "../_actions"
 
 interface DataTableProps<TData, TValue> {
-	orgId: string
+	orgId: number
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
+	createInviteAction: typeof createOrganizationInvite
 }
 
-export function DataTable<TData, TValue>({ columns, data, orgId }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAction }: DataTableProps<TData, TValue>) {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
 	const { state, setPagination } = usePagination()
@@ -53,7 +55,7 @@ export function DataTable<TData, TValue>({ columns, data, orgId }: DataTableProp
 					onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
 					className="max-w-sm"
 				/>
-				<OrganizationInviteModal orgId={orgId}>
+				<OrganizationInviteModal orgId={orgId} inviteAction={createInviteAction}>
 					<Button>
 						<AddIcon className="mr-2" />
 						Add Member

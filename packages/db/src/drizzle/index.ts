@@ -428,6 +428,16 @@ export function connectDB({
 					.where(eq(schema.organizations.publicId, publicId))
 				return { res }
 			},
+			invite: {
+				create: async (data: Omit<schema.InsertOrganizationInvite, "publicId">) => {
+					const publicId = generatePublicId("inv")
+					const res = await db.insert(schema.organizationInvites).values({
+						...data,
+						publicId,
+					})
+					return { res, publicId }
+				},
+			},
 			memberships: {
 				getMany: async ({
 					customerId,

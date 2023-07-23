@@ -7,10 +7,7 @@ import { formatDistance } from "date-fns"
 import { RoleSelect } from "./_components/RoleSelect"
 import { MemberOptions } from "./_components/MemberOptions"
 import { OrganizationMember } from "db/src/drizzle/schema"
-import { api } from "@/server/client"
-import { Suspense, use, useEffect, useState } from "react"
 import { User } from "@clerk/nextjs/dist/types/server"
-import { getSeededProfileImageUrl } from "@/lib/utils"
 import { UserCell } from "./_components/UserCell"
 
 export const columns: ColumnDef<OrganizationMember>[] = [

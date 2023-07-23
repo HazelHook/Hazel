@@ -4,6 +4,7 @@ import { columns } from "./columns"
 import db from "@/lib/db"
 import { auth } from "@/lib/auth"
 import { Container } from "@/components/ui/container"
+import { createOrganizationInvite } from "../_actions"
 
 interface MemberListPageProps {
 	params: {
@@ -29,7 +30,12 @@ const MemberListPage = async ({ params, searchParams }: MemberListPageProps) => 
 
 	return (
 		<Container>
-			<DataTable columns={columns} orgId={organization.publicId} data={memberships} />
+			<DataTable
+				columns={columns}
+				orgId={organization.id}
+				data={memberships}
+				createInviteAction={createOrganizationInvite}
+			/>
 		</Container>
 	)
 }
