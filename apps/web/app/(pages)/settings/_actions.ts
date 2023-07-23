@@ -18,6 +18,26 @@ export const createApiKeyAction = createAction(
 	}),
 )
 
+export const revokeOrganizationInvite = createAction(
+	protectedProcedure
+		.input(
+			z.object({
+				inviteId: z.string(),
+			}),
+		)
+		.mutation(async (opts) => {
+			const invitation = await db.organization.invite.revoke({
+				publicInviteId: opts.input.inviteId,
+			})
+
+			// TODO: SEND EMAIL HERE
+
+			return {
+				id: invitation.publicId,
+			}
+		}),
+)
+
 export const createOrganizationInvite = createAction(
 	protectedProcedure
 		.input(

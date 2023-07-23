@@ -1,0 +1,20 @@
+"use client"
+
+import { OrganizationInvite } from "db/src/drizzle/schema"
+import type { createOrganizationInvite, revokeOrganizationInvite } from "../../_actions"
+import { DataTable } from "../../members/dataTable"
+import { columns } from "../columns"
+
+export const TableWrapper = ({
+	revokeAction,
+	inviteAction,
+	invites,
+	orgId,
+}: {
+	revokeAction: typeof revokeOrganizationInvite
+	inviteAction: typeof createOrganizationInvite
+	invites: OrganizationInvite[]
+	orgId: number
+}) => {
+	return <DataTable columns={columns(revokeAction)} orgId={orgId} createInviteAction={inviteAction} data={invites} />
+}

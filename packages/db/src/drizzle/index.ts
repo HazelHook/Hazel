@@ -429,12 +429,34 @@ export function connectDB({
 				return { res }
 			},
 			invite: {
+				getMany: async ({
+					orgId,
+				}: {
+					orgId: number
+				}) => {
+					const invites = db.query.organizationInvites.findMany({
+						where: and(
+							eq(schema.organizationInvites.organizationId, orgId),
+							isNull(schema.organizationMembers.deletedAt),
+						),
+					})
+
+					return invites
+				},
 				create: async (data: Omit<schema.InsertOrganizationInvite, "publicId">) => {
 					const publicId = generatePublicId("inv")
 					const res = await db.insert(schema.organizationInvites).values({
 						...data,
 						publicId,
 					})
+					return { res, publicId }
+				},
+				revoke: async (data: { publicInviteId: string }) => {
+					const publicId = generatePublicId("inv")
+					const res = await db
+						.delete(schema.organizationInvites)
+						.where(eq(schema.organizationInvites.publicId, data.publicInviteId))
+
 					return { res, publicId }
 				},
 			},
@@ -460,9 +482,6 @@ export function connectDB({
 
 					const memberShips = db.query.organizationMembers.findMany({
 						where: and(whereClause, isNull(schema.organizationMembers.deletedAt)),
-						with: {
-							organization: true,
-						},
 					})
 					return memberShips
 				},

@@ -1,13 +1,10 @@
 "use client"
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-
 import { ColumnDef } from "@tanstack/react-table"
 import { formatDistance } from "date-fns"
 import { RoleSelect } from "./_components/RoleSelect"
 import { MemberOptions } from "./_components/MemberOptions"
 import { OrganizationMember } from "db/src/drizzle/schema"
-import { User } from "@clerk/nextjs/dist/types/server"
 import { UserCell } from "./_components/UserCell"
 
 export const columns: ColumnDef<OrganizationMember>[] = [
