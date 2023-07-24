@@ -18,9 +18,9 @@ import {
 import { useRouter } from "next/navigation"
 import AutoForm from "../ui/auto-form"
 import { useAction } from "@/server/client"
-import { createOrganizationInvite } from "@/app/(pages)/settings/_actions"
 import { toast } from "sonner"
 import { orgInviteFormSchema } from "./schemas/organization"
+import type { createOrganizationInvite } from "@/server/actions/organization-invite"
 
 interface CreateOrganizationModalProps {
 	children: ReactNode

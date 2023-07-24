@@ -7,8 +7,8 @@ import { PromiseType } from "@/lib/ts/helpers"
 import { buttonVariants } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
 import { AddIcon } from "@/components/icons/pika/add"
-import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { DestinationTable } from "@/app/(pages)/(destination)/_components/DestinationTable"
+import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 
 async function dataFetch({ workspaceId }: { workspaceId: string }) {
 	const destinations = await db.destination.getMany({

@@ -1,22 +1,9 @@
 "use server"
 
 import { z } from "zod"
-
-import { createAction, protectedProcedure } from "@/server/trpc"
+import { createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
 import { orgInviteFormSchema } from "@/components/modals/schemas/organization"
-
-export const createApiKeyAction = createAction(
-	protectedProcedure.input(z.object({ workspaceId: z.string() })).mutation(async (opts) => {
-		const connection = await db.api.create({
-			workspaceId: opts.input.workspaceId,
-		})
-
-		return {
-			id: connection.publicId,
-		}
-	}),
-)
 
 export const revokeOrganizationInvite = createAction(
 	protectedProcedure

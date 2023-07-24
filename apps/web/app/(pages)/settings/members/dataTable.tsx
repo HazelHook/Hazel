@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button"
 import { AddIcon } from "@/components/icons/pika/add"
 import { usePagination } from "@/lib/hooks/usePagination"
 import { OrganizationInviteModal } from "@/components/modals/OrganizationInviteModal"
-import { createOrganizationInvite } from "../_actions"
+import type { createOrganizationInvite } from "@/server/actions/organization-invite"
 
 interface DataTableProps<TData, TValue> {
 	orgId: number

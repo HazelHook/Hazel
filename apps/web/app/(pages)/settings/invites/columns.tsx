@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { InviteOptions } from "./_components/InviteOptions"
 import { dateFormatter } from "@/lib/formatters"
 import { OrganizationInvite } from "db/src/drizzle/schema"
-import { revokeOrganizationInvite } from "../_actions"
+import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
 
 export const columns: (revokeAction: typeof revokeOrganizationInvite) => ColumnDef<OrganizationInvite>[] = (
 	revokeAction,

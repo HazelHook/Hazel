@@ -4,7 +4,7 @@ import { columns } from "./columns"
 import db from "@/lib/db"
 import { auth } from "@/lib/auth"
 import { Container } from "@/components/ui/container"
-import { createOrganizationInvite } from "../_actions"
+import { createOrganizationInvite } from "@/server/actions/organization-invite"
 
 interface MemberListPageProps {
 	params: {

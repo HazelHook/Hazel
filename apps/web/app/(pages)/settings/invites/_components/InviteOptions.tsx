@@ -13,8 +13,9 @@ import { ThreeDotsVerticalIcon } from "@/components/icons/pika/threeDotsVertical
 import { ClipboardIcon } from "@/components/icons/pika/clipboard"
 import { UserCrossIcon } from "@/components/icons/pika/userCross"
 import { useAction } from "@/server/client"
-import { revokeOrganizationInvite } from "../../_actions"
+
 import { toast } from "sonner"
+import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
 
 export interface InviteOptionsProps {
 	emailAdress: string

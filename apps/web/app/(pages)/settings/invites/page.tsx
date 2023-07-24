@@ -1,11 +1,9 @@
 import { redirect } from "next/navigation"
-import { columns } from "./columns"
-import { DataTable } from "../members/dataTable"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { createOrganizationInvite, revokeOrganizationInvite } from "../_actions"
 import { Container } from "@/components/ui/container"
 import { TableWrapper } from "./_components/TableWrapper"
+import { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
 
 const MemberListPage = async ({ params, searchParams }: any) => {
 	const { organization } = await auth()
