@@ -6,12 +6,19 @@ import AutoForm from "@/components/ui/auto-form"
 import { Button } from "@/components/ui/button"
 import { updateOrganzationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"
+import { useRouter } from "next/navigation"
 
 export const OrganizationUpdateForm = ({
 	pOrgId,
 	defaultValues,
 }: { pOrgId: string; defaultValues?: z.infer<typeof orgUpdateFormSchema> }) => {
-	const updateOrg = useAction(updateOrganzationAction)
+	const router = useRouter()
+
+	const updateOrg = useAction(updateOrganzationAction, {
+		onSuccess: () => {
+			router.refresh()
+		},
+	})
 
 	return (
 		<AutoForm

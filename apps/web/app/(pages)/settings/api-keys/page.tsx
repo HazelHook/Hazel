@@ -1,8 +1,8 @@
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 
-import { ApiKeyForm } from "../_form"
 import { createApiKeyAction } from "@/server/actions/api-keys"
+import { ApiKeyModal } from "./modal"
 
 const ApiKeyPage = async () => {
 	const { workspaceId } = await auth()
@@ -16,7 +16,7 @@ const ApiKeyPage = async () => {
 			))}
 			<p>Create API KEY</p>
 
-			<ApiKeyForm workspaceId={workspaceId} createAction={createApiKeyAction} />
+			<ApiKeyModal workspaceId={workspaceId} createAction={createApiKeyAction} />
 		</div>
 	)
 }
