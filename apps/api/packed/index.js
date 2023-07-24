@@ -12662,6 +12662,29 @@ function connectDB({
         }).where(eq(organizations.publicId, publicId));
         return { res };
       },
+      invite: {
+        getMany: async ({
+          orgId
+        }) => {
+          const invites = db.query.organizationInvites.findMany({
+            where: and(eq(organizationInvites.organizationId, orgId), isNull3(organizationMembers.deletedAt))
+          });
+          return invites;
+        },
+        create: async (data2) => {
+          const publicId = generatePublicId("inv");
+          const res = await db.insert(organizationInvites).values({
+            ...data2,
+            publicId
+          });
+          return { res, publicId };
+        },
+        revoke: async (data2) => {
+          const publicId = generatePublicId("inv");
+          const res = await db.delete(organizationInvites).where(eq(organizationInvites.publicId, data2.publicInviteId));
+          return { res, publicId };
+        }
+      },
       memberships: {
         getMany: async ({
           customerId,
@@ -12677,10 +12700,7 @@ function connectDB({
             whereClause = eq(organizationMembers.organizationId, orgId);
           }
           const memberShips = db.query.organizationMembers.findMany({
-            where: and(whereClause, isNull3(organizationMembers.deletedAt)),
-            with: {
-              organization: true
-            }
+            where: and(whereClause, isNull3(organizationMembers.deletedAt))
           });
           return memberShips;
         }
