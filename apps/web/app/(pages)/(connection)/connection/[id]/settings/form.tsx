@@ -18,13 +18,13 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AddIcon } from "@/components/icons/pika/add"
-import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
 import { createSourceAction } from "@/server/actions/source"
 
 import { createDestinationAction } from "@/server/actions/destination"
 import type { updateConnectionAction } from "@/server/actions/connections"
 import { updateConnectionSchema } from "@/lib/schemas/connection"
 import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
+import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction
@@ -329,7 +329,7 @@ export function UpdateConnectionForm({
 
 			<Dialog open={destinationModal} onOpenChange={setDestinationModal}>
 				<DialogContent>
-					<NewDestinationForm
+					<CreateDestinationForm
 						onClose={(id) => {
 							setDestinationModal(false)
 							form.setValue("publiceDestinationId", id, {

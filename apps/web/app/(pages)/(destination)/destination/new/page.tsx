@@ -1,10 +1,10 @@
+import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
 import { createDestinationAction } from "@/server/actions/destination"
-import { NewDestinationForm } from "./form"
 
 const NewSourcePage = () => {
 	return (
 		<main className="p-4">
-			<NewDestinationForm action={createDestinationAction} />
+			<CreateDestinationForm action={createDestinationAction} />
 		</main>
 	)
 }
