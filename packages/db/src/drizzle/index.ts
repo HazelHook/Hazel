@@ -371,12 +371,12 @@ export function connectDB({
 		},
 		organization: {
 			getOne: async ({
-				slug,
+				publicId,
 			}: {
-				slug: string
+				publicId: string
 			}) => {
 				return db.query.organizations.findFirst({
-					where: and(eq(schema.organizations.slug, slug), isNull(schema.organizations.deletedAt)),
+					where: and(eq(schema.organizations.publicId, publicId), isNull(schema.organizations.deletedAt)),
 					with: {
 						members: true,
 						invites: true,

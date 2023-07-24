@@ -31,8 +31,6 @@ interface CreateOrganizationModalProps {
 export const OrganizationInviteModal = ({ children, orgId, inviteAction }: CreateOrganizationModalProps) => {
 	const router = useRouter()
 
-	const [isSubmitting, setIsSubmitting] = useState(false)
-
 	const [open, setOpen] = useState(false)
 
 	const handleInvite = useAction(inviteAction, {
@@ -57,13 +55,17 @@ export const OrganizationInviteModal = ({ children, orgId, inviteAction }: Creat
 				<DialogHeader>
 					<DialogTitle>Add member to organization</DialogTitle>
 				</DialogHeader>
-				<AutoForm formSchema={orgInviteFormSchema} onSubmit={onSubmit} onStateChange={setIsSubmitting}>
+				<AutoForm formSchema={orgInviteFormSchema} onSubmit={onSubmit}>
 					<DialogFooter>
 						<DialogClose asChild>
 							<Button variant="outline">Cancel</Button>
 						</DialogClose>
 
-						<Button type="submit" disabled={isSubmitting} loading={isSubmitting}>
+						<Button
+							type="submit"
+							disabled={handleInvite.status === "loading"}
+							loading={handleInvite.status === "loading"}
+						>
 							Invite
 						</Button>
 					</DialogFooter>

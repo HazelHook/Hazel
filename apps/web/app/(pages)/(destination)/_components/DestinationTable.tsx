@@ -1,9 +1,9 @@
 "use client"
 
 import { DataTable } from "@/components/ui/data-table"
-import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { columns } from "@/app/(pages)/(destination)/destinations/columns"
 import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
+import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 
 export const DestinationTable = ({
 	destination,

@@ -11,8 +11,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-import type { createDestinationAction } from "../../_actions"
 import { formSchema } from "./schema"
+import type { createDestinationAction } from "@/server/actions/destination"
 
 interface NewDestinationFormProps {
 	action: typeof createDestinationAction

@@ -2,6 +2,7 @@ import { Sidebar } from "@/components/Sidebar"
 import { AtomIcon } from "@/components/icons/pika/atom"
 import { BarChartUpIcon } from "@/components/icons/pika/barChartUp"
 import { CardIcon } from "@/components/icons/pika/card"
+import { KeyIcon } from "@/components/icons/pika/key"
 import { Settings02Icon } from "@/components/icons/pika/settings02"
 import { User2Icon } from "@/components/icons/pika/user2"
 import { UserPlusIcon } from "@/components/icons/pika/userPlus"
@@ -30,9 +31,9 @@ const SettingsLayout = ({ children }: { children: ReactNode }) => {
 								href: "/settings/usage",
 							},
 							{
-								title: "API",
-								icon: AtomIcon,
-								href: "/settings/api",
+								title: "API Keys",
+								icon: KeyIcon,
+								href: "/settings/api-keys",
 							},
 						],
 					},

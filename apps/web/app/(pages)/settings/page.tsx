@@ -1,22 +1,23 @@
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
 
-import { createApiKeyAction } from "./_actions"
-import { ApiKeyForm } from "./_form"
+import { Container } from "@/components/ui/container"
+import { OrganizationUpdateForm } from "@/components/forms/organization/OrganizationUpdateForm"
 
 const SettingsPage = async () => {
-	const { workspaceId } = await auth()
+	const { workspaceId, organization } = await auth()
 
-	const apiKeys = await db.api.getMany({ workspaceId: workspaceId })
 	return (
-		<div className="container">
-			{apiKeys.map((key) => (
-				<p key={key.publicId}>{key.publicId}</p>
-			))}
-			<p>Create API KEY</p>
+		<Container>
+			<div>
+				<h1 className="text-3xl font-bold">Settings</h1>
+				<p className="text-lg">Configure general settings for your instance</p>
+			</div>
 
-			<ApiKeyForm workspaceId={workspaceId} createAction={createApiKeyAction} />
-		</div>
+			<OrganizationUpdateForm
+				defaultValues={{ name: organization.name, slug: organization.slug }}
+				pOrgId={workspaceId}
+			/>
+		</Container>
 	)
 }
 

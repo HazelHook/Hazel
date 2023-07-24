@@ -3,8 +3,8 @@ import "server-only"
 import { notFound } from "next/navigation"
 
 import db from "@/lib/db"
-import { updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
+import { updateDestinationAction } from "@/server/actions/destination"
 
 export interface SettingsProps {
 	id: string

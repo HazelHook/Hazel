@@ -11,8 +11,8 @@ import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { formSchema } from "@/app/(pages)/(destination)/destination/new/schema"
+import type { updateDestinationAction } from "@/server/actions/destination"
 
 export const UpdateDestinationForm = ({
 	data,

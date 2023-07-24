@@ -14,6 +14,7 @@ import { Switch } from "./switch"
 import { Textarea } from "./textarea"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion"
 import { RadioGroup, RadioGroupItem } from "./radio-group"
+import { toast } from "sonner"
 
 /**
  * Beautify a camelCase string.
@@ -410,10 +411,11 @@ export function AutoFormSubmit({ children }: { children?: React.ReactNode }) {
 
 function AutoForm<SchemaType extends z.ZodObject<any, any>>({
 	formSchema,
+	toastValues,
 	values: valuesProp,
 	onValuesChange: onValuesChangeProp,
 	onSubmit: onSubmitProp,
-	onStateChange,
+	defaultValues,
 	fieldConfig,
 	children,
 	className,
@@ -421,28 +423,35 @@ function AutoForm<SchemaType extends z.ZodObject<any, any>>({
 	formSchema: SchemaType
 	values?: Partial<z.infer<SchemaType>>
 	onValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
-	onSubmit?: (values: z.infer<SchemaType>) => void
-	onStateChange?: (isSubmitting: boolean) => void
+	onSubmit?: (values: z.infer<SchemaType>) => Promise<void>
 	fieldConfig?: FieldConfig<z.infer<SchemaType>>
 	children?: React.ReactNode
 	className?: string
+	defaultValues?: any
+	toastValues?: {
+		loading: string
+		success: string
+		error: string
+	}
 }) {
-	const defaultValues: DefaultValues<z.infer<typeof formSchema>> = getDefaultValues(formSchema)
+	const cDefaultValues: DefaultValues<z.infer<typeof formSchema>> = defaultValues || getDefaultValues(formSchema)
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues,
+		defaultValues: cDefaultValues,
 		values: valuesProp,
 	})
-
-	// useEffect(() => {
-	// 	onStateChange?.(form.formState.isSubmitting)
-	// }, [form.formState.isSubmitting])
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		const parsedValues = formSchema.safeParse(values)
 		if (parsedValues.success) {
-			onSubmitProp?.(parsedValues.data)
+			if (onSubmitProp) {
+				toast.promise(onSubmitProp(parsedValues.data), {
+					loading: toastValues?.loading || "Saving Data...",
+					success: toastValues?.success || "Sucessfully Saved",
+					error: toastValues?.error || "There was an error saving... Please try again and contact us if it persists.",
+				})
+			}
 		}
 	}
 
