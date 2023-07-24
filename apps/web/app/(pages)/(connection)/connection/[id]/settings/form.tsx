@@ -20,11 +20,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { AddIcon } from "@/components/icons/pika/add"
 import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
 import { createSourceAction } from "@/server/actions/source"
-import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import { createDestinationAction } from "@/server/actions/destination"
 import type { updateConnectionAction } from "@/server/actions/connections"
 import { updateConnectionSchema } from "@/lib/schemas/connection"
+import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction
@@ -315,7 +315,7 @@ export function UpdateConnectionForm({
 
 			<Dialog open={sourceModal} onOpenChange={setSourceModal}>
 				<DialogContent>
-					<NewSourceForm
+					<CreateSourceForm
 						shouldRedirect={false}
 						onClose={(id) => {
 							setSourceModal(false)

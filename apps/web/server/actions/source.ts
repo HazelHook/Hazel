@@ -26,7 +26,7 @@ export const createSourceAction = createAction(
 	}),
 )
 
-export const editSourceAction = createAction(
+export const updateSourceAction = createAction(
 	protectedProcedure.input(updateSourceSchema).mutation(async (opts) => {
 		const integration = opts.input.integrationId
 			? await db.integration.getOne({
