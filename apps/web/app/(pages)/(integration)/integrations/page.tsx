@@ -5,7 +5,7 @@ import db from "@/lib/db"
 import { PromiseType } from "@/lib/ts/helpers"
 import { IntegrationsTable } from "@/app/(pages)/(integration)/_components/IntegrationTable"
 import { IntegrationToolCard } from "@/app/(pages)/(integration)/_components/IntegrationToolCard"
-import { deleteIntegrationAction, updateIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
+import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 
 export type IntegrationToolColumn = PromiseType<ReturnType<typeof db.integration.getMany>>[number]
 

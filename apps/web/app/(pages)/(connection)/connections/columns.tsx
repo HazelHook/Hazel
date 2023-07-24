@@ -13,11 +13,7 @@ import { Cell, SortableHeader } from "@/components/ui/data-table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { EyeOpenIcon } from "@/components/icons/pika/eyeOpen"
-import {
-	deleteConnectionAction,
-	pauseConnectionAction,
-	updateConnectionAction,
-} from "@/app/(pages)/(connection)/_actions"
+import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { ConnectionActions } from "@/app/(pages)/(connection)/_components/ConnectionActions"
 import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
 

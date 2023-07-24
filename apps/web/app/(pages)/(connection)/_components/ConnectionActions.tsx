@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import type { deleteConnectionAction, pauseConnectionAction } from "@conn/_actions"
+import type { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { ConnectionDataRowType } from "@conn/connections/page"
 import { toast } from "sonner"
 

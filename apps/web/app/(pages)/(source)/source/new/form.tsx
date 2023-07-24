@@ -12,8 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { editSourceAction } from "@/app/(pages)/(source)/source/[id]/settings/_actions"
-import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
+import { createSourceAction } from "@/server/actions/source"
 
 import { formSchema } from "./schema"
 

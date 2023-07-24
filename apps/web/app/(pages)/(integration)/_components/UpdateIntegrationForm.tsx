@@ -14,7 +14,7 @@ import { Form } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { LabeledSeparator } from "@/components/LabeledSeparator"
 import { IntegrationToolField } from "@/app/(pages)/(integration)/_components/IntegrationToolField"
-import { createIntegrationAction, updateIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
+import { createIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 
 export const UpdateIntegrationForm = ({
 	data,

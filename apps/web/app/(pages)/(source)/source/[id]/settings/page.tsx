@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { getCachedSource } from "@/lib/orm"
-import { editSourceAction } from "@/app/(pages)/(source)/source/[id]/settings/_actions"
+import { editSourceAction } from "@/server/actions/source"
 import { EditSourceForm } from "@/app/(pages)/(source)/source/[id]/settings/form"
 
 interface EventsPageProps {

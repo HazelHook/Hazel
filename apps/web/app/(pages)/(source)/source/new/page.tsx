@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 import { getCachedIntegrations } from "@/lib/orm"
 
-import { createSourceAction } from "./_actions"
+import { createSourceAction } from "../../../../../server/actions/source"
 import { NewSourceForm } from "./form"
 
 const NewSourcePage = async () => {

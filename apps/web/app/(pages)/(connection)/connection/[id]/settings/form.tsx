@@ -20,7 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { AddIcon } from "@/components/icons/pika/add"
 import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
 import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
-import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
+import { createSourceAction } from "@/server/actions/source"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import { formSchema } from "./schema"

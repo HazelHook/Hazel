@@ -15,7 +15,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-import type { editSourceAction } from "./_actions"
+import type { editSourceAction } from "@/server/actions/source"
 import { formSchema } from "./schema"
 
 interface EditSourceFormProps {

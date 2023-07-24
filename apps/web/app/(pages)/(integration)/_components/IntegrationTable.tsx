@@ -1,7 +1,7 @@
 "use client"
 
 import { DataTable } from "@/components/ui/data-table"
-import { deleteIntegrationAction, updateIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
+import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { columns } from "@/app/(pages)/(integration)/integrations/columns"
 import { IntegrationToolColumn } from "@/app/(pages)/(integration)/integrations/page"
 

@@ -10,10 +10,7 @@ import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
 import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { IntegrationsActions } from "@/app/(pages)/(integration)/_components/IntegrationsActions"
-import type {
-	deleteIntegrationAction,
-	updateIntegrationAction,
-} from "@/app/(pages)/(integration)/integrations/_actions"
+import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { IntegrationToolColumn } from "@/app/(pages)/(integration)/integrations/page"
 
 export const columns: (

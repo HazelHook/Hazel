@@ -5,7 +5,7 @@ import { z } from "zod"
 import { createAction, protectedProcedure } from "@/server/trpc"
 import db from "@/lib/db"
 
-import { formSchema } from "./connection/new/schema"
+import { formSchema } from "../../app/(pages)/(connection)/connection/new/schema"
 
 /**
  * Either inline procedures using trpc's flexible

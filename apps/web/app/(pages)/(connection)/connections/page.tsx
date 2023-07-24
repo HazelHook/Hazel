@@ -6,11 +6,7 @@ import { PromiseType } from "@/lib/ts/helpers"
 import { buttonVariants } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
 import { AddIcon } from "@/components/icons/pika/add"
-import {
-	deleteConnectionAction,
-	pauseConnectionAction,
-	updateConnectionAction,
-} from "@/app/(pages)/(connection)/_actions"
+import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { ConnectionTable } from "@/app/(pages)/(connection)/_components/ConnectionTable"
 
 const fetchData = async ({ workspaceId }: { workspaceId: string }) => {
