@@ -11,9 +11,9 @@ import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { SortableHeader } from "@/components/ui/data-table"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
-import { deleteDestinationAction, updateDestinationAction } from "@/app/(pages)/(destination)/_actions"
 import { DestinationsActions } from "@/app/(pages)/(destination)/_components/DestinationsActions"
 import { DestinationsDataRowType } from "@/app/(pages)/(destination)/destinations/page"
+import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 
 export const columns: (
 	deleteAction: typeof deleteDestinationAction,
