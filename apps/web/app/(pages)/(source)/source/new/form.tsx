@@ -13,8 +13,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { createSourceAction } from "@/server/actions/source"
-
-import { formSchema } from "./schema"
+import { createSourceSchema } from "@/lib/schemas/source"
 
 interface NewSourceFormProps {
 	action: typeof createSourceAction
@@ -26,8 +25,8 @@ interface NewSourceFormProps {
 export function NewSourceForm({ onClose, action, shouldRedirect = true, integrations }: NewSourceFormProps) {
 	const router = useRouter()
 
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof createSourceSchema>>({
+		resolver: zodResolver(createSourceSchema),
 		defaultValues: {
 			name: "",
 			url: "",
@@ -49,8 +48,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 		},
 	})
 
-	// 2. Define a submit handler.
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	function onSubmit(values: z.infer<typeof createSourceSchema>) {
 		createSource.mutate(values)
 	}
 
@@ -92,7 +90,7 @@ export function NewSourceForm({ onClose, action, shouldRedirect = true, integrat
 						<FormItem>
 							<FormLabel>Integration - Optional</FormLabel>
 							{IntegrationTools.length > 0 && (
-								<Select onValueChange={field.onChange} value={field.value}>
+								<Select onValueChange={field.onChange} value={field.value || ""}>
 									<FormControl>
 										<SelectTrigger>
 											<SelectValue

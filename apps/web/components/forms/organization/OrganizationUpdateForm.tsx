@@ -1,7 +1,7 @@
 "use client"
 
 import { z } from "zod"
-import { orgUpdateFormSchema } from "@/components/modals/schemas/organization"
+import { orgUpdateFormSchema } from "@/lib/schemas/organization"
 import AutoForm from "@/components/ui/auto-form"
 import { Button } from "@/components/ui/button"
 import { updateOrganzationAction } from "@/server/actions/organization"

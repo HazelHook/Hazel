@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -11,8 +10,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-import { formSchema } from "./schema"
 import type { createDestinationAction } from "@/server/actions/destination"
+import { createDestinationSchema } from "@/lib/schemas/destination"
 
 interface NewDestinationFormProps {
 	action: typeof createDestinationAction
@@ -23,8 +22,8 @@ interface NewDestinationFormProps {
 export function NewDestinationForm({ onClose, action, shouldRedirect = true }: NewDestinationFormProps) {
 	const router = useRouter()
 
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof createDestinationSchema>>({
+		resolver: zodResolver(createDestinationSchema),
 		defaultValues: {
 			name: "",
 			url: "",
@@ -46,7 +45,7 @@ export function NewDestinationForm({ onClose, action, shouldRedirect = true }: N
 	})
 
 	// 2. Define a submit handler.
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	function onSubmit(values: z.infer<typeof createDestinationSchema>) {
 		createSource.mutate(values)
 	}
 

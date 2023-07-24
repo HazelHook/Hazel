@@ -21,8 +21,8 @@ import { createSourceAction } from "@/server/actions/source"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import type { createConnectionAction } from "@/server/actions/connections"
-import { formSchema } from "./schema"
 import { createDestinationAction } from "@/server/actions/destination"
+import { createConnectionSchema } from "@/lib/schemas/connection"
 
 interface NewSourceFormProps {
 	action: typeof createConnectionAction
@@ -38,8 +38,8 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 
 	const router = useRouter()
 
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof createConnectionSchema>>({
+		resolver: zodResolver(createConnectionSchema),
 		defaultValues: {
 			name: "",
 			publicSourceId: searchParams.get("source") || sources[0]?.publicId || "",
@@ -56,7 +56,7 @@ export function NewConnectionForm({ action, sources, destinations, integrations 
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	function onSubmit(values: z.infer<typeof createConnectionSchema>) {
 		createSource.mutate(values)
 	}
 

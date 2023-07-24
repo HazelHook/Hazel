@@ -11,8 +11,8 @@ import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { formSchema } from "@/app/(pages)/(destination)/destination/new/schema"
 import type { updateDestinationAction } from "@/server/actions/destination"
+import { updateDestinationSchema } from "@/lib/schemas/destination"
 
 export const UpdateDestinationForm = ({
 	data,
@@ -27,8 +27,8 @@ export const UpdateDestinationForm = ({
 }) => {
 	const router = useRouter()
 
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof updateDestinationSchema>>({
+		resolver: zodResolver(updateDestinationSchema),
 		defaultValues: data as any,
 	})
 
@@ -44,7 +44,7 @@ export const UpdateDestinationForm = ({
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	function onSubmit(values: z.infer<typeof updateDestinationSchema>) {
 		toast.promise(updateDestination.mutateAsync({ publicId: data.publicId, ...values }), {
 			loading: "Update Destination...",
 			success: "Destination Successfully Updated",

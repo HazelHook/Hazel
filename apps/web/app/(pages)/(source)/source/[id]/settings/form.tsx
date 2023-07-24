@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 import type { editSourceAction } from "@/server/actions/source"
-import { formSchema } from "./schema"
+import { updateSourceSchema } from "@/lib/schemas/source"
 
 interface EditSourceFormProps {
 	action: typeof editSourceAction
@@ -33,8 +33,8 @@ export function EditSourceForm({ onClose, action, shouldRedirect = true, integra
 		return null
 	}
 
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof updateSourceSchema>>({
+		resolver: zodResolver(updateSourceSchema),
 		defaultValues: {
 			name: source.name,
 			url: source.url || undefined,
@@ -59,7 +59,7 @@ export function EditSourceForm({ onClose, action, shouldRedirect = true, integra
 	})
 
 	// 2. Define a submit handler.
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	function onSubmit(values: z.infer<typeof updateSourceSchema>) {
 		editSource.mutate(values)
 	}
 

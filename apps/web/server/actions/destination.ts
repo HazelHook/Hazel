@@ -4,10 +4,10 @@ import { z } from "zod"
 
 import { createAction, protectedProcedure } from "@/server/trpc"
 import db from "@/lib/db"
-import { formSchema } from "@/app/(pages)/(destination)/destination/new/schema"
+import { createDestinationSchema, updateDestinationSchema } from "@/lib/schemas/destination"
 
 export const createDestinationAction = createAction(
-	protectedProcedure.input(formSchema).mutation(async (opts) => {
+	protectedProcedure.input(createDestinationSchema).mutation(async (opts) => {
 		const source = await db.destination.create({
 			...opts.input,
 			workspaceId: opts.ctx.auth.workspaceId,
@@ -20,7 +20,7 @@ export const createDestinationAction = createAction(
 )
 
 export const updateDestinationAction = createAction(
-	protectedProcedure.input(z.object({ publicId: z.string() }).merge(formSchema)).mutation(async (opts) => {
+	protectedProcedure.input(z.object({ publicId: z.string() }).merge(updateDestinationSchema)).mutation(async (opts) => {
 		const destination = await db.destination.update({
 			...opts.input,
 			workspaceId: opts.ctx.auth.workspaceId,

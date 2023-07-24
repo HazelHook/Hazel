@@ -12620,10 +12620,10 @@ function connectDB({
     },
     organization: {
       getOne: async ({
-        slug
+        publicId
       }) => {
         return db.query.organizations.findFirst({
-          where: and(eq(organizations.slug, slug), isNull3(organizations.deletedAt)),
+          where: and(eq(organizations.publicId, publicId), isNull3(organizations.deletedAt)),
           with: {
             members: true,
             invites: true

@@ -3,7 +3,7 @@
 import { z } from "zod"
 import { createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
-import { orgInviteFormSchema } from "@/components/modals/schemas/organization"
+import { orgInviteFormSchema } from "@/lib/schemas/organization"
 
 export const revokeOrganizationInvite = createAction(
 	protectedProcedure

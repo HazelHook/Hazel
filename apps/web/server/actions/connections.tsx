@@ -4,13 +4,10 @@ import { z } from "zod"
 
 import { createAction, protectedProcedure } from "@/server/trpc"
 import db from "@/lib/db"
-
-import { formSchema } from "../../app/(pages)/(connection)/connection/new/schema"
-
-import { formSchema as editConnectionFormSchema } from "../../app/(pages)/(connection)/connection/[id]/settings/schema"
+import { createConnectionSchema, updateConnectionSchema } from "@/lib/schemas/connection"
 
 export const createConnectionAction = createAction(
-	protectedProcedure.input(formSchema).mutation(async (opts) => {
+	protectedProcedure.input(createConnectionSchema).mutation(async (opts) => {
 		const source = await db.db.query.source.findFirst({
 			where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
 		})
@@ -50,35 +47,7 @@ export const pauseConnectionAction = createAction(
 )
 
 export const updateConnectionAction = createAction(
-	protectedProcedure.input(z.object({ publicId: z.string() }).merge(formSchema)).mutation(async (opts) => {
-		const source = await db.db.query.source.findFirst({
-			where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
-		})
-
-		const destination = await db.db.query.destination.findFirst({
-			where: (source, { eq }) => eq(source.publicId, opts.input.publiceDestinationId),
-		})
-
-		if (!destination || !source) {
-			throw new Error("Doesnt exist bruw")
-		}
-
-		const connection = await db.connection.update({
-			name: opts.input.name,
-			sourceId: source.id,
-			destinationId: destination.id,
-			workspaceId: opts.ctx.auth.workspaceId,
-			publicId: opts.input.publicId,
-		})
-
-		return {
-			id: connection.publicId,
-		}
-	}),
-)
-
-export const editConnectionAction = createAction(
-	protectedProcedure.input(editConnectionFormSchema).mutation(async (opts) => {
+	protectedProcedure.input(z.object({ publicId: z.string() }).merge(updateConnectionSchema)).mutation(async (opts) => {
 		const source = await db.db.query.source.findFirst({
 			where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
 		})

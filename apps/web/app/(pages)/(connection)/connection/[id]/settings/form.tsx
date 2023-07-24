@@ -22,12 +22,12 @@ import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/
 import { createSourceAction } from "@/server/actions/source"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
-import { formSchema } from "./schema"
 import { createDestinationAction } from "@/server/actions/destination"
-import type { editConnectionAction } from "@/server/actions/connections"
+import type { updateConnectionAction } from "@/server/actions/connections"
+import { updateConnectionSchema } from "@/lib/schemas/connection"
 
 interface NewSourceFormProps {
-	action: typeof editConnectionAction
+	action: typeof updateConnectionAction
 	sources: Source[]
 	destinations: Destination[]
 	integrations: Integration[]
@@ -47,8 +47,8 @@ export function UpdateConnectionForm({
 	const [destinationModal, setDestinationModal] = useState(false)
 
 	const router = useRouter()
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof updateConnectionSchema>>({
+		resolver: zodResolver(updateConnectionSchema),
 		defaultValues: {
 			name: connection.name,
 			publicSourceId: connection.source.publicId,
@@ -70,7 +70,7 @@ export function UpdateConnectionForm({
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	function onSubmit(values: z.infer<typeof updateConnectionSchema>) {
 		createSource.mutate(values)
 	}
 
