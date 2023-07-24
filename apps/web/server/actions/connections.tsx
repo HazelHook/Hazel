@@ -7,12 +7,8 @@ import db from "@/lib/db"
 
 import { formSchema } from "../../app/(pages)/(connection)/connection/new/schema"
 
-/**
- * Either inline procedures using trpc's flexible
- * builder api, with input parsers and middleware
- * Wrap the procedure in a `createAction` call to
- * make it server-action friendly
- */
+import { formSchema as editConnectionFormSchema } from "../../app/(pages)/(connection)/connection/[id]/settings/schema"
+
 export const createConnectionAction = createAction(
 	protectedProcedure.input(formSchema).mutation(async (opts) => {
 		const source = await db.db.query.source.findFirst({
@@ -55,6 +51,34 @@ export const pauseConnectionAction = createAction(
 
 export const updateConnectionAction = createAction(
 	protectedProcedure.input(z.object({ publicId: z.string() }).merge(formSchema)).mutation(async (opts) => {
+		const source = await db.db.query.source.findFirst({
+			where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
+		})
+
+		const destination = await db.db.query.destination.findFirst({
+			where: (source, { eq }) => eq(source.publicId, opts.input.publiceDestinationId),
+		})
+
+		if (!destination || !source) {
+			throw new Error("Doesnt exist bruw")
+		}
+
+		const connection = await db.connection.update({
+			name: opts.input.name,
+			sourceId: source.id,
+			destinationId: destination.id,
+			workspaceId: opts.ctx.auth.workspaceId,
+			publicId: opts.input.publicId,
+		})
+
+		return {
+			id: connection.publicId,
+		}
+	}),
+)
+
+export const editConnectionAction = createAction(
+	protectedProcedure.input(editConnectionFormSchema).mutation(async (opts) => {
 		const source = await db.db.query.source.findFirst({
 			where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
 		})

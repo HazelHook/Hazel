@@ -18,13 +18,13 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AddIcon } from "@/components/icons/pika/add"
-import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
 import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
 import { createSourceAction } from "@/server/actions/source"
 import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
 
 import { formSchema } from "./schema"
 import { createDestinationAction } from "@/server/actions/destination"
+import type { editConnectionAction } from "@/server/actions/connections"
 
 interface NewSourceFormProps {
 	action: typeof editConnectionAction
