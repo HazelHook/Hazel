@@ -5,9 +5,9 @@ import OrganizationInviteEmail from "@hazel/email/emails/Invite"
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export const POST = async (request: Request) => {
+	const resend = new Resend(process.env.RESEND_API_KEY)
+
 	const { userId } = auth()
 
 	if (!userId) {
