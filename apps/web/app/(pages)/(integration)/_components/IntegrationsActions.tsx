@@ -17,8 +17,8 @@ import {
 } from "@/components/ui/dialog"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
-import { UpdateIntegrationForm } from "@/app/(pages)/(integration)/_components/UpdateIntegrationForm"
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
+import { UpdateIntegrationForm } from "@/components/forms/integration/UpdateIntegrationForm"
 
 export const IntegrationsActions = ({
 	updateAction,

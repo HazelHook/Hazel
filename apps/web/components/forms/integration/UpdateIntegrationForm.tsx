@@ -11,10 +11,9 @@ import { z } from "zod"
 import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 import { LabeledSeparator } from "@/components/LabeledSeparator"
 import { IntegrationToolField } from "@/app/(pages)/(integration)/_components/IntegrationToolField"
-import { createIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
+import { updateIntegrationAction } from "@/server/actions/integrations"
 
 export const UpdateIntegrationForm = ({
 	data,
