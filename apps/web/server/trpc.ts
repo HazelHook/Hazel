@@ -37,6 +37,7 @@ export const createAction = experimental_createServerActionHandler(t, {
 			auth: {
 				workspaceId: organization?.publicId,
 				customerid: auth.userId,
+				user: auth.user,
 			},
 		}
 	},
@@ -56,6 +57,7 @@ const isAuthed = t.middleware(({ next, ctx }) => {
 			auth: {
 				workspaceId: ctx.auth.workspaceId,
 				customerId: ctx.auth.customerid,
+				user: ctx.auth.user,
 			},
 		},
 	})

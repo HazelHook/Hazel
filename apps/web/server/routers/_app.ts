@@ -23,7 +23,6 @@ export const appRouter = router({
 		.query(async (opts) => {
 			return `hello ${opts.input.text}`
 		}),
-
 	getUser,
 })
 

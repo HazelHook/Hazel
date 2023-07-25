@@ -11,7 +11,7 @@ import {
 } from "@tanstack/react-table"
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { DataTablePagination } from "@/components/ui/data-table-pagination"
 import { Button } from "@/components/ui/button"
@@ -70,7 +70,9 @@ export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAct
 								{headerGroup.headers.map((header) => {
 									return (
 										<TableHead key={header.id}>
-											{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+											{header.isPlaceholder
+												? null
+												: (flexRender(header.column.columnDef.header, header.getContext()) as ReactNode)}
 										</TableHead>
 									)
 								})}
@@ -82,7 +84,9 @@ export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAct
 							table.getRowModel().rows.map((row) => (
 								<TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+										<TableCell key={cell.id}>
+											{flexRender(cell.column.columnDef.cell, cell.getContext()) as ReactNode}
+										</TableCell>
 									))}
 								</TableRow>
 							))

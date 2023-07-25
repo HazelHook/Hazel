@@ -10,6 +10,7 @@ export async function createContext(opts?: FetchCreateContextFnOptions) {
 		auth: {
 			workspaceId: organization?.publicId,
 			customerid: auth.userId,
+			user: auth.user,
 		},
 		headers: opts && Object.fromEntries(opts.req.headers),
 	}

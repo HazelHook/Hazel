@@ -4,6 +4,12 @@ import { z } from "zod"
 import { createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
 import { orgInviteFormSchema } from "@/lib/schemas/organization"
+import { serverClient } from "../server"
+
+// import { Resend } from "resend"
+// import { OrganizationInviteEmail } from "@/lib/emails/organization/Invite"
+
+// const resend = new Resend(process.env.RESEND_API_KEY)
 
 export const revokeOrganizationInvite = createAction(
 	protectedProcedure
@@ -40,9 +46,16 @@ export const createOrganizationInvite = createAction(
 				...opts.input,
 			})
 
-			// TODO: SEND EMAIL HERE
+			// await serverClient.email.invite.mutate({
+			// 	organizationId: opts.ctx.auth.workspaceId,
+			// 	email: opts.input.email,
+			// 	inviteId: invitation.publicId,
+			// })
 
 			return {
+				// email: data,
+				email: opts.input.email,
+				organizationId: opts.ctx.auth.workspaceId,
 				id: invitation.publicId,
 			}
 		}),
