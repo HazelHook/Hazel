@@ -5,6 +5,11 @@ import { createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
 import { orgInviteFormSchema } from "@/lib/schemas/organization"
 
+// import { Resend } from "resend"
+// import { OrganizationInviteEmail } from "@/lib/emails/organization/Invite"
+
+// const resend = new Resend(process.env.RESEND_API_KEY)
+
 export const revokeOrganizationInvite = createAction(
 	protectedProcedure
 		.input(
@@ -40,9 +45,15 @@ export const createOrganizationInvite = createAction(
 				...opts.input,
 			})
 
-			// TODO: SEND EMAIL HERE
+			// const data = await resend.emails.send({
+			// 	from: "system@hazelapp.dev",
+			// 	to: opts.input.email,
+			// 	subject: `${opts.ctx.auth.customerId} invited you to join ORGNAMEHERE on Hazel `,
+			// 	html: "<strong>it works!</strong>",
+			// })
 
 			return {
+				// email: data,
 				id: invitation.publicId,
 			}
 		}),

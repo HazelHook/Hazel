@@ -58,6 +58,7 @@
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.45.2",
 		"reactflow": "^11.7.4",
+		"resend": "^0.17.1",
 		"server-only": "^0.0.1",
 		"sharp": "^0.32.3",
 		"sonner": "^0.6.2",

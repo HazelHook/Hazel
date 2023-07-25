@@ -46,3 +46,8 @@ packages/hazel-flux/performance-testing/data/*.json
 # vercel
 .vercel
 .tinyb
+
+
+# emails
+
+.react-email

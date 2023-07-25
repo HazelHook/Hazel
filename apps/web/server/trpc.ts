@@ -37,6 +37,7 @@ export const createAction = experimental_createServerActionHandler(t, {
 			auth: {
 				workspaceId: organization?.publicId,
 				customerid: auth.userId,
+				user: auth.user,
 			},
 		}
 	},
