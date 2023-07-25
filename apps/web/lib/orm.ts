@@ -5,7 +5,7 @@ import { PromiseType } from "@/lib/ts/helpers"
 
 import db from "./db"
 
-export const getCachedConnection = unstable_cache(async ({ publicId }: { publicId: string }) => {
+export const getCachedConnection = async ({ publicId }: { publicId: string }) => {
 	const connection = await db.connection.getOne({ publicId })
 
 	if (!connection) {
@@ -13,33 +13,32 @@ export const getCachedConnection = unstable_cache(async ({ publicId }: { publicI
 	}
 
 	return connection
-})
+}
 export type CacheConnection = PromiseType<ReturnType<typeof getCachedConnection>>
 
-export const getCachedSource = unstable_cache(
-	async ({
-		publicId,
-		redirectMissing = true,
-	}: {
-		publicId: string
-		redirectMissing?: boolean
-	}) => {
-		const source = await db.source.getOne({ publicId })
+export const getCachedSource = async ({
+	publicId,
+	redirectMissing = true,
+}: {
+	publicId: string
+	redirectMissing?: boolean
+}) => {
+	const source = await db.source.getOne({ publicId })
 
-		if (!source) {
-			if (redirectMissing) {
-				notFound()
-			} else {
-				return null
-			}
+	if (!source) {
+		if (redirectMissing) {
+			notFound()
+		} else {
+			return null
 		}
+	}
 
-		return source
-	},
-)
+	return source
+}
+
 export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>
 
-export const getCachedDestination = unstable_cache(async ({ publicId }: { publicId: string }) => {
+export const getCachedDestination = async ({ publicId }: { publicId: string }) => {
 	const destination = await db.destination.getOne({ publicId })
 
 	if (!destination) {
@@ -47,10 +46,10 @@ export const getCachedDestination = unstable_cache(async ({ publicId }: { public
 	}
 
 	return destination
-})
+}
 export type CacheDestination = PromiseType<ReturnType<typeof getCachedDestination>>
 
-export const getCachedIntegrations = unstable_cache(async ({ workspaceId }: { workspaceId: string }) => {
+export const getCachedIntegrations = async ({ workspaceId }: { workspaceId: string }) => {
 	const integration = await db.integration.getMany({ workspaceId })
 
 	if (!integration) {
@@ -58,5 +57,5 @@ export const getCachedIntegrations = unstable_cache(async ({ workspaceId }: { wo
 	}
 
 	return integration
-})
+}
 export type CacheIntegrations = PromiseType<ReturnType<typeof getCachedIntegrations>>

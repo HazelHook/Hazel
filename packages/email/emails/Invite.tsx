@@ -27,7 +27,13 @@ interface VercelInviteUserEmailProps {
 	inviteLink: string
 }
 
-const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ""
+function getBaseUrl() {
+	if (typeof window !== "undefined") return ""
+	if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
+	return `http://localhost:${process.env.PORT || "3000"}`
+}
+
+const baseUrl = getBaseUrl()
 
 export const OrganizationInviteEmail = ({
 	username,
@@ -55,7 +61,7 @@ export const OrganizationInviteEmail = ({
 						</Heading>
 						<Text className="text-black text-[14px] leading-[24px]">Hello {username},</Text>
 						<Text className="text-black text-[14px] leading-[24px]">
-							<strong>bukinoshita</strong> (
+							<strong>{invitedByUsername}</strong> (
 							<Link href={`mailto:${invitedByEmail}`} className="text-blue-600 no-underline">
 								{invitedByEmail}
 							</Link>
