@@ -65,7 +65,6 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 							<>
 								<FormItem>
 									<FormLabel>
-										{field.value}
 										{label}
 										{isRequired && <span className="text-destructive"> *</span>}
 									</FormLabel>
