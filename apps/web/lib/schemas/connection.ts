@@ -7,8 +7,11 @@ export const createConnectionSchema = z.object({
 			message: "Name must be between 2 and 20 characters long",
 		})
 		.max(20),
-	publicSourceId: z.string().length(21, { message: "You need to Select/Create a Source" }),
-	publiceDestinationId: z.string().length(21, { message: "You need to Select/Create a Destination" }),
+	publicSourceId: z.string().length(21, { message: "You need to Select/Create a Source" }).describe("Source"),
+	publiceDestinationId: z
+		.string()
+		.length(21, { message: "You need to Select/Create a Destination" })
+		.describe("Destination"),
 })
 
 export const updateConnectionSchema = z.object({
