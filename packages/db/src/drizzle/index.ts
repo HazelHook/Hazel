@@ -404,13 +404,23 @@ export function connectDB({
 
 				return data.organization
 			},
-			create: async (data: Omit<schema.InsertOrganization, "publicId">) => {
+			create: async (data: Omit<schema.InsertOrganization, "publicId">, userId: string) => {
 				const publicId = generatePublicId("org")
-				const res = await db.insert(schema.organizations).values({
-					...data,
-					publicId,
+				const memberPublicId = generatePublicId("mem")
+
+				await db.transaction(async (tx) => {
+					const res = await tx.insert(schema.organizations).values({ ...data, publicId: publicId })
+
+					await tx.insert(schema.organizationMembers).values({
+						publicId: memberPublicId,
+						customerId: userId,
+						organizationId: Number(res.insertId),
+						personal: true,
+						role: "admin",
+					})
 				})
-				return { res, publicId }
+
+				return { publicId }
 			},
 			update: async (data: OptionalExceptFor<schema.InsertOrganization, "publicId">) => {
 				const res = await db
@@ -482,6 +492,9 @@ export function connectDB({
 
 					const memberShips = db.query.organizationMembers.findMany({
 						where: and(whereClause, isNull(schema.organizationMembers.deletedAt)),
+						with: {
+							organization: true,
+						},
 					})
 					return memberShips
 				},

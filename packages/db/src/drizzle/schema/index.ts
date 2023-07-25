@@ -142,9 +142,9 @@ export const organizationMembers = buildCustomMysqlTable(
 	},
 	(table) => ({
 		publicIdx: uniqueIndex("public_idx").on(table.publicId),
-		customerIdx: uniqueIndex("customer_id_idx").on(table.customerId),
-		roleIdx: uniqueIndex("role_id_idx").on(table.role),
-		organizationIdx: uniqueIndex("org_id_idx").on(table.organizationId),
+		customerIdx: index("customer_id_idx").on(table.customerId),
+		roleIdx: index("role_id_idx").on(table.role),
+		organizationIdx: index("org_id_idx").on(table.organizationId),
 	}),
 )
 
