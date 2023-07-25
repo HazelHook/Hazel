@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import NextProgress from "@/components/NProgress"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "sonner"
 
 export const metadata: Metadata = {
 	title: {
@@ -46,6 +47,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
 						{children}
 						<TailwindIndicator />
 					</ThemeProvider>
+					<Toaster
+						position="bottom-right"
+						toastOptions={{
+							style: {
+								background: "hsl(var(--background))",
+								color: "hsl(var(--foreground))",
+								border: "1px solid hsl(var(--border))",
+							},
+						}}
+					/>
 				</ClerkProvider>
 			</body>
 		</html>
