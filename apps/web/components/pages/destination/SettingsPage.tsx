@@ -3,7 +3,7 @@ import "server-only"
 import { notFound } from "next/navigation"
 
 import db from "@/lib/db"
-import { UpdateDestinationForm } from "@/app/(pages)/(destination)/_components/UpdateDestinationForm"
+import { UpdateDestinationForm } from "@/components/forms/destination/UpdateDestinationForm"
 import { updateDestinationAction } from "@/server/actions/destination"
 
 export interface SettingsProps {
@@ -18,5 +18,5 @@ export const DestinationSettingsPage = async ({ id, isModal }: SettingsProps) =>
 		notFound()
 	}
 
-	return <UpdateDestinationForm data={destination} updateAction={updateDestinationAction} isModal={isModal} />
+	return <UpdateDestinationForm destination={destination} updateAction={updateDestinationAction} isModal={isModal} />
 }

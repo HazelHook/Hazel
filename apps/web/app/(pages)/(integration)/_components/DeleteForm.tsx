@@ -1,11 +1,11 @@
 "use client"
 
 import React from "react"
-import * as Dialog from "@radix-ui/react-dialog"
-import { Separator } from "@radix-ui/react-dropdown-menu"
 
 import { Card } from "@/components/ui/card"
 import { MinusIcon } from "@/components/icons/pika/minus"
+import { Separator } from "@/components/ui/separator"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 export function DeleteForm({
 	onClose,
@@ -17,8 +17,8 @@ export function DeleteForm({
 	slug: string
 }) {
 	return (
-		<Dialog.Root>
-			<Dialog.Content
+		<Dialog>
+			<DialogContent
 				className="absolute w-screen h-screen m-0 p-0 top-0 left-0 flex justify-center items-center z-50"
 				style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
 				onMouseDown={() => onClose()}
@@ -36,7 +36,7 @@ export function DeleteForm({
 					</div>
 					<Separator />
 				</Card>
-			</Dialog.Content>
-		</Dialog.Root>
+			</DialogContent>
+		</Dialog>
 	)
 }

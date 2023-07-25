@@ -1,8 +1,8 @@
+import { CreateConnectionForm } from "@/components/forms/connection/CreateConnectionForm"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 
-import { createConnectionAction } from "../../_actions"
-import { NewConnectionForm } from "./form"
+import { createConnectionAction } from "@/server/actions/connections"
 
 const NewConnectionPage = async () => {
 	const { workspaceId } = await auth()
@@ -15,7 +15,7 @@ const NewConnectionPage = async () => {
 
 	return (
 		<main className="p-4">
-			<NewConnectionForm
+			<CreateConnectionForm
 				action={createConnectionAction}
 				destinations={destinations}
 				sources={sources}

@@ -2,8 +2,8 @@ import "server-only"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
 import { UpdateConnectionForm } from "@/app/(pages)/(connection)/connection/[id]/settings/form"
+import { updateConnectionAction } from "@/server/actions/connections"
 
 export interface SettingsProps {
 	id: string
@@ -28,7 +28,7 @@ export const ConnectionSettingsPage = async ({ id, isModal }: SettingsProps) => 
 	return (
 		<UpdateConnectionForm
 			connection={connection as any}
-			action={editConnectionAction}
+			action={updateConnectionAction}
 			destinations={destinations}
 			sources={sources}
 			integrations={integrations}

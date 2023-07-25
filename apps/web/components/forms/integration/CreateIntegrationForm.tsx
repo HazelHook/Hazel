@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { LabeledSeparator } from "@/components/LabeledSeparator"
 import { IntegrationToolField } from "@/app/(pages)/(integration)/_components/IntegrationToolField"
-import { createIntegrationAction } from "@/app/(pages)/(integration)/integrations/_actions"
+import { createIntegrationAction } from "@/server/actions/integrations"
 
 export const NewIntegrationForm = ({
 	integration: { config, slug },

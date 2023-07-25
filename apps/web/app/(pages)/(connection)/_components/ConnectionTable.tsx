@@ -1,11 +1,7 @@
 "use client"
 
 import { DataTable } from "@/components/ui/data-table"
-import {
-	deleteConnectionAction,
-	pauseConnectionAction,
-	updateConnectionAction,
-} from "@/app/(pages)/(connection)/_actions"
+import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { columns } from "@/app/(pages)/(connection)/connections/columns"
 import { ConnectionDataRowType } from "@/app/(pages)/(connection)/connections/page"
 

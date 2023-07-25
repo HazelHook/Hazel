@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { DatabaseIcon } from "@/components/icons/pika/database"
 import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
-import { NewIntegrationForm } from "@/app/(pages)/(integration)/_components/NewIntegrationForm"
+import { NewIntegrationForm } from "@/components/forms/integration/CreateIntegrationForm"
 
 const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	({

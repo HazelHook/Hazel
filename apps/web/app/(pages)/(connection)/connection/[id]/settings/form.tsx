@@ -18,16 +18,16 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AddIcon } from "@/components/icons/pika/add"
-import { editConnectionAction } from "@/app/(pages)/(connection)/connection/[id]/settings/_actions"
-import { NewDestinationForm } from "@/app/(pages)/(destination)/destination/new/form"
-import { createSourceAction } from "@/app/(pages)/(source)/source/new/_actions"
-import { NewSourceForm } from "@/app/(pages)/(source)/source/new/form"
+import { createSourceAction } from "@/server/actions/source"
 
-import { formSchema } from "./schema"
 import { createDestinationAction } from "@/server/actions/destination"
+import type { updateConnectionAction } from "@/server/actions/connections"
+import { updateConnectionSchema } from "@/lib/schemas/connection"
+import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
+import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
 
 interface NewSourceFormProps {
-	action: typeof editConnectionAction
+	action: typeof updateConnectionAction
 	sources: Source[]
 	destinations: Destination[]
 	integrations: Integration[]
@@ -47,8 +47,8 @@ export function UpdateConnectionForm({
 	const [destinationModal, setDestinationModal] = useState(false)
 
 	const router = useRouter()
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof updateConnectionSchema>>({
+		resolver: zodResolver(updateConnectionSchema),
 		defaultValues: {
 			name: connection.name,
 			publicSourceId: connection.source.publicId,
@@ -70,7 +70,7 @@ export function UpdateConnectionForm({
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	function onSubmit(values: z.infer<typeof updateConnectionSchema>) {
 		createSource.mutate(values)
 	}
 
@@ -315,7 +315,7 @@ export function UpdateConnectionForm({
 
 			<Dialog open={sourceModal} onOpenChange={setSourceModal}>
 				<DialogContent>
-					<NewSourceForm
+					<CreateSourceForm
 						shouldRedirect={false}
 						onClose={(id) => {
 							setSourceModal(false)
@@ -329,7 +329,7 @@ export function UpdateConnectionForm({
 
 			<Dialog open={destinationModal} onOpenChange={setDestinationModal}>
 				<DialogContent>
-					<NewDestinationForm
+					<CreateDestinationForm
 						onClose={(id) => {
 							setDestinationModal(false)
 							form.setValue("publiceDestinationId", id, {
