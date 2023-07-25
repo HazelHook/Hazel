@@ -1,15 +1,5 @@
-import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
-import {
-	Dialog,
-	DialogClose,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog"
+
 import { auth } from "@/lib/auth"
 import { DeleteOrganizationDialog } from "./dialog"
 import { deleteOrganzationAction } from "@/server/actions/organization"

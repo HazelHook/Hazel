@@ -1,5 +1,3 @@
-import { Toaster } from "sonner"
-
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Sidebar } from "@/components/Sidebar"
 import { SiteHeader } from "@/components/site-header"
@@ -10,6 +8,12 @@ import { GitCommitIcon } from "@/components/icons/pika/gitCommit"
 import { AutomationIcon } from "@/components/icons/pika/automation"
 import { Settings01Icon } from "@/components/icons/pika/settings01"
 import { FileInfoIcon } from "@/components/icons/pika/fileInfo"
+import TeamSwitcher from "@/components/TeamSwitcher"
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+import { OrganizationMembership } from "@clerk/nextjs/dist/types/server"
+import { Organization } from "db/src/drizzle/schema"
+import { createOrganzationAction } from "@/server/actions/organization"
 
 interface RootLayoutProps {
 	children: React.ReactNode
@@ -19,7 +23,11 @@ interface RootLayoutProps {
 	}
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+	const { userId } = await auth()
+
+	const organzations = await db.organization.memberships.getMany({ customerId: userId })
+
 	return (
 		<TooltipProvider>
 			<div className="relative flex min-h-screen flex-col">
@@ -77,7 +85,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
 							},
 						]}
 						className="fixed flex w-12 flex-col justify-between transition-[width] duration-300 lg:w-64"
-					/>
+					>
+						<TeamSwitcher createTeamAction={createOrganzationAction} memberships={organzations} className="w-full" />
+					</Sidebar>
 					<div className="col-span-full ml-12 border-l h-full transition-[margin] duration-300 lg:ml-64">
 						<SiteHeader />
 

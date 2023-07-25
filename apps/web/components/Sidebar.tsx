@@ -7,6 +7,7 @@ import { IconProps } from "@/components/icons/pika/types"
 
 import { SidebarClientItem } from "./SidebarItem"
 import { Fragment } from "react"
+import TeamSwitcher from "./TeamSwitcher"
 
 type SubItem = {
 	href: string
@@ -41,7 +42,7 @@ export const SidebarItem = ({ icon, endIcon, ...rest }: SubItem) => {
 	)
 }
 
-export async function Sidebar({ className, disableLogo = false, items }: SidebarProps) {
+export async function Sidebar({ className, disableLogo = false, items, children }: SidebarProps) {
 	return (
 		<div
 			className={cn("flex w-full flex-col justify-between gap-4 border-r", className)}
@@ -79,7 +80,7 @@ export async function Sidebar({ className, disableLogo = false, items }: Sidebar
 					</Fragment>
 				))}
 			</div>
-			<div className="hidden p-2 lg:block">{/* <TeamSwitcher className="lg:w-full" /> */}</div>
+			<div className="hidden p-2 lg:block">{children}</div>
 		</div>
 	)
 }

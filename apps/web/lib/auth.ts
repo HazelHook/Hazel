@@ -23,7 +23,6 @@ export const auth = async () => {
 		await retry({}, async () => {
 			await db.db.transaction(async (tx) => {
 				const orgPublicId = generatePublicId("org")
-				console.log(orgPublicId)
 				const res = await tx.insert(schema.organizations).values({
 					name: `${user!.username}'s Organization`,
 					ownerId: userId,
