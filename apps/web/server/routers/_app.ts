@@ -2,6 +2,7 @@ import { z } from "zod"
 
 import { publicProcedure, router } from "../trpc"
 import { clerkClient } from "@clerk/nextjs"
+import { emailRouter } from "./email"
 
 export const getUser = publicProcedure
 	.input(
@@ -23,7 +24,7 @@ export const appRouter = router({
 		.query(async (opts) => {
 			return `hello ${opts.input.text}`
 		}),
-
+	email: emailRouter,
 	getUser,
 })
 

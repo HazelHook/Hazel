@@ -4,6 +4,7 @@ import { z } from "zod"
 import { createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
 import { orgInviteFormSchema } from "@/lib/schemas/organization"
+import { serverClient } from "../server"
 
 // import { Resend } from "resend"
 // import { OrganizationInviteEmail } from "@/lib/emails/organization/Invite"
@@ -45,15 +46,16 @@ export const createOrganizationInvite = createAction(
 				...opts.input,
 			})
 
-			// const data = await resend.emails.send({
-			// 	from: "system@hazelapp.dev",
-			// 	to: opts.input.email,
-			// 	subject: `${opts.ctx.auth.customerId} invited you to join ORGNAMEHERE on Hazel `,
-			// 	html: "<strong>it works!</strong>",
+			// await serverClient.email.invite.mutate({
+			// 	organizationId: opts.ctx.auth.workspaceId,
+			// 	email: opts.input.email,
+			// 	inviteId: invitation.publicId,
 			// })
 
 			return {
 				// email: data,
+				email: opts.input.email,
+				organizationId: opts.ctx.auth.workspaceId,
 				id: invitation.publicId,
 			}
 		}),

@@ -57,6 +57,7 @@ const isAuthed = t.middleware(({ next, ctx }) => {
 			auth: {
 				workspaceId: ctx.auth.workspaceId,
 				customerId: ctx.auth.customerid,
+				user: ctx.auth.user,
 			},
 		},
 	})

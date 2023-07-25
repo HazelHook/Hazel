@@ -21,6 +21,7 @@ import { useAction } from "@/server/client"
 import { toast } from "sonner"
 import { orgInviteFormSchema } from "../../lib/schemas/organization"
 import type { createOrganizationInvite } from "@/server/actions/organization-invite"
+import { getBaseUrl } from "@/server/shared"
 
 interface CreateOrganizationModalProps {
 	children: ReactNode
@@ -34,7 +35,15 @@ export const OrganizationInviteModal = ({ children, orgId, inviteAction }: Creat
 	const [open, setOpen] = useState(false)
 
 	const handleInvite = useAction(inviteAction, {
-		onSuccess: () => {
+		onSuccess: (data) => {
+			fetch(`${getBaseUrl()}/api/resend/invite`, {
+				method: "POST",
+				body: JSON.stringify({
+					organizationId: data.organizationId,
+					email: data.email,
+					inviteId: data.id,
+				}),
+			})
 			router.refresh()
 			setOpen(false)
 		},
