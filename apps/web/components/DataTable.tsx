@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { ReactNode, useMemo, useState } from "react"
 import {
 	ColumnDef,
 	flexRender,
@@ -61,7 +61,9 @@ export function DataTable<TData extends Record<string, any> & { id: string }, TV
 								{headerGroup.headers.map((header) => {
 									return (
 										<TableHead key={header.id}>
-											{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+											{header.isPlaceholder
+												? null
+												: (flexRender(header.column.columnDef.header, header.getContext()) as ReactNode)}
 										</TableHead>
 									)
 								})}
@@ -78,7 +80,9 @@ export function DataTable<TData extends Record<string, any> & { id: string }, TV
 									onClick={() => setSheetId(row.original.id)}
 								>
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+										<TableCell key={cell.id}>
+											{flexRender(cell.column.columnDef.cell, cell.getContext()) as ReactNode}
+										</TableCell>
 									))}
 								</TableRow>
 							))

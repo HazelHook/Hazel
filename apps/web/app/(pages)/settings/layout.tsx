@@ -2,6 +2,7 @@ import { Sidebar } from "@/components/Sidebar"
 import { AtomIcon } from "@/components/icons/pika/atom"
 import { BarChartUpIcon } from "@/components/icons/pika/barChartUp"
 import { CardIcon } from "@/components/icons/pika/card"
+import { DangerIcon } from "@/components/icons/pika/danger"
 import { KeyIcon } from "@/components/icons/pika/key"
 import { Settings02Icon } from "@/components/icons/pika/settings02"
 import { User2Icon } from "@/components/icons/pika/user2"
@@ -38,7 +39,6 @@ const SettingsLayout = ({ children }: { children: ReactNode }) => {
 						],
 					},
 					{
-						title: "Organization",
 						items: [
 							{
 								title: "Members",
@@ -49,6 +49,11 @@ const SettingsLayout = ({ children }: { children: ReactNode }) => {
 								title: "Invites",
 								icon: UserPlusIcon,
 								href: "/settings/invites",
+							},
+							{
+								title: "Danger",
+								icon: DangerIcon,
+								href: "/settings/danger",
 							},
 						],
 					},
