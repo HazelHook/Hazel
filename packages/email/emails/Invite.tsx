@@ -27,13 +27,9 @@ interface VercelInviteUserEmailProps {
 	inviteLink: string
 }
 
-function getBaseUrl() {
-	if (typeof window !== "undefined") return ""
-	if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
-	return `http://localhost:${process.env.PORT || "3000"}`
-}
-
-const baseUrl = getBaseUrl()
+const baseUrl = process.env.VERCEL_URL
+	? `https://${process.env.VERCEL_URL}`
+	: "https://hazel-git-feat-emails-maple-analytics.vercel.app"
 
 export const OrganizationInviteEmail = ({
 	username,
@@ -54,7 +50,7 @@ export const OrganizationInviteEmail = ({
 				<Body className="bg-white my-auto mx-auto font-sans">
 					<Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
 						<Section className="mt-[32px]">
-							<Img src={`${baseUrl}/assets/avatar.png`} width="40" height="37" alt="Hazel" className="my-0 mx-auto" />
+							<Img src={`${baseUrl}/assets/avatar.png`} width="80" height="80" alt="Hazel" className="my-0 mx-auto" />
 						</Section>
 						<Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
 							Join <strong>{teamName}</strong> on <strong>Hazel</strong>
