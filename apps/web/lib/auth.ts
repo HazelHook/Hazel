@@ -18,11 +18,17 @@ export const auth = async () => {
 	}
 	const cookiesList = cookies()
 
-	const membership_id = cookiesList.get("membership_id")
+	const membershipIdCookie = cookiesList.get("membership_id")
 
-	console.log(membership_id)
+	console.log(membershipIdCookie)
 
-	let organization = await db.organization.getPersonal({ customerId: userId })
+	let organization: schema.Organization | null
+
+	if (membershipIdCookie?.value) {
+		organization = await db.organization.memberships.getOne({ membershipId: membershipIdCookie.value })
+	} else {
+		organization = await db.organization.getPersonal({ customerId: userId })
+	}
 
 	if (!organization) {
 		const user = await currentUser()

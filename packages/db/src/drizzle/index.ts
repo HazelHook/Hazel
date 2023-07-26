@@ -471,6 +471,24 @@ export function connectDB({
 				},
 			},
 			memberships: {
+				getOne: async ({
+					membershipId,
+				}: {
+					membershipId: string
+				}) => {
+					const data = await db.query.organizationMembers.findFirst({
+						where: eq(schema.organizationMembers.publicId, membershipId),
+						with: {
+							organization: true,
+						},
+					})
+
+					if (!data || !data?.organization) {
+						return null
+					}
+
+					return data.organization
+				},
 				getMany: async ({
 					customerId,
 					orgId,
