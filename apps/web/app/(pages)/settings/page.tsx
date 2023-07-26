@@ -13,10 +13,7 @@ const SettingsPage = async () => {
 				<p className="text-lg">Configure general settings for your instance</p>
 			</div>
 
-			<OrganizationUpdateForm
-				defaultValues={{ name: organization.name, slug: organization.slug }}
-				pOrgId={workspaceId}
-			/>
+			<OrganizationUpdateForm defaultValues={{ name: organization.name }} pOrgId={workspaceId} />
 		</Container>
 	)
 }

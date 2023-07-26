@@ -12250,13 +12250,12 @@ var organizations = buildCustomMysqlTable("organizations", {
   id: serial("id").primaryKey().autoincrement(),
   publicId: varchar("public_id", { length: 21 }).unique().notNull(),
   ownerId: varchar("owner_id", { length: 128 }).notNull(),
+  name: varchar("name", { length: 128 }).notNull(),
+  personal: boolean("personal").default(false).notNull(),
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
   updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
-  deletedAt: timestamp("deleted_at"),
-  name: varchar("name", { length: 128 }).notNull(),
-  slug: varchar("slug", { length: 128 }).notNull()
+  deletedAt: timestamp("deleted_at")
 }, (table) => ({
-  slugIdx: uniqueIndex("org_slug_idx").on(table.slug),
   publicIdx: uniqueIndex("public_idx").on(table.publicId)
 }));
 var organizationMembers = buildCustomMysqlTable("organization_members", {
@@ -12265,7 +12264,6 @@ var organizationMembers = buildCustomMysqlTable("organization_members", {
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
   updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
   deletedAt: timestamp("deleted_at"),
-  personal: boolean("personal").default(false).notNull(),
   customerId: varchar("customer_id", { length: 128 }).notNull(),
   organizationId: int("organization_id").notNull(),
   role: mysqlEnum("role", ["owner", "admin", "member"]).notNull()
@@ -12633,16 +12631,13 @@ function connectDB({
       getPersonal: async ({
         customerId
       }) => {
-        const data2 = await db.query.organizationMembers.findFirst({
-          where: and(eq(organizationMembers.customerId, customerId), eq(organizationMembers.personal, true)),
-          with: {
-            organization: true
-          }
+        const data2 = await db.query.organizations.findFirst({
+          where: and(eq(organizations.ownerId, customerId), eq(organizations.personal, true))
         });
-        if (!data2 || !data2?.organization) {
+        if (!data2) {
           return null;
         }
-        return data2.organization;
+        return data2;
       },
       create: async (data2, userId) => {
         const publicId = generatePublicId("org");
@@ -12653,7 +12648,6 @@ function connectDB({
             publicId: memberPublicId,
             customerId: userId,
             organizationId: Number(res.insertId),
-            personal: true,
             role: "admin"
           });
         });
@@ -12705,7 +12699,7 @@ function connectDB({
           if (!data2 || !data2?.organization) {
             return null;
           }
-          return data2.organization;
+          return data2;
         },
         getMany: async ({
           customerId,
