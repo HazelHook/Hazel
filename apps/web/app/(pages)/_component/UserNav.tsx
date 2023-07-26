@@ -26,7 +26,6 @@ import { Settings01Icon } from "@/components/icons/pika/settings01"
 
 export function UserNav() {
 	const { signOut } = useAuth()
-
 	const { user } = useUser()
 
 	if (!user) {

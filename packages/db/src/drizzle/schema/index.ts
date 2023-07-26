@@ -112,14 +112,14 @@ export const organizations = buildCustomMysqlTable(
 
 		ownerId: varchar("owner_id", { length: 128 }).notNull(),
 
+		name: varchar("name", { length: 128 }).notNull(),
+		personal: boolean("personal").default(false).notNull(),
+
 		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
 		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		deletedAt: timestamp("deleted_at"),
-		name: varchar("name", { length: 128 }).notNull(),
-		slug: varchar("slug", { length: 128 }).notNull(),
 	},
 	(table) => ({
-		slugIdx: uniqueIndex("org_slug_idx").on(table.slug),
 		publicIdx: uniqueIndex("public_idx").on(table.publicId),
 	}),
 )
@@ -133,8 +133,6 @@ export const organizationMembers = buildCustomMysqlTable(
 		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
 		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		deletedAt: timestamp("deleted_at"),
-
-		personal: boolean("personal").default(false).notNull(),
 
 		customerId: varchar("customer_id", { length: 128 }).notNull(),
 		organizationId: int("organization_id").notNull(),

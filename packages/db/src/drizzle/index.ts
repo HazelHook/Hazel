@@ -388,21 +388,15 @@ export function connectDB({
 			}: {
 				customerId: string
 			}) => {
-				const data = await db.query.organizationMembers.findFirst({
-					where: and(
-						eq(schema.organizationMembers.customerId, customerId),
-						eq(schema.organizationMembers.personal, true),
-					),
-					with: {
-						organization: true,
-					},
+				const data = await db.query.organizations.findFirst({
+					where: and(eq(schema.organizations.ownerId, customerId), eq(schema.organizations.personal, true)),
 				})
 
-				if (!data || !data?.organization) {
+				if (!data) {
 					return null
 				}
 
-				return data.organization
+				return data
 			},
 			create: async (data: Omit<schema.InsertOrganization, "publicId">, userId: string) => {
 				const publicId = generatePublicId("org")
@@ -415,7 +409,6 @@ export function connectDB({
 						publicId: memberPublicId,
 						customerId: userId,
 						organizationId: Number(res.insertId),
-						personal: false,
 						role: "admin",
 					})
 				})
@@ -487,7 +480,7 @@ export function connectDB({
 						return null
 					}
 
-					return data.organization
+					return data
 				},
 				getMany: async ({
 					customerId,

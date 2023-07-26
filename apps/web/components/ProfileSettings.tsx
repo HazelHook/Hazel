@@ -66,7 +66,7 @@ export const ProfileSettings = ({
 	const router = useRouter()
 
 	const currentMembership = memberships.find((membership) => membership.publicId === currentMembershipId)
-	const personalMembership = memberships.find((membership) => membership.personal === true)
+	const personalMembership = memberships.find((membership) => membership.organization.personal === true)
 
 	const { user } = useUser()
 
@@ -98,11 +98,11 @@ export const ProfileSettings = ({
 							{user?.profileImageUrl ? (
 								<AvatarImage src={user.profileImageUrl} alt={user.username ?? "Profile picture"} />
 							) : null}
-							<AvatarFallback>{selectedTeam.organization.slug.slice(0, 2).toUpperCase()}</AvatarFallback>
+							<AvatarFallback>{selectedTeam.organization.name.slice(0, 2).toUpperCase()}</AvatarFallback>
 						</Avatar>
 						<div className="flex flex-row-reverse items-center gap-4 lg:gap-1 lg:items-start lg:flex-col">
 							<span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[8rem]">
-								{selectedTeam.personal ? "Personal" : selectedTeam.organization.name}
+								{selectedTeam.organization.personal ? "Personal" : selectedTeam.organization.name}
 							</span>
 							<PlanBadge plan={"free"} />
 						</div>
@@ -187,7 +187,7 @@ export const ProfileSettings = ({
 						</DropdownMenuItem>
 
 						{memberships
-							.filter((m) => m.personal === false)
+							.filter((m) => m.organization.personal === false)
 							.map((membership) => (
 								<DropdownMenuItem
 									key={membership.organization.publicId}

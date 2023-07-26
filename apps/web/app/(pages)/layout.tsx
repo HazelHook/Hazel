@@ -95,9 +95,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 							currentMembershipId={orgCookie?.value}
 						/>
 					</Sidebar>
-					<div className="col-span-full ml-12 border-l h-full transition-[margin] duration-300 lg:ml-64">
-						{children}
-					</div>
+					<div className="col-span-full ml-12 h-full transition-[margin] duration-300 lg:ml-64">{children}</div>
 				</div>
 			</div>
 		</TooltipProvider>
