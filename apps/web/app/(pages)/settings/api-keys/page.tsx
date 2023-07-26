@@ -3,6 +3,9 @@ import db from "@/lib/db"
 
 import { createApiKeyAction } from "@/server/actions/api-keys"
 import { ApiKeyModal } from "./modal"
+import { PageHeader } from "@/components/ui/page-header"
+import { Container } from "@/components/ui/container"
+import { Button } from "@/components/ui/button"
 
 const ApiKeyPage = async () => {
 	const { workspaceId } = await auth()
@@ -10,14 +13,23 @@ const ApiKeyPage = async () => {
 	const apiKeys = await db.api.getMany({ workspaceId: workspaceId })
 
 	return (
-		<div className="container">
-			{apiKeys.map((key) => (
-				<p key={key.publicId}>{key.publicId}</p>
-			))}
-			<p>Create API KEY</p>
+		<Container>
+			<PageHeader
+				title="API Keys"
+				subtitle="These keys are used to interact with our API, create your own flows or build your own admin panels."
+			>
+				<ApiKeyModal workspaceId={workspaceId} createAction={createApiKeyAction} />
+			</PageHeader>
 
-			<ApiKeyModal workspaceId={workspaceId} createAction={createApiKeyAction} />
-		</div>
+			<div className="flex flex-col gap-2">
+				{apiKeys.map((key) => (
+					<div className="flex flex-row gap-2 border p-4 rounded-md" key={key.publicId}>
+						<p>{key.name}</p>
+						<p>{key.publicId}</p>
+					</div>
+				))}
+			</div>
+		</Container>
 	)
 }
 

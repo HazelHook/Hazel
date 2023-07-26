@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const SidebarClientItem = ({
 	className,
@@ -29,7 +29,6 @@ export const SidebarClientItem = ({
 }) => {
 	const pathname = usePathname()
 
-	console.log(className)
 	const active = pathname === href
 
 	if (disabled) {

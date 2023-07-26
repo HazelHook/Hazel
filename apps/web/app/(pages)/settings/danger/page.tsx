@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container"
 import { auth } from "@/lib/auth"
 import { DeleteOrganizationDialog } from "./dialog"
 import { deleteOrganzationAction } from "@/server/actions/organization"
+import { PageHeader } from "@/components/ui/page-header"
 
 const DangerPage = async () => {
 	const { workspaceId, organization, userId } = await auth()
@@ -11,10 +12,7 @@ const DangerPage = async () => {
 
 	return (
 		<Container>
-			<div>
-				<h1 className="text-3xl font-bold">Danger Zone</h1>
-				<p className="text-lg">Be careful most things here can't be reverted</p>
-			</div>
+			<PageHeader title="Danger Zone" subtitle="Be careful most things here can't be reverted" />
 
 			<div>
 				<DeleteOrganizationDialog
