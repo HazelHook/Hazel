@@ -7,9 +7,9 @@ import { IconProps } from "@/components/icons/pika/types"
 
 import { SidebarClientItem } from "./SidebarItem"
 import { Fragment } from "react"
-import TeamSwitcher from "./TeamSwitcher"
 
 type SubItem = {
+	className?: string
 	href: string
 	icon: (props: IconProps) => JSX.Element
 	endIcon?: (props: IconProps) => JSX.Element

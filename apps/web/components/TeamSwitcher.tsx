@@ -70,9 +70,9 @@ export default function TeamSwitcher({
 	})
 
 	const handleSwitchTeam = useAction(switchTeamAction, {
-		onSuccess: () => {
-			router.push("/")
-		},
+		// onSuccess: () => {
+		// 	router.push("/")
+		// },
 	})
 
 	return (

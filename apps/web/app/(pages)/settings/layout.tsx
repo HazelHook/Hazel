@@ -54,12 +54,13 @@ const SettingsLayout = ({ children }: { children: ReactNode }) => {
 								title: "Danger",
 								icon: DangerIcon,
 								href: "/settings/danger",
+								className: "text-destructive",
 							},
 						],
 					},
 				]}
 				disableLogo
-				className="max-w-[200px]"
+				className="max-w-min lg:max-w-[200px]"
 			/>
 			{children}
 		</div>

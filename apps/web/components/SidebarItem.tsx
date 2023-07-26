@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const SidebarClientItem = ({
+	className,
 	href,
 	icon,
 	title,
@@ -23,10 +24,12 @@ export const SidebarClientItem = ({
 	title: string
 	target?: string
 	disabled?: boolean
+	className?: string
 	size?: "default" | "xs" | "sm" | "lg"
 }) => {
 	const pathname = usePathname()
 
+	console.log(className)
 	const active = pathname === href
 
 	if (disabled) {
@@ -35,7 +38,7 @@ export const SidebarClientItem = ({
 				variant="ghost"
 				disabled={disabled}
 				size={size}
-				className={cn(active && "bg-muted", "w-full justify-center lg:justify-start")}
+				className={cn(active && "bg-muted", "w-full justify-center lg:justify-start", className)}
 			>
 				{icon}
 				<p className="hidden lg:block">{title}</p>
