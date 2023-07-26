@@ -20,8 +20,6 @@ export const auth = async () => {
 
 	const membershipIdCookie = cookiesList.get("membership_id")
 
-	console.log(membershipIdCookie)
-
 	let organization: schema.Organization | null
 
 	if (membershipIdCookie?.value) {
