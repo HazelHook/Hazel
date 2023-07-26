@@ -8,6 +8,7 @@ import { randColor } from "@ngneat/falso"
 import db from "./db"
 import { generatePublicId } from "db/src/drizzle/schema/common"
 import * as schema from "db/src/drizzle/schema"
+import { cookies } from "next/headers"
 
 export const auth = async () => {
 	const { userId } = clerkAuth()
@@ -15,6 +16,11 @@ export const auth = async () => {
 	if (!userId) {
 		redirect("/log-in")
 	}
+	const cookiesList = cookies()
+
+	const membership_id = cookiesList.get("membership_id")
+
+	console.log(membership_id)
 
 	let organization = await db.organization.getPersonal({ customerId: userId })
 

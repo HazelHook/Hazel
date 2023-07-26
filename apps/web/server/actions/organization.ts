@@ -5,6 +5,7 @@ import { createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
 import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
 import { TRPCError } from "@trpc/server"
+import { cookies } from "next/headers"
 
 export const createOrganzationAction = createAction(
 	protectedProcedure.input(createOrgFormSchema).mutation(async (opts) => {
@@ -55,6 +56,16 @@ export const deleteOrganzationAction = createAction(
 
 		return {
 			res: deletedOrg.res,
+			id: opts.input.publicId,
+		}
+	}),
+)
+
+export const switchOrganizationAction = createAction(
+	protectedProcedure.input(z.object({ publicId: z.string() })).mutation(async (opts) => {
+		cookies().set("membership_id", opts.input.publicId)
+
+		return {
 			id: opts.input.publicId,
 		}
 	}),

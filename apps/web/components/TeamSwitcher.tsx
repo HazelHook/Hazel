@@ -31,7 +31,7 @@ import { Organization, OrganizationMember } from "db/src/drizzle/schema"
 import AutoForm from "./ui/auto-form"
 import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { useAction } from "@/server/client"
-import type { createOrganzationAction } from "@/server/actions/organization"
+import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { useRouter } from "next/navigation"
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger>
@@ -42,19 +42,36 @@ type Membership = OrganizationMember & {
 
 interface TeamSwitcherProps extends PopoverTriggerProps {
 	memberships: Membership[]
+	currentMembershipId?: string
 	createTeamAction: typeof createOrganzationAction
+	switchTeamAction: typeof switchOrganizationAction
 }
 
-export default function TeamSwitcher({ className, memberships, createTeamAction }: TeamSwitcherProps) {
+export default function TeamSwitcher({
+	className,
+	memberships,
+	currentMembershipId,
+	createTeamAction,
+	switchTeamAction,
+}: TeamSwitcherProps) {
 	const router = useRouter()
+
+	const currentMembership = memberships.find((membership) => membership.publicId === currentMembershipId)
+
 	const [open, setOpen] = React.useState(false)
 	const [showNewTeamDialog, setShowNewTeamDialog] = React.useState(false)
-	const [selectedTeam, setSelectedTeam] = React.useState<Membership>(memberships[0])
+	const [selectedTeam, setSelectedTeam] = React.useState<Membership>(currentMembership || memberships[0])
 
 	const handleTeamCreation = useAction(createTeamAction, {
 		onSuccess: () => {
 			setShowNewTeamDialog(false)
 			router.refresh()
+		},
+	})
+
+	const handleSwitchTeam = useAction(switchTeamAction, {
+		onSuccess: () => {
+			router.push("/")
 		},
 	})
 
@@ -86,27 +103,28 @@ export default function TeamSwitcher({ className, memberships, createTeamAction 
 							<CommandInput placeholder="Search team..." />
 							<CommandEmpty>No team found.</CommandEmpty>
 							<CommandGroup heading={"Teams"}>
-								{memberships.map((mebership) => (
+								{memberships.map((membership) => (
 									<CommandItem
-										key={mebership.publicId}
+										key={membership.publicId}
 										onSelect={() => {
-											setSelectedTeam(mebership)
+											handleSwitchTeam.mutate({ publicId: membership.publicId })
+											setSelectedTeam(membership)
 											setOpen(false)
 										}}
 										className="text-sm"
 									>
 										<Avatar className="mr-2 h-5 w-5">
 											<AvatarImage
-												src={`https://avatar.vercel.sh/${mebership.organization.publicId}.png`}
-												alt={mebership.organization.name}
+												src={`https://avatar.vercel.sh/${membership.organization.publicId}.png`}
+												alt={membership.organization.name}
 											/>
 											<AvatarFallback>SC</AvatarFallback>
 										</Avatar>
-										{mebership.organization.name}
+										{membership.organization.name}
 										<CheckTickIcon
 											className={cn(
 												"ml-auto h-4 w-4",
-												selectedTeam.publicId === mebership.publicId ? "opacity-100" : "opacity-0",
+												selectedTeam.publicId === membership.publicId ? "opacity-100" : "opacity-0",
 											)}
 										/>
 									</CommandItem>

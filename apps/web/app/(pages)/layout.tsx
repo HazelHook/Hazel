@@ -11,9 +11,8 @@ import { FileInfoIcon } from "@/components/icons/pika/fileInfo"
 import TeamSwitcher from "@/components/TeamSwitcher"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { OrganizationMembership } from "@clerk/nextjs/dist/types/server"
-import { Organization } from "db/src/drizzle/schema"
-import { createOrganzationAction } from "@/server/actions/organization"
+import { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
+import { cookies } from "next/headers"
 
 interface RootLayoutProps {
 	children: React.ReactNode
@@ -25,6 +24,10 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
 	const { userId } = await auth()
+
+	const cookiesList = cookies()
+
+	const orgCookie = cookiesList.get("membership_id")
 
 	const organzations = await db.organization.memberships.getMany({ customerId: userId })
 
@@ -86,7 +89,13 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 						]}
 						className="fixed flex w-12 flex-col justify-between transition-[width] duration-300 lg:w-64"
 					>
-						<TeamSwitcher createTeamAction={createOrganzationAction} memberships={organzations} className="w-full" />
+						<TeamSwitcher
+							switchTeamAction={switchOrganizationAction}
+							createTeamAction={createOrganzationAction}
+							memberships={organzations}
+							currentMembershipId={orgCookie?.value}
+							className="w-full"
+						/>
 					</Sidebar>
 					<div className="col-span-full ml-12 border-l h-full transition-[margin] duration-300 lg:ml-64">
 						<SiteHeader />
