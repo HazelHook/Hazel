@@ -44,10 +44,7 @@ export const SidebarItem = ({ icon, endIcon, ...rest }: SubItem) => {
 
 export async function Sidebar({ className, disableLogo = false, items, children }: SidebarProps) {
 	return (
-		<div
-			className={cn("flex w-full flex-col justify-between gap-4 border-r", className)}
-			style={{ height: "calc(100vh - 4rem)" }}
-		>
+		<aside className={cn("flex h-screen flex-col justify-between gap-4 border-r", className)}>
 			<div className="h-full w-full max-w-full space-y-2 pb-4 lg:space-y-4">
 				{!disableLogo && (
 					<Link className="cursor-pointer" href={"/"}>
@@ -76,11 +73,10 @@ export async function Sidebar({ className, disableLogo = false, items, children 
 								))}
 							</div>
 						</div>
-						{index + 1 !== items.length && <Separator />}
 					</Fragment>
 				))}
 			</div>
-			<div className="hidden p-2 lg:block">{children}</div>
-		</div>
+			<div className="hidden p-2 lg:block mb-8">{children}</div>
+		</aside>
 	)
 }

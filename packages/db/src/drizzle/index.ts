@@ -415,7 +415,7 @@ export function connectDB({
 						publicId: memberPublicId,
 						customerId: userId,
 						organizationId: Number(res.insertId),
-						personal: true,
+						personal: false,
 						role: "admin",
 					})
 				})

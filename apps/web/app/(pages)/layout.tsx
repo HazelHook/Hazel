@@ -1,6 +1,5 @@
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Sidebar } from "@/components/Sidebar"
-import { SiteHeader } from "@/components/site-header"
 import { HomeIcon } from "@/components/icons/pika/home"
 import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
 import { LinkChainIcon } from "@/components/icons/pika/linkChain"
@@ -8,11 +7,11 @@ import { GitCommitIcon } from "@/components/icons/pika/gitCommit"
 import { AutomationIcon } from "@/components/icons/pika/automation"
 import { Settings01Icon } from "@/components/icons/pika/settings01"
 import { FileInfoIcon } from "@/components/icons/pika/fileInfo"
-import TeamSwitcher from "@/components/TeamSwitcher"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { cookies } from "next/headers"
+import { ProfileSettings } from "@/components/ProfileSettings"
 
 interface RootLayoutProps {
 	children: React.ReactNode
@@ -33,8 +32,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
 	return (
 		<TooltipProvider>
-			<div className="relative flex min-h-screen flex-col">
-				<div className="grid grow lg:grid-cols-5">
+			<div className="flex min-h-screen flex-col">
+				<div>
 					<Sidebar
 						items={[
 							{
@@ -89,17 +88,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 						]}
 						className="fixed flex w-12 flex-col justify-between transition-[width] duration-300 lg:w-64"
 					>
-						<TeamSwitcher
+						<ProfileSettings
 							switchTeamAction={switchOrganizationAction}
 							createTeamAction={createOrganzationAction}
 							memberships={organzations}
 							currentMembershipId={orgCookie?.value}
-							className="w-full"
 						/>
 					</Sidebar>
 					<div className="col-span-full ml-12 border-l h-full transition-[margin] duration-300 lg:ml-64">
-						<SiteHeader />
-
 						{children}
 					</div>
 				</div>

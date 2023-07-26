@@ -5,7 +5,6 @@ import { createApiKeyAction } from "@/server/actions/api-keys"
 import { ApiKeyModal } from "./modal"
 import { PageHeader } from "@/components/ui/page-header"
 import { Container } from "@/components/ui/container"
-import { Button } from "@/components/ui/button"
 
 const ApiKeyPage = async () => {
 	const { workspaceId } = await auth()

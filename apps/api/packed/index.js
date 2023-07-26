@@ -12271,9 +12271,9 @@ var organizationMembers = buildCustomMysqlTable("organization_members", {
   role: mysqlEnum("role", ["owner", "admin", "member"]).notNull()
 }, (table) => ({
   publicIdx: uniqueIndex("public_idx").on(table.publicId),
-  customerIdx: uniqueIndex("customer_id_idx").on(table.customerId),
-  roleIdx: uniqueIndex("role_id_idx").on(table.role),
-  organizationIdx: uniqueIndex("org_id_idx").on(table.organizationId)
+  customerIdx: index("customer_id_idx").on(table.customerId),
+  roleIdx: index("role_id_idx").on(table.role),
+  organizationIdx: index("org_id_idx").on(table.organizationId)
 }));
 var organizationInvites = buildMysqlTable("organization_invites", {
   id: serial("id").primaryKey().autoincrement(),
@@ -12644,13 +12644,20 @@ function connectDB({
         }
         return data2.organization;
       },
-      create: async (data2) => {
+      create: async (data2, userId) => {
         const publicId = generatePublicId("org");
-        const res = await db.insert(organizations).values({
-          ...data2,
-          publicId
+        const memberPublicId = generatePublicId("mem");
+        await db.transaction(async (tx) => {
+          const res = await tx.insert(organizations).values({ ...data2, publicId });
+          await tx.insert(organizationMembers).values({
+            publicId: memberPublicId,
+            customerId: userId,
+            organizationId: Number(res.insertId),
+            personal: true,
+            role: "admin"
+          });
         });
-        return { res, publicId };
+        return { publicId };
       },
       update: async (data2) => {
         const res = await db.update(organizations).set(data2).where(eq(organizations.publicId, data2.publicId));
@@ -12686,6 +12693,20 @@ function connectDB({
         }
       },
       memberships: {
+        getOne: async ({
+          membershipId
+        }) => {
+          const data2 = await db.query.organizationMembers.findFirst({
+            where: eq(organizationMembers.publicId, membershipId),
+            with: {
+              organization: true
+            }
+          });
+          if (!data2 || !data2?.organization) {
+            return null;
+          }
+          return data2.organization;
+        },
         getMany: async ({
           customerId,
           orgId
@@ -12700,7 +12721,10 @@ function connectDB({
             whereClause = eq(organizationMembers.organizationId, orgId);
           }
           const memberShips = db.query.organizationMembers.findMany({
-            where: and(whereClause, isNull3(organizationMembers.deletedAt))
+            where: and(whereClause, isNull3(organizationMembers.deletedAt)),
+            with: {
+              organization: true
+            }
           });
           return memberShips;
         }

@@ -9,6 +9,7 @@ export const createApiKeyAction = createAction(
 	protectedProcedure.input(z.object({ workspaceId: z.string() }).merge(createApiKeySchema)).mutation(async (opts) => {
 		const key = await db.api.create({
 			...opts.input,
+			ownerId: opts.ctx.auth.customerId,
 		})
 
 		return {
