@@ -27,9 +27,6 @@ export const OrganizationUpdateForm = ({
 				name: {
 					description: "Name of your Organization",
 				},
-				slug: {
-					description: "Slug to describe your Organization",
-				},
 			}}
 			defaultValues={defaultValues}
 			onSubmit={async (data) => {
