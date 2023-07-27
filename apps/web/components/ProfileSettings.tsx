@@ -70,7 +70,6 @@ export const ProfileSettings = ({
 
 	const { user } = useUser()
 
-	const [open, setOpen] = useState(false)
 	const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
 	const [selectedTeam, setSelectedTeam] = useState<Membership>(currentMembership || memberships[0])
 
@@ -167,7 +166,6 @@ export const ProfileSettings = ({
 								if (personalMembership) {
 									handleSwitchTeam.mutate({ publicId: personalMembership.publicId })
 									setSelectedTeam(personalMembership)
-									setOpen(false)
 								}
 							}}
 							className={cn("flex items-center justify-between", {
@@ -194,7 +192,6 @@ export const ProfileSettings = ({
 									onClick={() => {
 										handleSwitchTeam.mutate({ publicId: membership.publicId })
 										setSelectedTeam(membership)
-										setOpen(false)
 									}}
 									className={cn("flex items-center justify-between")}
 								>

@@ -50,7 +50,7 @@
 		"db": "workspace:*",
 		"elkjs": "^0.8.2",
 		"framer-motion": "^10.13.1",
-		"next": "13.4.9",
+		"next": "13.4.12",
 		"next-themes": "^0.2.1",
 		"nprogress": "^0.2.0",
 		"radash": "^11.0.0",

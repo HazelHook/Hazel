@@ -62,7 +62,6 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 							placeholder: "Source Name",
 						},
 					},
-
 					url: {
 						description: "The endpoint that will send the webhooks.",
 						inputProps: {

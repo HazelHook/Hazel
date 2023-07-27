@@ -12252,6 +12252,7 @@ var organizations = buildCustomMysqlTable("organizations", {
   ownerId: varchar("owner_id", { length: 128 }).notNull(),
   name: varchar("name", { length: 128 }).notNull(),
   personal: boolean("personal").default(false).notNull(),
+  plan: mysqlEnum("plan", ["free", "pro", "enterprise"]).default("free").notNull(),
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
   updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
   deletedAt: timestamp("deleted_at")

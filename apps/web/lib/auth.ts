@@ -56,8 +56,6 @@ export const auth = async () => {
 		organization = await db.organization.getPersonal({ customerId: userId })
 	}
 
-	console.log(organization)
-
 	// This should never happen
 	if (!organization) {
 		redirect("/someroutetoshowerrormessagetocontactus")
