@@ -19,12 +19,14 @@ export const auth = async () => {
 
 	const membershipIdCookie = cookiesList.get("membership_id")
 
-	let organization: schema.Organization | null
+	let organization: schema.Organization | null | undefined = undefined
 
 	if (membershipIdCookie?.value) {
 		const membership = await db.organization.memberships.getOne({ membershipId: membershipIdCookie.value })
 		organization = membership?.organization!
-	} else {
+	}
+
+	if (!organization) {
 		organization = await db.organization.getPersonal({ customerId: userId })
 	}
 
@@ -53,6 +55,8 @@ export const auth = async () => {
 
 		organization = await db.organization.getPersonal({ customerId: userId })
 	}
+
+	console.log(organization)
 
 	// This should never happen
 	if (!organization) {
