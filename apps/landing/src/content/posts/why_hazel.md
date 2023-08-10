@@ -9,7 +9,7 @@ image:
 tags: ["webhooks", "hazel", "startup", "build in public", "api", "saas"]
 ---
 
-## Introducing Hazel
+# Introducing Hazel
 
 Hazel is your one-stop solution to streamline your webhook architecture. Webhooks, despite being a simple concept, 
 come bundled with complexities—ranging from verifying signatures to rate limiting and handling retries. 

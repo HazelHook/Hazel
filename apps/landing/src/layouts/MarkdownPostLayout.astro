@@ -1,13 +1,12 @@
 ---
-import { getCollection } from "astro:content";
-const allPosts = await getCollection("posts");
 import LightLayout from "./LightLayout.astro";
 import NewsletterCta from "@/components/complex/NewsletterCta.astro";
 const { frontmatter } = Astro.props;
 
 import { AstroSeo } from "@astrolib/seo";
----
 
+
+---
 <AstroSeo
   title={frontmatter.title}
   description={frontmatter.description}
@@ -15,8 +14,8 @@ import { AstroSeo } from "@astrolib/seo";
   canonical="https://www.hazelhook.dev"
   openGraph={{
     url: "https://www.hazelhook.dev",
-    title: "Title",
-    description: "description",
+    title: frontmatter.title,
+    description: frontmatter.description,
     images: [
       {
         url: "https://www.hazelhook.dev/opengraph/social-og.jpg",
@@ -35,7 +34,7 @@ import { AstroSeo } from "@astrolib/seo";
       { url: "https://www.hazelhook.dev/opengraph/social-og.jpg" },
       { url: "https://www.hazelhook.dev/opengraph/twitter-og.jpg" },
     ],
-    site_name: "YourSitesName",
+    site_name: "Hazel",
   }}
   twitter={{
     handle: "@makisuo__",
