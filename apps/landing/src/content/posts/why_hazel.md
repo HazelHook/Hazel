@@ -51,24 +51,24 @@ enabling swift identification and resolution of issues.
 
 ### Delay, Retries and Ratelimiting
 
-Ratelimting, retries on failure and delays are an essantial part of webhook infrastrucutre but can be super unrealiable or
-even none existant. Hazel provides a consistent delay, retry and ratelimting system for all webhook sources.
+Ratelimiting, retries on failure and delays are an essential part of webhook infrastrucutre but can be super unrealiable or
+even none existent. Hazel provides a consistent delay, retry and ratelimiting system for all webhook sources.
 
 
-### Integrations and automaitc webhook verification
+### Integrations and automatic webhook verification
 
 We provide very straightforward and easy to use intgerations for most popular webhook sources, but also provide simple solutions to verify other sources.
 This way you will never have to worry about verifying your webhook on your server anymore, by just using one of Hazel's sdks.
 
 ### Simple Rest API
 
-We provide a simple rest api to easily manage Webhooks aswell in your tech stack without ever needing to interact with Hazels ui.
+We provide a simple rest api to easily manage Webhooks in your tech stack without ever needing to interact with Hazels-UI.
 You can create connections, destinations or connect new sources.
 
 
 ### Build for developers
 
-We made it as simple as possible to also test your webhooks locally with the help of our cli to make developing with Hazel a breeze.
+We made it as simple as possible to also test your webhooks locally with the help of our CLI to make developing with Hazel a breeze.
 
 
 ### Build with speed in mind
