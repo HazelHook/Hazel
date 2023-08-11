@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { subDays } from "date-fns"
 import { DateRange } from "react-day-picker"
