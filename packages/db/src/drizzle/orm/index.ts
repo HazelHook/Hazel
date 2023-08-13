@@ -25,9 +25,9 @@ export function connectDB({
 }: {
 	connectionString: string
 }) {
-	if (!connectionString) {
-		throw new Error("Connection String cant be empty")
-	}
+	// if (!connectionString) {
+	// 	throw new Error("Connection String cant be empty")
+	// }
 
 	const client = postgres(connectionString)
 
