@@ -13,7 +13,7 @@ importers:
         version: 4.1.0(prettier@3.0.0)
       '@turbo/gen':
         specifier: 1.10.9
-        version: 1.10.9(@types/node@20.4.5)(typescript@5.1.6)
+        version: 1.10.9(@types/node@20.5.0)(typescript@5.1.6)
       prettier:
         specifier: 3.0.0
         version: 3.0.0
@@ -53,7 +53,7 @@ importers:
     devDependencies:
       bun-types:
         specifier: latest
-        version: 0.7.0
+        version: 0.7.3
 
   apps/backend:
     dependencies:
@@ -77,7 +77,7 @@ importers:
         version: link:../../packages/db
       drizzle-orm:
         specifier: ^0.27.0
-        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.0)
+        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.3)
       elysia:
         specifier: latest
         version: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
@@ -90,7 +90,7 @@ importers:
     devDependencies:
       bun-types:
         specifier: latest
-        version: 0.7.0
+        version: 0.7.3
 
   apps/clibun:
     dependencies:
@@ -127,7 +127,7 @@ importers:
         version: 8.5.5
       ts-node:
         specifier: ^10.9.1
-        version: 10.9.1(@types/node@20.4.5)(typescript@5.1.6)
+        version: 10.9.1(@types/node@20.5.0)(typescript@5.1.6)
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
@@ -205,7 +205,7 @@ importers:
         version: 18.2.7
       astro:
         specifier: ^2.8.3
-        version: 2.8.3(@types/node@20.4.5)(sharp@0.32.3)
+        version: 2.8.3(@types/node@20.5.0)(sharp@0.32.3)
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
@@ -441,22 +441,19 @@ importers:
     devDependencies:
       bun-types:
         specifier: latest
-        version: 0.7.0
+        version: 0.7.3
 
   packages/db:
     dependencies:
       '@chronark/zod-bird':
         specifier: ^0.1.1
         version: 0.1.1
-      '@planetscale/database':
-        specifier: ^1.8.0
-        version: 1.8.0
       drizzle-orm:
-        specifier: ^0.27.2
-        version: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.3)(postgres@3.3.5)
+        specifier: ^0.28.2
+        version: 0.28.2(bun-types@0.7.3)(postgres@3.3.5)
       drizzle-zod:
-        specifier: ^0.4.4
-        version: 0.4.4(drizzle-orm@0.27.2)(zod@3.21.4)
+        specifier: ^0.5.0
+        version: 0.5.0(drizzle-orm@0.28.2)(zod@3.21.4)
       nanoid:
         specifier: ^4.0.2
         version: 4.0.2
@@ -468,8 +465,8 @@ importers:
         version: 3.21.4
     devDependencies:
       '@types/node':
-        specifier: ^20.4.4
-        version: 20.4.4
+        specifier: ^20.5.0
+        version: 20.5.0
       bun-types:
         specifier: latest
         version: 0.7.3
@@ -477,8 +474,8 @@ importers:
         specifier: ^16.3.1
         version: 16.3.1
       drizzle-kit:
-        specifier: ^0.19.10
-        version: 0.19.10
+        specifier: ^0.19.12
+        version: 0.19.12
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -850,7 +847,7 @@ packages:
         optional: true
     dependencies:
       '@altano/tiny-async-pool': 1.0.2
-      astro: 2.8.3(@types/node@20.4.5)(sharp@0.32.3)
+      astro: 2.8.3(@types/node@20.5.0)(sharp@0.32.3)
       http-cache-semantics: 4.1.1
       image-size: 1.0.2
       kleur: 4.1.5
@@ -886,7 +883,7 @@ packages:
       astro: ^2.5.0
     dependencies:
       '@astrojs/prism': 2.1.2
-      astro: 2.8.3(@types/node@20.4.5)(sharp@0.32.3)
+      astro: 2.8.3(@types/node@20.5.0)(sharp@0.32.3)
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.2
       rehype-raw: 6.1.1
@@ -974,7 +971,7 @@ packages:
       astro: ^2.6.5
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 2.8.3(@types/node@20.4.5)(sharp@0.32.3)
+      astro: 2.8.3(@types/node@20.5.0)(sharp@0.32.3)
       autoprefixer: 10.4.14(postcss@8.4.27)
       postcss: 8.4.27
       postcss-load-config: 4.0.1(postcss@8.4.27)
@@ -1008,7 +1005,7 @@ packages:
     peerDependencies:
       astro: ^1.2.1 || ^2.0.0
     dependencies:
-      astro: 2.8.3(@types/node@20.4.5)(sharp@0.32.3)
+      astro: 2.8.3(@types/node@20.5.0)(sharp@0.32.3)
     dev: false
 
   /@babel/code-frame@7.22.5:
@@ -4610,7 +4607,7 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: true
 
-  /@turbo/gen@1.10.9(@types/node@20.4.5)(typescript@5.1.6):
+  /@turbo/gen@1.10.9(@types/node@20.5.0)(typescript@5.1.6):
     resolution: {integrity: sha512-EQdg4NqN032+o2Wgj9lg49puijGc4tbgKjGjDOi8+rN/RqE9CUKxKtrfaTGdDjfdC1Uy8FaaKk7y1zYK3zIojg==}
     hasBin: true
     dependencies:
@@ -4621,7 +4618,7 @@ packages:
       minimatch: 9.0.1
       node-plop: 0.26.3
       semver: 7.5.4
-      ts-node: 10.9.1(@types/node@20.4.5)(typescript@5.1.6)
+      ts-node: 10.9.1(@types/node@20.5.0)(typescript@5.1.6)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -4678,12 +4675,12 @@ packages:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
 
   /@types/connect@3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
 
   /@types/cookies@0.7.7:
     resolution: {integrity: sha512-h7BcvPUogWbKCzBR2lY4oqaZbO3jXZksexYJVFvkrFeLgbZjQkU4x8pRq6eg2MHXQhY0McQdqmmsxRWlVAHooA==}
@@ -4691,7 +4688,7 @@ packages:
       '@types/connect': 3.4.35
       '@types/express': 4.17.17
       '@types/keygrip': 1.0.2
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
     dev: false
 
   /@types/css-tree@2.3.1:
@@ -4901,7 +4898,7 @@ packages:
   /@types/express-serve-static-core@4.17.35:
     resolution: {integrity: sha512-wALWQwrgiB2AWTT91CB62b6Yt0sNHpznUXeZEcnPU3DRdlDIz74x8Qg1UUYKSVFi+va5vKOLYRBI1bRKiLLKIg==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
       '@types/send': 0.17.1
@@ -4931,7 +4928,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
     dev: true
 
   /@types/hast@2.3.4:
@@ -5000,7 +4997,7 @@ packages:
   /@types/node-fetch@2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
       form-data: 3.0.1
     dev: false
 
@@ -5020,12 +5017,11 @@ packages:
     resolution: {integrity: sha512-Dd0BYtWgnWJKwO1jkmTrzofjK2QXXcai0dmtzvIBhcA+RsG5h8R3xlyta0kGOZRNfL9GuRtb1knmPEhQrePCEw==}
     dev: true
 
-  /@types/node@20.4.4:
-    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
-    dev: true
-
   /@types/node@20.4.5:
     resolution: {integrity: sha512-rt40Nk13II9JwQBdeYqmbn2Q6IVTA5uPhvSO+JVqdXw/6/4glI6oR9ezty/A9Hg5u7JH4OmYmuQ+XvjKm0Datg==}
+
+  /@types/node@20.5.0:
+    resolution: {integrity: sha512-Mgq7eCtoTjT89FqNoTzzXg2XvCi5VMhRV6+I2aYanc6kQCBImeNaAYRs/DyoVqk1YEUJK5gN9VO7HRIdz4Wo3Q==}
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -5071,7 +5067,7 @@ packages:
   /@types/sax@1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
     dev: false
 
   /@types/scheduler@0.16.3:
@@ -5081,13 +5077,13 @@ packages:
     resolution: {integrity: sha512-Cwo8LE/0rnvX7kIIa3QHCkcuF21c05Ayb0ZfxPiv0W8VRiZiNW/WuRupHKpqqGVGf7SUA44QSOUKaEd9lIrd/Q==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
 
   /@types/serve-static@1.15.1:
     resolution: {integrity: sha512-NUo5XNiAdULrJENtJXZZ3fHtfMolzZwczzBbnAeBbqBwG+LaG6YaJtuwzwGSQZ2wsCrxjEhNNjAkKigy3n8teQ==}
     dependencies:
       '@types/mime': 3.0.1
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
 
   /@types/signal-exit@3.0.0:
     resolution: {integrity: sha512-MaJ+16SOXz0Z27EMf3d88+B6UDglq1sn140a+5X/ROLkIcEfRq0CPg+1B2efF1GXQn4n+aKH4ti2hHG4Ya+Dzg==}
@@ -5100,7 +5096,7 @@ packages:
   /@types/through@0.0.30:
     resolution: {integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
     dev: true
 
   /@types/tinycolor2@1.4.3:
@@ -5495,7 +5491,7 @@ packages:
       terser: 5.18.2
     dev: false
 
-  /astro@2.8.3(@types/node@20.4.5)(sharp@0.32.3):
+  /astro@2.8.3(@types/node@20.5.0)(sharp@0.32.3):
     resolution: {integrity: sha512-UopGl3WubMnl15TWlR6PTCcH54TooZ+JoAloErfoXQtz4PAvmEEqEVc7tHoJ45iC7rhKgzILsvDhqzitBeRihw==}
     engines: {node: '>=16.12.0', npm: '>=6.14.0'}
     hasBin: true
@@ -5557,7 +5553,7 @@ packages:
       typescript: 5.1.6
       unist-util-visit: 4.1.2
       vfile: 5.3.7
-      vite: 4.4.2(@types/node@20.4.5)
+      vite: 4.4.2(@types/node@20.5.0)
       vitefu: 0.2.4(vite@4.4.2)
       which-pm: 2.0.0
       yargs-parser: 21.1.1
@@ -5840,9 +5836,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
-
-  /bun-types@0.7.0:
-    resolution: {integrity: sha512-jXFiYtwSUQtD/Y3LHRWeWNwhFaUYvcO96zI7y3gSPgTq+ozxXpuTGDxABLdIKmFc672Q7Qp/OgrfJFEjg4Mnkg==}
 
   /bun-types@0.7.3:
     resolution: {integrity: sha512-kssLD5mDLoawmLZFgQRRq0Wy+dca/os6TZ0MHWyFVoVAEwSrpAxmNCZ1K1GUelfhlDaL2FikRxeF9GkATdzXZg==}
@@ -6822,8 +6815,8 @@ packages:
       wordwrap: 1.0.0
     dev: true
 
-  /drizzle-kit@0.19.10:
-    resolution: {integrity: sha512-v7bd+7YUO3NJJTY7hwt9k+DPJVw+31iejG/ztkvNS0hK8zWjJvA6NAECYZVswKQ+efCjzLgPCx+I9X105Zqt6Q==}
+  /drizzle-kit@0.19.12:
+    resolution: {integrity: sha512-rcsmh5gUIkvuD0WrbEc+aLpqY2q2J8ltynRcJiJo2l01hhsYvPnX0sgxWlFXlfAIa5ZXNw2nJZhYlslI6tG3MA==}
     hasBin: true
     dependencies:
       '@drizzle-team/studio': 0.0.5
@@ -6842,73 +6835,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.0):
-    resolution: {integrity: sha512-ZvBvceff+JlgP7FxHKe0zOU9CkZ4RcOtibumIrqfYzDGuOeF0YUY0F9iMqYpRM7pxnLRfC+oO7rWOUH3T5oFQA==}
-    peerDependencies:
-      '@aws-sdk/client-rds-data': '>=3'
-      '@cloudflare/workers-types': '>=3'
-      '@libsql/client': '*'
-      '@neondatabase/serverless': '>=0.1'
-      '@opentelemetry/api': ^1.4.1
-      '@planetscale/database': '>=1'
-      '@types/better-sqlite3': '*'
-      '@types/pg': '*'
-      '@types/sql.js': '*'
-      '@vercel/postgres': '*'
-      better-sqlite3: '>=7'
-      bun-types: '*'
-      knex: '*'
-      kysely: '*'
-      mysql2: '>=2'
-      pg: '>=8'
-      postgres: '>=3'
-      sql.js: '>=1'
-      sqlite3: '>=5'
-    peerDependenciesMeta:
-      '@aws-sdk/client-rds-data':
-        optional: true
-      '@cloudflare/workers-types':
-        optional: true
-      '@libsql/client':
-        optional: true
-      '@neondatabase/serverless':
-        optional: true
-      '@opentelemetry/api':
-        optional: true
-      '@planetscale/database':
-        optional: true
-      '@types/better-sqlite3':
-        optional: true
-      '@types/pg':
-        optional: true
-      '@types/sql.js':
-        optional: true
-      '@vercel/postgres':
-        optional: true
-      better-sqlite3:
-        optional: true
-      bun-types:
-        optional: true
-      knex:
-        optional: true
-      kysely:
-        optional: true
-      mysql2:
-        optional: true
-      pg:
-        optional: true
-      postgres:
-        optional: true
-      sql.js:
-        optional: true
-      sqlite3:
-        optional: true
-    dependencies:
-      '@planetscale/database': 1.8.0
-      bun-types: 0.7.0
-    dev: false
-
-  /drizzle-orm@0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.3)(postgres@3.3.5):
+  /drizzle-orm@0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.3):
     resolution: {integrity: sha512-ZvBvceff+JlgP7FxHKe0zOU9CkZ4RcOtibumIrqfYzDGuOeF0YUY0F9iMqYpRM7pxnLRfC+oO7rWOUH3T5oFQA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -6972,16 +6899,81 @@ packages:
     dependencies:
       '@planetscale/database': 1.8.0
       bun-types: 0.7.3
+    dev: false
+
+  /drizzle-orm@0.28.2(bun-types@0.7.3)(postgres@3.3.5):
+    resolution: {integrity: sha512-QRyuzvpJr7GE6LpvZ/sg2nAKNg2if1uGGkgFTiXn4auuYId//vVJe6HBsDTktfKfcaDGzIYos+/f+PS5EkBmrg==}
+    peerDependencies:
+      '@aws-sdk/client-rds-data': '>=3'
+      '@cloudflare/workers-types': '>=3'
+      '@libsql/client': '*'
+      '@neondatabase/serverless': '>=0.1'
+      '@opentelemetry/api': ^1.4.1
+      '@planetscale/database': '>=1'
+      '@types/better-sqlite3': '*'
+      '@types/pg': '*'
+      '@types/sql.js': '*'
+      '@vercel/postgres': '*'
+      better-sqlite3: '>=7'
+      bun-types: '*'
+      knex: '*'
+      kysely: '*'
+      mysql2: '>=2'
+      pg: '>=8'
+      postgres: '>=3'
+      sql.js: '>=1'
+      sqlite3: '>=5'
+    peerDependenciesMeta:
+      '@aws-sdk/client-rds-data':
+        optional: true
+      '@cloudflare/workers-types':
+        optional: true
+      '@libsql/client':
+        optional: true
+      '@neondatabase/serverless':
+        optional: true
+      '@opentelemetry/api':
+        optional: true
+      '@planetscale/database':
+        optional: true
+      '@types/better-sqlite3':
+        optional: true
+      '@types/pg':
+        optional: true
+      '@types/sql.js':
+        optional: true
+      '@vercel/postgres':
+        optional: true
+      better-sqlite3:
+        optional: true
+      bun-types:
+        optional: true
+      knex:
+        optional: true
+      kysely:
+        optional: true
+      mysql2:
+        optional: true
+      pg:
+        optional: true
+      postgres:
+        optional: true
+      sql.js:
+        optional: true
+      sqlite3:
+        optional: true
+    dependencies:
+      bun-types: 0.7.3
       postgres: 3.3.5
     dev: false
 
-  /drizzle-zod@0.4.4(drizzle-orm@0.27.2)(zod@3.21.4):
-    resolution: {integrity: sha512-XNn0mjQ306Hvg+CuyKV98wnsWBWeTqv+kgE/N79Zj0EdCvjD2kaoN5sFDGFkMVqPQuP7IB1IPs0lEcOij1RvBA==}
+  /drizzle-zod@0.5.0(drizzle-orm@0.28.2)(zod@3.21.4):
+    resolution: {integrity: sha512-gIOXclphhaleYFEGZFxSyJBoiPRyksGyIPgmgWz6a+j5JeaOrOf1QOPjf1p5AHYA+1O3Q01ondGOZfgObxBTsg==}
     peerDependencies:
       drizzle-orm: '>=0.23.13'
       zod: '*'
     dependencies:
-      drizzle-orm: 0.27.2(@planetscale/database@1.8.0)(bun-types@0.7.3)(postgres@3.3.5)
+      drizzle-orm: 0.28.2(bun-types@0.7.3)(postgres@3.3.5)
       zod: 3.21.4
     dev: false
 
@@ -12411,6 +12403,37 @@ packages:
       yn: 3.1.1
     dev: true
 
+  /ts-node@10.9.1(@types/node@20.5.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.5.0
+      acorn: 8.10.0
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.1.6
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: true
+
   /ts-pattern@5.0.5:
     resolution: {integrity: sha512-tL0w8U/pgaacOmkb9fRlYzWEUDCfVjjv9dD4wHTgZ61MjhuMt46VNWTG747NqW6vRzoWIKABVhFSOJ82FvXrfA==}
     dev: false
@@ -12891,7 +12914,7 @@ packages:
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
 
-  /vite@4.4.2(@types/node@20.4.5):
+  /vite@4.4.2(@types/node@20.5.0):
     resolution: {integrity: sha512-zUcsJN+UvdSyHhYa277UHhiJ3iq4hUBwHavOpsNUGsTgjBeoBlK8eDt+iT09pBq0h9/knhG/SPrZiM7cGmg7NA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -12919,7 +12942,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.5.0
       esbuild: 0.18.11
       postcss: 8.4.27
       rollup: 3.25.3
@@ -12934,7 +12957,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.2(@types/node@20.4.5)
+      vite: 4.4.2(@types/node@20.5.0)
 
   /vscode-css-languageservice@6.2.6:
     resolution: {integrity: sha512-SA2WkeOecIpUiEbZnjOsP/fI5CRITZEiQGSHXKiDQDwLApfKcnLhZwMtOBbIifSzESVcQa7b/shX/nbnF4NoCg==}

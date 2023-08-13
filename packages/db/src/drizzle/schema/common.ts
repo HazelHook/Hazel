@@ -1,5 +1,4 @@
-import { BuildColumns, sql } from "drizzle-orm"
-import { PgTableExtraConfig, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core"
+import { serial, timestamp, varchar } from "drizzle-orm/pg-core"
 import { nanoid } from "nanoid"
 
 export const commonFields = {

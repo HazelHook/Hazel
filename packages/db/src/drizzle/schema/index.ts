@@ -25,15 +25,13 @@ export const source = pgTable(
 	"sources",
 	{
 		...commonFields,
+		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		url,
-		integrationId: integer("integration_id"),
+		integrationId: integer("integration_id").references(() => integration.id),
 	},
 	(table) => ({
-		publicIdIndex: index("src_public_id_idx").on(table.publicId),
 		workspaceIdIndex: index("src_workspace_id_idx").on(table.workspaceId),
-
-		integrationIdIndex: index("src_integration_id_idx").on(table.integrationId),
 	}),
 )
 
@@ -41,12 +39,12 @@ export const integration = pgTable(
 	"integrations",
 	{
 		...commonFields,
+		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		tool: varchar("tool", { enum: Object.keys(INTEGRATIONS) as [string, ...string[]] }),
 		config: json("config"),
 	},
 	(table) => ({
-		publicIdIndex: index("itg_public_id_idx").on(table.publicId),
 		workspaceIdIndex: index("itg_workspace_id_idx").on(table.workspaceId),
 
 		nameIndex: index("itg_name_idx").on(table.name),
@@ -57,12 +55,12 @@ export const destination = pgTable(
 	"destinations",
 	{
 		...commonFields,
+		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		url: url.notNull(),
 		websocket_connection: boolean("websocket_connection").default(false).notNull(),
 	},
 	(table) => ({
-		publicIdIndex: index("dst_public_id_idx").on(table.publicId),
 		workspaceIdIndex: index("dst_workspace_id_idx").on(table.workspaceId),
 	}),
 )
@@ -71,11 +69,16 @@ export const connection = pgTable(
 	"connections",
 	{
 		...commonFields,
+		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		enabled,
 
-		sourceId: integer("source_id").notNull(),
-		destinationId: integer("destination_id").notNull(),
+		sourceId: integer("source_id")
+			.notNull()
+			.references(() => source.id),
+		destinationId: integer("destination_id")
+			.notNull()
+			.references(() => destination.id),
 
 		delay: integer("delay"),
 
@@ -86,12 +89,7 @@ export const connection = pgTable(
 		fluxConfig: json("flux_config"),
 	},
 	(table) => ({
-		publicIdIndex: uniqueIndex("con_public_id_idx").on(table.publicId),
-
 		workspaceIdIndex: index("con_workspace_id_idx").on(table.workspaceId),
-
-		sourceIdIndex: index("con_source_id_idx").on(table.sourceId),
-		destinationIndex: index("con_destination_id_idx").on(table.destinationId),
 
 		unq: unique().on(table.sourceId, table.destinationId),
 	}),
@@ -101,13 +99,12 @@ export const apiKeys = pgTable(
 	"api_keys",
 	{
 		...commonFields,
+		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		ownerId: varchar("owner_id", { length: 128 }),
 		name: varchar("name", { length: 128 }),
 		expires: timestamp("expires", { precision: 3 }),
 	},
-	(table) => ({
-		publicIdx: uniqueIndex("api_public_idx").on(table.publicId),
-	}),
+	(table) => ({}),
 )
 
 export const organizations = pgTable(
@@ -127,9 +124,7 @@ export const organizations = pgTable(
 		updatedAt: timestamp("updated_at").defaultNow().notNull(),
 		deletedAt: timestamp("deleted_at"),
 	},
-	(table) => ({
-		publicIdx: uniqueIndex("public_idx").on(table.publicId),
-	}),
+	(table) => ({}),
 )
 
 export const organizationMembers = pgTable(
@@ -143,14 +138,14 @@ export const organizationMembers = pgTable(
 		deletedAt: timestamp("deleted_at"),
 
 		customerId: varchar("customer_id", { length: 128 }).notNull(),
-		organizationId: integer("organization_id").notNull(),
+		organizationId: integer("organization_id")
+			.notNull()
+			.references(() => organizations.id),
 		role: role,
 	},
 	(table) => ({
-		publicIdx: uniqueIndex("public_idx").on(table.publicId),
 		customerIdx: index("customer_id_idx").on(table.customerId),
-		// roleIdx: index("role_id_idx").on(table.role),
-		organizationIdx: index("org_id_idx").on(table.organizationId),
+		roleIdx: index("role_id_idx").on(table.role),
 	}),
 )
 
@@ -165,10 +160,11 @@ export const organizationInvites = pgTable(
 
 		email: varchar("email", { length: 128 }).notNull(),
 		role: role,
-		organizationId: integer("organization_id").notNull(),
+		organizationId: integer("organization_id")
+			.notNull()
+			.references(() => organizations.id),
 	},
 	(table) => ({
-		publicIdx: uniqueIndex("public_idx").on(table.publicId),
 		emailIdx: uniqueIndex("email_idx").on(table.email),
 	}),
 )

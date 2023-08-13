@@ -3,9 +3,8 @@ import type { Config } from "drizzle-kit"
 export default {
 	schema: "./src/drizzle/schema/index.ts",
 	out: "./drizzle",
-	driver: "mysql2",
+	driver: "pg",
 	dbCredentials: {
-		connectionString:
-			'mysql://idba9dft9xnfbpeh7p4m:pscale_pw_FlEj2UL0OWeic5wDE6dx5UhvESh8JhYzC3OfOxlmE8C@aws.connect.psdb.cloud/hazel?ssl={"rejectUnauthorized":true}',
+		connectionString: "postgresql://postgres:wowgamingKEKW@db.ptigbydnxtgzgiocsrin.supabase.co:5432/postgres",
 	},
 } satisfies Config
