@@ -42,7 +42,6 @@ export const createOrganizationInvite = createAction(
 		)
 		.mutation(async (opts) => {
 			const invitation = await db.organization.invite.create({
-				workspaceId: opts.ctx.auth.workspaceId,
 				...opts.input,
 			})
 

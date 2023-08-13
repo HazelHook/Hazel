@@ -1,5 +1,5 @@
 import bearer from "@elysiajs/bearer"
-import db from "db/src/drizzle"
+import db from "db/src/drizzle/orm"
 import Elysia from "elysia"
 
 import { ratelimit } from "./ratelimit.guard"
@@ -10,7 +10,7 @@ export const authGuard = (app: Elysia) =>
 			throw "Not good"
 		}
 
-		const apiKey = await db.api.getOne({ publicId: bearer })
+		const apiKey = await db.apiKeys.getOne({ publicId: bearer })
 
 		if (!apiKey) {
 			throw new Error("Unauthorized")

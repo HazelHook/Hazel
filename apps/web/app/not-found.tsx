@@ -32,4 +32,4 @@ export default function NotFoundPage() {
 	)
 }
 
-export const runtime = "edge"
+// export const runtime = "edge"

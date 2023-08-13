@@ -1,11 +1,8 @@
-import { and, eq, isNull } from "drizzle-orm"
 import { PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js"
 
 import * as integrations from "../integrations/common"
 import * as integrationsData from "../integrations/data"
-import { DrizzleTable } from "./db-table"
 import * as schema from "../schema"
-import { generatePublicId } from "../schema/common"
 
 import postgres from "postgres"
 import sourceLogic from "./tables/source"
@@ -28,6 +25,10 @@ export function connectDB({
 }: {
 	connectionString: string
 }) {
+	if (!connectionString) {
+		throw new Error("Connection String cant be empty")
+	}
+
 	const client = postgres(connectionString)
 
 	const db = drizzle(client, { schema })

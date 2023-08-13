@@ -9,7 +9,7 @@ import { Container } from "@/components/ui/container"
 const ApiKeyPage = async () => {
 	const { workspaceId } = await auth()
 
-	const apiKeys = await db.api.getMany({ workspaceId: workspaceId })
+	const apiKeys = await db.apiKeys.getMany({ workspaceId: workspaceId })
 
 	return (
 		<Container>

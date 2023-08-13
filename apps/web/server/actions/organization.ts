@@ -9,13 +9,10 @@ import { cookies } from "next/headers"
 
 export const createOrganzationAction = createAction(
 	protectedProcedure.input(createOrgFormSchema).mutation(async (opts) => {
-		const organization = await db.organization.create(
-			{
-				...opts.input,
-				ownerId: opts.ctx.auth.customerId,
-			},
-			opts.ctx.auth.customerId,
-		)
+		const organization = await db.organization.create({
+			...opts.input,
+			ownerId: opts.ctx.auth.customerId,
+		})
 
 		return {
 			id: organization.publicId,
@@ -55,7 +52,6 @@ export const deleteOrganzationAction = createAction(
 		})
 
 		return {
-			res: deletedOrg.res,
 			id: opts.input.publicId,
 		}
 	}),

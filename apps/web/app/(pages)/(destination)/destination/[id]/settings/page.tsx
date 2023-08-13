@@ -17,4 +17,4 @@ const UpdateDestinationPage = async ({
 
 export default UpdateDestinationPage
 
-export const runtime = "edge"
+// export const runtime = "edge"

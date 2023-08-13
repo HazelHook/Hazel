@@ -54,4 +54,4 @@ export default function ErrorPage({
 	)
 }
 
-export const runtime = "edge"
+// export const runtime = "edge"

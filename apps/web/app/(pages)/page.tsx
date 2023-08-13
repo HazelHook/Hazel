@@ -235,6 +235,6 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 // export const fetchCache = "force-no-store"
 
-export const runtime = "edge"
+// export const runtime = "edge"
 
 export default Dashboard

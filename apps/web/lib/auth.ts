@@ -5,7 +5,6 @@ import { auth as clerkAuth, currentUser } from "@clerk/nextjs"
 import { retry } from "radash"
 
 import db from "./db"
-import { generatePublicId } from "db/src/drizzle/schema/common"
 import * as schema from "db/src/drizzle/schema"
 import { cookies } from "next/headers"
 
@@ -33,23 +32,10 @@ export const auth = async () => {
 	if (!organization) {
 		const user = await currentUser()
 		await retry({}, async () => {
-			await db.db.transaction(async (tx) => {
-				const orgPublicId = generatePublicId("org")
-				const res = await tx.insert(schema.organizations).values({
-					name: `${user!.username}'s Organization`,
-					ownerId: userId,
-					publicId: orgPublicId,
-					personal: true,
-				})
-
-				const orgMembershipPublicId = generatePublicId("mem")
-
-				await tx.insert(schema.organizationMembers).values({
-					publicId: orgMembershipPublicId,
-					customerId: userId,
-					organizationId: Number(res.insertId),
-					role: "admin",
-				})
+			await db.organization.create({
+				ownerId: userId,
+				personal: true,
+				name: `${user!.username}'s Organization`,
 			})
 		})
 
