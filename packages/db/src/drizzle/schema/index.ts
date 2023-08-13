@@ -1,31 +1,33 @@
-import { InferModel, relations, sql } from "drizzle-orm"
+import { InferModel, relations } from "drizzle-orm"
+
+import { INTEGRATIONS } from "../integrations/data"
+import { commonFields } from "./common"
 import {
 	boolean,
-	datetime,
 	index,
-	int,
+	integer,
 	json,
-	mysqlEnum,
+	pgTable,
 	serial,
 	timestamp,
 	unique,
 	uniqueIndex,
 	varchar,
-} from "drizzle-orm/mysql-core"
-
-import { INTEGRATIONS } from "../integrations/data"
-import { buildCustomMysqlTable, buildMysqlTable } from "./common"
+} from "drizzle-orm/pg-core"
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 })
 const enabled = boolean("enabled").default(true).notNull()
 
-export const source = buildMysqlTable(
+const role = varchar("role", { enum: ["owner", "admin", "member"] })
+
+export const source = pgTable(
 	"sources",
 	{
+		...commonFields,
 		name,
 		url,
-		integrationId: int("integration_id"),
+		integrationId: integer("integration_id"),
 	},
 	(table) => ({
 		publicIdIndex: index("src_public_id_idx").on(table.publicId),
@@ -35,11 +37,12 @@ export const source = buildMysqlTable(
 	}),
 )
 
-export const integration = buildMysqlTable(
+export const integration = pgTable(
 	"integrations",
 	{
+		...commonFields,
 		name,
-		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]).notNull(),
+		tool: varchar("tool", { enum: Object.keys(INTEGRATIONS) as [string, ...string[]] }),
 		config: json("config"),
 	},
 	(table) => ({
@@ -50,9 +53,10 @@ export const integration = buildMysqlTable(
 	}),
 )
 
-export const destination = buildMysqlTable(
+export const destination = pgTable(
 	"destinations",
 	{
+		...commonFields,
 		name,
 		url: url.notNull(),
 		websocket_connection: boolean("websocket_connection").default(false).notNull(),
@@ -63,20 +67,21 @@ export const destination = buildMysqlTable(
 	}),
 )
 
-export const connection = buildMysqlTable(
+export const connection = pgTable(
 	"connections",
 	{
+		...commonFields,
 		name,
 		enabled,
 
-		sourceId: int("source_id").notNull(),
-		destinationId: int("destination_id").notNull(),
+		sourceId: integer("source_id").notNull(),
+		destinationId: integer("destination_id").notNull(),
 
-		delay: int("delay"),
+		delay: integer("delay"),
 
-		retyCount: int("retry_count"),
-		retryDelay: int("retry_delay"),
-		retryType: mysqlEnum("retry_type", ["fixed", "exponential"]),
+		retyCount: integer("retry_count"),
+		retryDelay: integer("retry_delay"),
+		retryType: varchar("retry_type", { enum: ["fixed", "exponential"] }),
 
 		fluxConfig: json("flux_config"),
 	},
@@ -92,22 +97,23 @@ export const connection = buildMysqlTable(
 	}),
 )
 
-export const apiKeys = buildMysqlTable(
+export const apiKeys = pgTable(
 	"api_keys",
 	{
+		...commonFields,
 		ownerId: varchar("owner_id", { length: 128 }),
 		name: varchar("name", { length: 128 }),
-		expires: datetime("expires", { fsp: 3 }),
+		expires: timestamp("expires", { precision: 3 }),
 	},
 	(table) => ({
 		publicIdx: uniqueIndex("api_public_idx").on(table.publicId),
 	}),
 )
 
-export const organizations = buildCustomMysqlTable(
+export const organizations = pgTable(
 	"organizations",
 	{
-		id: serial("id").primaryKey().autoincrement(),
+		id: serial("id").primaryKey(),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 
 		ownerId: varchar("owner_id", { length: 128 }).notNull(),
@@ -115,10 +121,10 @@ export const organizations = buildCustomMysqlTable(
 		name: varchar("name", { length: 128 }).notNull(),
 		personal: boolean("personal").default(false).notNull(),
 
-		plan: mysqlEnum("plan", ["free", "pro", "enterprise"]).default("free").notNull(),
+		plan: varchar("plan", { enum: ["free", "pro", "enterprise"] }),
 
-		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
-		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+		createdAt: timestamp("created_at").defaultNow().notNull(),
+		updatedAt: timestamp("updated_at").defaultNow().notNull(),
 		deletedAt: timestamp("deleted_at"),
 	},
 	(table) => ({
@@ -126,40 +132,40 @@ export const organizations = buildCustomMysqlTable(
 	}),
 )
 
-export const organizationMembers = buildCustomMysqlTable(
+export const organizationMembers = pgTable(
 	"organization_members",
 	{
-		id: serial("id").primaryKey().autoincrement(),
+		id: serial("id").primaryKey(),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 
-		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
-		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+		createdAt: timestamp("created_at").defaultNow().notNull(),
+		updatedAt: timestamp("updated_at").defaultNow().notNull(),
 		deletedAt: timestamp("deleted_at"),
 
 		customerId: varchar("customer_id", { length: 128 }).notNull(),
-		organizationId: int("organization_id").notNull(),
-		role: mysqlEnum("role", ["owner", "admin", "member"]).notNull(),
+		organizationId: integer("organization_id").notNull(),
+		role: role,
 	},
 	(table) => ({
 		publicIdx: uniqueIndex("public_idx").on(table.publicId),
 		customerIdx: index("customer_id_idx").on(table.customerId),
-		roleIdx: index("role_id_idx").on(table.role),
+		// roleIdx: index("role_id_idx").on(table.role),
 		organizationIdx: index("org_id_idx").on(table.organizationId),
 	}),
 )
 
-export const organizationInvites = buildMysqlTable(
+export const organizationInvites = pgTable(
 	"organization_invites",
 	{
-		id: serial("id").primaryKey().autoincrement(),
+		id: serial("id").primaryKey(),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 
-		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
+		createdAt: timestamp("created_at").defaultNow().notNull(),
 		revokedAt: timestamp("revoked_at"),
 
 		email: varchar("email", { length: 128 }).notNull(),
-		role: mysqlEnum("role", ["owner", "admin", "member"]).notNull(),
-		organizationId: int("organization_id").notNull(),
+		role: role,
+		organizationId: integer("organization_id").notNull(),
 	},
 	(table) => ({
 		publicIdx: uniqueIndex("public_idx").on(table.publicId),

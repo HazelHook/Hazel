@@ -1,13 +1,13 @@
-import { MySqlTableWithColumns } from "drizzle-orm/mysql-core"
+import { PgTableWithColumns } from "drizzle-orm/pg-core"
 
-import { DB } from ".."
+import { DB } from "."
 
 export class DrizzleTable<TableType extends keyof DB["query"]> {
-	public readonly table: MySqlTableWithColumns<any>
+	public readonly table: PgTableWithColumns<any>
 	private readonly db: DB
 	public readonly name: TableType
 
-	constructor(name: TableType, table: MySqlTableWithColumns<any>, db: DB) {
+	constructor(name: TableType, table: PgTableWithColumns<any>, db: DB) {
 		this.name = name
 		this.table = table
 		this.db = db

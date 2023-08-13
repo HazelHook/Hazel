@@ -8,8 +8,7 @@
     "strict": true,
     "lib": ["esnext"],
     "jsx": "react-jsx",
-    "incremental": true,                              
-
+    "incremental": true,
     "jsxImportSource": "hono/jsx"
   }
 }
