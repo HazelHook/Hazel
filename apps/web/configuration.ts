@@ -49,7 +49,7 @@ const configuration = {
 		port: 587,
 		user: "",
 		password: "",
-		senderAddress: "MakerKit Team <info@makerkit.dev>",
+		senderAddress: "Hazel Team <info@hazelapp.dev>",
 	},
 	sentry: {
 		dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
