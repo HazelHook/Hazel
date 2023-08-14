@@ -17,16 +17,7 @@ const nextConfig = {
 		if (config.name === "server" || config.name === "edge-server") config.optimization.concatenateModules = false
 
 		if (!isServer) {
-			config.resolve = {
-				...config.resolve,
-				fallback: {
-					net: false,
-					dns: false,
-					tls: false,
-					assert: false,
-					process: false,
-				},
-			}
+			config.resolve.fallback.fs = false
 		}
 
 		return config

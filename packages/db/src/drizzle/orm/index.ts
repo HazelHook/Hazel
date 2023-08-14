@@ -29,6 +29,8 @@ export function connectDB({
 	// 	throw new Error("Connection String cant be empty")
 	// }
 
+	console.log(connectionString)
+
 	const client = postgres(connectionString)
 
 	const db = drizzle(client, { schema })
