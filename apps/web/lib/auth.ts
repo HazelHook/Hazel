@@ -1,45 +1,45 @@
 import "server-only"
 
 import { redirect } from "next/navigation"
-import { auth as clerkAuth, currentUser } from "@clerk/nextjs"
 import { retry } from "radash"
 
 import db from "./db"
 import * as schema from "db/src/drizzle/schema"
 import { cookies } from "next/headers"
+import getSupabaseServerClient from "@/core/supabase/server-client"
+import requireSession from "./user/require-session"
 
 export const auth = async () => {
-	const { userId } = clerkAuth()
+	const client = getSupabaseServerClient()
+	const session = await requireSession(client)
 
-	if (!userId) {
-		redirect("/log-in")
-	}
+	const user = session.user
+
 	const cookiesList = cookies()
 
-	const membershipIdCookie = cookiesList.get("membership_id")
+	const membershipIdCookie = cookiesList.get("membership_id")?.value
 
 	let organization: schema.Organization | null | undefined = undefined
 
-	if (membershipIdCookie?.value) {
-		const membership = await db.organization.memberships.getOne({ membershipId: membershipIdCookie.value })
+	if (membershipIdCookie) {
+		const membership = await db.organization.memberships.getOne({ membershipId: membershipIdCookie })
 		organization = membership?.organization!
 	}
 
 	if (!organization) {
-		organization = await db.organization.getPersonal({ customerId: userId })
+		organization = await db.organization.getPersonal({ customerId: user.id })
 	}
 
 	if (!organization) {
-		const user = await currentUser()
 		await retry({}, async () => {
 			await db.organization.create({
-				ownerId: userId,
+				ownerId: user.id,
 				personal: true,
-				name: `${user!.username}'s Organization`,
+				name: `${user.app_metadata.name}'s Organization`,
 			})
 		})
 
-		organization = await db.organization.getPersonal({ customerId: userId })
+		organization = await db.organization.getPersonal({ customerId: user.id })
 	}
 
 	// This should never happen
@@ -47,5 +47,5 @@ export const auth = async () => {
 		redirect("/someroutetoshowerrormessagetocontactus")
 	}
 
-	return { organization, workspaceId: organization.publicId, userId }
+	return { organization, workspaceId: organization.publicId, userId: user.id }
 }
