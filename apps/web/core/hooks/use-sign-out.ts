@@ -4,7 +4,7 @@ import useSupabase from "@/core/hooks/use-supabase"
 /**
  * @name useSignOut
  */
-function useSignOut() {
+export function useSignOut() {
 	const client = useSupabase()
 
 	return useCallback(async () => {

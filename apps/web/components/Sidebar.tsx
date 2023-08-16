@@ -1,7 +1,6 @@
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-import { Separator } from "@/components/ui/separator"
 import { LogoIcon } from "@/components/icons/Logo"
 import { IconProps } from "@/components/icons/pika/types"
 

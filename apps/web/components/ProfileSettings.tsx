@@ -18,7 +18,6 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 import { cn } from "@/lib/utils"
-import { SignOutButton, useUser } from "@clerk/nextjs"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 import { DropdownMenuSub } from "@radix-ui/react-dropdown-menu"
@@ -33,18 +32,17 @@ import { SunIcon } from "./icons/pika/sun"
 import { MoonIcon } from "./icons/pika/moon"
 import { MonitorIcon } from "./icons/pika/monitor"
 import { LogOutLeftIcon } from "./icons/pika/logOutLeft"
-import { AddIcon } from "./icons/pika/add"
 import { CheckTickIcon } from "./icons/pika/checkTick"
-import { ChevronUpIcon } from "./icons/pika/chevronUp"
 import { useAction } from "@/server/client"
 import { ChevronSortVerticalIcon } from "./icons/pika/chevronSortVertical"
 import { AddCircleIcon } from "./icons/pika/addCircle"
-import { AddSquareIcon } from "./icons/pika/addSquare"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog"
 import AutoForm from "./ui/auto-form"
 import { Button } from "./ui/button"
 import { createOrgFormSchema } from "@/lib/schemas/organization"
-import { Badge, badgeVariants } from "./ui/badge"
+import { Badge } from "./ui/badge"
+import useSignOut from "@/core/hooks/use-sign-out"
+import { useAuth } from "@/lib/provider/AuthProvider"
 
 type Membership = OrganizationMember & {
 	organization: Organization
@@ -65,10 +63,12 @@ export const ProfileSettings = ({
 }: TeamSwitcherProps) => {
 	const router = useRouter()
 
+	const signOut = useSignOut()
+
 	const currentMembership = memberships.find((membership) => membership.publicId === currentMembershipId)
 	const personalMembership = memberships.find((membership) => membership.organization.personal === true)
 
-	const { user } = useUser()
+	const { user } = useAuth()
 
 	const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
 	const [selectedTeam, setSelectedTeam] = useState<Membership>(currentMembership || memberships[0])
@@ -94,8 +94,11 @@ export const ProfileSettings = ({
 				<DropdownMenuTrigger className="flex items-center justify-between gap-4 px-2 py-1 rounded lg:w-full hover:bg-muted">
 					<div className="flex flex-row-reverse items-center justify-start w-full gap-4 lg:flex-row ">
 						<Avatar className="w-8 h-8 lg:w-10 lg:h-10">
-							{user?.profileImageUrl ? (
-								<AvatarImage src={user.profileImageUrl} alt={user.username ?? "Profile picture"} />
+							{user?.app_metadata?.photoUrl ? (
+								<AvatarImage
+									src={user?.app_metadata?.photoUrl}
+									alt={user?.app_metadata?.displayName ?? "Profile picture"}
+								/>
 							) : null}
 							<AvatarFallback>{selectedTeam.organization.name.slice(0, 2).toUpperCase()}</AvatarFallback>
 						</Avatar>
@@ -173,7 +176,7 @@ export const ProfileSettings = ({
 							})}
 						>
 							<Avatar className="mr-2 h-5 w-5">
-								<AvatarImage src={user?.profileImageUrl} alt={user?.username || ""} />
+								<AvatarImage src={user?.app_metadata?.photoUrl} alt={user?.app_metadata?.displayName || ""} />
 							</Avatar>
 							Personal
 							<CheckTickIcon
@@ -227,14 +230,19 @@ export const ProfileSettings = ({
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
-						<SignOutButton signOutCallback={() => router.push("/auth/sign-in")}>
-							<DropdownMenuItem asChild className="cursor-pointer">
-								<span>
-									<LogOutLeftIcon className="w-4 h-4 mr-2" />
-									Sign out
-								</span>
-							</DropdownMenuItem>
-						</SignOutButton>
+						<DropdownMenuItem
+							asChild
+							onClick={() => {
+								signOut()
+								router.refresh()
+							}}
+							className="cursor-pointer"
+						>
+							<span>
+								<LogOutLeftIcon className="w-4 h-4 mr-2" />
+								Sign out
+							</span>
+						</DropdownMenuItem>
 					</DropdownMenuGroup>
 				</DropdownMenuContent>
 			</DropdownMenu>

@@ -1,5 +1,4 @@
 import { useRouter } from "next/navigation"
-import { useAuth } from "@clerk/nextjs"
 
 import { Button } from "@/components/ui/button"
 import {

@@ -1,7 +1,6 @@
 "use client"
 
 import { ReactNode, useState } from "react"
-import { useUser } from "@clerk/nextjs"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"

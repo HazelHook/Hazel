@@ -1,7 +1,7 @@
 import { AvatarImage, Avatar } from "@/components/ui/avatar"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { api } from "@/server/client"
-import { User } from "@clerk/nextjs/dist/types/server/clerkClient"
+import { User } from "@supabase/supabase-js"
 import { useEffect, useState } from "react"
 
 export const UserCell = ({ userId }: { userId: string }) => {
@@ -22,7 +22,7 @@ export const UserCell = ({ userId }: { userId: string }) => {
 				<AvatarImage src={getSeededProfileImageUrl(userId)} />
 			</Avatar>
 			<div>
-				{user ? <p>{user?.username?.toUpperCase()}</p> : <p>Loading...</p>}
+				{user ? <p>{user?.app_metadata.username?.toUpperCase()}</p> : <p>Loading...</p>}
 				<p className="text-muted-foreground">{userId}</p>
 			</div>
 		</div>

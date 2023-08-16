@@ -5,8 +5,9 @@ import superjson from "superjson"
 import { ZodError } from "zod"
 
 import { Context } from "./context"
-import { auth as clerkAuth } from "@clerk/nextjs"
 import db from "@/lib/db"
+import requireSession from "@/lib/user/require-session"
+import getSupabaseServerActionClient from "@/core/supabase/action-client"
 
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,
@@ -29,15 +30,18 @@ export const createAction = experimental_createServerActionHandler(t, {
 		// If you're using Node 18 before 18.15.0, omit the "connection" header
 		newHeaders.delete("connection")
 
-		const auth = clerkAuth()
-		const organization = await db.organization.getPersonal({ customerId: auth.userId || "" })
+		const client = getSupabaseServerActionClient()
+
+		const session = await requireSession(client)
+
+		const organization = await db.organization.getPersonal({ customerId: session.user.id })
 
 		return {
 			headers: Object.fromEntries(newHeaders),
 			auth: {
 				workspaceId: organization?.publicId,
-				customerid: auth.userId,
-				user: auth.user,
+				customerid: session.user.id,
+				user: session.user,
 			},
 		}
 	},

@@ -1,18 +1,25 @@
+import getSupabaseServerClient from "@/core/supabase/server-client"
 import db from "@/lib/db"
-import { getAuth } from "@clerk/nextjs/server"
+import requireSession from "@/lib/user/require-session"
 import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
+import { headers } from "next/headers"
 
 export async function createContext(opts?: FetchCreateContextFnOptions) {
-	const auth = getAuth(opts?.req! as any)
-	const organization = await db.organization.getPersonal({ customerId: auth.userId || "" })
+	const newHeaders = new Map(headers())
+
+	const client = getSupabaseServerClient()
+
+	const session = await requireSession(client)
+
+	const organization = await db.organization.getPersonal({ customerId: session.user.id })
 
 	return {
+		headers: Object.fromEntries(newHeaders),
 		auth: {
 			workspaceId: organization?.publicId,
-			customerid: auth.userId,
-			user: auth.user,
+			customerid: session.user.id,
+			user: session.user,
 		},
-		headers: opts && Object.fromEntries(opts.req.headers),
 	}
 }
 

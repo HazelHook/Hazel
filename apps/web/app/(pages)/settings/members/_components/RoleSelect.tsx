@@ -1,6 +1,6 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useAuth } from "@/lib/provider/AuthProvider"
 import { capitalizeFirstLetter } from "@/lib/utils"
-import { useAuth } from "@clerk/nextjs"
 
 import { OrganizationMember } from "db/src/drizzle/schema"
 import { useMemo } from "react"
@@ -13,11 +13,11 @@ export interface RoleSelectProps {
 	members: OrganizationMember[]
 }
 export const RoleSelect = ({ defaultValue, memberId, members, orgId }: RoleSelectProps) => {
-	const { userId } = useAuth()
+	const { user } = useAuth()
 
-	const activeMember = useMemo(() => members.find((member) => member.customerId === userId), [members, userId])
+	const activeMember = useMemo(() => members.find((member) => member.customerId === user?.id), [members, user?.id])
 
-	if (activeMember?.role !== "admin" || memberId === userId) {
+	if (activeMember?.role !== "admin" || memberId === user?.id) {
 		return <p>{capitalizeFirstLetter(defaultValue)}</p>
 	}
 

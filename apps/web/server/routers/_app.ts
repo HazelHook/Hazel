@@ -1,7 +1,8 @@
 import { z } from "zod"
 
 import { publicProcedure, router } from "../trpc"
-import { clerkClient } from "@clerk/nextjs"
+import getSupabaseServerActionClient from "@/core/supabase/action-client"
+import { TRPCError } from "@trpc/server"
 
 export const getUser = publicProcedure
 	.input(
@@ -10,7 +11,14 @@ export const getUser = publicProcedure
 		}),
 	)
 	.query(async (opts) => {
-		return await clerkClient.users.getUser(opts.input.userId)
+		const client = getSupabaseServerActionClient({ admin: true })
+		const { data, error } = await client.auth.admin.getUserById(opts.input.userId)
+
+		if (error || !data.user) {
+			throw new TRPCError({ message: "NOT_FOUND", code: "NOT_FOUND" })
+		}
+
+		return data.user
 	})
 
 export const appRouter = router({

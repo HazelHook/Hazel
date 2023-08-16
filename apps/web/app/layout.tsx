@@ -1,7 +1,6 @@
 import "@/styles/global.css"
 
 import { Metadata } from "next"
-import { ClerkProvider } from "@clerk/nextjs"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -10,6 +9,7 @@ import NextProgress from "@/components/NProgress"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "sonner"
+import AuthProvider from "@/lib/provider/AuthProvider"
 
 export const metadata: Metadata = {
 	title: {
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
-				<ClerkProvider>
+				<AuthProvider>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						<NextProgress />
 						{children}
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 							},
 						}}
 					/>
-				</ClerkProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	)

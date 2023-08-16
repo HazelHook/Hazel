@@ -47,5 +47,5 @@ export const auth = async () => {
 		redirect("/someroutetoshowerrormessagetocontactus")
 	}
 
-	return { organization, workspaceId: organization.publicId, userId: user.id }
+	return { organization, workspaceId: organization.publicId, userId: user.id, user }
 }

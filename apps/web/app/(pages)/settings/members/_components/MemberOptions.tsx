@@ -10,7 +10,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useAuth } from "@clerk/nextjs"
+import { useAuth } from "@/lib/provider/AuthProvider"
 import { OrganizationMember } from "db/src/drizzle/schema"
 import { useMemo } from "react"
 import { toast } from "sonner"
@@ -21,9 +21,9 @@ export interface MemberOptionsProps {
 	members: OrganizationMember[]
 }
 export const MemberOptions = ({ members, memberId, orgId }: MemberOptionsProps) => {
-	const { userId } = useAuth()
+	const { user } = useAuth()
 
-	const activeMember = useMemo(() => members.find((member) => member.customerId === userId), [members, userId])
+	const activeMember = useMemo(() => members.find((member) => member.customerId === user?.id), [members, user?.id])
 
 	const handleKick = async () => {
 		// await kickOrgMemberAction({ userId: memberId, orgId: orgId })
@@ -44,11 +44,11 @@ export const MemberOptions = ({ members, memberId, orgId }: MemberOptionsProps) 
 					<span>Copy user ID</span>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem disabled={activeMember?.role !== "admin" || memberId === userId} onClick={handleKick}>
+				<DropdownMenuItem disabled={activeMember?.role !== "admin" || memberId === user?.id} onClick={handleKick}>
 					<FolderRemoveIcon className="mr-2 text-destructive" />
 					<span>Remove member</span>
 				</DropdownMenuItem>
-				{memberId === userId && (
+				{memberId === user?.id && (
 					<DropdownMenuItem disabled={activeMember?.role === "admin"} onClick={handleKick}>
 						<LogOutLeftIcon className="mr-2" />
 						<span>Leave Organization</span>
