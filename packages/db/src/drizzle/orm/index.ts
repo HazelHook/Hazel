@@ -11,6 +11,7 @@ import connectionLogic from "./tables/connection"
 import integrationLogic from "./tables/integration"
 import apiKeysLogic from "./tables/apiKeys"
 import organizationsLogic from "./tables/organization"
+import userLogic from "./tables/user"
 
 export { integrationsData }
 
@@ -29,8 +30,6 @@ export function connectDB({
 	// 	throw new Error("Connection String cant be empty")
 	// }
 
-	console.log(connectionString)
-
 	const client = postgres(connectionString)
 
 	const db = drizzle(client, { schema })
@@ -43,6 +42,7 @@ export function connectDB({
 		integration: integrationLogic(db),
 		apiKeys: apiKeysLogic(db),
 		organization: organizationsLogic(db),
+		user: userLogic(db),
 	}
 }
 

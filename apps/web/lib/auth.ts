@@ -1,51 +1,45 @@
 import "server-only"
 
 import { redirect } from "next/navigation"
-import { retry } from "radash"
 
 import db from "./db"
 import * as schema from "db/src/drizzle/schema"
 import { cookies } from "next/headers"
 import getSupabaseServerClient from "@/core/supabase/server-client"
 import requireSession from "./user/require-session"
+import configuration from "@/configuration"
 
 export const auth = async () => {
 	const client = getSupabaseServerClient()
 	const session = await requireSession(client)
 
-	const user = session.user
+	const userSession = session.user
 
 	const cookiesList = cookies()
 
-	const membershipIdCookie = cookiesList.get("membership_id")?.value
+	const membershipId = cookiesList.get("membership_id")?.value
 
-	let organization: schema.Organization | null | undefined = undefined
+	const user = await db.user.getOneWithMemberShip({ id: userSession.id, membershipId: membershipId || "" })
 
-	if (membershipIdCookie) {
-		const membership = await db.organization.memberships.getOne({ membershipId: membershipIdCookie })
-		organization = membership?.organization!
+	if (!user || !user.onboarded) {
+		redirect(configuration.paths.onboarding)
 	}
 
-	if (!organization) {
-		organization = await db.organization.getPersonal({ customerId: user.id })
+	if (!membershipId || user.memberships.length === 0) {
+		redirect(configuration.paths.switch)
 	}
 
-	if (!organization) {
-		await retry({}, async () => {
-			await db.organization.create({
-				ownerId: user.id,
-				personal: true,
-				name: `${user.app_metadata.name}'s Organization`,
-			})
-		})
-
-		organization = await db.organization.getPersonal({ customerId: user.id })
-	}
+	const organization: schema.Organization | null | undefined = undefined
 
 	// This should never happen
 	if (!organization) {
-		redirect("/someroutetoshowerrormessagetocontactus")
+		throw new Error("It should never get here")
 	}
 
-	return { organization, workspaceId: organization.publicId, userId: user.id, user }
+	return {
+		organization: user.memberships[0].organization,
+		workspaceId: user.memberships[0].organization.publicId,
+		userId: userSession.id,
+		user,
+	}
 }

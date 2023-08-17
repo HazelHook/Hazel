@@ -35,21 +35,6 @@ const organizationsLogic = (db: DB) =>
 				},
 			})
 		},
-		getPersonal: async ({
-			customerId,
-		}: {
-			customerId: string
-		}) => {
-			const data = await db.query.organizations.findFirst({
-				where: and(eq(schema.organizations.ownerId, customerId), eq(schema.organizations.personal, true)),
-			})
-
-			if (!data) {
-				return null
-			}
-
-			return data
-		},
 		create: async (data: Omit<schema.InsertOrganization, "publicId">) => {
 			const publicId = generatePublicId("org")
 			const memberPublicId = generatePublicId("mem")
@@ -62,7 +47,7 @@ const organizationsLogic = (db: DB) =>
 
 				await tx.insert(schema.organizationMembers).values({
 					publicId: memberPublicId,
-					customerId: data.ownerId,
+					userId: data.ownerId,
 					organizationId: Number(res[0].insertedId),
 					role: "admin",
 				})
@@ -151,7 +136,7 @@ const organizationsLogic = (db: DB) =>
 				let whereClause
 
 				if (customerId) {
-					whereClause = eq(schema.organizationMembers.customerId, customerId)
+					whereClause = eq(schema.organizationMembers.userId, customerId)
 				} else if (orgId) {
 					whereClause = eq(schema.organizationMembers.organizationId, orgId)
 				}

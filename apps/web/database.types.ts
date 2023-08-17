@@ -218,39 +218,45 @@ export interface Database {
 			organization_members: {
 				Row: {
 					created_at: string
-					customer_id: string
 					deleted_at: string | null
 					id: number
 					organization_id: number
 					public_id: string
 					role: string | null
 					updated_at: string
+					user_id: string
 				}
 				Insert: {
 					created_at?: string
-					customer_id: string
 					deleted_at?: string | null
 					id?: number
 					organization_id: number
 					public_id: string
 					role?: string | null
 					updated_at?: string
+					user_id: string
 				}
 				Update: {
 					created_at?: string
-					customer_id?: string
 					deleted_at?: string | null
 					id?: number
 					organization_id?: number
 					public_id?: string
 					role?: string | null
 					updated_at?: string
+					user_id?: string
 				}
 				Relationships: [
 					{
 						foreignKeyName: "organization_members_organization_id_organizations_id_fk"
 						columns: ["organization_id"]
 						referencedRelation: "organizations"
+						referencedColumns: ["id"]
+					},
+					{
+						foreignKeyName: "organization_members_user_id_users_id_fk"
+						columns: ["user_id"]
+						referencedRelation: "users"
 						referencedColumns: ["id"]
 					},
 				]
@@ -330,6 +336,31 @@ export interface Database {
 						foreignKeyName: "sources_integration_id_integrations_id_fk"
 						columns: ["integration_id"]
 						referencedRelation: "integrations"
+						referencedColumns: ["id"]
+					},
+				]
+			}
+			users: {
+				Row: {
+					id: string
+					onboarded: boolean
+					profile_image: string | null
+				}
+				Insert: {
+					id: string
+					onboarded?: boolean
+					profile_image?: string | null
+				}
+				Update: {
+					id?: string
+					onboarded?: boolean
+					profile_image?: string | null
+				}
+				Relationships: [
+					{
+						foreignKeyName: "users_id_fkey"
+						columns: ["id"]
+						referencedRelation: "users"
 						referencedColumns: ["id"]
 					},
 				]

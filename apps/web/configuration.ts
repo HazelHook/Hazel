@@ -36,6 +36,7 @@ const configuration = {
 		signUp: "/auth/sign-up",
 		signInMfa: "/auth/verify",
 		onboarding: "/onboarding",
+		switch: "/switch",
 		authCallback: "/auth/callback",
 		settings: {
 			profile: "settings/profile",

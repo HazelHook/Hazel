@@ -7,11 +7,13 @@ import {
 	index,
 	integer,
 	json,
+	pgSchema,
 	pgTable,
 	serial,
 	timestamp,
 	unique,
 	uniqueIndex,
+	uuid,
 	varchar,
 } from "drizzle-orm/pg-core"
 
@@ -20,6 +22,13 @@ const url = varchar("url", { length: 128 })
 const enabled = boolean("enabled").default(true).notNull()
 
 const role = varchar("role", { enum: ["owner", "admin", "member"] })
+
+export const user = pgTable("users", {
+	id: uuid("id").primaryKey().notNull(),
+	name: varchar("name", { length: 128 }),
+	onboarded: boolean("onboarded").default(false).notNull(),
+	profileImage: varchar("profile_image"),
+})
 
 export const source = pgTable(
 	"sources",
@@ -137,14 +146,15 @@ export const organizationMembers = pgTable(
 		updatedAt: timestamp("updated_at").defaultNow().notNull(),
 		deletedAt: timestamp("deleted_at"),
 
-		customerId: varchar("customer_id", { length: 128 }).notNull(),
+		userId: uuid("user_id")
+			.references(() => user.id)
+			.notNull(),
 		organizationId: integer("organization_id")
 			.notNull()
 			.references(() => organizations.id),
 		role: role,
 	},
 	(table) => ({
-		customerIdx: index("customer_id_idx").on(table.customerId),
 		roleIdx: index("role_id_idx").on(table.role),
 	}),
 )
@@ -169,6 +179,10 @@ export const organizationInvites = pgTable(
 	}),
 )
 
+export const userRelation = relations(user, ({ many }) => ({
+	memberships: many(organizationMembers),
+}))
+
 export const organizationRelations = relations(organizations, ({ many }) => ({
 	members: many(organizationMembers),
 	invites: many(organizationInvites),
@@ -179,12 +193,9 @@ export const organizationMemberRelations = relations(organizationMembers, ({ one
 		fields: [organizationMembers.organizationId],
 		references: [organizations.id],
 	}),
-}))
-
-export const organizationInviteRelations = relations(organizationInvites, ({ one }) => ({
-	organization: one(organizations, {
-		fields: [organizationInvites.organizationId],
-		references: [organizations.id],
+	user: one(user, {
+		fields: [organizationMembers.userId],
+		references: [user.id],
 	}),
 }))
 
