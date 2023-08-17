@@ -1,84 +1,165 @@
 import { authMiddleware } from "@clerk/nextjs"
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import configuration from "./configuration"
-import { isPrivateRoute, isPublicRoute } from "./core/route-matcher"
+import { isPublicRoute } from "./core/route-matcher"
 
-const privateRoutes: string[] = []
+import csrf from "edge-csrf"
+import HttpStatusCode from "./core/generic/http-status-code.enum"
+
+const CSRF_TOKEN_HEADER = "X-CSRF-Token"
+const CSRF_SECRET_COOKIE = "csrfSecret"
+const CSRF_TOKEN_BODY_FIELD = "csrfToken"
+const NEXT_ACTION_HEADER = "next-action"
+
 const publicRoutes: string[] = ["/auth/*", "/api/webhook/:id"]
+
+const csrfMiddleware = csrf({
+	cookie: {
+		secure: configuration.production,
+		name: CSRF_SECRET_COOKIE,
+	},
+})
 
 export default authMiddleware({
 	publicRoutes: ["/api/webhook/:id"],
 	async afterAuth(auth, req, evt) {
-		const res = NextResponse.next()
-		const supabase = createMiddlewareClient({ req, res })
-		const { data } = await supabase.auth.getSession()
+		const res = await withCsrfMiddleware(req)
 
-		if (data.session) {
-			// if (data.session.user && !data.session.user.app_metadata.completed_onboarding) {
-			// 	if (req.nextUrl.pathname !== configuration.paths.onboarding) {
-			// 		const redirectUrl = req.nextUrl.clone()
-			// 		redirectUrl.pathname = configuration.paths.onboarding
-			// 		return NextResponse.redirect(redirectUrl)
-			// 	}
-			// }
-
-			return res
-		}
-
-		console.log(isPublicRoute(req.nextUrl.pathname, publicRoutes))
-
-		if (!isPublicRoute(req.nextUrl.pathname, publicRoutes)) {
-			const redirectUrl = req.nextUrl.clone()
-			redirectUrl.pathname = configuration.paths.signIn
-			redirectUrl.searchParams.set("redirectedFrom", req.nextUrl.pathname)
-			return NextResponse.redirect(redirectUrl)
-		}
-
-		return res
+		return sessionMiddleware(req, res)
 	},
 })
+
+async function sessionMiddleware(req: NextRequest, res: NextResponse) {
+	const supabase = createMiddlewareClient({ req, res })
+	const { data } = await supabase.auth.getSession()
+
+	if (data.session) {
+		// if (data.session.user && !data.session.user.app_metadata.completed_onboarding) {
+		// 	if (req.nextUrl.pathname !== configuration.paths.onboarding) {
+		// 		const redirectUrl = req.nextUrl.clone()
+		// 		redirectUrl.pathname = configuration.paths.onboarding
+		// 		return NextResponse.redirect(redirectUrl)
+		// 	}
+		// }
+
+		return res
+	}
+
+	if (!isPublicRoute(req.nextUrl.pathname, publicRoutes)) {
+		const redirectUrl = req.nextUrl.clone()
+		redirectUrl.pathname = configuration.paths.signIn
+		redirectUrl.searchParams.set("redirectedFrom", req.nextUrl.pathname)
+		return NextResponse.redirect(redirectUrl)
+	}
+
+	return res
+}
 
 export const config = {
 	matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 
-// import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
-// import { NextRequest, NextResponse } from "next/server"
-// import configuration from "./configuration"
-// import { isPublicRoute } from "./core/route-matcher"
+async function withCsrfMiddleware(request: NextRequest) {
+	const csrfResponse = NextResponse.next()
 
-// const publicRoutes: string[] = ["/auth/*", "/api/webhook/:id"]
+	// If the request is a Next action
+	// we need to decorate the headers with the CSRF token passed in the body
+	if (isNextAction(request)) {
+		const decorated = await decorateHeadersWithCsrfToken(request)
 
-// export async function middleware(req: NextRequest) {
-// 	const res = NextResponse.next()
-// 	const supabase = createMiddlewareClient({ req, res })
-// 	const { data } = await supabase.auth.getSession()
+		// If the request is not JSON, we can't correctly infer the CSRF token
+		// so we return the response without the CSRF token
+		// and let the action handle the CSRF check itself
+		if (!decorated) {
+			return csrfResponse
+		}
+	}
 
-// 	if (data.session) {
-// 		// if (data.session.user && !data.session.user.app_metadata.completed_onboarding) {
-// 		// 	if (req.nextUrl.pathname !== configuration.paths.onboarding) {
-// 		// 		const redirectUrl = req.nextUrl.clone()
-// 		// 		redirectUrl.pathname = configuration.paths.onboarding
-// 		// 		return NextResponse.redirect(redirectUrl)
-// 		// 	}
-// 		// }
+	const csrfError = await csrfMiddleware(request, csrfResponse)
 
-// 		return res
-// 	}
+	if (csrfError) {
+		return NextResponse.json("Invalid CSRF token", {
+			status: HttpStatusCode.Forbidden,
+		})
+	}
 
-// 	console.log(isPublicRoute(req.nextUrl.pathname, publicRoutes))
+	const token = csrfResponse.headers.get(CSRF_TOKEN_HEADER)
 
-// 	if (!isPublicRoute(req.nextUrl.pathname, publicRoutes)) {
-// 		const redirectUrl = req.nextUrl.clone()
-// 		redirectUrl.pathname = configuration.paths.signIn
-// 		redirectUrl.searchParams.set("redirectedFrom", req.nextUrl.pathname)
-// 		return NextResponse.redirect(redirectUrl)
-// 	}
+	if (token) {
+		const requestHeaders = new Headers(request.headers)
+		requestHeaders.set(CSRF_TOKEN_HEADER, token)
 
-// 	return res
-// }
+		const response = NextResponse.next({
+			request: { headers: requestHeaders },
+		})
 
-// export const config = {
-// 	matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
-// }
+		const nextCsrfSecret = csrfResponse.cookies.get(CSRF_SECRET_COOKIE)?.value ?? ""
+
+		if (nextCsrfSecret) {
+			response.cookies.set(CSRF_SECRET_COOKIE, nextCsrfSecret)
+		}
+
+		return response
+	}
+
+	return csrfResponse
+}
+
+/**
+ * Check if the request is a Next action
+ * @param request
+ */
+function isNextAction(request: NextRequest) {
+	const headers = new Headers(request.headers)
+
+	return headers.has(NEXT_ACTION_HEADER)
+}
+
+/**
+ * Decorate the headers with the CSRF token passed in the body
+ * @param request
+ */
+async function decorateHeadersWithCsrfToken(request: NextRequest) {
+	const { data, type } = await parsePayload(request)
+
+	if (type === "json") {
+		if (!Array.isArray(data) || data.length === 0) {
+			return false
+		}
+
+		const csrfToken = data[0][CSRF_TOKEN_BODY_FIELD]
+
+		if (csrfToken) {
+			request.headers.set(CSRF_TOKEN_HEADER, csrfToken)
+		}
+
+		return true
+	}
+
+	return false
+}
+
+/**
+ * @name parsePayload
+ * @description Parse the payload of the request
+ * @param request
+ */
+async function parsePayload(request: NextRequest) {
+	const clone = request.clone()
+
+	try {
+		const type = "json"
+		const data = await clone.json()
+
+		return {
+			type,
+			data,
+		}
+	} catch (e) {
+		return {
+			type: undefined,
+			data: null,
+		}
+	}
+}

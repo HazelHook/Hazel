@@ -323,6 +323,9 @@ importers:
       db:
         specifier: workspace:*
         version: link:../../packages/db
+      edge-csrf:
+        specifier: ^1.0.4
+        version: 1.0.4(next@13.4.13)
       elkjs:
         specifier: ^0.8.2
         version: 0.8.2
@@ -7184,6 +7187,14 @@ packages:
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+
+  /edge-csrf@1.0.4(next@13.4.13):
+    resolution: {integrity: sha512-h8TQ8kCchUNx1HC/hYed6YlHxup/uCnWRRPgadZ7BHFrrE1LQs59tTyZgtOBMOfeKBOhurSyQAINIdO2OL2U9g==}
+    peerDependencies:
+      next: ^13.0.0
+    dependencies:
+      next: 13.4.13(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+    dev: false
 
   /editorconfig@1.0.4:
     resolution: {integrity: sha512-L9Qe08KWTlqYMVvMcTIvMAdl1cDUubzRNYL+WfA4bLDMHe4nemKkpmYzkznE1FwLKu0EEmy6obgQKzMJrg4x9Q==}
