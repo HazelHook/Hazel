@@ -21,14 +21,11 @@ const csrfMiddleware = csrf({
 	},
 })
 
-export default authMiddleware({
-	publicRoutes: ["/api/webhook/:id"],
-	async afterAuth(auth, req, evt) {
-		const res = await withCsrfMiddleware(req)
+export default async function middleware(req: NextRequest) {
+	const res = await withCsrfMiddleware(req)
 
-		return sessionMiddleware(req, res)
-	},
-})
+	return sessionMiddleware(req, res)
+}
 
 async function sessionMiddleware(req: NextRequest, res: NextResponse) {
 	const supabase = createMiddlewareClient({ req, res })

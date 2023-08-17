@@ -1,6 +1,5 @@
 import { Suspense } from "react"
 import Link from "next/link"
-import { currentUser } from "@clerk/nextjs"
 import { formatDistanceToNow, sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
@@ -26,7 +25,7 @@ interface DashboardPageProps {
 }
 
 const Dashboard = async ({ searchParams }: DashboardPageProps) => {
-	const { workspaceId } = await auth()
+	const { workspaceId, user } = await auth()
 
 	const endTime = searchParams.date_to || formatDateTime(new Date())
 	const startTime =
@@ -60,8 +59,6 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		end_date: endTime,
 	})
 
-	const user = currentUser()
-
 	const timelineBySources = await tiny.request.timeline({
 		workspace_id: workspaceId,
 		start_date: startTime,
@@ -76,14 +73,14 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 				<div className="flex flex-row gap-2">
 					<Suspense fallback={<Skeleton className="w-16 h-16 rounded-full" />}>
 						<Avatar className="w-16 h-16">
-							<AvatarImage src={(await user)?.profileImageUrl} />
+							<AvatarImage src={user.profileImage!} />
 							<AvatarFallback />
 						</Avatar>
 					</Suspense>
 
 					<Suspense>
 						<div className="flex justify-center flex-col">
-							<h3 className="text-2xl">Welcome back, {(await user)?.username}</h3>
+							<h3 className="text-2xl">Welcome back, {user.name}</h3>
 							<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
 						</div>
 					</Suspense>

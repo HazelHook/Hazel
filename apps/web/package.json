@@ -17,7 +17,6 @@
 		"format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
 	},
 	"dependencies": {
-		"@clerk/nextjs": "4.23.1",
 		"@hazel/email": "workspace:*",
 		"@hookform/resolvers": "^3.2.0",
 		"@ngneat/falso": "^7.0.1",

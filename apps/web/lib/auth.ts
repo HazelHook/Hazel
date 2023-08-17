@@ -40,6 +40,12 @@ export const auth = async () => {
 		organization: user.memberships[0].organization,
 		workspaceId: user.memberships[0].organization.publicId,
 		userId: userSession.id,
-		user,
+		user: {
+			id: user.id,
+			name: user.name,
+			onboarded: user.onboarded,
+			profileImage: user.profileImage,
+			email: userSession.email,
+		},
 	}
 }
