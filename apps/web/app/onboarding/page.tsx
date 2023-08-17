@@ -15,9 +15,9 @@ const OnboardingPage = async () => {
 
 	const user = await db.user.getOne({ id: session.user.id })
 
-	if (user?.onboarded) {
-		redirect(configuration.paths.home)
-	}
+	// if (user?.onboarded) {
+	// 	redirect(configuration.paths.home)
+	// }
 
 	return <OnboardingContainer csrfToken={csrfToken} />
 }

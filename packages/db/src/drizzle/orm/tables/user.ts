@@ -37,6 +37,19 @@ const userLogic = (db: DB) => ({
 			},
 		})
 	},
+	create: async (data: schema.InsertUser) => {
+		const res = await db
+			.insert(schema.user)
+			.values({
+				...data,
+			})
+			.onConflictDoUpdate({
+				target: schema.user.id,
+				set: data,
+			})
+
+		return { id: data.id }
+	},
 })
 
 export default userLogic

@@ -3,6 +3,10 @@
 import { useEffect, useRef, useTransition } from "react"
 import useCsrfToken from "@/core/hooks/use-csrf-token"
 import Spinner from "@/components/Spinner"
+import { useAction } from "@/server/client"
+import { handleOnboardingAction } from "@/server/actions/onboarding"
+import { useRouter } from "next/navigation"
+import configuration from "@/configuration"
 
 interface CompleteOnboardingStepData {
 	organization: string
@@ -27,9 +31,16 @@ const CompleteOnboardingStep: React.FC<{
 export default CompleteOnboardingStep
 
 function useCompleteOnboarding(data: CompleteOnboardingStepData) {
+	const router = useRouter()
 	const submitted = useRef(false)
 	const [, startTransition] = useTransition()
 	const csrfToken = useCsrfToken()
+
+	const handleOnboardingCompleteAction = useAction(handleOnboardingAction, {
+		onSuccess: () => {
+			router.push(configuration.paths.home)
+		},
+	})
 
 	useEffect(() => {
 		if (submitted.current) {
@@ -41,7 +52,7 @@ function useCompleteOnboarding(data: CompleteOnboardingStepData) {
 
 			startTransition(async () => {
 				console.log("Complete OnBoarding")
-				// await handleOnboardingCompleteAction({ ...data, csrfToken })
+				handleOnboardingCompleteAction.mutate({ organizationName: data.organization })
 			})
 		})()
 	}, [csrfToken, data])

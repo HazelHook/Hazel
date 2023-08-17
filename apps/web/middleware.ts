@@ -1,4 +1,3 @@
-import { authMiddleware } from "@clerk/nextjs"
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
 import { NextRequest, NextResponse } from "next/server"
 import configuration from "./configuration"
@@ -22,9 +21,9 @@ const csrfMiddleware = csrf({
 })
 
 export default async function middleware(req: NextRequest) {
-	const res = await withCsrfMiddleware(req)
+	// const res = await withCsrfMiddleware(req)
 
-	return sessionMiddleware(req, res)
+	return sessionMiddleware(req, NextResponse.next())
 }
 
 async function sessionMiddleware(req: NextRequest, res: NextResponse) {

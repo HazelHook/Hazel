@@ -3,7 +3,6 @@ import "server-only"
 import { redirect } from "next/navigation"
 
 import db from "./db"
-import * as schema from "db/src/drizzle/schema"
 import { cookies } from "next/headers"
 import getSupabaseServerClient from "@/core/supabase/server-client"
 import requireSession from "./user/require-session"
@@ -29,10 +28,8 @@ export const auth = async () => {
 		redirect(configuration.paths.switch)
 	}
 
-	const organization: schema.Organization | null | undefined = undefined
-
 	// This should never happen
-	if (!organization) {
+	if (!user.memberships[0].organization) {
 		throw new Error("It should never get here")
 	}
 

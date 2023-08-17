@@ -7,7 +7,6 @@ import {
 	index,
 	integer,
 	json,
-	pgSchema,
 	pgTable,
 	serial,
 	timestamp,
@@ -222,6 +221,9 @@ export const connectionRelations = relations(connection, ({ one }) => ({
 		references: [source.id],
 	}),
 }))
+
+export type InsertUser = InferModel<typeof user, "insert">
+export type User = InferModel<typeof user, "select">
 
 export type InsertConnection = InferModel<typeof connection, "insert">
 export type Connection = InferModel<typeof connection, "select">

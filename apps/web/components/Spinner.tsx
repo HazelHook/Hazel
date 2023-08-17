@@ -1,4 +1,5 @@
 import classNames from "clsx"
+import { SpinnerIcon } from "./icons/pika/spinner"
 
 function Spinner(
 	props: React.PropsWithChildren<{
@@ -9,10 +10,7 @@ function Spinner(
 		<div role="status">
 			<svg
 				aria-hidden="true"
-				className={classNames(
-					"h-8 w-8 animate-spin fill-primary-500 text-gray-200 dark:text-gray-400",
-					props.className,
-				)}
+				className={classNames("h-8 w-8 animate-spin fill-primary text-muted-foreground", props.className)}
 				viewBox="0 0 100 101"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
