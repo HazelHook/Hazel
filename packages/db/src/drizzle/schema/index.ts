@@ -1,7 +1,6 @@
 import { InferModel, relations } from "drizzle-orm"
 
 import { INTEGRATIONS } from "../integrations/data"
-import { commonFields } from "./common"
 import {
 	boolean,
 	index,
@@ -15,6 +14,16 @@ import {
 	uuid,
 	varchar,
 } from "drizzle-orm/pg-core"
+
+const commonFields = {
+	id: serial("id").primaryKey(),
+
+	publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+
+	createdAt: timestamp("created_at").defaultNow().notNull(),
+	updatedAt: timestamp("updated_at").defaultNow().notNull(),
+	deletedAt: timestamp("deleted_at"),
+}
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 })
@@ -33,28 +42,30 @@ export const source = pgTable(
 	"sources",
 	{
 		...commonFields,
+		workspaceId: varchar("workspace_id", { length: 128 })
+			.notNull()
+			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		url,
 		integrationId: integer("integration_id").references(() => integration.id),
 	},
-	(table) => ({
-		workspaceIdIndex: index("src_workspace_id_idx").on(table.workspaceId),
-	}),
+	(table) => ({}),
 )
 
 export const integration = pgTable(
 	"integrations",
 	{
 		...commonFields,
+		workspaceId: varchar("workspace_id", { length: 128 })
+			.notNull()
+			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		tool: varchar("tool", { enum: Object.keys(INTEGRATIONS) as [string, ...string[]] }),
 		config: json("config"),
 	},
 	(table) => ({
-		workspaceIdIndex: index("itg_workspace_id_idx").on(table.workspaceId),
-
 		nameIndex: index("itg_name_idx").on(table.name),
 	}),
 )
@@ -63,20 +74,24 @@ export const destination = pgTable(
 	"destinations",
 	{
 		...commonFields,
+		workspaceId: varchar("workspace_id", { length: 128 })
+			.notNull()
+			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		url: url.notNull(),
 		websocket_connection: boolean("websocket_connection").default(false).notNull(),
 	},
-	(table) => ({
-		workspaceIdIndex: index("dst_workspace_id_idx").on(table.workspaceId),
-	}),
+	(table) => ({}),
 )
 
 export const connection = pgTable(
 	"connections",
 	{
 		...commonFields,
+		workspaceId: varchar("workspace_id", { length: 128 })
+			.notNull()
+			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		enabled,
@@ -97,8 +112,6 @@ export const connection = pgTable(
 		fluxConfig: json("flux_config"),
 	},
 	(table) => ({
-		workspaceIdIndex: index("con_workspace_id_idx").on(table.workspaceId),
-
 		unq: unique().on(table.sourceId, table.destinationId),
 	}),
 )
@@ -107,6 +120,9 @@ export const apiKeys = pgTable(
 	"api_keys",
 	{
 		...commonFields,
+		workspaceId: varchar("workspace_id", { length: 128 })
+			.notNull()
+			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		ownerId: varchar("owner_id", { length: 128 }),
 		name: varchar("name", { length: 128 }),
