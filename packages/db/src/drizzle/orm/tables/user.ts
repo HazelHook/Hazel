@@ -15,7 +15,7 @@ const userLogic = (db: DB) => ({
 			where: eq(schema.user.id, id),
 		})
 	},
-	getOneWithMemberShip: async ({
+	getOneWithMemberShips: async ({
 		id,
 		membershipId,
 	}: {

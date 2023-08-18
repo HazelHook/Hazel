@@ -18,9 +18,9 @@ export const auth = async () => {
 
 	const membershipId = cookiesList.get("membership_id")?.value
 
-	const user = await db.user.getOneWithMemberShip({ id: userSession.id, membershipId: membershipId || "" })
+	const user = await db.user.getOneWithMemberShips({ id: userSession.id, membershipId: membershipId || "" })
 
-	if (!user || !user.onboarded) {
+	if (!user) {
 		redirect(configuration.paths.onboarding)
 	}
 

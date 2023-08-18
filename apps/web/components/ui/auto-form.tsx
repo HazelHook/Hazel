@@ -1,8 +1,8 @@
 "use client"
-import React, { useEffect } from "react"
+import React from "react"
 import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./form"
-import { ControllerRenderProps, DefaultValues, FieldValues, UseFormReturn, useForm } from "react-hook-form"
+import { ControllerRenderProps, DefaultValues, FieldValues, useFieldArray, useForm } from "react-hook-form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "./button"
@@ -14,7 +14,9 @@ import { Switch } from "./switch"
 import { Textarea } from "./textarea"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion"
 import { RadioGroup, RadioGroupItem } from "./radio-group"
-import { toast } from "sonner"
+import { Separator } from "./separator"
+import { AddIcon } from "../icons/pika/add"
+import { CopperXIcon } from "../icons/pika/copperX"
 
 /**
  * Beautify a camelCase string.
@@ -27,17 +29,25 @@ function beautifyObjectName(string: string) {
 }
 
 /**
+ * Get the lowest level Zod type.
+ * This will unpack optionals, refinements, etc.
+ */
+function getBaseSchema(schema: z.ZodAny | z.ZodEffects<z.ZodAny>): z.ZodAny {
+	if ("innerType" in schema._def) {
+		return getBaseSchema(schema._def.innerType as z.ZodAny)
+	}
+	if ("schema" in schema._def) {
+		return getBaseSchema(schema._def.schema as z.ZodAny)
+	}
+	return schema as z.ZodAny
+}
+
+/**
  * Get the type name of the lowest level Zod type.
  * This will unpack optionals, refinements, etc.
  */
 function getBaseType(schema: z.ZodAny): string {
-	if ("innerType" in schema._def) {
-		return getBaseType(schema._def.innerType as z.ZodAny)
-	}
-	if ("schema" in schema._def) {
-		return getBaseType(schema._def.schema as z.ZodAny)
-	}
-	return schema._def.typeName
+	return getBaseSchema(schema)._def.typeName
 }
 
 /**
@@ -85,6 +95,14 @@ function getDefaultValues<Schema extends z.ZodObject<any, any>>(schema: Schema) 
 	}
 
 	return defaultValues
+}
+
+function getObjectFormSchema(schema: ZodObjectOrWrapped): z.ZodObject<any, any> {
+	if (schema._def.typeName === "ZodEffects") {
+		const typedSchema = schema as z.ZodEffects<z.ZodObject<any, any>>
+		return getObjectFormSchema(typedSchema._def.schema)
+	}
+	return schema as z.ZodObject<any, any>
 }
 
 /**
@@ -139,7 +157,7 @@ export type FieldConfigItem = {
 
 	renderParent?: (props: {
 		children: React.ReactNode
-	}) => React.ReactElement | null | undefined
+	}) => React.ReactElement | null
 }
 
 export type FieldConfig<SchemaType extends z.infer<z.ZodObject<any, any>>> = {
@@ -173,6 +191,18 @@ function AutoFormInput({ label, isRequired, fieldConfigItem, fieldProps }: AutoF
 			{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
 			<FormMessage />
 		</FormItem>
+	)
+}
+
+function AutoFormNumber({ fieldProps, ...props }: AutoFormInputComponentProps) {
+	return (
+		<AutoFormInput
+			fieldProps={{
+				type: "number",
+				...fieldProps,
+			}}
+			{...props}
+		/>
 	)
 }
 
@@ -274,7 +304,18 @@ function AutoFormDate({ label, isRequired, field, fieldConfigItem, fieldProps }:
 }
 
 function AutoFormEnum({ label, isRequired, field, fieldConfigItem, zodItem }: AutoFormInputComponentProps) {
-	const values = (zodItem as unknown as z.ZodEnum<any>)._def.values
+	const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def.values
+
+	let values: [string, string][] = []
+	if (!Array.isArray(baseValues)) {
+		values = Object.entries(baseValues)
+	} else {
+		values = baseValues.map((value) => [value, value])
+	}
+
+	function findItem(value: any) {
+		return values.find((item) => item[0] === value)
+	}
 
 	return (
 		<FormItem>
@@ -285,12 +326,14 @@ function AutoFormEnum({ label, isRequired, field, fieldConfigItem, zodItem }: Au
 			<FormControl>
 				<Select onValueChange={field.onChange} defaultValue={field.value}>
 					<SelectTrigger>
-						<SelectValue className="w-full">{field.value ?? "Select an option"}</SelectValue>
+						<SelectValue className="w-full" placeholder={fieldConfigItem.inputProps?.placeholder}>
+							{field.value ? findItem(field.value)?.[1] : "Select an option"}
+						</SelectValue>
 					</SelectTrigger>
 					<SelectContent>
-						{values.map((value: any) => (
+						{values.map(([value, label]) => (
 							<SelectItem value={value} key={value}>
-								{value}
+								{label}
 							</SelectItem>
 						))}
 					</SelectContent>
@@ -309,6 +352,7 @@ const INPUT_COMPONENTS = {
 	radio: AutoFormRadioGroup,
 	switch: AutoFormSwitch,
 	textarea: AutoFormTextarea,
+	number: AutoFormNumber,
 	fallback: AutoFormInput,
 }
 
@@ -322,6 +366,8 @@ const DEFAULT_ZOD_HANDLERS: {
 	ZodBoolean: "checkbox",
 	ZodDate: "date",
 	ZodEnum: "select",
+	ZodNativeEnum: "select",
+	ZodNumber: "number",
 }
 
 function DefaultParent({ children }: { children: React.ReactNode }) {
@@ -347,7 +393,7 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 				const item = shape[name] as z.ZodAny
 				const zodBaseType = getBaseType(item)
 				const itemName = item._def.description ?? beautifyObjectName(name)
-				const key = `${path.join(".")}.${name}`
+				const key = [...path, name].join(".")
 
 				if (zodBaseType === "ZodObject") {
 					return (
@@ -362,6 +408,17 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 								/>
 							</AccordionContent>
 						</AccordionItem>
+					)
+				}
+				if (zodBaseType === "ZodArray") {
+					return (
+						<AutoFormArray
+							key={key}
+							name={name}
+							item={item as unknown as z.ZodArray<any>}
+							form={form}
+							path={[...path, name]}
+						/>
 					)
 				}
 
@@ -393,6 +450,7 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 											...zodInputProps,
 											...field,
 											...fieldConfigItem.inputProps,
+											value: !fieldConfigItem.inputProps?.defaultValue ? field.value ?? "" : undefined,
 										}}
 									/>
 								</ParentElement>
@@ -405,17 +463,65 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 	)
 }
 
+function AutoFormArray({
+	name,
+	item,
+	form,
+	path = [],
+}: {
+	name: string
+	item: z.ZodArray<any>
+	form: ReturnType<typeof useForm>
+	path?: string[]
+}) {
+	const { fields, append, remove } = useFieldArray({
+		control: form.control,
+		name,
+	})
+	const title = item._def.description ?? beautifyObjectName(name)
+
+	return (
+		<AccordionItem value={name}>
+			<AccordionTrigger>{title}</AccordionTrigger>
+			<AccordionContent className="border-l p-3 pl-6">
+				{fields.map((_field, index) => {
+					const key = [...path, index.toString()].join(".")
+					return (
+						<div className="mb-4 grid gap-6" key={`${key}`}>
+							<AutoFormObject
+								schema={item._def.type as z.ZodObject<any, any>}
+								form={form}
+								path={[...path, index.toString()]}
+							/>
+							<Button variant="secondary" size="none" type="button" onClick={() => remove(index)}>
+								<CopperXIcon className="h-4 w-4" />
+							</Button>
+							<Separator />
+						</div>
+					)
+				})}
+				<Button type="button" onClick={() => append({})} className="flex items-center">
+					<AddIcon className="mr-2" size={16} />
+					Add
+				</Button>
+			</AccordionContent>
+		</AccordionItem>
+	)
+}
+
 export function AutoFormSubmit({ children }: { children?: React.ReactNode }) {
 	return <Button type="submit">{children ?? "Submit"}</Button>
 }
 
-function AutoForm<SchemaType extends z.ZodObject<any, any>>({
+// TODO: This should support recursive ZodEffects but TypeScript doesn't allow circular type definitions.
+type ZodObjectOrWrapped = z.ZodObject<any, any> | z.ZodEffects<z.ZodObject<any, any>>
+
+function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	formSchema,
-	toastValues,
 	values: valuesProp,
 	onValuesChange: onValuesChangeProp,
+	onParsedValuesChange,
 	onSubmit: onSubmitProp,
-	defaultValues,
 	fieldConfig,
 	children,
 	className,
@@ -423,35 +529,25 @@ function AutoForm<SchemaType extends z.ZodObject<any, any>>({
 	formSchema: SchemaType
 	values?: Partial<z.infer<SchemaType>>
 	onValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
-	onSubmit?: (values: z.infer<SchemaType>) => Promise<void>
+	onParsedValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
+	onSubmit?: (values: z.infer<SchemaType>) => void
 	fieldConfig?: FieldConfig<z.infer<SchemaType>>
 	children?: React.ReactNode
 	className?: string
-	defaultValues?: any
-	toastValues?: {
-		loading: string
-		success: string
-		error: string
-	}
 }) {
-	const cDefaultValues: DefaultValues<z.infer<typeof formSchema>> = defaultValues || getDefaultValues(formSchema)
+	const objectFormSchema = getObjectFormSchema(formSchema)
+	const defaultValues: DefaultValues<z.infer<typeof objectFormSchema>> = getDefaultValues(objectFormSchema)
 
-	const form = useForm<z.infer<typeof formSchema>>({
+	const form = useForm<z.infer<typeof objectFormSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: cDefaultValues,
+		defaultValues,
 		values: valuesProp,
 	})
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		const parsedValues = formSchema.safeParse(values)
 		if (parsedValues.success) {
-			if (onSubmitProp) {
-				toast.promise(onSubmitProp(parsedValues.data), {
-					loading: toastValues?.loading || "Saving Data...",
-					success: toastValues?.success || "Sucessfully Saved",
-					error: toastValues?.error || "There was an error saving... Please try again and contact us if it persists.",
-				})
-			}
+			onSubmitProp?.(parsedValues.data)
 		}
 	}
 
@@ -463,14 +559,15 @@ function AutoForm<SchemaType extends z.ZodObject<any, any>>({
 				}}
 				onChange={() => {
 					const values = form.getValues()
+					onValuesChangeProp?.(values)
 					const parsedValues = formSchema.safeParse(values)
 					if (parsedValues.success) {
-						onValuesChangeProp?.(parsedValues.data)
+						onParsedValuesChange?.(parsedValues.data)
 					}
 				}}
 				className={cn("space-y-5", className)}
 			>
-				<AutoFormObject schema={formSchema} form={form} fieldConfig={fieldConfig} />
+				<AutoFormObject schema={objectFormSchema} form={form} fieldConfig={fieldConfig} />
 
 				{children}
 			</form>

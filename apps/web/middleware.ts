@@ -5,6 +5,8 @@ import { isPublicRoute } from "./core/route-matcher"
 
 import csrf from "edge-csrf"
 import HttpStatusCode from "./core/generic/http-status-code.enum"
+import { cookies } from "next/headers"
+import db from "./lib/db"
 
 const CSRF_TOKEN_HEADER = "X-CSRF-Token"
 const CSRF_SECRET_COOKIE = "csrfSecret"
@@ -31,14 +33,6 @@ async function sessionMiddleware(req: NextRequest, res: NextResponse) {
 	const { data } = await supabase.auth.getSession()
 
 	if (data.session) {
-		// if (data.session.user && !data.session.user.app_metadata.completed_onboarding) {
-		// 	if (req.nextUrl.pathname !== configuration.paths.onboarding) {
-		// 		const redirectUrl = req.nextUrl.clone()
-		// 		redirectUrl.pathname = configuration.paths.onboarding
-		// 		return NextResponse.redirect(redirectUrl)
-		// 	}
-		// }
-
 		return res
 	}
 
