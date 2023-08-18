@@ -36,7 +36,7 @@ export const columns: ColumnDef<OrganizationMember>[] = [
 					orgId={row.original.publicId}
 					members={members}
 					defaultValue={row.getValue("role")}
-					memberId={row.original.customerId}
+					memberId={row.original.userId}
 				/>
 			)
 		},
@@ -46,7 +46,7 @@ export const columns: ColumnDef<OrganizationMember>[] = [
 		cell: ({ row, table }) => {
 			const members = table.getRowModel().rows.map((row) => row.original)
 
-			return <MemberOptions members={members} orgId={row.original.publicId} memberId={row.original.customerId} />
+			return <MemberOptions members={members} orgId={row.original.publicId} memberId={row.original.userId} />
 		},
 	},
 ]

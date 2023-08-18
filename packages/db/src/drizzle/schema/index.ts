@@ -140,7 +140,6 @@ export const organizations = pgTable(
 		ownerId: varchar("owner_id", { length: 128 }).notNull(),
 
 		name: varchar("name", { length: 128 }).notNull(),
-		personal: boolean("personal").default(false).notNull(),
 
 		plan: varchar("plan", { enum: ["free", "pro", "enterprise"] }),
 

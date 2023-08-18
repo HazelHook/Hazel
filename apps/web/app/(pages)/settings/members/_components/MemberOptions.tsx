@@ -23,7 +23,7 @@ export interface MemberOptionsProps {
 export const MemberOptions = ({ members, memberId, orgId }: MemberOptionsProps) => {
 	const { user } = useAuth()
 
-	const activeMember = useMemo(() => members.find((member) => member.customerId === user?.id), [members, user?.id])
+	const activeMember = useMemo(() => members.find((member) => member.userId === user?.id), [members, user?.id])
 
 	const handleKick = async () => {
 		// await kickOrgMemberAction({ userId: memberId, orgId: orgId })

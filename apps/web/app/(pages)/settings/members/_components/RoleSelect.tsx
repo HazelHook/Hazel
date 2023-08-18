@@ -15,7 +15,7 @@ export interface RoleSelectProps {
 export const RoleSelect = ({ defaultValue, memberId, members, orgId }: RoleSelectProps) => {
 	const { user } = useAuth()
 
-	const activeMember = useMemo(() => members.find((member) => member.customerId === user?.id), [members, user?.id])
+	const activeMember = useMemo(() => members.find((member) => member.userId === user?.id), [members, user?.id])
 
 	if (activeMember?.role !== "admin" || memberId === user?.id) {
 		return <p>{capitalizeFirstLetter(defaultValue)}</p>

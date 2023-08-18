@@ -1,12 +1,12 @@
-import useUserId from "@/core/hooks/use-user-id"
+import { useAuth } from "@/lib/provider/AuthProvider"
 
 /**
  * @returns {string[]} The key for the user's factors mutation. This is used to invalidate the query.
  */
 function useFactorsMutationKey() {
-	const userId = useUserId()
+	const session = useAuth()
 
-	return ["mfa-factors", userId]
+	return ["mfa-factors", session.user?.id]
 }
 
 export default useFactorsMutationKey

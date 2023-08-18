@@ -66,7 +66,6 @@ export const ProfileSettings = ({
 	const signOut = useSignOut()
 
 	const currentMembership = memberships.find((membership) => membership.publicId === currentMembershipId)
-	const personalMembership = memberships.find((membership) => membership.organization.personal === true)
 
 	const { user } = useAuth()
 
@@ -104,7 +103,7 @@ export const ProfileSettings = ({
 						</Avatar>
 						<div className="flex flex-row-reverse items-center gap-4 lg:gap-1 lg:items-start lg:flex-col">
 							<span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[8rem]">
-								{selectedTeam.organization.personal ? "Personal" : selectedTeam.organization.name}
+								{selectedTeam.organization.name}
 							</span>
 							<PlanBadge plan={"free"} />
 						</div>
@@ -164,55 +163,30 @@ export const ProfileSettings = ({
 					<DropdownMenuGroup>
 						<DropdownMenuLabel>Switch Workspace</DropdownMenuLabel>
 
-						<DropdownMenuItem
-							onClick={() => {
-								if (personalMembership) {
-									handleSwitchTeam.mutate({ publicId: personalMembership.publicId })
-									setSelectedTeam(personalMembership)
-								}
-							}}
-							className={cn("flex items-center justify-between", {
-								"bg-stone-100 dark:bg-stone-700 dark:text-stone-100 cursor-pointer": selectedTeam === null,
-							})}
-						>
-							<Avatar className="mr-2 h-5 w-5">
-								<AvatarImage src={user?.app_metadata?.photoUrl} alt={user?.app_metadata?.displayName || ""} />
-							</Avatar>
-							Personal
-							<CheckTickIcon
-								className={cn(
-									"ml-auto h-4 w-4",
-									selectedTeam.publicId === personalMembership?.publicId ? "opacity-100" : "opacity-0",
-								)}
-							/>
-						</DropdownMenuItem>
-
-						{memberships
-							.filter((m) => m.organization.personal === false)
-							.map((membership) => (
-								<DropdownMenuItem
-									key={membership.organization.publicId}
-									onClick={() => {
-										handleSwitchTeam.mutate({ publicId: membership.publicId })
-										setSelectedTeam(membership)
-									}}
-									className={cn("flex items-center justify-between")}
-								>
-									<Avatar className="mr-2 h-5 w-5">
-										<AvatarImage
-											src={`https://avatar.vercel.sh/${membership.organization.publicId}.png`}
-											alt={membership.organization.name}
-										/>
-									</Avatar>
-									{membership.organization.name}
-									<CheckTickIcon
-										className={cn(
-											"ml-auto h-4 w-4",
-											selectedTeam.publicId === membership.publicId ? "opacity-100" : "opacity-0",
-										)}
+						{memberships.map((membership) => (
+							<DropdownMenuItem
+								key={membership.organization.publicId}
+								onClick={() => {
+									handleSwitchTeam.mutate({ publicId: membership.publicId })
+									setSelectedTeam(membership)
+								}}
+								className={cn("flex items-center justify-between")}
+							>
+								<Avatar className="mr-2 h-5 w-5">
+									<AvatarImage
+										src={`https://avatar.vercel.sh/${membership.organization.publicId}.png`}
+										alt={membership.organization.name}
 									/>
-								</DropdownMenuItem>
-							))}
+								</Avatar>
+								{membership.organization.name}
+								<CheckTickIcon
+									className={cn(
+										"ml-auto h-4 w-4",
+										selectedTeam.publicId === membership.publicId ? "opacity-100" : "opacity-0",
+									)}
+								/>
+							</DropdownMenuItem>
+						))}
 					</DropdownMenuGroup>
 
 					<DropdownMenuSeparator />
