@@ -11,7 +11,6 @@ import configuration from "@/configuration"
 export const auth = async () => {
 	const client = getSupabaseServerClient()
 	const session = await requireSession(client)
-
 	const userSession = session.user
 
 	const cookiesList = cookies()
