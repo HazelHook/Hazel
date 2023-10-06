@@ -2,8 +2,7 @@
 
 import Link from "next/link"
 import { ColumnDef } from "@tanstack/react-table"
-import { Destination } from "db/src/drizzle/schema"
-import { Connection } from "reactflow"
+import { Connection, Destination } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
