@@ -12,7 +12,7 @@ import { useState } from "react"
 import { createConnectionSchema } from "@/lib/schemas/connection"
 import { useAction } from "@/server/client"
 import { z } from "zod"
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { getSeededProfileImageUrl } from "@/lib/utils"
@@ -32,7 +32,11 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 	const [sourceModal, setSourceModal] = useState(false)
 	const [destinationModal, setDestinationModal] = useState(false)
 
-	const [values, setValues] = useState<z.infer<typeof createConnectionSchema>>()
+	const [values, setValues] = useState<z.infer<typeof createConnectionSchema>>({
+		name: "",
+		publicSourceId: searchParams.get("source") || sources[0]?.publicId || "",
+		publiceDestinationId: searchParams.get("destination") || destinations[0]?.publicId || "",
+	})
 
 	const router = useRouter()
 
@@ -45,11 +49,6 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 	return (
 		<>
 			<AutoForm
-				defaultValues={{
-					name: "",
-					publicSourceId: searchParams.get("source") || sources[0]?.publicId || "",
-					publiceDestinationId: searchParams.get("destination") || destinations[0]?.publicId || "",
-				}}
 				values={values}
 				onValuesChange={(v) => setValues({ ...values, ...v } as any)}
 				formSchema={createConnectionSchema}
@@ -81,7 +80,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 												<FormControl>
 													<SelectTrigger>
 														<SelectValue
-															placeholder={<p className="text-muted-foreground">Connect...</p>}
+															placeholder={
+																<p className="text-muted-foreground">Connect...</p>
+															}
 															className="focus:text-muted-foreground"
 														/>
 													</SelectTrigger>
@@ -91,7 +92,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 														<SelectItem key={source.publicId} value={source.publicId}>
 															<div className="flex flex-row items-center">
 																<Avatar className="mr-2 w-4 h-4">
-																	<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+																	<AvatarImage
+																		src={getSeededProfileImageUrl(source.publicId)}
+																	/>
 																</Avatar>
 																{source.name}
 															</div>
@@ -101,7 +104,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 											</Select>
 										)}
 									</FormControl>
-									{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
+									{fieldConfigItem.description && (
+										<FormDescription>{fieldConfigItem.description}</FormDescription>
+									)}
 									<FormMessage />
 								</FormItem>
 								<div className="flex justify-center">
@@ -127,7 +132,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 												<FormControl>
 													<SelectTrigger>
 														<SelectValue
-															placeholder={<p className="text-muted-foreground">Connect...</p>}
+															placeholder={
+																<p className="text-muted-foreground">Connect...</p>
+															}
 															className="focus:text-muted-foreground"
 														/>
 													</SelectTrigger>
@@ -137,7 +144,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 														<SelectItem key={source.publicId} value={source.publicId}>
 															<div className="flex flex-row items-center">
 																<Avatar className="mr-2 w-4 h-4">
-																	<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+																	<AvatarImage
+																		src={getSeededProfileImageUrl(source.publicId)}
+																	/>
 																</Avatar>
 																{source.name}
 															</div>
@@ -147,7 +156,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 											</Select>
 										)}
 									</FormControl>
-									{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
+									{fieldConfigItem.description && (
+										<FormDescription>{fieldConfigItem.description}</FormDescription>
+									)}
 									<FormMessage />
 								</FormItem>
 								<div className="flex justify-center">
@@ -170,7 +181,11 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 					await createSource.mutateAsync(data)
 				}}
 			>
-				<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
+				<Button
+					type="submit"
+					disabled={createSource.status === "loading"}
+					loading={createSource.status === "loading"}
+				>
 					Create
 				</Button>
 			</AutoForm>

@@ -1,6 +1,6 @@
-import type { SignInWithOAuthCredentials } from "@supabase/gotrue-js"
 import useMutation from "swr/mutation"
 import useSupabase from "@/core/hooks/use-supabase"
+import { SignInWithOAuthCredentials } from "@supabase/supabase-js"
 
 /**
  * @name useSignInWithProvider

@@ -17,6 +17,7 @@ import { RadioGroup, RadioGroupItem } from "./radio-group"
 import { Separator } from "./separator"
 import { AddIcon } from "../icons/pika/add"
 import { CopperXIcon } from "../icons/pika/copperX"
+import { toast } from "sonner"
 
 /**
  * Beautify a camelCase string.
@@ -432,9 +433,11 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 						name={key}
 						key={key}
 						render={({ field }) => {
-							const inputType = fieldConfigItem.fieldType ?? DEFAULT_ZOD_HANDLERS[zodBaseType] ?? "fallback"
+							const inputType =
+								fieldConfigItem.fieldType ?? DEFAULT_ZOD_HANDLERS[zodBaseType] ?? "fallback"
 
-							const InputComponent = typeof inputType === "function" ? inputType : INPUT_COMPONENTS[inputType]
+							const InputComponent =
+								typeof inputType === "function" ? inputType : INPUT_COMPONENTS[inputType]
 							const ParentElement = fieldConfigItem.renderParent ?? DefaultParent
 
 							return (
@@ -450,7 +453,9 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 											...zodInputProps,
 											...field,
 											...fieldConfigItem.inputProps,
-											value: !fieldConfigItem.inputProps?.defaultValue ? field.value ?? "" : undefined,
+											value: !fieldConfigItem.inputProps?.defaultValue
+												? field.value ?? ""
+												: undefined,
 										}}
 									/>
 								</ParentElement>
@@ -525,18 +530,28 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	fieldConfig,
 	children,
 	className,
+	toastValues,
+	defaultValues: cdefaultValues,
 }: {
 	formSchema: SchemaType
 	values?: Partial<z.infer<SchemaType>>
 	onValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
 	onParsedValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
-	onSubmit?: (values: z.infer<SchemaType>) => void
+	onSubmit?: (values: z.infer<SchemaType>) => Promise<void>
 	fieldConfig?: FieldConfig<z.infer<SchemaType>>
 	children?: React.ReactNode
+	defaultValues?: any
 	className?: string
+	toastValues?: {
+		loading: string
+		success: string
+		error: string
+	}
 }) {
 	const objectFormSchema = getObjectFormSchema(formSchema)
-	const defaultValues: DefaultValues<z.infer<typeof objectFormSchema>> = getDefaultValues(objectFormSchema)
+
+	const defaultValues: DefaultValues<z.infer<typeof objectFormSchema>> =
+		cdefaultValues || getDefaultValues(objectFormSchema)
 
 	const form = useForm<z.infer<typeof objectFormSchema>>({
 		resolver: zodResolver(formSchema),
@@ -547,7 +562,15 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		const parsedValues = formSchema.safeParse(values)
 		if (parsedValues.success) {
-			onSubmitProp?.(parsedValues.data)
+			if (onSubmitProp) {
+				toast.promise(onSubmitProp(parsedValues.data), {
+					loading: toastValues?.loading || "Saving Data...",
+					success: toastValues?.success || "Sucessfully Saved",
+					error:
+						toastValues?.error ||
+						"There was an error saving... Please try again and contact us if it persists.",
+				})
+			}
 		}
 	}
 

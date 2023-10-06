@@ -31,7 +31,7 @@ export const UpdateIntegrationForm = ({
 
 	if (!config) return notFound()
 
-	const schema = createZodIntegrationSchema(integration.config!)
+	const schema = createZodIntegrationSchema(integration.config!) as any
 
 	const form = useForm<z.infer<typeof schema>>({
 		resolver: zodResolver(schema),

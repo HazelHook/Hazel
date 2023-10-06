@@ -41,7 +41,7 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 	({ className, variant, size, children, loading, ...props }, ref) => {
 		return (
-			// rome-ignore lint/a11y/useButtonType: <explanation>
+			// biome-ignore lint/a11y/useButtonType: <explanation>
 			<button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
 				{loading && <RefreshIcon className="mr-2 h-4 w-4 animate-spin" />}
 				{children}

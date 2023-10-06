@@ -1,7 +1,7 @@
 import useMutation from "swr/mutation"
-import type { UserAttributes } from "@supabase/gotrue-js"
 
 import useSupabase from "@/core/hooks/use-supabase"
+import { UserAttributes } from "@supabase/supabase-js"
 
 type Params = { arg: UserAttributes & { redirectTo: string } }
 

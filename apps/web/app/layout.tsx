@@ -62,3 +62,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		</html>
 	)
 }
+
+export const dynamic = "force-dynamic"

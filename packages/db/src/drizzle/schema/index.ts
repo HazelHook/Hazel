@@ -1,6 +1,5 @@
 import { InferModel, relations } from "drizzle-orm"
 
-import { INTEGRATIONS } from "../integrations/data"
 import {
 	boolean,
 	index,
@@ -14,6 +13,7 @@ import {
 	uuid,
 	varchar,
 } from "drizzle-orm/pg-core"
+import { INTEGRATIONS } from "../integrations/data"
 
 const commonFields = {
 	id: serial("id").primaryKey(),
@@ -165,7 +165,7 @@ export const organizationMembers = pgTable(
 			.notNull(),
 		organizationId: integer("organization_id")
 			.notNull()
-			.references(() => organizations.id),
+			.references(() => organizations.id, { onDelete: "cascade" }),
 		role: role,
 	},
 	(table) => ({
@@ -186,7 +186,7 @@ export const organizationInvites = pgTable(
 		role: role,
 		organizationId: integer("organization_id")
 			.notNull()
-			.references(() => organizations.id),
+			.references(() => organizations.id, { onDelete: "cascade" }),
 	},
 	(table) => ({
 		emailIdx: uniqueIndex("email_idx").on(table.email),

@@ -78,10 +78,7 @@ const organizationsLogic = (db: DB) =>
 				orgId: number
 			}) => {
 				const invites = db.query.organizationInvites.findMany({
-					where: and(
-						eq(schema.organizationInvites.organizationId, orgId),
-						isNull(schema.organizationMembers.deletedAt),
-					),
+					where: eq(schema.organizationInvites.organizationId, orgId),
 				})
 
 				return invites
