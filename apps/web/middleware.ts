@@ -5,8 +5,6 @@ import { isPublicRoute } from "./core/route-matcher"
 
 import csrf from "edge-csrf"
 import HttpStatusCode from "./core/generic/http-status-code.enum"
-import { cookies } from "next/headers"
-import db from "./lib/db"
 
 const CSRF_TOKEN_HEADER = "X-CSRF-Token"
 const CSRF_SECRET_COOKIE = "csrfSecret"

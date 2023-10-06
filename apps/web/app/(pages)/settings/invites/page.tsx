@@ -8,10 +8,6 @@ import { createOrganizationInvite, revokeOrganizationInvite } from "@/server/act
 const MemberListPage = async ({ params, searchParams }: any) => {
 	const { organization } = await auth()
 
-	if (params.org === "personal") {
-		redirect("/app/personal")
-	}
-
 	const invites = await db.organization.invite.getMany({ orgId: organization.id })
 	const limit = searchParams.limit || 10
 	const offset = searchParams.page ? searchParams.page * limit : 0

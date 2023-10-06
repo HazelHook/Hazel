@@ -18,10 +18,6 @@ interface MemberListPageProps {
 
 const MemberListPage = async ({ params, searchParams }: MemberListPageProps) => {
 	const { organization } = await auth()
-	// TODO: DIFFERENT ORGS + PAGINATION
-	if (params.org === "personal") {
-		redirect("/app/personal")
-	}
 
 	const memberships = await db.organization.memberships.getMany({ orgId: organization.id })
 
