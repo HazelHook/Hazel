@@ -11,32 +11,32 @@
 		"astro": "astro"
 	},
 	"devDependencies": {
-		"@astrojs/image": "^0.17.2",
-		"@astrojs/tailwind": "^4.0.0",
-		"@tailwindcss/forms": "^0.5.4",
-		"@tailwindcss/typography": "^0.5.9",
-		"@types/alpinejs": "^3.7.2",
+		"@astrojs/image": "^0.18.0",
+		"@astrojs/tailwind": "^5.0.1",
+		"@tailwindcss/forms": "^0.5.6",
+		"@tailwindcss/typography": "^0.5.10",
+		"@types/alpinejs": "^3.13.2n",
 		"@types/react": "^18.2.25",
 		"@types/react-dom": "18.2.10",
-		"astro": "^2.8.3",
+		"astro": "^3.2.3",
 		"prettier": "^2.8.8",
-		"prettier-plugin-astro": "^0.10.0"
+		"prettier-plugin-astro": "^0.12.0"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^0.19.7",
-		"@astrojs/react": "^2.2.1",
-		"@astrojs/rss": "^2.4.3",
-		"@astrojs/sitemap": "^1.4.0",
-		"@astrolib/seo": "^0.4.0",
+		"@astrojs/mdx": "^1.1.1",
+		"@astrojs/react": "^3.0.3",
+		"@astrojs/rss": "^3.0.0",
+		"@astrojs/sitemap": "^3.0.1",
+		"@astrolib/seo": "^0.6.0",
 		"aos": "^2.3.4",
-		"astro-compress": "^1.1.49",
-		"framer-motion": "^10.13.0",
+		"astro-compress": "^2.0.15",
+		"framer-motion": "^10.16.4",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"sharp": "^0.32.3",
-		"tailwind-merge": "^1.13.2",
+		"sharp": "^0.32.6",
+		"tailwind-merge": "^1.14.0",
 		"tailwind-scrollbar-hide": "^1.1.7",
 		"tailwindcss": "^3.3.3",
-		"wrangler": "^3.5.0"
+		"wrangler": "^3.11.0"
 	}
 }

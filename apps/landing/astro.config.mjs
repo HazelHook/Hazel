@@ -7,9 +7,6 @@ import compress from "astro-compress"
 import { defineConfig } from "astro/config"
 
 export default defineConfig({
-	experimental: {
-		assets: true,
-	},
 	markdown: {
 		drafts: true,
 		shikiConfig: {
