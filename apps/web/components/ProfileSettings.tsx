@@ -43,6 +43,7 @@ import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { Badge } from "./ui/badge"
 import useSignOut from "@/core/hooks/use-sign-out"
 import { useAuth } from "@/lib/provider/AuthProvider"
+import { useChangeLocale, useCurrentLocale } from "@/i18n/client"
 
 type Membership = OrganizationMember & {
 	organization: Organization
@@ -68,6 +69,9 @@ export const ProfileSettings = ({
 	const currentMembership = memberships.find((membership) => membership.publicId === currentMembershipId)
 
 	const { user } = useAuth()
+
+	const changeLocale = useChangeLocale()
+	const locale = useCurrentLocale()
 
 	const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
 	const [selectedTeam, setSelectedTeam] = useState<Membership>(currentMembership || memberships[0])
@@ -163,6 +167,27 @@ export const ProfileSettings = ({
 											<MonitorIcon className="w-4 h-4" />
 											System
 										</div>
+									</DropdownMenuCheckboxItem>
+								</DropdownMenuSubContent>
+							</DropdownMenuPortal>
+						</DropdownMenuSub>
+					</DropdownMenuGroup>
+					<DropdownMenuGroup>
+						<DropdownMenuSub>
+							<DropdownMenuSubTrigger>Change Language</DropdownMenuSubTrigger>
+							<DropdownMenuPortal>
+								<DropdownMenuSubContent>
+									<DropdownMenuCheckboxItem
+										checked={locale === "en"}
+										onCheckedChange={() => changeLocale("en")}
+									>
+										<div className="flex items-center gap-2 ">EN</div>
+									</DropdownMenuCheckboxItem>
+									<DropdownMenuCheckboxItem
+										checked={locale === "de"}
+										onCheckedChange={() => changeLocale("de")}
+									>
+										<div className="flex items-center gap-2 ">DE</div>
 									</DropdownMenuCheckboxItem>
 								</DropdownMenuSubContent>
 							</DropdownMenuPortal>

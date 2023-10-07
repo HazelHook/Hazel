@@ -375,8 +375,8 @@ importers:
         specifier: ^0.32.6
         version: 0.32.6
       sonner:
-        specifier: ^0.6.2
-        version: 0.6.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.0.3
+        version: 1.0.3(react-dom@18.2.0)(react@18.2.0)
       superjson:
         specifier: ^1.13.3
         version: 1.13.3
@@ -11641,8 +11641,8 @@ packages:
       atomic-sleep: 1.0.0
     dev: false
 
-  /sonner@0.6.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-bh4FWhYoNN481ZIW94W4e0kSLBTMGislYg2YXvDS1px1AJJz4erQe9jHV8s5pS1VMVDgfh3CslNSFLaU6Ldrnw==}
+  /sonner@1.0.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-hBoA2zKuYW3lUnpx4K0vAn8j77YuYiwvP9sLQfieNS2pd5FkT20sMyPTDJnl9S+5T27ZJbwQRPiujwvDBwhZQg==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
