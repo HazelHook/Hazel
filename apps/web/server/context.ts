@@ -1,7 +1,6 @@
 import getSupabaseServerActionClient from "@/core/supabase/action-client"
 import db from "@/lib/db"
 import requireSession from "@/lib/user/require-session"
-import { TRPCError } from "@trpc/server"
 import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
 import { cookies, headers } from "next/headers"
 
@@ -23,6 +22,7 @@ export async function createContext(opts?: FetchCreateContextFnOptions) {
 	// if (!membership) {
 	// 	throw new TRPCError({ message: "User needs to have an valid Organization selected", code: "BAD_REQUEST" })
 	// }
+	console.log(session, "XDDD")
 
 	return {
 		headers: Object.fromEntries(newHeaders),

@@ -1,5 +1,7 @@
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
-import { NextRequest, NextResponse } from "next/server"
+import { createI18nMiddleware } from "next-international/middleware"
+
+import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from "next/server"
 import configuration from "./configuration"
 import { isPublicRoute } from "./core/route-matcher"
 
@@ -11,7 +13,7 @@ const CSRF_SECRET_COOKIE = "csrfSecret"
 const CSRF_TOKEN_BODY_FIELD = "csrfToken"
 const NEXT_ACTION_HEADER = "next-action"
 
-const publicRoutes: string[] = ["/auth/*", "/api/webhook/:id"]
+const publicRoutes: string[] = ["/:locale/auth/*", "/auth/*", "/api/webhook/:id"]
 
 const csrfMiddleware = csrf({
 	cookie: {
@@ -20,11 +22,24 @@ const csrfMiddleware = csrf({
 	},
 })
 
-export default async function middleware(req: NextRequest) {
+const I18nMiddleware = createI18nMiddleware({
+	locales: ["en", "de"],
+	defaultLocale: "en",
+	urlMappingStrategy: "rewrite",
+})
+
+export const withI18n = (next: NextMiddleware) => {
+	return async (request: NextRequest, _next: NextFetchEvent) => {
+		await next(request, _next)
+		return I18nMiddleware(request)
+	}
+}
+
+export default withI18n(async function middleware(req: NextRequest) {
 	// const res = await withCsrfMiddleware(req)
 
 	return sessionMiddleware(req, NextResponse.next())
-}
+})
 
 async function sessionMiddleware(req: NextRequest, res: NextResponse) {
 	const supabase = createMiddlewareClient({ req, res })

@@ -1,5 +1,9 @@
 function matchesWildcard(path: string, pattern: string): boolean {
-	const regex = new RegExp(`^${pattern.split("*").join(".*")}$`)
+	const regexPattern = pattern
+		.split("*")
+		.join(".*") // Replace * with .*
+		.replace(/:[a-zA-Z0-9_]+/g, "[^/]+") // Replace :somevalue with [^/]+
+	const regex = new RegExp(`^${regexPattern}$`)
 	return regex.test(path)
 }
 

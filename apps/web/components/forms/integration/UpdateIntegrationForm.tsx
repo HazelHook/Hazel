@@ -12,7 +12,7 @@ import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { LabeledSeparator } from "@/components/LabeledSeparator"
-import { IntegrationToolField } from "@/app/(pages)/(integration)/_components/IntegrationToolField"
+import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
 import { updateIntegrationAction } from "@/server/actions/integrations"
 
 export const UpdateIntegrationForm = ({

@@ -137,19 +137,28 @@ export const ProfileSettings = ({
 							<DropdownMenuSubTrigger>Change Theme</DropdownMenuSubTrigger>
 							<DropdownMenuPortal>
 								<DropdownMenuSubContent>
-									<DropdownMenuCheckboxItem checked={theme === "light"} onCheckedChange={() => setTheme("light")}>
+									<DropdownMenuCheckboxItem
+										checked={theme === "light"}
+										onCheckedChange={() => setTheme("light")}
+									>
 										<div className="flex items-center gap-2 ">
 											<SunIcon className="w-4 h-4" />
 											Light
 										</div>
 									</DropdownMenuCheckboxItem>
-									<DropdownMenuCheckboxItem checked={theme === "dark"} onCheckedChange={() => setTheme("dark")}>
+									<DropdownMenuCheckboxItem
+										checked={theme === "dark"}
+										onCheckedChange={() => setTheme("dark")}
+									>
 										<div className="flex items-center gap-2 ">
 											<MoonIcon className="w-4 h-4" />
 											Dark
 										</div>
 									</DropdownMenuCheckboxItem>
-									<DropdownMenuCheckboxItem checked={theme === "system"} onCheckedChange={() => setTheme("system")}>
+									<DropdownMenuCheckboxItem
+										checked={theme === "system"}
+										onCheckedChange={() => setTheme("system")}
+									>
 										<div className="flex items-center gap-2 ">
 											<MonitorIcon className="w-4 h-4" />
 											System

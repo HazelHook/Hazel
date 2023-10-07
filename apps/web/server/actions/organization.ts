@@ -1,7 +1,7 @@
 "use server"
 
 import { z } from "zod"
-import { createAction, protectedProcedure } from "../trpc"
+import { basicProtectedProcedure, createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
 import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
 import { TRPCError } from "@trpc/server"
@@ -58,7 +58,7 @@ export const deleteOrganzationAction = createAction(
 )
 
 export const switchOrganizationAction = createAction(
-	protectedProcedure.input(z.object({ publicId: z.string() })).mutation(async (opts) => {
+	basicProtectedProcedure.input(z.object({ publicId: z.string() })).mutation(async (opts) => {
 		cookies().set("membership_id", opts.input.publicId)
 
 		return {
