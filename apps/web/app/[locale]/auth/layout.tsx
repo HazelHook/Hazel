@@ -1,12 +1,10 @@
-import initializeServerI18n from "@/i18n/i18n.server"
 import AuthPageShell from "./components/AuthPageShell"
-import getLanguageCookie from "@/i18n/get-language-cookie"
 import getSupabaseServerClient from "@/core/supabase/server-client"
 import { redirect } from "next/navigation"
 import configuration from "@/configuration"
 
 import verifyRequiresMfa from "@/core/session/utils/check-requires-mfa"
-import { Providers } from "./providers"
+import { I18Provider } from "@/components/i18-provider"
 
 export const dynamic = "force-dynamic"
 
@@ -24,9 +22,9 @@ async function AuthLayout({ children }: React.PropsWithChildren) {
 	}
 
 	return (
-		<Providers>
+		<I18Provider>
 			<AuthPageShell>{children}</AuthPageShell>
-		</Providers>
+		</I18Provider>
 	)
 }
 

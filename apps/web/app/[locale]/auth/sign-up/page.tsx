@@ -1,7 +1,6 @@
 import Link from "next/link"
 
 import configuration from "@/configuration"
-import { withI18n } from "@/i18n/with-i18n"
 import Heading from "@/components/ui/heading"
 import SignUpMethodsContainer from "../components/SignUpMethodsContainer"
 import { getI18n } from "@/i18n/server"
@@ -35,4 +34,4 @@ async function SignUpPage() {
 	)
 }
 
-export default withI18n(SignUpPage)
+export default SignUpPage

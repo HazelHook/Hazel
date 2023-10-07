@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Trans } from "@/components/ui/trans"
 
 import { Heading } from "@/components/ui/heading"
 

@@ -2,17 +2,16 @@ import Link from "next/link"
 
 import configuration from "@/configuration"
 
-import { withI18n } from "@/i18n/with-i18n"
 import Heading from "@/components/ui/heading"
 import PasswordResetContainer from "../components/PasswordResetContainer"
-import { useI18n } from "@/i18n/client"
+import { getI18n } from "@/i18n/server"
 
 export const metadata = {
 	title: "Password Reset",
 }
 
-function PasswordResetPage() {
-	const t = useI18n()
+async function PasswordResetPage() {
+	const t = await getI18n()
 	return (
 		<>
 			<div>
@@ -39,4 +38,4 @@ function PasswordResetPage() {
 	)
 }
 
-export default withI18n(PasswordResetPage)
+export default PasswordResetPage

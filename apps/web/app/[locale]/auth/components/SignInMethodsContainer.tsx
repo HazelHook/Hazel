@@ -3,8 +3,6 @@
 import { useCallback } from "react"
 import { useRouter } from "next/navigation"
 
-import { Trans } from "@/components/ui/trans"
-
 import OAuthProviders from "./OAuthProviders"
 
 import configuration from "@/configuration"
