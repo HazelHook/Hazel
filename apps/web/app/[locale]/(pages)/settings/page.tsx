@@ -6,6 +6,7 @@ import { OrganizationUpdateForm } from "@/components/forms/organization/Organiza
 const SettingsPage = async () => {
 	const { workspaceId, organization } = await auth()
 
+	console.log(organization.name)
 	return (
 		<Container>
 			<div>

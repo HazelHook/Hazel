@@ -26,7 +26,7 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
 	}, [copied])
 
 	return (
-		// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<div className="flex gap-2 items-center" onClick={handleClipboard}>
 			{props.children}
 			<svg

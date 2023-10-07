@@ -7,12 +7,21 @@ import { Button } from "@/components/ui/button"
 import { updateOrganzationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"
 import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export const OrganizationUpdateForm = ({
 	pOrgId,
 	defaultValues,
 }: { pOrgId: string; defaultValues?: z.infer<typeof orgUpdateFormSchema> }) => {
 	const router = useRouter()
+
+	const [values, setValues] = useState<Partial<z.infer<typeof orgUpdateFormSchema>>>(defaultValues || {})
+
+	useEffect(() => {
+		if (defaultValues) {
+			setValues(defaultValues)
+		}
+	}, [defaultValues])
 
 	const updateOrg = useAction(updateOrganzationAction, {
 		onSuccess: () => {
@@ -28,7 +37,8 @@ export const OrganizationUpdateForm = ({
 					description: "Name of your Organization",
 				},
 			}}
-			defaultValues={defaultValues}
+			values={values}
+			onValuesChange={setValues}
 			onSubmit={async (data) => {
 				await updateOrg.mutateAsync({ ...data, publicId: pOrgId })
 			}}
