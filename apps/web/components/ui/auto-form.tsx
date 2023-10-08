@@ -1,4 +1,5 @@
 "use client"
+
 import React from "react"
 import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./form"
@@ -153,6 +154,7 @@ function zodToHtmlInputProps(
 
 export type FieldConfigItem = {
 	description?: React.ReactNode
+	hidden?: boolean
 	inputProps?: React.InputHTMLAttributes<HTMLInputElement>
 	fieldType?: keyof typeof INPUT_COMPONENTS | React.FC<AutoFormInputComponentProps>
 
@@ -396,6 +398,12 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 				const itemName = item._def.description ?? beautifyObjectName(name)
 				const key = [...path, name].join(".")
 
+				const fieldConfigItem: FieldConfigItem = fieldConfig?.[name] ?? {}
+
+				if (fieldConfigItem.hidden) {
+					return
+				}
+
 				if (zodBaseType === "ZodObject") {
 					return (
 						<AccordionItem value={name} key={key}>
@@ -423,7 +431,6 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 					)
 				}
 
-				const fieldConfigItem: FieldConfigItem = fieldConfig?.[name] ?? {}
 				const zodInputProps = zodToHtmlInputProps(item)
 				const isRequired = zodInputProps.required ?? fieldConfigItem.inputProps?.required ?? false
 
@@ -537,7 +544,7 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	values?: Partial<z.infer<SchemaType>>
 	onValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
 	onParsedValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
-	onSubmit?: (values: z.infer<SchemaType>) => Promise<void>
+	onSubmit?: (values: z.infer<SchemaType>) => Promise<unknown>
 	fieldConfig?: FieldConfig<z.infer<SchemaType>>
 	children?: React.ReactNode
 	defaultValues?: any

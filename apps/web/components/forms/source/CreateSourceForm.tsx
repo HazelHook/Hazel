@@ -1,11 +1,8 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { IntegrationTools } from "db/src/drizzle/integrations/data"
 import { Integration } from "db/src/drizzle/schema"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
 
 import { useAction } from "@/server/client"
 import { Button } from "@/components/ui/button"
@@ -25,14 +22,6 @@ interface CreateSourceFormProps {
 export function CreateSourceForm({ onClose, action, shouldRedirect = true, integrations }: CreateSourceFormProps) {
 	const router = useRouter()
 
-	const form = useForm<z.infer<typeof createSourceSchema>>({
-		resolver: zodResolver(createSourceSchema),
-		defaultValues: {
-			name: "",
-			url: "",
-		},
-	})
-
 	const createSource = useAction(action, {
 		onSuccess(data) {
 			router.refresh()
@@ -42,9 +31,6 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 			}
 
 			onClose?.(data.id)
-		},
-		onError(error) {
-			form.setError("root", error)
 		},
 	})
 
@@ -70,7 +56,13 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 						},
 					},
 					integrationId: {
-						fieldType: ({ label, isRequired, field, fieldConfigItem, fieldProps }: AutoFormInputComponentProps) => (
+						fieldType: ({
+							label,
+							isRequired,
+							field,
+							fieldConfigItem,
+							fieldProps,
+						}: AutoFormInputComponentProps) => (
 							<FormItem>
 								<FormLabel>
 									{label}
@@ -82,7 +74,9 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 											<FormControl>
 												<SelectTrigger>
 													<SelectValue
-														placeholder={<p className="text-muted-foreground">Connect...</p>}
+														placeholder={
+															<p className="text-muted-foreground">Connect...</p>
+														}
 														className="focus:text-muted-foreground"
 													/>
 												</SelectTrigger>
@@ -90,22 +84,30 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 											<SelectContent className="max-h-96">
 												{integrations.map((integration) => (
 													<SelectItem key={integration.publicId} value={integration.publicId}>
-														<div className="flex flex-row items-center">{integration.name}</div>
+														<div className="flex flex-row items-center">
+															{integration.name}
+														</div>
 													</SelectItem>
 												))}
 											</SelectContent>
 										</Select>
 									)}
 								</FormControl>
-								{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
+								{fieldConfigItem.description && (
+									<FormDescription>{fieldConfigItem.description}</FormDescription>
+								)}
 								<FormMessage />
 							</FormItem>
 						),
 					},
 				}}
 			>
-				<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
-					{"Create"}
+				<Button
+					type="submit"
+					disabled={createSource.status === "loading"}
+					loading={createSource.status === "loading"}
+				>
+					Create
 				</Button>
 			</AutoForm>
 		</>

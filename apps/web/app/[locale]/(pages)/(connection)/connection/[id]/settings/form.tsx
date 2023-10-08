@@ -12,10 +12,9 @@ import { getCachedConnection } from "@/lib/orm"
 import { PromiseType } from "@/lib/ts/helpers"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AddIcon } from "@/components/icons/pika/add"
 import { createSourceAction } from "@/server/actions/source"
@@ -25,6 +24,8 @@ import type { updateConnectionAction } from "@/server/actions/connections"
 import { updateConnectionSchema } from "@/lib/schemas/connection"
 import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
 import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
+import AutoForm from "@/components/ui/auto-form"
+import Link from "next/link"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction
@@ -46,16 +47,14 @@ export function UpdateConnectionForm({
 	const [sourceModal, setSourceModal] = useState(false)
 	const [destinationModal, setDestinationModal] = useState(false)
 
-	const router = useRouter()
-	const form = useForm<z.infer<typeof updateConnectionSchema>>({
-		resolver: zodResolver(updateConnectionSchema),
-		defaultValues: {
-			name: connection.name,
-			publicSourceId: connection.source.publicId,
-			publiceDestinationId: connection.destination.publicId,
-			publicId: connection.publicId,
-		},
+	const [values, setValues] = useState<Partial<z.infer<typeof updateConnectionSchema>>>({
+		name: connection.name,
+		publicSourceId: connection.source.publicId,
+		publiceDestinationId: connection.destination.publicId,
+		publicId: connection.publicId,
 	})
+
+	const router = useRouter()
 
 	const createSource = useAction(action, {
 		onSuccess(data) {
@@ -65,39 +64,28 @@ export function UpdateConnectionForm({
 
 			router.refresh()
 		},
-		onError(error) {
-			form.setError("root", error)
-		},
 	})
-
-	function onSubmit(values: z.infer<typeof updateConnectionSchema>) {
-		createSource.mutate(values)
-	}
 
 	return (
 		<>
-			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-					<FormField
-						control={form.control}
-						name="name"
-						render={({ field }) => (
+			<AutoForm
+				values={values}
+				onValuesChange={setValues}
+				formSchema={updateConnectionSchema}
+				onSubmit={createSource.mutateAsync}
+				fieldConfig={{
+					name: {
+						description: "A name to identify your connection.",
+					},
+					publicId: { hidden: true },
+					publicSourceId: {
+						description: "The source of the incoming request.",
+						fieldType: ({ label, isRequired, field, fieldConfigItem, fieldProps }) => (
 							<FormItem>
-								<FormLabel>Name</FormLabel>
-								<FormControl>
-									<Input placeholder="Connection ..." {...field} />
-								</FormControl>
-								<FormDescription>A name to identify your connection.</FormDescription>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="publicSourceId"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Source</FormLabel>
+								<FormLabel>
+									{label}
+									{isRequired && <span className="text-destructive"> *</span>}
+								</FormLabel>
 								{sources.length > 0 && (
 									<Select
 										onValueChange={(value) => {
@@ -109,16 +97,20 @@ export function UpdateConnectionForm({
 									>
 										<FormControl>
 											<SelectTrigger>
-												<SelectValue placeholder="Select a verified email to display" />
+												<SelectValue placeholder="Select any source to connect" />
 											</SelectTrigger>
 										</FormControl>
-										<FormDescription>The source of the incoming request.</FormDescription>
+										{fieldConfigItem.description && (
+											<FormDescription>{fieldConfigItem.description}</FormDescription>
+										)}
 										<SelectContent>
 											{sources.map((source) => (
 												<SelectItem key={source.publicId} value={source.publicId}>
 													<div className="flex flex-row items-center">
 														<Avatar className="mr-2 w-4 h-4">
-															<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+															<AvatarImage
+																src={getSeededProfileImageUrl(source.publicId)}
+															/>
 														</Avatar>
 														{source.name}
 													</div>
@@ -138,16 +130,17 @@ export function UpdateConnectionForm({
 								)}
 								<FormMessage />
 							</FormItem>
-						)}
-					/>
-
-					<FormField
-						control={form.control}
-						name="publiceDestinationId"
-						render={({ field }) => (
+						),
+					},
+					publiceDestinationId: {
+						description: "The intended destination of the request.",
+						fieldType: ({ label, isRequired, field, fieldConfigItem, fieldProps }) => (
 							<FormItem>
-								<FormLabel>Destination</FormLabel>
-								{destinations.length > 0 && (
+								<FormLabel>
+									{label}
+									{isRequired && <span className="text-destructive"> *</span>}
+								</FormLabel>
+								{sources.length > 0 && (
 									<Select
 										onValueChange={(value) => {
 											if (value !== "") {
@@ -158,16 +151,20 @@ export function UpdateConnectionForm({
 									>
 										<FormControl>
 											<SelectTrigger>
-												<SelectValue placeholder="Select a verified email to display" />
+												<SelectValue placeholder="Select any source to connect" />
 											</SelectTrigger>
 										</FormControl>
-										<FormDescription>The intended destination of the request.</FormDescription>
+										{fieldConfigItem.description && (
+											<FormDescription>{fieldConfigItem.description}</FormDescription>
+										)}
 										<SelectContent>
 											{destinations.map((source) => (
 												<SelectItem key={source.publicId} value={source.publicId}>
 													<div className="flex flex-row items-center">
 														<Avatar className="mr-2 w-4 h-4">
-															<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+															<AvatarImage
+																src={getSeededProfileImageUrl(source.publicId)}
+															/>
 														</Avatar>
 														{source.name}
 													</div>
@@ -185,141 +182,46 @@ export function UpdateConnectionForm({
 										</SelectContent>
 									</Select>
 								)}
-
 								<FormMessage />
 							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="delay"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Delay</FormLabel>
-								<FormControl>
-									<Input
-										type="number"
-										placeholder="Delay ..."
-										{...field}
-										onChange={(event) => field.onChange(+event.target.value)}
-									/>
-								</FormControl>
-								<FormDescription>Add a delay to your webhook delivery.</FormDescription>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="retryDelay"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Retry Delay</FormLabel>
-								<FormControl>
-									<Input
-										type="number"
-										placeholder="Delay ..."
-										{...field}
-										onChange={(event) => field.onChange(+event.target.value)}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="retryCount"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Retry Count</FormLabel>
-								<FormControl>
-									<Input
-										type="number"
-										placeholder="Retry Counts ..."
-										{...field}
-										onChange={(event) => field.onChange(+event.target.value)}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					{/* <FormField
-						control={form.control}
-						name="delay"
-						render={({ field }) => (
-							<FormItem>
-								<RefreshIcon />
-								<div className="flex flex-row items-center gap-1">
-									Retry
-									<Select>
-										<TextSelectTrigger>
-											<SelectValue placeholder="exponentially" />
-										</TextSelectTrigger>
-										<SelectContent>
-											<SelectGroup>
-												<SelectItem value="apple">Apple</SelectItem>
-												<SelectItem value="banana">Banana</SelectItem>
-												<SelectItem value="blueberry">Blueberry</SelectItem>
-												<SelectItem value="grapes">Grapes</SelectItem>
-												<SelectItem value="pineapple">Pineapple</SelectItem>
-											</SelectGroup>
-										</SelectContent>
-									</Select>
-									every
-									<Select>
-										<TextSelectTrigger>
-											<SelectValue placeholder="1 day" />
-										</TextSelectTrigger>
-										<SelectContent>
-											<SelectGroup>
-												<SelectItem value="apple">Apple</SelectItem>
-												<SelectItem value="banana">Banana</SelectItem>
-												<SelectItem value="blueberry">Blueberry</SelectItem>
-												<SelectItem value="grapes">Grapes</SelectItem>
-												<SelectItem value="pineapple">Pineapple</SelectItem>
-											</SelectGroup>
-										</SelectContent>
-									</Select>
-									up to
-									<Select>
-										<TextSelectTrigger>
-											<SelectValue placeholder="5" />
-										</TextSelectTrigger>
-										<SelectContent>
-											<SelectGroup>
-												<SelectItem value="5">Apple</SelectItem>
-												<SelectItem value="banana">Banana</SelectItem>
-												<SelectItem value="blueberry">Blueberry</SelectItem>
-												<SelectItem value="grapes">Grapes</SelectItem>
-												<SelectItem value="pineapple">Pineapple</SelectItem>
-											</SelectGroup>
-										</SelectContent>
-									</Select>
-									times
-								</div>
-							</FormItem>
-						)}
-					/> */}
-					<FormMessage />
-					<Button
-						type="submit"
-						disabled={createSource.status === "loading"}
-						loading={createSource.status === "loading"}
-					>
-						Update
-					</Button>
-				</form>
-			</Form>
-
+						),
+					},
+					delay: {
+						description: "Add a delay to your webhook delivery.",
+					},
+					retryCount: {
+						description: "Count of times a request should be retried when failing.",
+					},
+					retryDelay: {
+						description: "Delay between retries of requests.",
+					},
+					retryType: {
+						description: (
+							<span>
+								Type of retry, learn more{" "}
+								<Link className={buttonVariants({ variant: "link", size: "none" })} href="todo">
+									here
+								</Link>
+							</span>
+						),
+					},
+				}}
+			>
+				<Button
+					type="submit"
+					disabled={createSource.status === "loading"}
+					loading={createSource.status === "loading"}
+				>
+					Update
+				</Button>
+			</AutoForm>
 			<Dialog open={sourceModal} onOpenChange={setSourceModal}>
 				<DialogContent>
 					<CreateSourceForm
 						shouldRedirect={false}
 						onClose={(id) => {
 							setSourceModal(false)
-							form.setValue("publicSourceId", id, { shouldValidate: true })
+							setValues({ ...values, publicSourceId: id })
 						}}
 						action={createSourceAction}
 						integrations={integrations}
@@ -332,9 +234,7 @@ export function UpdateConnectionForm({
 					<CreateDestinationForm
 						onClose={(id) => {
 							setDestinationModal(false)
-							form.setValue("publiceDestinationId", id, {
-								shouldValidate: true,
-							})
+							setValues({ ...values, publiceDestinationId: id })
 						}}
 						shouldRedirect={false}
 						action={createDestinationAction}

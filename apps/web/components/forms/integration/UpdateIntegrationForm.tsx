@@ -29,7 +29,9 @@ export const UpdateIntegrationForm = ({
 	const { config, slug } = integration
 	const router = useRouter()
 
-	if (!config) return notFound()
+	if (!config) {
+		notFound()
+	}
 
 	const schema = createZodIntegrationSchema(integration.config!) as any
 
