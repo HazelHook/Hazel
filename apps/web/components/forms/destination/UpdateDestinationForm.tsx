@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation"
 import { Destination } from "db/src/drizzle/schema"
 
 import { useAction } from "@/server/client"
-import { Button } from "@/components/ui/button"
 import type { updateDestinationAction } from "@/server/actions/destination"
 import { updateDestinationSchema } from "@/lib/schemas/destination"
 import AutoForm from "@/components/ui/auto-form"
+import { LoadingButton } from "@/components/loading-button"
 
 export const UpdateDestinationForm = ({
 	destination,
@@ -61,13 +61,9 @@ export const UpdateDestinationForm = ({
 				},
 			}}
 		>
-			<Button
-				type="submit"
-				disabled={updateDestination.status === "loading"}
-				loading={updateDestination.status === "loading"}
-			>
+			<LoadingButton type="submit" loading={updateDestination.status === "loading"}>
 				Create
-			</Button>
+			</LoadingButton>
 		</AutoForm>
 	)
 }

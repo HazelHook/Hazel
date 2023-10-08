@@ -2,9 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { Destination, Integration, Source } from "db/src/drizzle/schema"
-import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { useAction } from "@/server/client"
@@ -26,6 +24,7 @@ import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
 import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
 import AutoForm from "@/components/ui/auto-form"
 import Link from "next/link"
+import { LoadingButton } from "@/components/loading-button"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction
@@ -207,13 +206,9 @@ export function UpdateConnectionForm({
 					},
 				}}
 			>
-				<Button
-					type="submit"
-					disabled={createSource.status === "loading"}
-					loading={createSource.status === "loading"}
-				>
+				<LoadingButton type="submit" loading={createSource.status === "loading"}>
 					Update
-				</Button>
+				</LoadingButton>
 			</AutoForm>
 			<Dialog open={sourceModal} onOpenChange={setSourceModal}>
 				<DialogContent>

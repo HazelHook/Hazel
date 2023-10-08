@@ -60,10 +60,20 @@ export function jsonToArray(obj: {
 }): Array<{ title: string; description: any }> {
 	const arr = []
 	for (const key in obj) {
-		// rome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
+		// biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
 		if (obj.hasOwnProperty(key)) {
 			arr.push({ title: key, description: obj[key] })
 		}
 	}
 	return arr
+}
+
+async function sleep(ms: number) {
+	return new Promise<void>((resolve) => setTimeout(resolve, ms))
+}
+
+export async function minDelay<T>(promise: Promise<T>, ms: number) {
+	const [p] = await Promise.all([promise, sleep(ms)])
+
+	return p
 }

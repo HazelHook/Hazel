@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { ReactNode } from "react"
 import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./form"
 import { ControllerRenderProps, DefaultValues, FieldValues, useFieldArray, useForm } from "react-hook-form"
@@ -10,7 +10,7 @@ import { Button } from "./button"
 import { Input } from "./input"
 import { Checkbox } from "./checkbox"
 import { DatePicker } from "./date-picker"
-import { cn } from "@/lib/utils"
+import { cn, minDelay } from "@/lib/utils"
 import { Switch } from "./switch"
 import { Textarea } from "./textarea"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion"
@@ -538,6 +538,7 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	children,
 	className,
 	toastValues,
+	minSubmitDelay = 1000,
 	defaultValues: cdefaultValues,
 }: {
 	formSchema: SchemaType
@@ -546,9 +547,10 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	onParsedValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
 	onSubmit?: (values: z.infer<SchemaType>) => Promise<unknown>
 	fieldConfig?: FieldConfig<z.infer<SchemaType>>
-	children?: React.ReactNode
+	children?: ReactNode | ((minSubmitDelay: number) => ReactNode)
 	defaultValues?: any
 	className?: string
+	minSubmitDelay?: number
 	toastValues?: {
 		loading: string
 		success: string
@@ -570,7 +572,7 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 		const parsedValues = formSchema.safeParse(values)
 		if (parsedValues.success) {
 			if (onSubmitProp) {
-				toast.promise(onSubmitProp(parsedValues.data), {
+				toast.promise(minDelay(onSubmitProp(parsedValues.data), minSubmitDelay), {
 					loading: toastValues?.loading || "Saving Data...",
 					success: toastValues?.success || "Sucessfully Saved",
 					error:
@@ -599,7 +601,7 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 			>
 				<AutoFormObject schema={objectFormSchema} form={form} fieldConfig={fieldConfig} />
 
-				{children}
+				{typeof children === "function" ? children?.(minSubmitDelay) : children}
 			</form>
 		</Form>
 	)
