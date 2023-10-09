@@ -1,4 +1,4 @@
-import { cookies, headers } from "next/headers"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import getSupabaseServerClient from "@/core/supabase/server-client"
 import requireSession from "@/lib/user/require-session"
@@ -6,8 +6,6 @@ import db from "@/lib/db"
 import configuration from "@/configuration"
 import { Container } from "@/components/ui/container"
 import { switchOrganizationAction } from "@/server/actions/organization"
-import { LogoIcon } from "@/components/icons/Logo"
-import Heading from "@/components/ui/heading"
 import { CreateOrg } from "./components/CreateOrg"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Card } from "@/components/ui/card"
@@ -37,8 +35,6 @@ async function OrganizationsPage() {
 
 	const memberships = await db.organization.memberships.getMany({ customerId: user.id })
 
-	const csrfToken = headers().get("X-CSRF-Token") ?? ""
-
 	if (memberships.length === 1) {
 		const organization = memberships[0].organization
 
@@ -48,53 +44,26 @@ async function OrganizationsPage() {
 	}
 
 	return (
-		<div className={"flex flex-col space-y-8"}>
-			<OrganizationsPageHeader />
-
-			<Container>
-				<div className="h-full w-full flex justify-center items-center">
-					<Card className={"w-[300px]"}>
-						{/* <NewOrganizationButtonContainer csrfToken={csrfToken} /> */}
-						{memberships.map((membership) => {
-							return (
-								<OrgButton
-									key={membership.publicId}
-									switchTeamAction={switchOrganizationAction}
-									avatarUrl={getSeededProfileImageUrl(membership.organization.publicId)}
-									name={membership.organization.name}
-									membershipId={membership.publicId}
-									role="TODO"
-								/>
-							)
-						})}
-						<CreateOrg />
-					</Card>
-				</div>
-			</Container>
-		</div>
+		<Container>
+			<div className="h-full w-full flex justify-center items-center">
+				<Card className={"w-[300px]"}>
+					{memberships.map((membership) => {
+						return (
+							<OrgButton
+								key={membership.publicId}
+								switchTeamAction={switchOrganizationAction}
+								avatarUrl={getSeededProfileImageUrl(membership.organization.publicId)}
+								name={membership.organization.name}
+								membershipId={membership.publicId}
+								role="TODO"
+							/>
+						)
+					})}
+					<CreateOrg />
+				</Card>
+			</div>
+		</Container>
 	)
 }
 
 export default OrganizationsPage
-
-function OrganizationsPageHeader() {
-	return (
-		<div className="flex flex-1 items-center justify-between border-b border-gray-50 p-4 dark:border-dark-700">
-			<div className={"flex w-full flex-1 justify-between"}>
-				<div className={"flex items-center justify-between space-x-4 lg:space-x-0"}>
-					<div className={"flex items-center space-x-2 lg:space-x-4 xl:space-x-6"}>
-						<LogoIcon />
-
-						<Heading type={5}>
-							<span className={"flex items-center space-x-0.5 lg:space-x-2"}>
-								<span className={"lg:text-initial text-base font-medium dark:text-white"}>
-									Your Organizations
-								</span>
-							</span>
-						</Heading>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
-}
