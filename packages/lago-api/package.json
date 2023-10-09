@@ -1,0 +1,22 @@
+{
+	"name": "@hazel/lago",
+	"version": "0.0.1",
+	"main": "./index.ts",
+	"types": "./index.ts",
+	"scripts": {
+		"lint": "eslint \"**/*.ts*\"",
+		"generate:schema": "openapi-typescript http://swagger.getlago.com/openapi.yaml -o ./schema.d.ts"
+	},
+	"devDependencies": {
+		"@types/node": "^20.8.4",
+		"@types/react": "^18.2.27",
+		"@types/react-dom": "18.2.12",
+		"openapi-typescript": "^6.7.0",
+		"react": "^18.2.0",
+		"tsconfig": "workspace:*",
+		"typescript": "^5.2.2"
+	},
+	"dependencies": {
+		"openapi-fetch": "^0.7.10"
+	}
+}

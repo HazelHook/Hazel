@@ -12,7 +12,7 @@ const nextConfig = {
 		serverActions: true,
 		serverComponentsExternalPackages: ["@trpc/server"],
 	},
-	transpilePackages: ["ui"],
+	transpilePackages: ["ui", "db", "@hazel/lago"],
 	webpack: (config, { isServer }) => {
 		if (config.name === "server" || config.name === "edge-server") config.optimization.concatenateModules = false
 

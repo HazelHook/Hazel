@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@hazel/email": "workspace:*",
+		"@hazel/lago": "workspace:*",
 		"@hookform/resolvers": "^3.3.1",
 		"@ngneat/falso": "^7.1.1",
 		"@radix-ui/react-accordion": "^1.1.2",
