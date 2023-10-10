@@ -13,7 +13,9 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { useI18n } from "@/i18n/client"
 
-const EmailLinkAuth: React.FC = () => {
+const EmailLinkAuth: React.FC<{
+	inviteCode?: string
+}> = ({ inviteCode }) => {
 	const t = useI18n()
 	const signInWithOtpMutation = useSignInWithOtp()
 
@@ -26,7 +28,9 @@ const EmailLinkAuth: React.FC = () => {
 			const email = data.get("email") as string
 
 			const origin = window.location.origin
-			const redirectUrl = [origin, configuration.paths.authCallback].join("")
+			const queryParams = inviteCode ? `?inviteCode=${inviteCode}` : ""
+
+			const redirectUrl = [origin, configuration.paths.authCallback, queryParams].join("")
 
 			const promise = signInWithOtpMutation.trigger({
 				email,

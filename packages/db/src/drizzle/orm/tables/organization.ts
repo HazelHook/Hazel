@@ -72,6 +72,20 @@ const organizationsLogic = (db: DB) =>
 			return { publicId }
 		},
 		invite: {
+			get: async ({
+				publicId,
+			}: {
+				publicId: string
+			}) => {
+				const invite = db.query.organizationInvites.findFirst({
+					where: eq(schema.organizationInvites.publicId, publicId),
+					with: {
+						organization: true,
+					},
+				})
+
+				return invite
+			},
 			getMany: async ({
 				orgId,
 			}: {
@@ -101,6 +115,14 @@ const organizationsLogic = (db: DB) =>
 			},
 		},
 		memberships: {
+			create: async (data: Omit<schema.InsertOrganizationMember, "publicId">) => {
+				const publicId = generatePublicId("mem")
+				const res = await db.insert(schema.organizationMembers).values({
+					...data,
+					publicId,
+				})
+				return { res, publicId }
+			},
 			getOne: async ({
 				membershipId,
 			}: {

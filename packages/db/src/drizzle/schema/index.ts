@@ -213,6 +213,13 @@ export const organizationMemberRelations = relations(organizationMembers, ({ one
 	}),
 }))
 
+export const organizationInviteRelations = relations(organizationInvites, ({ one }) => ({
+	organization: one(organizations, {
+		fields: [organizationInvites.organizationId],
+		references: [organizations.id],
+	}),
+}))
+
 export const sourceRelations = relations(source, ({ many, one }) => ({
 	connections: many(connection),
 	integration: one(integration, {

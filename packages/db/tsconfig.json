@@ -1,14 +1,14 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "lib": ["esnext"],
-    "jsx": "react-jsx",
-    "incremental": true,
-    "jsxImportSource": "hono/jsx"
-  }
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"lib": ["esnext", "DOM"],
+		"jsx": "react-jsx",
+		"incremental": true,
+		"jsxImportSource": "hono/jsx"
+	}
 }

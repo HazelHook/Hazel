@@ -1,10 +1,11 @@
 "use server"
 
 import { z } from "zod"
-import { createAction, protectedProcedure } from "../trpc"
+import { basicProtectedProcedure, createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
 import { orgInviteFormSchema } from "@/lib/schemas/organization"
 import { serverClient } from "../server"
+import { TRPCError } from "@trpc/server"
 
 // import { Resend } from "resend"
 // import { OrganizationInviteEmail } from "@/lib/emails/organization/Invite"
@@ -56,6 +57,38 @@ export const createOrganizationInvite = createAction(
 				email: opts.input.email,
 				organizationId: opts.ctx.auth.workspaceId,
 				id: invitation.publicId,
+			}
+		}),
+)
+
+export const acceptOrganizationInvite = createAction(
+	basicProtectedProcedure
+		.input(
+			z.object({
+				inviteId: z.string(),
+			}),
+		)
+		.mutation(async (opts) => {
+			const invitation = await db.organization.invite.get({
+				publicId: opts.input.inviteId,
+			})
+
+			if (!invitation) {
+				throw new TRPCError({ message: "Invitiation with code doesn't exist", code: "NOT_FOUND" })
+			}
+
+			if (opts.ctx.auth.user.email !== invitation.email) {
+				throw new TRPCError({ message: "Email doesn't match the invite link", code: "FORBIDDEN" })
+			}
+
+			await db.organization.memberships.create({
+				userId: opts.ctx.auth.user.id,
+				organizationId: invitation.organizationId,
+				role: invitation.role,
+			})
+
+			return {
+				organizationId: opts.ctx.auth.workspaceId,
 			}
 		}),
 )
