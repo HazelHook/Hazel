@@ -1,29 +1,16 @@
 import { AvatarImage, Avatar } from "@/components/ui/avatar"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { api } from "@/server/client"
 import { User } from "@supabase/supabase-js"
-import { useEffect, useState } from "react"
 
-export const UserCell = ({ userId }: { userId: string }) => {
-	const [user, setUser] = useState<User>()
-
-	const fetchData = async (userId: string) => {
-		const user = await api.getUser.query({ userId })
-		setUser(user)
-	}
-
-	useEffect(() => {
-		fetchData(userId)
-	}, [userId])
-
+export const UserCell = ({ user }: { user: User }) => {
 	return (
 		<div className="flex flex-row gap-2">
 			<Avatar>
-				<AvatarImage src={getSeededProfileImageUrl(userId)} />
+				<AvatarImage src={getSeededProfileImageUrl(user.id)} />
 			</Avatar>
 			<div>
-				{user ? <p>{user?.app_metadata.username?.toUpperCase()}</p> : <p>Loading...</p>}
-				<p className="text-muted-foreground">{userId}</p>
+				{user ? <p>{(user as any).raw_user_meta_data?.user_name?.toUpperCase()}</p> : <p>Loading...</p>}
+				<p className="text-muted-foreground">{user.id}</p>
 			</div>
 		</div>
 	)

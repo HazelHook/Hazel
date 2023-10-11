@@ -1,4 +1,4 @@
-import { InferModel, relations } from "drizzle-orm"
+import { InferInsertModel, InferModel, InferSelectModel, relations } from "drizzle-orm"
 
 import {
 	boolean,
@@ -244,29 +244,29 @@ export const connectionRelations = relations(connection, ({ one }) => ({
 	}),
 }))
 
-export type InsertUser = InferModel<typeof user, "insert">
-export type User = InferModel<typeof user, "select">
+export type InsertUser = InferInsertModel<typeof user>
+export type User = InferSelectModel<typeof user>
 
-export type InsertConnection = InferModel<typeof connection, "insert">
-export type Connection = InferModel<typeof connection, "select">
+export type InsertConnection = InferModel<typeof connection>
+export type Connection = InferSelectModel<typeof connection>
 
-export type InsertDestination = InferModel<typeof destination, "insert">
-export type Destination = InferModel<typeof destination, "select">
+export type InsertDestination = InferInsertModel<typeof destination>
+export type Destination = InferSelectModel<typeof destination>
 
-export type InsertSource = InferModel<typeof source, "insert">
-export type Source = InferModel<typeof source, "select">
+export type InsertSource = InferInsertModel<typeof source>
+export type Source = InferSelectModel<typeof source>
 
-export type InsertIntegration = InferModel<typeof integration, "insert">
-export type Integration = InferModel<typeof integration, "select">
+export type InsertIntegration = InferInsertModel<typeof integration>
+export type Integration = InferSelectModel<typeof integration>
 
-export type InsertApiKey = InferModel<typeof apiKeys, "insert">
-export type ApiKey = InferModel<typeof apiKeys, "select">
+export type InsertApiKey = InferInsertModel<typeof apiKeys>
+export type ApiKey = InferSelectModel<typeof apiKeys>
 
-export type InsertOrganization = InferModel<typeof organizations, "insert">
-export type Organization = InferModel<typeof organizations, "select">
+export type InsertOrganization = InferInsertModel<typeof organizations>
+export type Organization = InferSelectModel<typeof organizations>
 
-export type InsertOrganizationInvite = InferModel<typeof organizationInvites, "insert">
-export type OrganizationInvite = InferModel<typeof organizationInvites, "select">
+export type InsertOrganizationInvite = InferInsertModel<typeof organizationInvites>
+export type OrganizationInvite = InferSelectModel<typeof organizationInvites>
 
-export type InsertOrganizationMember = InferModel<typeof organizationMembers, "insert">
-export type OrganizationMember = InferModel<typeof organizationMembers, "select">
+export type InsertOrganizationMember = InferInsertModel<typeof organizationMembers>
+export type OrganizationMember = InferSelectModel<typeof organizationMembers>

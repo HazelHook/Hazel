@@ -2,7 +2,6 @@ import "@/styles/global.css"
 
 import { Metadata } from "next"
 
-import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import NextProgress from "@/components/NProgress"
@@ -10,13 +9,14 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "sonner"
 import AuthProvider from "@/lib/provider/AuthProvider"
+import configuration from "@/configuration"
 
 export const metadata: Metadata = {
 	title: {
-		default: siteConfig.name,
-		template: `%s - ${siteConfig.name}`,
+		default: configuration.site.name,
+		template: `%s - ${configuration.site.name}`,
 	},
-	description: siteConfig.description,
+	description: configuration.site.description,
 	themeColor: [
 		{ media: "(prefers-color-scheme: light)", color: "white" },
 		{ media: "(prefers-color-scheme: dark)", color: "black" },

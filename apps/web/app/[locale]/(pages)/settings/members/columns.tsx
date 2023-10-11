@@ -6,15 +6,17 @@ import { RoleSelect } from "./_components/RoleSelect"
 import { MemberOptions } from "./_components/MemberOptions"
 import { OrganizationMember } from "db/src/drizzle/schema"
 import { UserCell } from "./_components/UserCell"
+import { AugmentedMember } from "./page"
+import { User } from "@supabase/supabase-js"
 
-export const columns: ColumnDef<OrganizationMember>[] = [
+export const columns: ColumnDef<AugmentedMember>[] = [
 	{
-		accessorKey: "customerId",
+		accessorKey: "user",
 		id: "name",
 		header: "Name",
 		cell: ({ cell }) => {
-			const userId = cell.getValue() as string
-			return <UserCell userId={userId} />
+			const user = cell.getValue() as User
+			return <UserCell user={user} />
 		},
 	},
 	{
