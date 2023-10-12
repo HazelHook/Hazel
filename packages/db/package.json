@@ -19,7 +19,6 @@
 		"@types/node": "^20.8.4",
 		"bun-types": "latest",
 		"dotenv": "^16.3.1",
-		"drizzle-kit": "^0.19.13",
-		"typescript": "5.2.2"
+		"drizzle-kit": "^0.19.13"
 	}
 }

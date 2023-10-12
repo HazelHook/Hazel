@@ -38,7 +38,10 @@ export const columns: ColumnDef<Column>[] = [
 			const destinationId = cell.getValue() as string
 
 			return (
-				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/destination/${destinationId}`}>
+				<Link
+					className={buttonVariants({ variant: "link", size: "none" })}
+					href={`/destination/${destinationId}`}
+				>
 					{destinationId}
 				</Link>
 			)
@@ -69,7 +72,7 @@ export const columns: ColumnDef<Column>[] = [
 					<DropdownMenuContent align="end">
 						<DropdownMenuLabel>Actions</DropdownMenuLabel>
 						<DropdownMenuItem>View Request</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.id)}>
+						<DropdownMenuItem onClick={() => window.clipboard.writeText(request.id)}>
 							Copy request ID
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />
