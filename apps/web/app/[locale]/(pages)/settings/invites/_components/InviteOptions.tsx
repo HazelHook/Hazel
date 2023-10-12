@@ -47,7 +47,7 @@ export const InviteOptions = ({ emailAdress, revokeAction, inviteId }: InviteOpt
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => navigator.clipboard.writeText(emailAdress)}>
+				<DropdownMenuItem onClick={() => (navigator as any).clipboard.writeText(emailAdress)}>
 					<ClipboardIcon className="mr-2" />
 					<span>Copy Email Adress</span>
 				</DropdownMenuItem>

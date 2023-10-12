@@ -52,7 +52,10 @@ export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAct
 				<Input
 					placeholder="Filter members..."
 					value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-					onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
+					onChange={(event: any) => {
+						console.log(event.target.value)
+						table.getColumn("name")?.setFilterValue(event.target.value)
+					}}
 					className="max-w-sm"
 				/>
 				<OrganizationInviteModal orgId={orgId} inviteAction={createInviteAction}>
@@ -72,7 +75,10 @@ export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAct
 										<TableHead key={header.id}>
 											{header.isPlaceholder
 												? null
-												: (flexRender(header.column.columnDef.header, header.getContext()) as ReactNode)}
+												: (flexRender(
+														header.column.columnDef.header,
+														header.getContext(),
+												  ) as ReactNode)}
 										</TableHead>
 									)
 								})}

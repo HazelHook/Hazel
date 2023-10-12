@@ -1,4 +1,4 @@
-import { DataTable } from "./dataTable"
+import { DataTable } from "./data-table"
 import { columns } from "./columns"
 import db from "@/lib/db"
 import { auth } from "@/lib/auth"

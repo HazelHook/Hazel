@@ -17,8 +17,10 @@
 		"rome": "12.1.3",
 		"tsup": "7.2.0",
 		"turbo": "1.10.15",
+		"@biomejs/biome": "^1.2.2",
 		"typescript": "5.2.2"
 	},
 	"packageManager": "pnpm@8.6.5",
-	"workspaces": ["apps/backend", "packages/db", "apps/api"]
+	"workspaces": ["apps/backend", "packages/db", "apps/api"],
+	"dependencies": {}
 }

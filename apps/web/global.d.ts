@@ -41,6 +41,13 @@ declare global {
 			resetDatabase(): void
 		}
 	}
+
+	interface Navigator {
+		clipboard: {
+			writeText(newClipText: string): Promise<void>
+			readText(): Promise<string>
+		}
+	}
 }
 
 declare module "react" {

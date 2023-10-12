@@ -32,9 +32,9 @@
 		"tailwind-merge": "^1.13.2"
 	},
 	"devDependencies": {
-		"@builder.io/qwik": "^1.2.2",
-		"@types/react": "^18.2.25",
-		"@types/react-dom": "18.2.10",
+		"@builder.io/qwik": "^1.2.13",
+		"@types/react": "^18.2.28",
+		"@types/react-dom": "18.2.13",
 		"react": "^18.2.0",
 		"tsconfig": "workspace:*"
 	}

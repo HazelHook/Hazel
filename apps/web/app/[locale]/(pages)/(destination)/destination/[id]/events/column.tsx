@@ -57,7 +57,7 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 					<DropdownMenuContent align="end">
 						<DropdownMenuLabel>Actions</DropdownMenuLabel>
 						<DropdownMenuItem>View Request</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.id)}>
+						<DropdownMenuItem onClick={() => (navigator as any).clipboard.writeText(request.id)}>
 							Copy request ID
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />

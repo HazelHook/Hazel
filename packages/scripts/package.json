@@ -63,8 +63,8 @@
 		"yoga-wasm-web": "~0.3.3"
 	},
 	"devDependencies": {
-		"@types/node": "^20.8.2",
-		"@types/react": "^18.2.25",
+		"@types/node": "^20.8.5",
+		"@types/react": "^18.2.28",
 		"ts-node": "^10.9.1"
 	}
 }
