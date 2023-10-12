@@ -1,5 +1,5 @@
 import Alert from "@/components/ui/alert"
-import { useScopedI18n } from "@/i18n/client"
+import { useI18n, useScopedI18n } from "@/i18n/client"
 import { AuthError } from "@supabase/supabase-js"
 
 /**
@@ -15,21 +15,21 @@ export default function AuthErrorMessage({
 }: {
 	error: Maybe<Error | AuthError | unknown>
 }) {
-	const t = useScopedI18n("auth")
+	const t = useI18n()
 
 	if (!error) {
 		return null
 	}
 
-	const DefaultError = t("errors.default")
+	const DefaultError = t("auth.errors.default")
 	const errorCode = error instanceof AuthError ? error.message : error
 
 	return (
 		<Alert className={"w-full"} type={"error"}>
-			<Alert.Heading>{t("errorAlertHeading")}</Alert.Heading>
+			<Alert.Heading>{t("auth.errorAlertHeading")}</Alert.Heading>
 
 			<p className={"text-sm font-medium"} data-cy={"auth-error-message"}>
-				{t(`errors.${errorCode as any}` as any) || DefaultError}
+				{t(`auth.errors.${errorCode as any}` as any, {}) || DefaultError}
 			</p>
 		</Alert>
 	)

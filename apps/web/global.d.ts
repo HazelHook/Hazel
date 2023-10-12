@@ -30,7 +30,7 @@ declare global {
 
 	namespace Cypress {
 		interface Chainable {
-			cyGet(name: string): Chainable<JQuery>
+			// cyGet(name: string): Chainable<JQuery>
 
 			signIn(redirectPath?: string, credentials?: { email: string; password: string }): void
 
@@ -39,13 +39,6 @@ declare global {
 			signOutSession(): void
 
 			resetDatabase(): void
-		}
-	}
-
-	interface Navigator {
-		clipboard: {
-			writeText(newClipText: string): Promise<void>
-			readText(): Promise<string>
 		}
 	}
 }

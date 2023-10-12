@@ -24,10 +24,11 @@ const EmailLinkAuth: React.FC<{
 			event.preventDefault()
 
 			const target = event.currentTarget
-			const data = new FormData(target)
+			const data = (new FormData() as any)(target as any)
 			const email = data.get("email") as string
 
-			const origin = window.location.origin
+			// @ts-ignore
+			const origin = (window as any).location.origin
 			const queryParams = inviteCode ? `?inviteCode=${inviteCode}` : ""
 
 			const redirectUrl = [origin, configuration.paths.authCallback, queryParams].join("")

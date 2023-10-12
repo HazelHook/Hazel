@@ -39,12 +39,15 @@ export const MemberOptions = ({ members, memberId, orgId }: MemberOptionsProps) 
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => navigator.clipboard.writeText(memberId)}>
+				<DropdownMenuItem onClick={() => (navigator as any).clipboard.writeText(memberId)}>
 					<ClipboardIcon className="mr-2" />
 					<span>Copy user ID</span>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem disabled={activeMember?.role !== "admin" || memberId === user?.id} onClick={handleKick}>
+				<DropdownMenuItem
+					disabled={activeMember?.role !== "admin" || memberId === user?.id}
+					onClick={handleKick}
+				>
 					<FolderRemoveIcon className="mr-2 text-destructive" />
 					<span>Remove member</span>
 				</DropdownMenuItem>
