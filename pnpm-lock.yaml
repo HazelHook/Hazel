@@ -16,12 +16,15 @@ importers:
         version: 4.1.1(prettier@3.0.3)
       '@turbo/gen':
         specifier: 1.10.15
-        version: 1.10.15(@types/node@20.8.5)(typescript@5.1.6)
+        version: 1.10.15(@types/node@20.8.5)(typescript@5.2.2)
+      '@types/node':
+        specifier: ^20.8.5
+        version: 20.8.5
       '@types/react':
-        specifier: 18.2.28
+        specifier: ^18.2.28
         version: 18.2.28
       '@types/react-dom':
-        specifier: 18.2.13
+        specifier: ^18.2.13
         version: 18.2.13
       prettier:
         specifier: 3.0.3
@@ -31,13 +34,13 @@ importers:
         version: 12.1.3
       tsup:
         specifier: 7.2.0
-        version: 7.2.0(typescript@5.1.6)
+        version: 7.2.0(typescript@5.2.2)
       turbo:
-        specifier: 1.10.15
+        specifier: ^1.10.15
         version: 1.10.15
       typescript:
-        specifier: 5.1.6
-        version: 5.1.6
+        specifier: ^5.2.2
+        version: 5.2.2
 
   apps/api:
     dependencies:
@@ -61,7 +64,7 @@ importers:
         version: link:../../packages/db
       elysia:
         specifier: latest
-        version: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6)
+        version: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.2.2)
     devDependencies:
       bun-types:
         specifier: latest
@@ -92,7 +95,7 @@ importers:
         version: 0.27.2(@planetscale/database@1.8.0)(bun-types@1.0.5-canary.20231009T140142)
       elysia:
         specifier: latest
-        version: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6)
+        version: 0.5.23(@sinclair/typebox@0.29.4)(typescript@5.2.2)
       nanoid:
         specifier: ^4.0.2
         version: 4.0.2
@@ -377,15 +380,12 @@ importers:
       '@tailwindcss/container-queries':
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.3.3)
-      '@types/node':
-        specifier: ^20.8.5
-        version: 20.8.5
       '@types/nprogress':
         specifier: ^0.2.1
         version: 0.2.1
       '@typescript-eslint/parser':
         specifier: ^6.7.5
-        version: 6.7.5(eslint@8.50.0)(typescript@5.1.6)
+        version: 6.7.5(eslint@8.50.0)(typescript@5.2.2)
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.16(postcss@8.4.31)
@@ -404,9 +404,6 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.3.3)
-      typescript:
-        specifier: 5.1.6
-        version: 5.1.6
 
   apps/worker:
     dependencies:
@@ -448,9 +445,6 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
-      '@types/node':
-        specifier: ^20.8.5
-        version: 20.8.5
       dotenv:
         specifier: ^16.3.1
         version: 16.3.1
@@ -635,15 +629,9 @@ importers:
         specifier: ~0.3.3
         version: 0.3.3
     devDependencies:
-      '@types/node':
-        specifier: ^20.8.5
-        version: 20.8.5
-      '@types/react':
-        specifier: ^18.2.28
-        version: 18.2.28
       ts-node:
         specifier: ^10.9.1
-        version: 10.9.1(@types/node@20.8.5)(typescript@5.1.6)
+        version: 10.9.1(@types/node@20.8.5)(typescript@5.2.2)
 
   packages/tsconfig: {}
 
@@ -1423,7 +1411,7 @@ packages:
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6)
+      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.2.2)
     dev: false
 
   /@elysiajs/fn@0.5.2(elysia@0.5.23):
@@ -1435,7 +1423,7 @@ packages:
       superjson:
         optional: true
     dependencies:
-      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6)
+      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.2.2)
     dev: false
 
   /@elysiajs/swagger@0.5.2(elysia@0.5.23):
@@ -1443,7 +1431,7 @@ packages:
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6)
+      elysia: 0.5.23(@elysiajs/fn@0.5.2)(typescript@5.2.2)
     dev: false
 
   /@emmetio/abbreviation@2.3.3:
@@ -4467,7 +4455,7 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: true
 
-  /@turbo/gen@1.10.15(@types/node@20.8.5)(typescript@5.1.6):
+  /@turbo/gen@1.10.15(@types/node@20.8.5)(typescript@5.2.2):
     resolution: {integrity: sha512-nvCiw2Como/K1LfqBQBpp+IiFEWQtlhx5f6iXIpmioj2DtVTg+RmyQM+5nIqbi8iaXg3zaF5vQo29bTyuohUuw==}
     hasBin: true
     dependencies:
@@ -4479,7 +4467,7 @@ packages:
       minimatch: 9.0.3
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.1(@types/node@20.8.5)(typescript@5.1.6)
+      ts-node: 10.9.1(@types/node@20.8.5)(typescript@5.2.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -4721,7 +4709,7 @@ packages:
   /@types/yargs-parser@21.0.1:
     resolution: {integrity: sha512-axdPBuLuEJt0c4yI5OZssC19K2Mq1uKdrfZBzuxLvaztgqUtFYZUNw7lETExPYJR9jdEoIg4mb7RQKRQzOkeGQ==}
 
-  /@typescript-eslint/parser@6.7.5(eslint@8.50.0)(typescript@5.1.6):
+  /@typescript-eslint/parser@6.7.5(eslint@8.50.0)(typescript@5.2.2):
     resolution: {integrity: sha512-bIZVSGx2UME/lmhLcjdVc7ePBwn7CLqKarUBL4me1C5feOd663liTGjMBGVcGr+BhnSLeP4SgwdvNnnkbIdkCw==}
     engines: {node: ^16.0.0 || >=18.0.0}
     peerDependencies:
@@ -4733,11 +4721,11 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 6.7.5
       '@typescript-eslint/types': 6.7.5
-      '@typescript-eslint/typescript-estree': 6.7.5(typescript@5.1.6)
+      '@typescript-eslint/typescript-estree': 6.7.5(typescript@5.2.2)
       '@typescript-eslint/visitor-keys': 6.7.5
       debug: 4.3.4
       eslint: 8.50.0
-      typescript: 5.1.6
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4755,7 +4743,7 @@ packages:
     engines: {node: ^16.0.0 || >=18.0.0}
     dev: true
 
-  /@typescript-eslint/typescript-estree@6.7.5(typescript@5.1.6):
+  /@typescript-eslint/typescript-estree@6.7.5(typescript@5.2.2):
     resolution: {integrity: sha512-NhJiJ4KdtwBIxrKl0BqG1Ur+uw7FiOnOThcYx9DpOGJ/Abc9z2xNzLeirCG02Ig3vkvrc2qFLmYSSsaITbKjlg==}
     engines: {node: ^16.0.0 || >=18.0.0}
     peerDependencies:
@@ -4770,8 +4758,8 @@ packages:
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.5.4
-      ts-api-utils: 1.0.1(typescript@5.1.6)
-      typescript: 5.1.6
+      ts-api-utils: 1.0.1(typescript@5.2.2)
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5146,7 +5134,7 @@ packages:
       kleur: 4.1.5
       magic-string: 0.30.4
       mime: 3.0.0
-      network-information-types: 0.1.1(typescript@5.1.6)
+      network-information-types: 0.1.1(typescript@5.2.2)
       ora: 6.3.1
       p-limit: 4.0.0
       path-to-regexp: 6.2.1
@@ -5160,7 +5148,7 @@ packages:
       string-width: 5.1.2
       strip-ansi: 7.1.0
       tsconfig-resolver: 3.0.1
-      typescript: 5.1.6
+      typescript: 5.2.2
       unist-util-visit: 4.1.2
       vfile: 5.3.7
       vite: 4.4.11(@types/node@20.8.5)
@@ -6443,7 +6431,7 @@ packages:
   /electron-to-chromium@1.4.542:
     resolution: {integrity: sha512-6+cpa00G09N3sfh2joln4VUXHquWrOFx3FLZqiVQvl45+zS9DskDBTPvob+BhvFRmTBkyDSk0vvLMMRo/qc6mQ==}
 
-  /elysia@0.5.23(@elysiajs/fn@0.5.2)(typescript@5.1.6):
+  /elysia@0.5.23(@elysiajs/fn@0.5.2)(typescript@5.2.2):
     resolution: {integrity: sha512-y174lgobsKDjk6dFTznydxIJZwVq99FrFo3fHwYJ8n0R7YAWo51JJLJS1rjTfVL//J2Rca42ooCgSSTpO+EGfw==}
     peerDependencies:
       '@elysiajs/fn': '*'
@@ -6465,10 +6453,10 @@ packages:
       fast-querystring: 1.1.2
       lodash.clonedeep: 4.5.0
       memoirist: 0.1.4
-      typescript: 5.1.6
+      typescript: 5.2.2
     dev: false
 
-  /elysia@0.5.23(@sinclair/typebox@0.29.4)(typescript@5.1.6):
+  /elysia@0.5.23(@sinclair/typebox@0.29.4)(typescript@5.2.2):
     resolution: {integrity: sha512-y174lgobsKDjk6dFTznydxIJZwVq99FrFo3fHwYJ8n0R7YAWo51JJLJS1rjTfVL//J2Rca42ooCgSSTpO+EGfw==}
     peerDependencies:
       '@elysiajs/fn': '*'
@@ -6490,7 +6478,7 @@ packages:
       fast-querystring: 1.1.2
       lodash.clonedeep: 4.5.0
       memoirist: 0.1.4
-      typescript: 5.1.6
+      typescript: 5.2.2
     dev: false
 
   /emmet@2.4.6:
@@ -9179,12 +9167,12 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
-  /network-information-types@0.1.1(typescript@5.1.6):
+  /network-information-types@0.1.1(typescript@5.2.2):
     resolution: {integrity: sha512-mLXNafJYOkiJB6IlF727YWssTRpXitR+tKSLyA5VAdBi3SOvLf5gtizHgxf241YHPWocnAO/fAhVrB/68tPHDw==}
     peerDependencies:
       typescript: '>= 3.0.0'
     dependencies:
-      typescript: 5.1.6
+      typescript: 5.2.2
 
   /next-international@1.1.2:
     resolution: {integrity: sha512-WLWNmKet7Ln7QDzwBrQNOX27R3RPCP+2XhqL9pSo3aKyO/f/N1zX9k7srM1YnPzACUIWUKptYB0teqTaPiIq/g==}
@@ -11667,19 +11655,19 @@ packages:
   /trough@2.1.0:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
 
-  /ts-api-utils@1.0.1(typescript@5.1.6):
+  /ts-api-utils@1.0.1(typescript@5.2.2):
     resolution: {integrity: sha512-lC/RGlPmwdrIBFTX59wwNzqh7aR2otPNPR/5brHZm/XKFYKsfqxihXUe9pU3JI+3vGkl+vyCoNNnPhJn3aLK1A==}
     engines: {node: '>=16.13.0'}
     peerDependencies:
       typescript: '>=4.2.0'
     dependencies:
-      typescript: 5.1.6
+      typescript: 5.2.2
     dev: true
 
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.1(@types/node@20.8.5)(typescript@5.1.6):
+  /ts-node@10.9.1(@types/node@20.8.5)(typescript@5.2.2):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -11705,7 +11693,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.1.6
+      typescript: 5.2.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
@@ -11735,7 +11723,7 @@ packages:
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  /tsup@7.2.0(typescript@5.1.6):
+  /tsup@7.2.0(typescript@5.2.2):
     resolution: {integrity: sha512-vDHlczXbgUvY3rWvqFEbSqmC1L7woozbzngMqTtL2PGBODTtWlRwGDDawhvWzr5c1QjKe4OAKqJGfE1xeXUvtQ==}
     engines: {node: '>=16.14'}
     hasBin: true
@@ -11765,7 +11753,7 @@ packages:
       source-map: 0.8.0-beta.0
       sucrase: 3.34.0
       tree-kill: 1.2.2
-      typescript: 5.1.6
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -11904,8 +11892,8 @@ packages:
       is-typedarray: 1.0.0
     dev: false
 
-  /typescript@5.1.6:
-    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
     hasBin: true
 
