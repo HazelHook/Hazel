@@ -23,6 +23,7 @@ function PasswordResetContainer() {
 		async (event: FormEvent<HTMLFormElement>) => {
 			event.preventDefault()
 
+			// @ts-ignore
 			const data = new FormData(event.currentTarget)
 			const email = data.get("email") as string
 			const redirectTo = getReturnUrl()
@@ -78,6 +79,7 @@ export default PasswordResetContainer
  * their password
  */
 function getReturnUrl() {
+	// @ts-ignore
 	const host = window.location.origin
 	const callback = configuration.paths.authCallback
 

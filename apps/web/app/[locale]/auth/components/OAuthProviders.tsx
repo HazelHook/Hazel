@@ -50,6 +50,7 @@ const OAuthProviders: React.FCC<{
 								key={provider}
 								providerId={provider}
 								onClick={() => {
+									// @ts-ignore
 									const origin = window.location.origin
 									const callback = configuration.paths.authCallback
 
