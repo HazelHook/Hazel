@@ -1,5 +1,5 @@
 import Alert from "@/components/ui/alert"
-import { useI18n, useScopedI18n } from "@/i18n/client"
+import { useI18n } from "@/i18n/client"
 import { AuthError } from "@supabase/supabase-js"
 
 /**

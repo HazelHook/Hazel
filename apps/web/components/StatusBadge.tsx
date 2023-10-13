@@ -1,7 +1,7 @@
 import { match } from "ts-pattern"
-import { cn } from "ui"
 
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 
 interface StatusProps {
 	status: "error" | "success" | "pending"

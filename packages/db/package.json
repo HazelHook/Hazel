@@ -17,6 +17,7 @@
 	},
 	"devDependencies": {
 		"dotenv": "^16.3.1",
+		"typescript": "^5.2.2",
 		"drizzle-kit": "^0.19.13"
 	}
 }

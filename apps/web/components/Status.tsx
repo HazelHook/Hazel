@@ -1,5 +1,5 @@
+import { cn } from "@/lib/utils"
 import { match } from "ts-pattern"
-import { cn } from "ui"
 
 interface StatusProps {
 	status: "error" | "success" | "pending"
