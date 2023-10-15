@@ -3,9 +3,9 @@
 import * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
 
-import { cn } from "@//lib/utils"
-import { CheckTickIcon } from "@//components/icons/pika/checkTick"
-import { ChevronDownIcon } from "@//components/icons/pika/chevronDown"
+import { cn } from "@/lib/utils"
+import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
 
 const Select = SelectPrimitive.Root
 

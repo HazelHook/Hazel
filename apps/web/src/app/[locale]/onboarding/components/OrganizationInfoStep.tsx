@@ -1,11 +1,11 @@
 "use client"
 
-import { ArrowRightIcon } from "@//components/icons/pika/arrowRight"
-import { Button } from "@//components/ui/button"
-import Heading from "@//components/ui/heading"
-import { Input } from "@//components/ui/input"
-import { Label } from "@//components/ui/label"
-import { useAuth } from "@//lib/provider/AuthProvider"
+import { ArrowRightIcon } from "@/components/icons/pika/arrowRight"
+import { Button } from "@/components/ui/button"
+import Heading from "@/components/ui/heading"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { useAuth } from "@/lib/provider/AuthProvider"
 import type { FormEvent } from "react"
 import { useCallback } from "react"
 

@@ -1,11 +1,11 @@
 "use client"
 
 import { z } from "zod"
-import { orgUpdateFormSchema } from "@//lib/schemas/organization"
-import AutoForm from "@//components/ui/auto-form"
-import { Button } from "@//components/ui/button"
-import { updateOrganzationAction } from "@//server/actions/organization"
-import { useAction } from "@//server/client"
+import { orgUpdateFormSchema } from "@/lib/schemas/organization"
+import AutoForm from "@/components/ui/auto-form"
+import { Button } from "@/components/ui/button"
+import { updateOrganzationAction } from "@/server/actions/organization"
+import { useAction } from "@/server/client"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 

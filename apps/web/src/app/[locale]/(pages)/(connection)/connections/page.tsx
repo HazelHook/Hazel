@@ -1,13 +1,13 @@
 import Link from "next/link"
 
-import { auth } from "@//lib/auth"
-import db from "@//lib/db"
-import { PromiseType } from "@//lib/ts/helpers"
-import { buttonVariants } from "@//components/ui/button"
-import { Container } from "@//components/ui/container"
-import { AddIcon } from "@//components/icons/pika/add"
-import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@//server/actions/connections"
-import { ConnectionTable } from "@//app/[locale]/(pages)/(connection)/_components/ConnectionTable"
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+import { PromiseType } from "@/lib/ts/helpers"
+import { buttonVariants } from "@/components/ui/button"
+import { Container } from "@/components/ui/container"
+import { AddIcon } from "@/components/icons/pika/add"
+import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@/server/actions/connections"
+import { ConnectionTable } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionTable"
 
 const fetchData = async ({ workspaceId }: { workspaceId: string }) => {
 	return await db.connection.getMany({

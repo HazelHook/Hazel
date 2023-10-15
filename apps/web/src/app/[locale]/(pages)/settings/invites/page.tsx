@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation"
-import { auth } from "@//lib/auth"
-import db from "@//lib/db"
-import { Container } from "@//components/ui/container"
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+import { Container } from "@/components/ui/container"
 import { TableWrapper } from "./_components/TableWrapper"
-import { createOrganizationInvite, revokeOrganizationInvite } from "@//server/actions/organization-invite"
+import { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
 
 const MemberListPage = async ({ params, searchParams }: any) => {
 	const { organization } = await auth()

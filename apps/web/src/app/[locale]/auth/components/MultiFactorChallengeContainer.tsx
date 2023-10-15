@@ -2,24 +2,24 @@ import type { FormEventHandler } from "react"
 import { useCallback, useEffect, useState } from "react"
 import useMutation from "swr/mutation"
 
-import useSupabase from "@//core/hooks/use-supabase"
-import useSignOut from "@//core/hooks/use-sign-out"
+import useSupabase from "@/core/hooks/use-supabase"
+import useSignOut from "@/core/hooks/use-sign-out"
 
 import VerificationCodeInput from "./VerificationCodeInput"
-import useFetchAuthFactors from "@//core/hooks/use-fetch-factors"
-import If from "@//components/ui/if"
-import Alert from "@//components/ui/alert"
-import { Button } from "@//components/ui/button"
-import Spinner from "@//components/Spinner"
-import Heading from "@//components/ui/heading"
-import { useI18n } from "@//i18n/client"
+import useFetchAuthFactors from "@/core/hooks/use-fetch-factors"
+import If from "@/components/ui/if"
+import Alert from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
+import Spinner from "@/components/Spinner"
+import Heading from "@/components/ui/heading"
+import { useTranslations } from "next-intl"
 
 function MultiFactorChallengeContainer({
 	onSuccess,
 }: React.PropsWithChildren<{
 	onSuccess: () => void
 }>) {
-	const t = useI18n()
+	const t = useTranslations()
 	const [factorId, setFactorId] = useState("")
 	const [verifyCode, setVerifyCode] = useState("")
 	const mutation = useVerifyMFAChallenge()
@@ -112,7 +112,7 @@ function FactorsListContainer({
 	onSuccess: () => void
 	onSelect: (factor: string) => void
 }>) {
-	const t = useI18n()
+	const t = useTranslations()
 	const signOut = useSignOut()
 
 	const { data: factors, isLoading, error } = useFetchAuthFactors()

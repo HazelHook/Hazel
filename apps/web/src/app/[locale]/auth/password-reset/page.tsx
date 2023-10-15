@@ -1,17 +1,17 @@
 import Link from "next/link"
 
-import configuration from "@//configuration"
+import configuration from "@/configuration"
 
-import Heading from "@//components/ui/heading"
+import Heading from "@/components/ui/heading"
 import PasswordResetContainer from "../components/PasswordResetContainer"
-import { getI18n } from "@//i18n/server"
+import { useTranslations } from "next-intl"
 
 export const metadata = {
 	title: "Password Reset",
 }
 
 async function PasswordResetPage() {
-	const t = await getI18n()
+	const t = useTranslations()
 	return (
 		<>
 			<div>

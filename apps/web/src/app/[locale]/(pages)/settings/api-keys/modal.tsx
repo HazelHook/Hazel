@@ -1,9 +1,9 @@
 "use client"
 
-import { Button } from "@//components/ui/button"
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@//components/ui/dialog"
-import type { createApiKeyAction } from "@//server/actions/api-keys"
-import { CreateApiKeyForm } from "@//components/forms/api/CreateApiKeyForm"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import type { createApiKeyAction } from "@/server/actions/api-keys"
+import { CreateApiKeyForm } from "@/components/forms/api/CreateApiKeyForm"
 import { useState } from "react"
 
 export const ApiKeyModal = ({

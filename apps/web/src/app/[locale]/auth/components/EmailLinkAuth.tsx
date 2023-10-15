@@ -3,20 +3,20 @@
 import type { FormEventHandler } from "react"
 import { useCallback } from "react"
 
-import configuration from "@//configuration"
+import configuration from "@/configuration"
 import { toast } from "sonner"
-import Alert from "@//components/ui/alert"
-import { Button } from "@//components/ui/button"
-import If from "@//components/ui/if"
-import useSignInWithOtp from "@//core/hooks/use-sign-in-with-otp"
-import { Label } from "@//components/ui/label"
-import { Input } from "@//components/ui/input"
-import { useI18n } from "@//i18n/client"
+import Alert from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
+import If from "@/components/ui/if"
+import useSignInWithOtp from "@/core/hooks/use-sign-in-with-otp"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { useTranslations } from "next-intl"
 
 const EmailLinkAuth: React.FC<{
 	inviteCode?: string
 }> = ({ inviteCode }) => {
-	const t = useI18n()
+	const t = useTranslations()
 	const signInWithOtpMutation = useSignInWithOtp()
 
 	const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(

@@ -1,19 +1,23 @@
 import AuthPageShell from "./components/AuthPageShell"
-import getSupabaseServerClient from "@//core/supabase/server-client"
+import getSupabaseServerClient from "@/core/supabase/server-client"
 import { redirect } from "next/navigation"
-import configuration from "@//configuration"
+import configuration from "@/configuration"
+import {NextIntlClientProvider, useMessages} from 'next-intl';
 
-import verifyRequiresMfa from "@//core/session/utils/check-requires-mfa"
-import { I18Provider } from "@//components/i18-provider"
+
+import verifyRequiresMfa from "@/core/session/utils/check-requires-mfa"
 
 export const dynamic = "force-dynamic"
 
-async function AuthLayout({ children }: React.PropsWithChildren) {
+async function AuthLayout({ children,params }: React.PropsWithChildren<{params: {locale:string}}>) {
 	const client = getSupabaseServerClient()
 
 	const {
 		data: { session },
 	} = await client.auth.getSession()
+
+	const messages = useMessages();
+
 
 	const requiresMultiFactorAuthentication = await verifyRequiresMfa(client)
 
@@ -22,9 +26,9 @@ async function AuthLayout({ children }: React.PropsWithChildren) {
 	}
 
 	return (
-		<I18Provider>
+		<NextIntlClientProvider locale={params.locale} messages={messages}>
 			<AuthPageShell>{children}</AuthPageShell>
-		</I18Provider>
+		</NextIntlClientProvider>
 	)
 }
 

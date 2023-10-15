@@ -5,9 +5,9 @@ import superjson from "superjson"
 import { ZodError } from "zod"
 
 import { Context } from "./context"
-import db from "@//lib/db"
-import requireSession from "@//lib/user/require-session"
-import getSupabaseServerActionClient from "@//core/supabase/action-client"
+import db from "@/lib/db"
+import requireSession from "@/lib/user/require-session"
+import getSupabaseServerActionClient from "@/core/supabase/action-client"
 
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,

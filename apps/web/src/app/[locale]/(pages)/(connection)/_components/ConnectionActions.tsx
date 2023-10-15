@@ -1,11 +1,11 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import type { deleteConnectionAction, pauseConnectionAction } from "@//server/actions/connections"
-import { ConnectionDataRowType } from "@//app/[locale]/(pages)/(connection)/connections/page"
+import type { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
+import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 import { toast } from "sonner"
 
-import { useAction } from "@//server/client"
-import { Button, buttonVariants } from "@//components/ui/button"
+import { useAction } from "@/server/client"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -15,12 +15,12 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@//components/ui/dialog"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@//components/ui/tooltip"
-import { ClockIcon } from "@//components/icons/pika/clock"
-import { DeleteDustbinIcon } from "@//components/icons/pika/deleteDustbin"
-import { EditPencilIcon } from "@//components/icons/pika/editPencil"
-import { PlayBigIcon } from "@//components/icons/pika/playBig"
+} from "@/components/ui/dialog"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { ClockIcon } from "@/components/icons/pika/clock"
+import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
+import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import { PlayBigIcon } from "@/components/icons/pika/playBig"
 
 export const ConnectionActions = ({
 	deleteAction,

@@ -1,8 +1,8 @@
 "use client"
 
 import { useCallback } from "react"
-import configuration from "@//configuration"
-import MultiFactorChallengeContainer from "@//app/[locale]/auth/components/MultiFactorChallengeContainer"
+import configuration from "@/configuration"
+import MultiFactorChallengeContainer from "@/app/[locale]/auth/components/MultiFactorChallengeContainer"
 
 function VerifyFormContainer() {
 	const onSuccess = useCallback(() => {

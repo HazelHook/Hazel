@@ -5,8 +5,8 @@ import { useCallback, useState } from "react"
 import OrganizationInfoStep, { OrganizationInfoStepData } from "./OrganizationInfoStep"
 
 import CompleteOnboardingStep from "./CompleteOnboardingStep"
-import CsrfTokenContext from "@//lib/contexts/csrf"
-import If from "@//components/ui/if"
+import CsrfTokenContext from "@/lib/contexts/csrf"
+import If from "@/components/ui/if"
 
 interface Data {
 	organization: string

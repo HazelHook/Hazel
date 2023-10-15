@@ -6,12 +6,12 @@ import { createZodIntegrationSchema, IntegrationTool } from "db/src/drizzle/inte
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { useAction } from "@//server/client"
-import { Button } from "@//components/ui/button"
-import { Form } from "@//components/ui/form"
-import { LabeledSeparator } from "@//components/LabeledSeparator"
-import { IntegrationToolField } from "@//app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
-import { createIntegrationAction } from "@//server/actions/integrations"
+import { useAction } from "@/server/client"
+import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
+import { LabeledSeparator } from "@/components/LabeledSeparator"
+import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
+import { createIntegrationAction } from "@/server/actions/integrations"
 
 export const NewIntegrationForm = ({
 	integration: { config, slug },

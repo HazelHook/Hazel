@@ -5,7 +5,7 @@ import Link, { LinkProps } from "next/link"
 import { usePathname } from "next/navigation"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
 
-import { cn } from "@//lib/utils"
+import { cn } from "@/lib/utils"
 
 const LinkTabList = React.forwardRef<
 	React.ElementRef<typeof TabsPrimitive.List>,

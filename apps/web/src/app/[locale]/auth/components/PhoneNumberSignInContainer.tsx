@@ -1,15 +1,15 @@
 import type { FormEventHandler } from "react"
 import React, { useCallback, useState } from "react"
 
-import configuration from "@//configuration"
-import useSignInWithOtp from "@//core/hooks/use-sign-in-with-otp"
-import useVerifyOtp from "@//core/hooks/use-verify-otp"
-import If from "@//components/ui/if"
-import Alert from "@//components/ui/alert"
-import { Button } from "@//components/ui/button"
+import configuration from "@/configuration"
+import useSignInWithOtp from "@/core/hooks/use-sign-in-with-otp"
+import useVerifyOtp from "@/core/hooks/use-verify-otp"
+import If from "@/components/ui/if"
+import Alert from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
 import VerificationCodeInput from "./VerificationCodeInput"
 import PhoneNumberCredentialForm from "./PhoneNumberCredentialForm"
-import { useI18n } from "@//i18n/client"
+import { useTranslations } from "next-intl"
 
 enum Step {
 	Phone = 0,
@@ -20,7 +20,7 @@ const PhoneNumberSignInContainer: React.FC<{
 	onSuccess: () => unknown
 	mode: "signIn" | "signUp"
 }> = ({ onSuccess, mode }) => {
-	const t = useI18n()
+	const t = useTranslations()
 	const [step, setStep] = useState<Step>(Step.Phone)
 	const [verificationCode, setVerificationCode] = useState("")
 	const [phone, setPhone] = useState("")

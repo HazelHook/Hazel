@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "@//components/ui/button"
-import If from "@//components/ui/if"
-import { useI18n } from "@//i18n/client"
+import { Button } from "@/components/ui/button"
+import If from "@/components/ui/if"
 import { z } from "zod"
-import AutoForm from "@//components/ui/auto-form"
+import AutoForm from "@/components/ui/auto-form"
 import { passwordSchema } from "./EmailPasswordSignUpForm"
+import { useTranslations } from "next-intl"
 
 const emailPasswordSignInFormSchema = z.object({
 	email: z.string().email(),
@@ -19,7 +19,7 @@ const EmailPasswordSignInForm: React.FCC<{
 	onSubmit: (params: Schema) => void
 	loading: boolean
 }> = ({ onSubmit, loading }) => {
-	const t = useI18n()
+	const t = useTranslations()
 
 	return (
 		<AutoForm

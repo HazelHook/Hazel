@@ -1,5 +1,7 @@
 import million from "million/compiler"
 
+import withNextIntl from "next-intl/plugin"
+
 const millionConfig = {
 	// if you're using RSC:
 	auto: { rsc: true },
@@ -24,4 +26,6 @@ const nextConfig = {
 	},
 }
 
-export default nextConfig
+const intlConfig = withNextIntl("./src/i18n/index.ts")
+
+export default intlConfig(nextConfig)

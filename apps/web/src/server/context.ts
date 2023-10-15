@@ -1,6 +1,6 @@
-import getSupabaseServerActionClient from "@//core/supabase/action-client"
-import db from "@//lib/db"
-import requireSession from "@//lib/user/require-session"
+import getSupabaseServerActionClient from "@/core/supabase/action-client"
+import db from "@/lib/db"
+import requireSession from "@/lib/user/require-session"
 import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
 import { cookies, headers } from "next/headers"
 

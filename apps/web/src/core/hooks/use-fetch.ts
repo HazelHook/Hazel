@@ -1,5 +1,5 @@
 import { useCallback, useRef } from "react"
-import useCsrfToken from "@//core/hooks/use-csrf-token"
+import useCsrfToken from "@/core/hooks/use-csrf-token"
 
 const CSRF_TOKEN_HEADER = "x-csrf-token"
 

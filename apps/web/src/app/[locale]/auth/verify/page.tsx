@@ -1,11 +1,11 @@
 import { use } from "react"
 import { redirect } from "next/navigation"
 
-import verifyRequiresMfa from "@//core/session/utils/check-requires-mfa"
-import getSupabaseServerClient from "@//core/supabase/server-client"
+import verifyRequiresMfa from "@/core/session/utils/check-requires-mfa"
+import getSupabaseServerClient from "@/core/supabase/server-client"
 import VerifyFormContainer from "./components/VerifyFormContainer"
 
-import configuration from "@//configuration"
+import configuration from "@/configuration"
 
 export const metadata = {
 	title: "Verify Authentication",

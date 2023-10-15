@@ -1,10 +1,10 @@
 "use client"
 
-import AutoForm from "@//components/ui/auto-form"
-import { Button } from "@//components/ui/button"
-import { createApiKeySchema } from "@//lib/schemas/api-key"
-import type { createApiKeyAction } from "@//server/actions/api-keys"
-import { useAction } from "@//server/client"
+import AutoForm from "@/components/ui/auto-form"
+import { Button } from "@/components/ui/button"
+import { createApiKeySchema } from "@/lib/schemas/api-key"
+import type { createApiKeyAction } from "@/server/actions/api-keys"
+import { useAction } from "@/server/client"
 import { useRouter } from "next/navigation"
 
 interface CreateApiKeyFormProps {

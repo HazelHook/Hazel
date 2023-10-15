@@ -1,14 +1,14 @@
 import { redirect } from "next/navigation"
 import { sub } from "date-fns"
 
-import { auth } from "@//lib/auth"
-import { getCachedConnection } from "@//lib/orm"
-import tiny from "@//lib/tiny"
-import { chartColors, formatDateTime } from "@//lib/utils"
-import { Card, CardHeader, CardTitle } from "@//components/ui/card"
-import { Chart } from "@//components/ui/chart"
-import { KpiCard } from "@//app/[locale]/(pages)/_component/KpiCard"
-import { transformSourcesChartData } from "@//app/[locale]/(pages)/_utils"
+import { auth } from "@/lib/auth"
+import { getCachedConnection } from "@/lib/orm"
+import tiny from "@/lib/tiny"
+import { chartColors, formatDateTime } from "@/lib/utils"
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Chart } from "@/components/ui/chart"
+import { KpiCard } from "@/app/[locale]/(pages)/_component/KpiCard"
+import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
 const SourcePage = async ({
 	params,

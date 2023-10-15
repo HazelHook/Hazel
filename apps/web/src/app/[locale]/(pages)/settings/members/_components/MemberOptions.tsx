@@ -1,16 +1,16 @@
-import { ClipboardIcon } from "@//components/icons/pika/clipboard"
-import { FolderRemoveIcon } from "@//components/icons/pika/folderRemove"
-import { LogOutLeftIcon } from "@//components/icons/pika/logOutLeft"
-import { ThreeDotsHorizontalIcon } from "@//components/icons/pika/threeDotsHorizontal"
-import { Button } from "@//components/ui/button"
+import { ClipboardIcon } from "@/components/icons/pika/clipboard"
+import { FolderRemoveIcon } from "@/components/icons/pika/folderRemove"
+import { LogOutLeftIcon } from "@/components/icons/pika/logOutLeft"
+import { ThreeDotsHorizontalIcon } from "@/components/icons/pika/threeDotsHorizontal"
+import { Button } from "@/components/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@//components/ui/dropdown-menu"
-import { useAuth } from "@//lib/provider/AuthProvider"
+} from "@/components/ui/dropdown-menu"
+import { useAuth } from "@/lib/provider/AuthProvider"
 import { OrganizationMember } from "db/src/drizzle/schema"
 import { useMemo } from "react"
 import { toast } from "sonner"

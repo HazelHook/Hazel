@@ -1,16 +1,16 @@
 "use client"
 
-import PageLoadingIndicator from "@//components/PageLoadingIndicator"
-import If from "@//components/ui/if"
-import isBrowser from "@//core/generic/is-browser"
-import { acceptOrganizationInvite } from "@//server/actions/organization-invite"
-import { useAction } from "@//server/client"
+import PageLoadingIndicator from "@/components/PageLoadingIndicator"
+import If from "@/components/ui/if"
+import isBrowser from "@/core/generic/is-browser"
+import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
+import { useAction } from "@/server/client"
 import { useState } from "react"
 import OAuthProviders from "../../auth/components/OAuthProviders"
-import configuration from "@//configuration"
+import configuration from "@/configuration"
 import EmailPasswordSignUpContainer from "../../auth/components/EmailPasswordSignUpContainer"
-import { useI18n } from "@//i18n/client"
-import { Button } from "@//components/ui/button"
+
+import { Button } from "@/components/ui/button"
 import EmailPasswordSignInContainer from "../../auth/components/EmailPasswordSignInContainer"
 import EmailLinkAuth from "../../auth/components/EmailLinkAuth"
 import PhoneNumberSignInContainer from "../../auth/components/PhoneNumberSignInContainer"
@@ -26,7 +26,7 @@ function NewUserInviteForm(
 		action: typeof acceptOrganizationInvite
 	}>,
 ) {
-	const t = useI18n()
+	const t = useTranslations()
 	const [mode, setMode] = useState<Mode>(Mode.SignUp)
 
 	const inviteAcceptAction = useAction(props.action)

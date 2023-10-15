@@ -1,17 +1,18 @@
 import Link from "next/link"
 
-import { Heading } from "@//components/ui/heading"
+import { Heading } from "@/components/ui/heading"
 
-import configuration from "@//configuration"
-import SignInMethodsContainer from "@//app/[locale]/auth/components/SignInMethodsContainer"
-import { getScopedI18n } from "@//i18n/server"
+import configuration from "@/configuration"
+import SignInMethodsContainer from "@/app/[locale]/auth/components/SignInMethodsContainer"
+import { useTranslations } from "next-intl"
 
 export const metadata = {
 	title: "Sign In",
 }
 
 async function SignInPage() {
-	const t = await getScopedI18n("auth")
+	const t = useTranslations("auth")
+
 	return (
 		<>
 			<div>

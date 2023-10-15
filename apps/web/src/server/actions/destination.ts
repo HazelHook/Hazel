@@ -2,9 +2,9 @@
 
 import { z } from "zod"
 
-import { createAction, protectedProcedure } from "@//server/trpc"
-import db from "@//lib/db"
-import { createDestinationSchema, updateDestinationSchema } from "@//lib/schemas/destination"
+import { createAction, protectedProcedure } from "@/server/trpc"
+import db from "@/lib/db"
+import { createDestinationSchema, updateDestinationSchema } from "@/lib/schemas/destination"
 
 export const createDestinationAction = createAction(
 	protectedProcedure.input(createDestinationSchema).mutation(async (opts) => {

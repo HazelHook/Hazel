@@ -1,10 +1,10 @@
 import { type ReactNode } from "react"
 import Link from "next/link"
 
-import { getCachedDestination } from "@//lib/orm"
-import { buttonVariants } from "@//components/ui/button"
-import { LinkTab } from "@//components/ui/linkTabs"
-import { NavTabs } from "@//components/ui/NavTabs"
+import { getCachedDestination } from "@/lib/orm"
+import { buttonVariants } from "@/components/ui/button"
+import { LinkTab } from "@/components/ui/linkTabs"
+import { NavTabs } from "@/components/ui/NavTabs"
 
 const ConnectionLayout = async ({
 	children,

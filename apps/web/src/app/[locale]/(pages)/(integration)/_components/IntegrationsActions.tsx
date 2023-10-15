@@ -3,8 +3,8 @@ import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 import { Integration } from "db/src/drizzle/schema"
 import { toast } from "sonner"
 
-import { useAction } from "@//server/client"
-import { Button } from "@//components/ui/button"
+import { useAction } from "@/server/client"
+import { Button } from "@/components/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -14,11 +14,11 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@//components/ui/dialog"
-import { DeleteDustbinIcon } from "@//components/icons/pika/deleteDustbin"
-import { EditPencilIcon } from "@//components/icons/pika/editPencil"
-import type { deleteIntegrationAction, updateIntegrationAction } from "@//server/actions/integrations"
-import { UpdateIntegrationForm } from "@//components/forms/integration/UpdateIntegrationForm"
+} from "@/components/ui/dialog"
+import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
+import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
+import { UpdateIntegrationForm } from "@/components/forms/integration/UpdateIntegrationForm"
 
 export const IntegrationsActions = ({
 	updateAction,

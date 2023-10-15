@@ -15,6 +15,7 @@ const configuration = {
 		language: "en",
 		convertKitFormId: "",
 		locale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
+		locales: ["en", "de"],
 	},
 	auth: {
 		// ensure this is the same as your Supabase project. By default - it's true

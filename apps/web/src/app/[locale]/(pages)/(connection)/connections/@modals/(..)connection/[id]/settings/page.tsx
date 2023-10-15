@@ -1,5 +1,5 @@
-import { Dialog, InterceptedDialogContent } from "@//components/ui/dialog"
-import { ConnectionSettingsPage } from "@//components/pages/connection/SettingsPage"
+import { Dialog, InterceptedDialogContent } from "@/components/ui/dialog"
+import { ConnectionSettingsPage } from "@/components/pages/connection/SettingsPage"
 
 const ConnectionUpdateFormPage = ({
 	params,

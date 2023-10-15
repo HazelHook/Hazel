@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import type { SupabaseClient } from "@supabase/supabase-js"
-import verifyRequiresMfa from "@//core/session/utils/check-requires-mfa"
-import configuration from "@//configuration"
+import verifyRequiresMfa from "@/core/session/utils/check-requires-mfa"
+import configuration from "@/configuration"
 import { Database } from "@/database.types"
 
 /**

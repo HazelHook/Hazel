@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 
-import { PromiseType } from "@//lib/ts/helpers"
+import { PromiseType } from "@/lib/ts/helpers"
 
 import db from "./db"
 

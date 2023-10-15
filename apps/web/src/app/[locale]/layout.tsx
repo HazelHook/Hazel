@@ -2,14 +2,15 @@ import "@/styles/global.css"
 
 import { Metadata } from "next"
 
-import { fontSans } from "@//lib/fonts"
-import { cn } from "@//lib/utils"
-import NextProgress from "@//components/NProgress"
-import { TailwindIndicator } from "@//components/tailwind-indicator"
-import { ThemeProvider } from "@//components/theme-provider"
+import { fontSans } from "@/lib/fonts"
+import { cn } from "@/lib/utils"
+import NextProgress from "@/components/NProgress"
+import { TailwindIndicator } from "@/components/tailwind-indicator"
+import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "sonner"
-import AuthProvider from "@//lib/provider/AuthProvider"
-import configuration from "@//configuration"
+import AuthProvider from "@/lib/provider/AuthProvider"
+import configuration from "@/configuration"
+import { notFound } from "next/navigation"
 
 export const metadata: Metadata = {
 	title: {
@@ -31,14 +32,19 @@ export const metadata: Metadata = {
 interface RootLayoutProps {
 	children: React.ReactNode
 	params: {
-		org?: string
-		slug?: string
+		locale: string
 	}
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children, params }: RootLayoutProps) {
+	const isValidLocale = configuration.site.locales.some((cur) => cur === params.locale)
+
+	if (!isValidLocale) {
+		notFound()
+	}
+
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang={params.locale} suppressHydrationWarning>
 			<head />
 			<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
 				<AuthProvider>

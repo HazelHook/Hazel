@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react"
-import { setCookie } from "@//core/generic/cookies"
+import { setCookie } from "@/core/generic/cookies"
 
 const SIDEBAR_COLLAPSED_STORAGE_KEY = "sidebarState"
 

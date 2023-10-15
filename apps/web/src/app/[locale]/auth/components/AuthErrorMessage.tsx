@@ -1,6 +1,6 @@
-import Alert from "@//components/ui/alert"
-import { useI18n } from "@//i18n/client"
+import Alert from "@/components/ui/alert"
 import { AuthError } from "@supabase/supabase-js"
+import { useTranslations } from "next-intl"
 
 /**
  * @name AuthErrorMessage
@@ -15,7 +15,7 @@ export default function AuthErrorMessage({
 }: {
 	error: Maybe<Error | AuthError | unknown>
 }) {
-	const t = useI18n()
+	const t = useTranslations()
 
 	if (!error) {
 		return null

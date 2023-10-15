@@ -1,5 +1,5 @@
-import { AvatarImage, Avatar } from "@//components/ui/avatar"
-import { getSeededProfileImageUrl } from "@//lib/utils"
+import { AvatarImage, Avatar } from "@/components/ui/avatar"
+import { getSeededProfileImageUrl } from "@/lib/utils"
 import { User } from "@supabase/supabase-js"
 
 export const UserCell = ({ user }: { user: User }) => {

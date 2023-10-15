@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation"
-import { Heading } from "@//components/ui/heading"
-import If from "@//components/ui/if"
-import getLogger from "@//core/logger"
-import getSupabaseServerClient from "@//core/supabase/server-client"
-import { getI18n } from "@//i18n/server"
-import db from "@//lib/db"
+import { Heading } from "@/components/ui/heading"
+import If from "@/components/ui/if"
+import getLogger from "@/core/logger"
+import getSupabaseServerClient from "@/core/supabase/server-client"
+import db from "@/lib/db"
 import ExistingUserInviteForm from "../components/existing-user-invite-form"
-import { acceptOrganizationInvite } from "@//server/actions/organization-invite"
+import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import NewUserInviteForm from "../components/new-user-invite-form"
+import { useTranslations } from "next-intl"
 
 interface Props {
 	params: {
@@ -20,7 +20,7 @@ export const metadata = {
 }
 
 const InvitePage = async ({ params }: Props) => {
-	const t = await getI18n()
+	const t = useTranslations()
 
 	const logger = getLogger()
 	const client = getSupabaseServerClient()

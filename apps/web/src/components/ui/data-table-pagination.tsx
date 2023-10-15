@@ -1,9 +1,9 @@
 import { Table } from "@tanstack/react-table"
 
-import { Button } from "@//components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@//components/ui/select"
-import { ChevronBigLeftIcon } from "@//components/icons/pika/chevronBigLeft"
-import { ChevronBigRightIcon } from "@//components/icons/pika/chevronBigRight"
+import { Button } from "@/components/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ChevronBigLeftIcon } from "@/components/icons/pika/chevronBigLeft"
+import { ChevronBigRightIcon } from "@/components/icons/pika/chevronBigRight"
 
 interface DataTablePaginationProps<TData> {
 	table: Table<TData>

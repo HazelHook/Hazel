@@ -4,18 +4,18 @@ import { useCallback } from "react"
 
 import AuthErrorMessage from "./AuthErrorMessage"
 
-import configuration from "@//configuration"
-import useSignInWithProvider from "@//core/hooks/use-sign-in-with-provider"
+import configuration from "@/configuration"
+import useSignInWithProvider from "@/core/hooks/use-sign-in-with-provider"
 import AuthProviderButton from "./AuthProviderButton"
-import PageLoadingIndicator from "@//components/PageLoadingIndicator"
-import { useI18n } from "@//i18n/client"
+import PageLoadingIndicator from "@/components/PageLoadingIndicator"
+import { useTranslations } from "next-intl"
 
 const OAUTH_PROVIDERS = configuration.auth.providers.oAuth
 
 const OAuthProviders: React.FCC<{
 	returnUrl?: string
 }> = (props) => {
-	const t = useI18n()
+	const t = useTranslations()
 	const signInWithProviderMutation = useSignInWithProvider()
 
 	// we make the UI "busy" until the next page is fully loaded

@@ -2,8 +2,8 @@
 
 import { z } from "zod"
 import { basicProtectedProcedure, createAction, protectedProcedure } from "../trpc"
-import db from "@//lib/db"
-import { createOrgFormSchema, orgUpdateFormSchema } from "@//lib/schemas/organization"
+import db from "@/lib/db"
+import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
 import { TRPCError } from "@trpc/server"
 import { cookies } from "next/headers"
 

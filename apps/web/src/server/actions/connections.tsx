@@ -2,9 +2,9 @@
 
 import { z } from "zod"
 
-import { createAction, protectedProcedure } from "@//server/trpc"
-import db from "@//lib/db"
-import { createConnectionSchema, updateConnectionSchema } from "@//lib/schemas/connection"
+import { createAction, protectedProcedure } from "@/server/trpc"
+import db from "@/lib/db"
+import { createConnectionSchema, updateConnectionSchema } from "@/lib/schemas/connection"
 
 export const createConnectionAction = createAction(
 	protectedProcedure.input(createConnectionSchema).mutation(async (opts) => {

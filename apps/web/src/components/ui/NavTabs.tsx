@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-import { LinkTabList } from "@//components/ui/linkTabs"
+import { LinkTabList } from "@/components/ui/linkTabs"
 
 interface NavTabsProps {
 	children: ReactNode[]

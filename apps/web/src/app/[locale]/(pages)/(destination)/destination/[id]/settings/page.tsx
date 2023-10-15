@@ -1,5 +1,5 @@
-import { Container } from "@//components/ui/container"
-import { DestinationSettingsPage } from "@//components/pages/destination/SettingsPage"
+import { Container } from "@/components/ui/container"
+import { DestinationSettingsPage } from "@/components/pages/destination/SettingsPage"
 
 const UpdateDestinationPage = async ({
 	params,

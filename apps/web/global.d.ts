@@ -41,6 +41,9 @@ declare global {
 			resetDatabase(): void
 		}
 	}
+
+	type Messages = typeof import("./src/i18n/locales/en.json")
+	declare type IntlMessages = Messages
 }
 
 declare module "react" {

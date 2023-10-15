@@ -2,8 +2,8 @@
 
 import { z } from "zod"
 import { createAction, protectedProcedure } from "../trpc"
-import db from "@//lib/db"
-import { createApiKeySchema } from "@//lib/schemas/api-key"
+import db from "@/lib/db"
+import { createApiKeySchema } from "@/lib/schemas/api-key"
 
 export const createApiKeyAction = createAction(
 	protectedProcedure.input(z.object({ workspaceId: z.string() }).merge(createApiKeySchema)).mutation(async (opts) => {

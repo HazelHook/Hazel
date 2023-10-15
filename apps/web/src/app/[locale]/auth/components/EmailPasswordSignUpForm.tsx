@@ -1,7 +1,8 @@
-import AutoForm from "@//components/ui/auto-form"
-import { Button } from "@//components/ui/button"
-import If from "@//components/ui/if"
-import { useI18n } from "@//i18n/client"
+import AutoForm from "@/components/ui/auto-form"
+import { Button } from "@/components/ui/button"
+import If from "@/components/ui/if"
+import { useTranslations } from "next-intl"
+
 import { z } from "zod"
 
 export const passwordSchema = z
@@ -37,7 +38,7 @@ const EmailPasswordSignUpForm: React.FCC<{
 	onSubmit: (params: Schema) => void
 	loading: boolean
 }> = ({ onSubmit, loading }) => {
-	const t = useI18n()
+	const t = useTranslations()
 
 	return (
 		<AutoForm

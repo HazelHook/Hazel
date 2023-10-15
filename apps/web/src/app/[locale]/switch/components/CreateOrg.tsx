@@ -1,7 +1,7 @@
 "use client"
 
-import AutoForm from "@//components/ui/auto-form"
-import { Button } from "@//components/ui/button"
+import AutoForm from "@/components/ui/auto-form"
+import { Button } from "@/components/ui/button"
 import {
 	Dialog,
 	DialogContent,
@@ -10,10 +10,10 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@//components/ui/dialog"
-import { createOrgFormSchema } from "@//lib/schemas/organization"
-import { createOrganzationAction } from "@//server/actions/organization"
-import { useAction } from "@//server/client"
+} from "@/components/ui/dialog"
+import { createOrgFormSchema } from "@/lib/schemas/organization"
+import { createOrganzationAction } from "@/server/actions/organization"
+import { useAction } from "@/server/client"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 

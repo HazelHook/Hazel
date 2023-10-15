@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import useCsrfToken from "@//core/hooks/use-csrf-token"
+import useCsrfToken from "@/core/hooks/use-csrf-token"
 
 function useCsrfTokenHeader() {
 	const csrfToken = useCsrfToken()

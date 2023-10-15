@@ -3,7 +3,7 @@ import "server-only"
 import { Suspense } from "react"
 import Link from "next/link"
 
-import { getCachedSource } from "@//lib/orm"
+import { getCachedSource } from "@/lib/orm"
 
 interface SourceLinkProps {
 	sourceId: string

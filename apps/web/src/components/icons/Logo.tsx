@@ -1,4 +1,4 @@
-import { IconProps } from "@//components/icons/pika/types"
+import { IconProps } from "@/components/icons/pika/types"
 
 export const LogoIcon = (props: IconProps) => {
 	return (

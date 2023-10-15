@@ -2,12 +2,12 @@
 
 import { useCallback } from "react"
 import type { Session } from "@supabase/auth-helpers-nextjs"
-import useSignOut from "@//core/hooks/use-sign-out"
-import useRefresh from "@//core/hooks/use-refresh"
-import { Button } from "@//components/ui/button"
-import { useI18n } from "@//i18n/client"
-import { useAction } from "@//server/client"
-import type { acceptOrganizationInvite } from "@//server/actions/organization-invite"
+import useSignOut from "@/core/hooks/use-sign-out"
+import useRefresh from "@/core/hooks/use-refresh"
+import { Button } from "@/components/ui/button"
+
+import { useAction } from "@/server/client"
+import type { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 
 function ExistingUserInviteForm(
 	props: React.PropsWithChildren<{
@@ -16,7 +16,7 @@ function ExistingUserInviteForm(
 		action: typeof acceptOrganizationInvite
 	}>,
 ) {
-	const t = useI18n()
+	const t = useTranslations()
 	const signOut = useSignOut()
 	const refresh = useRefresh()
 

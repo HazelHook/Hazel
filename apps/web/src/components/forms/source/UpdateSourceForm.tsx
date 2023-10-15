@@ -4,13 +4,13 @@ import { useRouter } from "next/navigation"
 import { IntegrationTools } from "db/src/drizzle/integrations/data"
 import { Integration, Source } from "db/src/drizzle/schema"
 
-import { useAction } from "@//server/client"
-import { Button } from "@//components/ui/button"
-import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@//components/ui/form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@//components/ui/select"
-import { updateSourceAction } from "@//server/actions/source"
-import { updateSourceSchema } from "@//lib/schemas/source"
-import AutoForm, { AutoFormInputComponentProps } from "@//components/ui/auto-form"
+import { useAction } from "@/server/client"
+import { Button } from "@/components/ui/button"
+import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { updateSourceAction } from "@/server/actions/source"
+import { updateSourceSchema } from "@/lib/schemas/source"
+import AutoForm, { AutoFormInputComponentProps } from "@/components/ui/auto-form"
 
 interface UpdateSourceFormProps {
 	source: Source

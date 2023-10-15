@@ -1,4 +1,4 @@
-import { cn } from "@//lib/utils"
+import { cn } from "@/lib/utils"
 
 type HeadingType = 1 | 2 | 3 | 4 | 5 | 6
 

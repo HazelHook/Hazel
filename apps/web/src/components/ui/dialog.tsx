@@ -4,8 +4,8 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 
-import { cn } from "@//lib/utils"
-import { CrossIcon } from "@//components/icons/pika/cross"
+import { cn } from "@/lib/utils"
+import { CrossIcon } from "@/components/icons/pika/cross"
 
 const Dialog = DialogPrimitive.Root
 

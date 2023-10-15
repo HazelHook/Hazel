@@ -4,13 +4,12 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import AuthErrorMessage from "./AuthErrorMessage"
 
-import configuration from "@//configuration"
-import If from "@//components/ui/if"
-import Alert from "@//components/ui/alert"
+import configuration from "@/configuration"
+import If from "@/components/ui/if"
+import Alert from "@/components/ui/alert"
 
-import useSignUpWithEmailAndPasswordMutation from "@//core/hooks/use-sign-up-with-email-password"
+import useSignUpWithEmailAndPasswordMutation from "@/core/hooks/use-sign-up-with-email-password"
 import EmailPasswordSignUpForm from "./EmailPasswordSignUpForm"
-import { useI18n } from "@//i18n/client"
 
 const requireEmailConfirmation = configuration.auth.requireEmailConfirmation
 
@@ -19,7 +18,7 @@ const EmailPasswordSignUpContainer: React.FCC<{
 	onSubmit?: (userId?: string) => void
 	onError?: (error?: unknown) => unknown
 }> = ({ onSignUp, onSubmit, onError }) => {
-	const t = useI18n()
+	const t = useTranslations()
 	const signUpMutation = useSignUpWithEmailAndPasswordMutation()
 	const redirecting = useRef(false)
 	const loading = signUpMutation.isMutating || redirecting.current

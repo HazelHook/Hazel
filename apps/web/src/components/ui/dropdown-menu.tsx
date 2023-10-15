@@ -3,10 +3,10 @@
 import * as React from "react"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 
-import { cn } from "@//lib/utils"
-import { CheckTickIcon } from "@//components/icons/pika/checkTick"
-import { ChevronRightIcon } from "@//components/icons/pika/chevronRight"
-import { CircleDotIcon } from "@//components/icons/pika/circleDot"
+import { cn } from "@/lib/utils"
+import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { ChevronRightIcon } from "@/components/icons/pika/chevronRight"
+import { CircleDotIcon } from "@/components/icons/pika/circleDot"
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 

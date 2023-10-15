@@ -1,6 +1,6 @@
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@//components/ui/select"
-import { useAuth } from "@//lib/provider/AuthProvider"
-import { capitalizeFirstLetter } from "@//lib/utils"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useAuth } from "@/lib/provider/AuthProvider"
+import { capitalizeFirstLetter } from "@/lib/utils"
 
 import { OrganizationMember } from "db/src/drizzle/schema"
 import { useMemo } from "react"

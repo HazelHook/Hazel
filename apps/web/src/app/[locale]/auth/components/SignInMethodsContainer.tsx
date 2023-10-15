@@ -5,17 +5,17 @@ import { useRouter } from "next/navigation"
 
 import OAuthProviders from "./OAuthProviders"
 
-import configuration from "@//configuration"
-import If from "@//components/ui/if"
+import configuration from "@/configuration"
+import If from "@/components/ui/if"
 import EmailLinkAuth from "./EmailLinkAuth"
 import EmailPasswordSignInContainer from "./EmailPasswordSignInContainer"
 import PhoneNumberSignInContainer from "./PhoneNumberSignInContainer"
-import { useScopedI18n } from "@//i18n/client"
+import { useTranslations } from "next-intl"
 
 function SignInMethodsContainer() {
 	const router = useRouter()
 
-	const t = useScopedI18n("auth")
+	const t = useTranslations()
 
 	const onSignIn = useCallback(() => {
 		router.push(configuration.paths.home)
@@ -27,7 +27,7 @@ function SignInMethodsContainer() {
 				<OAuthProviders />
 
 				<div>
-					<span className={"text-xs text-gray-400"}>{t("orContinueWithEmail")}</span>
+					<span className={"text-xs text-gray-400"}>{t("auth.orContinueWithEmail")}</span>
 				</div>
 			</If>
 

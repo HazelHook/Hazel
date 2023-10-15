@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 
-import { Button } from "@//components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -10,10 +10,10 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@//components/ui/dropdown-menu"
-import { FilterVerticalIcon } from "@//components/icons/pika/filterVertical"
-import { Status } from "@//components/Status"
-import { EventDataRowType } from "@//app/[locale]/(pages)/(source)/source/[id]/events/page"
+} from "@/components/ui/dropdown-menu"
+import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
+import { Status } from "@/components/Status"
+import { EventDataRowType } from "@/app/[locale]/(pages)/(source)/source/[id]/events/page"
 
 export const columns: ColumnDef<EventDataRowType>[] = [
 	{

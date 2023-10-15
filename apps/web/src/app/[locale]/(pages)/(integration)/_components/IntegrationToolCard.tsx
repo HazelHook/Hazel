@@ -4,14 +4,14 @@ import React, { useState } from "react"
 import { IntegrationTool } from "db/src/drizzle/integrations/common"
 import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "db/src/drizzle/integrations/data"
 
-import { Badge } from "@//components/ui/badge"
-import { Card } from "@//components/ui/card"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@//components/ui/dialog"
-import { Separator } from "@//components/ui/separator"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@//components/ui/tooltip"
-import { DatabaseIcon } from "@//components/icons/pika/database"
-import { ShieldCheckIcon } from "@//components/icons/pika/shieldCheck"
-import { NewIntegrationForm } from "@//components/forms/integration/CreateIntegrationForm"
+import { Badge } from "@/components/ui/badge"
+import { Card } from "@/components/ui/card"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Separator } from "@/components/ui/separator"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { DatabaseIcon } from "@/components/icons/pika/database"
+import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
+import { NewIntegrationForm } from "@/components/forms/integration/CreateIntegrationForm"
 
 const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	({

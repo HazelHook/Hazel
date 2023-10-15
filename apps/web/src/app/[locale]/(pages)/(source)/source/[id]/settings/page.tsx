@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation"
 
-import { auth } from "@//lib/auth"
-import db from "@//lib/db"
-import { getCachedSource } from "@//lib/orm"
-import { UpdateSourceForm } from "@//components/forms/source/UpdateSourceForm"
-import { updateSourceAction } from "@//server/actions/source"
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+import { getCachedSource } from "@/lib/orm"
+import { UpdateSourceForm } from "@/components/forms/source/UpdateSourceForm"
+import { updateSourceAction } from "@/server/actions/source"
 
 interface EventsPageProps {
 	params: {

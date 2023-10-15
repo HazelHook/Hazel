@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import CsrfTokenContext from "@//lib/contexts/csrf"
+import CsrfTokenContext from "@/lib/contexts/csrf"
 
 /**
  * @description Retrieves the current CSRF token in the CsrfTokenContext context

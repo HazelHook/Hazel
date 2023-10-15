@@ -3,17 +3,17 @@
 import { useRouter } from "next/navigation"
 import { useCallback } from "react"
 
-import configuration from "@//configuration"
+import configuration from "@/configuration"
 import OAuthProviders from "./OAuthProviders"
-import If from "@//components/ui/if"
+import If from "@/components/ui/if"
 
 import EmailLinkAuth from "./EmailLinkAuth"
 import EmailPasswordSignUpContainer from "./EmailPasswordSignUpContainer"
 import PhoneNumberSignInContainer from "./PhoneNumberSignInContainer"
-import { useI18n } from "@//i18n/client"
+import { useTranslations } from "next-intl"
 
 function SignUpMethodsContainer() {
-	const t = useI18n()
+	const t = useTranslations()
 	const router = useRouter()
 
 	const onSignUp = useCallback(() => {

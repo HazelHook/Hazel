@@ -3,13 +3,13 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Connection, Destination, Source } from "db/src/drizzle/schema"
 
-import { getSeededProfileImageUrl } from "@//lib/utils"
-import { Avatar, AvatarImage } from "@//components/ui/avatar"
-import { Badge } from "@//components/ui/badge"
-import { Button } from "@//components/ui/button"
-import { ArrowDownIcon } from "@//components/icons/pika/arrowDown"
-import { ArrowUpIcon } from "@//components/icons/pika/arrowUp"
-import { CheckTickIcon } from "@//components/icons/pika/checkTick"
+import { getSeededProfileImageUrl } from "@/lib/utils"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
+import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
+import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 export type Column = Source & {
 	connections: Connection[]

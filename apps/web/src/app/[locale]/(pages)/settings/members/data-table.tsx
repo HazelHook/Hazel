@@ -10,15 +10,15 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@//components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { ReactNode, useState } from "react"
-import { Input } from "@//components/ui/input"
-import { DataTablePagination } from "@//components/ui/data-table-pagination"
-import { Button } from "@//components/ui/button"
-import { AddIcon } from "@//components/icons/pika/add"
-import { usePagination } from "@//lib/hooks/usePagination"
-import { OrganizationInviteModal } from "@//components/modals/OrganizationInviteModal"
-import type { createOrganizationInvite } from "@//server/actions/organization-invite"
+import { Input } from "@/components/ui/input"
+import { DataTablePagination } from "@/components/ui/data-table-pagination"
+import { Button } from "@/components/ui/button"
+import { AddIcon } from "@/components/icons/pika/add"
+import { usePagination } from "@/lib/hooks/usePagination"
+import { OrganizationInviteModal } from "@/components/modals/OrganizationInviteModal"
+import type { createOrganizationInvite } from "@/server/actions/organization-invite"
 
 interface DataTableProps<TData, TValue> {
 	orgId: number

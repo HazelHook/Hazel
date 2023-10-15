@@ -12,10 +12,10 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 
-import { Button } from "@//components/ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@//components/ui/table"
-import { ArrowDownSquareIcon } from "@//components/icons/pika/arrowDownSquare"
-import { ArrowUpSquareIcon } from "@//components/icons/pika/arrowUpSquare"
+import { Button } from "@/components/ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
+import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]

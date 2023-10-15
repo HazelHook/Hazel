@@ -3,7 +3,7 @@
 import { ReactNode, useState } from "react"
 import { z } from "zod"
 
-import { Button } from "@//components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -12,15 +12,15 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@//components/ui/dialog"
+} from "@/components/ui/dialog"
 
 import { useRouter } from "next/navigation"
 import AutoForm from "../ui/auto-form"
-import { useAction } from "@//server/client"
+import { useAction } from "@/server/client"
 import { toast } from "sonner"
 import { orgInviteFormSchema } from "../../lib/schemas/organization"
-import type { createOrganizationInvite } from "@//server/actions/organization-invite"
-import { getBaseUrl } from "@//server/shared"
+import type { createOrganizationInvite } from "@/server/actions/organization-invite"
+import { getBaseUrl } from "@/server/shared"
 
 interface CreateOrganizationModalProps {
 	children: ReactNode

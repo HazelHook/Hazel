@@ -1,5 +1,5 @@
-import configuration from "@//configuration"
-import { LogoIcon } from "@//components/icons/Logo"
+import configuration from "@/configuration"
+import { LogoIcon } from "@/components/icons/Logo"
 import Link from "next/link"
 
 export const dynamic = "force-dynamic"

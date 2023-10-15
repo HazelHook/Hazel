@@ -12,19 +12,21 @@ import {
 	DropdownMenuPortal,
 	DropdownMenuSubContent,
 	DropdownMenuCheckboxItem,
-} from "@//components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 
-import { cn } from "@//lib/utils"
-import { Avatar, AvatarImage, AvatarFallback } from "@//components/ui/avatar"
+import { useLocale } from "next-intl"
+
+import { cn } from "@/lib/utils"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 import { DropdownMenuSub } from "@radix-ui/react-dropdown-menu"
 import { useTheme } from "next-themes"
 import { Organization, OrganizationMember } from "db/src/drizzle/schema"
 import { PopoverTriggerProps } from "@radix-ui/react-popover"
-import type { createOrganzationAction, switchOrganizationAction } from "@//server/actions/organization"
+import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { RocketIcon } from "./icons/pika/rocket"
 import { File2InfoIcon } from "./icons/pika/file2Info"
 import { CardIcon } from "./icons/pika/card"
@@ -33,17 +35,16 @@ import { MoonIcon } from "./icons/pika/moon"
 import { MonitorIcon } from "./icons/pika/monitor"
 import { LogOutLeftIcon } from "./icons/pika/logOutLeft"
 import { CheckTickIcon } from "./icons/pika/checkTick"
-import { useAction } from "@//server/client"
+import { useAction } from "@/server/client"
 import { ChevronSortVerticalIcon } from "./icons/pika/chevronSortVertical"
 import { AddCircleIcon } from "./icons/pika/addCircle"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog"
 import AutoForm from "./ui/auto-form"
 import { Button } from "./ui/button"
-import { createOrgFormSchema } from "@//lib/schemas/organization"
+import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { Badge } from "./ui/badge"
-import useSignOut from "@//core/hooks/use-sign-out"
-import { useAuth } from "@//lib/provider/AuthProvider"
-import { useChangeLocale, useCurrentLocale } from "@//i18n/client"
+import useSignOut from "@/core/hooks/use-sign-out"
+import { useAuth } from "@/lib/provider/AuthProvider"
 
 type Membership = OrganizationMember & {
 	organization: Organization
@@ -63,6 +64,7 @@ export const ProfileSettings = ({
 	switchTeamAction,
 }: TeamSwitcherProps) => {
 	const router = useRouter()
+	const pathname = usePathname()
 
 	const signOut = useSignOut()
 
@@ -70,8 +72,11 @@ export const ProfileSettings = ({
 
 	const { user } = useAuth()
 
-	const changeLocale = useChangeLocale()
-	const locale = useCurrentLocale()
+	const changeLocale = (locale: string) => {
+		console.log(pathname)
+		router.replace(`${locale}/${pathname}`)
+	}
+	const locale = useLocale()
 
 	const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
 	const [selectedTeam, setSelectedTeam] = useState<Membership>(currentMembership || memberships[0])

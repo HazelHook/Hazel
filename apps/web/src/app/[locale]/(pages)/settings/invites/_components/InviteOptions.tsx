@@ -1,20 +1,20 @@
 import { useRouter } from "next/navigation"
 
-import { Button } from "@//components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@//components/ui/dropdown-menu"
-import { ThreeDotsVerticalIcon } from "@//components/icons/pika/threeDotsVertical"
-import { ClipboardIcon } from "@//components/icons/pika/clipboard"
-import { UserCrossIcon } from "@//components/icons/pika/userCross"
-import { useAction } from "@//server/client"
+} from "@/components/ui/dropdown-menu"
+import { ThreeDotsVerticalIcon } from "@/components/icons/pika/threeDotsVertical"
+import { ClipboardIcon } from "@/components/icons/pika/clipboard"
+import { UserCrossIcon } from "@/components/icons/pika/userCross"
+import { useAction } from "@/server/client"
 
 import { toast } from "sonner"
-import type { revokeOrganizationInvite } from "@//server/actions/organization-invite"
+import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
 
 export interface InviteOptionsProps {
 	emailAdress: string

@@ -3,15 +3,15 @@ import { sub } from "date-fns"
 import { Destination } from "db/src/drizzle/schema"
 import { Tiny } from "db/src/tinybird"
 
-import { getCachedSource } from "@//lib/orm"
-import { chartColors, formatDateTime } from "@//lib/utils"
-import { Card, CardHeader, CardTitle } from "@//components/ui/card"
-import { Chart } from "@//components/ui/chart"
-import { DataTable } from "@//components/ui/data-table"
-import { transformSourcesChartData } from "@//app/[locale]/(pages)/_utils"
+import { getCachedSource } from "@/lib/orm"
+import { chartColors, formatDateTime } from "@/lib/utils"
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Chart } from "@/components/ui/chart"
+import { DataTable } from "@/components/ui/data-table"
+import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
 import { columns } from "./column"
-import { auth } from "@//lib/auth"
+import { auth } from "@/lib/auth"
 
 const SourcePage = async ({
 	params,

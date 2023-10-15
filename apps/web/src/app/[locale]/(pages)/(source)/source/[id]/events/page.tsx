@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation"
 
-import { auth } from "@//lib/auth"
-import { getCachedSource } from "@//lib/orm"
-import tiny from "@//lib/tiny"
-import { PromiseType } from "@//lib/ts/helpers"
-import { TableWrapper } from "@//app/[locale]/(pages)/(source)/source/[id]/events/table"
+import { auth } from "@/lib/auth"
+import { getCachedSource } from "@/lib/orm"
+import tiny from "@/lib/tiny"
+import { PromiseType } from "@/lib/ts/helpers"
+import { TableWrapper } from "@/app/[locale]/(pages)/(source)/source/[id]/events/table"
 
 interface EventsPageProps {
 	params: {

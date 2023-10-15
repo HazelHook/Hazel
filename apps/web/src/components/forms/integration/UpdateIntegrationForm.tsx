@@ -8,12 +8,12 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
 
-import { useAction } from "@//server/client"
-import { Button } from "@//components/ui/button"
-import { Form } from "@//components/ui/form"
-import { LabeledSeparator } from "@//components/LabeledSeparator"
-import { IntegrationToolField } from "@//app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
-import { updateIntegrationAction } from "@//server/actions/integrations"
+import { useAction } from "@/server/client"
+import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
+import { LabeledSeparator } from "@/components/LabeledSeparator"
+import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
+import { updateIntegrationAction } from "@/server/actions/integrations"
 
 export const UpdateIntegrationForm = ({
 	data,

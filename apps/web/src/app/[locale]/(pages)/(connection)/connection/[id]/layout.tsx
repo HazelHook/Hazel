@@ -1,8 +1,8 @@
 import { type ReactNode } from "react"
 
-import { getCachedConnection } from "@//lib/orm"
-import { LinkTab } from "@//components/ui/linkTabs"
-import { NavTabs } from "@//components/ui/NavTabs"
+import { getCachedConnection } from "@/lib/orm"
+import { LinkTab } from "@/components/ui/linkTabs"
+import { NavTabs } from "@/components/ui/NavTabs"
 
 const ConnectionLayout = async ({
 	children,

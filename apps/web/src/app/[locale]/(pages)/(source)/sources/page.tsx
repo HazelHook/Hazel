@@ -1,12 +1,12 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { auth } from "@//lib/auth"
-import db from "@//lib/db"
-import { buttonVariants } from "@//components/ui/button"
-import { Container } from "@//components/ui/container"
-import { DataTable } from "@//components/ui/data-table"
-import { AddIcon } from "@//components/icons/pika/add"
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+import { buttonVariants } from "@/components/ui/button"
+import { Container } from "@/components/ui/container"
+import { DataTable } from "@/components/ui/data-table"
+import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"
 

@@ -1,8 +1,8 @@
-import { auth } from "@//lib/auth"
-import { getCachedIntegrations } from "@//lib/orm"
+import { auth } from "@/lib/auth"
+import { getCachedIntegrations } from "@/lib/orm"
 
-import { createSourceAction } from "@//server/actions/source"
-import { CreateSourceForm } from "@//components/forms/source/CreateSourceForm"
+import { createSourceAction } from "@/server/actions/source"
+import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
 
 const NewSourcePage = async () => {
 	const { workspaceId } = await auth()

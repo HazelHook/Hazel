@@ -2,8 +2,8 @@
 
 import { z } from "zod"
 
-import { createAction, protectedProcedure } from "@//server/trpc"
-import db from "@//lib/db"
+import { createAction, protectedProcedure } from "@/server/trpc"
+import db from "@/lib/db"
 
 const formSchema = z.object({
 	name: z.string(),

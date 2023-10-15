@@ -4,9 +4,9 @@ import { redirect } from "next/navigation"
 
 import db from "./db"
 import { cookies } from "next/headers"
-import getSupabaseServerClient from "@//core/supabase/server-client"
+import getSupabaseServerClient from "@/core/supabase/server-client"
 import requireSession from "./user/require-session"
-import configuration from "@//configuration"
+import configuration from "@/configuration"
 
 export const auth = async () => {
 	const client = getSupabaseServerClient()

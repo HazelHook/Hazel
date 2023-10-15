@@ -1,9 +1,9 @@
 import Link from "next/link"
 
-import configuration from "@//configuration"
-import Heading from "@//components/ui/heading"
+import configuration from "@/configuration"
+import Heading from "@/components/ui/heading"
 import SignUpMethodsContainer from "../components/SignUpMethodsContainer"
-import { getI18n } from "@//i18n/server"
+import { useTranslations } from "next-intl"
 
 const SIGN_IN_PATH = configuration.paths.signIn
 
@@ -12,7 +12,7 @@ export const metadata = {
 }
 
 async function SignUpPage() {
-	const t = await getI18n()
+	const t = useTranslations()
 	return (
 		<>
 			<div>

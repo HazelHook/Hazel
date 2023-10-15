@@ -3,17 +3,17 @@
 import { ReactNode, Suspense } from "react"
 import Link from "next/link"
 
-import { CacheSource } from "@//lib/orm"
-import { capitalizeFirstLetter, jsonToArray } from "@//lib/utils"
-import { Button } from "@//components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@//components/ui/card"
-import { ExpandableList } from "@//components/ui/ExpandableList"
-import { ScrollArea } from "@//components/ui/scroll-area"
-import { SheetHeader, SheetTitle } from "@//components/ui/sheet"
-import { DataTable } from "@//components/DataTable"
-import { Status } from "@//components/Status"
-import { columns } from "@//app/[locale]/(pages)/(source)/source/[id]/events/column"
-import { EventDataRowType } from "@//app/[locale]/(pages)/(source)/source/[id]/events/page"
+import { CacheSource } from "@/lib/orm"
+import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ExpandableList } from "@/components/ui/ExpandableList"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { SheetHeader, SheetTitle } from "@/components/ui/sheet"
+import { DataTable } from "@/components/DataTable"
+import { Status } from "@/components/Status"
+import { columns } from "@/app/[locale]/(pages)/(source)/source/[id]/events/column"
+import { EventDataRowType } from "@/app/[locale]/(pages)/(source)/source/[id]/events/page"
 
 export const TableWrapper = ({
 	data,

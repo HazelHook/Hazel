@@ -1,10 +1,10 @@
-import { auth } from "@//lib/auth"
-import db from "@//lib/db"
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
 
-import { createApiKeyAction } from "@//server/actions/api-keys"
+import { createApiKeyAction } from "@/server/actions/api-keys"
 import { ApiKeyModal } from "./modal"
-import { PageHeader } from "@//components/ui/page-header"
-import { Container } from "@//components/ui/container"
+import { PageHeader } from "@/components/ui/page-header"
+import { Container } from "@/components/ui/container"
 
 const ApiKeyPage = async () => {
 	const { workspaceId } = await auth()

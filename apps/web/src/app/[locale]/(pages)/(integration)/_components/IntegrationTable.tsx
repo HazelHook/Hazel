@@ -1,9 +1,9 @@
 "use client"
 
-import { DataTable } from "@//components/ui/data-table"
-import { deleteIntegrationAction, updateIntegrationAction } from "@//server/actions/integrations"
-import { columns } from "@//app/[locale]/(pages)/(integration)/integrations/columns"
-import { IntegrationToolColumn } from "@//app/[locale]/(pages)/(integration)/integrations/page"
+import { DataTable } from "@/components/ui/data-table"
+import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
+import { columns } from "@/app/[locale]/(pages)/(integration)/integrations/columns"
+import { IntegrationToolColumn } from "@/app/[locale]/(pages)/(integration)/integrations/page"
 
 export const IntegrationsTable = ({
 	integrations,

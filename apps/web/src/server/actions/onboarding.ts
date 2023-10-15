@@ -2,8 +2,8 @@
 
 import { z } from "zod"
 
-import { basicProtectedProcedure, createAction } from "@//server/trpc"
-import db from "@//lib/db"
+import { basicProtectedProcedure, createAction } from "@/server/trpc"
+import db from "@/lib/db"
 import * as schema from "db/src/drizzle/schema"
 
 import { cookies } from "next/headers"

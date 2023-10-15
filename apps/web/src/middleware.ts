@@ -1,5 +1,5 @@
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
-import { createI18nMiddleware } from "next-international/middleware"
+import createI18nMiddleware from "next-intl/middleware"
 
 import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from "next/server"
 import configuration from "./configuration"
@@ -25,7 +25,7 @@ const csrfMiddleware = csrf({
 const I18nMiddleware = createI18nMiddleware({
 	locales: ["en", "de"],
 	defaultLocale: "en",
-	urlMappingStrategy: "rewrite",
+	localePrefix: "never",
 })
 
 export const withI18n = (next: NextMiddleware) => {
@@ -42,7 +42,6 @@ export default withI18n(async function middleware(req: NextRequest) {
 })
 
 async function sessionMiddleware(req: NextRequest, res: NextResponse) {
-	console.log("HI")
 	const supabase = createMiddlewareClient({ req, res })
 	const { data } = await supabase.auth.getSession()
 

@@ -1,4 +1,4 @@
-import { useAuth } from "@//lib/provider/AuthProvider"
+import { useAuth } from "@/lib/provider/AuthProvider"
 
 /**
  * @returns {string[]} The key for the user's factors mutation. This is used to invalidate the query.

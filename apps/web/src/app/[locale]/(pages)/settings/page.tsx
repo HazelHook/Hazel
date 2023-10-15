@@ -1,7 +1,7 @@
-import { auth } from "@//lib/auth"
+import { auth } from "@/lib/auth"
 
-import { Container } from "@//components/ui/container"
-import { OrganizationUpdateForm } from "@//components/forms/organization/OrganizationUpdateForm"
+import { Container } from "@/components/ui/container"
+import { OrganizationUpdateForm } from "@/components/forms/organization/OrganizationUpdateForm"
 
 const SettingsPage = async () => {
 	const { workspaceId, organization } = await auth()

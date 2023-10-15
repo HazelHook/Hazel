@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react"
 
-import { Maximize02Icon } from "@//components/icons/pika/maximize02"
-import { Minimize02Icon } from "@//components/icons/pika/minimize02"
+import { Maximize02Icon } from "@/components/icons/pika/maximize02"
+import { Minimize02Icon } from "@/components/icons/pika/minimize02"
 
 export interface ExpandableListProps {
 	maxItems?: number

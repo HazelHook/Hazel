@@ -2,19 +2,19 @@
 
 import { FormEvent, useCallback } from "react"
 
-import useResetPassword from "@//core/hooks/use-reset-password"
-import AuthErrorMessage from "@//app/[locale]/auth/components/AuthErrorMessage"
+import useResetPassword from "@/core/hooks/use-reset-password"
+import AuthErrorMessage from "@/app/[locale]/auth/components/AuthErrorMessage"
 
-import configuration from "@//configuration"
-import If from "@//components/ui/if"
-import Alert from "@//components/ui/alert"
-import { Label } from "@//components/ui/label"
-import { Input } from "@//components/ui/input"
-import { Button } from "@//components/ui/button"
-import { useI18n } from "@//i18n/client"
+import configuration from "@/configuration"
+import If from "@/components/ui/if"
+import Alert from "@/components/ui/alert"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 
 function PasswordResetContainer() {
-	const t = useI18n()
+	const t = useTranslations()
 	const resetPasswordMutation = useResetPassword()
 	const error = resetPasswordMutation.error
 	const success = resetPasswordMutation.data

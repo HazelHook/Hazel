@@ -5,10 +5,10 @@ import { Avatar } from "@radix-ui/react-avatar"
 import { ColumnDef } from "@tanstack/react-table"
 import { Destination } from "db/src/drizzle/schema"
 
-import { getSeededProfileImageUrl } from "@//lib/utils"
-import { AvatarImage } from "@//components/ui/avatar"
-import { Badge } from "@//components/ui/badge"
-import { CheckTickIcon } from "@//components/icons/pika/checkTick"
+import { getSeededProfileImageUrl } from "@/lib/utils"
+import { AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 export type Column = Destination
 

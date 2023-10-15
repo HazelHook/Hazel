@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@//components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -10,9 +10,9 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@//components/ui/dialog"
-import type { deleteOrganzationAction } from "@//server/actions/organization"
-import { useAction } from "@//server/client"
+} from "@/components/ui/dialog"
+import type { deleteOrganzationAction } from "@/server/actions/organization"
+import { useAction } from "@/server/client"
 import { useRouter } from "next/navigation"
 
 interface OrganizationDeleteDialogProps {

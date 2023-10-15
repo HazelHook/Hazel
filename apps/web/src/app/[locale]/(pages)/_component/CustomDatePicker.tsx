@@ -2,10 +2,10 @@ import { useState } from "react"
 import { subDays } from "date-fns"
 import { DateRange } from "react-day-picker"
 
-import { cn } from "@//lib/utils"
-import { Button } from "@//components/ui/button"
-import { Calendar } from "@//components/ui/calendar"
-import { Dialog, DialogClose, DialogContentWithoutClose, DialogTrigger } from "@//components/ui/dialog"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import { Dialog, DialogClose, DialogContentWithoutClose, DialogTrigger } from "@/components/ui/dialog"
 
 interface CustomDatePickerProps {
 	className?: string

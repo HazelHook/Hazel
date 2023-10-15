@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useRef, useTransition } from "react"
-import useCsrfToken from "@//core/hooks/use-csrf-token"
-import Spinner from "@//components/Spinner"
-import { useAction } from "@//server/client"
-import { handleOnboardingAction } from "@//server/actions/onboarding"
+import useCsrfToken from "@/core/hooks/use-csrf-token"
+import Spinner from "@/components/Spinner"
+import { useAction } from "@/server/client"
+import { handleOnboardingAction } from "@/server/actions/onboarding"
 import { useRouter } from "next/navigation"
-import configuration from "@//configuration"
+import configuration from "@/configuration"
 
 interface CompleteOnboardingStepData {
 	organization: string

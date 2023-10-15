@@ -1,4 +1,4 @@
-import PageLoadingIndicator from "@//components/PageLoadingIndicator"
+import PageLoadingIndicator from "@/components/PageLoadingIndicator"
 
 function Loading() {
 	return (

@@ -1,9 +1,9 @@
 "use server"
 
-import { createAction, protectedProcedure } from "@//server/trpc"
-import db from "@//lib/db"
+import { createAction, protectedProcedure } from "@/server/trpc"
+import db from "@/lib/db"
 
-import { createSourceSchema, updateSourceSchema } from "@//lib/schemas/source"
+import { createSourceSchema, updateSourceSchema } from "@/lib/schemas/source"
 
 export const createSourceAction = createAction(
 	protectedProcedure.input(createSourceSchema).mutation(async (opts) => {

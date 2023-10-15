@@ -4,9 +4,9 @@ import { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { cn } from "@//lib/utils"
-import { Button } from "@//components/ui/button"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@//components/ui/tooltip"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const SidebarClientItem = ({
 	className,

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@//lib/utils"
+import { cn } from "@/lib/utils"
 
 // rome-ignore lint/suspicious/noEmptyInterface: <explanation>
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
