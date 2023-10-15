@@ -10,6 +10,7 @@ import Alert from "@/components/ui/alert"
 
 import useSignUpWithEmailAndPasswordMutation from "@/core/hooks/use-sign-up-with-email-password"
 import EmailPasswordSignUpForm from "./EmailPasswordSignUpForm"
+import { useTranslations } from "next-intl"
 
 const requireEmailConfirmation = configuration.auth.requireEmailConfirmation
 

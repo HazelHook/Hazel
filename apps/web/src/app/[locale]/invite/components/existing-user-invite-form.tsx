@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 
 import { useAction } from "@/server/client"
 import type { acceptOrganizationInvite } from "@/server/actions/organization-invite"
+import { useTranslations } from "next-intl"
 
 function ExistingUserInviteForm(
 	props: React.PropsWithChildren<{

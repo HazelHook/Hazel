@@ -42,16 +42,18 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 		workspace_id: workspaceId,
 	})
 
-	if (data.length === 0) {
+	const req = data[0]
+
+	if (!req) {
 		notFound()
 	}
-
-	const req = data[0]
 
 	const { data: resData } = await tiny.response.get({
 		workspace_id: workspaceId,
 		request_id: params.id,
 	})
+
+	const firstRes = resData[0]
 
 	// TODO: ADD ACCEPETED/REJECTED TO TINYBIRD => Wasnt valid
 
@@ -96,9 +98,14 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 						/>
 						<ListItem
 							name="Added Latency"
-							description={`${
-								new Date(resData[0]?.send_at).getTime() - new Date(resData[0]?.received_at).getTime()
-							}ms`}
+							description={
+								firstRes
+									? `${
+											new Date(firstRes.send_at).getTime() -
+											new Date(firstRes.received_at).getTime()
+									  }ms`
+									: "-"
+							}
 						/>
 						<ListItem name="Verified" description={capitalizeFirstLetter(String(!!req.validated))} />
 					</div>

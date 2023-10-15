@@ -4,7 +4,7 @@ import db from "@/lib/db"
 import { auth } from "@/lib/auth"
 import { Container } from "@/components/ui/container"
 import { createOrganizationInvite } from "@/server/actions/organization-invite"
-import { sql } from "drizzle-orm"
+import { sql } from "db/src/drizzle"
 import { OrganizationMember } from "db/src/drizzle"
 import { User } from "@supabase/supabase-js"
 

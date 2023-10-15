@@ -61,6 +61,8 @@ const TableSheet = ({
 
 	const headers = JSON.parse(data.headers)
 
+	const firstResponse = data.responses[0]
+
 	return (
 		<div>
 			<SheetHeader>
@@ -102,10 +104,14 @@ const TableSheet = ({
 								/>
 								<ListItem
 									name="Added Latency"
-									description={`${
-										new Date(data.responses[0]?.send_at).getTime() -
-										new Date(data.timestamp).getTime()
-									}ms`}
+									description={
+										firstResponse
+											? `${
+													new Date(firstResponse.send_at).getTime() -
+													new Date(data.timestamp).getTime()
+											  }ms`
+											: "-"
+									}
 								/>
 								<ListItem
 									name="Verified"

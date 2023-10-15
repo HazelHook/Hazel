@@ -16,8 +16,6 @@
 		"db": "workspace:*",
 		"elysia": "latest"
 	},
-	"devDependencies": {
-		"bun-types": "latest"
-	},
+
 	"module": "src/index.js"
 }

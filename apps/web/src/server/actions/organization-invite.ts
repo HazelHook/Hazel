@@ -4,7 +4,6 @@ import { z } from "zod"
 import { basicProtectedProcedure, createAction, protectedProcedure } from "../trpc"
 import db from "@/lib/db"
 import { orgInviteFormSchema } from "@/lib/schemas/organization"
-import { serverClient } from "../server"
 import { TRPCError } from "@trpc/server"
 
 // import { Resend } from "resend"

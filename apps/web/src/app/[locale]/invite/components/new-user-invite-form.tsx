@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 import EmailPasswordSignInContainer from "../../auth/components/EmailPasswordSignInContainer"
 import EmailLinkAuth from "../../auth/components/EmailLinkAuth"
 import PhoneNumberSignInContainer from "../../auth/components/PhoneNumberSignInContainer"
+import { useTranslations } from "next-intl"
 
 enum Mode {
 	SignUp = 0,

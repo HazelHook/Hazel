@@ -247,7 +247,7 @@ export const connectionRelations = relations(connection, ({ one }) => ({
 export type InsertUser = InferInsertModel<typeof user>
 export type User = InferSelectModel<typeof user>
 
-export type InsertConnection = InferModel<typeof connection>
+export type InsertConnection = InferInsertModel<typeof connection>
 export type Connection = InferSelectModel<typeof connection>
 
 export type InsertDestination = InferInsertModel<typeof destination>
