@@ -20,6 +20,7 @@ import { Factor } from "@supabase/supabase-js"
 import { PageHeader } from "@/components/ui/page-header"
 import MultiFactorAuthSetupModal from "./components/multi-factor-auth-setup-modal"
 import { Container } from "@/components/ui/container"
+import { Card } from "@/components/ui/card"
 
 const MAX_FACTOR_COUNT = 10
 
@@ -30,9 +31,10 @@ function MultiFactorAuthenticationSettings() {
 
 	return (
 		<Container>
-			<PageHeader title={t("multiFactorAuth")} subtitle={t("multiFactorAuthSubheading")}>
+			<PageHeader title={t("multiFactorAuth")} subtitle={t("multiFactorAuthSubheading")} />
+			<Card className="p-3">
 				<MultiFactorAuthFactorsList onEnrollRequested={() => setIsMfaModalOpen(true)} />
-			</PageHeader>
+			</Card>
 
 			<MultiFactorAuthSetupModal isOpen={isMfaModalOpen} setIsOpen={setIsMfaModalOpen} />
 		</Container>

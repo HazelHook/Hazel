@@ -1,7 +1,6 @@
 "use client"
 
-import { Close as DialogPrimitiveClose } from "@radix-ui/react-dialog"
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./dialog"
+import { Dialog, DialogContent, DialogTitle, DialogTrigger, DialogClose } from "./dialog"
 import If from "./if"
 import { CrossIcon } from "../icons/pika/cross"
 import { Button } from "./button"
@@ -63,7 +62,7 @@ const Modal: React.FC<Props> & {
 					<div className="relative">{children}</div>
 
 					<If condition={useCloseButton}>
-						<DialogPrimitiveClose asChild>
+						<DialogClose asChild>
 							<Button
 								className={"absolute top-0 right-4 flex items-center"}
 								onClick={() => {
@@ -75,7 +74,7 @@ const Modal: React.FC<Props> & {
 								<CrossIcon className={"h-6"} />
 								<span className="sr-only">Close</span>
 							</Button>
-						</DialogPrimitiveClose>
+						</DialogClose>
 					</If>
 				</div>
 			</DialogContent>
