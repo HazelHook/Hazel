@@ -11,6 +11,7 @@ import { Toaster } from "sonner"
 import AuthProvider from "@/lib/provider/AuthProvider"
 import configuration from "@/configuration"
 import { notFound } from "next/navigation"
+import { I18Provider } from "@/lib/provider/i18-provider"
 
 export const metadata: Metadata = {
 	title: {
@@ -47,23 +48,25 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 		<html lang={params.locale} suppressHydrationWarning>
 			<head />
 			<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
-				<AuthProvider>
-					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-						<NextProgress />
-						{children}
-						<TailwindIndicator />
-					</ThemeProvider>
-					<Toaster
-						position="bottom-right"
-						toastOptions={{
-							style: {
-								background: "hsl(var(--background))",
-								color: "hsl(var(--foreground))",
-								border: "1px solid hsl(var(--border))",
-							},
-						}}
-					/>
-				</AuthProvider>
+				<I18Provider locale={params.locale}>
+					<AuthProvider>
+						<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+							<NextProgress />
+							{children}
+							<TailwindIndicator />
+						</ThemeProvider>
+						<Toaster
+							position="bottom-right"
+							toastOptions={{
+								style: {
+									background: "hsl(var(--background))",
+									color: "hsl(var(--foreground))",
+									border: "1px solid hsl(var(--border))",
+								},
+							}}
+						/>
+					</AuthProvider>
+				</I18Provider>
 			</body>
 		</html>
 	)

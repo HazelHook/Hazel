@@ -11,7 +11,7 @@ export const metadata = {
 	title: "Sign up",
 }
 
-async function SignUpPage() {
+function SignUpPage() {
 	const t = useTranslations()
 	return (
 		<>

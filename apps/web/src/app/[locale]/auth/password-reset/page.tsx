@@ -10,7 +10,7 @@ export const metadata = {
 	title: "Password Reset",
 }
 
-async function PasswordResetPage() {
+function PasswordResetPage() {
 	const t = useTranslations()
 	return (
 		<>

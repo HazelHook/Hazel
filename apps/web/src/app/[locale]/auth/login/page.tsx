@@ -10,7 +10,7 @@ export const metadata = {
 	title: "Sign In",
 }
 
-async function SignInPage() {
+function SignInPage() {
 	const t = useTranslations("auth")
 
 	return (

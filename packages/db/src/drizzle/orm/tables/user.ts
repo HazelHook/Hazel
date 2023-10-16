@@ -2,7 +2,7 @@ import { DrizzleTable } from "../db-table"
 
 import * as schema from "../../schema"
 import { and, eq, isNull } from "drizzle-orm"
-import { DB } from ".."
+import { DB, OptionalExceptFor } from ".."
 
 const userLogic = (db: DB) => ({
 	table: new DrizzleTable("user", schema.user, db),
@@ -50,6 +50,12 @@ const userLogic = (db: DB) => ({
 
 		return { id: data.id }
 	},
+	update: async(data: OptionalExceptFor<schema.InsertUser, "id">) => {
+		const { id, ...rest } = data
+		const res = await db.update(schema.user).set(rest).where(eq(schema.user.id, id))
+
+		return { id }
+	}
 })
 
 export default userLogic

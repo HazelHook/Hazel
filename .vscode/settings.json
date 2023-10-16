@@ -10,7 +10,9 @@
 		"**/Thumbs.db": true
 	},
 	"typescript.preferences.importModuleSpecifier": "shortest",
-	"hazel.pagesDir": "apps/web/app/(pages)",
+	"i18n-ally.localesPaths": ["apps/web/src/i18n/locales"],
+	"i18n-ally.keystyle": "nested",
+	"hazel.pagesDir": "apps/web/app/[locale]",
 	"hazel.pageTypes": [
 		{
 			"name": "New",

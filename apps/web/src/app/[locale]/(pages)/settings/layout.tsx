@@ -2,8 +2,12 @@ import { Sidebar } from "@/components/Sidebar"
 import { BarChartUpIcon } from "@/components/icons/pika/barChartUp"
 import { CardIcon } from "@/components/icons/pika/card"
 import { DangerIcon } from "@/components/icons/pika/danger"
+import { EyeScanIcon } from "@/components/icons/pika/eyeScan"
+import { FocusIcon } from "@/components/icons/pika/focus"
 import { KeyIcon } from "@/components/icons/pika/key"
+import { LockedIcon } from "@/components/icons/pika/locked"
 import { Settings02Icon } from "@/components/icons/pika/settings02"
+import { UserIcon } from "@/components/icons/pika/user"
 import { User2Icon } from "@/components/icons/pika/user2"
 import { UserPlusIcon } from "@/components/icons/pika/userPlus"
 import { auth } from "@/lib/auth"
@@ -55,6 +59,32 @@ const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 								title: "Danger",
 								icon: DangerIcon,
 								href: "/settings/danger",
+								className: "text-destructive",
+							},
+						],
+					},
+					{
+						title: "Personal",
+						items: [
+							{
+								title: "My Details",
+								icon: UserIcon,
+								href: "/settings/personal",
+							},
+							{
+								title: "Authentication",
+								icon: EyeScanIcon,
+								href: "/settings/personal/auth",
+							},
+							{
+								title: "Email",
+								icon: FocusIcon,
+								href: "/settings/personal/email",
+							},
+							{
+								title: "Password",
+								icon: LockedIcon,
+								href: "/settings/personal/password",
 								className: "text-destructive",
 							},
 						],

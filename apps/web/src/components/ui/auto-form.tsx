@@ -526,7 +526,7 @@ export function AutoFormSubmit({ children }: { children?: React.ReactNode }) {
 }
 
 // TODO: This should support recursive ZodEffects but TypeScript doesn't allow circular type definitions.
-type ZodObjectOrWrapped = z.ZodObject<any, any> | z.ZodEffects<z.ZodObject<any, any>>
+export type ZodObjectOrWrapped = z.ZodObject<any, any> | z.ZodEffects<z.ZodObject<any, any>>
 
 function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	formSchema,
