@@ -3,7 +3,7 @@
 import { ReactNode, useState } from "react"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@hazel/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -12,10 +12,10 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@hazel/ui/dialog"
 
 import { useRouter } from "next/navigation"
-import AutoForm from "../ui/auto-form"
+import AutoForm from "@hazel/ui/auto-form"
 import { useAction } from "@/server/client"
 import { toast } from "sonner"
 import { orgInviteFormSchema } from "../../lib/schemas/organization"

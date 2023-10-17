@@ -1,6 +1,7 @@
 "use client"
 
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent } from "@hazel/ui/dialog"
+
 import type { createConnectionAction } from "@/server/actions/connections"
 import type { Destination, Integration, Source } from "db/src/drizzle/schema"
 import { CreateDestinationForm } from "../destination/CreateDestinationForm"
@@ -12,13 +13,14 @@ import { useState } from "react"
 import { createConnectionSchema } from "@/lib/schemas/connection"
 import { useAction } from "@/server/client"
 import { z } from "zod"
-import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
+import { Avatar, AvatarImage } from "@hazel/ui/avatar"
+
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { AddIcon } from "@/components/icons/pika/add"
-import { Button } from "@/components/ui/button"
-import AutoForm from "@/components/ui/auto-form"
+import { Button } from "@hazel/ui/button"
+import AutoForm from "@hazel/ui/auto-form"
 
 export interface CreateConnectionFormProps {
 	action: typeof createConnectionAction

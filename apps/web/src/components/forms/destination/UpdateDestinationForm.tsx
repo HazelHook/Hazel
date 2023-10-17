@@ -6,7 +6,7 @@ import { Destination } from "db/src/drizzle/schema"
 import { useAction } from "@/server/client"
 import type { updateDestinationAction } from "@/server/actions/destination"
 import { updateDestinationSchema } from "@/lib/schemas/destination"
-import AutoForm from "@/components/ui/auto-form"
+import AutoForm from "@hazel/ui/auto-form"
 import { LoadingButton } from "@/components/loading-button"
 
 export const UpdateDestinationForm = ({

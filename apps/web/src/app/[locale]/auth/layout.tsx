@@ -2,7 +2,6 @@ import AuthPageShell from "./components/AuthPageShell"
 import getSupabaseServerClient from "@/core/supabase/server-client"
 import { redirect } from "next/navigation"
 import configuration from "@/configuration"
-
 import verifyRequiresMfa from "@/core/session/utils/check-requires-mfa"
 
 export const dynamic = "force-dynamic"

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ColumnDef } from "@tanstack/react-table"
 import { TBResponse } from "db/src/tinybird/model/tiny-response"
 
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -12,7 +12,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@hazel/ui/dropdown-menu"
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
 
 export type Column = TBResponse

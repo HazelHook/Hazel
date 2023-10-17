@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Button } from "@hazel/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@hazel/ui/dialog"
 import type { createApiKeyAction } from "@/server/actions/api-keys"
 import { CreateApiKeyForm } from "@/components/forms/api/CreateApiKeyForm"
 import { useState } from "react"

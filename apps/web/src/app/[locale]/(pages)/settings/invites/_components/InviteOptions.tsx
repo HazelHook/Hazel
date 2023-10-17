@@ -1,13 +1,13 @@
 import { useRouter } from "next/navigation"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@hazel/ui/dropdown-menu"
 import { ThreeDotsVerticalIcon } from "@/components/icons/pika/threeDotsVertical"
 import { ClipboardIcon } from "@/components/icons/pika/clipboard"
 import { UserCrossIcon } from "@/components/icons/pika/userCross"

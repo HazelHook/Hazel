@@ -1,7 +1,7 @@
 "use client"
 
-import AutoForm from "@/components/ui/auto-form"
-import { Button } from "@/components/ui/button"
+import AutoForm from "@hazel/ui/auto-form"
+import { Button } from "@hazel/ui/button"
 import { createApiKeySchema } from "@/lib/schemas/api-key"
 import type { createApiKeyAction } from "@/server/actions/api-keys"
 import { useAction } from "@/server/client"

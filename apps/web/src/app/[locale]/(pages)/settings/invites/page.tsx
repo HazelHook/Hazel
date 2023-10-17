@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { Container } from "@/components/ui/container"
+import { Container } from "@hazel/ui/container"
 import { TableWrapper } from "./_components/TableWrapper"
 import { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
 

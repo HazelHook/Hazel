@@ -5,9 +5,9 @@ import { Tiny } from "db/src/tinybird"
 
 import { getCachedSource } from "@/lib/orm"
 import { chartColors, formatDateTime } from "@/lib/utils"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
-import { Chart } from "@/components/ui/chart"
-import { DataTable } from "@/components/ui/data-table"
+import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
+import { Chart } from "@hazel/ui/chart"
+import { DataTable } from "@hazel/ui/data-table"
 import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
 import { columns } from "./column"

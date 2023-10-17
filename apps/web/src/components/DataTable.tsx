@@ -11,9 +11,10 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 
-import { DataTablePagination } from "@/components/ui/data-table-pagination"
-import { Sheet, SheetContent } from "@/components/ui/sheet"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
+
+import { Sheet, SheetContent } from "@hazel/ui/sheet"
+import { DataTablePagination } from "@hazel/ui/data-table-pagination"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]

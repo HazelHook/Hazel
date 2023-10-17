@@ -1,6 +1,6 @@
-import AutoForm from "@/components/ui/auto-form"
-import { Button } from "@/components/ui/button"
-import If from "@/components/ui/if"
+import AutoForm from "@hazel/ui/auto-form"
+import { Button } from "@hazel/ui/button"
+import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
 import { z } from "zod"

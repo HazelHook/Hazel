@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
-import { Heading } from "@/components/ui/heading"
-import If from "@/components/ui/if"
+import { Heading } from "@hazel/ui/heading"
+import If from "@hazel/ui/if"
 import getLogger from "@/core/logger"
 import getSupabaseServerClient from "@/core/supabase/server-client"
 import db from "@/lib/db"

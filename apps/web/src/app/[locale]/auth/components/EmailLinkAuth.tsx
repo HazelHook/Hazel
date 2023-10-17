@@ -5,12 +5,12 @@ import { useCallback } from "react"
 
 import configuration from "@/configuration"
 import { toast } from "sonner"
-import Alert from "@/components/ui/alert"
-import { Button } from "@/components/ui/button"
-import If from "@/components/ui/if"
+import Alert from "@hazel/ui/alert"
+import { Button } from "@hazel/ui/button"
+import If from "@hazel/ui/if"
 import useSignInWithOtp from "@/core/hooks/use-sign-in-with-otp"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+import { Label } from "@hazel/ui/label"
+import { Input } from "@hazel/ui/input"
 import { useTranslations } from "next-intl"
 
 const EmailLinkAuth: React.FC<{

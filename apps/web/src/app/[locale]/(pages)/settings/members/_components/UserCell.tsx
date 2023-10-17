@@ -1,4 +1,4 @@
-import { AvatarImage, Avatar } from "@/components/ui/avatar"
+import { AvatarImage, Avatar } from "@hazel/ui/avatar"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { User } from "@supabase/supabase-js"
 

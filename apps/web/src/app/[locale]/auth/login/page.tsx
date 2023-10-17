@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { Heading } from "@/components/ui/heading"
+import { Heading } from "@hazel/ui/heading"
 
 import configuration from "@/configuration"
 import SignInMethodsContainer from "@/app/[locale]/auth/components/SignInMethodsContainer"

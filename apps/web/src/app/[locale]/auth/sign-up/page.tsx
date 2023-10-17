@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import configuration from "@/configuration"
-import Heading from "@/components/ui/heading"
+import Heading from "@hazel/ui/heading"
 import SignUpMethodsContainer from "../components/SignUpMethodsContainer"
 import { useTranslations } from "next-intl"
 

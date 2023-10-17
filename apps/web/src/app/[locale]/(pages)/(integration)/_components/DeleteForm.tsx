@@ -2,10 +2,10 @@
 
 import React from "react"
 
-import { Card } from "@/components/ui/card"
+import { Card } from "@hazel/ui/card"
 import { MinusIcon } from "@/components/icons/pika/minus"
-import { Separator } from "@/components/ui/separator"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Separator } from "@hazel/ui/separator"
+import { Dialog, DialogContent } from "@hazel/ui/dialog"
 
 export function DeleteForm({
 	onClose,

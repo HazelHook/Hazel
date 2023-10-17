@@ -1,4 +1,4 @@
-import Alert from "@/components/ui/alert"
+import Alert from "@hazel/ui/alert"
 import { AuthError } from "@supabase/supabase-js"
 import { useTranslations } from "next-intl"
 

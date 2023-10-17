@@ -1,12 +1,12 @@
 import VerificationCodeInput from "@/app/[locale]/auth/components/VerificationCodeInput"
-import Alert from "@/components/ui/alert"
-import If from "@/components/ui/if"
-import Modal from "@/components/ui/modal"
+import Alert from "@hazel/ui/alert"
+import If from "@hazel/ui/if"
+import Modal from "@hazel/ui/modal"
 import { useTranslations } from "next-intl"
 import React, { useCallback, useState } from "react"
 import { FactorQrCode, useVerifyCodeMutation } from "./mfa-setup-modal"
-import TextField from "@/components/ui/text-field"
-import { Button } from "@/components/ui/button"
+import { TextField } from "@hazel/ui/text-field"
+import { Button } from "@hazel/ui/button"
 
 export function MultiFactorAuthSetupForm({
 	onEnrolled,

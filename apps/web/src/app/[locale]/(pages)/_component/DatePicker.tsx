@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { format } from "date-fns"
 
 import { formatDateTime } from "@/lib/utils"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 import { CalendarIcon } from "@/components/icons/pika/calendar"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 

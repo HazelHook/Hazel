@@ -3,11 +3,8 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { SortableHeader } from "@/components/ui/data-table"
-import { ArrowDownSquareIcon } from "@/components/icons/pika/arrowDownSquare"
-import { ArrowUpSquareIcon } from "@/components/icons/pika/arrowUpSquare"
+import { Badge } from "@hazel/ui/badge"
+import { SortableHeader } from "@hazel/ui/data-table"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { IntegrationsActions } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationsActions"
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"

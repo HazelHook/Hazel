@@ -4,7 +4,7 @@ import { useCallback } from "react"
 import type { Session } from "@supabase/auth-helpers-nextjs"
 import useSignOut from "@/core/hooks/use-sign-out"
 import useRefresh from "@/core/hooks/use-refresh"
-import { Button } from "@/components/ui/button"
+import { Button } from "@hazel/ui/button"
 
 import { useAction } from "@/server/client"
 import type { acceptOrganizationInvite } from "@/server/actions/organization-invite"

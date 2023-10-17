@@ -6,9 +6,10 @@ import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 import { Connection, Destination, Integration, Source } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import { Cell, SortableHeader } from "@/components/ui/data-table"
+import { Avatar, AvatarImage } from "@hazel/ui/avatar"
+
+import { Badge } from "@hazel/ui/badge"
+import { Cell, SortableHeader } from "@hazel/ui/data-table"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 export type Column = Source & {

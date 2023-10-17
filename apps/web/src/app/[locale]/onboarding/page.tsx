@@ -1,10 +1,10 @@
 import configuration from "@/configuration"
 import getSupabaseServerClient from "@/core/supabase/server-client"
 import db from "@/lib/db"
-import requireSession from "@/lib/user/require-session"
 import OnboardingContainer from "./components/OnboardingContainer"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
+import requireSession from "@/lib/user/require-session"
 
 const OnboardingPage = async () => {
 	const client = getSupabaseServerClient()

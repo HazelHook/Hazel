@@ -8,11 +8,12 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
+	DropdownMenuSub,
 	DropdownMenuSubTrigger,
 	DropdownMenuPortal,
 	DropdownMenuSubContent,
 	DropdownMenuCheckboxItem,
-} from "@/components/ui/dropdown-menu"
+} from "@hazel/ui/dropdown-menu"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
@@ -20,12 +21,10 @@ import { useState } from "react"
 import { useLocale } from "next-intl"
 
 import { cn } from "@/lib/utils"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarImage, AvatarFallback } from "@hazel/ui/avatar"
 
-import { DropdownMenuSub } from "@radix-ui/react-dropdown-menu"
 import { useTheme } from "next-themes"
 import { Organization, OrganizationMember } from "db/src/drizzle/schema"
-import { PopoverTriggerProps } from "@radix-ui/react-popover"
 import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { RocketIcon } from "./icons/pika/rocket"
 import { File2InfoIcon } from "./icons/pika/file2Info"
@@ -38,11 +37,11 @@ import { CheckTickIcon } from "./icons/pika/checkTick"
 import { useAction } from "@/server/client"
 import { ChevronSortVerticalIcon } from "./icons/pika/chevronSortVertical"
 import { AddCircleIcon } from "./icons/pika/addCircle"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog"
-import AutoForm from "./ui/auto-form"
-import { Button } from "./ui/button"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@hazel/ui/dialog"
+import AutoForm from "@hazel/ui/auto-form"
+import { Button } from "@hazel/ui/button"
 import { createOrgFormSchema } from "@/lib/schemas/organization"
-import { Badge } from "./ui/badge"
+import { Badge } from "@hazel/ui/badge"
 import useSignOut from "@/core/hooks/use-sign-out"
 import { useAuth } from "@/lib/provider/AuthProvider"
 
@@ -50,7 +49,7 @@ type Membership = OrganizationMember & {
 	organization: Organization
 }
 
-interface TeamSwitcherProps extends PopoverTriggerProps {
+interface TeamSwitcherProps {
 	memberships: Membership[]
 	currentMembershipId?: string
 	createTeamAction: typeof createOrganzationAction

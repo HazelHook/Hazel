@@ -3,8 +3,8 @@ import db from "@/lib/db"
 
 import { createApiKeyAction } from "@/server/actions/api-keys"
 import { ApiKeyModal } from "./modal"
-import { PageHeader } from "@/components/ui/page-header"
-import { Container } from "@/components/ui/container"
+import { PageHeader } from "@hazel/ui/page-header"
+import { Container } from "@hazel/ui/container"
 
 const ApiKeyPage = async () => {
 	const { workspaceId } = await auth()

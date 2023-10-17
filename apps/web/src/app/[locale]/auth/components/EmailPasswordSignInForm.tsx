@@ -1,10 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import If from "@/components/ui/if"
+import { Button } from "@hazel/ui/button"
+import If from "@hazel/ui/if"
 import { z } from "zod"
-import AutoForm from "@/components/ui/auto-form"
+import AutoForm from "@hazel/ui/auto-form"
 import { passwordSchema } from "./EmailPasswordSignUpForm"
 import { useTranslations } from "next-intl"
 

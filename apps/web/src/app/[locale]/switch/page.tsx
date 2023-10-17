@@ -1,15 +1,15 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import getSupabaseServerClient from "@/core/supabase/server-client"
-import requireSession from "@/lib/user/require-session"
 import db from "@/lib/db"
 import configuration from "@/configuration"
-import { Container } from "@/components/ui/container"
+import { Container } from "@hazel/ui/container"
 import { switchOrganizationAction } from "@/server/actions/organization"
 import { CreateOrg } from "./components/CreateOrg"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Card } from "@/components/ui/card"
+import { Card } from "@hazel/ui/card"
 import { OrgButton } from "./components/org-button"
+import requireSession from "@/lib/user/require-session"
 
 async function OrganizationsPage() {
 	const client = getSupabaseServerClient()

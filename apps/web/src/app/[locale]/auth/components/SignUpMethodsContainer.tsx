@@ -5,7 +5,7 @@ import { useCallback } from "react"
 
 import configuration from "@/configuration"
 import OAuthProviders from "./OAuthProviders"
-import If from "@/components/ui/if"
+import If from "@hazel/ui/if"
 
 import EmailLinkAuth from "./EmailLinkAuth"
 import EmailPasswordSignUpContainer from "./EmailPasswordSignUpContainer"

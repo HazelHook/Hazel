@@ -84,6 +84,7 @@ const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 							{
 								title: "Password",
 								icon: LockedIcon,
+								disabled: true,
 								href: "/settings/personal/password",
 								className: "text-destructive",
 							},

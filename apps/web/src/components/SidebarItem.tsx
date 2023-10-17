@@ -5,8 +5,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { Button } from "@hazel/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 
 export const SidebarClientItem = ({
 	className,

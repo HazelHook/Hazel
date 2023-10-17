@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react"
 import classNames from "clsx"
-import If from "./ui/if"
+import If from "@hazel/ui/if"
 import { LogoIcon } from "./icons/Logo"
 import Spinner from "./Spinner"
 

@@ -1,4 +1,5 @@
-import { TooltipProvider } from "@/components/ui/tooltip"
+import { TooltipProvider } from "@hazel/ui/tooltip"
+
 import { Sidebar } from "@/components/Sidebar"
 import { HomeIcon } from "@/components/icons/pika/home"
 import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"

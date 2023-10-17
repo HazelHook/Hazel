@@ -1,4 +1,4 @@
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 import { useAuth } from "@/lib/provider/AuthProvider"
 import { capitalizeFirstLetter } from "@/lib/utils"
 

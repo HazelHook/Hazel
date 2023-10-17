@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import OAuthProviders from "./OAuthProviders"
 
 import configuration from "@/configuration"
-import If from "@/components/ui/if"
+import If from "@hazel/ui/if"
 import EmailLinkAuth from "./EmailLinkAuth"
 import EmailPasswordSignInContainer from "./EmailPasswordSignInContainer"
 import PhoneNumberSignInContainer from "./PhoneNumberSignInContainer"

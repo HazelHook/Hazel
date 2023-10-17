@@ -1,8 +1,8 @@
 "use client"
 
 import { z } from "zod"
-import AutoForm, { FieldConfig, ZodObjectOrWrapped } from "@/components/ui/auto-form"
-import { Button } from "@/components/ui/button"
+import AutoForm, { FieldConfig, ZodObjectOrWrapped } from "@hazel/ui/auto-form"
+import { Button } from "@hazel/ui/button"
 import { useAction } from "@/server/client"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"

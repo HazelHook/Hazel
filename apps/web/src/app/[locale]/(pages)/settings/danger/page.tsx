@@ -1,9 +1,9 @@
-import { Container } from "@/components/ui/container"
+import { Container } from "@hazel/ui/container"
 
 import { auth } from "@/lib/auth"
 import { DeleteOrganizationDialog } from "./dialog"
 import { deleteOrganzationAction } from "@/server/actions/organization"
-import { PageHeader } from "@/components/ui/page-header"
+import { PageHeader } from "@hazel/ui/page-header"
 
 const DangerPage = async () => {
 	const { workspaceId, organization, userId } = await auth()

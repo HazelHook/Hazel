@@ -6,11 +6,11 @@ import useResetPassword from "@/core/hooks/use-reset-password"
 import AuthErrorMessage from "@/app/[locale]/auth/components/AuthErrorMessage"
 
 import configuration from "@/configuration"
-import If from "@/components/ui/if"
-import Alert from "@/components/ui/alert"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import If from "@hazel/ui/if"
+import Alert from "@hazel/ui/alert"
+import { Label } from "@hazel/ui/label"
+import { Input } from "@hazel/ui/input"
+import { Button } from "@hazel/ui/button"
 import { useTranslations } from "next-intl"
 
 function PasswordResetContainer() {

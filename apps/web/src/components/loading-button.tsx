@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Button, ButtonProps } from "./ui/button"
+import { Button, ButtonProps } from "@hazel/ui/button"
 
 interface LoadingButtonProps extends ButtonProps {
 	loading: boolean

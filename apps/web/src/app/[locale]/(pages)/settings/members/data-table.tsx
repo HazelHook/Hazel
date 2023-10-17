@@ -10,11 +10,11 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 import { ReactNode, useState } from "react"
-import { Input } from "@/components/ui/input"
-import { DataTablePagination } from "@/components/ui/data-table-pagination"
-import { Button } from "@/components/ui/button"
+import { Input } from "@hazel/ui/input"
+import { DataTablePagination } from "@hazel/ui/data-table-pagination"
+import { Button } from "@hazel/ui/button"
 import { AddIcon } from "@/components/icons/pika/add"
 import { usePagination } from "@/lib/hooks/usePagination"
 import { OrganizationInviteModal } from "@/components/modals/OrganizationInviteModal"

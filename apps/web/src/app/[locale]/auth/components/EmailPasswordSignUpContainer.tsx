@@ -5,8 +5,8 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import AuthErrorMessage from "./AuthErrorMessage"
 
 import configuration from "@/configuration"
-import If from "@/components/ui/if"
-import Alert from "@/components/ui/alert"
+import If from "@hazel/ui/if"
+import Alert from "@hazel/ui/alert"
 
 import useSignUpWithEmailAndPasswordMutation from "@/core/hooks/use-sign-up-with-email-password"
 import EmailPasswordSignUpForm from "./EmailPasswordSignUpForm"

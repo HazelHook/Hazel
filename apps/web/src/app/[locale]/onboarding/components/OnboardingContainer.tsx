@@ -6,7 +6,7 @@ import OrganizationInfoStep, { OrganizationInfoStepData } from "./OrganizationIn
 
 import CompleteOnboardingStep from "./CompleteOnboardingStep"
 import CsrfTokenContext from "@/lib/contexts/csrf"
-import If from "@/components/ui/if"
+import If from "@hazel/ui/if"
 
 interface Data {
 	organization: string

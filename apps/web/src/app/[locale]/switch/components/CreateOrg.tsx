@@ -1,7 +1,7 @@
 "use client"
 
-import AutoForm from "@/components/ui/auto-form"
-import { Button } from "@/components/ui/button"
+import AutoForm from "@hazel/ui/auto-form"
+import { Button } from "@hazel/ui/button"
 import {
 	Dialog,
 	DialogContent,
@@ -10,7 +10,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@hazel/ui/dialog"
 import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { createOrganzationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"

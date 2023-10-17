@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 
-import { Container } from "@/components/ui/container"
-import { PageHeader } from "@/components/ui/page-header"
+import { Container } from "@hazel/ui/container"
+import { PageHeader } from "@hazel/ui/page-header"
 import { UserUpdateEmailForm } from "@/components/forms/user/user-update-email-form"
 
 const UpdateEmailPage = async () => {

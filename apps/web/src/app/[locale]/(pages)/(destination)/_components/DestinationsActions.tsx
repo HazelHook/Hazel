@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 import { useAction } from "@/server/client"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -13,7 +13,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@hazel/ui/dialog"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"

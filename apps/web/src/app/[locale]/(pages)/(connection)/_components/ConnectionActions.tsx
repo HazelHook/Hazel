@@ -5,7 +5,7 @@ import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/conne
 import { toast } from "sonner"
 
 import { useAction } from "@/server/client"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -15,8 +15,8 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+} from "@hazel/ui/dialog"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { ClockIcon } from "@/components/icons/pika/clock"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"

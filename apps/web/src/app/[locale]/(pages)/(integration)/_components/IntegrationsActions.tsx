@@ -4,7 +4,7 @@ import { Integration } from "db/src/drizzle/schema"
 import { toast } from "sonner"
 
 import { useAction } from "@/server/client"
-import { Button } from "@/components/ui/button"
+import { Button } from "@hazel/ui/button"
 import {
 	Dialog,
 	DialogClose,
@@ -14,7 +14,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@hazel/ui/dialog"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"

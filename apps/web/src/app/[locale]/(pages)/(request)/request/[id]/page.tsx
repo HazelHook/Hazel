@@ -7,9 +7,9 @@ import { auth } from "@/lib/auth"
 import { getCachedSource } from "@/lib/orm"
 import tiny from "@/lib/tiny"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExpandableList } from "@/components/ui/ExpandableList"
+import { Button } from "@hazel/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
+import { ExpandableList } from "@hazel/ui/expandable-list"
 import { Status } from "@/components/Status"
 
 const ListItem = ({

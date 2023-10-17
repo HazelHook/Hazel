@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input"
+import { Input } from "@hazel/ui/input"
 import type { FormEventHandler } from "react"
 import { useCallback, useEffect, useMemo } from "react"
 import { useFieldArray, useForm } from "react-hook-form"

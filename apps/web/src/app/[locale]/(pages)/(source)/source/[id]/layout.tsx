@@ -2,9 +2,9 @@ import { type ReactNode } from "react"
 import Link from "next/link"
 
 import { getCachedSource } from "@/lib/orm"
-import { buttonVariants } from "@/components/ui/button"
-import { LinkTab } from "@/components/ui/linkTabs"
-import { NavTabs } from "@/components/ui/NavTabs"
+import { buttonVariants } from "@hazel/ui/button"
+import { LinkTab } from "@hazel/ui/link-tabs"
+import { NavTabs } from "@hazel/ui/nav-tabs"
 
 const ConnectionLayout = async ({
 	children,

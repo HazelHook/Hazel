@@ -7,11 +7,11 @@ import useSignOut from "@/core/hooks/use-sign-out"
 
 import VerificationCodeInput from "./VerificationCodeInput"
 import useFetchAuthFactors from "@/core/hooks/use-fetch-factors"
-import If from "@/components/ui/if"
-import Alert from "@/components/ui/alert"
-import { Button } from "@/components/ui/button"
+import If from "@hazel/ui/if"
+import Alert from "@hazel/ui/alert"
+import { Button } from "@hazel/ui/button"
 import Spinner from "@/components/Spinner"
-import Heading from "@/components/ui/heading"
+import Heading from "@hazel/ui/heading"
 import { useTranslations } from "next-intl"
 
 function MultiFactorChallengeContainer({

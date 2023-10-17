@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import Link from "next/link"
 import { Image } from "@unpic/react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@hazel/ui/button"
 
 export default function ErrorPage({
 	error,

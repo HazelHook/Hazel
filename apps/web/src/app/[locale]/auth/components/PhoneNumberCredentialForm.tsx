@@ -1,9 +1,9 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import If from "@/components/ui/if"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "@hazel/ui/button"
+import If from "@hazel/ui/if"
+import { Input } from "@hazel/ui/input"
+import { Label } from "@hazel/ui/label"
 import { useTranslations } from "next-intl"
 
 import type { FormEventHandler } from "react"

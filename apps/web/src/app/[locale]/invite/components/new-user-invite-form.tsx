@@ -1,7 +1,7 @@
 "use client"
 
 import PageLoadingIndicator from "@/components/PageLoadingIndicator"
-import If from "@/components/ui/if"
+import If from "@hazel/ui/if"
 import isBrowser from "@/core/generic/is-browser"
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
@@ -10,7 +10,7 @@ import OAuthProviders from "../../auth/components/OAuthProviders"
 import configuration from "@/configuration"
 import EmailPasswordSignUpContainer from "../../auth/components/EmailPasswordSignUpContainer"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@hazel/ui/button"
 import EmailPasswordSignInContainer from "../../auth/components/EmailPasswordSignInContainer"
 import EmailLinkAuth from "../../auth/components/EmailLinkAuth"
 import PhoneNumberSignInContainer from "../../auth/components/PhoneNumberSignInContainer"
