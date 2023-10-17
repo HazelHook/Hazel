@@ -5,3 +5,17 @@ export const userUpdateFormSchema = z.object({
 	// profile_image: z.string().url().optional(),
 	// TODO: READD PROFILE IMAGE UPLOAD
 })
+
+export const userUpdateEmailFormSchema = z
+	.object({
+		email: z.string().email().describe("New Email"),
+		confirmEmail: z.string().email(),
+	})
+	.superRefine(({ email, confirmEmail }, ctx) => {
+		if (email !== confirmEmail) {
+			ctx.addIssue({
+				code: "custom",
+				message: "The email did not match",
+			})
+		}
+	})

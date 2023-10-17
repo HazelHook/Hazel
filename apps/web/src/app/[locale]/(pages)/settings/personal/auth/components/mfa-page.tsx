@@ -18,7 +18,7 @@ import { CrossIcon } from "@/components/icons/pika/cross"
 import Modal from "@/components/ui/modal"
 import { Factor } from "@supabase/supabase-js"
 import { PageHeader } from "@/components/ui/page-header"
-import MultiFactorAuthSetupModal from "./components/multi-factor-auth-setup-modal"
+import MultiFactorAuthSetupModal from "./mfa-setup-modal"
 import { Container } from "@/components/ui/container"
 import { Card } from "@/components/ui/card"
 

@@ -29,7 +29,7 @@ function MultiFactorAuthSetupModal(
 	}, [props, t])
 
 	return (
-		<Modal closeButton={false} heading={t("setupMfaButtonLabel")} isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
+		<Modal closeButton={true} heading={t("setupMfaButtonLabel")} isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
 			<MultiFactorAuthSetupForm onCancel={() => props.setIsOpen(false)} onEnrolled={onEnrollSuccess} />
 		</Modal>
 	)

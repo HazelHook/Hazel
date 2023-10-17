@@ -575,9 +575,14 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 				toast.promise(minDelay(onSubmitProp(parsedValues.data), minSubmitDelay), {
 					loading: toastValues?.loading || "Saving Data...",
 					success: toastValues?.success || "Sucessfully Saved",
-					error:
-						toastValues?.error ||
-						"There was an error saving... Please try again and contact us if it persists.",
+					error: (error) => {
+						console.log(error)
+						return (
+							String(error) ||
+							toastValues?.error ||
+							"There was an error saving... Please try again and contact us if it persists."
+						)
+					},
 				})
 			}
 		}

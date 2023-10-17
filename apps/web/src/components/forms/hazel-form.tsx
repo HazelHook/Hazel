@@ -8,19 +8,19 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { TRPCActionHandler } from "@trpc/next/app-dir/server"
 
-import { User } from "db/src/drizzle/schema"
-
 export const HazelForm = <SchemaType extends ZodObjectOrWrapped>({
 	action,
+	onSubmit,
 	formSchema,
 	defaultValues,
 	fieldConfig,
 	extraData,
 }: {
-	extraData?: Partial<User>
+	extraData?: any
 	formSchema: SchemaType
 	defaultValues?: z.infer<SchemaType>
-	action: TRPCActionHandler<any>
+	action?: TRPCActionHandler<any>
+	onSubmit?: (data: z.infer<SchemaType>) => Promise<void>
 	fieldConfig?: FieldConfig<z.infer<SchemaType>>
 }) => {
 	const router = useRouter()
@@ -33,7 +33,7 @@ export const HazelForm = <SchemaType extends ZodObjectOrWrapped>({
 		}
 	}, [defaultValues])
 
-	const updateAction = useAction(action, {
+	const updateAction = useAction(action as any, {
 		onSuccess: () => {
 			router.refresh()
 		},
@@ -46,8 +46,8 @@ export const HazelForm = <SchemaType extends ZodObjectOrWrapped>({
 			values={values}
 			onValuesChange={setValues}
 			onSubmit={async (data) => {
-				console.log(data)
-				await updateAction.mutateAsync({ ...extraData, ...data })
+				await onSubmit?.(data)
+				action && (await updateAction.mutateAsync({ ...extraData, ...data }))
 			}}
 		>
 			<Button

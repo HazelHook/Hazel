@@ -4,7 +4,7 @@ import If from "@/components/ui/if"
 import Modal from "@/components/ui/modal"
 import { useTranslations } from "next-intl"
 import React, { useCallback, useState } from "react"
-import { FactorQrCode, useVerifyCodeMutation } from "./multi-factor-auth-setup-modal"
+import { FactorQrCode, useVerifyCodeMutation } from "./mfa-setup-modal"
 import TextField from "@/components/ui/text-field"
 import { Button } from "@/components/ui/button"
 

@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 
 import { Container } from "@/components/ui/container"
-import { UserUpdateForm } from "@/components/forms/user/UserUpdateForm"
+import { UserUpdateForm } from "@/components/forms/user/user-update-form"
 
 const SettingsPage = async () => {
 	const { workspaceId, organization, userId, user } = await auth()

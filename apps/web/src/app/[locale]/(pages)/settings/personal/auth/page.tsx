@@ -1,4 +1,4 @@
-import MultiFactorAuthenticationSettings from "./AuthComp"
+import MultiFactorAuthenticationSettings from "./components/mfa-page"
 
 const MultiAuthPage = () => {
 	return <MultiFactorAuthenticationSettings />
