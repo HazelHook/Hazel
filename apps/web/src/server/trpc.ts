@@ -8,7 +8,7 @@ import db from "@/lib/db"
 import requireSession from "@/lib/user/require-session"
 
 import { Context } from "./context"
-import { getSupabaseServerActionClient } from "@hazel/supabase/clients/index"
+import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,

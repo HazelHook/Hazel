@@ -19,7 +19,7 @@ import { toast } from "sonner"
 import useMutation from "swr/mutation"
 
 import { CrossIcon } from "@hazel/icons"
-import { useSupabase } from "@hazel/supabase/hooks/index"
+import { useSupabase } from "@hazel/supabase/hooks"
 
 import Spinner from "@/components/spinner"
 

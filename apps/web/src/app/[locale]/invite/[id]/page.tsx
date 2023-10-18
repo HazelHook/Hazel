@@ -9,7 +9,7 @@ import db from "@/lib/db"
 
 import ExistingUserInviteForm from "../components/existing-user-invite-form"
 import NewUserInviteForm from "../components/new-user-invite-form"
-import { getSupabaseServerClient } from "@hazel/supabase/clients/index"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 interface Props {
 	params: {

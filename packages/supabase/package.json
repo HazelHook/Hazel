@@ -37,10 +37,8 @@
 	"main": "src/index.ts",
 	"exports": {
 		".": "./src/index.ts",
-		"./hooks": "./src/hooks/index.ts",
-		"./hooks/index": "./src/hooks/index.ts",
-		"./clients": "./src/clients/index.ts",
-		"./clients/index": "./src/clients/index.ts"
+		"./hooks": "./src/hooks.ts",
+		"./clients": "./src/clients.ts"
 	},
 	"typesVersions": {
 		"*": {

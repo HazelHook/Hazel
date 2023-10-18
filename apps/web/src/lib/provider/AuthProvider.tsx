@@ -2,7 +2,8 @@
 
 import { ReactNode, useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useSupabase } from "@hazel/supabase/hooks/index"
+import { useSupabase } from "@hazel/supabase/hooks"
+
 import { User } from "@supabase/supabase-js"
 
 import UserSessionContext from "../contexts/auth"

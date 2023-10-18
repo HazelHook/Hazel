@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation"
-import { useSupabase } from "@hazel/supabase/hooks/index"
+import { useSupabase } from "@hazel/supabase/hooks"
+
 import useSWR from "swr"
 
 /**

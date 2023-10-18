@@ -2,7 +2,7 @@ import type { FormEventHandler } from "react"
 import { useCallback, useEffect, useState } from "react"
 import useFetchAuthFactors from "@/core/hooks/use-fetch-factors"
 import useSignOut from "@/core/hooks/use-sign-out"
-import { useSupabase } from "@hazel/supabase/hooks/index"
+import { useSupabase } from "@hazel/supabase/hooks"
 
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"

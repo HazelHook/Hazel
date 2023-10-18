@@ -6,7 +6,7 @@ import configuration from "@/configuration"
 
 import db from "./db"
 import requireSession from "./user/require-session"
-import { getSupabaseServerClient } from "@hazel/supabase/clients/index"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 export const auth = async () => {
 	const client = getSupabaseServerClient()

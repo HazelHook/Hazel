@@ -3,7 +3,7 @@ import configuration from "@/configuration"
 import verifyRequiresMfa from "@/core/session/utils/check-requires-mfa"
 
 import VerifyFormContainer from "./components/VerifyFormContainer"
-import { getSupabaseServerClient } from "@hazel/supabase/clients/index"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 export const metadata = {
 	title: "Verify Authentication",

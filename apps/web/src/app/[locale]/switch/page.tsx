@@ -11,7 +11,7 @@ import { getSeededProfileImageUrl } from "@/lib/utils"
 
 import { CreateOrg } from "./components/CreateOrg"
 import { OrgButton } from "./components/org-button"
-import { getSupabaseServerClient } from "@hazel/supabase/clients/index"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 async function OrganizationsPage() {
 	const client = getSupabaseServerClient()

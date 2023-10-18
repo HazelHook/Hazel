@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
-import { useSupabase } from "@hazel/supabase/hooks/index"
+import { useSupabase } from "@hazel/supabase/hooks"
 
 import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
 import Alert from "@hazel/ui/alert"

@@ -3,7 +3,7 @@ import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
 
 import db from "@/lib/db"
 import requireSession from "@/lib/user/require-session"
-import { getSupabaseServerActionClient } from "@hazel/supabase/clients/index"
+import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 
 export async function createContext(opts?: FetchCreateContextFnOptions) {
 	const newHeaders = new Map(headers())
