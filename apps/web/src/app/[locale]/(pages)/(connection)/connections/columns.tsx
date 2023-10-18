@@ -11,8 +11,8 @@ import { Connection, Destination, Source } from "db/src/drizzle/schema"
 
 import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { CheckTickIcon } from "@/components/icons/pika/checkTick"
-import { EyeOpenIcon } from "@/components/icons/pika/eyeOpen"
+import { CheckTickIcon } from "@hazel/icons"
+import { EyeOpenIcon } from "@hazel/icons"
 import { ConnectionActions } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionActions"
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 

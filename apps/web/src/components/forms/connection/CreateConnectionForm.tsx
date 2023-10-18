@@ -17,7 +17,7 @@ import { createSourceAction } from "@/server/actions/source"
 import { useAction } from "@/server/client"
 import { createConnectionSchema } from "@/lib/schemas/connection"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { AddIcon } from "@/components/icons/pika/add"
+import { AddIcon } from "@hazel/icons"
 
 import { CreateDestinationForm } from "../destination/CreateDestinationForm"
 import { CreateSourceForm } from "../source/CreateSourceForm"

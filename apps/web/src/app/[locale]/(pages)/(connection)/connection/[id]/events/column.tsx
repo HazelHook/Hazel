@@ -13,7 +13,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table"
 import { TBResponse } from "db/src/tinybird/model/tiny-response"
 
-import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
+import { FilterVerticalIcon } from "@hazel/icons"
 
 export type Column = TBResponse
 

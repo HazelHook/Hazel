@@ -6,8 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { format } from "date-fns"
 
 import { formatDateTime } from "@/lib/utils"
-import { CalendarIcon } from "@/components/icons/pika/calendar"
-import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { CalendarIcon } from "@hazel/icons"
+import { CheckTickIcon } from "@hazel/icons"
 
 import { CustomDatePicker } from "./CustomDatePicker"
 

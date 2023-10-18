@@ -19,7 +19,7 @@ import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 import useMutation from "swr/mutation"
 
-import { CrossIcon } from "@/components/icons/pika/cross"
+import { CrossIcon } from "@hazel/icons"
 import Spinner from "@/components/Spinner"
 
 import MultiFactorAuthSetupModal from "./mfa-setup-modal"

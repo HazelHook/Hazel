@@ -11,10 +11,10 @@ import { OrganizationMember } from "db/src/drizzle/schema"
 import { toast } from "sonner"
 
 import { useAuth } from "@/lib/provider/AuthProvider"
-import { ClipboardIcon } from "@/components/icons/pika/clipboard"
-import { FolderRemoveIcon } from "@/components/icons/pika/folderRemove"
-import { LogOutLeftIcon } from "@/components/icons/pika/logOutLeft"
-import { ThreeDotsHorizontalIcon } from "@/components/icons/pika/threeDotsHorizontal"
+import { ClipboardIcon } from "@hazel/icons"
+import { FolderRemoveIcon } from "@hazel/icons"
+import { LogOutLeftIcon } from "@hazel/icons"
+import { ThreeDotsHorizontalIcon } from "@hazel/icons"
 
 export interface MemberOptionsProps {
 	orgId: string

@@ -17,8 +17,8 @@ import { toast } from "sonner"
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { useAction } from "@/server/client"
 import { UpdateIntegrationForm } from "@/components/forms/integration/UpdateIntegrationForm"
-import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
-import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import { DeleteDustbinIcon } from "@hazel/icons"
+import { EditPencilIcon } from "@hazel/icons"
 
 export const IntegrationsActions = ({
 	updateAction,

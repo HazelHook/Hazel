@@ -10,8 +10,8 @@ import { IntegrationTool } from "db/src/drizzle/integrations/common"
 import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "db/src/drizzle/integrations/data"
 
 import { NewIntegrationForm } from "@/components/forms/integration/CreateIntegrationForm"
-import { DatabaseIcon } from "@/components/icons/pika/database"
-import { ShieldCheckIcon } from "@/components/icons/pika/shieldCheck"
+import { DatabaseIcon } from "@hazel/icons"
+import { ShieldCheckIcon } from "@hazel/icons"
 
 const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	({

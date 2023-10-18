@@ -6,7 +6,7 @@ import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction }
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { PromiseType } from "@/lib/ts/helpers"
-import { AddIcon } from "@/components/icons/pika/add"
+import { AddIcon } from "@hazel/icons"
 import { ConnectionTable } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionTable"
 
 const fetchData = async ({ workspaceId }: { workspaceId: string }) => {

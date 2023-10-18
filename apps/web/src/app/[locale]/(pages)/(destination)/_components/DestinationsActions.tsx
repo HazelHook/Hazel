@@ -15,8 +15,8 @@ import { toast } from "sonner"
 
 import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 import { useAction } from "@/server/client"
-import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
-import { EditPencilIcon } from "@/components/icons/pika/editPencil"
+import { DeleteDustbinIcon } from "@hazel/icons"
+import { EditPencilIcon } from "@hazel/icons"
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
 
 export const DestinationsActions = ({

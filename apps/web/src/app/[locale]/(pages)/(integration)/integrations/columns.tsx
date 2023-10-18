@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
-import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { CheckTickIcon } from "@hazel/icons"
 import { IntegrationsActions } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationsActions"
 import { IntegrationToolColumn } from "@/app/[locale]/(pages)/(integration)/integrations/page"
 

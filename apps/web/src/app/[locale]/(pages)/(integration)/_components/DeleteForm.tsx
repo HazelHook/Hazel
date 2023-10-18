@@ -5,7 +5,7 @@ import { Card } from "@hazel/ui/card"
 import { Dialog, DialogContent } from "@hazel/ui/dialog"
 import { Separator } from "@hazel/ui/separator"
 
-import { MinusIcon } from "@/components/icons/pika/minus"
+import { MinusIcon } from "@hazel/icons"
 
 export function DeleteForm({
 	onClose,

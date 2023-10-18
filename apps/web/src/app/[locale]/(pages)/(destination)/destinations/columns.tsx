@@ -10,7 +10,7 @@ import { Connection, Destination } from "db/src/drizzle/schema"
 
 import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { CheckTickIcon } from "@hazel/icons"
 import { DestinationsActions } from "@/app/[locale]/(pages)/(destination)/_components/DestinationsActions"
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
 

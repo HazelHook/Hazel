@@ -4,7 +4,7 @@ import { DataTable } from "@hazel/ui/data-table"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { AddIcon } from "@/components/icons/pika/add"
+import { AddIcon } from "@hazel/icons"
 
 import { columns } from "./columns"
 

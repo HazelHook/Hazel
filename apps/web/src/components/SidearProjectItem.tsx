@@ -5,8 +5,8 @@ import { Connection } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Icons } from "@/components/icons"
-import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
-import { ChevronRightIcon } from "@/components/icons/pika/chevronRight"
+import { ChevronDownIcon } from "@hazel/icons"
+import { ChevronRightIcon } from "@hazel/icons"
 
 import { SidebarItem } from "./Sidebar"
 

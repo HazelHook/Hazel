@@ -7,7 +7,7 @@ import { deleteDestinationAction, updateDestinationAction } from "@/server/actio
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { PromiseType } from "@/lib/ts/helpers"
-import { AddIcon } from "@/components/icons/pika/add"
+import { AddIcon } from "@hazel/icons"
 import { DestinationTable } from "@/app/[locale]/(pages)/(destination)/_components/DestinationTable"
 
 async function dataFetch({ workspaceId }: { workspaceId: string }) {

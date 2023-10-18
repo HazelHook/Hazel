@@ -9,7 +9,7 @@ import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 import { Connection, Destination, Integration, Source } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { CheckTickIcon } from "@hazel/icons"
 
 export type Column = Source & {
 	connections: Connection[]

@@ -17,7 +17,7 @@ import {
 
 import type { createOrganizationInvite } from "@/server/actions/organization-invite"
 import { usePagination } from "@/lib/hooks/usePagination"
-import { AddIcon } from "@/components/icons/pika/add"
+import { AddIcon } from "@hazel/icons"
 import { OrganizationInviteModal } from "@/components/modals/OrganizationInviteModal"
 
 interface DataTableProps<TData, TValue> {

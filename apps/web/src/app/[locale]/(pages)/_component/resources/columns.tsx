@@ -7,9 +7,9 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Connection, Destination, Source } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
-import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
-import { CheckTickIcon } from "@/components/icons/pika/checkTick"
+import { ArrowDownIcon } from "@hazel/icons"
+import { ArrowUpIcon } from "@hazel/icons"
+import { CheckTickIcon } from "@hazel/icons"
 
 export type Column = Source & {
 	connections: Connection[]

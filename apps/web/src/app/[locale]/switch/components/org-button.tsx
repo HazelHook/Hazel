@@ -6,7 +6,7 @@ import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 
 import type { switchOrganizationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"
-import { ChevronRightIcon } from "@/components/icons/pika/chevronRight"
+import { ChevronRightIcon } from "@hazel/icons"
 
 interface OrgButtonProps {
 	name: string

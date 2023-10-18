@@ -16,10 +16,10 @@ import { toast } from "sonner"
 
 import type { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { useAction } from "@/server/client"
-import { ClockIcon } from "@/components/icons/pika/clock"
-import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
-import { EditPencilIcon } from "@/components/icons/pika/editPencil"
-import { PlayBigIcon } from "@/components/icons/pika/playBig"
+import { ClockIcon } from "@hazel/icons"
+import { DeleteDustbinIcon } from "@hazel/icons"
+import { EditPencilIcon } from "@hazel/icons"
+import { PlayBigIcon } from "@hazel/icons"
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
 export const ConnectionActions = ({

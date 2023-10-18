@@ -11,7 +11,7 @@ import {
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
 
-import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
+import { FilterVerticalIcon } from "@hazel/icons"
 import { Status } from "@/components/Status"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/page"
 

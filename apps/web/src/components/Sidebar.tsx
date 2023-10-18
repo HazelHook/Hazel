@@ -3,7 +3,7 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { LogoIcon } from "@/components/icons/Logo"
-import { IconProps } from "@/components/icons/pika/types"
+import { IconProps } from "@hazel/icons"
 
 import { SidebarClientItem } from "./SidebarItem"
 

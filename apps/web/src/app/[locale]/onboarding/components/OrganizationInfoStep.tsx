@@ -8,7 +8,7 @@ import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
 
 import { useAuth } from "@/lib/provider/AuthProvider"
-import { ArrowRightIcon } from "@/components/icons/pika/arrowRight"
+import { ArrowRightIcon } from "@hazel/icons"
 
 export interface OrganizationInfoStepData {
 	organization: string

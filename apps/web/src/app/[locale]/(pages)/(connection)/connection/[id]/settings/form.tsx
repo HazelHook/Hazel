@@ -22,7 +22,7 @@ import { PromiseType } from "@/lib/ts/helpers"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
 import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
-import { AddIcon } from "@/components/icons/pika/add"
+import { AddIcon } from "@hazel/icons"
 import { LoadingButton } from "@/components/loading-button"
 
 interface NewSourceFormProps {

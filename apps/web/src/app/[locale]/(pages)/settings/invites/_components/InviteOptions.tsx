@@ -11,9 +11,9 @@ import { toast } from "sonner"
 
 import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
-import { ClipboardIcon } from "@/components/icons/pika/clipboard"
-import { ThreeDotsVerticalIcon } from "@/components/icons/pika/threeDotsVertical"
-import { UserCrossIcon } from "@/components/icons/pika/userCross"
+import { ClipboardIcon } from "@hazel/icons"
+import { ThreeDotsVerticalIcon } from "@hazel/icons"
+import { UserCrossIcon } from "@hazel/icons"
 
 export interface InviteOptionsProps {
 	emailAdress: string
