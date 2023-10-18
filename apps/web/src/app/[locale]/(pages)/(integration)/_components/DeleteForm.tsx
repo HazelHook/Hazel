@@ -1,11 +1,11 @@
 "use client"
 
 import React from "react"
-
 import { Card } from "@hazel/ui/card"
-import { MinusIcon } from "@/components/icons/pika/minus"
-import { Separator } from "@hazel/ui/separator"
 import { Dialog, DialogContent } from "@hazel/ui/dialog"
+import { Separator } from "@hazel/ui/separator"
+
+import { MinusIcon } from "@/components/icons/pika/minus"
 
 export function DeleteForm({
 	onClose,

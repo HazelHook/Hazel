@@ -2,7 +2,6 @@ import AutoForm from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
-
 import { z } from "zod"
 
 export const passwordSchema = z
@@ -70,13 +69,7 @@ const EmailPasswordSignUpForm: React.FCC<{
 				},
 			}}
 		>
-			<Button
-				data-cy={"auth-submit-button"}
-				className={"w-full"}
-				color={"primary"}
-				type="submit"
-				loading={loading}
-			>
+			<Button data-cy={"auth-submit-button"} className={"w-full"} color={"primary"} type="submit" loading={loading}>
 				<If condition={loading} fallback={t("auth.getStarted")}>
 					{t("auth.signingUp")}
 				</If>

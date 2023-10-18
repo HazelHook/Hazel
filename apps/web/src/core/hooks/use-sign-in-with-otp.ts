@@ -1,8 +1,7 @@
-import useMutation from "swr/mutation"
-
-import useSupabase from "@/core/hooks/use-supabase"
 import configuration from "@/configuration"
+import useSupabase from "@/core/hooks/use-supabase"
 import { AuthError, SignInWithPasswordlessCredentials } from "@supabase/supabase-js"
+import useMutation from "swr/mutation"
 
 /**
  * @name useSignInWithOtp

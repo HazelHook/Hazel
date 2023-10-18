@@ -1,9 +1,11 @@
 "use client"
 
 import { OrganizationInvite } from "db/src/drizzle/schema"
+
+import type { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
+
 import { DataTable } from "../../members/data-table"
 import { columns } from "../columns"
-import type { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
 
 export const TableWrapper = ({
 	revokeAction,

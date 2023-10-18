@@ -1,11 +1,11 @@
 import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 
+import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { PromiseType } from "@/lib/ts/helpers"
 import { IntegrationsTable } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationTable"
 import { IntegrationToolCard } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolCard"
-import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 
 export type IntegrationToolColumn = PromiseType<ReturnType<typeof db.integration.getMany>>[number]
 

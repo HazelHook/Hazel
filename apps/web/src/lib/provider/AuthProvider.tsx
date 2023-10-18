@@ -1,10 +1,11 @@
 "use client"
 
 import { ReactNode, useContext, useEffect, useState } from "react"
-import UserSessionContext from "../contexts/auth"
+import { useRouter } from "next/navigation"
 import useSupabase from "@/core/hooks/use-supabase"
 import { User } from "@supabase/supabase-js"
-import { useRouter } from "next/navigation"
+
+import UserSessionContext from "../contexts/auth"
 
 export const useAuth = () => useContext(UserSessionContext)
 

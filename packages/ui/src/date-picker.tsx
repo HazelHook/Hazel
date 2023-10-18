@@ -1,14 +1,13 @@
 "use client"
 
 import * as React from "react"
+import { CalendarIcon } from "@hazel/icons"
 import { format } from "date-fns"
 
-import { cn } from "./utils"
 import { Button } from "./button"
 import { Calendar } from "./calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "./popover"
-
-import { CalendarIcon } from "./icons/pika/calendar"
+import { cn } from "./utils"
 
 export function DatePicker() {
 	const [date, setDate] = React.useState<Date>()

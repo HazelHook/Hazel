@@ -1,19 +1,18 @@
 "use client"
 
 import Link from "next/link"
-import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination } from "db/src/drizzle/schema"
-
-import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
-
 import { Badge } from "@hazel/ui/badge"
 import { buttonVariants } from "@hazel/ui/button"
 import { SortableHeader } from "@hazel/ui/data-table"
+import { ColumnDef } from "@tanstack/react-table"
+import { Connection, Destination } from "db/src/drizzle/schema"
+
+import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
+import { getSeededProfileImageUrl } from "@/lib/utils"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { DestinationsActions } from "@/app/[locale]/(pages)/(destination)/_components/DestinationsActions"
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
-import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 
 export const columns: (
 	deleteAction: typeof deleteDestinationAction,

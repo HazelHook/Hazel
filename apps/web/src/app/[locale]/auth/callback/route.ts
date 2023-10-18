@@ -1,11 +1,10 @@
 import { cookies } from "next/headers"
-import type { NextRequest } from "next/server"
 import { redirect } from "next/navigation"
-
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
-import { Database } from "@/database.types"
+import type { NextRequest } from "next/server"
 import configuration from "@/configuration"
 import getLogger from "@/core/logger"
+import { Database } from "@/database.types"
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 
 export async function GET(request: NextRequest) {
 	const requestUrl = new URL(request.url)

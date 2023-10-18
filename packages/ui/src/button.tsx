@@ -1,7 +1,7 @@
 import * as React from "react"
+import { RefreshIcon } from "@hazel/icons"
 import { cva, VariantProps } from "class-variance-authority"
 
-import { RefreshIcon } from "./icons/pika/refresh"
 import { cn } from "./utils"
 
 const buttonVariants = cva(

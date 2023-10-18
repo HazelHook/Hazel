@@ -2,11 +2,11 @@
 
 import Link from "next/link"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
+import { Badge } from "@hazel/ui/badge"
 import { ColumnDef } from "@tanstack/react-table"
 import { Destination } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Badge } from "@hazel/ui/badge"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 
 export type Column = Destination

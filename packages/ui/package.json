@@ -44,6 +44,7 @@
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.45.4",
 		"sonner": "^1.0.3",
+		"@hazel/icons": "workspace:*",
 		"tailwindcss": "3.3.2",
 		"tailwindcss-animate": "^1.0.6"
 	},
@@ -67,7 +68,6 @@
 	},
 	"exports": {
 		".": "./src/index.ts",
-		"./icons": "./src/icons/pika/index.ts",
 		"./utils": "./src/utils/index.ts",
 		"./accordion": "./src/accordion.tsx.tsx",
 		"./alert-dialog": "./src/alert-dialog.tsx",

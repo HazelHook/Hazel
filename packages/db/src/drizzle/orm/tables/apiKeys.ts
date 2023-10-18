@@ -1,19 +1,15 @@
-import { DrizzleTable } from "../db-table"
-
-import * as schema from "../../schema"
 import { and, eq, isNull } from "drizzle-orm"
-import { generatePublicId } from "../../schema/common"
-import { DB, OptionalExceptFor } from ".."
+
 import { EntityLogic } from "."
+import { DB, OptionalExceptFor } from ".."
+import * as schema from "../../schema"
+import { generatePublicId } from "../../schema/common"
+import { DrizzleTable } from "../db-table"
 
 const apiKeysLogic = (db: DB) =>
 	({
 		table: new DrizzleTable("apiKeys", schema.apiKeys, db),
-		getOne: async ({
-			publicId,
-		}: {
-			publicId: string
-		}) => {
+		getOne: async ({ publicId }: { publicId: string }) => {
 			return await db.query.apiKeys.findFirst({
 				where: and(eq(schema.apiKeys.publicId, publicId), isNull(schema.apiKeys.deletedAt)),
 			})

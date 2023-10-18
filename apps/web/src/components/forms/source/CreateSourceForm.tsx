@@ -1,16 +1,16 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { IntegrationTools } from "db/src/drizzle/integrations/data"
-import { Integration } from "db/src/drizzle/schema"
-
-import { useAction } from "@/server/client"
+import AutoForm, { AutoFormInputComponentProps } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
+import { IntegrationTools } from "db/src/drizzle/integrations/data"
+import { Integration } from "db/src/drizzle/schema"
+
 import { createSourceAction } from "@/server/actions/source"
+import { useAction } from "@/server/client"
 import { createSourceSchema } from "@/lib/schemas/source"
-import AutoForm, { AutoFormInputComponentProps } from "@hazel/ui/auto-form"
 
 interface CreateSourceFormProps {
 	action: typeof createSourceAction
@@ -56,13 +56,7 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 						},
 					},
 					integrationId: {
-						fieldType: ({
-							label,
-							isRequired,
-							field,
-							fieldConfigItem,
-							fieldProps,
-						}: AutoFormInputComponentProps) => (
+						fieldType: ({ label, isRequired, field, fieldConfigItem, fieldProps }: AutoFormInputComponentProps) => (
 							<FormItem>
 								<FormLabel>
 									{label}
@@ -74,9 +68,7 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 											<FormControl>
 												<SelectTrigger>
 													<SelectValue
-														placeholder={
-															<p className="text-muted-foreground">Connect...</p>
-														}
+														placeholder={<p className="text-muted-foreground">Connect...</p>}
 														className="focus:text-muted-foreground"
 													/>
 												</SelectTrigger>
@@ -84,29 +76,21 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 											<SelectContent className="max-h-96">
 												{integrations.map((integration) => (
 													<SelectItem key={integration.publicId} value={integration.publicId}>
-														<div className="flex flex-row items-center">
-															{integration.name}
-														</div>
+														<div className="flex flex-row items-center">{integration.name}</div>
 													</SelectItem>
 												))}
 											</SelectContent>
 										</Select>
 									)}
 								</FormControl>
-								{fieldConfigItem.description && (
-									<FormDescription>{fieldConfigItem.description}</FormDescription>
-								)}
+								{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
 								<FormMessage />
 							</FormItem>
 						),
 					},
 				}}
 			>
-				<Button
-					type="submit"
-					disabled={createSource.status === "loading"}
-					loading={createSource.status === "loading"}
-				>
+				<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
 					Create
 				</Button>
 			</AutoForm>

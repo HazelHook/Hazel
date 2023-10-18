@@ -1,4 +1,6 @@
-import { Sidebar } from "@/components/Sidebar"
+import { ReactNode } from "react"
+
+import { auth } from "@/lib/auth"
 import { BarChartUpIcon } from "@/components/icons/pika/barChartUp"
 import { CardIcon } from "@/components/icons/pika/card"
 import { DangerIcon } from "@/components/icons/pika/danger"
@@ -10,8 +12,7 @@ import { Settings02Icon } from "@/components/icons/pika/settings02"
 import { UserIcon } from "@/components/icons/pika/user"
 import { User2Icon } from "@/components/icons/pika/user2"
 import { UserPlusIcon } from "@/components/icons/pika/userPlus"
-import { auth } from "@/lib/auth"
-import { ReactNode } from "react"
+import { Sidebar } from "@/components/Sidebar"
 
 const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 	return (

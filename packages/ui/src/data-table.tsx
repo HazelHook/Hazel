@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from "react"
 import { useRouter } from "next/navigation"
+import { ArrowUpSquareIcon, ArrowDownSquareIcon } from "@hazel/icons"
 import {
 	Column,
 	ColumnDef,
@@ -14,8 +15,6 @@ import {
 
 import { Button } from "./button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./table"
-import { ArrowDownSquareIcon } from "./icons/pika/arrowDownSquare"
-import { ArrowUpSquareIcon } from "./icons/pika/arrowUpSquare"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]

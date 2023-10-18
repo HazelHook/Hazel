@@ -2,9 +2,9 @@ import "server-only"
 
 import { notFound } from "next/navigation"
 
+import { updateDestinationAction } from "@/server/actions/destination"
 import db from "@/lib/db"
 import { UpdateDestinationForm } from "@/components/forms/destination/UpdateDestinationForm"
-import { updateDestinationAction } from "@/server/actions/destination"
 
 export interface SettingsProps {
 	id: string

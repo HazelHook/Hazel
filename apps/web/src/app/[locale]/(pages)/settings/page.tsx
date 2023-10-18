@@ -1,7 +1,6 @@
-import { auth } from "@/lib/auth"
-
 import { Container } from "@hazel/ui/container"
 
+import { auth } from "@/lib/auth"
 import { OrganizationUpdateForm } from "@/components/forms/organization/OrganizationUpdateForm"
 
 const SettingsPage = async () => {

@@ -1,5 +1,5 @@
 function isBrowser() {
-  return typeof window !== 'undefined';
+	return typeof window !== "undefined"
 }
 
-export default isBrowser;
+export default isBrowser

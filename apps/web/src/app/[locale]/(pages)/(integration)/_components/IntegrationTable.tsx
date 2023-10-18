@@ -1,6 +1,7 @@
 "use client"
 
 import { DataTable } from "@hazel/ui/data-table"
+
 import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { columns } from "@/app/[locale]/(pages)/(integration)/integrations/columns"
 import { IntegrationToolColumn } from "@/app/[locale]/(pages)/(integration)/integrations/page"

@@ -1,6 +1,6 @@
+import { Badge } from "@hazel/ui/badge"
 import { match } from "ts-pattern"
 
-import { Badge } from "@hazel/ui/badge"
 import { cn } from "@/lib/utils"
 
 interface StatusProps {

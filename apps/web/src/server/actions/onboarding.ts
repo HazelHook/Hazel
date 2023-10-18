@@ -1,13 +1,12 @@
 "use server"
 
+import { cookies } from "next/headers"
+import * as schema from "db/src/drizzle/schema"
+import { generatePublicId } from "db/src/drizzle/schema/common"
 import { z } from "zod"
 
 import { basicProtectedProcedure, createAction } from "@/server/trpc"
 import db from "@/lib/db"
-import * as schema from "db/src/drizzle/schema"
-
-import { cookies } from "next/headers"
-import { generatePublicId } from "db/src/drizzle/schema/common"
 
 const formSchema = z.object({
 	organizationName: z.string().max(30),
@@ -35,7 +34,11 @@ export const handleOnboardingAction = createAction(
 
 			const res = await tx
 				.insert(schema.organizations)
-				.values({ name: input.organizationName, ownerId: ctx.auth.customerId, publicId: publicId })
+				.values({
+					name: input.organizationName,
+					ownerId: ctx.auth.customerId,
+					publicId: publicId,
+				})
 				.returning({ insertedId: schema.organizations.id })
 
 			await tx.insert(schema.organizationMembers).values({

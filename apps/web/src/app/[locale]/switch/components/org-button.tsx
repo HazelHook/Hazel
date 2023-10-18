@@ -1,12 +1,12 @@
 "use client"
 
-import { ChevronRightIcon } from "@/components/icons/pika/chevronRight"
+import { useRouter } from "next/navigation"
+import configuration from "@/configuration"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 
-import configuration from "@/configuration"
 import type { switchOrganizationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"
-import { useRouter } from "next/navigation"
+import { ChevronRightIcon } from "@/components/icons/pika/chevronRight"
 
 interface OrgButtonProps {
 	name: string

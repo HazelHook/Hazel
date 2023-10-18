@@ -1,15 +1,15 @@
 import type { FormEventHandler } from "react"
 import React, { useCallback, useState } from "react"
-
 import configuration from "@/configuration"
 import useSignInWithOtp from "@/core/hooks/use-sign-in-with-otp"
 import useVerifyOtp from "@/core/hooks/use-verify-otp"
-import If from "@hazel/ui/if"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
-import VerificationCodeInput from "./VerificationCodeInput"
-import PhoneNumberCredentialForm from "./PhoneNumberCredentialForm"
+import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
+
+import PhoneNumberCredentialForm from "./PhoneNumberCredentialForm"
+import VerificationCodeInput from "./VerificationCodeInput"
 
 enum Step {
 	Phone = 0,
@@ -79,12 +79,7 @@ const PhoneNumberSignInContainer: React.FC<{
 
 					<VerificationCodeInput onInvalid={() => setVerificationCode("")} onValid={setVerificationCode} />
 
-					<Button
-						disabled={!verificationCode}
-						loading={verifyOtp.isMutating}
-						variant={"default"}
-						type={"submit"}
-					>
+					<Button disabled={!verificationCode} loading={verifyOtp.isMutating} variant={"default"} type={"submit"}>
 						{t("auth.signIn")}
 					</Button>
 				</div>
@@ -101,11 +96,7 @@ const PhoneNumberSignInContainer: React.FC<{
 				</Alert>
 			</If>
 
-			<PhoneNumberCredentialForm
-				action={"signIn"}
-				onSubmit={onPhoneNumberSubmit}
-				loading={signInWithOtp.isMutating}
-			/>
+			<PhoneNumberCredentialForm action={"signIn"} onSubmit={onPhoneNumberSubmit} loading={signInWithOtp.isMutating} />
 		</div>
 	)
 }

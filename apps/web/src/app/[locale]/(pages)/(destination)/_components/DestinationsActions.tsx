@@ -1,8 +1,5 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { toast } from "sonner"
-
-import { useAction } from "@/server/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	Dialog,
@@ -14,10 +11,13 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@hazel/ui/dialog"
+import { toast } from "sonner"
+
+import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
+import { useAction } from "@/server/client"
 import { DeleteDustbinIcon } from "@/components/icons/pika/deleteDustbin"
 import { EditPencilIcon } from "@/components/icons/pika/editPencil"
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
-import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 
 export const DestinationsActions = ({
 	updateAction,
@@ -52,8 +52,7 @@ export const DestinationsActions = ({
 					<DialogHeader>
 						<DialogTitle>Are you sure you want to delete this Destination?</DialogTitle>
 						<DialogDescription>
-							This action cannot be undone. Are you sure you want to permanently delete this destination
-							forever?
+							This action cannot be undone. Are you sure you want to permanently delete this destination forever?
 						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>

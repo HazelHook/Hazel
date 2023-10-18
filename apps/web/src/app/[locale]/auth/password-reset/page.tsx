@@ -1,10 +1,9 @@
 import Link from "next/link"
-
 import configuration from "@/configuration"
-
 import Heading from "@hazel/ui/heading"
-import PasswordResetContainer from "../components/PasswordResetContainer"
 import { useTranslations } from "next-intl"
+
+import PasswordResetContainer from "../components/PasswordResetContainer"
 
 export const metadata = {
 	title: "Password Reset",

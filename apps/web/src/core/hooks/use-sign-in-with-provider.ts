@@ -1,6 +1,6 @@
-import useMutation from "swr/mutation"
 import useSupabase from "@/core/hooks/use-supabase"
 import { SignInWithOAuthCredentials } from "@supabase/supabase-js"
+import useMutation from "swr/mutation"
 
 /**
  * @name useSignInWithProvider

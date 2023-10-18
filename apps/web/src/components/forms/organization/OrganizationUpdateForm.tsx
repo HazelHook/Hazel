@@ -1,18 +1,22 @@
 "use client"
 
-import { z } from "zod"
-import { orgUpdateFormSchema } from "@/lib/schemas/organization"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import AutoForm from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
+import { z } from "zod"
+
 import { updateOrganzationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { orgUpdateFormSchema } from "@/lib/schemas/organization"
 
 export const OrganizationUpdateForm = ({
 	pOrgId,
 	defaultValues,
-}: { pOrgId: string; defaultValues?: z.infer<typeof orgUpdateFormSchema> }) => {
+}: {
+	pOrgId: string
+	defaultValues?: z.infer<typeof orgUpdateFormSchema>
+}) => {
 	const router = useRouter()
 
 	const [values, setValues] = useState<Partial<z.infer<typeof orgUpdateFormSchema>>>(defaultValues || {})

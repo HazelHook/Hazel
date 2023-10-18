@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useCallback } from "react"
+import { useRouter } from "next/navigation"
 
 /**
  * @name useRefresh
@@ -8,11 +8,11 @@ import { useRouter } from 'next/navigation';
  * workaround until Next.js adds mutations
  */
 function useRefresh() {
-  const router = useRouter();
+	const router = useRouter()
 
-  return useCallback(() => {
-    router.refresh();
-  }, [router]);
+	return useCallback(() => {
+		router.refresh()
+	}, [router])
 }
 
-export default useRefresh;
+export default useRefresh

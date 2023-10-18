@@ -1,8 +1,7 @@
-import { CreateConnectionForm } from "@/components/forms/connection/CreateConnectionForm"
+import { createConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-
-import { createConnectionAction } from "@/server/actions/connections"
+import { CreateConnectionForm } from "@/components/forms/connection/CreateConnectionForm"
 
 const NewConnectionPage = async () => {
 	const { workspaceId } = await auth()

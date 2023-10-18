@@ -1,6 +1,7 @@
+import Image from "next/image"
+
 import { KeyIcon } from "@/components/icons/pika/key"
 import { PhoneIcon } from "@/components/icons/pika/phone"
-import Image from "next/image"
 
 const DEFAULT_IMAGE_SIZE = 22
 

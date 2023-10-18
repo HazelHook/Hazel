@@ -1,31 +1,28 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
+import AutoForm from "@hazel/ui/auto-form"
+import { Avatar, AvatarImage } from "@hazel/ui/avatar"
+import { Button, buttonVariants } from "@hazel/ui/button"
+import { Dialog, DialogContent } from "@hazel/ui/dialog"
+import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 import { Destination, Integration, Source } from "db/src/drizzle/schema"
 import * as z from "zod"
 
+import type { updateConnectionAction } from "@/server/actions/connections"
+import { createDestinationAction } from "@/server/actions/destination"
+import { createSourceAction } from "@/server/actions/source"
 import { useAction } from "@/server/client"
 import { getCachedConnection } from "@/lib/orm"
+import { updateConnectionSchema } from "@/lib/schemas/connection"
 import { PromiseType } from "@/lib/ts/helpers"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Avatar, AvatarImage } from "@hazel/ui/avatar"
-
-import { Button, buttonVariants } from "@hazel/ui/button"
-import { Dialog, DialogContent } from "@hazel/ui/dialog"
-
-import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import { AddIcon } from "@/components/icons/pika/add"
-import { createSourceAction } from "@/server/actions/source"
-
-import { createDestinationAction } from "@/server/actions/destination"
-import type { updateConnectionAction } from "@/server/actions/connections"
-import { updateConnectionSchema } from "@/lib/schemas/connection"
-import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
 import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
-import AutoForm from "@hazel/ui/auto-form"
-import Link from "next/link"
+import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
+import { AddIcon } from "@/components/icons/pika/add"
 import { LoadingButton } from "@/components/loading-button"
 
 interface NewSourceFormProps {
@@ -101,17 +98,13 @@ export function UpdateConnectionForm({
 												<SelectValue placeholder="Select any source to connect" />
 											</SelectTrigger>
 										</FormControl>
-										{fieldConfigItem.description && (
-											<FormDescription>{fieldConfigItem.description}</FormDescription>
-										)}
+										{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
 										<SelectContent>
 											{sources.map((source) => (
 												<SelectItem key={source.publicId} value={source.publicId}>
 													<div className="flex flex-row items-center">
 														<Avatar className="mr-2 w-4 h-4">
-															<AvatarImage
-																src={getSeededProfileImageUrl(source.publicId)}
-															/>
+															<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
 														</Avatar>
 														{source.name}
 													</div>
@@ -155,17 +148,13 @@ export function UpdateConnectionForm({
 												<SelectValue placeholder="Select any source to connect" />
 											</SelectTrigger>
 										</FormControl>
-										{fieldConfigItem.description && (
-											<FormDescription>{fieldConfigItem.description}</FormDescription>
-										)}
+										{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
 										<SelectContent>
 											{destinations.map((source) => (
 												<SelectItem key={source.publicId} value={source.publicId}>
 													<div className="flex flex-row items-center">
 														<Avatar className="mr-2 w-4 h-4">
-															<AvatarImage
-																src={getSeededProfileImageUrl(source.publicId)}
-															/>
+															<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
 														</Avatar>
 														{source.name}
 													</div>

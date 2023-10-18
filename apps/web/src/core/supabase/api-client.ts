@@ -1,10 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-
+import type { Database } from "@/database.types"
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
-
 import invariant from "tiny-invariant"
-import type { Database } from "@/database.types"
 
 /**
  * Get a Supabase client for use in the legacy API routes

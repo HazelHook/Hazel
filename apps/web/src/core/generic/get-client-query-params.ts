@@ -1,5 +1,5 @@
 function getClientQueryParams() {
-  return new URLSearchParams(window.location.search);
+	return new URLSearchParams(window.location.search)
 }
 
-export default getClientQueryParams;
+export default getClientQueryParams

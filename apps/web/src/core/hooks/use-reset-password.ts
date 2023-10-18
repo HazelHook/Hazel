@@ -1,5 +1,5 @@
-import useSWRMutation from "swr/mutation"
 import useSupabase from "@/core/hooks/use-supabase"
+import useSWRMutation from "swr/mutation"
 
 interface Params {
 	email: string

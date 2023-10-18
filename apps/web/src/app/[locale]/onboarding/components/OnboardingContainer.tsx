@@ -1,12 +1,12 @@
 "use client"
 
 import { useCallback, useState } from "react"
+import If from "@hazel/ui/if"
 
-import OrganizationInfoStep, { OrganizationInfoStepData } from "./OrganizationInfoStep"
+import CsrfTokenContext from "@/lib/contexts/csrf"
 
 import CompleteOnboardingStep from "./CompleteOnboardingStep"
-import CsrfTokenContext from "@/lib/contexts/csrf"
-import If from "@hazel/ui/if"
+import OrganizationInfoStep, { OrganizationInfoStepData } from "./OrganizationInfoStep"
 
 interface Data {
 	organization: string
@@ -35,9 +35,7 @@ function OnboardingContainer(
 					<OrganizationInfoStep onSubmit={onFirstStepSubmitted} />
 				</If>
 
-				<If condition={currentStep === 1 && formData}>
-					{(formData) => <CompleteOnboardingStep data={formData} />}
-				</If>
+				<If condition={currentStep === 1 && formData}>{(formData) => <CompleteOnboardingStep data={formData} />}</If>
 			</div>
 		</CsrfTokenContext.Provider>
 	)

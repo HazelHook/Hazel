@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { rand, randBetweenDate, randJSON, randNumber, randText, randUrl, randWord } from "@ngneat/falso"
+import { Tiny } from "db/src/tinybird/index.js"
 import figures from "figures"
 import { nanoid } from "nanoid"
 
-import { Tiny } from "db/src/tinybird/index.js"
 import { Box, measureElement, Newline, Text, useInput } from "../ext/ink"
 import { ProgressBar } from "../ext/ink-progress-bar"
 import TextInput from "../ext/ink-text-input"

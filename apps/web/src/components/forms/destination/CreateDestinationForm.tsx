@@ -1,13 +1,12 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-
-import { useAction } from "@/server/client"
+import AutoForm from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 
 import type { createDestinationAction } from "@/server/actions/destination"
+import { useAction } from "@/server/client"
 import { createDestinationSchema } from "@/lib/schemas/destination"
-import AutoForm from "@hazel/ui/auto-form"
 
 interface CreateDestinationFormProps {
 	action: typeof createDestinationAction
@@ -50,11 +49,7 @@ export function CreateDestinationForm({ onClose, action, shouldRedirect = true }
 				},
 			}}
 		>
-			<Button
-				type="submit"
-				disabled={createSource.status === "loading"}
-				loading={createSource.status === "loading"}
-			>
+			<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
 				Create
 			</Button>
 		</AutoForm>

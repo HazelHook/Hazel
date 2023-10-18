@@ -2,13 +2,13 @@
 
 import Link from "next/link"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
+import { Badge } from "@hazel/ui/badge"
+import { Button } from "@hazel/ui/button"
+import { Switch } from "@hazel/ui/switch"
 import { ColumnDef } from "@tanstack/react-table"
 import { Destination } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Badge } from "@hazel/ui/badge"
-import { Button } from "@hazel/ui/button"
-import { Switch } from "@hazel/ui/switch"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"

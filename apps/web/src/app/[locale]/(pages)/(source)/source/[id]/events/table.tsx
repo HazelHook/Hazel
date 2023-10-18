@@ -2,14 +2,14 @@
 
 import { ReactNode, Suspense } from "react"
 import Link from "next/link"
-
-import { CacheSource } from "@/lib/orm"
-import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { Button } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { ExpandableList } from "@hazel/ui/expandable-list"
 import { ScrollArea } from "@hazel/ui/scroll-area"
 import { SheetHeader, SheetTitle } from "@hazel/ui/sheet"
+
+import { CacheSource } from "@/lib/orm"
+import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { DataTable } from "@/components/DataTable"
 import { Status } from "@/components/Status"
 import { columns } from "@/app/[locale]/(pages)/(source)/source/[id]/events/column"
@@ -106,17 +106,11 @@ const TableSheet = ({
 									name="Added Latency"
 									description={
 										firstResponse
-											? `${
-													new Date(firstResponse.send_at).getTime() -
-													new Date(data.timestamp).getTime()
-											  }ms`
+											? `${new Date(firstResponse.send_at).getTime() - new Date(data.timestamp).getTime()}ms`
 											: "-"
 									}
 								/>
-								<ListItem
-									name="Verified"
-									description={capitalizeFirstLetter(String(!!data.validated))}
-								/>
+								<ListItem name="Verified" description={capitalizeFirstLetter(String(!!data.validated))} />
 							</div>
 						</CardContent>
 					</Card>

@@ -1,14 +1,14 @@
 import Link from "next/link"
+import { Button } from "@hazel/ui/button"
+import { Image } from "@hazel/ui/image"
 import { Connection } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Button } from "@hazel/ui/button"
 import { Icons } from "@/components/icons"
 import { ChevronDownIcon } from "@/components/icons/pika/chevronDown"
 import { ChevronRightIcon } from "@/components/icons/pika/chevronRight"
 
 import { SidebarItem } from "./Sidebar"
-import { Image } from "@hazel/ui/image"
 
 export interface SidebarProjectItemProps {
 	project: Connection

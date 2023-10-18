@@ -1,20 +1,21 @@
 "use client"
 
-import PageLoadingIndicator from "@/components/PageLoadingIndicator"
-import If from "@hazel/ui/if"
+import { useState } from "react"
+import configuration from "@/configuration"
 import isBrowser from "@/core/generic/is-browser"
+import { Button } from "@hazel/ui/button"
+import If from "@hazel/ui/if"
+import { useTranslations } from "next-intl"
+
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
-import { useState } from "react"
-import OAuthProviders from "../../auth/components/OAuthProviders"
-import configuration from "@/configuration"
-import EmailPasswordSignUpContainer from "../../auth/components/EmailPasswordSignUpContainer"
+import PageLoadingIndicator from "@/components/PageLoadingIndicator"
 
-import { Button } from "@hazel/ui/button"
-import EmailPasswordSignInContainer from "../../auth/components/EmailPasswordSignInContainer"
 import EmailLinkAuth from "../../auth/components/EmailLinkAuth"
+import EmailPasswordSignInContainer from "../../auth/components/EmailPasswordSignInContainer"
+import EmailPasswordSignUpContainer from "../../auth/components/EmailPasswordSignUpContainer"
+import OAuthProviders from "../../auth/components/OAuthProviders"
 import PhoneNumberSignInContainer from "../../auth/components/PhoneNumberSignInContainer"
-import { useTranslations } from "next-intl"
 
 enum Mode {
 	SignUp = 0,
@@ -45,9 +46,7 @@ function NewUserInviteForm(
 			<If condition={configuration.auth.providers.emailPassword}>
 				<If condition={mode === Mode.SignUp}>
 					<div className={"flex w-full flex-col items-center space-y-4"}>
-						<EmailPasswordSignUpContainer
-							onSignUp={() => inviteAcceptAction.mutate({ inviteId: props.code })}
-						/>
+						<EmailPasswordSignUpContainer onSignUp={() => inviteAcceptAction.mutate({ inviteId: props.code })} />
 
 						<Button className="w-full" variant={"ghost"} size={"sm"} onClick={() => setMode(Mode.SignIn)}>
 							{t("auth.alreadyHaveAccountStatement")}
@@ -57,9 +56,7 @@ function NewUserInviteForm(
 
 				<If condition={mode === Mode.SignIn}>
 					<div className={"flex w-full flex-col items-center space-y-4"}>
-						<EmailPasswordSignInContainer
-							onSignIn={() => inviteAcceptAction.mutate({ inviteId: props.code })}
-						/>
+						<EmailPasswordSignInContainer onSignIn={() => inviteAcceptAction.mutate({ inviteId: props.code })} />
 
 						<Button className="w=full" variant={"ghost"} size={"sm"} onClick={() => setMode(Mode.SignUp)}>
 							{t("auth.doNotHaveAccountStatement")}

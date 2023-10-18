@@ -1,11 +1,11 @@
-import { createContext } from 'react';
+import { createContext } from "react"
 
 const SidebarContext = createContext<{
-  collapsed: boolean;
-  setCollapsed: (collapsed: boolean) => void;
+	collapsed: boolean
+	setCollapsed: (collapsed: boolean) => void
 }>({
-  collapsed: false,
-  setCollapsed: (_) => _,
-});
+	collapsed: false,
+	setCollapsed: (_) => _,
+})
 
-export default SidebarContext;
+export default SidebarContext

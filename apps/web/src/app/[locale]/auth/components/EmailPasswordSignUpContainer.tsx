@@ -1,16 +1,14 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
+import configuration from "@/configuration"
+import useSignUpWithEmailAndPasswordMutation from "@/core/hooks/use-sign-up-with-email-password"
+import Alert from "@hazel/ui/alert"
+import If from "@hazel/ui/if"
+import { useTranslations } from "next-intl"
 
 import AuthErrorMessage from "./AuthErrorMessage"
-
-import configuration from "@/configuration"
-import If from "@hazel/ui/if"
-import Alert from "@hazel/ui/alert"
-
-import useSignUpWithEmailAndPasswordMutation from "@/core/hooks/use-sign-up-with-email-password"
 import EmailPasswordSignUpForm from "./EmailPasswordSignUpForm"
-import { useTranslations } from "next-intl"
 
 const requireEmailConfirmation = configuration.auth.requireEmailConfirmation
 

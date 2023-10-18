@@ -1,13 +1,15 @@
 import { notFound } from "next/navigation"
-import { Heading } from "@hazel/ui/heading"
-import If from "@hazel/ui/if"
 import getLogger from "@/core/logger"
 import getSupabaseServerClient from "@/core/supabase/server-client"
-import db from "@/lib/db"
-import ExistingUserInviteForm from "../components/existing-user-invite-form"
-import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
-import NewUserInviteForm from "../components/new-user-invite-form"
+import { Heading } from "@hazel/ui/heading"
+import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
+
+import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
+import db from "@/lib/db"
+
+import ExistingUserInviteForm from "../components/existing-user-invite-form"
+import NewUserInviteForm from "../components/new-user-invite-form"
 
 interface Props {
 	params: {
@@ -45,7 +47,9 @@ const InvitePage = async ({ params }: Props) => {
 
 			<div>
 				<p className={"text-center"}>
-					{t("auth.joinOrganizationSubHeading", { organization: organization.name })}
+					{t("auth.joinOrganizationSubHeading", {
+						organization: organization.name,
+					})}
 				</p>
 
 				<p className={"text-center"}>
@@ -54,9 +58,7 @@ const InvitePage = async ({ params }: Props) => {
 			</div>
 
 			<If condition={session} fallback={<NewUserInviteForm action={acceptOrganizationInvite} code={params.id} />}>
-				{(session) => (
-					<ExistingUserInviteForm action={acceptOrganizationInvite} code={params.id} session={session} />
-				)}
+				{(session) => <ExistingUserInviteForm action={acceptOrganizationInvite} code={params.id} session={session} />}
 			</If>
 		</>
 	)

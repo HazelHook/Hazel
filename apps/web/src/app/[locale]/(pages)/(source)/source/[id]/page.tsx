@@ -1,17 +1,17 @@
 import { notFound, redirect } from "next/navigation"
+import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
+import { Chart } from "@hazel/ui/chart"
+import { DataTable } from "@hazel/ui/data-table"
 import { sub } from "date-fns"
 import { Destination } from "db/src/drizzle/schema"
 import { Tiny } from "db/src/tinybird"
 
+import { auth } from "@/lib/auth"
 import { getCachedSource } from "@/lib/orm"
 import { chartColors, formatDateTime } from "@/lib/utils"
-import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
-import { Chart } from "@hazel/ui/chart"
-import { DataTable } from "@hazel/ui/data-table"
 import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
 import { columns } from "./column"
-import { auth } from "@/lib/auth"
 
 const SourcePage = async ({
 	params,
@@ -54,9 +54,7 @@ const SourcePage = async ({
 					<DataTable
 						rootPath="/destination"
 						columns={columns}
-						data={
-							(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []
-						}
+						data={(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []}
 					/>
 				</div>
 

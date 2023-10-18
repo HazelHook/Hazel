@@ -2,17 +2,17 @@
 
 import Link from "next/link"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
-import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination, Source } from "db/src/drizzle/schema"
-
-import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { Cell, SortableHeader } from "@hazel/ui/data-table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
+import { ColumnDef } from "@tanstack/react-table"
+import { Connection, Destination, Source } from "db/src/drizzle/schema"
+
+import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
+import { getSeededProfileImageUrl } from "@/lib/utils"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { EyeOpenIcon } from "@/components/icons/pika/eyeOpen"
-import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { ConnectionActions } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionActions"
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 

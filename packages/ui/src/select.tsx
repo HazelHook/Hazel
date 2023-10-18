@@ -1,11 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { CheckTickIcon, ChevronDownIcon } from "@hazel/icons"
 import * as SelectPrimitive from "@radix-ui/react-select"
 
 import { cn } from "./utils"
-import { CheckTickIcon } from "./icons/pika/checkTick"
-import { ChevronDownIcon } from "./icons/pika/chevronDown"
 
 const Select = SelectPrimitive.Root
 

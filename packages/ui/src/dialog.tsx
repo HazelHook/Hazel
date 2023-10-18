@@ -2,10 +2,10 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { CrossIcon } from "@hazel/icons"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 
 import { cn } from "./utils"
-import { CrossIcon } from "./icons/pika/cross"
 
 const Dialog = DialogPrimitive.Root
 

@@ -1,12 +1,13 @@
 "use client"
 
 import Link from "next/link"
+import AutoForm from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import If from "@hazel/ui/if"
-import { z } from "zod"
-import AutoForm from "@hazel/ui/auto-form"
-import { passwordSchema } from "./EmailPasswordSignUpForm"
 import { useTranslations } from "next-intl"
+import { z } from "zod"
+
+import { passwordSchema } from "./EmailPasswordSignUpForm"
 
 const emailPasswordSignInFormSchema = z.object({
 	email: z.string().email(),

@@ -1,18 +1,18 @@
+import { cookies } from "next/headers"
 import { TooltipProvider } from "@hazel/ui/tooltip"
 
-import { Sidebar } from "@/components/Sidebar"
-import { HomeIcon } from "@/components/icons/pika/home"
-import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
-import { LinkChainIcon } from "@/components/icons/pika/linkChain"
-import { GitCommitIcon } from "@/components/icons/pika/gitCommit"
-import { AutomationIcon } from "@/components/icons/pika/automation"
-import { Settings01Icon } from "@/components/icons/pika/settings01"
-import { FileInfoIcon } from "@/components/icons/pika/fileInfo"
+import { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
-import { cookies } from "next/headers"
+import { AutomationIcon } from "@/components/icons/pika/automation"
+import { DashboardSimpleIcon } from "@/components/icons/pika/dashboardSimple"
+import { FileInfoIcon } from "@/components/icons/pika/fileInfo"
+import { GitCommitIcon } from "@/components/icons/pika/gitCommit"
+import { HomeIcon } from "@/components/icons/pika/home"
+import { LinkChainIcon } from "@/components/icons/pika/linkChain"
+import { Settings01Icon } from "@/components/icons/pika/settings01"
 import { ProfileSettings } from "@/components/ProfileSettings"
+import { Sidebar } from "@/components/Sidebar"
 
 interface RootLayoutProps {
 	children: React.ReactNode
@@ -29,7 +29,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
 	const orgCookie = cookiesList.get("membership_id")
 
-	const organzations = await db.organization.memberships.getMany({ customerId: userId })
+	const organzations = await db.organization.memberships.getMany({
+		customerId: userId,
+	})
 
 	return (
 		<TooltipProvider>
@@ -96,9 +98,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 							currentMembershipId={orgCookie?.value}
 						/>
 					</Sidebar>
-					<div className="col-span-full ml-12 h-full transition-[margin] duration-300 lg:ml-64">
-						{children}
-					</div>
+					<div className="col-span-full ml-12 h-full transition-[margin] duration-300 lg:ml-64">{children}</div>
 				</div>
 			</div>
 		</TooltipProvider>

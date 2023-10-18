@@ -2,15 +2,14 @@
 
 import { useCallback } from "react"
 import { useRouter } from "next/navigation"
-
-import OAuthProviders from "./OAuthProviders"
-
 import configuration from "@/configuration"
 import If from "@hazel/ui/if"
+import { useTranslations } from "next-intl"
+
 import EmailLinkAuth from "./EmailLinkAuth"
 import EmailPasswordSignInContainer from "./EmailPasswordSignInContainer"
+import OAuthProviders from "./OAuthProviders"
 import PhoneNumberSignInContainer from "./PhoneNumberSignInContainer"
-import { useTranslations } from "next-intl"
 
 function SignInMethodsContainer() {
 	const router = useRouter()

@@ -1,15 +1,15 @@
 import { ReactNode, Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { Button } from "@hazel/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
+import { ExpandableList } from "@hazel/ui/expandable-list"
 import { Code } from "bright"
 
 import { auth } from "@/lib/auth"
 import { getCachedSource } from "@/lib/orm"
 import tiny from "@/lib/tiny"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
-import { Button } from "@hazel/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
-import { ExpandableList } from "@hazel/ui/expandable-list"
 import { Status } from "@/components/Status"
 
 const ListItem = ({
@@ -99,12 +99,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 						<ListItem
 							name="Added Latency"
 							description={
-								firstRes
-									? `${
-											new Date(firstRes.send_at).getTime() -
-											new Date(firstRes.received_at).getTime()
-									  }ms`
-									: "-"
+								firstRes ? `${new Date(firstRes.send_at).getTime() - new Date(firstRes.received_at).getTime()}ms` : "-"
 							}
 						/>
 						<ListItem name="Verified" description={capitalizeFirstLetter(String(!!req.validated))} />

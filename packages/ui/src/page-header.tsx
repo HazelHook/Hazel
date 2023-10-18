@@ -4,7 +4,11 @@ export const PageHeader = ({
 	title,
 	subtitle,
 	children,
-}: { title: string; subtitle: string; children?: ReactNode }) => {
+}: {
+	title: string
+	subtitle: string
+	children?: ReactNode
+}) => {
 	return (
 		<div className="flex flex-row justify-between">
 			<div className="max-w-md">

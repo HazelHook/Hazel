@@ -1,6 +1,7 @@
-import useSWRMutation from "swr/mutation"
-import useSupabase from "./use-supabase"
 import configuration from "@/configuration"
+import useSWRMutation from "swr/mutation"
+
+import useSupabase from "./use-supabase"
 
 interface Credentials {
 	email: string

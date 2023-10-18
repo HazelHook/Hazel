@@ -1,10 +1,10 @@
-import { DrizzleTable } from "../db-table"
-
-import * as schema from "../../schema"
 import { and, eq, isNull } from "drizzle-orm"
-import { generatePublicId } from "../../schema/common"
-import { DB, OptionalExceptFor } from ".."
+
 import { EntityLogic } from "."
+import { DB, OptionalExceptFor } from ".."
+import * as schema from "../../schema"
+import { generatePublicId } from "../../schema/common"
+import { DrizzleTable } from "../db-table"
 
 const integrationLogic = (db: DB) =>
 	({

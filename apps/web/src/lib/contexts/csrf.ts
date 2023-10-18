@@ -1,5 +1,5 @@
-import { createContext } from 'react';
+import { createContext } from "react"
 
-const CsrfTokenContext = createContext<string | null>(null);
+const CsrfTokenContext = createContext<string | null>(null)
 
-export default CsrfTokenContext;
+export default CsrfTokenContext

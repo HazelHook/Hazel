@@ -2,16 +2,15 @@
 
 import type { FormEventHandler } from "react"
 import { useCallback } from "react"
-
 import configuration from "@/configuration"
-import { toast } from "sonner"
+import useSignInWithOtp from "@/core/hooks/use-sign-in-with-otp"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import If from "@hazel/ui/if"
-import useSignInWithOtp from "@/core/hooks/use-sign-in-with-otp"
-import { Label } from "@hazel/ui/label"
 import { Input } from "@hazel/ui/input"
+import { Label } from "@hazel/ui/label"
 import { useTranslations } from "next-intl"
+import { toast } from "sonner"
 
 const EmailLinkAuth: React.FC<{
 	inviteCode?: string
@@ -58,13 +57,7 @@ const EmailLinkAuth: React.FC<{
 			<div className={"flex flex-col space-y-4"}>
 				<div className="space-y-1">
 					<Label>{t("common.emailAddress")}</Label>
-					<Input
-						data-cy={"email-input"}
-						required
-						type="email"
-						placeholder={"your@email.com"}
-						name={"email"}
-					/>
+					<Input data-cy={"email-input"} required type="email" placeholder={"your@email.com"} name={"email"} />
 				</div>
 				<Button loading={signInWithOtpMutation.isMutating}>
 					<If condition={signInWithOtpMutation.isMutating} fallback={t("auth.sendEmailLink")}>

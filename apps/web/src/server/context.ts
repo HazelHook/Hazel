@@ -1,8 +1,9 @@
+import { cookies, headers } from "next/headers"
 import getSupabaseServerActionClient from "@/core/supabase/action-client"
+import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
+
 import db from "@/lib/db"
 import requireSession from "@/lib/user/require-session"
-import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
-import { cookies, headers } from "next/headers"
 
 export async function createContext(opts?: FetchCreateContextFnOptions) {
 	const newHeaders = new Map(headers())
@@ -17,7 +18,9 @@ export async function createContext(opts?: FetchCreateContextFnOptions) {
 	// 	throw new TRPCError({ message: "User needs to have an Organization Selected", code: "BAD_REQUEST" })
 	// }
 
-	const membership = await db.organization.memberships.getOne({ membershipId: membershipId || "" })
+	const membership = await db.organization.memberships.getOne({
+		membershipId: membershipId || "",
+	})
 
 	// if (!membership) {
 	// 	throw new TRPCError({ message: "User needs to have an valid Organization selected", code: "BAD_REQUEST" })

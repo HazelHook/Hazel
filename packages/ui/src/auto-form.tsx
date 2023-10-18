@@ -1,24 +1,24 @@
 "use client"
 
 import React, { ReactNode } from "react"
-import { z } from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./form"
-import { ControllerRenderProps, DefaultValues, FieldValues, useFieldArray, useForm } from "react-hook-form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select"
+import { AddIcon, CopperXIcon } from "@hazel/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { ControllerRenderProps, DefaultValues, FieldValues, useFieldArray, useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { z } from "zod"
+
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion"
 import { Button } from "./button"
-import { Input } from "./input"
 import { Checkbox } from "./checkbox"
 import { DatePicker } from "./date-picker"
-import { cn, minDelay } from "./utils"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./form"
+import { Input } from "./input"
+import { RadioGroup, RadioGroupItem } from "./radio-group"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select"
+import { Separator } from "./separator"
 import { Switch } from "./switch"
 import { Textarea } from "./text-area"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion"
-import { RadioGroup, RadioGroupItem } from "./radio-group"
-import { Separator } from "./separator"
-import { AddIcon } from "./icons/pika/add"
-import { CopperXIcon } from "./icons/pika/copperX"
-import { toast } from "sonner"
+import { cn, minDelay } from "./utils"
 
 /**
  * Beautify a camelCase string.
@@ -440,11 +440,9 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 						name={key}
 						key={key}
 						render={({ field }) => {
-							const inputType =
-								fieldConfigItem.fieldType ?? DEFAULT_ZOD_HANDLERS[zodBaseType] ?? "fallback"
+							const inputType = fieldConfigItem.fieldType ?? DEFAULT_ZOD_HANDLERS[zodBaseType] ?? "fallback"
 
-							const InputComponent =
-								typeof inputType === "function" ? inputType : INPUT_COMPONENTS[inputType]
+							const InputComponent = typeof inputType === "function" ? inputType : INPUT_COMPONENTS[inputType]
 							const ParentElement = fieldConfigItem.renderParent ?? DefaultParent
 
 							return (
@@ -460,9 +458,7 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 											...zodInputProps,
 											...field,
 											...fieldConfigItem.inputProps,
-											value: !fieldConfigItem.inputProps?.defaultValue
-												? field.value ?? ""
-												: undefined,
+											value: !fieldConfigItem.inputProps?.defaultValue ? field.value ?? "" : undefined,
 										}}
 									/>
 								</ParentElement>

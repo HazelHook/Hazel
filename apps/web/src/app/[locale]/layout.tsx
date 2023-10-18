@@ -1,17 +1,17 @@
 import "@/styles/global.css"
 
 import { Metadata } from "next"
+import { notFound } from "next/navigation"
+import configuration from "@/configuration"
+import { Toaster } from "sonner"
 
 import { fontSans } from "@/lib/fonts"
+import AuthProvider from "@/lib/provider/AuthProvider"
+import { I18Provider } from "@/lib/provider/i18-provider"
 import { cn } from "@/lib/utils"
 import NextProgress from "@/components/NProgress"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "sonner"
-import AuthProvider from "@/lib/provider/AuthProvider"
-import configuration from "@/configuration"
-import { notFound } from "next/navigation"
-import { I18Provider } from "@/lib/provider/i18-provider"
 
 export const metadata: Metadata = {
 	title: {

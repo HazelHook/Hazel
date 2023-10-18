@@ -1,6 +1,9 @@
 "use client"
 
 import { ReactNode, useMemo, useState } from "react"
+import { DataTablePagination } from "@hazel/ui/data-table-pagination"
+import { Sheet, SheetContent } from "@hazel/ui/sheet"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 import {
 	ColumnDef,
 	flexRender,
@@ -10,11 +13,6 @@ import {
 	SortingState,
 	useReactTable,
 } from "@tanstack/react-table"
-
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
-
-import { Sheet, SheetContent } from "@hazel/ui/sheet"
-import { DataTablePagination } from "@hazel/ui/data-table-pagination"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]

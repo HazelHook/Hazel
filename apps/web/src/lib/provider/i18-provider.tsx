@@ -1,5 +1,5 @@
-import { NextIntlClientProvider, useMessages } from "next-intl"
 import { ReactNode } from "react"
+import { NextIntlClientProvider, useMessages } from "next-intl"
 
 export type I18ProviderProps = {
 	locale: string

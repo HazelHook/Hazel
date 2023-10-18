@@ -20,18 +20,16 @@ export const createDestinationAction = createAction(
 )
 
 export const updateDestinationAction = createAction(
-	protectedProcedure
-		.input(z.object({ publicId: z.string() }).merge(updateDestinationSchema))
-		.mutation(async (opts) => {
-			const destination = await db.destination.update({
-				...opts.input,
-				workspaceId: opts.ctx.auth.workspaceId,
-			})
+	protectedProcedure.input(z.object({ publicId: z.string() }).merge(updateDestinationSchema)).mutation(async (opts) => {
+		const destination = await db.destination.update({
+			...opts.input,
+			workspaceId: opts.ctx.auth.workspaceId,
+		})
 
-			return {
-				id: destination.publicId,
-			}
-		}),
+		return {
+			id: destination.publicId,
+		}
+	}),
 )
 
 export const deleteDestinationAction = createAction(

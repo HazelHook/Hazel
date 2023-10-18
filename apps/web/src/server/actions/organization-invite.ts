@@ -1,10 +1,12 @@
 "use server"
 
+import { TRPCError } from "@trpc/server"
 import { z } from "zod"
-import { basicProtectedProcedure, createAction, protectedProcedure } from "../trpc"
+
 import db from "@/lib/db"
 import { orgInviteFormSchema } from "@/lib/schemas/organization"
-import { TRPCError } from "@trpc/server"
+
+import { basicProtectedProcedure, createAction, protectedProcedure } from "../trpc"
 
 // import { Resend } from "resend"
 // import { OrganizationInviteEmail } from "@/lib/emails/organization/Invite"
@@ -73,11 +75,17 @@ export const acceptOrganizationInvite = createAction(
 			})
 
 			if (!invitation) {
-				throw new TRPCError({ message: "Invitiation with code doesn't exist", code: "NOT_FOUND" })
+				throw new TRPCError({
+					message: "Invitiation with code doesn't exist",
+					code: "NOT_FOUND",
+				})
 			}
 
 			if (opts.ctx.auth.user.email !== invitation.email) {
-				throw new TRPCError({ message: "Email doesn't match the invite link", code: "FORBIDDEN" })
+				throw new TRPCError({
+					message: "Email doesn't match the invite link",
+					code: "FORBIDDEN",
+				})
 			}
 
 			await db.organization.memberships.create({

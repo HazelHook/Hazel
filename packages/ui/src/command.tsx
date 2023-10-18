@@ -1,12 +1,12 @@
 "use client"
 
 import * as React from "react"
+import { SearchRegularIcon } from "@hazel/icons"
 import { DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"
 
-import { cn } from "./utils"
 import { Dialog, DialogContent } from "./dialog"
-import { SearchRegularIcon } from "./icons/pika/searchRegular"
+import { cn } from "./utils"
 
 const Command = React.forwardRef<
 	React.ElementRef<typeof CommandPrimitive>,

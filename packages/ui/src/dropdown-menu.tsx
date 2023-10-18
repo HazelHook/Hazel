@@ -1,12 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { CheckTickIcon, ChevronRightIcon, CircleDotIcon } from "@hazel/icons"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 
 import { cn } from "./utils"
-import { CheckTickIcon } from "./icons/pika/checkTick"
-import { ChevronRightIcon } from "./icons/pika/chevronRight"
-import { CircleDotIcon } from "./icons/pika/circleDot"
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 

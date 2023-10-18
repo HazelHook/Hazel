@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 import AutoForm from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import {
@@ -11,11 +13,10 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@hazel/ui/dialog"
-import { createOrgFormSchema } from "@/lib/schemas/organization"
+
 import { createOrganzationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { createOrgFormSchema } from "@/lib/schemas/organization"
 
 export const CreateOrg = () => {
 	const router = useRouter()

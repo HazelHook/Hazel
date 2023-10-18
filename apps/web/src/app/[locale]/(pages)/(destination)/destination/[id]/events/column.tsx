@@ -1,7 +1,5 @@
 "use client"
 
-import { ColumnDef } from "@tanstack/react-table"
-
 import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -11,6 +9,8 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
+import { ColumnDef } from "@tanstack/react-table"
+
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
 import { Status } from "@/components/Status"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/page"

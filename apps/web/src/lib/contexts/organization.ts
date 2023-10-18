@@ -1,5 +1,5 @@
-import { Organization } from "db/src/drizzle"
 import { createContext } from "react"
+import { Organization } from "db/src/drizzle"
 
 const OrganizationContext = createContext<{
 	organization: Maybe<Organization>

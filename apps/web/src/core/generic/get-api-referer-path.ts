@@ -10,7 +10,7 @@ import { URL } from "url"
  * @param headers
  * @param defaultPath
  */
-export default function getApiRefererPath<ReadonlyHeaders extends Omit<Headers, "append" | "delete" | "set">>(
+export default function getApiRefererPath<ReadonlyHeaders extends Omit<Headers, "append" | "delete" | "set">,>(
 	headers: ReadonlyHeaders,
 	defaultPath = "/",
 ) {

@@ -1,17 +1,16 @@
 "use client"
 
 import { FormEvent, useCallback } from "react"
-
-import useResetPassword from "@/core/hooks/use-reset-password"
-import AuthErrorMessage from "@/app/[locale]/auth/components/AuthErrorMessage"
-
 import configuration from "@/configuration"
-import If from "@hazel/ui/if"
+import useResetPassword from "@/core/hooks/use-reset-password"
 import Alert from "@hazel/ui/alert"
-import { Label } from "@hazel/ui/label"
-import { Input } from "@hazel/ui/input"
 import { Button } from "@hazel/ui/button"
+import If from "@hazel/ui/if"
+import { Input } from "@hazel/ui/input"
+import { Label } from "@hazel/ui/label"
 import { useTranslations } from "next-intl"
+
+import AuthErrorMessage from "@/app/[locale]/auth/components/AuthErrorMessage"
 
 function PasswordResetContainer() {
 	const t = useTranslations()
@@ -47,9 +46,7 @@ function PasswordResetContainer() {
 					<form onSubmit={(e) => void onSubmit(e)} className={"container mx-auto flex justify-center"}>
 						<div className={"flex-col space-y-4"}>
 							<div>
-								<p className={"text-sm text-gray-700 dark:text-gray-400"}>
-									{t("auth.passwordResetSubheading")}
-								</p>
+								<p className={"text-sm text-gray-700 dark:text-gray-400"}>{t("auth.passwordResetSubheading")}</p>
 							</div>
 
 							<div className="space-y-1">

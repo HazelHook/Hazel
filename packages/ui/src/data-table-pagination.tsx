@@ -1,9 +1,8 @@
+import { ChevronBigLeftIcon, ChevronBigRightIcon } from "@hazel/icons"
 import { Table } from "@tanstack/react-table"
 
 import { Button } from "./button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select"
-import { ChevronBigLeftIcon } from "./icons/pika/chevronBigLeft"
-import { ChevronBigRightIcon } from "./icons/pika/chevronBigRight"
 
 interface DataTablePaginationProps<TData> {
 	table: Table<TData>

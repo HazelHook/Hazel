@@ -1,5 +1,4 @@
 import { useRouter } from "next/navigation"
-
 import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -8,13 +7,13 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import { ThreeDotsVerticalIcon } from "@/components/icons/pika/threeDotsVertical"
-import { ClipboardIcon } from "@/components/icons/pika/clipboard"
-import { UserCrossIcon } from "@/components/icons/pika/userCross"
-import { useAction } from "@/server/client"
-
 import { toast } from "sonner"
+
 import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
+import { useAction } from "@/server/client"
+import { ClipboardIcon } from "@/components/icons/pika/clipboard"
+import { ThreeDotsVerticalIcon } from "@/components/icons/pika/threeDotsVertical"
+import { UserCrossIcon } from "@/components/icons/pika/userCross"
 
 export interface InviteOptionsProps {
 	emailAdress: string

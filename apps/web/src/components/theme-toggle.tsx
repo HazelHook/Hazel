@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
+import { Button } from "@hazel/ui/button"
 import { useTheme } from "next-themes"
 
-import { Button } from "@hazel/ui/button"
 import { Icons } from "@/components/icons"
 
 export function ThemeToggle() {

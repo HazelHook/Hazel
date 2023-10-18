@@ -1,13 +1,12 @@
 "use client"
 
+import type { FormEventHandler } from "react"
+import { useCallback } from "react"
 import { Button } from "@hazel/ui/button"
 import If from "@hazel/ui/if"
 import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
 import { useTranslations } from "next-intl"
-
-import type { FormEventHandler } from "react"
-import { useCallback } from "react"
 
 type ActionTypes = `link` | `signIn`
 

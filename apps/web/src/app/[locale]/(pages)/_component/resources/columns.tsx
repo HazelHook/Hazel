@@ -1,13 +1,12 @@
 "use client"
 
+import { Avatar, AvatarImage } from "@hazel/ui/avatar"
+import { Badge } from "@hazel/ui/badge"
+import { Button } from "@hazel/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { Connection, Destination, Source } from "db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Avatar, AvatarImage } from "@hazel/ui/avatar"
-
-import { Badge } from "@hazel/ui/badge"
-import { Button } from "@hazel/ui/button"
 import { ArrowDownIcon } from "@/components/icons/pika/arrowDown"
 import { ArrowUpIcon } from "@/components/icons/pika/arrowUp"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"

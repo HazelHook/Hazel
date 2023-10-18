@@ -1,9 +1,9 @@
 import Link from "next/link"
-
 import configuration from "@/configuration"
 import Heading from "@hazel/ui/heading"
-import SignUpMethodsContainer from "../components/SignUpMethodsContainer"
 import { useTranslations } from "next-intl"
+
+import SignUpMethodsContainer from "../components/SignUpMethodsContainer"
 
 const SIGN_IN_PATH = configuration.paths.signIn
 

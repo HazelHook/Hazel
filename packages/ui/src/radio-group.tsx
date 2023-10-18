@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { CheckTickIcon } from "@hazel/icons"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 
 import { cn } from "./utils"
-import { CheckTickIcon } from "./icons/pika/checkTick"
 
 const RadioGroup = React.forwardRef<
 	React.ElementRef<typeof RadioGroupPrimitive.Root>,

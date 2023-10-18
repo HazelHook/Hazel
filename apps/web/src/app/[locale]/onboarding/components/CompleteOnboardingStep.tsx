@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useRef, useTransition } from "react"
-import useCsrfToken from "@/core/hooks/use-csrf-token"
-import Spinner from "@/components/Spinner"
-import { useAction } from "@/server/client"
-import { handleOnboardingAction } from "@/server/actions/onboarding"
 import { useRouter } from "next/navigation"
 import configuration from "@/configuration"
+import useCsrfToken from "@/core/hooks/use-csrf-token"
+
+import { handleOnboardingAction } from "@/server/actions/onboarding"
+import { useAction } from "@/server/client"
+import Spinner from "@/components/Spinner"
 
 interface CompleteOnboardingStepData {
 	organization: string
@@ -52,7 +53,9 @@ function useCompleteOnboarding(data: CompleteOnboardingStepData) {
 
 			startTransition(async () => {
 				console.log("Complete OnBoarding")
-				handleOnboardingCompleteAction.mutate({ organizationName: data.organization })
+				handleOnboardingCompleteAction.mutate({
+					organizationName: data.organization,
+				})
 			})
 		})()
 	}, [csrfToken, data])

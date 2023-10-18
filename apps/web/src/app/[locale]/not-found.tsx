@@ -1,7 +1,6 @@
 import Link from "next/link"
-import { Image } from "@unpic/react"
-
 import { Button } from "@hazel/ui/button"
+import { Image } from "@hazel/ui/image"
 
 export default function NotFoundPage() {
 	return (

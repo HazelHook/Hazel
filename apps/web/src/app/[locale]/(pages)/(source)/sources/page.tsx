@@ -1,11 +1,11 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-
-import { auth } from "@/lib/auth"
-import db from "@/lib/db"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 import { DataTable } from "@hazel/ui/data-table"
+
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
 import { AddIcon } from "@/components/icons/pika/add"
 
 import { columns } from "./columns"

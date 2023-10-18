@@ -1,13 +1,13 @@
 "use client"
 
+import { Badge } from "@hazel/ui/badge"
+import { SortableHeader } from "@hazel/ui/data-table"
 import { ColumnDef } from "@tanstack/react-table"
 import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
 
-import { Badge } from "@hazel/ui/badge"
-import { SortableHeader } from "@hazel/ui/data-table"
+import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { CheckTickIcon } from "@/components/icons/pika/checkTick"
 import { IntegrationsActions } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationsActions"
-import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { IntegrationToolColumn } from "@/app/[locale]/(pages)/(integration)/integrations/page"
 
 export const columns: (

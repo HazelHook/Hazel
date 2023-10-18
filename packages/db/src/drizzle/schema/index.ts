@@ -1,5 +1,4 @@
 import { InferInsertModel, InferModel, InferSelectModel, relations } from "drizzle-orm"
-
 import {
 	boolean,
 	index,
@@ -13,6 +12,7 @@ import {
 	uuid,
 	varchar,
 } from "drizzle-orm/pg-core"
+
 import { INTEGRATIONS } from "../integrations/data"
 
 const commonFields = {
@@ -62,7 +62,9 @@ export const integration = pgTable(
 			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
-		tool: varchar("tool", { enum: Object.keys(INTEGRATIONS) as [string, ...string[]] }),
+		tool: varchar("tool", {
+			enum: Object.keys(INTEGRATIONS) as [string, ...string[]],
+		}),
 		config: json("config"),
 	},
 	(table) => ({

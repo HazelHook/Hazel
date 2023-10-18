@@ -1,9 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { ColumnDef } from "@tanstack/react-table"
-import { TBResponse } from "db/src/tinybird/model/tiny-response"
-
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -13,6 +10,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
+import { ColumnDef } from "@tanstack/react-table"
+import { TBResponse } from "db/src/tinybird/model/tiny-response"
+
 import { FilterVerticalIcon } from "@/components/icons/pika/filterVertical"
 
 export type Column = TBResponse
@@ -38,10 +38,7 @@ export const columns: ColumnDef<Column>[] = [
 			const destinationId = cell.getValue() as string
 
 			return (
-				<Link
-					className={buttonVariants({ variant: "link", size: "none" })}
-					href={`/destination/${destinationId}`}
-				>
+				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/destination/${destinationId}`}>
 					{destinationId}
 				</Link>
 			)

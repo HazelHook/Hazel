@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { Button } from "@hazel/ui/button"
 import {
 	Dialog,
@@ -11,9 +12,9 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@hazel/ui/dialog"
+
 import type { deleteOrganzationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"
-import { useRouter } from "next/navigation"
 
 interface OrganizationDeleteDialogProps {
 	isAllowedToDelete: boolean
@@ -46,8 +47,8 @@ export const DeleteOrganizationDialog = ({
 				<DialogHeader className="mb-4">
 					<DialogTitle>Are you sure you want to delete the organization?</DialogTitle>
 					<DialogDescription>
-						This action cannot be undone. This will permanently delete the organization and remove all data
-						from our servers.
+						This action cannot be undone. This will permanently delete the organization and remove all data from our
+						servers.
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter>

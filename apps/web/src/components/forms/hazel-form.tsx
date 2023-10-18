@@ -1,12 +1,13 @@
 "use client"
 
-import { z } from "zod"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import AutoForm, { FieldConfig, ZodObjectOrWrapped } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
-import { useAction } from "@/server/client"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
 import { TRPCActionHandler } from "@trpc/next/app-dir/server"
+import { z } from "zod"
+
+import { useAction } from "@/server/client"
 
 export const HazelForm = <SchemaType extends ZodObjectOrWrapped>({
 	action,
@@ -50,11 +51,7 @@ export const HazelForm = <SchemaType extends ZodObjectOrWrapped>({
 				action && (await updateAction.mutateAsync({ ...extraData, ...data }))
 			}}
 		>
-			<Button
-				type="submit"
-				disabled={updateAction.status === "loading"}
-				loading={updateAction.status === "loading"}
-			>
+			<Button type="submit" disabled={updateAction.status === "loading"} loading={updateAction.status === "loading"}>
 				Update
 			</Button>
 		</AutoForm>

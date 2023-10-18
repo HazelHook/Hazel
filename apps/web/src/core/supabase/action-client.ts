@@ -1,10 +1,8 @@
+import { cookies } from "next/headers"
+import type { Database } from "@/database.types"
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
-
-import { cookies } from "next/headers"
-
 import invariant from "tiny-invariant"
-import type { Database } from "@/database.types"
 
 /**
  * @name createServerActionClient

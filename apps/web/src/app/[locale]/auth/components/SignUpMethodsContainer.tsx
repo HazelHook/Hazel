@@ -1,16 +1,15 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { useCallback } from "react"
-
+import { useRouter } from "next/navigation"
 import configuration from "@/configuration"
-import OAuthProviders from "./OAuthProviders"
 import If from "@hazel/ui/if"
+import { useTranslations } from "next-intl"
 
 import EmailLinkAuth from "./EmailLinkAuth"
 import EmailPasswordSignUpContainer from "./EmailPasswordSignUpContainer"
+import OAuthProviders from "./OAuthProviders"
 import PhoneNumberSignInContainer from "./PhoneNumberSignInContainer"
-import { useTranslations } from "next-intl"
 
 function SignUpMethodsContainer() {
 	const t = useTranslations()

@@ -1,5 +1,5 @@
+import { SpinnerIcon } from "@hazel/icons"
 import classNames from "clsx"
-import { SpinnerIcon } from "./icons/pika/spinner"
 
 function Spinner(
 	props: React.PropsWithChildren<{

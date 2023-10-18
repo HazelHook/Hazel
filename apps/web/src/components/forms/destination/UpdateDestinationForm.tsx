@@ -1,12 +1,12 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import AutoForm from "@hazel/ui/auto-form"
 import { Destination } from "db/src/drizzle/schema"
 
-import { useAction } from "@/server/client"
 import type { updateDestinationAction } from "@/server/actions/destination"
+import { useAction } from "@/server/client"
 import { updateDestinationSchema } from "@/lib/schemas/destination"
-import AutoForm from "@hazel/ui/auto-form"
 import { LoadingButton } from "@/components/loading-button"
 
 export const UpdateDestinationForm = ({
@@ -37,7 +37,10 @@ export const UpdateDestinationForm = ({
 	return (
 		<AutoForm
 			onSubmit={async (values) => {
-				await updateDestination.mutateAsync({ ...values, publicId: destination.publicId })
+				await updateDestination.mutateAsync({
+					...values,
+					publicId: destination.publicId,
+				})
 			}}
 			toastValues={{
 				loading: "Update Destination...",

@@ -1,5 +1,4 @@
 import { Client } from "lago-javascript-client"
-
 import { nanoid } from "nanoid"
 
 export type Domain = "event" | "domain"
@@ -9,7 +8,11 @@ export const lago = Client(process.env.LAGO_API_KEY!, {
 	customFetch: fetch,
 })
 
-export const ingestMetric = async (input: { externalId: string; type: Domain; properties?: any }) => {
+export const ingestMetric = async (input: {
+	externalId: string
+	type: Domain
+	properties?: any
+}) => {
 	try {
 		return await lago.events.createEvent({
 			event: {
@@ -24,7 +27,10 @@ export const ingestMetric = async (input: { externalId: string; type: Domain; pr
 	}
 }
 
-export const createSubscription = async (input: { planCode: string; externalId: string }) => {
+export const createSubscription = async (input: {
+	planCode: string
+	externalId: string
+}) => {
 	const { data } = await lago.subscriptions.createSubscription({
 		subscription: {
 			plan_code: input.planCode,
@@ -61,7 +67,11 @@ export const createCustomer = async (input: {
 	return data
 }
 
-export const isLimited = async (input: { externalId: string; metric: Domain; limit: number }) => {
+export const isLimited = async (input: {
+	externalId: string
+	metric: Domain
+	limit: number
+}) => {
 	const {
 		data: { subscriptions },
 	} = await lago.subscriptions.findAllSubscriptions({

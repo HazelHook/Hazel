@@ -1,4 +1,5 @@
 import { Button } from "@hazel/ui/button"
+
 import AuthProviderLogo from "./AuthProviderLogo"
 
 const AuthProviderButton: React.FCC<{

@@ -1,18 +1,17 @@
-import VerificationCodeInput from "@/app/[locale]/auth/components/VerificationCodeInput"
+import React, { useCallback, useEffect, useState } from "react"
+import Image from "next/image"
+import useSupabase from "@/core/hooks/use-supabase"
+import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import If from "@hazel/ui/if"
 import Modal from "@hazel/ui/modal"
 import TextField from "@hazel/ui/text-field"
-import useSupabase from "@/core/hooks/use-supabase"
-import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
 import { useTranslations } from "next-intl"
-import Image from "next/image"
-
-import React, { useCallback, useEffect, useState } from "react"
 import { toast } from "sonner"
-
 import useMutation from "swr/mutation"
+
+import VerificationCodeInput from "@/app/[locale]/auth/components/VerificationCodeInput"
 
 function MultiFactorAuthSetupModal(
 	props: React.PropsWithChildren<{
@@ -114,10 +113,7 @@ function MultiFactorAuthSetupForm({
 						<TextField.Label>
 							{t("verificationCode")}
 
-							<VerificationCodeInput
-								onInvalid={() => setVerificationCode("")}
-								onValid={setVerificationCode}
-							/>
+							<VerificationCodeInput onInvalid={() => setVerificationCode("")} onValid={setVerificationCode} />
 
 							<TextField.Hint>{t("verifyActivationCodeDescription")}</TextField.Hint>
 						</TextField.Label>

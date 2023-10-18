@@ -1,9 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-
-import { Maximize02Icon } from "./icons/pika/maximize02"
-import { Minimize02Icon } from "./icons/pika/minimize02"
+import { Maximize02Icon, Minimize02Icon } from "@hazel/icons"
 
 export interface ExpandableListProps {
 	maxItems?: number

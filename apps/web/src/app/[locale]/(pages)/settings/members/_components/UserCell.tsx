@@ -1,6 +1,7 @@
-import { AvatarImage, Avatar } from "@hazel/ui/avatar"
-import { getSeededProfileImageUrl } from "@/lib/utils"
+import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { User } from "@supabase/supabase-js"
+
+import { getSeededProfileImageUrl } from "@/lib/utils"
 
 export const UserCell = ({ user }: { user: User }) => {
 	return (

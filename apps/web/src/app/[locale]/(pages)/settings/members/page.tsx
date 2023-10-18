@@ -1,12 +1,13 @@
-import { DataTable } from "./data-table"
-import { columns } from "./columns"
-import db from "@/lib/db"
-import { auth } from "@/lib/auth"
 import { Container } from "@hazel/ui/container"
-import { createOrganizationInvite } from "@/server/actions/organization-invite"
-import { sql } from "db/src/drizzle"
-import { OrganizationMember } from "db/src/drizzle"
 import { User } from "@supabase/supabase-js"
+import { OrganizationMember, sql } from "db/src/drizzle"
+
+import { createOrganizationInvite } from "@/server/actions/organization-invite"
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+
+import { columns } from "./columns"
+import { DataTable } from "./data-table"
 
 interface MemberListPageProps {
 	params: {
@@ -46,7 +47,9 @@ async function augmentMemberships(memberships: OrganizationMember[]): Promise<Au
 const MemberListPage = async ({ params, searchParams }: MemberListPageProps) => {
 	const { organization } = await auth()
 
-	const memberships = await db.organization.memberships.getMany({ orgId: organization.id })
+	const memberships = await db.organization.memberships.getMany({
+		orgId: organization.id,
+	})
 
 	const augmentedMemberships = await augmentMemberships(memberships)
 

@@ -1,6 +1,6 @@
-import useMutation from "swr/mutation"
 import useSupabase from "@/core/hooks/use-supabase"
 import { VerifyOtpParams } from "@supabase/supabase-js"
+import useMutation from "swr/mutation"
 
 /**
  * @name useVerifyOtp

@@ -1,10 +1,10 @@
+import { useMemo } from "react"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
+import { OrganizationMember } from "db/src/drizzle/schema"
+import { toast } from "sonner"
+
 import { useAuth } from "@/lib/provider/AuthProvider"
 import { capitalizeFirstLetter } from "@/lib/utils"
-
-import { OrganizationMember } from "db/src/drizzle/schema"
-import { useMemo } from "react"
-import { toast } from "sonner"
 
 export interface RoleSelectProps {
 	orgId: string

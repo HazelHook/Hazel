@@ -1,19 +1,15 @@
-import { DrizzleTable } from "../db-table"
-
-import * as schema from "../../schema"
 import { and, eq, isNull, sql } from "drizzle-orm"
-import { generatePublicId } from "../../schema/common"
-import { DB, OptionalExceptFor } from ".."
+
 import { EntityLogic } from "."
+import { DB, OptionalExceptFor } from ".."
+import * as schema from "../../schema"
+import { generatePublicId } from "../../schema/common"
+import { DrizzleTable } from "../db-table"
 
 const organizationsLogic = (db: DB) =>
 	({
 		table: new DrizzleTable("organizations", schema.organizations, db),
-		getOne: async ({
-			publicId,
-		}: {
-			publicId: string
-		}) => {
+		getOne: async ({ publicId }: { publicId: string }) => {
 			return db.query.organizations.findFirst({
 				where: and(eq(schema.organizations.publicId, publicId), isNull(schema.organizations.deletedAt)),
 				with: {
@@ -22,11 +18,7 @@ const organizationsLogic = (db: DB) =>
 				},
 			})
 		},
-		getMany: async ({
-			ownerId,
-		}: {
-			ownerId: string
-		}) => {
+		getMany: async ({ ownerId }: { ownerId: string }) => {
 			return db.query.organizations.findMany({
 				where: and(eq(schema.organizations.ownerId, ownerId), isNull(schema.organizations.deletedAt)),
 				with: {
@@ -72,11 +64,7 @@ const organizationsLogic = (db: DB) =>
 			return { publicId }
 		},
 		invite: {
-			get: async ({
-				publicId,
-			}: {
-				publicId: string
-			}) => {
+			get: async ({ publicId }: { publicId: string }) => {
 				const invite = db.query.organizationInvites.findFirst({
 					where: eq(schema.organizationInvites.publicId, publicId),
 					with: {
@@ -86,11 +74,7 @@ const organizationsLogic = (db: DB) =>
 
 				return invite
 			},
-			getMany: async ({
-				orgId,
-			}: {
-				orgId: number
-			}) => {
+			getMany: async ({ orgId }: { orgId: number }) => {
 				const invites = db.query.organizationInvites.findMany({
 					where: eq(schema.organizationInvites.organizationId, orgId),
 				})
@@ -123,11 +107,7 @@ const organizationsLogic = (db: DB) =>
 				})
 				return { res, publicId }
 			},
-			getOne: async ({
-				membershipId,
-			}: {
-				membershipId: string
-			}) => {
+			getOne: async ({ membershipId }: { membershipId: string }) => {
 				const data = await db.query.organizationMembers.findFirst({
 					where: eq(schema.organizationMembers.publicId, membershipId),
 					with: {

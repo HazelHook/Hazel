@@ -1,12 +1,11 @@
+import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from "next/server"
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
+import csrf from "edge-csrf"
 import createI18nMiddleware from "next-intl/middleware"
 
-import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from "next/server"
 import configuration from "./configuration"
-import { isPublicRoute } from "./core/route-matcher"
-
-import csrf from "edge-csrf"
 import HttpStatusCode from "./core/generic/http-status-code.enum"
+import { isPublicRoute } from "./core/route-matcher"
 
 const CSRF_TOKEN_HEADER = "X-CSRF-Token"
 const CSRF_SECRET_COOKIE = "csrfSecret"

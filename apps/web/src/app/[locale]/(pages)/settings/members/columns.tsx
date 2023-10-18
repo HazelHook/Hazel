@@ -1,13 +1,14 @@
 "use client"
 
+import { User } from "@supabase/supabase-js"
 import { ColumnDef } from "@tanstack/react-table"
 import { formatDistance } from "date-fns"
-import { RoleSelect } from "./_components/RoleSelect"
-import { MemberOptions } from "./_components/MemberOptions"
 import { OrganizationMember } from "db/src/drizzle/schema"
+
+import { MemberOptions } from "./_components/MemberOptions"
+import { RoleSelect } from "./_components/RoleSelect"
 import { UserCell } from "./_components/UserCell"
 import { AugmentedMember } from "./page"
-import { User } from "@supabase/supabase-js"
 
 export const columns: ColumnDef<AugmentedMember>[] = [
 	{
@@ -23,7 +24,9 @@ export const columns: ColumnDef<AugmentedMember>[] = [
 		accessorKey: "createdAt",
 		header: () => <div>Joined</div>,
 		cell: ({ row }) => {
-			const formatted = formatDistance(row.getValue("createdAt"), new Date(), { addSuffix: true })
+			const formatted = formatDistance(row.getValue("createdAt"), new Date(), {
+				addSuffix: true,
+			})
 
 			return <div className="font-medium">{formatted}</div>
 		},

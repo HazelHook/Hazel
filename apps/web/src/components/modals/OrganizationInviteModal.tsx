@@ -1,8 +1,8 @@
 "use client"
 
 import { ReactNode, useState } from "react"
-import { z } from "zod"
-
+import { useRouter } from "next/navigation"
+import AutoForm from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import {
 	Dialog,
@@ -13,14 +13,14 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@hazel/ui/dialog"
-
-import { useRouter } from "next/navigation"
-import AutoForm from "@hazel/ui/auto-form"
-import { useAction } from "@/server/client"
 import { toast } from "sonner"
-import { orgInviteFormSchema } from "../../lib/schemas/organization"
+import { z } from "zod"
+
 import type { createOrganizationInvite } from "@/server/actions/organization-invite"
+import { useAction } from "@/server/client"
 import { getBaseUrl } from "@/server/shared"
+
+import { orgInviteFormSchema } from "../../lib/schemas/organization"
 
 interface CreateOrganizationModalProps {
 	children: ReactNode

@@ -1,10 +1,11 @@
 "use client"
 
-import { Dialog, DialogContent, DialogTitle, DialogTrigger, DialogClose } from "./dialog"
-import If from "./if"
-import { CrossIcon } from "./icons/pika/cross"
-import { Button } from "./button"
+import { CrossIcon } from "@hazel/icons"
 import { useTranslations } from "next-intl"
+
+import { Button } from "./button"
+import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from "./dialog"
+import If from "./if"
 
 type ControlledOpenProps = {
 	isOpen: boolean

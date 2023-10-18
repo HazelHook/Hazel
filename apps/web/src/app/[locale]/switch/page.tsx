@@ -1,15 +1,17 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import getSupabaseServerClient from "@/core/supabase/server-client"
-import db from "@/lib/db"
 import configuration from "@/configuration"
-import { Container } from "@hazel/ui/container"
-import { switchOrganizationAction } from "@/server/actions/organization"
-import { CreateOrg } from "./components/CreateOrg"
-import { getSeededProfileImageUrl } from "@/lib/utils"
+import getSupabaseServerClient from "@/core/supabase/server-client"
 import { Card } from "@hazel/ui/card"
-import { OrgButton } from "./components/org-button"
+import { Container } from "@hazel/ui/container"
+
+import { switchOrganizationAction } from "@/server/actions/organization"
+import db from "@/lib/db"
 import requireSession from "@/lib/user/require-session"
+import { getSeededProfileImageUrl } from "@/lib/utils"
+
+import { CreateOrg } from "./components/CreateOrg"
+import { OrgButton } from "./components/org-button"
 
 async function OrganizationsPage() {
 	const client = getSupabaseServerClient()
@@ -33,7 +35,9 @@ async function OrganizationsPage() {
 		}
 	}
 
-	const memberships = await db.organization.memberships.getMany({ customerId: user.id })
+	const memberships = await db.organization.memberships.getMany({
+		customerId: user.id,
+	})
 
 	if (memberships.length === 1) {
 		const organization = memberships[0].organization

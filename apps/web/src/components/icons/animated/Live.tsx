@@ -17,11 +17,7 @@ export const LiveIcon = ({
 				)}
 			/>
 			<span
-				className={cn(
-					inactive && "bg-muted",
-					!inactive && "bg-green-500",
-					"relative inline-flex h-3 w-3 rounded-full",
-				)}
+				className={cn(inactive && "bg-muted", !inactive && "bg-green-500", "relative inline-flex h-3 w-3 rounded-full")}
 			/>
 		</div>
 	)

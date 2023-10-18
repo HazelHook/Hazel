@@ -1,6 +1,6 @@
-import { Input } from "@hazel/ui/input"
 import type { FormEventHandler, KeyboardEvent } from "react"
 import { useCallback, useEffect, useMemo } from "react"
+import { Input } from "@hazel/ui/input"
 import { useFieldArray, useForm } from "react-hook-form"
 
 const DIGITS = 6

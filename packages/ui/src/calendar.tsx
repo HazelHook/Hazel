@@ -1,12 +1,11 @@
 "use client"
 
 import * as React from "react"
+import { ChevronLeftIcon, ChevronRightIcon } from "@hazel/icons"
 import { DayPicker } from "react-day-picker"
 
-import { cn } from "./utils"
 import { buttonVariants } from "./button"
-import { ChevronLeftIcon } from "./icons/pika/chevronLeft"
-import { ChevronRightIcon } from "./icons/pika/chevronRight"
+import { cn } from "./utils"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 

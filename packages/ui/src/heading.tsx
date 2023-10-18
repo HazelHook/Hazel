@@ -6,9 +6,7 @@ export const Heading: React.FCC<{ type?: HeadingType; className?: string }> = ({
 	switch (type) {
 		case 1:
 			return (
-				<h1 className={cn("font-heading scroll-m-20 text-4xl font-semibold tracking-tight", className)}>
-					{children}
-				</h1>
+				<h1 className={cn("font-heading scroll-m-20 text-4xl font-semibold tracking-tight", className)}>{children}</h1>
 			)
 		case 2:
 			return (

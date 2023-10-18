@@ -1,10 +1,9 @@
 import Link from "next/link"
-
-import { Heading } from "@hazel/ui/heading"
-
 import configuration from "@/configuration"
-import SignInMethodsContainer from "@/app/[locale]/auth/components/SignInMethodsContainer"
+import { Heading } from "@hazel/ui/heading"
 import { useTranslations } from "next-intl"
+
+import SignInMethodsContainer from "@/app/[locale]/auth/components/SignInMethodsContainer"
 
 export const metadata = {
 	title: "Sign In",

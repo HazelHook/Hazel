@@ -1,10 +1,11 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@hazel/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@hazel/ui/dialog"
+
 import type { createApiKeyAction } from "@/server/actions/api-keys"
 import { CreateApiKeyForm } from "@/components/forms/api/CreateApiKeyForm"
-import { useState } from "react"
 
 export const ApiKeyModal = ({
 	createAction,
@@ -24,11 +25,7 @@ export const ApiKeyModal = ({
 				<DialogHeader>
 					<DialogTitle>Create new API Key</DialogTitle>
 				</DialogHeader>
-				<CreateApiKeyForm
-					workspaceId={workspaceId}
-					createAction={createAction}
-					onSuccess={() => setOpen(false)}
-				/>
+				<CreateApiKeyForm workspaceId={workspaceId} createAction={createAction} onSuccess={() => setOpen(false)} />
 			</DialogContent>
 		</Dialog>
 	)

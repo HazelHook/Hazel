@@ -1,49 +1,51 @@
 "use client"
 
+import { useState } from "react"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import useSignOut from "@/core/hooks/use-sign-out"
+
 import {
-	DropdownMenuTrigger,
+	AddCircleIcon,
+	CardIcon,
+	CheckTickIcon,
+	File2InfoIcon,
+	LogOutLeftIcon,
+	MonitorIcon,
+	MoonIcon,
+	RocketIcon,
+	SunIcon,
+	ChevronSortVerticalIcon,
+} from "@hazel/icons"
+
+import AutoForm from "@hazel/ui/auto-form"
+import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
+import { Badge } from "@hazel/ui/badge"
+import { Button } from "@hazel/ui/button"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@hazel/ui/dialog"
+import {
 	DropdownMenu,
+	DropdownMenuCheckboxItem,
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
+	DropdownMenuPortal,
 	DropdownMenuSeparator,
 	DropdownMenuSub,
-	DropdownMenuSubTrigger,
-	DropdownMenuPortal,
 	DropdownMenuSubContent,
-	DropdownMenuCheckboxItem,
+	DropdownMenuSubTrigger,
+	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import { useState } from "react"
-
-import { useLocale } from "next-intl"
-
-import { cn } from "@/lib/utils"
-import { Avatar, AvatarImage, AvatarFallback } from "@hazel/ui/avatar"
-
-import { useTheme } from "next-themes"
 import { Organization, OrganizationMember } from "db/src/drizzle/schema"
+import { useLocale } from "next-intl"
+import { useTheme } from "next-themes"
+
 import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
-import { RocketIcon } from "./icons/pika/rocket"
-import { File2InfoIcon } from "./icons/pika/file2Info"
-import { CardIcon } from "./icons/pika/card"
-import { SunIcon } from "./icons/pika/sun"
-import { MoonIcon } from "./icons/pika/moon"
-import { MonitorIcon } from "./icons/pika/monitor"
-import { LogOutLeftIcon } from "./icons/pika/logOutLeft"
-import { CheckTickIcon } from "./icons/pika/checkTick"
 import { useAction } from "@/server/client"
-import { ChevronSortVerticalIcon } from "./icons/pika/chevronSortVertical"
-import { AddCircleIcon } from "./icons/pika/addCircle"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@hazel/ui/dialog"
-import AutoForm from "@hazel/ui/auto-form"
-import { Button } from "@hazel/ui/button"
-import { createOrgFormSchema } from "@/lib/schemas/organization"
-import { Badge } from "@hazel/ui/badge"
-import useSignOut from "@/core/hooks/use-sign-out"
 import { useAuth } from "@/lib/provider/AuthProvider"
+import { createOrgFormSchema } from "@/lib/schemas/organization"
+import { cn } from "@/lib/utils"
 
 type Membership = OrganizationMember & {
 	organization: Organization
@@ -145,28 +147,19 @@ export const ProfileSettings = ({
 							<DropdownMenuSubTrigger>Change Theme</DropdownMenuSubTrigger>
 							<DropdownMenuPortal>
 								<DropdownMenuSubContent>
-									<DropdownMenuCheckboxItem
-										checked={theme === "light"}
-										onCheckedChange={() => setTheme("light")}
-									>
+									<DropdownMenuCheckboxItem checked={theme === "light"} onCheckedChange={() => setTheme("light")}>
 										<div className="flex items-center gap-2 ">
 											<SunIcon className="w-4 h-4" />
 											Light
 										</div>
 									</DropdownMenuCheckboxItem>
-									<DropdownMenuCheckboxItem
-										checked={theme === "dark"}
-										onCheckedChange={() => setTheme("dark")}
-									>
+									<DropdownMenuCheckboxItem checked={theme === "dark"} onCheckedChange={() => setTheme("dark")}>
 										<div className="flex items-center gap-2 ">
 											<MoonIcon className="w-4 h-4" />
 											Dark
 										</div>
 									</DropdownMenuCheckboxItem>
-									<DropdownMenuCheckboxItem
-										checked={theme === "system"}
-										onCheckedChange={() => setTheme("system")}
-									>
+									<DropdownMenuCheckboxItem checked={theme === "system"} onCheckedChange={() => setTheme("system")}>
 										<div className="flex items-center gap-2 ">
 											<MonitorIcon className="w-4 h-4" />
 											System
@@ -181,16 +174,10 @@ export const ProfileSettings = ({
 							<DropdownMenuSubTrigger>Change Language</DropdownMenuSubTrigger>
 							<DropdownMenuPortal>
 								<DropdownMenuSubContent>
-									<DropdownMenuCheckboxItem
-										checked={locale === "en"}
-										onCheckedChange={() => changeLocale("en")}
-									>
+									<DropdownMenuCheckboxItem checked={locale === "en"} onCheckedChange={() => changeLocale("en")}>
 										<div className="flex items-center gap-2 ">EN</div>
 									</DropdownMenuCheckboxItem>
-									<DropdownMenuCheckboxItem
-										checked={locale === "de"}
-										onCheckedChange={() => changeLocale("de")}
-									>
+									<DropdownMenuCheckboxItem checked={locale === "de"} onCheckedChange={() => changeLocale("de")}>
 										<div className="flex items-center gap-2 ">DE</div>
 									</DropdownMenuCheckboxItem>
 								</DropdownMenuSubContent>

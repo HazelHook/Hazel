@@ -1,12 +1,14 @@
-import VerificationCodeInput from "@/app/[locale]/auth/components/VerificationCodeInput"
+import React, { useCallback, useState } from "react"
 import Alert from "@hazel/ui/alert"
+import { Button } from "@hazel/ui/button"
 import If from "@hazel/ui/if"
 import Modal from "@hazel/ui/modal"
-import { useTranslations } from "next-intl"
-import React, { useCallback, useState } from "react"
-import { FactorQrCode, useVerifyCodeMutation } from "./mfa-setup-modal"
 import { TextField } from "@hazel/ui/text-field"
-import { Button } from "@hazel/ui/button"
+import { useTranslations } from "next-intl"
+
+import VerificationCodeInput from "@/app/[locale]/auth/components/VerificationCodeInput"
+
+import { FactorQrCode, useVerifyCodeMutation } from "./mfa-setup-modal"
 
 export function MultiFactorAuthSetupForm({
 	onEnrolled,
@@ -87,10 +89,7 @@ export function MultiFactorAuthSetupForm({
 						<TextField.Label>
 							{t("verificationCode")}
 
-							<VerificationCodeInput
-								onInvalid={() => setVerificationCode("")}
-								onValid={setVerificationCode}
-							/>
+							<VerificationCodeInput onInvalid={() => setVerificationCode("")} onValid={setVerificationCode} />
 
 							<TextField.Hint>{t("verifyActivationCodeDescription")}</TextField.Hint>
 						</TextField.Label>

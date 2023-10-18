@@ -1,13 +1,14 @@
 import { cookies, headers } from "next/headers"
+import getSupabaseServerActionClient from "@/core/supabase/action-client"
 import { experimental_createServerActionHandler } from "@trpc/next/app-dir/server"
 import { initTRPC, TRPCError } from "@trpc/server"
 import superjson from "superjson"
 import { ZodError } from "zod"
 
-import { Context } from "./context"
 import db from "@/lib/db"
 import requireSession from "@/lib/user/require-session"
-import getSupabaseServerActionClient from "@/core/supabase/action-client"
+
+import { Context } from "./context"
 
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,
@@ -17,8 +18,7 @@ const t = initTRPC.context<Context>().create({
 			...shape,
 			data: {
 				...shape.data,
-				zodError:
-					error.code === "BAD_REQUEST" && error.cause instanceof ZodError ? error.cause.flatten() : null,
+				zodError: error.code === "BAD_REQUEST" && error.cause instanceof ZodError ? error.cause.flatten() : null,
 			},
 		}
 	},
@@ -38,7 +38,9 @@ export const createAction = experimental_createServerActionHandler(t, {
 		// 	throw new TRPCError({ message: "User needs to have an Organization Selected", code: "BAD_REQUEST" })
 		// }
 
-		const membership = await db.organization.memberships.getOne({ membershipId: membershipId || "" })
+		const membership = await db.organization.memberships.getOne({
+			membershipId: membershipId || "",
+		})
 
 		// if (!membership) {
 		// 	throw new TRPCError({ message: "User needs to have an valid Organization selected", code: "BAD_REQUEST" })

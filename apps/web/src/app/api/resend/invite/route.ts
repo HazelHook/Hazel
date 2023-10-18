@@ -1,9 +1,10 @@
-import { auth } from "@/lib/auth"
-import db from "@/lib/db"
-import { getSeededProfileImageUrl } from "@/lib/utils"
 // import OrganizationInviteEmail from "@hazel/email/emails/Invite"
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
+
+import { auth } from "@/lib/auth"
+import db from "@/lib/db"
+import { getSeededProfileImageUrl } from "@/lib/utils"
 
 export const POST = async (request: Request) => {
 	const resend = new Resend(process.env.RESEND_API_KEY)
@@ -15,7 +16,9 @@ export const POST = async (request: Request) => {
 	}
 
 	const body = await request.json()
-	const organization = await db.organization.getOne({ publicId: body.organizationId })
+	const organization = await db.organization.getOne({
+		publicId: body.organizationId,
+	})
 
 	if (!organization) {
 		return new Response("No Organzation for this id bruv kek", { status: 404 })

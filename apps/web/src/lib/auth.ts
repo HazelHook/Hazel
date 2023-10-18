@@ -1,12 +1,12 @@
 import "server-only"
 
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+import configuration from "@/configuration"
+import getSupabaseServerClient from "@/core/supabase/server-client"
 
 import db from "./db"
-import { cookies } from "next/headers"
-import getSupabaseServerClient from "@/core/supabase/server-client"
 import requireSession from "./user/require-session"
-import configuration from "@/configuration"
 
 export const auth = async () => {
 	const client = getSupabaseServerClient()
@@ -17,7 +17,10 @@ export const auth = async () => {
 
 	const membershipId = cookiesList.get("membership_id")?.value
 
-	const user = await db.user.getOneWithMemberShips({ id: userSession.id, membershipId: membershipId || "" })
+	const user = await db.user.getOneWithMemberShips({
+		id: userSession.id,
+		membershipId: membershipId || "",
+	})
 
 	if (!user) {
 		redirect(configuration.paths.onboarding)

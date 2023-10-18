@@ -1,13 +1,14 @@
 "use client"
 
-import { ArrowRightIcon } from "@/components/icons/pika/arrowRight"
+import type { FormEvent } from "react"
+import { useCallback } from "react"
 import { Button } from "@hazel/ui/button"
 import Heading from "@hazel/ui/heading"
 import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
+
 import { useAuth } from "@/lib/provider/AuthProvider"
-import type { FormEvent } from "react"
-import { useCallback } from "react"
+import { ArrowRightIcon } from "@/components/icons/pika/arrowRight"
 
 export interface OrganizationInfoStepData {
 	organization: string

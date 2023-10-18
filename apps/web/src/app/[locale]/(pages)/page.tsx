@@ -1,14 +1,14 @@
 import { Suspense } from "react"
 import Link from "next/link"
+import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
+import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
+import { Chart } from "@hazel/ui/chart"
+import { Skeleton } from "@hazel/ui/skeleton"
 import { formatDistanceToNow, sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
 import tiny from "@/lib/tiny"
 import { chartColors, formatDateTime, subtractFromString } from "@/lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
-import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
-import { Chart } from "@hazel/ui/chart"
-import { Skeleton } from "@hazel/ui/skeleton"
 import { StatusBadge } from "@/components/StatusBadge"
 import { SourceLink } from "@/app/[locale]/(pages)/_component/SourceLink"
 

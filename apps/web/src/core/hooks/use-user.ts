@@ -1,6 +1,6 @@
-import useSWR from "swr"
 import { useRouter } from "next/navigation"
 import useSupabase from "@/core/hooks/use-supabase"
+import useSWR from "swr"
 
 /**
  * @name useUser

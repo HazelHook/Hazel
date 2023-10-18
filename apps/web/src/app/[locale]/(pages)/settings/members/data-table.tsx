@@ -1,5 +1,10 @@
 "use client"
 
+import { ReactNode, useState } from "react"
+import { Button } from "@hazel/ui/button"
+import { DataTablePagination } from "@hazel/ui/data-table-pagination"
+import { Input } from "@hazel/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -10,15 +15,10 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
-import { ReactNode, useState } from "react"
-import { Input } from "@hazel/ui/input"
-import { DataTablePagination } from "@hazel/ui/data-table-pagination"
-import { Button } from "@hazel/ui/button"
-import { AddIcon } from "@/components/icons/pika/add"
-import { usePagination } from "@/lib/hooks/usePagination"
-import { OrganizationInviteModal } from "@/components/modals/OrganizationInviteModal"
 import type { createOrganizationInvite } from "@/server/actions/organization-invite"
+import { usePagination } from "@/lib/hooks/usePagination"
+import { AddIcon } from "@/components/icons/pika/add"
+import { OrganizationInviteModal } from "@/components/modals/OrganizationInviteModal"
 
 interface DataTableProps<TData, TValue> {
 	orgId: number
@@ -75,10 +75,7 @@ export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAct
 										<TableHead key={header.id}>
 											{header.isPlaceholder
 												? null
-												: (flexRender(
-														header.column.columnDef.header,
-														header.getContext(),
-												  ) as ReactNode)}
+												: (flexRender(header.column.columnDef.header, header.getContext()) as ReactNode)}
 										</TableHead>
 									)
 								})}

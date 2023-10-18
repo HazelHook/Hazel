@@ -1,12 +1,12 @@
 import Link from "next/link"
+import { buttonVariants } from "@hazel/ui/button"
+import { Container } from "@hazel/ui/container"
 
+import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { PromiseType } from "@/lib/ts/helpers"
-import { buttonVariants } from "@hazel/ui/button"
-import { Container } from "@hazel/ui/container"
 import { AddIcon } from "@/components/icons/pika/add"
-import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { ConnectionTable } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionTable"
 
 const fetchData = async ({ workspaceId }: { workspaceId: string }) => {
@@ -33,11 +33,7 @@ const ConnectionsPage = async () => {
 					New Connection
 				</Link>
 			</div>
-			<ConnectionTable
-				deleteAction={deleteConnectionAction}
-				pauseAction={pauseConnectionAction}
-				data={connections}
-			/>
+			<ConnectionTable deleteAction={deleteConnectionAction} pauseAction={pauseConnectionAction} data={connections} />
 		</Container>
 	)
 }

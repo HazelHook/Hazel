@@ -1,8 +1,8 @@
 import { type ReactNode } from "react"
-
-import { getCachedConnection } from "@/lib/orm"
 import { LinkTab } from "@hazel/ui/link-tabs"
 import { NavTabs } from "@hazel/ui/nav-tabs"
+
+import { getCachedConnection } from "@/lib/orm"
 
 const ConnectionLayout = async ({
 	children,

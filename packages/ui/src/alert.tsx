@@ -1,16 +1,11 @@
 "use client"
 
-import { useState, useMemo, createContext, useContext, ReactNode } from "react"
-
+import { createContext, ReactNode, useContext, useMemo, useState } from "react"
+import { AlertExclamationIcon, CheckTickCircleIcon, CrossIcon, InfoCircleIcon, InfoTriangleIcon } from "@hazel/icons"
+import { cva } from "class-variance-authority"
 import classNames from "clsx"
 
-import { CrossIcon } from "./icons/pika/cross"
-import { CheckTickCircleIcon } from "./icons/pika/checkTickCircle"
-import { AlertExclamationIcon } from "./icons/pika/alertExclamation"
-import { InfoTriangleIcon } from "./icons/pika/infoTriangle"
-import { InfoCircleIcon } from "./icons/pika/infoCircle"
 import { Button } from "./button"
-import { cva } from "class-variance-authority"
 import Heading from "./heading"
 
 type AlertType = "success" | "error" | "warn" | "info"

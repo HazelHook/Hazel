@@ -1,7 +1,6 @@
-import { createClientComponentClient, SupabaseClient } from "@supabase/auth-helpers-nextjs"
-
-import invariant from "tiny-invariant"
 import type { Database } from "@/database.types"
+import { createClientComponentClient, SupabaseClient } from "@supabase/auth-helpers-nextjs"
+import invariant from "tiny-invariant"
 
 let client: SupabaseClient<Database>
 

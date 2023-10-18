@@ -1,26 +1,28 @@
 "use client"
 
 import { useCallback, useState } from "react"
-import useMutation from "swr/mutation"
-import { toast } from "sonner"
-import Spinner from "@/components/Spinner"
 import useFetchAuthFactors from "@/core/hooks/use-fetch-factors"
-import Alert from "@hazel/ui/alert"
-import If from "@hazel/ui/if"
-import { Button } from "@hazel/ui/button"
-import { useTranslations } from "next-intl"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
-import { Badge } from "@hazel/ui/badge"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import useSupabase from "@/core/hooks/use-supabase"
 import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
-import { CrossIcon } from "@/components/icons/pika/cross"
-import Modal from "@hazel/ui/modal"
-import { Factor } from "@supabase/supabase-js"
-import { PageHeader } from "@hazel/ui/page-header"
-import MultiFactorAuthSetupModal from "./mfa-setup-modal"
-import { Container } from "@hazel/ui/container"
+import Alert from "@hazel/ui/alert"
+import { Badge } from "@hazel/ui/badge"
+import { Button } from "@hazel/ui/button"
 import { Card } from "@hazel/ui/card"
+import { Container } from "@hazel/ui/container"
+import If from "@hazel/ui/if"
+import Modal from "@hazel/ui/modal"
+import { PageHeader } from "@hazel/ui/page-header"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
+import { Factor } from "@supabase/supabase-js"
+import { useTranslations } from "next-intl"
+import { toast } from "sonner"
+import useMutation from "swr/mutation"
+
+import { CrossIcon } from "@/components/icons/pika/cross"
+import Spinner from "@/components/Spinner"
+
+import MultiFactorAuthSetupModal from "./mfa-setup-modal"
 
 const MAX_FACTOR_COUNT = 10
 
@@ -146,11 +148,7 @@ function ConfirmUnenrollFactorModal(
 	)
 
 	return (
-		<Modal
-			heading={t("profile.unenrollFactorModalHeading")}
-			isOpen={!!props.factorId}
-			setIsOpen={props.setIsModalOpen}
-		>
+		<Modal heading={t("profile.unenrollFactorModalHeading")} isOpen={!!props.factorId} setIsOpen={props.setIsModalOpen}>
 			<div className={"flex flex-col space-y-4"}>
 				<div className={"text-sm"}>{t("profile.unenrollFactorModalBody")}</div>
 
@@ -204,10 +202,7 @@ function FactorsTable({
 						</TableCell>
 
 						<TableCell>
-							<Badge
-								className={"inline-flex capitalize"}
-								color={factor.status === "verified" ? "success" : "normal"}
-							>
+							<Badge className={"inline-flex capitalize"} color={factor.status === "verified" ? "success" : "normal"}>
 								{factor.status}
 							</Badge>
 						</TableCell>

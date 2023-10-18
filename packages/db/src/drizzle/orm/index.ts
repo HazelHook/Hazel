@@ -1,16 +1,15 @@
-import { PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js"
+import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js"
+import postgres from "postgres"
 
 import * as integrations from "../integrations/common"
 import * as integrationsData from "../integrations/data"
 import * as schema from "../schema"
-
-import postgres from "postgres"
-import sourceLogic from "./tables/source"
-import destinationLogic from "./tables/destination"
-import connectionLogic from "./tables/connection"
-import integrationLogic from "./tables/integration"
 import apiKeysLogic from "./tables/apiKeys"
+import connectionLogic from "./tables/connection"
+import destinationLogic from "./tables/destination"
+import integrationLogic from "./tables/integration"
 import organizationsLogic from "./tables/organization"
+import sourceLogic from "./tables/source"
 import userLogic from "./tables/user"
 
 export { integrationsData }
@@ -21,11 +20,7 @@ export type DB = PostgresJsDatabase<typeof schema>
 
 export type OptionalExceptFor<T, K extends keyof T> = Partial<T> & Pick<T, K>
 
-export function connectDB({
-	connectionString,
-}: {
-	connectionString: string
-}) {
+export function connectDB({ connectionString }: { connectionString: string }) {
 	// if (!connectionString) {
 	// 	throw new Error("Connection String cant be empty")
 	// }

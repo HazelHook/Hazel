@@ -1,26 +1,26 @@
 "use client"
 
-import { Dialog, DialogContent } from "@hazel/ui/dialog"
-
-import type { createConnectionAction } from "@/server/actions/connections"
-import type { Destination, Integration, Source } from "db/src/drizzle/schema"
-import { CreateDestinationForm } from "../destination/CreateDestinationForm"
-import { createSourceAction } from "@/server/actions/source"
-import { createDestinationAction } from "@/server/actions/destination"
-import { CreateSourceForm } from "../source/CreateSourceForm"
-import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
-import { createConnectionSchema } from "@/lib/schemas/connection"
-import { useAction } from "@/server/client"
-import { z } from "zod"
+import { useRouter, useSearchParams } from "next/navigation"
+import AutoForm from "@hazel/ui/auto-form"
+import { Avatar, AvatarImage } from "@hazel/ui/avatar"
+import { Button } from "@hazel/ui/button"
+import { Dialog, DialogContent } from "@hazel/ui/dialog"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import { Avatar, AvatarImage } from "@hazel/ui/avatar"
+import type { Destination, Integration, Source } from "db/src/drizzle/schema"
+import { z } from "zod"
 
+import type { createConnectionAction } from "@/server/actions/connections"
+import { createDestinationAction } from "@/server/actions/destination"
+import { createSourceAction } from "@/server/actions/source"
+import { useAction } from "@/server/client"
+import { createConnectionSchema } from "@/lib/schemas/connection"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { AddIcon } from "@/components/icons/pika/add"
-import { Button } from "@hazel/ui/button"
-import AutoForm from "@hazel/ui/auto-form"
+
+import { CreateDestinationForm } from "../destination/CreateDestinationForm"
+import { CreateSourceForm } from "../source/CreateSourceForm"
 
 export interface CreateConnectionFormProps {
 	action: typeof createConnectionAction
@@ -82,9 +82,7 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 												<FormControl>
 													<SelectTrigger>
 														<SelectValue
-															placeholder={
-																<p className="text-muted-foreground">Connect...</p>
-															}
+															placeholder={<p className="text-muted-foreground">Connect...</p>}
 															className="focus:text-muted-foreground"
 														/>
 													</SelectTrigger>
@@ -94,9 +92,7 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 														<SelectItem key={source.publicId} value={source.publicId}>
 															<div className="flex flex-row items-center">
 																<Avatar className="mr-2 w-4 h-4">
-																	<AvatarImage
-																		src={getSeededProfileImageUrl(source.publicId)}
-																	/>
+																	<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
 																</Avatar>
 																{source.name}
 															</div>
@@ -106,9 +102,7 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 											</Select>
 										)}
 									</FormControl>
-									{fieldConfigItem.description && (
-										<FormDescription>{fieldConfigItem.description}</FormDescription>
-									)}
+									{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
 									<FormMessage />
 								</FormItem>
 								<div className="flex justify-center">
@@ -134,9 +128,7 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 												<FormControl>
 													<SelectTrigger>
 														<SelectValue
-															placeholder={
-																<p className="text-muted-foreground">Connect...</p>
-															}
+															placeholder={<p className="text-muted-foreground">Connect...</p>}
 															className="focus:text-muted-foreground"
 														/>
 													</SelectTrigger>
@@ -146,9 +138,7 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 														<SelectItem key={source.publicId} value={source.publicId}>
 															<div className="flex flex-row items-center">
 																<Avatar className="mr-2 w-4 h-4">
-																	<AvatarImage
-																		src={getSeededProfileImageUrl(source.publicId)}
-																	/>
+																	<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
 																</Avatar>
 																{source.name}
 															</div>
@@ -158,9 +148,7 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 											</Select>
 										)}
 									</FormControl>
-									{fieldConfigItem.description && (
-										<FormDescription>{fieldConfigItem.description}</FormDescription>
-									)}
+									{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
 									<FormMessage />
 								</FormItem>
 								<div className="flex justify-center">
@@ -183,11 +171,7 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 					await createSource.mutateAsync(data)
 				}}
 			>
-				<Button
-					type="submit"
-					disabled={createSource.status === "loading"}
-					loading={createSource.status === "loading"}
-				>
+				<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
 					Create
 				</Button>
 			</AutoForm>

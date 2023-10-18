@@ -1,11 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { CheckTickIcon } from "@hazel/icons"
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
 
 import { cn } from "./utils"
-
-import { CheckTickIcon } from "./icons/pika/checkTick"
 
 const Checkbox = React.forwardRef<
 	React.ElementRef<typeof CheckboxPrimitive.Root>,

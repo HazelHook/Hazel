@@ -1,14 +1,14 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { buttonVariants } from "@hazel/ui/button"
+import { Container } from "@hazel/ui/container"
 
+import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { PromiseType } from "@/lib/ts/helpers"
-import { buttonVariants } from "@hazel/ui/button"
-import { Container } from "@hazel/ui/container"
 import { AddIcon } from "@/components/icons/pika/add"
 import { DestinationTable } from "@/app/[locale]/(pages)/(destination)/_components/DestinationTable"
-import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 
 async function dataFetch({ workspaceId }: { workspaceId: string }) {
 	const destinations = await db.destination.getMany({

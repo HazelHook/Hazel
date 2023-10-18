@@ -1,14 +1,14 @@
 "use client"
 
 import { useCallback } from "react"
-
-import AuthErrorMessage from "./AuthErrorMessage"
-
 import configuration from "@/configuration"
 import useSignInWithProvider from "@/core/hooks/use-sign-in-with-provider"
-import AuthProviderButton from "./AuthProviderButton"
-import PageLoadingIndicator from "@/components/PageLoadingIndicator"
 import { useTranslations } from "next-intl"
+
+import PageLoadingIndicator from "@/components/PageLoadingIndicator"
+
+import AuthErrorMessage from "./AuthErrorMessage"
+import AuthProviderButton from "./AuthProviderButton"
 
 const OAUTH_PROVIDERS = configuration.auth.providers.oAuth
 
@@ -69,7 +69,9 @@ const OAuthProviders: React.FCC<{
 									return onSignInWithProvider(() => signInWithProviderMutation.trigger(credentials))
 								}}
 							>
-								{t("auth.signInWithProvider", { provider: getProviderName(provider) })}
+								{t("auth.signInWithProvider", {
+									provider: getProviderName(provider),
+								})}
 							</AuthProviderButton>
 						)
 					})}

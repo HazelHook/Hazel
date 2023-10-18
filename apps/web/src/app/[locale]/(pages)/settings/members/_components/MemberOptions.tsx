@@ -1,7 +1,4 @@
-import { ClipboardIcon } from "@/components/icons/pika/clipboard"
-import { FolderRemoveIcon } from "@/components/icons/pika/folderRemove"
-import { LogOutLeftIcon } from "@/components/icons/pika/logOutLeft"
-import { ThreeDotsHorizontalIcon } from "@/components/icons/pika/threeDotsHorizontal"
+import { useMemo } from "react"
 import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -10,10 +7,14 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import { useAuth } from "@/lib/provider/AuthProvider"
 import { OrganizationMember } from "db/src/drizzle/schema"
-import { useMemo } from "react"
 import { toast } from "sonner"
+
+import { useAuth } from "@/lib/provider/AuthProvider"
+import { ClipboardIcon } from "@/components/icons/pika/clipboard"
+import { FolderRemoveIcon } from "@/components/icons/pika/folderRemove"
+import { LogOutLeftIcon } from "@/components/icons/pika/logOutLeft"
+import { ThreeDotsHorizontalIcon } from "@/components/icons/pika/threeDotsHorizontal"
 
 export interface MemberOptionsProps {
 	orgId: string
@@ -44,10 +45,7 @@ export const MemberOptions = ({ members, memberId, orgId }: MemberOptionsProps) 
 					<span>Copy user ID</span>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem
-					disabled={activeMember?.role !== "admin" || memberId === user?.id}
-					onClick={handleKick}
-				>
+				<DropdownMenuItem disabled={activeMember?.role !== "admin" || memberId === user?.id} onClick={handleKick}>
 					<FolderRemoveIcon className="mr-2 text-destructive" />
 					<span>Remove member</span>
 				</DropdownMenuItem>
