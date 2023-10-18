@@ -1,4 +1,4 @@
-import { useSupabase } from "@hazel/supabase/hooks/index"
+import { useSupabase } from "@hazel/supabase/hooks"
 
 import { SignInWithOAuthCredentials } from "@supabase/supabase-js"
 import useMutation from "swr/mutation"
@@ -6,7 +6,7 @@ import useMutation from "swr/mutation"
 /**
  * @name useSignInWithProvider
  */
-function useSignInWithProvider() {
+export function useSignInWithProvider() {
 	const client = useSupabase()
 	const key = ["auth", "sign-in-with-provider"]
 
@@ -20,5 +20,3 @@ function useSignInWithProvider() {
 		})
 	})
 }
-
-export default useSignInWithProvider

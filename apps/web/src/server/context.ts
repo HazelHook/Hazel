@@ -1,9 +1,9 @@
 import { cookies, headers } from "next/headers"
-import getSupabaseServerActionClient from "@/core/supabase/action-client"
 import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
 
 import db from "@/lib/db"
 import requireSession from "@/lib/user/require-session"
+import { getSupabaseServerActionClient } from "@hazel/supabase/clients/index"
 
 export async function createContext(opts?: FetchCreateContextFnOptions) {
 	const newHeaders = new Map(headers())

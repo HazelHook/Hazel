@@ -15,7 +15,7 @@ const nextConfig = {
 		serverComponentsExternalPackages: ["@trpc/server"],
 		optimizePackageImports: ["@hazel/icons"],
 	},
-	transpilePackages: ["@hazel/db", "@hazel/email", "@hazel/ui", "@hazel/icons"],
+	transpilePackages: ["@hazel/auth", "@hazel/db", "@hazel/email", "@hazel/ui", "@hazel/icons", "@hazel/supabase"],
 	webpack: (config, { isServer }) => {
 		if (config.name === "server" || config.name === "edge-server") config.optimization.concatenateModules = false
 

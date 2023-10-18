@@ -1,5 +1,5 @@
 import { useCallback } from "react"
-import useSupabase from "@/core/hooks/use-supabase"
+import { useSupabase } from "@hazel/supabase/hooks/index"
 
 /**
  * @name useSignOut

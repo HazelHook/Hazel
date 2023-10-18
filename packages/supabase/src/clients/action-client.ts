@@ -1,18 +1,15 @@
-import { NextRequest, NextResponse } from "next/server"
-import type { Database } from "@/database.types"
-import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
+import { cookies } from "next/headers"
+import { createServerActionClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
 import invariant from "tiny-invariant"
+import { Database } from "@hazel/db/src/database.types"
 
 /**
- * Get a Supabase client for use in the Middleware.
- * @param req
- * @param res
+ * @name createServerActionClient
+ * @description Get a Supabase client for use in the Server Action Routes
  * @param params
  */
-function getSupabaseMiddlewareClient(
-	req: NextRequest,
-	res: NextResponse,
+export function getSupabaseServerActionClient(
 	params = {
 		admin: false,
 	},
@@ -35,16 +32,5 @@ function getSupabaseMiddlewareClient(
 		})
 	}
 
-	return createMiddlewareClient<Database>(
-		{
-			req,
-			res,
-		},
-		{
-			supabaseUrl: env.NEXT_PUBLIC_SUPABASE_URL,
-			supabaseKey: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-		},
-	)
+	return createServerActionClient<Database>({ cookies })
 }
-
-export default getSupabaseMiddlewareClient

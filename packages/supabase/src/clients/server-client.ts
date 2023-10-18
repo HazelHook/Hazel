@@ -1,15 +1,15 @@
 import { cookies } from "next/headers"
-import type { Database } from "@/database.types"
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs"
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
 import invariant from "tiny-invariant"
+import type { Database } from "@hazel/db/src/database.types"
 
 /**
- * @name createServerActionClient
- * @description Get a Supabase client for use in the Server Action Routes
+ * @name getSupabaseServerClient
+ * @description Get a Supabase client for use in the Server Routes
  * @param params
  */
-function getSupabaseServerActionClient(
+export function getSupabaseServerClient(
 	params = {
 		admin: false,
 	},
@@ -32,7 +32,5 @@ function getSupabaseServerActionClient(
 		})
 	}
 
-	return createServerActionClient<Database>({ cookies })
+	return createServerComponentClient<Database>({ cookies })
 }
-
-export default getSupabaseServerActionClient

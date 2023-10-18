@@ -1,4 +1,5 @@
-import useSupabase from "@/core/hooks/use-supabase"
+import { useSupabase } from "@hazel/supabase/hooks/index"
+
 import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
 import useQuery from "swr"
 

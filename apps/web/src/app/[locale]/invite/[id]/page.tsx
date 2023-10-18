@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation"
 import getLogger from "@/core/logger"
-import getSupabaseServerClient from "@/core/supabase/server-client"
 import { Heading } from "@hazel/ui/heading"
 import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
@@ -10,6 +9,7 @@ import db from "@/lib/db"
 
 import ExistingUserInviteForm from "../components/existing-user-invite-form"
 import NewUserInviteForm from "../components/new-user-invite-form"
+import { getSupabaseServerClient } from "@hazel/supabase/clients/index"
 
 interface Props {
 	params: {
@@ -58,7 +58,9 @@ const InvitePage = async ({ params }: Props) => {
 			</div>
 
 			<If condition={session} fallback={<NewUserInviteForm action={acceptOrganizationInvite} code={params.id} />}>
-				{(session) => <ExistingUserInviteForm action={acceptOrganizationInvite} code={params.id} session={session} />}
+				{(session) => (
+					<ExistingUserInviteForm action={acceptOrganizationInvite} code={params.id} session={session} />
+				)}
 			</If>
 		</>
 	)

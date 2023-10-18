@@ -1,4 +1,5 @@
-import useSupabase from "@/core/hooks/use-supabase"
+import { useSupabase } from "@hazel/supabase/hooks/index"
+
 import { UserAttributes } from "@supabase/supabase-js"
 import useMutation from "swr/mutation"
 

@@ -1,15 +1,18 @@
-import { cookies } from "next/headers"
-import type { Database } from "@/database.types"
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+import type { NextApiRequest, NextApiResponse } from "next"
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
 import invariant from "tiny-invariant"
+import type { Database } from "@hazel/db/src/database.types"
 
 /**
- * @name getSupabaseServerClient
- * @description Get a Supabase client for use in the Server Routes
+ * Get a Supabase client for use in the legacy API routes
+ * @param req
+ * @param res
  * @param params
  */
-function getSupabaseServerClient(
+export function getSupabaseAPIClient(
+	req: NextApiRequest,
+	res: NextApiResponse,
 	params = {
 		admin: false,
 	},
@@ -17,7 +20,6 @@ function getSupabaseServerClient(
 	const env = process.env
 
 	invariant(env.NEXT_PUBLIC_SUPABASE_URL, "Supabase URL not provided")
-
 	invariant(env.NEXT_PUBLIC_SUPABASE_ANON_KEY, "Supabase Anon Key not provided")
 
 	if (params.admin) {
@@ -32,7 +34,11 @@ function getSupabaseServerClient(
 		})
 	}
 
-	return createServerComponentClient<Database>({ cookies })
+	return createPagesServerClient<Database>(
+		{ req, res },
+		{
+			supabaseUrl: env.NEXT_PUBLIC_SUPABASE_URL,
+			supabaseKey: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+		},
+	)
 }
-
-export default getSupabaseServerClient

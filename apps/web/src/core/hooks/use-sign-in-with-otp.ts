@@ -1,5 +1,6 @@
 import configuration from "@/configuration"
-import useSupabase from "@/core/hooks/use-supabase"
+import { useSupabase } from "@hazel/supabase/hooks/index"
+
 import { AuthError, SignInWithPasswordlessCredentials } from "@supabase/supabase-js"
 import useMutation from "swr/mutation"
 

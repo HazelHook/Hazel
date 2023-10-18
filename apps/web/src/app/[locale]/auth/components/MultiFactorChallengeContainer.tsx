@@ -2,7 +2,8 @@ import type { FormEventHandler } from "react"
 import { useCallback, useEffect, useState } from "react"
 import useFetchAuthFactors from "@/core/hooks/use-fetch-factors"
 import useSignOut from "@/core/hooks/use-sign-out"
-import useSupabase from "@/core/hooks/use-supabase"
+import { useSupabase } from "@hazel/supabase/hooks/index"
+
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import Heading from "@hazel/ui/heading"
@@ -60,7 +61,11 @@ function MultiFactorChallengeContainer({
 				</div>
 
 				<Button loading={mutation.isMutating} disabled={!verifyCode}>
-					{mutation.isMutating ? <>{t("profile.verifyingCode")}</> : <>{t("profile.submitVerificationCode")}</>}
+					{mutation.isMutating ? (
+						<>{t("profile.verifyingCode")}</>
+					) : (
+						<>{t("profile.submitVerificationCode")}</>
+					)}
 				</Button>
 			</div>
 		</form>

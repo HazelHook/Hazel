@@ -1,0 +1,50 @@
+{
+	"name": "@hazel/supabase",
+	"private": true,
+	"version": "0.1.0",
+	"scripts": {
+		"clean": "git clean -xdf .turbo node_modules",
+		"format": "prettier --check \"**/*.{ts,tsx}\"",
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"tiny-invariant": "^1.3.1"
+	},
+	"peerDependencies": {
+		"@hazel/db": "workspace:*",
+		"@supabase/supabase-js": "^2.38.1",
+		"@supabase/auth-helpers-nextjs": "^0.8.1",
+		"@supabase/auth-ui-react": "^0.4.6",
+		"@supabase/auth-ui-shared": "^0.1.8",
+		"next": "13.5.4",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"swr": "^2.2.4"
+	},
+	"devDependencies": {
+		"@hazel/tailwind-config": "workspace:*",
+		"@hazel/tsconfig": "workspace:*",
+		"@types/react": "^18.2.28",
+		"@types/react-dom": "^18.2.13",
+		"eslint": "^8.51.0",
+		"next": "13.5.4",
+		"prettier": "^3.0.3",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"typescript": "^5.2.2"
+	},
+	"main": "src/index.ts",
+	"exports": {
+		".": "./src/index.ts",
+		"./hooks": "./src/hooks/index.ts",
+		"./hooks/index": "./src/hooks/index.ts",
+		"./clients": "./src/clients/index.ts",
+		"./clients/index": "./src/clients/index.ts"
+	},
+	"typesVersions": {
+		"*": {
+			"*": ["src/*"]
+		}
+	}
+}

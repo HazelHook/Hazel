@@ -1,4 +1,4 @@
-import type { Database } from "@/database.types"
+import type { Database } from "@hazel/db/src/database.types"
 import { createClientComponentClient, SupabaseClient } from "@supabase/auth-helpers-nextjs"
 import invariant from "tiny-invariant"
 
@@ -8,7 +8,7 @@ let client: SupabaseClient<Database>
  * @name getSupabaseBrowserClient
  * @description Get a Supabase client for use in the Browser
  */
-function getSupabaseBrowserClient() {
+export function getSupabaseBrowserClient() {
 	if (client) {
 		return client
 	}
@@ -26,5 +26,3 @@ function getSupabaseBrowserClient() {
 
 	return client
 }
-
-export default getSupabaseBrowserClient

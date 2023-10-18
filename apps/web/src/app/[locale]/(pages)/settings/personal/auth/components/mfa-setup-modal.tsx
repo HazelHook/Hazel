@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
-import useSupabase from "@/core/hooks/use-supabase"
+import { useSupabase } from "@hazel/supabase/hooks/index"
+
 import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
@@ -113,7 +114,10 @@ function MultiFactorAuthSetupForm({
 						<TextField.Label>
 							{t("verificationCode")}
 
-							<VerificationCodeInput onInvalid={() => setVerificationCode("")} onValid={setVerificationCode} />
+							<VerificationCodeInput
+								onInvalid={() => setVerificationCode("")}
+								onValid={setVerificationCode}
+							/>
 
 							<TextField.Hint>{t("verifyActivationCodeDescription")}</TextField.Hint>
 						</TextField.Label>

@@ -1,7 +1,6 @@
 import configuration from "@/configuration"
+import { useSupabase } from "@hazel/supabase/hooks/index"
 import useSWRMutation from "swr/mutation"
-
-import useSupabase from "./use-supabase"
 
 interface Credentials {
 	email: string

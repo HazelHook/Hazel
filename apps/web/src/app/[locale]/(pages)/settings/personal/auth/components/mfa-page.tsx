@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from "react"
 import useFetchAuthFactors from "@/core/hooks/use-fetch-factors"
-import useSupabase from "@/core/hooks/use-supabase"
 import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
 import Alert from "@hazel/ui/alert"
 import { Badge } from "@hazel/ui/badge"
@@ -20,6 +19,8 @@ import { toast } from "sonner"
 import useMutation from "swr/mutation"
 
 import { CrossIcon } from "@hazel/icons"
+import { useSupabase } from "@hazel/supabase/hooks/index"
+
 import Spinner from "@/components/spinner"
 
 import MultiFactorAuthSetupModal from "./mfa-setup-modal"
@@ -148,7 +149,11 @@ function ConfirmUnenrollFactorModal(
 	)
 
 	return (
-		<Modal heading={t("profile.unenrollFactorModalHeading")} isOpen={!!props.factorId} setIsOpen={props.setIsModalOpen}>
+		<Modal
+			heading={t("profile.unenrollFactorModalHeading")}
+			isOpen={!!props.factorId}
+			setIsOpen={props.setIsModalOpen}
+		>
 			<div className={"flex flex-col space-y-4"}>
 				<div className={"text-sm"}>{t("profile.unenrollFactorModalBody")}</div>
 
@@ -202,7 +207,10 @@ function FactorsTable({
 						</TableCell>
 
 						<TableCell>
-							<Badge className={"inline-flex capitalize"} color={factor.status === "verified" ? "success" : "normal"}>
+							<Badge
+								className={"inline-flex capitalize"}
+								color={factor.status === "verified" ? "success" : "normal"}
+							>
 								{factor.status}
 							</Badge>
 						</TableCell>

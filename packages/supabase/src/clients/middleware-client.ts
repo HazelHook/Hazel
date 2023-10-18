@@ -1,18 +1,18 @@
-import type { NextApiRequest, NextApiResponse } from "next"
-import type { Database } from "@/database.types"
-import { createPagesServerClient } from "@supabase/auth-helpers-nextjs"
+import { NextRequest, NextResponse } from "next/server"
+import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
 import invariant from "tiny-invariant"
+import type { Database } from "@hazel/db/src/database.types"
 
 /**
- * Get a Supabase client for use in the legacy API routes
+ * Get a Supabase client for use in the Middleware.
  * @param req
  * @param res
  * @param params
  */
-function getSupabaseAPIClient(
-	req: NextApiRequest,
-	res: NextApiResponse,
+export function getSupabaseMiddlewareClient(
+	req: NextRequest,
+	res: NextResponse,
 	params = {
 		admin: false,
 	},
@@ -20,6 +20,7 @@ function getSupabaseAPIClient(
 	const env = process.env
 
 	invariant(env.NEXT_PUBLIC_SUPABASE_URL, "Supabase URL not provided")
+
 	invariant(env.NEXT_PUBLIC_SUPABASE_ANON_KEY, "Supabase Anon Key not provided")
 
 	if (params.admin) {
@@ -34,13 +35,14 @@ function getSupabaseAPIClient(
 		})
 	}
 
-	return createPagesServerClient<Database>(
-		{ req, res },
+	return createMiddlewareClient<Database>(
+		{
+			req,
+			res,
+		},
 		{
 			supabaseUrl: env.NEXT_PUBLIC_SUPABASE_URL,
 			supabaseKey: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 		},
 	)
 }
-
-export default getSupabaseAPIClient
