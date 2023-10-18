@@ -1,5 +1,5 @@
 import { Input } from "@hazel/ui/input"
-import type { FormEventHandler } from "react"
+import type { FormEventHandler, KeyboardEvent } from "react"
 import { useCallback, useEffect, useMemo } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 
@@ -27,6 +27,26 @@ function VerificationCodeInput({
 		name: "values",
 		shouldUnregister: true,
 	})
+
+	const onKeyDown = useCallback(
+		(event: KeyboardEvent<HTMLInputElement>) => {
+			const element = event.currentTarget
+			const index = Number(element.dataset.index)
+
+			// Handle arrow keys
+			if (event.key === "ArrowRight" && index < DIGITS - 1) {
+				setFocus(`values.${index + 1}.value`)
+			} else if (event.key === "ArrowLeft" && index > 0) {
+				setFocus(`values.${index - 1}.value`)
+			}
+
+			// Handle delete/backspace key
+			if (event.key === "Backspace" && element.value === "" && index > 0) {
+				setFocus(`values.${index - 1}.value`)
+			}
+		},
+		[setFocus],
+	)
 
 	const values = watch()
 
@@ -81,6 +101,7 @@ function VerificationCodeInput({
 						key={digit}
 						maxLength={1}
 						onInput={onInput}
+						onKeyDown={onKeyDown}
 						{...control}
 					/>
 				)
