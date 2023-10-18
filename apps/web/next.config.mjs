@@ -13,6 +13,7 @@ const nextConfig = {
 	experimental: {
 		serverActions: true,
 		serverComponentsExternalPackages: ["@trpc/server"],
+			optimizePackageImports: ["@hazel/icons"]
 	},
 	transpilePackages: ["db", "@hazel/email", "@hazel/ui", "@hazel/icons"],
 	webpack: (config, { isServer }) => {
