@@ -6,7 +6,7 @@ import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { Switch } from "@hazel/ui/switch"
 import { ColumnDef } from "@tanstack/react-table"
-import { Destination } from "db/src/drizzle/schema"
+import { Destination } from "@hazel/db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { ArrowDownIcon } from "@hazel/icons"

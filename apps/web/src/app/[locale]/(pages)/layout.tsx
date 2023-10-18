@@ -11,8 +11,8 @@ import { GitCommitIcon } from "@hazel/icons"
 import { HomeIcon } from "@hazel/icons"
 import { LinkChainIcon } from "@hazel/icons"
 import { Settings01Icon } from "@hazel/icons"
-import { ProfileSettings } from "@/components/ProfileSettings"
-import { Sidebar } from "@/components/Sidebar"
+import { ProfileSettings } from "@/components/profile-settings"
+import { Sidebar } from "@/components/sidebar"
 
 interface RootLayoutProps {
 	children: React.ReactNode

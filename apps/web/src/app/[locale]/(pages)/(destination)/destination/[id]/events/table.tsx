@@ -1,6 +1,6 @@
 "use client"
 
-import { DataTable } from "@/components/DataTable"
+import { DataTable } from "@/components/data-table"
 import { columns } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/column"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/page"
 

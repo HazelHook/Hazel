@@ -1,5 +1,5 @@
-import { TBTimelineRequest } from "db/src/tinybird/model/tiny-request"
-import { TBTimelineResponse } from "db/src/tinybird/model/tiny-response"
+import { TBTimelineRequest } from "@hazel/db/src/tinybird/model/tiny-request"
+import { TBTimelineResponse } from "@hazel/db/src/tinybird/model/tiny-response"
 
 export const transformSourcesChartData = (data: TBTimelineRequest[]) => {
 	return data.reduce(

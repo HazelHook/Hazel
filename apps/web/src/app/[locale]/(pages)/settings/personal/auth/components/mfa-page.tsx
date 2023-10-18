@@ -20,7 +20,7 @@ import { toast } from "sonner"
 import useMutation from "swr/mutation"
 
 import { CrossIcon } from "@hazel/icons"
-import Spinner from "@/components/Spinner"
+import Spinner from "@/components/spinner"
 
 import MultiFactorAuthSetupModal from "./mfa-setup-modal"
 

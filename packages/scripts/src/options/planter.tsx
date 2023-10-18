@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { rand, randBetweenDate, randJSON, randNumber, randText, randUrl, randWord } from "@ngneat/falso"
-import { Tiny } from "db/src/tinybird/index.js"
+import { Tiny } from "@hazel/db/src/tinybird/index.js"
 import figures from "figures"
 import { nanoid } from "nanoid"
 
@@ -267,7 +267,12 @@ export function Planter({
 					<Box marginRight={1}>
 						<Text>Number of sources: </Text>
 					</Box>
-					<TextInput showCursor value={sources} onChange={setSources} focus={selectedInput === 1 && engaged} />
+					<TextInput
+						showCursor
+						value={sources}
+						onChange={setSources}
+						focus={selectedInput === 1 && engaged}
+					/>
 				</Box>
 				<Box>
 					<Box marginRight={1}>
@@ -286,7 +291,11 @@ export function Planter({
 					<Box marginRight={1}>
 						<Text>Number of requests: </Text>
 					</Box>
-					<TextInput value={numberOfRequests} onChange={setNumberOfRequests} focus={selectedInput === 4 && engaged} />
+					<TextInput
+						value={numberOfRequests}
+						onChange={setNumberOfRequests}
+						focus={selectedInput === 4 && engaged}
+					/>
 				</Box>
 				<ProgressBar percent={progress.percentage} columns={progress.width} />
 			</Box>

@@ -9,7 +9,7 @@ import { formatDistanceToNow, sub } from "date-fns"
 import { auth } from "@/lib/auth"
 import tiny from "@/lib/tiny"
 import { chartColors, formatDateTime, subtractFromString } from "@/lib/utils"
-import { StatusBadge } from "@/components/StatusBadge"
+import { StatusBadge } from "@/components/status-badge"
 import { SourceLink } from "@/app/[locale]/(pages)/_component/SourceLink"
 
 import { DatePicker } from "./_component/DatePicker"

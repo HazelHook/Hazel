@@ -1,4 +1,4 @@
-import { LogoIcon } from "@/components/icons/Logo"
+import { LogoIcon } from "@/components/icons/logo"
 
 function AuthPageShell({ children }: React.PropsWithChildren) {
 	return (

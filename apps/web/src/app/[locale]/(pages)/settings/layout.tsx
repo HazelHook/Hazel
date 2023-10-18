@@ -12,7 +12,7 @@ import { Settings02Icon } from "@hazel/icons"
 import { UserIcon } from "@hazel/icons"
 import { User2Icon } from "@hazel/icons"
 import { UserPlusIcon } from "@hazel/icons"
-import { Sidebar } from "@/components/Sidebar"
+import { Sidebar } from "@/components/sidebar"
 
 const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 	return (

@@ -1,5 +1,5 @@
-import { Destination } from "db/src/drizzle/schema"
-import tiny from "db/src/tinybird"
+import { Destination } from "@hazel/db/src/drizzle/schema"
+import tiny from "@hazel/db/src/tinybird"
 import { nanoid } from "nanoid"
 
 import { ForwardResult } from "./forward"

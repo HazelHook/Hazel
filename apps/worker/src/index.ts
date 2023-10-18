@@ -1,6 +1,6 @@
 import { ConnectionOptions, MetricsTime, Worker } from "bullmq"
-import db from "db/src/drizzle"
-import tiny from "db/src/tinybird"
+import db from "@hazel/db/src/drizzle"
+import tiny from "@hazel/db/src/tinybird"
 import { nanoid } from "nanoid"
 
 import { consumeBase64 } from "./lib/request.helper"

@@ -95,6 +95,7 @@
 		"./image": "./src/image.tsx",
 		"./label": "./src/label.tsx",
 		"./link-tabs": "./src/link-tabs.tsx",
+		"./loading-button": "./src/loading-button.tsx",
 		"./modal": "./src/modal.tsx",
 		"./nav-tabs": "./src/nav-tabs.tsx",
 		"./page-header": "./src/page-header.tsx",

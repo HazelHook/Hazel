@@ -1,5 +1,5 @@
-import db from "db/src/drizzle"
-import tiny from "db/src/tinybird"
+import db from "@hazel/db/src/drizzle"
+import tiny from "@hazel/db/src/tinybird"
 import { Elysia } from "elysia"
 import { nanoid } from "nanoid"
 

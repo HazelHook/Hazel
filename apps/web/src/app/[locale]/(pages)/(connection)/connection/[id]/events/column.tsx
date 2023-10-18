@@ -11,7 +11,7 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
-import { TBResponse } from "db/src/tinybird/model/tiny-response"
+import { TBResponse } from "@hazel/db/src/tinybird/model/tiny-response"
 
 import { FilterVerticalIcon } from "@hazel/icons"
 
@@ -38,7 +38,10 @@ export const columns: ColumnDef<Column>[] = [
 			const destinationId = cell.getValue() as string
 
 			return (
-				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/destination/${destinationId}`}>
+				<Link
+					className={buttonVariants({ variant: "link", size: "none" })}
+					href={`/destination/${destinationId}`}
+				>
 					{destinationId}
 				</Link>
 			)

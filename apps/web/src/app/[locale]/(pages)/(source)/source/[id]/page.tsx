@@ -3,8 +3,8 @@ import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
 import { DataTable } from "@hazel/ui/data-table"
 import { sub } from "date-fns"
-import { Destination } from "db/src/drizzle/schema"
-import { Tiny } from "db/src/tinybird"
+import { Destination } from "@hazel/db/src/drizzle/schema"
+import { Tiny } from "@hazel/db/src/tinybird"
 
 import { auth } from "@/lib/auth"
 import { getCachedSource } from "@/lib/orm"
@@ -54,7 +54,9 @@ const SourcePage = async ({
 					<DataTable
 						rootPath="/destination"
 						columns={columns}
-						data={(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []}
+						data={
+							(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []
+						}
 					/>
 				</div>
 

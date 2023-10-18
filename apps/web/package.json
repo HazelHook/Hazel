@@ -36,7 +36,7 @@
 		"clsx": "^2.0.0",
 		"cmdk": "^0.2.0",
 		"date-fns": "^2.30.0",
-		"db": "workspace:*",
+		"@hazel/db": "workspace:*",
 		"edge-csrf": "^1.0.5",
 		"framer-motion": "^10.16.4",
 		"lago-javascript-client": "0.49.0-beta",

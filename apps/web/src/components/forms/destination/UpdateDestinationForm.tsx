@@ -2,12 +2,12 @@
 
 import { useRouter } from "next/navigation"
 import AutoForm from "@hazel/ui/auto-form"
-import { Destination } from "db/src/drizzle/schema"
+import { Destination } from "@hazel/db/src/drizzle/schema"
 
 import type { updateDestinationAction } from "@/server/actions/destination"
 import { useAction } from "@/server/client"
 import { updateDestinationSchema } from "@/lib/schemas/destination"
-import { LoadingButton } from "@/components/loading-button"
+import { LoadingButton } from "@hazel/ui/loading-button"
 
 export const UpdateDestinationForm = ({
 	destination,

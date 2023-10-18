@@ -6,7 +6,7 @@ import { Badge } from "@hazel/ui/badge"
 import { buttonVariants } from "@hazel/ui/button"
 import { SortableHeader } from "@hazel/ui/data-table"
 import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination } from "db/src/drizzle/schema"
+import { Connection, Destination } from "@hazel/db/src/drizzle/schema"
 
 import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 import { getSeededProfileImageUrl } from "@/lib/utils"

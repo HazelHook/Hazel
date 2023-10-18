@@ -3,7 +3,7 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Input } from "@hazel/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import { AnyIntegrationFormField } from "db/src/drizzle/integrations/common"
+import { AnyIntegrationFormField } from "@hazel/db/src/drizzle/integrations/common"
 
 import { IntegrationMDText } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationMdText"
 

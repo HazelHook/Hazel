@@ -4,7 +4,7 @@ import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination, Source } from "db/src/drizzle/schema"
+import { Connection, Destination, Source } from "@hazel/db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { ArrowDownIcon } from "@hazel/icons"

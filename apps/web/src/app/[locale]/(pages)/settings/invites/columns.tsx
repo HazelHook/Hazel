@@ -1,7 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { OrganizationInvite } from "db/src/drizzle/schema"
+import { OrganizationInvite } from "@hazel/db/src/drizzle/schema"
 
 import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
 import { dateFormatter } from "@/lib/formatters"
@@ -29,7 +29,11 @@ export const columns: (revokeAction: typeof revokeOrganizationInvite) => ColumnD
 		accessorKey: "actions",
 		cell: ({ row }) => {
 			return (
-				<InviteOptions revokeAction={revokeAction} emailAdress={row.original.email} inviteId={row.original.publicId} />
+				<InviteOptions
+					revokeAction={revokeAction}
+					emailAdress={row.original.email}
+					inviteId={row.original.publicId}
+				/>
 			)
 		},
 	},

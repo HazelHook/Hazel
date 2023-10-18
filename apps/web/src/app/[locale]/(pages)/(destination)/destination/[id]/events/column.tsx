@@ -12,7 +12,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table"
 
 import { FilterVerticalIcon } from "@hazel/icons"
-import { Status } from "@/components/Status"
+import { Status } from "@/components/status"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/page"
 
 export const columns: ColumnDef<EventDataRowType>[] = [

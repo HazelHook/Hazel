@@ -3,7 +3,7 @@
 import { Badge } from "@hazel/ui/badge"
 import { SortableHeader } from "@hazel/ui/data-table"
 import { ColumnDef } from "@tanstack/react-table"
-import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
+import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
 
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { CheckTickIcon } from "@hazel/icons"

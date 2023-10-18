@@ -6,13 +6,13 @@ import { Button } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { ExpandableList } from "@hazel/ui/expandable-list"
 import { Code } from "bright"
-import { TBRequest } from "db/src/tinybird/model/tiny-request"
+import { TBRequest } from "@hazel/db/src/tinybird/model/tiny-request"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination, getCachedSource } from "@/lib/orm"
 import tiny from "@/lib/tiny"
 import { jsonToArray } from "@/lib/utils"
-import { Status } from "@/components/Status"
+import { Status } from "@/components/status"
 
 const ListItem = ({
 	name,

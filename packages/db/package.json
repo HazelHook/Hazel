@@ -1,5 +1,5 @@
 {
-	"name": "db",
+	"name": "@hazel/db",
 	"private": true,
 	"type": "module",
 	"scripts": {

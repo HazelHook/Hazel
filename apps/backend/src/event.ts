@@ -1,5 +1,5 @@
-import type { Connection, Destination } from "db/src/drizzle/schema"
-import tiny from "db/src/tinybird"
+import type { Connection, Destination } from "@hazel/db/src/drizzle/schema"
+import tiny from "@hazel/db/src/tinybird"
 import { nanoid } from "nanoid"
 
 import { sourceQueue } from "./lib/queue"

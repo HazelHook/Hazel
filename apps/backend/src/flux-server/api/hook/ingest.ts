@@ -1,5 +1,5 @@
-import db from "db/src/drizzle"
-import { Destination } from "db/src/drizzle/schema"
+import db from "@hazel/db/src/drizzle"
+import { Destination } from "@hazel/db/src/drizzle/schema"
 import Elysia from "elysia"
 import { nanoid } from "nanoid"
 
@@ -46,7 +46,9 @@ export function addHookIngestEndpoint(elysia: Elysia) {
 					}
 				}
 
-				const destinations = source.connections.filter((c) => c.enabled).flatMap((connection) => connection.destination)
+				const destinations = source.connections
+					.filter((c) => c.enabled)
+					.flatMap((connection) => connection.destination)
 				const requestId = `req_${nanoid()}`
 
 				const queryString = request.url.split("?")[1] ?? ""

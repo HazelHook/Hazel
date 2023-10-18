@@ -7,7 +7,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import { OrganizationMember } from "db/src/drizzle/schema"
+import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
 import { toast } from "sonner"
 
 import { useAuth } from "@/lib/provider/AuthProvider"
@@ -45,7 +45,10 @@ export const MemberOptions = ({ members, memberId, orgId }: MemberOptionsProps) 
 					<span>Copy user ID</span>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem disabled={activeMember?.role !== "admin" || memberId === user?.id} onClick={handleKick}>
+				<DropdownMenuItem
+					disabled={activeMember?.role !== "admin" || memberId === user?.id}
+					onClick={handleKick}
+				>
 					<FolderRemoveIcon className="mr-2 text-destructive" />
 					<span>Remove member</span>
 				</DropdownMenuItem>

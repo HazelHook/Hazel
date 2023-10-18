@@ -4,13 +4,13 @@ import { notFound, useRouter } from "next/navigation"
 import { Button } from "@hazel/ui/button"
 import { Form } from "@hazel/ui/form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { createZodIntegrationSchema, IntegrationTool } from "db/src/drizzle/integrations/common"
+import { createZodIntegrationSchema, IntegrationTool } from "@hazel/db/src/drizzle/integrations/common"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { createIntegrationAction } from "@/server/actions/integrations"
 import { useAction } from "@/server/client"
-import { LabeledSeparator } from "@/components/LabeledSeparator"
+import { LabeledSeparator } from "@/components/labeled-separator"
 import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
 
 export const NewIntegrationForm = ({

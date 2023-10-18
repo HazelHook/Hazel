@@ -1,6 +1,6 @@
 import { Container } from "@hazel/ui/container"
 import { User } from "@supabase/supabase-js"
-import { OrganizationMember, sql } from "db/src/drizzle"
+import { OrganizationMember, sql } from "@hazel/db/src/drizzle"
 
 import { createOrganizationInvite } from "@/server/actions/organization-invite"
 import { auth } from "@/lib/auth"

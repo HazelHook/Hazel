@@ -7,7 +7,7 @@ import { Button } from "@hazel/ui/button"
 import { Cell, SortableHeader } from "@hazel/ui/data-table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination, Source } from "db/src/drizzle/schema"
+import { Connection, Destination, Source } from "@hazel/db/src/drizzle/schema"
 
 import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { getSeededProfileImageUrl } from "@/lib/utils"

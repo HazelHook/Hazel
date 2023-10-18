@@ -1,4 +1,3 @@
-import { SpinnerIcon } from "@hazel/icons"
 import classNames from "clsx"
 
 function Spinner(

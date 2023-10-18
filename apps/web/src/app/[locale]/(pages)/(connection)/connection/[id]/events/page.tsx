@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation"
-import { Tiny } from "db/src/tinybird"
+import { Tiny } from "@hazel/db/src/tinybird"
 
 import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
-import { DataTable } from "@/components/DataTable"
+import { DataTable } from "@/components/data-table"
 
 import { columns } from "./column"
 

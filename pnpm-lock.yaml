@@ -38,15 +38,15 @@ importers:
       '@elysiajs/swagger':
         specifier: ^0.5.2
         version: 0.5.2(elysia@0.7.17)
+      '@hazel/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@upstash/ratelimit':
         specifier: 0.4.3
         version: 0.4.3
       '@upstash/redis':
         specifier: ^1.22.0
         version: 1.22.0
-      db:
-        specifier: workspace:*
-        version: link:../../packages/db
       elysia:
         specifier: latest
         version: 0.7.17(@sinclair/typebox@0.29.4)(typescript@5.2.2)
@@ -56,6 +56,9 @@ importers:
       '@chronark/zod-bird':
         specifier: ^0.1.1
         version: 0.1.1
+      '@hazel/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@planetscale/database':
         specifier: ^1.8.0
         version: 1.8.0
@@ -68,9 +71,6 @@ importers:
       bullmq:
         specifier: ^4.3.0
         version: 4.6.0
-      db:
-        specifier: workspace:*
-        version: link:../../packages/db
       drizzle-orm:
         specifier: ^0.27.0
         version: 0.27.0(@planetscale/database@1.8.0)
@@ -88,6 +88,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@hazel/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@hazel/email':
         specifier: workspace:*
         version: link:../../packages/email
@@ -148,9 +151,6 @@ importers:
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
-      db:
-        specifier: workspace:*
-        version: link:../../packages/db
       edge-csrf:
         specifier: ^1.0.5
         version: 1.0.5(next@13.5.4)
@@ -284,12 +284,12 @@ importers:
 
   apps/worker:
     dependencies:
+      '@hazel/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       bullmq:
         specifier: ^4.12.4
         version: 4.12.4
-      db:
-        specifier: workspace:*
-        version: link:../../packages/db
       nanoid:
         specifier: ^5.0.2
         version: 5.0.2

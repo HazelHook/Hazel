@@ -12,7 +12,7 @@
 		"@sinclair/typebox": "^0.29.4",
 		"@types/qs": "^6.9.7",
 		"bullmq": "^4.3.0",
-		"db": "workspace:*",
+		"@hazel/db": "workspace:*",
 		"drizzle-orm": "^0.27.0",
 		"elysia": "latest",
 		"nanoid": "^4.0.2",

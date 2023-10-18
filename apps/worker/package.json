@@ -7,7 +7,7 @@
 	},
 	"dependencies": {
 		"bullmq": "^4.12.4",
-		"db": "workspace:*",
+		"@hazel/db": "workspace:*",
 		"nanoid": "^5.0.2",
 		"zod": "^3.22.4"
 	},

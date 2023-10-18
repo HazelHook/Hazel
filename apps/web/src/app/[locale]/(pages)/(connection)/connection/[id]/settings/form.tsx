@@ -9,7 +9,7 @@ import { Button, buttonVariants } from "@hazel/ui/button"
 import { Dialog, DialogContent } from "@hazel/ui/dialog"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import { Destination, Integration, Source } from "db/src/drizzle/schema"
+import { Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
 import * as z from "zod"
 
 import type { updateConnectionAction } from "@/server/actions/connections"
@@ -23,7 +23,7 @@ import { getSeededProfileImageUrl } from "@/lib/utils"
 import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
 import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
 import { AddIcon } from "@hazel/icons"
-import { LoadingButton } from "@/components/loading-button"
+import { LoadingButton } from "@hazel/ui/loading-button"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction
@@ -98,13 +98,17 @@ export function UpdateConnectionForm({
 												<SelectValue placeholder="Select any source to connect" />
 											</SelectTrigger>
 										</FormControl>
-										{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
+										{fieldConfigItem.description && (
+											<FormDescription>{fieldConfigItem.description}</FormDescription>
+										)}
 										<SelectContent>
 											{sources.map((source) => (
 												<SelectItem key={source.publicId} value={source.publicId}>
 													<div className="flex flex-row items-center">
 														<Avatar className="mr-2 w-4 h-4">
-															<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+															<AvatarImage
+																src={getSeededProfileImageUrl(source.publicId)}
+															/>
 														</Avatar>
 														{source.name}
 													</div>
@@ -148,13 +152,17 @@ export function UpdateConnectionForm({
 												<SelectValue placeholder="Select any source to connect" />
 											</SelectTrigger>
 										</FormControl>
-										{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
+										{fieldConfigItem.description && (
+											<FormDescription>{fieldConfigItem.description}</FormDescription>
+										)}
 										<SelectContent>
 											{destinations.map((source) => (
 												<SelectItem key={source.publicId} value={source.publicId}>
 													<div className="flex flex-row items-center">
 														<Avatar className="mr-2 w-4 h-4">
-															<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+															<AvatarImage
+																src={getSeededProfileImageUrl(source.publicId)}
+															/>
 														</Avatar>
 														{source.name}
 													</div>

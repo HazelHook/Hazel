@@ -6,8 +6,8 @@ import { Card } from "@hazel/ui/card"
 import { Dialog, DialogContent, DialogHeader } from "@hazel/ui/dialog"
 import { Separator } from "@hazel/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@hazel/ui/tooltip"
-import { IntegrationTool } from "db/src/drizzle/integrations/common"
-import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "db/src/drizzle/integrations/data"
+import { IntegrationTool } from "@hazel/db/src/drizzle/integrations/common"
+import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "@hazel/db/src/drizzle/integrations/data"
 
 import { NewIntegrationForm } from "@/components/forms/integration/CreateIntegrationForm"
 import { DatabaseIcon } from "@hazel/icons"
@@ -60,7 +60,9 @@ export const IntegrationToolCard = ({
 											<div className="flex flex-col gap-1">
 												<div className="flex flex-row h-full gap-2 items-center">
 													<IntegrationFeatureIcon slug={feature} className="w-4 h-4" />
-													<p className="text-sm font-semibold">{INTEGRATION_FEATURES[feature].name}</p>
+													<p className="text-sm font-semibold">
+														{INTEGRATION_FEATURES[feature].name}
+													</p>
 												</div>
 												<p className="text-xs text-muted-foreground ml-6">
 													{INTEGRATION_FEATURES[feature].description}

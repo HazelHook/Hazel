@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { ColumnDef } from "@tanstack/react-table"
-import { Destination } from "db/src/drizzle/schema"
+import { Destination } from "@hazel/db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { CheckTickIcon } from "@hazel/icons"

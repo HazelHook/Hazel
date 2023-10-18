@@ -1,4 +1,4 @@
-import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
+import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
 
 import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { auth } from "@/lib/auth"

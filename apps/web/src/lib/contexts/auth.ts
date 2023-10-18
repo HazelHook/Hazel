@@ -1,6 +1,6 @@
 import { createContext } from "react"
 import { User } from "@supabase/supabase-js"
-import { OrganizationMember } from "db/src/drizzle"
+import { OrganizationMember } from "@hazel/db/src/drizzle"
 
 interface UserSession {
 	user: Maybe<User>

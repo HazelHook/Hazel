@@ -2,8 +2,8 @@ import type { PropsWithChildren } from "react"
 import If from "@hazel/ui/if"
 import classNames from "clsx"
 
-import { LogoIcon } from "./icons/Logo"
-import Spinner from "./Spinner"
+import { LogoIcon } from "./icons/logo"
+import Spinner from "./spinner"
 
 export default function PageLoadingIndicator({
 	children,

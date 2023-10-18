@@ -10,8 +10,8 @@ import { SheetHeader, SheetTitle } from "@hazel/ui/sheet"
 
 import { CacheSource } from "@/lib/orm"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
-import { DataTable } from "@/components/DataTable"
-import { Status } from "@/components/Status"
+import { DataTable } from "@/components/data-table"
+import { Status } from "@/components/status"
 import { columns } from "@/app/[locale]/(pages)/(source)/source/[id]/events/column"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(source)/source/[id]/events/page"
 
@@ -106,11 +106,17 @@ const TableSheet = ({
 									name="Added Latency"
 									description={
 										firstResponse
-											? `${new Date(firstResponse.send_at).getTime() - new Date(data.timestamp).getTime()}ms`
+											? `${
+													new Date(firstResponse.send_at).getTime() -
+													new Date(data.timestamp).getTime()
+											  }ms`
 											: "-"
 									}
 								/>
-								<ListItem name="Verified" description={capitalizeFirstLetter(String(!!data.validated))} />
+								<ListItem
+									name="Verified"
+									description={capitalizeFirstLetter(String(!!data.validated))}
+								/>
 							</div>
 						</CardContent>
 					</Card>

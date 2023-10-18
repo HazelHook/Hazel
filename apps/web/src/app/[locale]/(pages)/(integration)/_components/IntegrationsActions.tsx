@@ -10,8 +10,8 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@hazel/ui/dialog"
-import { INTEGRATIONS } from "db/src/drizzle/integrations/data"
-import { Integration } from "db/src/drizzle/schema"
+import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
+import { Integration } from "@hazel/db/src/drizzle/schema"
 import { toast } from "sonner"
 
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
@@ -70,7 +70,8 @@ export const IntegrationsActions = ({
 					<DialogHeader>
 						<DialogTitle>Are you sure you want to delete this Integration?</DialogTitle>
 						<DialogDescription>
-							This action cannot be undone. Are you sure you want to permanently delete this integration forever?
+							This action cannot be undone. Are you sure you want to permanently delete this integration
+							forever?
 						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>

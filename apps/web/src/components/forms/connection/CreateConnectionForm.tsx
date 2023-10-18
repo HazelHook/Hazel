@@ -8,7 +8,7 @@ import { Button } from "@hazel/ui/button"
 import { Dialog, DialogContent } from "@hazel/ui/dialog"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import type { Destination, Integration, Source } from "db/src/drizzle/schema"
+import type { Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
 import { z } from "zod"
 
 import type { createConnectionAction } from "@/server/actions/connections"
@@ -82,7 +82,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 												<FormControl>
 													<SelectTrigger>
 														<SelectValue
-															placeholder={<p className="text-muted-foreground">Connect...</p>}
+															placeholder={
+																<p className="text-muted-foreground">Connect...</p>
+															}
 															className="focus:text-muted-foreground"
 														/>
 													</SelectTrigger>
@@ -92,7 +94,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 														<SelectItem key={source.publicId} value={source.publicId}>
 															<div className="flex flex-row items-center">
 																<Avatar className="mr-2 w-4 h-4">
-																	<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+																	<AvatarImage
+																		src={getSeededProfileImageUrl(source.publicId)}
+																	/>
 																</Avatar>
 																{source.name}
 															</div>
@@ -102,7 +106,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 											</Select>
 										)}
 									</FormControl>
-									{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
+									{fieldConfigItem.description && (
+										<FormDescription>{fieldConfigItem.description}</FormDescription>
+									)}
 									<FormMessage />
 								</FormItem>
 								<div className="flex justify-center">
@@ -128,7 +134,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 												<FormControl>
 													<SelectTrigger>
 														<SelectValue
-															placeholder={<p className="text-muted-foreground">Connect...</p>}
+															placeholder={
+																<p className="text-muted-foreground">Connect...</p>
+															}
 															className="focus:text-muted-foreground"
 														/>
 													</SelectTrigger>
@@ -138,7 +146,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 														<SelectItem key={source.publicId} value={source.publicId}>
 															<div className="flex flex-row items-center">
 																<Avatar className="mr-2 w-4 h-4">
-																	<AvatarImage src={getSeededProfileImageUrl(source.publicId)} />
+																	<AvatarImage
+																		src={getSeededProfileImageUrl(source.publicId)}
+																	/>
 																</Avatar>
 																{source.name}
 															</div>
@@ -148,7 +158,9 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 											</Select>
 										)}
 									</FormControl>
-									{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
+									{fieldConfigItem.description && (
+										<FormDescription>{fieldConfigItem.description}</FormDescription>
+									)}
 									<FormMessage />
 								</FormItem>
 								<div className="flex justify-center">
@@ -171,7 +183,11 @@ export const CreateConnectionForm = ({ action, sources, destinations, integratio
 					await createSource.mutateAsync(data)
 				}}
 			>
-				<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
+				<Button
+					type="submit"
+					disabled={createSource.status === "loading"}
+					loading={createSource.status === "loading"}
+				>
 					Create
 				</Button>
 			</AutoForm>

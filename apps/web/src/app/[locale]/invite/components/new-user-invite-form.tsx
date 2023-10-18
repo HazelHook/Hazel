@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl"
 
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
-import PageLoadingIndicator from "@/components/PageLoadingIndicator"
+import PageLoadingIndicator from "@/components/page-loading-indicator"
 
 import EmailLinkAuth from "../../auth/components/EmailLinkAuth"
 import EmailPasswordSignInContainer from "../../auth/components/EmailPasswordSignInContainer"

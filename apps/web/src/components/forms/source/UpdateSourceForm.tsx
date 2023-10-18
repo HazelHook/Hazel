@@ -5,8 +5,8 @@ import AutoForm, { AutoFormInputComponentProps } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import { IntegrationTools } from "db/src/drizzle/integrations/data"
-import { Integration, Source } from "db/src/drizzle/schema"
+import { IntegrationTools } from "@hazel/db/src/drizzle/integrations/data"
+import { Integration, Source } from "@hazel/db/src/drizzle/schema"
 
 import { updateSourceAction } from "@/server/actions/source"
 import { useAction } from "@/server/client"
@@ -57,7 +57,13 @@ export function UpdateSourceForm({ onClose, source, action, integrations }: Upda
 						},
 					},
 					integrationId: {
-						fieldType: ({ label, isRequired, field, fieldConfigItem, fieldProps }: AutoFormInputComponentProps) => (
+						fieldType: ({
+							label,
+							isRequired,
+							field,
+							fieldConfigItem,
+							fieldProps,
+						}: AutoFormInputComponentProps) => (
 							<FormItem>
 								<FormLabel>
 									{label}
@@ -69,7 +75,9 @@ export function UpdateSourceForm({ onClose, source, action, integrations }: Upda
 											<FormControl>
 												<SelectTrigger>
 													<SelectValue
-														placeholder={<p className="text-muted-foreground">Connect...</p>}
+														placeholder={
+															<p className="text-muted-foreground">Connect...</p>
+														}
 														className="focus:text-muted-foreground"
 													/>
 												</SelectTrigger>
@@ -77,21 +85,29 @@ export function UpdateSourceForm({ onClose, source, action, integrations }: Upda
 											<SelectContent className="max-h-96">
 												{integrations.map((integration) => (
 													<SelectItem key={integration.publicId} value={integration.publicId}>
-														<div className="flex flex-row items-center">{integration.name}</div>
+														<div className="flex flex-row items-center">
+															{integration.name}
+														</div>
 													</SelectItem>
 												))}
 											</SelectContent>
 										</Select>
 									)}
 								</FormControl>
-								{fieldConfigItem.description && <FormDescription>{fieldConfigItem.description}</FormDescription>}
+								{fieldConfigItem.description && (
+									<FormDescription>{fieldConfigItem.description}</FormDescription>
+								)}
 								<FormMessage />
 							</FormItem>
 						),
 					},
 				}}
 			>
-				<Button type="submit" disabled={updateSource.status === "loading"} loading={updateSource.status === "loading"}>
+				<Button
+					type="submit"
+					disabled={updateSource.status === "loading"}
+					loading={updateSource.status === "loading"}
+				>
 					Update
 				</Button>
 			</AutoForm>

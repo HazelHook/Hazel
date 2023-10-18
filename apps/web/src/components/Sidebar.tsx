@@ -2,10 +2,10 @@ import { Fragment } from "react"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-import { LogoIcon } from "@/components/icons/Logo"
+import { LogoIcon } from "@/components/icons/logo"
 import { IconProps } from "@hazel/icons"
 
-import { SidebarClientItem } from "./SidebarItem"
+import { SidebarClientItem } from "./sidebar-item"
 
 type SubItem = {
 	className?: string
@@ -63,7 +63,9 @@ export async function Sidebar({ className, disableLogo = false, items, children 
 					<Fragment key={`${item.title}-${index}`}>
 						<div className="py-2 lg:px-4">
 							{item.title && (
-								<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">{item.title}</h2>
+								<h2 className="mb-2 hidden px-2 text-lg font-semibold tracking-tight lg:block">
+									{item.title}
+								</h2>
 							)}
 
 							<div className="space-y-1">

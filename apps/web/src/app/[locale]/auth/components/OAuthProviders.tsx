@@ -5,7 +5,7 @@ import configuration from "@/configuration"
 import useSignInWithProvider from "@/core/hooks/use-sign-in-with-provider"
 import { useTranslations } from "next-intl"
 
-import PageLoadingIndicator from "@/components/PageLoadingIndicator"
+import PageLoadingIndicator from "@/components/page-loading-indicator"
 
 import AuthErrorMessage from "./AuthErrorMessage"
 import AuthProviderButton from "./AuthProviderButton"

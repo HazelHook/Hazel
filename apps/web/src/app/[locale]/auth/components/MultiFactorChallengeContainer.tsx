@@ -10,7 +10,7 @@ import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 import useMutation from "swr/mutation"
 
-import Spinner from "@/components/Spinner"
+import Spinner from "@/components/spinner"
 
 import VerificationCodeInput from "./VerificationCodeInput"
 

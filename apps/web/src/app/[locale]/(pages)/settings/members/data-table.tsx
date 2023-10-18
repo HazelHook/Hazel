@@ -18,7 +18,7 @@ import {
 import type { createOrganizationInvite } from "@/server/actions/organization-invite"
 import { usePagination } from "@/lib/hooks/usePagination"
 import { AddIcon } from "@hazel/icons"
-import { OrganizationInviteModal } from "@/components/modals/OrganizationInviteModal"
+import { OrganizationInviteModal } from "@/components/modals/organization-invite-modal"
 
 interface DataTableProps<TData, TValue> {
 	orgId: number
@@ -75,7 +75,10 @@ export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAct
 										<TableHead key={header.id}>
 											{header.isPlaceholder
 												? null
-												: (flexRender(header.column.columnDef.header, header.getContext()) as ReactNode)}
+												: (flexRender(
+														header.column.columnDef.header,
+														header.getContext(),
+												  ) as ReactNode)}
 										</TableHead>
 									)
 								})}

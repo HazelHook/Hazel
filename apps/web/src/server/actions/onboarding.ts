@@ -1,8 +1,8 @@
 "use server"
 
 import { cookies } from "next/headers"
-import * as schema from "db/src/drizzle/schema"
-import { generatePublicId } from "db/src/drizzle/schema/common"
+import * as schema from "@hazel/db/src/drizzle/schema"
+import { generatePublicId } from "@hazel/db/src/drizzle/schema/common"
 import { z } from "zod"
 
 import { basicProtectedProcedure, createAction } from "@/server/trpc"

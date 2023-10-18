@@ -1,4 +1,4 @@
-import db from "db/src/drizzle"
+import db from "@hazel/db/src/drizzle"
 import { t } from "elysia"
 
 import { CLIAuthenticatedDTO } from "."
