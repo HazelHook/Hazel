@@ -5,7 +5,7 @@ import configuration from "@/configuration"
 import isBrowser from "@/core/generic/is-browser"
 import { Button } from "@hazel/ui/button"
 import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
-import If from "@hazel/ui/if"
+import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"

@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react"
 import classNames from "clsx"
 
-import If from "./if"
+import { If } from "./if"
 import { Spinner } from "./spinner"
 import { Logo } from "./logo"
 

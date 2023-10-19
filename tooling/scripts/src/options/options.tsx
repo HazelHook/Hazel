@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import { Quicklinks } from "@hazel/ui"
 
 import { Box, Newline, useInput } from "../ext/ink"
-import { HazelAPI } from "./hazel-api.js"
-import { Planter } from "./planter.js"
+import { HazelAPI } from "./hazel-api.jsx"
+import { Planter } from "./planter.jsx"
 import { Purger } from "./purger"
 
 const numberOptions = 4
@@ -46,7 +46,12 @@ export default function Options() {
 					<Planter mode="select" selected={option === 0} engaged={engaged} />
 					<Quicklinks mode="select" selected={option === 1} engaged={engaged} />
 					<HazelAPI mode="select" selected={option === 2} engaged={engaged} />
-					<Purger mode="select" selected={option === 3} engaged={engaged} disengage={() => setEngaged(false)} />
+					<Purger
+						mode="select"
+						selected={option === 3}
+						engaged={engaged}
+						disengage={() => setEngaged(false)}
+					/>
 				</Box>
 			</Box>
 			<Box height="100%" display="flex" flexDirection="column">

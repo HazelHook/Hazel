@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
-import getLogger from "@/core/logger"
 import { Heading } from "@hazel/ui/heading"
-import If from "@hazel/ui/if"
+import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
@@ -10,6 +9,7 @@ import db from "@/lib/db"
 import ExistingUserInviteForm from "../components/existing-user-invite-form"
 import NewUserInviteForm from "../components/new-user-invite-form"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
+import { getLogger } from "@hazel/utils"
 
 interface Props {
 	params: {

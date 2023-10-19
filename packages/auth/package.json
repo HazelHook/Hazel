@@ -17,10 +17,13 @@
 		"next": "13.5.4",
 		"swr": "^2.2.4",
 		"@supabase/supabase-js": "^2.38.1",
+		"@supabase/auth-helpers-nextjs": "^0.8.1",
 		"next-intl": "3.0.0-rc.5",
+		"@hazel/db": "workspace:*",
 		"@hazel/ui": "workspace:*",
 		"@hazel/icons": "workspace:*",
 		"@hazel/supabase": "workspace:*",
+		"@hazel/utils": "workspace:*",
 		"react-hook-form": "^7.47.0",
 		"sonner": "^1.0.3",
 		"tailwindcss-animate": "^1.0.6"

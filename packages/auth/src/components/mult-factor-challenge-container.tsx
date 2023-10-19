@@ -5,7 +5,7 @@ import { useSupabase } from "@hazel/supabase/hooks"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import Heading from "@hazel/ui/heading"
-import If from "@hazel/ui/if"
+import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 import useMutation from "swr/mutation"
 

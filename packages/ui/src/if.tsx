@@ -27,5 +27,3 @@ export function If<Value = unknown>({
 		return null
 	}, [condition, fallback, children])
 }
-
-export default If

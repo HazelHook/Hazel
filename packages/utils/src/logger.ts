@@ -3,7 +3,7 @@ import pino from "pino"
 
 let logger: Logger
 
-function getLogger() {
+export function getLogger() {
 	if (logger) {
 		return logger
 	}
@@ -31,5 +31,3 @@ function getLogger() {
 
 	return logger
 }
-
-export default getLogger

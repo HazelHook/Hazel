@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
-import If from "@hazel/ui/if"
+import { If } from "@hazel/ui/if"
 import Modal from "@hazel/ui/modal"
 import { TextField } from "@hazel/ui/text-field"
 import { useTranslations } from "next-intl"
@@ -89,7 +89,10 @@ export function MultiFactorAuthSetupForm({
 						<TextField.Label>
 							{t("verificationCode")}
 
-							<VerificationCodeInput onInvalid={() => setVerificationCode("")} onValid={setVerificationCode} />
+							<VerificationCodeInput
+								onInvalid={() => setVerificationCode("")}
+								onValid={setVerificationCode}
+							/>
 
 							<TextField.Hint>{t("verifyActivationCodeDescription")}</TextField.Hint>
 						</TextField.Label>

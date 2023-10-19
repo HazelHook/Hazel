@@ -1,7 +1,7 @@
 import { Box } from "./ext/ink"
 import BigText from "./ext/ink-big-text"
 import Gradient from "./ext/ink-gradient"
-import Options from "./options/options.js"
+import Options from "./options/options.jsx"
 
 export default function App() {
 	return (

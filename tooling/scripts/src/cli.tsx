@@ -1,8 +1,8 @@
 import meow from "meow"
 
-import App from "./app.js"
-import { render } from "./ext/ink"
-import { GlobalStateProvider } from "./lib/datasource"
+import App from "./app.jsx"
+import { render } from "./ext/ink.js"
+import { GlobalStateProvider } from "./lib/datasource.jsx"
 
 const cli = meow(
 	`

@@ -2,7 +2,7 @@ import type { FormEventHandler } from "react"
 import React, { useCallback, useState } from "react"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
-import If from "@hazel/ui/if"
+import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
 import PhoneNumberCredentialForm from "./phone-number-credential-form"

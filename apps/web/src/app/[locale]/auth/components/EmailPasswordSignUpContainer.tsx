@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import configuration from "@/configuration"
 import useSignUpWithEmailAndPasswordMutation from "@/core/hooks/use-sign-up-with-email-password"
 import Alert from "@hazel/ui/alert"
-import If from "@hazel/ui/if"
+import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
 import AuthErrorMessage from "./AuthErrorMessage"

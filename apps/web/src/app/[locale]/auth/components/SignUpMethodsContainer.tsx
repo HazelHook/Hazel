@@ -3,7 +3,7 @@
 import { useCallback } from "react"
 import { useRouter } from "next/navigation"
 import configuration from "@/configuration"
-import If from "@hazel/ui/if"
+import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
 import EmailLinkAuth from "./EmailLinkAuth"

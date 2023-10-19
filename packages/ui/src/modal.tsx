@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 
 import { Button } from "./button"
 import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from "./dialog"
-import If from "./if"
+import { If } from "./if"
 
 type ControlledOpenProps = {
 	isOpen: boolean
