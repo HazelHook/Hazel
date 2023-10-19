@@ -12,7 +12,7 @@ import {
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
 
-import { Status } from "@/components/status"
+import { Status } from "@/components/xd"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/page"
 
 export const columns: ColumnDef<EventDataRowType>[] = [

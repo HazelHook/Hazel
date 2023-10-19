@@ -5,7 +5,7 @@ import createI18nMiddleware from "next-intl/middleware"
 
 import configuration from "./configuration"
 import HttpStatusCode from "./core/generic/http-status-code.enum"
-import { isPublicRoute } from "./core/route-matcher"
+import { isPublicRoute } from "./core/generic/route-matcher"
 
 const CSRF_TOKEN_HEADER = "X-CSRF-Token"
 const CSRF_SECRET_COOKIE = "csrfSecret"
