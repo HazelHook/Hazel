@@ -644,7 +644,7 @@ importers:
         version: 1.0.7(@types/react-dom@18.2.13)(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0)
       '@unpic/react':
         specifier: ^0.0.36
-        version: 0.0.36(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
+        version: 0.0.36(react-dom@18.2.0)(react@18.2.0)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -663,6 +663,9 @@ importers:
       react-apexcharts:
         specifier: ^1.4.1
         version: 1.4.1(apexcharts@3.44.0)(react@18.2.0)
+      react-top-loading-bar:
+        specifier: ^2.3.1
+        version: 2.3.1(react@18.2.0)
       sonner:
         specifier: ^1.0.3
         version: 1.0.3(react-dom@18.2.0)(react@18.2.0)
@@ -3969,7 +3972,7 @@ packages:
       unpic: 3.10.1
     dev: false
 
-  /@unpic/react@0.0.36(next@13.5.4)(react-dom@18.2.0)(react@18.2.0):
+  /@unpic/react@0.0.36(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-HITDvifa6/0u5GxgTeqlo/QsW1sTpyCPN81z2upfQAtmwKWLY8SeAH5sOzchVlHDlc/QU/dLcs4j9ZI1H/6c4A==}
     peerDependencies:
       next: '>=12'
@@ -3980,7 +3983,6 @@ packages:
         optional: true
     dependencies:
       '@unpic/core': 0.0.31
-      next: 13.5.4(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -8097,6 +8099,15 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
+
+  /react-top-loading-bar@2.3.1(react@18.2.0):
+    resolution: {integrity: sha512-rQk2Nm+TOBrM1C4E3e6KwT65iXyRSgBHjCkr2FNja1S51WaPulRA5nKj/xazuQ3x89wDDdGsrqkqy0RBIfd0xg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react@18.2.0:

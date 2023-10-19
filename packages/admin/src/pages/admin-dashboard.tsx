@@ -19,6 +19,7 @@ export async function AdminDashboardPage() {
 }
 
 async function loadData() {
+	// TODO: USE DRIZZLE AND NOT THIS SHIT
 	const client = getSupabaseServerClient({ admin: true })
 
 	const { count: usersCount } = await client.from("users").select("*", {

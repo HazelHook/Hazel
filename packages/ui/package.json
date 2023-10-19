@@ -30,10 +30,12 @@
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"cmdk": "^0.2.0",
+		"react-top-loading-bar": "^2.3.1",
 		"tailwind-merge": "^1.14.0",
 		"zod": "^3.22.1"
 	},
 	"peerDependencies": {
+		"@hazel/icons": "workspace:*",
 		"@hookform/resolvers": "^3.3.2",
 		"@tanstack/react-table": "^8.9.3",
 		"next": "13.5.4",
@@ -44,7 +46,6 @@
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.45.4",
 		"sonner": "^1.0.3",
-		"@hazel/icons": "workspace:*",
 		"tailwindcss": "3.3.2",
 		"tailwindcss-animate": "^1.0.6"
 	},
@@ -67,7 +68,7 @@
 		"typescript": "^5.2.2"
 	},
 	"exports": {
-		".": "./src/index.ts",
+		"./*": "./src/*.tsx",
 		"./utils": "./src/utils/index.ts",
 		"./accordion": "./src/accordion.tsx.tsx",
 		"./alert-dialog": "./src/alert-dialog.tsx",
