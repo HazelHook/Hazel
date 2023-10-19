@@ -6,7 +6,18 @@ import { useSupabase } from "@hazel/supabase/hooks"
 
 import { User } from "@supabase/supabase-js"
 
-import UserSessionContext from "../../../../apps/web/src/lib/contexts/auth"
+import { createContext } from "react"
+import { OrganizationMember } from "@hazel/db/src/drizzle"
+
+interface UserSession {
+	user: Maybe<User>
+	role: Maybe<OrganizationMember["role"]>
+}
+
+export const UserSessionContext = createContext<UserSession>({
+	user: undefined,
+	role: undefined,
+})
 
 export const useAuth = () => useContext(UserSessionContext)
 

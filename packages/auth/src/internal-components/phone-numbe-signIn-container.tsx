@@ -6,10 +6,10 @@ import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
 import PhoneNumberCredentialForm from "./phone-number-credential-form"
-import VerificationCodeInput from "./verification-code-input"
+import { VerificationCodeInput } from "./verification-code-input"
 import { useSignInWithOtp } from "../hooks/use-sign-in-with-otp"
 import { useVerifyOtp } from "../hooks/use-verify-otp"
-import { Paths } from "../pages"
+import { useAuthConfig } from "../provider/auth-config"
 
 enum Step {
 	Phone = 0,
@@ -19,9 +19,10 @@ enum Step {
 export const PhoneNumberSignInContainer: React.FC<{
 	onSuccess: () => unknown
 	mode: "signIn" | "signUp"
-	paths: Paths
-}> = ({ onSuccess, mode, paths }) => {
+}> = ({ onSuccess, mode }) => {
 	const t = useTranslations()
+	const authConfig = useAuthConfig()
+
 	const [step, setStep] = useState<Step>(Step.Phone)
 	const [verificationCode, setVerificationCode] = useState("")
 	const [phone, setPhone] = useState("")
@@ -49,7 +50,7 @@ export const PhoneNumberSignInContainer: React.FC<{
 		async (e) => {
 			e.preventDefault()
 
-			const redirectTo = `${window.location.origin}${paths.redirect}`
+			const redirectTo = `${window.location.origin}${authConfig.paths.signInRedirect}`
 
 			await verifyOtp.trigger({
 				token: verificationCode,

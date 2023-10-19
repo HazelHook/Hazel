@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl"
 
 import type { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
-import { useSignOut } from "@hazel/auth/hooks/use-sign-out"
+import { useSignOut } from "@hazel/auth/hooks"
 
 function ExistingUserInviteForm(
 	props: React.PropsWithChildren<{

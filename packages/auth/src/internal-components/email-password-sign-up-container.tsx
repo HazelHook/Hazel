@@ -1,25 +1,27 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import configuration from "@/configuration"
-import useSignUpWithEmailAndPasswordMutation from "@/core/hooks/use-sign-up-with-email-password"
 import Alert from "@hazel/ui/alert"
 import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
-import AuthErrorMessage from "./AuthErrorMessage"
-import EmailPasswordSignUpForm from "./EmailPasswordSignUpForm"
+import EmailPasswordSignUpForm from "./email-password-sign-up-form"
+import { AuthErrorMessage } from "./auth-error-messave"
+import { useSignUpWithEmailAndPassword } from "../hooks/use-sign-up-with-email-password"
+import { useAuthConfig } from "../provider/auth-config"
 
-const requireEmailConfirmation = configuration.auth.requireEmailConfirmation
-
-const EmailPasswordSignUpContainer: React.FCC<{
+export const EmailPasswordSignUpContainer: React.FCC<{
 	onSignUp?: () => unknown
 	onSubmit?: (userId?: string) => void
 	onError?: (error?: unknown) => unknown
 }> = ({ onSignUp, onSubmit, onError }) => {
 	const t = useTranslations()
-	const signUpMutation = useSignUpWithEmailAndPasswordMutation()
+
+	const authConfig = useAuthConfig()
+
+	const signUpMutation = useSignUpWithEmailAndPassword()
 	const redirecting = useRef(false)
+
 	const loading = signUpMutation.isMutating || redirecting.current
 	const [showVerifyEmailAlert, setShowVerifyEmailAlert] = useState(false)
 
@@ -43,7 +45,7 @@ const EmailPasswordSignUpContainer: React.FCC<{
 				const data = await signUpMutation.trigger(params)
 
 				// If the user is required to confirm their email, we display a message
-				if (requireEmailConfirmation) {
+				if (authConfig.config.requireEmailConfirmation) {
 					setShowVerifyEmailAlert(true)
 
 					if (onSubmit) {
@@ -81,5 +83,3 @@ const EmailPasswordSignUpContainer: React.FCC<{
 		</>
 	)
 }
-
-export default EmailPasswordSignUpContainer

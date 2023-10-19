@@ -7,8 +7,8 @@ import Heading from "@hazel/ui/heading"
 import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
 
-import { useAuth } from "@/lib/provider/AuthProvider"
 import { ArrowRightIcon } from "@hazel/icons"
+import { useAuth } from "@hazel/auth/provider"
 
 export interface OrganizationInfoStepData {
 	organization: string

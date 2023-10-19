@@ -7,14 +7,7 @@ export const metadata = {
 }
 
 async function NextVerifyPage() {
-	return (
-		<VerifyPage
-			paths={{
-				signIn: configuration.paths.signIn,
-				redirect: configuration.paths.home,
-			}}
-		/>
-	)
+	return <VerifyPage signInPath={configuration.paths.signIn} signInRedirectPath={configuration.paths.home} />
 }
 
 export default NextVerifyPage

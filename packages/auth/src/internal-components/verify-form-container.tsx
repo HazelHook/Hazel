@@ -3,17 +3,16 @@
 import { useCallback } from "react"
 import { useRouter } from "next/navigation"
 
-import { VerifyPaths } from "../pages/verify"
 import { MultiFactorChallengeContainer } from "./mult-factor-challenge-container"
 
 export type VerifyFormContainerProps = {
-	paths: VerifyPaths
+	redirectPath: string
 }
 
-export function VerifyFormContainer({ paths }: VerifyFormContainerProps) {
+export function VerifyFormContainer({ redirectPath }: VerifyFormContainerProps) {
 	const router = useRouter()
 	const onSuccess = useCallback(() => {
-		router.replace(paths.redirect)
+		router.replace(redirectPath)
 	}, [])
 
 	return <MultiFactorChallengeContainer onSuccess={onSuccess} />

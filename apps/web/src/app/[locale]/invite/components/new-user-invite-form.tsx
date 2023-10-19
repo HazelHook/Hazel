@@ -10,12 +10,11 @@ import { useTranslations } from "next-intl"
 
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
-
-import EmailLinkAuth from "../../auth/components/EmailLinkAuth"
-import EmailPasswordSignInContainer from "../../auth/components/EmailPasswordSignInContainer"
-import EmailPasswordSignUpContainer from "../../auth/components/EmailPasswordSignUpContainer"
-import OAuthProviders from "../../auth/components/OAuthProviders"
-import PhoneNumberSignInContainer from "../../auth/components/PhoneNumberSignInContainer"
+import OAuthProviders from "@hazel/auth/internal-components/oAuth-providers"
+import { EmailPasswordSignInContainer } from "@hazel/auth/internal-components/emai-password-signIn-container"
+import { PhoneNumberSignInContainer } from "@hazel/auth/internal-components/phone-numbe-signIn-container"
+import { EmailLinkAuth } from "@hazel/auth/internal-components/email-link-auth"
+import { EmailPasswordSignUpContainer } from "@hazel/auth/internal-components/email-password-sign-up-container"
 
 enum Mode {
 	SignUp = 0,
@@ -41,7 +40,11 @@ function NewUserInviteForm(
 				<PageLoadingIndicator fullPage>Accepting invite. Please wait...</PageLoadingIndicator>
 			</If>
 
-			<OAuthProviders returnUrl={oAuthReturnUrl} />
+			<OAuthProviders
+				providers={configuration.auth.providers.oAuth}
+				returnUrl={oAuthReturnUrl}
+				callbackUrl={configuration.paths.authCallback}
+			/>
 
 			<If condition={configuration.auth.providers.emailPassword}>
 				<If condition={mode === Mode.SignUp}>
@@ -76,7 +79,7 @@ function NewUserInviteForm(
 				/>
 			</If>
 
-			<If condition={configuration.auth.providers.emailLink}>
+			<If condition={configuration.auth.providers.magicLink}>
 				<EmailLinkAuth inviteCode={props.code} />
 			</If>
 		</>

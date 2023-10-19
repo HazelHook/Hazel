@@ -2,6 +2,7 @@ import { redirect } from "next/navigation"
 import { Button } from "@hazel/ui/button"
 import { Alert, AlertHeading } from "@hazel/ui/alert"
 import Link from "next/link"
+import { getLogger } from "@hazel/utils"
 
 interface AuthCallbackErrorPageProps {
 	searchParams: StringObject
@@ -11,11 +12,12 @@ interface AuthCallbackErrorPageProps {
 export function AuthCallbackErrorPage({ searchParams, signInPath }: AuthCallbackErrorPageProps) {
 	const error = searchParams.error
 
-	// TODO: LOG THIS
 	// if there is no error, redirect the user to the sign-in page
 	if (!error) {
 		redirect(signInPath)
 	}
+
+	getLogger().error(error)
 
 	return (
 		<div className={"flex flex-col space-y-6 py-4"}>

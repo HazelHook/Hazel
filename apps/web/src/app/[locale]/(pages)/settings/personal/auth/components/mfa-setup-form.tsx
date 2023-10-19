@@ -6,9 +6,8 @@ import Modal from "@hazel/ui/modal"
 import { TextField } from "@hazel/ui/text-field"
 import { useTranslations } from "next-intl"
 
-import VerificationCodeInput from "@/app/[locale]/auth/components/VerificationCodeInput"
-
 import { FactorQrCode, useVerifyCodeMutation } from "./mfa-setup-modal"
+import { VerificationCodeInput } from "@hazel/auth/internal-components/verification-code-input"
 
 export function MultiFactorAuthSetupForm({
 	onEnrolled,

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
 import NextProgress from "@/components/NProgress"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import { AuthProvider } from "@hazel/auth/provider"
+import { AuthConfigProvider, AuthProvider } from "@hazel/auth/provider"
 
 export const metadata: Metadata = {
 	title: {
@@ -49,23 +49,38 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 			<head />
 			<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
 				<I18Provider locale={params.locale}>
-					<AuthProvider>
-						<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-							<NextProgress />
-							{children}
-							<TailwindIndicator />
-						</ThemeProvider>
-						<Toaster
-							position="bottom-right"
-							toastOptions={{
-								style: {
-									background: "hsl(var(--background))",
-									color: "hsl(var(--foreground))",
-									border: "1px solid hsl(var(--border))",
-								},
-							}}
-						/>
-					</AuthProvider>
+					<AuthConfigProvider
+						providers={configuration.auth.providers}
+						config={{
+							requireEmailConfirmation: configuration.auth.requireEmailConfirmation,
+						}}
+						paths={{
+							signIn: configuration.paths.signIn,
+							signUp: configuration.paths.signUp,
+							signInRedirect: configuration.paths.home,
+							signUpRedirect: configuration.paths.home,
+							authCallback: configuration.paths.authCallback,
+							onboarding: configuration.paths.onboarding,
+						}}
+					>
+						<AuthProvider>
+							<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+								<NextProgress />
+								{children}
+								<TailwindIndicator />
+							</ThemeProvider>
+							<Toaster
+								position="bottom-right"
+								toastOptions={{
+									style: {
+										background: "hsl(var(--background))",
+										color: "hsl(var(--foreground))",
+										border: "1px solid hsl(var(--border))",
+									},
+								}}
+							/>
+						</AuthProvider>
+					</AuthConfigProvider>
 				</I18Provider>
 			</body>
 		</html>

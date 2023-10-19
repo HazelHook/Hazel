@@ -9,14 +9,15 @@ import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
-import { Paths } from "../pages"
 import { useSignInWithOtp } from "../hooks/use-sign-in-with-otp"
+import { useAuthConfig } from "../provider/auth-config"
 
 export const EmailLinkAuth: React.FC<{
 	inviteCode?: string
-	paths: Paths
-}> = ({ inviteCode, paths }) => {
+}> = ({ inviteCode }) => {
 	const t = useTranslations()
+	const authConfig = useAuthConfig()
+
 	const signInWithOtpMutation = useSignInWithOtp()
 
 	const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(
@@ -31,7 +32,7 @@ export const EmailLinkAuth: React.FC<{
 			const origin = (window as any).location.origin
 			const queryParams = inviteCode ? `?inviteCode=${inviteCode}` : ""
 
-			const redirectUrl = [origin, paths.authCallback, queryParams].join("")
+			const redirectUrl = [origin, authConfig.paths.authCallback, queryParams].join("")
 
 			const promise = signInWithOtpMutation.trigger({
 				email,

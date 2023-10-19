@@ -1,3 +1,5 @@
 export * from "./pages/sign-in"
+export * from "./pages/sign-up"
 export * from "./pages/verify"
 export * from "./pages/error-callback"
+export * from "./pages/password-reset"

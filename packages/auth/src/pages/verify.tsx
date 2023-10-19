@@ -2,20 +2,18 @@ import { redirect } from "next/navigation"
 
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { checkSessionRequireMfa } from "../utils/check-requires-mfa"
-import { VerifyFormContainer } from "../components/verify-form-container"
+import { VerifyFormContainer } from "../internal-components/verify-form-container"
 
-export type VerifyPaths = {
-	signIn: string
-	redirect: string
-}
-
-export async function VerifyPage({ paths }: { paths: VerifyPaths }) {
+export async function VerifyPage({
+	signInPath,
+	signInRedirectPath,
+}: { signInPath: string; signInRedirectPath: string }) {
 	const client = getSupabaseServerClient()
 	const needsMfa = await checkSessionRequireMfa(client)
 
 	if (!needsMfa) {
-		redirect(paths.signIn)
+		redirect(signInPath)
 	}
 
-	return <VerifyFormContainer paths={paths} />
+	return <VerifyFormContainer redirectPath={signInRedirectPath} />
 }

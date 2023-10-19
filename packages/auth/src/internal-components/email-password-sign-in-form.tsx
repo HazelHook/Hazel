@@ -6,8 +6,7 @@ import { Button } from "@hazel/ui/button"
 import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 import { z } from "zod"
-
-import { passwordSchema } from "./EmailPasswordSignUpForm"
+import { passwordSchema } from "./email-password-sign-up-form"
 
 const emailPasswordSignInFormSchema = z.object({
 	email: z.string().email(),

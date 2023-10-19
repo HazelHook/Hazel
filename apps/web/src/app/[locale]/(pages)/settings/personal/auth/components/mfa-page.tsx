@@ -1,8 +1,6 @@
 "use client"
 
 import { useCallback, useState } from "react"
-import useFetchAuthFactors from "@/core/hooks/use-fetch-factors"
-import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
 import Alert from "@hazel/ui/alert"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
@@ -23,6 +21,7 @@ import { useSupabase } from "@hazel/supabase/hooks"
 
 import MultiFactorAuthSetupModal from "./mfa-setup-modal"
 import { Spinner } from "@hazel/ui/spinner"
+import { useFactorsMutationKey, useFetchAuthFactors } from "@hazel/auth/hooks"
 
 const MAX_FACTOR_COUNT = 10
 

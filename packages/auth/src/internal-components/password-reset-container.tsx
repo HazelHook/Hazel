@@ -1,19 +1,19 @@
 "use client"
 
 import { FormEvent, useCallback } from "react"
-import configuration from "@/configuration"
-import useResetPassword from "@/core/hooks/use-reset-password"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import { If } from "@hazel/ui/if"
 import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
 import { useTranslations } from "next-intl"
+import { AuthErrorMessage } from "./auth-error-messave"
+import useResetPassword from "../hooks/use-reset-password"
+import { useAuthConfig } from "../provider"
 
-import AuthErrorMessage from "@/app/[locale]/auth/components/AuthErrorMessage"
-
-function PasswordResetContainer() {
+export function PasswordResetContainer() {
 	const t = useTranslations()
+	const authConfig = useAuthConfig()
 	const resetPasswordMutation = useResetPassword()
 	const error = resetPasswordMutation.error
 	const success = resetPasswordMutation.data
@@ -22,10 +22,9 @@ function PasswordResetContainer() {
 		async (event: FormEvent<HTMLFormElement>) => {
 			event.preventDefault()
 
-			// @ts-ignore
 			const data = new FormData(event.currentTarget)
 			const email = data.get("email") as string
-			const redirectTo = getReturnUrl()
+			const redirectTo = getReturnUrl(authConfig.paths.authCallback)
 
 			await resetPasswordMutation.trigger({
 				email,
@@ -70,17 +69,13 @@ function PasswordResetContainer() {
 	)
 }
 
-export default PasswordResetContainer
-
 /**
  * @description
  * Return the URL where the user will be redirected to after resetting
  * their password
  */
-function getReturnUrl() {
-	// @ts-ignore
+function getReturnUrl(callbackPath: string) {
 	const host = window.location.origin
-	const callback = configuration.paths.authCallback
 
-	return `${host}${callback}`
+	return `${host}${callbackPath}`
 }

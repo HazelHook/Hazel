@@ -35,3 +35,5 @@ export const authCallbackGetRoute =
 
 		return redirect(redirectPath)
 	}
+
+export * from "./components/auth-page-shell"

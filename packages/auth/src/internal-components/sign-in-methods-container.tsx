@@ -8,44 +8,39 @@ import { useTranslations } from "next-intl"
 import { EmailLinkAuth } from "./email-link-auth"
 import { EmailPasswordSignInContainer } from "./emai-password-signIn-container"
 import OAuthProviders from "./oAuth-providers"
-import type { Paths, Providers } from "../pages"
 import { PhoneNumberSignInContainer } from "./phone-numbe-signIn-container"
+import { useAuthConfig } from "../provider/auth-config"
 
-export type SignInMethodsContainerProps = {
-	paths: Paths
-
-	providers: Providers
-}
-
-export function SignInMethodsContainer({ paths, providers }: SignInMethodsContainerProps) {
+export function SignInMethodsContainer() {
 	const router = useRouter()
+	const authConfig = useAuthConfig()
 
 	const t = useTranslations()
 
 	const onSignIn = useCallback(() => {
-		router.push(paths.redirect)
+		router.push(authConfig.paths.signInRedirect)
 	}, [router])
 
 	return (
 		<>
-			<If condition={providers.oAuth.length}>
-				<OAuthProviders providers={providers.oAuth as any} callbackUrl={paths.authCallback} />
+			<If condition={authConfig.providers.oAuth.length}>
+				<OAuthProviders providers={authConfig.providers.oAuth} callbackUrl={authConfig.paths.authCallback} />
 
 				<div>
 					<span className={"text-xs text-gray-400"}>{t("auth.orContinueWithEmail")}</span>
 				</div>
 			</If>
 
-			<If condition={providers.emailPassword}>
+			<If condition={authConfig.providers.emailPassword}>
 				<EmailPasswordSignInContainer onSignIn={onSignIn} />
 			</If>
 
-			<If condition={providers.phoneNumber}>
-				<PhoneNumberSignInContainer paths={paths} onSuccess={onSignIn} mode={"signIn"} />
+			<If condition={authConfig.providers.phoneNumber}>
+				<PhoneNumberSignInContainer onSuccess={onSignIn} mode={"signIn"} />
 			</If>
 
-			<If condition={providers.magicLink}>
-				<EmailLinkAuth paths={paths} />
+			<If condition={authConfig.providers.magicLink}>
+				<EmailLinkAuth />
 			</If>
 		</>
 	)

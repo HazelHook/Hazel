@@ -26,7 +26,8 @@
 		"@hazel/utils": "workspace:*",
 		"react-hook-form": "^7.47.0",
 		"sonner": "^1.0.3",
-		"tailwindcss-animate": "^1.0.6"
+		"tailwindcss-animate": "^1.0.6",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@hazel/supabase": "workspace:*",
@@ -49,7 +50,8 @@
 		"./pages": "./src/pages.ts",
 		"./provider": "./src/provider.ts",
 		"./utils": "./src/utils.ts",
-		"./hooks": "./src/hooks.ts"
+		"./hooks": "./src/hooks.ts",
+		"./internal-components/*": "./src/internal-components/*.tsx"
 	},
 	"typesVersions": {
 		"*": {

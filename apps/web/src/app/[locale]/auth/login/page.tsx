@@ -7,16 +7,7 @@ export const metadata = {
 }
 
 function LoginPage() {
-	return (
-		<SignInPage
-			providers={configuration.auth.providers}
-			paths={{
-				redirect: configuration.paths.home,
-				authCallback: configuration.paths.authCallback,
-				signUp: configuration.paths.signUp,
-			}}
-		/>
-	)
+	return <SignInPage signUpPath={configuration.paths.signUp} />
 }
 
 export default LoginPage

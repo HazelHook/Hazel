@@ -2,7 +2,7 @@
 
 import { useCallback } from "react"
 
-import EmailPasswordSignInForm from "../../../../apps/web/src/app/[locale]/auth/components/EmailPasswordSignInForm"
+import EmailPasswordSignInForm from "./email-password-sign-in-form"
 import { AuthErrorMessage } from "./auth-error-messave"
 import { useSignInWithEmailPassword } from "../hooks/use-sign-in-with-email-password"
 
