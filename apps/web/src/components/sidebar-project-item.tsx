@@ -7,7 +7,7 @@ import { Image } from "@hazel/ui/image"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 
-import { SidebarItem } from "./xd"
+import { SidebarItem } from "./sidebar"
 
 export interface SidebarProjectItemProps {
 	project: Connection
