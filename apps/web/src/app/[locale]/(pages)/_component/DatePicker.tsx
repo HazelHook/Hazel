@@ -2,12 +2,11 @@
 
 import { useCallback, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { CalendarIcon, CheckTickIcon } from "@hazel/icons"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 import { format } from "date-fns"
 
 import { formatDateTime } from "@/lib/utils"
-import { CalendarIcon } from "@hazel/icons"
-import { CheckTickIcon } from "@hazel/icons"
 
 import { CustomDatePicker } from "./CustomDatePicker"
 

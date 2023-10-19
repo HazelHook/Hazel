@@ -1,9 +1,9 @@
 "use client"
 
+import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
 import { User } from "@supabase/supabase-js"
 import { ColumnDef } from "@tanstack/react-table"
 import { formatDistance } from "date-fns"
-import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
 
 import { MemberOptions } from "./_components/MemberOptions"
 import { RoleSelect } from "./_components/RoleSelect"

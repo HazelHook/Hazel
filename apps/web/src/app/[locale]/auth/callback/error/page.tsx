@@ -1,5 +1,5 @@
-import { AuthCallbackErrorPage } from "@hazel/auth/pages"
 import configuration from "@/configuration"
+import { AuthCallbackErrorPage } from "@hazel/auth/pages"
 
 interface Params {
 	searchParams: StringObject

@@ -1,7 +1,7 @@
 "use client"
 
-import { ColumnDef } from "@tanstack/react-table"
 import { OrganizationInvite } from "@hazel/db/src/drizzle/schema"
+import { ColumnDef } from "@tanstack/react-table"
 
 import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
 import { dateFormatter } from "@/lib/formatters"

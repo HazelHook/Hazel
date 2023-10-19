@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation"
 import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
-import { EmailLinkAuth } from "./email-link-auth"
+import { useAuthConfig } from "../provider/auth-config"
 import { EmailPasswordSignInContainer } from "./emai-password-signIn-container"
+import { EmailLinkAuth } from "./email-link-auth"
 import OAuthProviders from "./oAuth-providers"
 import { PhoneNumberSignInContainer } from "./phone-numbe-signIn-container"
-import { useAuthConfig } from "../provider/auth-config"
 
 export function SignInMethodsContainer() {
 	const router = useRouter()

@@ -1,13 +1,10 @@
 "use client"
 
-import { ReactNode, useContext, useEffect, useState } from "react"
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useSupabase } from "@hazel/supabase/hooks"
-
-import { User } from "@supabase/supabase-js"
-
-import { createContext } from "react"
 import { OrganizationMember } from "@hazel/db/src/drizzle"
+import { useSupabase } from "@hazel/supabase/hooks"
+import { User } from "@supabase/supabase-js"
 
 interface UserSession {
 	user: Maybe<User>

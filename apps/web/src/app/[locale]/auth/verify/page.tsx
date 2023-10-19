@@ -1,5 +1,4 @@
 import configuration from "@/configuration"
-
 import { VerifyPage } from "@hazel/auth/pages"
 
 export const metadata = {

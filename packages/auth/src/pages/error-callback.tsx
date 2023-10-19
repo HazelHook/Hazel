@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation"
-import { Button } from "@hazel/ui/button"
-import { Alert, AlertHeading } from "@hazel/ui/alert"
 import Link from "next/link"
+import { redirect } from "next/navigation"
+import { Alert, AlertHeading } from "@hazel/ui/alert"
+import { Button } from "@hazel/ui/button"
 import { getLogger } from "@hazel/utils"
 
 interface AuthCallbackErrorPageProps {

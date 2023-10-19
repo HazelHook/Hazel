@@ -3,10 +3,10 @@ import "server-only"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import configuration from "@/configuration"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 import db from "./db"
 import requireSession from "./user/require-session"
-import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 export const auth = async () => {
 	const client = getSupabaseServerClient()

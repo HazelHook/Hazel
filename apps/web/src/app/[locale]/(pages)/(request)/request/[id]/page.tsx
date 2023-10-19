@@ -99,7 +99,12 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 						<ListItem
 							name="Added Latency"
 							description={
-								firstRes ? `${new Date(firstRes.send_at).getTime() - new Date(firstRes.received_at).getTime()}ms` : "-"
+								firstRes
+									? `${
+											new Date(firstRes.send_at).getTime() -
+											new Date(firstRes.received_at).getTime()
+									  }ms`
+									: "-"
 							}
 						/>
 						<ListItem name="Verified" description={capitalizeFirstLetter(String(!!req.validated))} />

@@ -4,10 +4,10 @@ import { useEffect, useRef, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import configuration from "@/configuration"
 import useCsrfToken from "@/core/hooks/use-csrf-token"
+import { Spinner } from "@hazel/ui/spinner"
 
 import { handleOnboardingAction } from "@/server/actions/onboarding"
 import { useAction } from "@/server/client"
-import { Spinner } from "@hazel/ui/spinner"
 
 interface CompleteOnboardingStepData {
 	organization: string

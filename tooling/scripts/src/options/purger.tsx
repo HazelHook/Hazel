@@ -117,7 +117,8 @@ export function Purger({
 						selected={selectedOption === elementCount - 1 && engaged}
 						onClick={async () => {
 							for (const index of selectedCheckboxTab1) {
-								if (index < datasources.datasources.length) truncate(datasources.datasources[index].name, cascadeDelete)
+								if (index < datasources.datasources.length)
+									truncate(datasources.datasources[index].name, cascadeDelete)
 							}
 
 							for (const index of selectedCheckboxTab2) {

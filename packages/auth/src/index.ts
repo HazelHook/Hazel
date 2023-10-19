@@ -1,11 +1,9 @@
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import type { NextRequest } from "next/server"
-
 import type { Database } from "@hazel/db/src/database.types"
 import { getLogger } from "@hazel/utils"
-
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
 
 export const authCallbackGetRoute =
 	({ redirectPath }: { redirectPath: string }) =>

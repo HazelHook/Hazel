@@ -5,10 +5,10 @@ import Alert from "@hazel/ui/alert"
 import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
-import EmailPasswordSignUpForm from "./email-password-sign-up-form"
-import { AuthErrorMessage } from "./auth-error-messave"
 import { useSignUpWithEmailAndPassword } from "../hooks/use-sign-up-with-email-password"
 import { useAuthConfig } from "../provider/auth-config"
+import { AuthErrorMessage } from "./auth-error-messave"
+import EmailPasswordSignUpForm from "./email-password-sign-up-form"
 
 export const EmailPasswordSignUpContainer: React.FCC<{
 	onSignUp?: () => unknown

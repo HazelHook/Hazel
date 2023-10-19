@@ -1,5 +1,4 @@
 import { useSupabase } from "@hazel/supabase/hooks"
-
 import { VerifyOtpParams } from "@supabase/supabase-js"
 import useMutation from "swr/mutation"
 

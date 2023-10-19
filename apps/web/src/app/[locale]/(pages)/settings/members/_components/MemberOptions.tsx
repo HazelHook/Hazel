@@ -1,4 +1,7 @@
 import { useMemo } from "react"
+import { useAuth } from "@hazel/auth/provider"
+import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
+import { ClipboardIcon, FolderRemoveIcon, LogOutLeftIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -7,14 +10,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
 import { toast } from "sonner"
-
-import { ClipboardIcon } from "@hazel/icons"
-import { FolderRemoveIcon } from "@hazel/icons"
-import { LogOutLeftIcon } from "@hazel/icons"
-import { ThreeDotsHorizontalIcon } from "@hazel/icons"
-import { useAuth } from "@hazel/auth/provider"
 
 export interface MemberOptionsProps {
 	orgId: string

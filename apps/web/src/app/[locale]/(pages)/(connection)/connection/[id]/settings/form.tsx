@@ -3,13 +3,15 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
+import { AddIcon } from "@hazel/icons"
 import AutoForm from "@hazel/ui/auto-form"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import { Dialog, DialogContent } from "@hazel/ui/dialog"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
+import { LoadingButton } from "@hazel/ui/loading-button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import { Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
 import * as z from "zod"
 
 import type { updateConnectionAction } from "@/server/actions/connections"
@@ -22,8 +24,6 @@ import { PromiseType } from "@/lib/ts/helpers"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
 import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
-import { AddIcon } from "@hazel/icons"
-import { LoadingButton } from "@hazel/ui/loading-button"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction

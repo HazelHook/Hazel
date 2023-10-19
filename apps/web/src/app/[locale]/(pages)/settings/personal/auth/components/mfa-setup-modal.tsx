@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
+import { useFactorsMutationKey } from "@hazel/auth/hooks"
+import { VerificationCodeInput } from "@hazel/auth/internal-components/verification-code-input"
 import { useSupabase } from "@hazel/supabase/hooks"
-
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import { If } from "@hazel/ui/if"
@@ -10,8 +11,6 @@ import TextField from "@hazel/ui/text-field"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 import useMutation from "swr/mutation"
-import { VerificationCodeInput } from "@hazel/auth/internal-components/verification-code-input"
-import { useFactorsMutationKey } from "@hazel/auth/hooks"
 
 function MultiFactorAuthSetupModal(
 	props: React.PropsWithChildren<{

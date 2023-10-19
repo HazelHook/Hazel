@@ -1,17 +1,19 @@
 import { ReactNode } from "react"
+import {
+	BarChartUpIcon,
+	CardIcon,
+	DangerIcon,
+	EyeScanIcon,
+	FocusIcon,
+	KeyIcon,
+	LockedIcon,
+	Settings02Icon,
+	User2Icon,
+	UserIcon,
+	UserPlusIcon,
+} from "@hazel/icons"
 
 import { auth } from "@/lib/auth"
-import { BarChartUpIcon } from "@hazel/icons"
-import { CardIcon } from "@hazel/icons"
-import { DangerIcon } from "@hazel/icons"
-import { EyeScanIcon } from "@hazel/icons"
-import { FocusIcon } from "@hazel/icons"
-import { KeyIcon } from "@hazel/icons"
-import { LockedIcon } from "@hazel/icons"
-import { Settings02Icon } from "@hazel/icons"
-import { UserIcon } from "@hazel/icons"
-import { User2Icon } from "@hazel/icons"
-import { UserPlusIcon } from "@hazel/icons"
 import { Sidebar } from "@/components/sidebar"
 
 const SettingsLayout = async ({ children }: { children: ReactNode }) => {

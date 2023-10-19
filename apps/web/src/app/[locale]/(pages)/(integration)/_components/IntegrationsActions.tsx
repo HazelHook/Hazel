@@ -1,4 +1,7 @@
 import { useRouter } from "next/navigation"
+import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
+import { Integration } from "@hazel/db/src/drizzle/schema"
+import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import {
 	Dialog,
@@ -10,15 +13,11 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@hazel/ui/dialog"
-import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
-import { Integration } from "@hazel/db/src/drizzle/schema"
 import { toast } from "sonner"
 
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { useAction } from "@/server/client"
 import { UpdateIntegrationForm } from "@/components/forms/integration/UpdateIntegrationForm"
-import { DeleteDustbinIcon } from "@hazel/icons"
-import { EditPencilIcon } from "@hazel/icons"
 
 export const IntegrationsActions = ({
 	updateAction,

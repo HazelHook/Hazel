@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from "react"
 import { useRouter } from "next/navigation"
-import { ArrowUpSquareIcon, ArrowDownSquareIcon } from "@hazel/icons"
+import { ArrowDownSquareIcon, ArrowUpSquareIcon } from "@hazel/icons"
 import {
 	Column,
 	ColumnDef,

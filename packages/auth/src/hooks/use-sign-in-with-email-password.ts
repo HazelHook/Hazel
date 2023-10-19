@@ -1,5 +1,4 @@
 import { useSupabase } from "@hazel/supabase/hooks"
-
 import useMutation from "swr/mutation"
 
 interface Credentials {

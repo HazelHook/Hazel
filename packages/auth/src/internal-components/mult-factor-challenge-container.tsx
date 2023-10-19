@@ -1,18 +1,17 @@
 import type { FormEventHandler } from "react"
 import { useCallback, useEffect, useState } from "react"
 import { useSupabase } from "@hazel/supabase/hooks"
-
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import Heading from "@hazel/ui/heading"
 import { If } from "@hazel/ui/if"
+import { Spinner } from "@hazel/ui/spinner"
 import { useTranslations } from "next-intl"
 import useMutation from "swr/mutation"
 
-import { Spinner } from "@hazel/ui/spinner"
-import { VerificationCodeInput } from "./verification-code-input"
-import { useSignOut } from "../hooks/use-sign-out"
 import { useFetchAuthFactors } from "../hooks/use-fetch-factors"
+import { useSignOut } from "../hooks/use-sign-out"
+import { VerificationCodeInput } from "./verification-code-input"
 
 export function MultiFactorChallengeContainer({
 	onSuccess,

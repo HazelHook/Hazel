@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation"
 import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
+import { useAuthConfig } from "../provider/auth-config"
 import { EmailLinkAuth } from "./email-link-auth"
+import { EmailPasswordSignUpContainer } from "./email-password-sign-up-container"
 import OAuthProviders from "./oAuth-providers"
 import { PhoneNumberSignInContainer } from "./phone-numbe-signIn-container"
-import { useAuthConfig } from "../provider/auth-config"
-import { EmailPasswordSignUpContainer } from "./email-password-sign-up-container"
 
 export function SignUpMethodsContainer() {
 	const t = useTranslations()

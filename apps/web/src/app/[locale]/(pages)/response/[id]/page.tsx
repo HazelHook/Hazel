@@ -1,12 +1,12 @@
 import { ReactNode, Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { TBRequest } from "@hazel/db/src/tinybird/model/tiny-request"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { ExpandableList } from "@hazel/ui/expandable-list"
 import { Code } from "bright"
-import { TBRequest } from "@hazel/db/src/tinybird/model/tiny-request"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination, getCachedSource } from "@/lib/orm"

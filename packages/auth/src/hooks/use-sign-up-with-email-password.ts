@@ -1,6 +1,6 @@
 import { useSupabase } from "@hazel/supabase/hooks"
-
 import useSWRMutation from "swr/mutation"
+
 import { useAuthConfig } from "../provider/auth-config"
 
 interface Credentials {

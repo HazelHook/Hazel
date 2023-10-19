@@ -5,11 +5,11 @@ import { Button } from "@hazel/ui/button"
 import { If } from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
-import PhoneNumberCredentialForm from "./phone-number-credential-form"
-import { VerificationCodeInput } from "./verification-code-input"
 import { useSignInWithOtp } from "../hooks/use-sign-in-with-otp"
 import { useVerifyOtp } from "../hooks/use-verify-otp"
 import { useAuthConfig } from "../provider/auth-config"
+import PhoneNumberCredentialForm from "./phone-number-credential-form"
+import { VerificationCodeInput } from "./verification-code-input"
 
 enum Step {
 	Phone = 0,

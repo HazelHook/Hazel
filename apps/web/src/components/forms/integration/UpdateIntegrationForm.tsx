@@ -1,11 +1,11 @@
 "use client"
 
 import { notFound, useRouter } from "next/navigation"
+import { createZodIntegrationSchema, IntegrationTool } from "@hazel/db/src/drizzle/integrations/common"
+import { Integration } from "@hazel/db/src/drizzle/schema"
 import { Button } from "@hazel/ui/button"
 import { Form } from "@hazel/ui/form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { createZodIntegrationSchema, IntegrationTool } from "@hazel/db/src/drizzle/integrations/common"
-import { Integration } from "@hazel/db/src/drizzle/schema"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"

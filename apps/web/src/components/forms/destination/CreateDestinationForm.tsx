@@ -49,7 +49,11 @@ export function CreateDestinationForm({ onClose, action, shouldRedirect = true }
 				},
 			}}
 		>
-			<Button type="submit" disabled={createSource.status === "loading"} loading={createSource.status === "loading"}>
+			<Button
+				type="submit"
+				disabled={createSource.status === "loading"}
+				loading={createSource.status === "loading"}
+			>
 				Create
 			</Button>
 		</AutoForm>

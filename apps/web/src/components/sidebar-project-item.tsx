@@ -1,12 +1,11 @@
 import Link from "next/link"
+import { Connection } from "@hazel/db/src/drizzle/schema"
+import { ChevronDownIcon, ChevronRightIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { Image } from "@hazel/ui/image"
-import { Connection } from "@hazel/db/src/drizzle/schema"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { Icons } from "@/components/icons"
-import { ChevronDownIcon } from "@hazel/icons"
-import { ChevronRightIcon } from "@hazel/icons"
 
 import { SidebarItem } from "./sidebar"
 

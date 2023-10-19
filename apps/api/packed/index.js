@@ -121,7 +121,8 @@ var init_dist = __esm(() => {
 		if (i.length > 1) {
 			if (s > t2) return null
 			if (i.length < 15) {
-				for (let t3 = 1, r3 = l + 1; t3 < i.length; ++t3, ++r3) if (i.charCodeAt(t3) !== e2.charCodeAt(r3)) return null
+				for (let t3 = 1, r3 = l + 1; t3 < i.length; ++t3, ++r3)
+					if (i.charCodeAt(t3) !== e2.charCodeAt(r3)) return null
 			} else if (e2.substring(l, s) !== i) return null
 		}
 		if (s === t2)
@@ -358,7 +359,10 @@ var require_typebox = __commonJS((exports) => {
 		TypeGuard2.TBigInt = TBigInt
 		function TBoolean(schema) {
 			return (
-				TKind(schema) && schema[exports.Kind] === "Boolean" && schema.type === "boolean" && IsOptionalString(schema.$id)
+				TKind(schema) &&
+				schema[exports.Kind] === "Boolean" &&
+				schema.type === "boolean" &&
+				IsOptionalString(schema.$id)
 			)
 		}
 		TypeGuard2.TBoolean = TBoolean
@@ -437,7 +441,8 @@ var require_typebox = __commonJS((exports) => {
 					schema[exports.Kind] === "Intersect" &&
 					IsArray(schema.allOf) &&
 					IsOptionalString(schema.type) &&
-					(IsOptionalBoolean(schema.unevaluatedProperties) || IsOptionalSchema(schema.unevaluatedProperties)) &&
+					(IsOptionalBoolean(schema.unevaluatedProperties) ||
+						IsOptionalSchema(schema.unevaluatedProperties)) &&
 					IsOptionalString(schema.$id)
 				)
 			) {
@@ -501,7 +506,12 @@ var require_typebox = __commonJS((exports) => {
 		}
 		TypeGuard2.TNot = TNot
 		function TNull(schema) {
-			return TKind(schema) && schema[exports.Kind] === "Null" && schema.type === "null" && IsOptionalString(schema.$id)
+			return (
+				TKind(schema) &&
+				schema[exports.Kind] === "Null" &&
+				schema.type === "null" &&
+				IsOptionalString(schema.$id)
+			)
 		}
 		TypeGuard2.TNull = TNull
 		function TNumber(schema) {
@@ -578,7 +588,9 @@ var require_typebox = __commonJS((exports) => {
 		}
 		TypeGuard2.TRecord = TRecord
 		function TRef(schema) {
-			return TKind(schema) && schema[exports.Kind] === "Ref" && IsOptionalString(schema.$id) && IsString(schema.$ref)
+			return (
+				TKind(schema) && schema[exports.Kind] === "Ref" && IsOptionalString(schema.$id) && IsString(schema.$ref)
+			)
 		}
 		TypeGuard2.TRef = TRef
 		function TString(schema) {
@@ -616,7 +628,12 @@ var require_typebox = __commonJS((exports) => {
 		}
 		TypeGuard2.TTemplateLiteral = TTemplateLiteral
 		function TThis(schema) {
-			return TKind(schema) && schema[exports.Kind] === "This" && IsOptionalString(schema.$id) && IsString(schema.$ref)
+			return (
+				TKind(schema) &&
+				schema[exports.Kind] === "This" &&
+				IsOptionalString(schema.$id) &&
+				IsString(schema.$ref)
+			)
 		}
 		TypeGuard2.TThis = TThis
 		function TTuple(schema) {
@@ -661,7 +678,12 @@ var require_typebox = __commonJS((exports) => {
 		TypeGuard2.TUnionLiteral = TUnionLiteral
 		function TUnion(schema) {
 			if (
-				!(TKind(schema) && schema[exports.Kind] === "Union" && IsArray(schema.anyOf) && IsOptionalString(schema.$id))
+				!(
+					TKind(schema) &&
+					schema[exports.Kind] === "Union" &&
+					IsArray(schema.anyOf) &&
+					IsOptionalString(schema.$id)
+				)
 			) {
 				return false
 			}
@@ -785,7 +807,10 @@ var require_typebox = __commonJS((exports) => {
 		}
 		function Any(left, right) {
 			if (TypeGuard.TIntersect(right)) return IntersectRight(left, right)
-			if (TypeGuard.TUnion(right) && right.anyOf.some((schema) => TypeGuard.TAny(schema) || TypeGuard.TUnknown(schema)))
+			if (
+				TypeGuard.TUnion(right) &&
+				right.anyOf.some((schema) => TypeGuard.TAny(schema) || TypeGuard.TUnknown(schema))
+			)
 				return TypeExtendsResult.True
 			if (TypeGuard.TUnion(right)) return TypeExtendsResult.Union
 			if (TypeGuard.TUnknown(right)) return TypeExtendsResult.True
@@ -841,7 +866,8 @@ var require_typebox = __commonJS((exports) => {
 			if (left.parameters.length > right.parameters.length) return TypeExtendsResult.False
 			if (
 				!left.parameters.every(
-					(schema, index) => IntoBooleanResult(Visit(right.parameters[index], schema)) === TypeExtendsResult.True,
+					(schema, index) =>
+						IntoBooleanResult(Visit(right.parameters[index], schema)) === TypeExtendsResult.True,
 				)
 			) {
 				return TypeExtendsResult.False
@@ -867,7 +893,8 @@ var require_typebox = __commonJS((exports) => {
 			if (left.parameters.length > right.parameters.length) return TypeExtendsResult.False
 			if (
 				!left.parameters.every(
-					(schema, index) => IntoBooleanResult(Visit(right.parameters[index], schema)) === TypeExtendsResult.True,
+					(schema, index) =>
+						IntoBooleanResult(Visit(right.parameters[index], schema)) === TypeExtendsResult.True,
 				)
 			) {
 				return TypeExtendsResult.False
@@ -876,7 +903,9 @@ var require_typebox = __commonJS((exports) => {
 		}
 		function IntegerRight(left, right) {
 			if (TypeGuard.TLiteral(left) && typeof left.const === "number") return TypeExtendsResult.True
-			return TypeGuard.TNumber(left) || TypeGuard.TInteger(left) ? TypeExtendsResult.True : TypeExtendsResult.False
+			return TypeGuard.TNumber(left) || TypeGuard.TInteger(left)
+				? TypeExtendsResult.True
+				: TypeExtendsResult.False
 		}
 		function Integer(left, right) {
 			if (TypeGuard.TIntersect(right)) return IntersectRight(left, right)
@@ -886,7 +915,9 @@ var require_typebox = __commonJS((exports) => {
 			if (TypeGuard.TAny(right)) return AnyRight(left, right)
 			if (TypeGuard.TObject(right)) return ObjectRight(left, right)
 			if (TypeGuard.TRecord(right)) return RecordRight(left, right)
-			return TypeGuard.TInteger(right) || TypeGuard.TNumber(right) ? TypeExtendsResult.True : TypeExtendsResult.False
+			return TypeGuard.TInteger(right) || TypeGuard.TNumber(right)
+				? TypeExtendsResult.True
+				: TypeExtendsResult.False
 		}
 		function IntersectRight(left, right) {
 			return right.allOf.every((schema) => Visit(left, schema) === TypeExtendsResult.True)
@@ -919,7 +950,9 @@ var require_typebox = __commonJS((exports) => {
 			if (TypeGuard.TNumber(right)) return NumberRight(left, right)
 			if (TypeGuard.TInteger(right)) return IntegerRight(left, right)
 			if (TypeGuard.TBoolean(right)) return BooleanRight(left, right)
-			return TypeGuard.TLiteral(right) && right.const === left.const ? TypeExtendsResult.True : TypeExtendsResult.False
+			return TypeGuard.TLiteral(right) && right.const === left.const
+				? TypeExtendsResult.True
+				: TypeExtendsResult.False
 		}
 		function NeverRight(left, right) {
 			return TypeExtendsResult.False
@@ -953,7 +986,9 @@ var require_typebox = __commonJS((exports) => {
 		}
 		function NumberRight(left, right) {
 			if (TypeGuard.TLiteral(left) && IsLiteralNumber(left)) return TypeExtendsResult.True
-			return TypeGuard.TNumber(left) || TypeGuard.TInteger(left) ? TypeExtendsResult.True : TypeExtendsResult.False
+			return TypeGuard.TNumber(left) || TypeGuard.TInteger(left)
+				? TypeExtendsResult.True
+				: TypeExtendsResult.False
 		}
 		function Number2(left, right) {
 			if (TypeGuard.TIntersect(right)) return IntersectRight(left, right)
@@ -963,7 +998,9 @@ var require_typebox = __commonJS((exports) => {
 			if (TypeGuard.TAny(right)) return AnyRight(left, right)
 			if (TypeGuard.TObject(right)) return ObjectRight(left, right)
 			if (TypeGuard.TRecord(right)) return RecordRight(left, right)
-			return TypeGuard.TInteger(right) || TypeGuard.TNumber(right) ? TypeExtendsResult.True : TypeExtendsResult.False
+			return TypeGuard.TInteger(right) || TypeGuard.TNumber(right)
+				? TypeExtendsResult.True
+				: TypeExtendsResult.False
 		}
 		function IsObjectPropertyCount(schema, count) {
 			return globalThis.Object.keys(schema.properties).length === count
@@ -1038,8 +1075,10 @@ var require_typebox = __commonJS((exports) => {
 			if (TypeGuard.TUnknown(left)) return TypeExtendsResult.False
 			if (TypeGuard.TAny(left)) return TypeExtendsResult.Union
 			if (TypeGuard.TNever(left)) return TypeExtendsResult.True
-			if (TypeGuard.TLiteral(left) && IsLiteralString(left) && IsObjectStringLike(right)) return TypeExtendsResult.True
-			if (TypeGuard.TLiteral(left) && IsLiteralNumber(left) && IsObjectNumberLike(right)) return TypeExtendsResult.True
+			if (TypeGuard.TLiteral(left) && IsLiteralString(left) && IsObjectStringLike(right))
+				return TypeExtendsResult.True
+			if (TypeGuard.TLiteral(left) && IsLiteralNumber(left) && IsObjectNumberLike(right))
+				return TypeExtendsResult.True
 			if (TypeGuard.TLiteral(left) && IsLiteralBoolean(left) && IsObjectBooleanLike(right))
 				return TypeExtendsResult.True
 			if (TypeGuard.TSymbol(left) && IsObjectSymbolLike(right)) return TypeExtendsResult.True
@@ -1249,7 +1288,8 @@ var require_typebox = __commonJS((exports) => {
 			return TypeGuard.TVoid(right) ? TypeExtendsResult.True : TypeExtendsResult.False
 		}
 		function Visit(left, right) {
-			if (TypeGuard.TTemplateLiteral(left) || TypeGuard.TTemplateLiteral(right)) return TemplateLiteral(left, right)
+			if (TypeGuard.TTemplateLiteral(left) || TypeGuard.TTemplateLiteral(right))
+				return TemplateLiteral(left, right)
 			if (TypeGuard.TNot(left) || TypeGuard.TNot(right)) return Not(left, right)
 			if (TypeGuard.TAny(left)) return Any(left, right)
 			if (TypeGuard.TArray(left)) return Array2(left, right)
@@ -1414,7 +1454,8 @@ var require_typebox = __commonJS((exports) => {
 			const sets = schema.anyOf.map((inner) => Visit(inner, options))
 			return [
 				...sets.reduce(
-					(set, outer) => outer.map((key) => (sets.every((inner) => inner.includes(key)) ? set.add(key) : set))[0],
+					(set, outer) =>
+						outer.map((key) => (sets.every((inner) => inner.includes(key)) ? set.add(key) : set))[0],
 					new Set(),
 				),
 			]
@@ -1515,7 +1556,9 @@ var require_typebox = __commonJS((exports) => {
 		function Resolve(template) {
 			const expression = TemplateLiteralParser.ParseExact(template.pattern)
 			if (!TemplateLiteralFinite.Check(expression)) return exports.Type.String()
-			const literals = [...TemplateLiteralGenerator.Generate(expression)].map((value) => exports.Type.Literal(value))
+			const literals = [...TemplateLiteralGenerator.Generate(expression)].map((value) =>
+				exports.Type.Literal(value),
+			)
 			return exports.Type.Union(literals)
 		}
 		TemplateLiteralResolver2.Resolve = Resolve
@@ -1768,7 +1811,12 @@ var require_typebox = __commonJS((exports) => {
 			return this.Create({ ...options, [exports.Kind]: "Any" })
 		}
 		Array(items, options = {}) {
-			return this.Create({ ...options, [exports.Kind]: "Array", type: "array", items: TypeClone.Clone(items, {}) })
+			return this.Create({
+				...options,
+				[exports.Kind]: "Array",
+				type: "array",
+				items: TypeClone.Clone(items, {}),
+			})
 		}
 		Boolean(options = {}) {
 			return this.Create({ ...options, [exports.Kind]: "Boolean", type: "boolean" })
@@ -1801,10 +1849,14 @@ var require_typebox = __commonJS((exports) => {
 			}
 		}
 		Exclude(left, right, options = {}) {
-			if (TypeGuard.TTemplateLiteral(left)) return this.Exclude(TemplateLiteralResolver.Resolve(left), right, options)
-			if (TypeGuard.TTemplateLiteral(right)) return this.Exclude(left, TemplateLiteralResolver.Resolve(right), options)
+			if (TypeGuard.TTemplateLiteral(left))
+				return this.Exclude(TemplateLiteralResolver.Resolve(left), right, options)
+			if (TypeGuard.TTemplateLiteral(right))
+				return this.Exclude(left, TemplateLiteralResolver.Resolve(right), options)
 			if (TypeGuard.TUnion(left)) {
-				const narrowed = left.anyOf.filter((inner) => TypeExtends.Extends(inner, right) === TypeExtendsResult.False)
+				const narrowed = left.anyOf.filter(
+					(inner) => TypeExtends.Extends(inner, right) === TypeExtendsResult.False,
+				)
 				return narrowed.length === 1 ? TypeClone.Clone(narrowed[0], options) : this.Union(narrowed, options)
 			} else {
 				return TypeExtends.Extends(left, right) !== TypeExtendsResult.False
@@ -1813,10 +1865,14 @@ var require_typebox = __commonJS((exports) => {
 			}
 		}
 		Extract(left, right, options = {}) {
-			if (TypeGuard.TTemplateLiteral(left)) return this.Extract(TemplateLiteralResolver.Resolve(left), right, options)
-			if (TypeGuard.TTemplateLiteral(right)) return this.Extract(left, TemplateLiteralResolver.Resolve(right), options)
+			if (TypeGuard.TTemplateLiteral(left))
+				return this.Extract(TemplateLiteralResolver.Resolve(left), right, options)
+			if (TypeGuard.TTemplateLiteral(right))
+				return this.Extract(left, TemplateLiteralResolver.Resolve(right), options)
 			if (TypeGuard.TUnion(left)) {
-				const narrowed = left.anyOf.filter((inner) => TypeExtends.Extends(inner, right) !== TypeExtendsResult.False)
+				const narrowed = left.anyOf.filter(
+					(inner) => TypeExtends.Extends(inner, right) !== TypeExtendsResult.False,
+				)
 				return narrowed.length === 1 ? TypeClone.Clone(narrowed[0], options) : this.Union(narrowed, options)
 			} else {
 				return TypeExtends.Extends(left, right) !== TypeExtendsResult.False
@@ -1848,7 +1904,11 @@ var require_typebox = __commonJS((exports) => {
 			const clonedUnevaluatedProperties = TypeGuard.TSchema(options.unevaluatedProperties)
 				? { unevaluatedProperties: TypeClone.Clone(options.unevaluatedProperties, {}) }
 				: {}
-			if (options.unevaluatedProperties === false || TypeGuard.TSchema(options.unevaluatedProperties) || objects) {
+			if (
+				options.unevaluatedProperties === false ||
+				TypeGuard.TSchema(options.unevaluatedProperties) ||
+				objects
+			) {
 				return this.Create({
 					...options,
 					...clonedUnevaluatedProperties,
@@ -1857,7 +1917,12 @@ var require_typebox = __commonJS((exports) => {
 					allOf: cloned,
 				})
 			} else {
-				return this.Create({ ...options, ...clonedUnevaluatedProperties, [exports.Kind]: "Intersect", allOf: cloned })
+				return this.Create({
+					...options,
+					...clonedUnevaluatedProperties,
+					[exports.Kind]: "Intersect",
+					allOf: cloned,
+				})
 			}
 		}
 		KeyOf(schema, options = {}) {
@@ -2268,7 +2333,8 @@ var require_system2 = __commonJS((exports) => {
 		(exports && exports.__exportStar) ||
 		function (m, exports2) {
 			for (var p in m)
-				if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports2, p)) __createBinding(exports2, m, p)
+				if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports2, p))
+					__createBinding(exports2, m, p)
 		}
 	Object.defineProperty(exports, "__esModule", { value: true })
 	__exportStar(require_system(), exports)
@@ -2333,7 +2399,9 @@ var require_hash = __commonJS((exports) => {
 			return typeof value === "bigint"
 		}
 		function IsObject(value) {
-			return typeof value === "object" && value !== null && !IsArray(value) && !IsDate(value) && !IsUint8Array(value)
+			return (
+				typeof value === "object" && value !== null && !IsArray(value) && !IsDate(value) && !IsUint8Array(value)
+			)
 		}
 		function IsString(value) {
 			return typeof value === "string"
@@ -2786,7 +2854,13 @@ var require_errors = __commonJS((exports) => {
 				const next = Visit(inner, references, path, value).next()
 				if (!next.done) {
 					yield next.value
-					yield { type: ValueErrorType.Intersect, schema, path, value, message: `Expected all sub schemas to be valid` }
+					yield {
+						type: ValueErrorType.Intersect,
+						schema,
+						path,
+						value,
+						message: `Expected all sub schemas to be valid`,
+					}
 					return
 				}
 			}
@@ -2808,7 +2882,12 @@ var require_errors = __commonJS((exports) => {
 				const keyCheck = new RegExp(Types.KeyResolver.ResolvePattern(schema))
 				for (const valueKey of globalThis.Object.getOwnPropertyNames(value)) {
 					if (!keyCheck.test(valueKey)) {
-						const next = Visit(schema.unevaluatedProperties, references, `${path}/${valueKey}`, value[valueKey]).next()
+						const next = Visit(
+							schema.unevaluatedProperties,
+							references,
+							`${path}/${valueKey}`,
+							value[valueKey],
+						).next()
 						if (!next.done) {
 							yield next.value
 							yield {
@@ -3306,7 +3385,8 @@ var require_errors2 = __commonJS((exports) => {
 		(exports && exports.__exportStar) ||
 		function (m, exports2) {
 			for (var p in m)
-				if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports2, p)) __createBinding(exports2, m, p)
+				if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports2, p))
+					__createBinding(exports2, m, p)
 		}
 	Object.defineProperty(exports, "__esModule", { value: true })
 	__exportStar(require_errors(), exports)
@@ -3498,8 +3578,10 @@ var require_compiler = __commonJS((exports) => {
 		}
 		function* Date2(schema, references, value) {
 			yield `(${value} instanceof Date) && Number.isFinite(${value}.getTime())`
-			if (IsNumber(schema.exclusiveMinimumTimestamp)) yield `${value}.getTime() > ${schema.exclusiveMinimumTimestamp}`
-			if (IsNumber(schema.exclusiveMaximumTimestamp)) yield `${value}.getTime() < ${schema.exclusiveMaximumTimestamp}`
+			if (IsNumber(schema.exclusiveMinimumTimestamp))
+				yield `${value}.getTime() > ${schema.exclusiveMinimumTimestamp}`
+			if (IsNumber(schema.exclusiveMaximumTimestamp))
+				yield `${value}.getTime() < ${schema.exclusiveMaximumTimestamp}`
 			if (IsNumber(schema.minimumTimestamp)) yield `${value}.getTime() >= ${schema.minimumTimestamp}`
 			if (IsNumber(schema.maximumTimestamp)) yield `${value}.getTime() <= ${schema.maximumTimestamp}`
 		}
@@ -3559,15 +3641,18 @@ var require_compiler = __commonJS((exports) => {
 		}
 		function* Object2(schema, references, value) {
 			yield IsObjectCheck(value)
-			if (IsNumber(schema.minProperties)) yield `Object.getOwnPropertyNames(${value}).length >= ${schema.minProperties}`
-			if (IsNumber(schema.maxProperties)) yield `Object.getOwnPropertyNames(${value}).length <= ${schema.maxProperties}`
+			if (IsNumber(schema.minProperties))
+				yield `Object.getOwnPropertyNames(${value}).length >= ${schema.minProperties}`
+			if (IsNumber(schema.maxProperties))
+				yield `Object.getOwnPropertyNames(${value}).length <= ${schema.maxProperties}`
 			const knownKeys = globalThis.Object.getOwnPropertyNames(schema.properties)
 			for (const knownKey of knownKeys) {
 				const memberExpression = MemberExpression.Encode(value, knownKey)
 				const property = schema.properties[knownKey]
 				if (schema.required && schema.required.includes(knownKey)) {
 					yield* Visit(property, references, memberExpression)
-					if (Types.ExtendsUndefined.Check(property) || IsAnyOrUnknown(property)) yield `('${knownKey}' in ${value})`
+					if (Types.ExtendsUndefined.Check(property) || IsAnyOrUnknown(property))
+						yield `('${knownKey}' in ${value})`
 				} else {
 					const expression = CreateExpression(property, references, memberExpression)
 					yield IsExactOptionalProperty(value, knownKey, expression)
@@ -3592,8 +3677,10 @@ var require_compiler = __commonJS((exports) => {
 		}
 		function* Record(schema, references, value) {
 			yield IsRecordCheck(value)
-			if (IsNumber(schema.minProperties)) yield `Object.getOwnPropertyNames(${value}).length >= ${schema.minProperties}`
-			if (IsNumber(schema.maxProperties)) yield `Object.getOwnPropertyNames(${value}).length <= ${schema.maxProperties}`
+			if (IsNumber(schema.minProperties))
+				yield `Object.getOwnPropertyNames(${value}).length >= ${schema.minProperties}`
+			if (IsNumber(schema.maxProperties))
+				yield `Object.getOwnPropertyNames(${value}).length <= ${schema.maxProperties}`
 			const [patternKey, patternSchema] = globalThis.Object.entries(schema.patternProperties)[0]
 			const local = PushLocal(`new RegExp(/${patternKey}/)`)
 			const check1 = CreateExpression(patternSchema, references, "value")
@@ -3854,7 +3941,8 @@ var require_compiler2 = __commonJS((exports) => {
 		(exports && exports.__exportStar) ||
 		function (m, exports2) {
 			for (var p in m)
-				if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports2, p)) __createBinding(exports2, m, p)
+				if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports2, p))
+					__createBinding(exports2, m, p)
 		}
 	Object.defineProperty(exports, "__esModule", { value: true })
 	exports.ValueErrorType = undefined
@@ -4394,7 +4482,11 @@ var require_lodash = __commonJS((exports, module) => {
 	var isIndex = function (value, length) {
 		length = length == null ? MAX_SAFE_INTEGER : length
 		return (
-			!!length && (typeof value == "number" || reIsUint.test(value)) && value > -1 && value % 1 == 0 && value < length
+			!!length &&
+			(typeof value == "number" || reIsUint.test(value)) &&
+			value > -1 &&
+			value % 1 == 0 &&
+			value < length
 		)
 	}
 	var isKeyable = function (value) {
@@ -4685,7 +4777,10 @@ var init_schema = __esm(() => {
 					200: {
 						...i2,
 						description: i2.description,
-						content: r3(c, e4 === "object" || e4 === "array" ? { type: e4, properties: t4, required: o2 } : h),
+						content: r3(
+							c,
+							e4 === "object" || e4 === "array" ? { type: e4, properties: t4, required: o2 } : h,
+						),
 					},
 				}
 			} else
@@ -4695,7 +4790,11 @@ var init_schema = __esm(() => {
 						h[e4] = { ...p2, description: p2.description, content: r3(c, t4) }
 					} else {
 						let { type: o2, properties: i2, required: n2, ...p2 } = t4
-						h[e4] = { ...p2, description: p2.description, content: r3(c, { type: o2, properties: i2, required: n2 }) }
+						h[e4] = {
+							...p2,
+							description: p2.description,
+							content: r3(c, { type: o2, properties: i2, required: n2 }),
+						}
 					}
 				})
 		} else if (typeof h == "string") {
@@ -4711,7 +4810,11 @@ var init_schema = __esm(() => {
 				operationId: s?.detail?.operationId ?? generateOperationId(p, n),
 				...s?.detail,
 				...(l
-					? { requestBody: { content: r3(c, typeof l == "string" ? { $ref: `#/components/schemas/${l}` } : l) } }
+					? {
+							requestBody: {
+								content: r3(c, typeof l == "string" ? { $ref: `#/components/schemas/${l}` } : l),
+							},
+					  }
 					: null),
 			},
 		}
@@ -4762,16 +4865,17 @@ var require_fast_decode_uri_component = __commonJS((exports, module) => {
 	var UTF8_ACCEPT = 12
 	var UTF8_REJECT = 0
 	var UTF8_DATA = [
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-		2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 5,
-		5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-		7, 7, 7, 8, 7, 7, 10, 9, 9, 9, 11, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0,
-		0, 24, 36, 48, 60, 72, 84, 96, 0, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24,
-		24, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 48, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		48, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 63, 63, 63, 0, 31, 15, 15, 15, 7, 7, 7,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+		3, 3, 3, 3, 3, 3, 3, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+		5, 5, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 7, 7, 10, 9, 9, 9, 11, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 24, 36, 48, 60, 72, 84, 96, 0, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 24, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 48, 48, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 127, 63, 63, 63, 0, 31, 15, 15, 15, 7, 7, 7,
 	]
 	var HEX = {
 		0: 0,
@@ -4938,10 +5042,10 @@ var require_querystring = __commonJS((exports, module) => {
 	}
 	var hexTable = Array.from({ length: 256 }, (_, i) => "%" + ((i < 16 ? "0" : "") + i.toString(16)).toUpperCase())
 	var noEscape = new Int8Array([
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-		1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+		0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0,
 	])
 	module.exports = { encodeString }
 })
@@ -5369,7 +5473,10 @@ ${r4}
 		let w = g.forceErrorEncapsulation || m.error.length > 0 || typeof Bun == "undefined",
 			{ composeValidation: x, composeResponseValidation: k } = p(w),
 			H = w ? "try {\n" : "",
-			R = h || d2 !== "GET" ? [$, ...m.transform, ...m.beforeHandle, ...m.afterHandle].map((e6) => e6.toString()) : [],
+			R =
+				h || d2 !== "GET"
+					? [$, ...m.transform, ...m.beforeHandle, ...m.afterHandle].map((e6) => e6.toString())
+					: [],
 			v = d2 !== "GET" && m.type !== "none" && (h.body || m.type || R.some((e6) => isFnUse("body", e6))),
 			O = h.headers || R.some((e6) => isFnUse("headers", e6))
 		O &&
@@ -5559,7 +5666,10 @@ ${r4}
 							m.transform[e6].constructor.name === i
 								? `Object.assign(c, await transform[${e6}](c));`
 								: `Object.assign(c, transform[${e6}](c));`)
-					: (H += m.transform[e6].constructor.name === i ? `await transform[${e6}](c);` : `transform[${e6}](c);`)
+					: (H +=
+							m.transform[e6].constructor.name === i
+								? `await transform[${e6}](c);`
+								: `transform[${e6}](c);`)
 			}
 		if (
 			(h &&
@@ -6052,7 +6162,11 @@ var init_custom_types = __esm(() => {
 		return e7
 	}
 	r4 = (e7, t5) => {
-		if (!(t5 instanceof Blob) || (e7.minSize && t5.size < i2(e7.minSize)) || (e7.maxSize && t5.size > i2(e7.maxSize)))
+		if (
+			!(t5 instanceof Blob) ||
+			(e7.minSize && t5.size < i2(e7.minSize)) ||
+			(e7.maxSize && t5.size > i2(e7.maxSize))
+		)
 			return false
 		if (e7.extension) {
 			if (typeof e7.extension == "string") {
@@ -6068,7 +6182,11 @@ var init_custom_types = __esm(() => {
 		Numeric: system.TypeSystem.Type("Numeric", {}),
 		File: system.TypeSystem.Type("File", r4),
 		Files: system.TypeSystem.Type("Files", (e7, t5) => {
-			if (!Array.isArray(t5) || (e7.minItems && t5.length < e7.minItems) || (e7.maxItems && t5.length > e7.maxItems))
+			if (
+				!Array.isArray(t5) ||
+				(e7.minItems && t5.length < e7.minItems) ||
+				(e7.maxItems && t5.length > e7.maxItems)
+			)
 				return false
 			for (let i3 = 0; i3 < t5.length; i3++) if (!r4(e7, t5[i3])) return false
 			return true
@@ -6994,7 +7112,11 @@ var init_plainer = __esm(() => {
 		}
 		if (!isArray(tree)) {
 			forEach(tree, function (subtree, key) {
-				return traverse(subtree, walker, __spreadArray2(__spreadArray2([], __read3(origin)), __read3(parsePath(key))))
+				return traverse(
+					subtree,
+					walker,
+					__spreadArray2(__spreadArray2([], __read3(origin)), __read3(parsePath(key))),
+				)
 			})
 			return
 		}
@@ -7128,7 +7250,9 @@ var init_plainer = __esm(() => {
 			  }
 			: {
 					transformedValue,
-					annotations: transformationResult ? [transformationResult.type, innerAnnotations] : innerAnnotations,
+					annotations: transformationResult
+						? [transformationResult.type, innerAnnotations]
+						: innerAnnotations,
 			  }
 		if (!primitive) {
 			seenObjects.set(object, result)
@@ -7881,7 +8005,8 @@ class p2 {
 	outerErrorHandler = (e7) => new Response(e7.message, { status: e7?.status ?? 500 })
 	listen = (e7, t5) => {
 		if (!Bun) throw Error("Bun to run")
-		if ((this.compile(), typeof e7 == "string" && Number.isNaN((e7 = +e7)))) throw Error("Port must be a numeric value")
+		if ((this.compile(), typeof e7 == "string" && Number.isNaN((e7 = +e7))))
+			throw Error("Port must be a numeric value")
 		let r5 = this.fetch,
 			s2 = (process.env.ENV ?? "development") !== "production",
 			o =
@@ -8800,7 +8925,11 @@ var require_dist2 = __commonJS((exports, module) => {
 				}
 				const now = Date.now()
 				const key = [identifier, Math.floor(now / intervalDuration)].join(":")
-				const [remaining, reset] = await ctx.redis.eval(script, [key], [maxTokens, intervalDuration, refillRate, now])
+				const [remaining, reset] = await ctx.redis.eval(
+					script,
+					[key],
+					[maxTokens, intervalDuration, refillRate, now],
+				)
 				const success = remaining > 0
 				if (ctx.cache && !success) {
 					ctx.cache.blockUntil(identifier, reset)
@@ -8935,10 +9064,9 @@ var swagger =
 			version: "0.0.0",
 			...documentation.info,
 		}
-		app
-			.get(path, (context) => {
-				return new Response(
-					`<!DOCTYPE html>
+		app.get(path, (context) => {
+			return new Response(
+				`<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8967,41 +9095,40 @@ var swagger =
     </script>
 </body>
 </html>`,
-					{
-						headers: {
-							"content-type": "text/html; charset=utf8",
-						},
-					},
-				)
-			})
-			.route(
-				"GET",
-				`${path}/json`,
-				(context) => ({
-					openapi: "3.0.3",
-					...{
-						...documentation,
-						info: {
-							title: "Elysia Documentation",
-							description: "Developement documentation",
-							version: "0.0.0",
-							...documentation.info,
-						},
-					},
-					paths: filterPaths(context[SCHEMA], {
-						excludeStaticFile,
-						exclude: Array.isArray(exclude) ? exclude : [exclude],
-					}),
-					components: {
-						schemas: context[DEFS],
-					},
-				}),
 				{
-					config: {
-						allowMeta: true,
+					headers: {
+						"content-type": "text/html; charset=utf8",
 					},
 				},
 			)
+		}).route(
+			"GET",
+			`${path}/json`,
+			(context) => ({
+				openapi: "3.0.3",
+				...{
+					...documentation,
+					info: {
+						title: "Elysia Documentation",
+						description: "Developement documentation",
+						version: "0.0.0",
+						...documentation.info,
+					},
+				},
+				paths: filterPaths(context[SCHEMA], {
+					excludeStaticFile,
+					exclude: Array.isArray(exclude) ? exclude : [exclude],
+				}),
+				components: {
+					schemas: context[DEFS],
+				},
+			}),
+			{
+				config: {
+					allowMeta: true,
+				},
+			},
+		)
 		return app
 	}
 var dist_default2 = swagger
@@ -10027,7 +10154,10 @@ class PgSelectQueryBuilder extends TypedQueryBuilder {
 			}
 			if (typeof on === "function") {
 				on = on(
-					new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" })),
+					new Proxy(
+						this.config.fields,
+						new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" }),
+					),
 				)
 			}
 			this.config.joins.push({ on, table, joinType, alias: tableName })
@@ -10067,7 +10197,10 @@ class PgSelectQueryBuilder extends TypedQueryBuilder {
 	where(where) {
 		if (typeof where === "function") {
 			where = where(
-				new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" })),
+				new Proxy(
+					this.config.fields,
+					new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" }),
+				),
 			)
 		}
 		this.config.where = where
@@ -10076,7 +10209,10 @@ class PgSelectQueryBuilder extends TypedQueryBuilder {
 	having(having) {
 		if (typeof having === "function") {
 			having = having(
-				new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" })),
+				new Proxy(
+					this.config.fields,
+					new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" }),
+				),
 			)
 		}
 		this.config.having = having
@@ -10085,7 +10221,10 @@ class PgSelectQueryBuilder extends TypedQueryBuilder {
 	groupBy(...columns) {
 		if (typeof columns[0] === "function") {
 			const groupBy = columns[0](
-				new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" })),
+				new Proxy(
+					this.config.fields,
+					new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" }),
+				),
 			)
 			this.config.groupBy = Array.isArray(groupBy) ? groupBy : [groupBy]
 		} else {
@@ -10096,7 +10235,10 @@ class PgSelectQueryBuilder extends TypedQueryBuilder {
 	orderBy(...columns) {
 		if (typeof columns[0] === "function") {
 			const orderBy = columns[0](
-				new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" })),
+				new Proxy(
+					this.config.fields,
+					new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" }),
+				),
 			)
 			this.config.orderBy = Array.isArray(orderBy) ? orderBy : [orderBy]
 		} else {
@@ -10320,18 +10462,26 @@ class SQL {
 					const tableName = chunk[Table.Symbol.Name]
 					return {
 						sql:
-							schemaName === undefined ? escapeName(tableName) : escapeName(schemaName) + "." + escapeName(tableName),
+							schemaName === undefined
+								? escapeName(tableName)
+								: escapeName(schemaName) + "." + escapeName(tableName),
 						params: [],
 					}
 				}
 				if (is4(chunk, Column)) {
-					return { sql: escapeName(chunk.table[Table.Symbol.Name]) + "." + escapeName(chunk.name), params: [] }
+					return {
+						sql: escapeName(chunk.table[Table.Symbol.Name]) + "." + escapeName(chunk.name),
+						params: [],
+					}
 				}
 				if (is4(chunk, View)) {
 					const schemaName = chunk[ViewBaseConfig].schema
 					const viewName = chunk[ViewBaseConfig].name
 					return {
-						sql: schemaName === undefined ? escapeName(viewName) : escapeName(schemaName) + "." + escapeName(viewName),
+						sql:
+							schemaName === undefined
+								? escapeName(viewName)
+								: escapeName(schemaName) + "." + escapeName(viewName),
 						params: [],
 					}
 				}
@@ -10367,7 +10517,10 @@ class SQL {
 					)
 				}
 				if (isSQLWrapper(chunk)) {
-					return this.buildQueryFromSourceParams([new StringChunk("("), chunk.getSQL(), new StringChunk(")")], config)
+					return this.buildQueryFromSourceParams(
+						[new StringChunk("("), chunk.getSQL(), new StringChunk(")")],
+						config,
+					)
 				}
 				if (is4(chunk, Relation)) {
 					return this.buildQueryFromSourceParams(
@@ -10964,9 +11117,9 @@ class MySqlDialect {
 						await tx.execute(sql.raw(stmt))
 					}
 					await tx.execute(
-						sql`insert into ${sql.identifier(migrationsTable)} (\`hash\`, \`created_at\`) values(${migration.hash}, ${
-							migration.folderMillis
-						})`,
+						sql`insert into ${sql.identifier(migrationsTable)} (\`hash\`, \`created_at\`) values(${
+							migration.hash
+						}, ${migration.folderMillis})`,
 					)
 				}
 			}
@@ -11079,7 +11232,8 @@ class MySqlDialect {
 				!((table2) =>
 					joins.some(
 						({ alias }) =>
-							alias === (table2[Table.Symbol.IsAlias] ? getTableName(table2) : table2[Table.Symbol.BaseName]),
+							alias ===
+							(table2[Table.Symbol.IsAlias] ? getTableName(table2) : table2[Table.Symbol.BaseName]),
 					))(f2.field.table)
 			) {
 				const tableName = getTableName(f2.field.table)
@@ -11107,7 +11261,9 @@ class MySqlDialect {
 		const selection = this.buildSelection(fieldsList, { isSingleTable })
 		const tableSql = (() => {
 			if (is4(table, Table) && table[Table.Symbol.OriginalName] !== table[Table.Symbol.Name]) {
-				return sql`${sql.identifier(table[Table.Symbol.OriginalName])} ${sql.identifier(table[Table.Symbol.Name])}`
+				return sql`${sql.identifier(table[Table.Symbol.OriginalName])} ${sql.identifier(
+					table[Table.Symbol.Name],
+				)}`
 			}
 			return table
 		})()
@@ -11278,7 +11434,8 @@ class MySqlDialect {
 			selectedColumns = Object.keys(tableConfig.columns)
 		}
 		if (config.extras) {
-			const extrasOrig = typeof config.extras === "function" ? config.extras(aliasedFields, { sql }) : config.extras
+			const extrasOrig =
+				typeof config.extras === "function" ? config.extras(aliasedFields, { sql }) : config.extras
 			selectedExtras = Object.entries(extrasOrig).map(([key, value]) => ({
 				key,
 				value: mapColumnsInAliasedSQLToAlias(value, tableAlias),
@@ -11296,11 +11453,13 @@ class MySqlDialect {
 			const whereSql = typeof config.where === "function" ? config.where(aliasedFields, operators) : config.where
 			where = whereSql && mapColumnsInSQLToAlias(whereSql, tableAlias)
 		}
-		const groupBy = (tableConfig.primaryKey.length ? tableConfig.primaryKey : Object.values(tableConfig.columns)).map(
-			(c) => aliasedTableColumn(c, tableAlias),
-		)
+		const groupBy = (
+			tableConfig.primaryKey.length ? tableConfig.primaryKey : Object.values(tableConfig.columns)
+		).map((c) => aliasedTableColumn(c, tableAlias))
 		let orderByOrig =
-			typeof config.orderBy === "function" ? config.orderBy(aliasedFields, orderByOperators) : config.orderBy ?? []
+			typeof config.orderBy === "function"
+				? config.orderBy(aliasedFields, orderByOperators)
+				: config.orderBy ?? []
 		if (!Array.isArray(orderByOrig)) {
 			orderByOrig = [orderByOrig]
 		}
@@ -11463,9 +11622,11 @@ class MySqlDialect {
 			} else {
 				finalFieldsFlat.push({
 					path: ["__drizzle_row_number"],
-					field: sql`row_number() over(partition by ${relationColumns.map((c) => aliasedTableColumn(c, tableAlias))}${
-						orderBy.length > 0 && !isRoot ? sql` order by ${sql.join(orderBy, sql`, `)}` : undefined
-					})`.as("__drizzle_row_number"),
+					field: sql`row_number() over(partition by ${relationColumns.map((c) =>
+						aliasedTableColumn(c, tableAlias),
+					)}${orderBy.length > 0 && !isRoot ? sql` order by ${sql.join(orderBy, sql`, `)}` : undefined})`.as(
+						"__drizzle_row_number",
+					),
 				})
 			}
 		}
@@ -11600,7 +11761,10 @@ class MySqlSelectQueryBuilder extends TypedQueryBuilder {
 			}
 			if (typeof on === "function") {
 				on = on(
-					new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" })),
+					new Proxy(
+						this.config.fields,
+						new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" }),
+					),
 				)
 			}
 			this.config.joins.push({ on, table, joinType, alias: tableName })
@@ -11640,7 +11804,10 @@ class MySqlSelectQueryBuilder extends TypedQueryBuilder {
 	where(where) {
 		if (typeof where === "function") {
 			where = where(
-				new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" })),
+				new Proxy(
+					this.config.fields,
+					new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" }),
+				),
 			)
 		}
 		this.config.where = where
@@ -11649,7 +11816,10 @@ class MySqlSelectQueryBuilder extends TypedQueryBuilder {
 	having(having) {
 		if (typeof having === "function") {
 			having = having(
-				new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" })),
+				new Proxy(
+					this.config.fields,
+					new SelectionProxyHandler({ sqlAliasedBehavior: "sql", sqlBehavior: "sql" }),
+				),
 			)
 		}
 		this.config.having = having
@@ -11658,7 +11828,10 @@ class MySqlSelectQueryBuilder extends TypedQueryBuilder {
 	groupBy(...columns) {
 		if (typeof columns[0] === "function") {
 			const groupBy = columns[0](
-				new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" })),
+				new Proxy(
+					this.config.fields,
+					new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" }),
+				),
 			)
 			this.config.groupBy = Array.isArray(groupBy) ? groupBy : [groupBy]
 		} else {
@@ -11669,7 +11842,10 @@ class MySqlSelectQueryBuilder extends TypedQueryBuilder {
 	orderBy(...columns) {
 		if (typeof columns[0] === "function") {
 			const orderBy = columns[0](
-				new Proxy(this.config.fields, new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" })),
+				new Proxy(
+					this.config.fields,
+					new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" }),
+				),
 			)
 			this.config.orderBy = Array.isArray(orderBy) ? orderBy : [orderBy]
 		} else {
@@ -12142,7 +12318,14 @@ class PlanetscaleSession extends MySqlSession {
 		this.logger = options.logger ?? new NoopLogger()
 	}
 	prepareQuery(query, fields, customResultMapper) {
-		return new PlanetScalePreparedQuery(this.client, query.sql, query.params, this.logger, fields, customResultMapper)
+		return new PlanetScalePreparedQuery(
+			this.client,
+			query.sql,
+			query.params,
+			this.logger,
+			fields,
+			customResultMapper,
+		)
 	}
 	async query(query, params) {
 		this.logger.logQuery(query, params)
@@ -13618,7 +13801,10 @@ function connectDB({ username, host, password }) {
 			invite: {
 				getMany: async ({ orgId }) => {
 					const invites = db.query.organizationInvites.findMany({
-						where: and(eq(organizationInvites.organizationId, orgId), isNull3(organizationMembers.deletedAt)),
+						where: and(
+							eq(organizationInvites.organizationId, orgId),
+							isNull3(organizationMembers.deletedAt),
+						),
 					})
 					return invites
 				},
@@ -13632,7 +13818,9 @@ function connectDB({ username, host, password }) {
 				},
 				revoke: async (data2) => {
 					const publicId = generatePublicId("inv")
-					const res = await db.delete(organizationInvites).where(eq(organizationInvites.publicId, data2.publicInviteId))
+					const res = await db
+						.delete(organizationInvites)
+						.where(eq(organizationInvites.publicId, data2.publicInviteId))
 					return { res, publicId }
 				},
 			},
@@ -14951,7 +15139,9 @@ class Pipeline {
 				})
 				return res.map(({ error: error5, result }, i3) => {
 					if (error5) {
-						throw new UpstashError(`Command ${i3 + 1} [ ${this.commands[i3].command[0]} ] failed: ${error5}`)
+						throw new UpstashError(
+							`Command ${i3 + 1} [ ${this.commands[i3].command[0]} ] failed: ${error5}`,
+						)
 					}
 					return this.commands[i3].deserialize(result)
 				})
@@ -15594,7 +15784,8 @@ class Pipeline {
 			enumerable: true,
 			configurable: true,
 			writable: true,
-			value: (key, increment, member) => this.chain(new ZIncrByCommand([key, increment, member], this.commandOptions)),
+			value: (key, increment, member) =>
+				this.chain(new ZIncrByCommand([key, increment, member], this.commandOptions)),
 		})
 		Object.defineProperty(this, "zinterstore", {
 			enumerable: true,
@@ -16323,7 +16514,8 @@ class Redis {
 			enumerable: true,
 			configurable: true,
 			writable: true,
-			value: (key, count, withValues) => new HRandFieldCommand([key, count, withValues], this.opts).exec(this.client),
+			value: (key, count, withValues) =>
+				new HRandFieldCommand([key, count, withValues], this.opts).exec(this.client),
 		})
 		Object.defineProperty(this, "hscan", {
 			enumerable: true,
@@ -16768,7 +16960,8 @@ class Redis {
 			enumerable: true,
 			configurable: true,
 			writable: true,
-			value: (key, increment, member) => new ZIncrByCommand([key, increment, member], this.opts).exec(this.client),
+			value: (key, increment, member) =>
+				new ZIncrByCommand([key, increment, member], this.opts).exec(this.client),
 		})
 		Object.defineProperty(this, "zinterstore", {
 			enumerable: true,

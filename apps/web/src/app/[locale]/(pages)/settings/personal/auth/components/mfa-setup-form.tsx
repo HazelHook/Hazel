@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react"
+import { VerificationCodeInput } from "@hazel/auth/internal-components/verification-code-input"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import { If } from "@hazel/ui/if"
@@ -7,7 +8,6 @@ import { TextField } from "@hazel/ui/text-field"
 import { useTranslations } from "next-intl"
 
 import { FactorQrCode, useVerifyCodeMutation } from "./mfa-setup-modal"
-import { VerificationCodeInput } from "@hazel/auth/internal-components/verification-code-input"
 
 export function MultiFactorAuthSetupForm({
 	onEnrolled,

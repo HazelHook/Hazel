@@ -20,7 +20,9 @@ export default function ErrorPage({
 	return (
 		<div className="mx-auto flex h-screen w-full px-4 container max-w-2xl flex-col items-center justify-center gap-8">
 			<div className="bg-card p-6 border rounded-full">
-				<p className="text-center text-2xl font-semibold text-primary">Uh-oh! It seems our squirrels have gone nuts.</p>
+				<p className="text-center text-2xl font-semibold text-primary">
+					Uh-oh! It seems our squirrels have gone nuts.
+				</p>
 			</div>
 			<div className="w-[300px] h-[300px]">
 				<Image src={"/assets/avatar/500.png"} layout="fullWidth" />

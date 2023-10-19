@@ -3,20 +3,21 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-
+import { useSignOut } from "@hazel/auth/hooks"
+import { useAuth } from "@hazel/auth/provider"
+import { Organization, OrganizationMember } from "@hazel/db/src/drizzle/schema"
 import {
 	AddCircleIcon,
 	CardIcon,
 	CheckTickIcon,
+	ChevronSortVerticalIcon,
 	File2InfoIcon,
 	LogOutLeftIcon,
 	MonitorIcon,
 	MoonIcon,
 	RocketIcon,
 	SunIcon,
-	ChevronSortVerticalIcon,
 } from "@hazel/icons"
-
 import AutoForm from "@hazel/ui/auto-form"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
@@ -36,7 +37,6 @@ import {
 	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import { Organization, OrganizationMember } from "@hazel/db/src/drizzle/schema"
 import { useLocale } from "next-intl"
 import { useTheme } from "next-themes"
 
@@ -44,8 +44,6 @@ import type { createOrganzationAction, switchOrganizationAction } from "@/server
 import { useAction } from "@/server/client"
 import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { cn } from "@/lib/utils"
-import { useSignOut } from "@hazel/auth/hooks"
-import { useAuth } from "@hazel/auth/provider"
 
 type Membership = OrganizationMember & {
 	organization: Organization

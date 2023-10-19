@@ -60,7 +60,10 @@ const integrationLogic = (db: DB) =>
 			return { publicId }
 		},
 		update: async (data: OptionalExceptFor<Omit<schema.InsertIntegration, "workspaceId">, "publicId">) => {
-			const res = await db.update(schema.integration).set(data).where(eq(schema.integration.publicId, data.publicId))
+			const res = await db
+				.update(schema.integration)
+				.set(data)
+				.where(eq(schema.integration.publicId, data.publicId))
 			return { publicId: data.publicId }
 		},
 		markAsDeleted: async ({ publicId }: { publicId: string }) => {

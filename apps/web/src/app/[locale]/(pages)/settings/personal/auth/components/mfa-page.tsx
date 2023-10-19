@@ -1,6 +1,9 @@
 "use client"
 
 import { useCallback, useState } from "react"
+import { useFactorsMutationKey, useFetchAuthFactors } from "@hazel/auth/hooks"
+import { CrossIcon } from "@hazel/icons"
+import { useSupabase } from "@hazel/supabase/hooks"
 import Alert from "@hazel/ui/alert"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
@@ -9,6 +12,7 @@ import { Container } from "@hazel/ui/container"
 import { If } from "@hazel/ui/if"
 import Modal from "@hazel/ui/modal"
 import { PageHeader } from "@hazel/ui/page-header"
+import { Spinner } from "@hazel/ui/spinner"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { Factor } from "@supabase/supabase-js"
@@ -16,12 +20,7 @@ import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 import useMutation from "swr/mutation"
 
-import { CrossIcon } from "@hazel/icons"
-import { useSupabase } from "@hazel/supabase/hooks"
-
 import MultiFactorAuthSetupModal from "./mfa-setup-modal"
-import { Spinner } from "@hazel/ui/spinner"
-import { useFactorsMutationKey, useFetchAuthFactors } from "@hazel/auth/hooks"
 
 const MAX_FACTOR_COUNT = 10
 

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
+import type { Database } from "@hazel/db/src/database.types"
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
 import invariant from "tiny-invariant"
-import type { Database } from "@hazel/db/src/database.types"
 
 /**
  * Get a Supabase client for use in the Middleware.

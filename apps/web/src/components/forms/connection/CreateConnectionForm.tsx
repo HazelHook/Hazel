@@ -2,13 +2,14 @@
 
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import type { Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
+import { AddIcon } from "@hazel/icons"
 import AutoForm from "@hazel/ui/auto-form"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Button } from "@hazel/ui/button"
 import { Dialog, DialogContent } from "@hazel/ui/dialog"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import type { Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
 import { z } from "zod"
 
 import type { createConnectionAction } from "@/server/actions/connections"
@@ -17,7 +18,6 @@ import { createSourceAction } from "@/server/actions/source"
 import { useAction } from "@/server/client"
 import { createConnectionSchema } from "@/lib/schemas/connection"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { AddIcon } from "@hazel/icons"
 
 import { CreateDestinationForm } from "../destination/CreateDestinationForm"
 import { CreateSourceForm } from "../source/CreateSourceForm"

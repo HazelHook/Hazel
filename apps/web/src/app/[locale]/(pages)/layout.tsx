@@ -1,16 +1,18 @@
 import { cookies } from "next/headers"
+import {
+	AutomationIcon,
+	DashboardSimpleIcon,
+	FileInfoIcon,
+	GitCommitIcon,
+	HomeIcon,
+	LinkChainIcon,
+	Settings01Icon,
+} from "@hazel/icons"
 import { TooltipProvider } from "@hazel/ui/tooltip"
 
 import { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { AutomationIcon } from "@hazel/icons"
-import { DashboardSimpleIcon } from "@hazel/icons"
-import { FileInfoIcon } from "@hazel/icons"
-import { GitCommitIcon } from "@hazel/icons"
-import { HomeIcon } from "@hazel/icons"
-import { LinkChainIcon } from "@hazel/icons"
-import { Settings01Icon } from "@hazel/icons"
 import { ProfileSettings } from "@/components/profile-settings"
 import { Sidebar } from "@/components/sidebar"
 
@@ -98,7 +100,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 							currentMembershipId={orgCookie?.value}
 						/>
 					</Sidebar>
-					<div className="col-span-full ml-12 h-full transition-[margin] duration-300 lg:ml-64">{children}</div>
+					<div className="col-span-full ml-12 h-full transition-[margin] duration-300 lg:ml-64">
+						{children}
+					</div>
 				</div>
 			</div>
 		</TooltipProvider>

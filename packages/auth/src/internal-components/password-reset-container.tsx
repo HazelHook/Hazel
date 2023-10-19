@@ -7,9 +7,10 @@ import { If } from "@hazel/ui/if"
 import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
 import { useTranslations } from "next-intl"
-import { AuthErrorMessage } from "./auth-error-messave"
+
 import useResetPassword from "../hooks/use-reset-password"
 import { useAuthConfig } from "../provider"
+import { AuthErrorMessage } from "./auth-error-messave"
 
 export function PasswordResetContainer() {
 	const t = useTranslations()

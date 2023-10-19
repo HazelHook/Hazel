@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { ClockIcon, DeleteDustbinIcon, EditPencilIcon, PlayBigIcon } from "@hazel/icons"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	Dialog,
@@ -16,10 +17,6 @@ import { toast } from "sonner"
 
 import type { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { useAction } from "@/server/client"
-import { ClockIcon } from "@hazel/icons"
-import { DeleteDustbinIcon } from "@hazel/icons"
-import { EditPencilIcon } from "@hazel/icons"
-import { PlayBigIcon } from "@hazel/icons"
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
 export const ConnectionActions = ({
@@ -49,7 +46,10 @@ export const ConnectionActions = ({
 		<div className="flex justify-end">
 			<Tooltip>
 				<TooltipTrigger asChild>
-					<Link href={`/connection/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
+					<Link
+						href={`/connection/${data.publicId}/settings`}
+						className={buttonVariants({ variant: "ghost" })}
+					>
 						<EditPencilIcon className="h-4 w-4" />
 					</Link>
 				</TooltipTrigger>
@@ -67,7 +67,9 @@ export const ConnectionActions = ({
 								}),
 								{
 									loading: data.enabled ? "Pausing Connection..." : "Enabling Connection",
-									success: data.enabled ? "Connection Successfully Paused..." : "Connection Successfully Enabled",
+									success: data.enabled
+										? "Connection Successfully Paused..."
+										: "Connection Successfully Enabled",
 									error: "There was an error changing the status of your Connection	. Please try again or contact us.",
 								},
 							)
@@ -95,7 +97,8 @@ export const ConnectionActions = ({
 					<DialogHeader>
 						<DialogTitle>Are you sure you want to delete this Destination?</DialogTitle>
 						<DialogDescription>
-							This action cannot be undone. Are you sure you want to permanently delete this destination forever?
+							This action cannot be undone. Are you sure you want to permanently delete this destination
+							forever?
 						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>

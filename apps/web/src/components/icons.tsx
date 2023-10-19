@@ -1,8 +1,4 @@
-import { DashboardAlt2Icon } from "@hazel/icons"
-import { LinkChainIcon } from "@hazel/icons"
-import { MoonIcon } from "@hazel/icons"
-import { Settings01Icon } from "@hazel/icons"
-import { SunIcon } from "@hazel/icons"
+import { DashboardAlt2Icon, LinkChainIcon, MoonIcon, Settings01Icon, SunIcon } from "@hazel/icons"
 
 export const Icons = {
 	sun: SunIcon,

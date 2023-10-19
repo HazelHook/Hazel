@@ -1,4 +1,5 @@
 import { Logo } from "@hazel/ui/logo"
+
 import { AuthConfig, AuthConfigProvider } from "../provider"
 
 export function AuthPageShell({ children, ...rest }: React.PropsWithChildren<AuthConfig>) {

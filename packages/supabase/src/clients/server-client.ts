@@ -1,8 +1,8 @@
 import { cookies } from "next/headers"
+import type { Database } from "@hazel/db/src/database.types"
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
 import invariant from "tiny-invariant"
-import type { Database } from "@hazel/db/src/database.types"
 
 /**
  * @name getSupabaseServerClient

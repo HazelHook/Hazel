@@ -1,6 +1,8 @@
 "use client"
 
 import Link from "next/link"
+import { TBResponse } from "@hazel/db/src/tinybird/model/tiny-response"
+import { FilterVerticalIcon } from "@hazel/icons"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -11,9 +13,6 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
-import { TBResponse } from "@hazel/db/src/tinybird/model/tiny-response"
-
-import { FilterVerticalIcon } from "@hazel/icons"
 
 export type Column = TBResponse
 

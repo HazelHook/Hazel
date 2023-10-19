@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation"
 import configuration from "@/configuration"
-import { checkSessionRequireMfa } from "@hazel/auth/utils"
-
 import { AuthPageShell } from "@hazel/auth"
+import { checkSessionRequireMfa } from "@hazel/auth/utils"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 export const dynamic = "force-dynamic"

@@ -1,8 +1,8 @@
 import { cookies } from "next/headers"
+import { Database } from "@hazel/db/src/database.types"
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
 import invariant from "tiny-invariant"
-import { Database } from "@hazel/db/src/database.types"
 
 /**
  * @name createServerActionClient

@@ -1,6 +1,7 @@
 "use client"
 
 import { ReactNode, useState } from "react"
+import { AddIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { DataTablePagination } from "@hazel/ui/data-table-pagination"
 import { Input } from "@hazel/ui/input"
@@ -17,7 +18,6 @@ import {
 
 import type { createOrganizationInvite } from "@/server/actions/organization-invite"
 import { usePagination } from "@/lib/hooks/usePagination"
-import { AddIcon } from "@hazel/icons"
 import { OrganizationInviteModal } from "@/components/modals/organization-invite-modal"
 
 interface DataTableProps<TData, TValue> {

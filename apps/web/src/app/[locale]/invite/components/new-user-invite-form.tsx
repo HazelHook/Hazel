@@ -3,18 +3,18 @@
 import { useState } from "react"
 import configuration from "@/configuration"
 import isBrowser from "@/core/generic/is-browser"
+import { EmailPasswordSignInContainer } from "@hazel/auth/internal-components/emai-password-signIn-container"
+import { EmailLinkAuth } from "@hazel/auth/internal-components/email-link-auth"
+import { EmailPasswordSignUpContainer } from "@hazel/auth/internal-components/email-password-sign-up-container"
+import OAuthProviders from "@hazel/auth/internal-components/oAuth-providers"
+import { PhoneNumberSignInContainer } from "@hazel/auth/internal-components/phone-numbe-signIn-container"
 import { Button } from "@hazel/ui/button"
-import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 import { If } from "@hazel/ui/if"
+import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 import { useTranslations } from "next-intl"
 
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
-import OAuthProviders from "@hazel/auth/internal-components/oAuth-providers"
-import { EmailPasswordSignInContainer } from "@hazel/auth/internal-components/emai-password-signIn-container"
-import { PhoneNumberSignInContainer } from "@hazel/auth/internal-components/phone-numbe-signIn-container"
-import { EmailLinkAuth } from "@hazel/auth/internal-components/email-link-auth"
-import { EmailPasswordSignUpContainer } from "@hazel/auth/internal-components/email-password-sign-up-container"
 
 enum Mode {
 	SignUp = 0,

@@ -440,9 +440,11 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 						name={key}
 						key={key}
 						render={({ field }) => {
-							const inputType = fieldConfigItem.fieldType ?? DEFAULT_ZOD_HANDLERS[zodBaseType] ?? "fallback"
+							const inputType =
+								fieldConfigItem.fieldType ?? DEFAULT_ZOD_HANDLERS[zodBaseType] ?? "fallback"
 
-							const InputComponent = typeof inputType === "function" ? inputType : INPUT_COMPONENTS[inputType]
+							const InputComponent =
+								typeof inputType === "function" ? inputType : INPUT_COMPONENTS[inputType]
 							const ParentElement = fieldConfigItem.renderParent ?? DefaultParent
 
 							return (
@@ -458,7 +460,9 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 											...zodInputProps,
 											...field,
 											...fieldConfigItem.inputProps,
-											value: !fieldConfigItem.inputProps?.defaultValue ? field.value ?? "" : undefined,
+											value: !fieldConfigItem.inputProps?.defaultValue
+												? field.value ?? ""
+												: undefined,
 										}}
 									/>
 								</ParentElement>

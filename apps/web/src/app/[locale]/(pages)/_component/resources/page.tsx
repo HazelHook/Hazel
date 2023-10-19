@@ -1,10 +1,10 @@
 import Link from "next/link"
+import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { DataTable } from "@hazel/ui/data-table"
 
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
-import { AddIcon } from "@hazel/icons"
 
 import { columns } from "./columns"
 

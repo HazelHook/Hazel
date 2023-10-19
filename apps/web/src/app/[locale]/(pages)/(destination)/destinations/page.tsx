@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 
@@ -7,7 +8,6 @@ import { deleteDestinationAction, updateDestinationAction } from "@/server/actio
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { PromiseType } from "@/lib/ts/helpers"
-import { AddIcon } from "@hazel/icons"
 import { DestinationTable } from "@/app/[locale]/(pages)/(destination)/_components/DestinationTable"
 
 async function dataFetch({ workspaceId }: { workspaceId: string }) {

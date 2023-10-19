@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import configuration from "@/configuration"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
 
@@ -11,7 +12,6 @@ import { getSeededProfileImageUrl } from "@/lib/utils"
 
 import { CreateOrg } from "./components/CreateOrg"
 import { OrgButton } from "./components/org-button"
-import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 async function OrganizationsPage() {
 	const client = getSupabaseServerClient()

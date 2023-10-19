@@ -9,6 +9,7 @@ import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
+
 import { useSignInWithOtp } from "../hooks/use-sign-in-with-otp"
 import { useAuthConfig } from "../provider/auth-config"
 

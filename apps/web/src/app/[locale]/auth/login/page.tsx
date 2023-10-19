@@ -1,5 +1,4 @@
 import configuration from "@/configuration"
-
 import { SignInPage } from "@hazel/auth/pages"
 
 export const metadata = {

@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
 import configuration from "@/configuration"
 import { Database } from "@/database.types"
-import type { SupabaseClient } from "@supabase/supabase-js"
 import { checkSessionRequireMfa } from "@hazel/auth/utils"
+import type { SupabaseClient } from "@supabase/supabase-js"
 
 /**
  * @name requireSession

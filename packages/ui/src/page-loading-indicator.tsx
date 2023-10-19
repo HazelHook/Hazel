@@ -2,8 +2,8 @@ import type { PropsWithChildren } from "react"
 import classNames from "clsx"
 
 import { If } from "./if"
-import { Spinner } from "./spinner"
 import { Logo } from "./logo"
+import { Spinner } from "./spinner"
 
 export function PageLoadingIndicator({
 	children,

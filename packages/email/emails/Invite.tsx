@@ -49,7 +49,13 @@ export const OrganizationInviteEmail = ({
 				<Container className="bg-white my-auto mx-auto font-sans">
 					<Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
 						<Section className="mt-[32px]">
-							<Img src={`${baseUrl}/assets/avatar.png`} width="80" height="80" alt="Hazel" className="my-0 mx-auto" />
+							<Img
+								src={`${baseUrl}/assets/avatar.png`}
+								width="80"
+								height="80"
+								alt="Hazel"
+								className="my-0 mx-auto"
+							/>
 						</Section>
 						<Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
 							Join <strong>{teamName}</strong> on <strong>Hazel</strong>
@@ -68,7 +74,12 @@ export const OrganizationInviteEmail = ({
 									<Img className="rounded-full" src={userImage} width="64" height="64" />
 								</Column>
 								<Column align="center">
-									<Img src={`${baseUrl}/assets/arrow.png`} width="12" height="9" alt="invited you to" />
+									<Img
+										src={`${baseUrl}/assets/arrow.png`}
+										width="12"
+										height="9"
+										alt="invited you to"
+									/>
 								</Column>
 								<Column align="left">
 									<Img className="rounded-full" src={teamImage} width="64" height="64" />
@@ -93,8 +104,8 @@ export const OrganizationInviteEmail = ({
 						</Text>
 						<Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
 						<Text className="text-[#666666] text-[12px] leading-[24px]">
-							If you were not expecting this invitation, you can safely ignore this email. If you are concerned about
-							your account's safety, please reply to this email to get in touch with us.
+							If you were not expecting this invitation, you can safely ignore this email. If you are
+							concerned about your account's safety, please reply to this email to get in touch with us.
 						</Text>
 					</Container>
 				</Container>

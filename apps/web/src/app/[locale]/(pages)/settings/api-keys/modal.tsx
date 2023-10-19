@@ -25,7 +25,11 @@ export const ApiKeyModal = ({
 				<DialogHeader>
 					<DialogTitle>Create new API Key</DialogTitle>
 				</DialogHeader>
-				<CreateApiKeyForm workspaceId={workspaceId} createAction={createAction} onSuccess={() => setOpen(false)} />
+				<CreateApiKeyForm
+					workspaceId={workspaceId}
+					createAction={createAction}
+					onSuccess={() => setOpen(false)}
+				/>
 			</DialogContent>
 		</Dialog>
 	)

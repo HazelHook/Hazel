@@ -1,18 +1,17 @@
 "use client"
 
 import Link from "next/link"
+import { Connection, Destination, Source } from "@hazel/db/src/drizzle/schema"
+import { CheckTickIcon, EyeOpenIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { Cell, SortableHeader } from "@hazel/ui/data-table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { ColumnDef } from "@tanstack/react-table"
-import { Connection, Destination, Source } from "@hazel/db/src/drizzle/schema"
 
 import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { CheckTickIcon } from "@hazel/icons"
-import { EyeOpenIcon } from "@hazel/icons"
 import { ConnectionActions } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionActions"
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
