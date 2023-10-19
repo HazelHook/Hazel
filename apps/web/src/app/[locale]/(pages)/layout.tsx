@@ -14,7 +14,7 @@ import { createOrganzationAction, switchOrganizationAction } from "@/server/acti
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { ProfileSettings } from "@/components/profile-settings"
-import { Sidebar } from "@/components/sidebar"
+import { Sidebar } from "@/components/xd"
 
 interface RootLayoutProps {
 	children: React.ReactNode

@@ -14,7 +14,7 @@ import {
 } from "@hazel/icons"
 
 import { auth } from "@/lib/auth"
-import { Sidebar } from "@/components/sidebar"
+import { Sidebar } from "@/components/xd"
 
 const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 	return (
