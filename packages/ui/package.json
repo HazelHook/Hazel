@@ -113,7 +113,8 @@
 		"./tabs": "./src/tabs.tsx",
 		"./text-field": "./src/text-field.tsx",
 		"./text-area": "./src/text-area.tsx",
-		"./tooltip": "./src/tooltip.tsx"
+		"./tooltip": "./src/tooltip.tsx",
+		"./tile": "./src/tile.tsx"
 	},
 	"typesVersions": {
 		"*": {

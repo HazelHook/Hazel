@@ -3,10 +3,10 @@
 	"version": "0.0.2",
 	"private": true,
 	"scripts": {
-		"dev": "doppler run -- next dev --port 3004",
+		"dev": "infisical run -- next dev --port 3004",
 		"dev:raw": "next dev",
-		"dev:turbo": "doppler run -- next dev --turbo",
-		"dev:build": "doppler run -- next build",
+		"dev:turbo": "infisical run -- next dev --turbo",
+		"dev:build": "infisical run --next build",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -67,6 +67,7 @@
 		"ts-pattern": "^5.0.5",
 		"zod": "^3.22.4",
 		"@hazel/ui": "workspace:*",
+		"@hazel/admin": "workspace:*",
 		"@hazel/icons": "workspace:*",
 		"@hazel/utils": "workspace:*"
 	},

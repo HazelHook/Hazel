@@ -1,14 +1,8 @@
-import baseConfig from "@hazel/tailwind-config"
 import type { Config } from "tailwindcss"
 
 export default {
 	darkMode: ["class"],
-	content: [
-		"src/**/*.{ts,tsx}",
-		"../../packages/ui/src/**/*.{ts,tsx}",
-		"../../packages/auth/src/**/*.{ts,tsx}",
-		"../../packages/admin/src/**/*.{ts,tsx}",
-	],
+	content: ["src/**/*.{ts,tsx}"],
 	theme: {
 		container: {
 			center: true,
