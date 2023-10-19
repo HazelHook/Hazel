@@ -21,9 +21,8 @@ import useMutation from "swr/mutation"
 import { CrossIcon } from "@hazel/icons"
 import { useSupabase } from "@hazel/supabase/hooks"
 
-import Spinner from "@/components/spinner"
-
 import MultiFactorAuthSetupModal from "./mfa-setup-modal"
+import { Spinner } from "@hazel/ui/spinner"
 
 const MAX_FACTOR_COUNT = 10
 

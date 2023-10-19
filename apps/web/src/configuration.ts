@@ -25,7 +25,7 @@ const configuration = {
 		providers: {
 			emailPassword: true,
 			phoneNumber: false,
-			emailLink: false,
+			magicLink: false,
 			oAuth: ["google", "github"] as Provider[],
 		},
 	},

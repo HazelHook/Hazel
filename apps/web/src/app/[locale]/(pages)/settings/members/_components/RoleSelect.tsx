@@ -3,8 +3,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
 import { toast } from "sonner"
 
-import { useAuth } from "@/lib/provider/AuthProvider"
 import { capitalizeFirstLetter } from "@/lib/utils"
+import { useAuth } from "@hazel/auth/provider"
 
 export interface RoleSelectProps {
 	orgId: string

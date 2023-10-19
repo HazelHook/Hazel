@@ -1,6 +1,6 @@
-import classNames from "clsx"
+import { cn } from "./utils"
 
-function Spinner(
+export function Spinner(
 	props: React.PropsWithChildren<{
 		className?: string
 	}>,
@@ -9,7 +9,7 @@ function Spinner(
 		<div role="status">
 			<svg
 				aria-hidden="true"
-				className={classNames("h-8 w-8 animate-spin fill-primary text-muted-foreground", props.className)}
+				className={cn("h-8 w-8 animate-spin fill-primary text-muted-foreground", props.className)}
 				viewBox="0 0 100 101"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
@@ -28,5 +28,3 @@ function Spinner(
 		</div>
 	)
 }
-
-export default Spinner

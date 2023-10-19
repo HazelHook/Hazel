@@ -10,7 +10,7 @@ export const I18Provider = ({ children, locale }: I18ProviderProps) => {
 	const messages = useMessages()
 
 	return (
-		<NextIntlClientProvider locale={locale} messages={messages}>
+		<NextIntlClientProvider locale={locale} messages={messages} timeZone={"Europe/Vienna"}>
 			{children}
 		</NextIntlClientProvider>
 	)

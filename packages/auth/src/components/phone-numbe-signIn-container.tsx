@@ -1,25 +1,26 @@
 import type { FormEventHandler } from "react"
 import React, { useCallback, useState } from "react"
-import configuration from "@/configuration"
-import useSignInWithOtp from "@/core/hooks/use-sign-in-with-otp"
-import useVerifyOtp from "@/core/hooks/use-verify-otp"
 import Alert from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
-import PhoneNumberCredentialForm from "./PhoneNumberCredentialForm"
-import VerificationCodeInput from "./VerificationCodeInput"
+import PhoneNumberCredentialForm from "./phone-number-credential-form"
+import VerificationCodeInput from "./verification-code-input"
+import { useSignInWithOtp } from "../hooks/use-sign-in-with-otp"
+import { useVerifyOtp } from "../hooks/use-verify-otp"
+import { Paths } from "../pages"
 
 enum Step {
 	Phone = 0,
 	Otp = 1,
 }
 
-const PhoneNumberSignInContainer: React.FC<{
+export const PhoneNumberSignInContainer: React.FC<{
 	onSuccess: () => unknown
 	mode: "signIn" | "signUp"
-}> = ({ onSuccess, mode }) => {
+	paths: Paths
+}> = ({ onSuccess, mode, paths }) => {
 	const t = useTranslations()
 	const [step, setStep] = useState<Step>(Step.Phone)
 	const [verificationCode, setVerificationCode] = useState("")
@@ -48,7 +49,7 @@ const PhoneNumberSignInContainer: React.FC<{
 		async (e) => {
 			e.preventDefault()
 
-			const redirectTo = `${window.location.origin}${configuration.paths.home}`
+			const redirectTo = `${window.location.origin}${paths.redirect}`
 
 			await verifyOtp.trigger({
 				token: verificationCode,
@@ -79,7 +80,12 @@ const PhoneNumberSignInContainer: React.FC<{
 
 					<VerificationCodeInput onInvalid={() => setVerificationCode("")} onValid={setVerificationCode} />
 
-					<Button disabled={!verificationCode} loading={verifyOtp.isMutating} variant={"default"} type={"submit"}>
+					<Button
+						disabled={!verificationCode}
+						loading={verifyOtp.isMutating}
+						variant={"default"}
+						type={"submit"}
+					>
 						{t("auth.signIn")}
 					</Button>
 				</div>
@@ -96,9 +102,11 @@ const PhoneNumberSignInContainer: React.FC<{
 				</Alert>
 			</If>
 
-			<PhoneNumberCredentialForm action={"signIn"} onSubmit={onPhoneNumberSubmit} loading={signInWithOtp.isMutating} />
+			<PhoneNumberCredentialForm
+				action={"signIn"}
+				onSubmit={onPhoneNumberSubmit}
+				loading={signInWithOtp.isMutating}
+			/>
 		</div>
 	)
 }
-
-export default PhoneNumberSignInContainer

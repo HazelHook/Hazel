@@ -5,7 +5,7 @@ import { useFieldArray, useForm } from "react-hook-form"
 
 const DIGITS = 6
 
-function VerificationCodeInput({
+export function VerificationCodeInput({
 	onValid,
 	onInvalid,
 }: React.PropsWithChildren<{
@@ -109,5 +109,3 @@ function VerificationCodeInput({
 		</div>
 	)
 }
-
-export default VerificationCodeInput

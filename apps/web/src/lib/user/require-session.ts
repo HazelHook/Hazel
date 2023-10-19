@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
 import configuration from "@/configuration"
-import verifyRequiresMfa from "@/core/session/utils/check-requires-mfa"
 import { Database } from "@/database.types"
 import type { SupabaseClient } from "@supabase/supabase-js"
+import { checkSessionRequireMfa } from "@hazel/auth/utils"
 
 /**
  * @name requireSession
@@ -16,7 +16,7 @@ async function requireSession(client: SupabaseClient<Database>) {
 		return redirect(configuration.paths.signIn)
 	}
 
-	const requiresMfa = await verifyRequiresMfa(client)
+	const requiresMfa = await checkSessionRequireMfa(client)
 
 	// If the user requires multi-factor authentication,
 	// redirect them to the page where they can verify their identity.

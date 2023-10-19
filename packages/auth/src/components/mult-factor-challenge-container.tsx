@@ -1,7 +1,5 @@
 import type { FormEventHandler } from "react"
 import { useCallback, useEffect, useState } from "react"
-import useFetchAuthFactors from "@/core/hooks/use-fetch-factors"
-import useSignOut from "@/core/hooks/use-sign-out"
 import { useSupabase } from "@hazel/supabase/hooks"
 
 import Alert from "@hazel/ui/alert"
@@ -11,11 +9,12 @@ import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 import useMutation from "swr/mutation"
 
-import Spinner from "@/components/spinner"
+import { Spinner } from "@hazel/ui/spinner"
+import { VerificationCodeInput } from "./verification-code-input"
+import { useSignOut } from "../hooks/use-sign-out"
+import { useFetchAuthFactors } from "../hooks/use-fetch-factors"
 
-import VerificationCodeInput from "./VerificationCodeInput"
-
-function MultiFactorChallengeContainer({
+export function MultiFactorChallengeContainer({
 	onSuccess,
 }: React.PropsWithChildren<{
 	onSuccess: () => void
@@ -71,8 +70,6 @@ function MultiFactorChallengeContainer({
 		</form>
 	)
 }
-
-export default MultiFactorChallengeContainer
 
 function useVerifyMFAChallenge() {
 	const client = useSupabase()

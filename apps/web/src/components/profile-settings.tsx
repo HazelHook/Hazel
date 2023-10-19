@@ -3,7 +3,6 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import useSignOut from "@/core/hooks/use-sign-out"
 
 import {
 	AddCircleIcon,
@@ -43,9 +42,10 @@ import { useTheme } from "next-themes"
 
 import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { useAction } from "@/server/client"
-import { useAuth } from "@/lib/provider/AuthProvider"
 import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { cn } from "@/lib/utils"
+import { useSignOut } from "@hazel/auth/hooks"
+import { useAuth } from "@hazel/auth/provider"
 
 type Membership = OrganizationMember & {
 	organization: Organization

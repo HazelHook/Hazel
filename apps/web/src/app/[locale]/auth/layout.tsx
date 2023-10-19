@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import configuration from "@/configuration"
-import verifyRequiresMfa from "@/core/session/utils/check-requires-mfa"
+import { checkSessionRequireMfa } from "@hazel/auth/utils"
 
 import AuthPageShell from "./components/AuthPageShell"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
@@ -14,7 +14,7 @@ async function AuthLayout({ children }: React.PropsWithChildren) {
 		data: { session },
 	} = await client.auth.getSession()
 
-	const requiresMultiFactorAuthentication = await verifyRequiresMfa(client)
+	const requiresMultiFactorAuthentication = await checkSessionRequireMfa(client)
 
 	if (session && !requiresMultiFactorAuthentication) {
 		redirect(configuration.paths.home)

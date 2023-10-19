@@ -6,11 +6,11 @@ import { useSupabase } from "@hazel/supabase/hooks"
 
 import { User } from "@supabase/supabase-js"
 
-import UserSessionContext from "../contexts/auth"
+import UserSessionContext from "../../../../apps/web/src/lib/contexts/auth"
 
 export const useAuth = () => useContext(UserSessionContext)
 
-const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const supabase = useSupabase()
 	const router = useRouter()
 
@@ -41,5 +41,3 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 	return <UserSessionContext.Provider value={{ user, role: undefined }}>{children}</UserSessionContext.Provider>
 }
-
-export default AuthProvider

@@ -1,7 +1,6 @@
 import Link from "next/link"
 import configuration from "@/configuration"
-
-import { LogoIcon } from "@/components/icons/logo"
+import { Logo } from "@hazel/ui/logo"
 
 export const dynamic = "force-dynamic"
 
@@ -16,7 +15,7 @@ async function OnboardingLayout({ children }: React.PropsWithChildren) {
 				>
 					<div className={"absolute top-12 xl:top-24"}>
 						<Link href={configuration.paths.onboarding}>
-							<LogoIcon />
+							<Logo />
 						</Link>
 					</div>
 

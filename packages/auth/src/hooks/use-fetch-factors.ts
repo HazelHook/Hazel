@@ -1,9 +1,9 @@
 import { useSupabase } from "@hazel/supabase/hooks"
 
-import useFactorsMutationKey from "@/core/hooks/use-user-factors-mutation-key"
 import useQuery from "swr"
+import { useFactorsMutationKey } from "./use-user-factors-mutation-key"
 
-function useFetchAuthFactors() {
+export function useFetchAuthFactors() {
 	const client = useSupabase()
 	const key = useFactorsMutationKey()
 
@@ -17,5 +17,3 @@ function useFetchAuthFactors() {
 		return data
 	})
 }
-
-export default useFetchAuthFactors

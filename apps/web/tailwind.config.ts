@@ -3,7 +3,7 @@ import type { Config } from "tailwindcss"
 
 export default {
 	darkMode: ["class"],
-	content: ["src/**/*.{ts,tsx}", "../../packages/ui/src/**/*.{ts,tsx}"],
+	content: ["src/**/*.{ts,tsx}", "../../packages/ui/src/**/*.{ts,tsx}", "../../packages/auth/src/**/*.{ts,tsx}"],
 	theme: {
 		container: {
 			center: true,

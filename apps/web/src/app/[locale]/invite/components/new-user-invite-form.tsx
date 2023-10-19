@@ -4,12 +4,12 @@ import { useState } from "react"
 import configuration from "@/configuration"
 import isBrowser from "@/core/generic/is-browser"
 import { Button } from "@hazel/ui/button"
+import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
-import PageLoadingIndicator from "@/components/page-loading-indicator"
 
 import EmailLinkAuth from "../../auth/components/EmailLinkAuth"
 import EmailPasswordSignInContainer from "../../auth/components/EmailPasswordSignInContainer"
@@ -46,7 +46,9 @@ function NewUserInviteForm(
 			<If condition={configuration.auth.providers.emailPassword}>
 				<If condition={mode === Mode.SignUp}>
 					<div className={"flex w-full flex-col items-center space-y-4"}>
-						<EmailPasswordSignUpContainer onSignUp={() => inviteAcceptAction.mutate({ inviteId: props.code })} />
+						<EmailPasswordSignUpContainer
+							onSignUp={() => inviteAcceptAction.mutate({ inviteId: props.code })}
+						/>
 
 						<Button className="w-full" variant={"ghost"} size={"sm"} onClick={() => setMode(Mode.SignIn)}>
 							{t("auth.alreadyHaveAccountStatement")}
@@ -56,7 +58,9 @@ function NewUserInviteForm(
 
 				<If condition={mode === Mode.SignIn}>
 					<div className={"flex w-full flex-col items-center space-y-4"}>
-						<EmailPasswordSignInContainer onSignIn={() => inviteAcceptAction.mutate({ inviteId: props.code })} />
+						<EmailPasswordSignInContainer
+							onSignIn={() => inviteAcceptAction.mutate({ inviteId: props.code })}
+						/>
 
 						<Button className="w=full" variant={"ghost"} size={"sm"} onClick={() => setMode(Mode.SignUp)}>
 							{t("auth.doNotHaveAccountStatement")}

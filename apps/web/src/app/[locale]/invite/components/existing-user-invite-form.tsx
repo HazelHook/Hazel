@@ -2,13 +2,13 @@
 
 import { useCallback } from "react"
 import useRefresh from "@/core/hooks/use-refresh"
-import useSignOut from "@/core/hooks/use-sign-out"
 import { Button } from "@hazel/ui/button"
 import type { Session } from "@supabase/auth-helpers-nextjs"
 import { useTranslations } from "next-intl"
 
 import type { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 import { useAction } from "@/server/client"
+import { useSignOut } from "@hazel/auth/hooks/use-sign-out"
 
 function ExistingUserInviteForm(
 	props: React.PropsWithChildren<{
@@ -31,7 +31,9 @@ function ExistingUserInviteForm(
 	return (
 		<>
 			<div className={"flex flex-col space-y-4"}>
-				<p className={"text-center text-sm"}>{t("auth.clickToAcceptAs", { email: props.session.user.email })}</p>
+				<p className={"text-center text-sm"}>
+					{t("auth.clickToAcceptAs", { email: props.session.user.email })}
+				</p>
 
 				<Button
 					className="w-full"

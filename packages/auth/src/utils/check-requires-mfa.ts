@@ -8,7 +8,7 @@ const ASSURANCE_LEVEL_2 = "aal2"
  * We do it by checking that the next assurance level is AAL2 and that the current assurance level is not AAL2.
  * @param client
  */
-async function checkSessionRequiresMultiFactorAuthentication(client: SupabaseClient) {
+export async function checkSessionRequireMfa(client: SupabaseClient) {
 	const assuranceLevel = await client.auth.mfa.getAuthenticatorAssuranceLevel()
 
 	if (assuranceLevel.error) {
@@ -19,5 +19,3 @@ async function checkSessionRequiresMultiFactorAuthentication(client: SupabaseCli
 
 	return nextLevel === ASSURANCE_LEVEL_2 && nextLevel !== currentLevel
 }
-
-export default checkSessionRequiresMultiFactorAuthentication

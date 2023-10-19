@@ -1,12 +1,12 @@
 "use client"
 
 import { useCallback } from "react"
-import useSignInWithEmailPassword from "@/core/hooks/use-sign-in-with-email-password"
 
-import AuthErrorMessage from "./AuthErrorMessage"
-import EmailPasswordSignInForm from "./EmailPasswordSignInForm"
+import EmailPasswordSignInForm from "../../../../apps/web/src/app/[locale]/auth/components/EmailPasswordSignInForm"
+import { AuthErrorMessage } from "./auth-error-messave"
+import { useSignInWithEmailPassword } from "../hooks/use-sign-in-with-email-password"
 
-const EmailPasswordSignInContainer: React.FCC<{
+export const EmailPasswordSignInContainer: React.FCC<{
 	onSignIn: (userId?: string) => unknown
 }> = ({ onSignIn }) => {
 	const signInMutation = useSignInWithEmailPassword()
@@ -34,5 +34,3 @@ const EmailPasswordSignInContainer: React.FCC<{
 		</>
 	)
 }
-
-export default EmailPasswordSignInContainer

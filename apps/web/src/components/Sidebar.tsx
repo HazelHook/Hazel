@@ -2,10 +2,10 @@ import { Fragment } from "react"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-import { LogoIcon } from "@/components/icons/logo"
 import { IconProps } from "@hazel/icons"
 
 import { SidebarClientItem } from "./sidebar-item"
+import { Logo } from "@hazel/ui/logo"
 
 type SubItem = {
 	className?: string
@@ -48,13 +48,13 @@ export async function Sidebar({ className, disableLogo = false, items, children 
 				{!disableLogo && (
 					<Link className="cursor-pointer" href={"/"}>
 						<div className="hidden flex-row items-center gap-2 px-4 py-2 lg:flex">
-							<LogoIcon className="h-12 w-12" />
+							<Logo className="h-12 w-12" />
 
 							<h1 className="text-3xl font-semibold tracking-tight">Hazel</h1>
 						</div>
 
 						<div className="flex justify-center py-2 lg:hidden">
-							<LogoIcon className="h-6 w-6" />
+							<Logo className="h-6 w-6" />
 						</div>
 					</Link>
 				)}

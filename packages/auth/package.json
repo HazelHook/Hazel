@@ -19,7 +19,10 @@
 		"@supabase/supabase-js": "^2.38.1",
 		"next-intl": "3.0.0-rc.5",
 		"@hazel/ui": "workspace:*",
+		"@hazel/icons": "workspace:*",
 		"@hazel/supabase": "workspace:*",
+		"react-hook-form": "^7.47.0",
+		"sonner": "^1.0.3",
 		"tailwindcss-animate": "^1.0.6"
 	},
 	"devDependencies": {
@@ -40,7 +43,10 @@
 	},
 	"exports": {
 		".": "./src/index.ts",
-		"./pages": "./src/pages.ts"
+		"./pages": "./src/pages.ts",
+		"./provider": "./src/provider.ts",
+		"./utils": "./src/utils.ts",
+		"./hooks": "./src/hooks.ts"
 	},
 	"typesVersions": {
 		"*": {

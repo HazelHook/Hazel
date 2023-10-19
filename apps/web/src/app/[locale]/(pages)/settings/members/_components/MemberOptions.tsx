@@ -10,11 +10,11 @@ import {
 import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
 import { toast } from "sonner"
 
-import { useAuth } from "@/lib/provider/AuthProvider"
 import { ClipboardIcon } from "@hazel/icons"
 import { FolderRemoveIcon } from "@hazel/icons"
 import { LogOutLeftIcon } from "@hazel/icons"
 import { ThreeDotsHorizontalIcon } from "@hazel/icons"
+import { useAuth } from "@hazel/auth/provider"
 
 export interface MemberOptionsProps {
 	orgId: string

@@ -1,11 +1,11 @@
 import type { PropsWithChildren } from "react"
-import If from "@hazel/ui/if"
 import classNames from "clsx"
 
-import { LogoIcon } from "./icons/logo"
-import Spinner from "./spinner"
+import If from "./if"
+import { Spinner } from "./spinner"
+import { Logo } from "./logo"
 
-export default function PageLoadingIndicator({
+export function PageLoadingIndicator({
 	children,
 	fullPage,
 	displayLogo,
@@ -21,12 +21,12 @@ export default function PageLoadingIndicator({
 	return (
 		<div
 			className={classNames("flex flex-col items-center justify-center space-y-6", className, {
-				"fixed top-0 left-0 z-[100] h-screen w-screen bg-white dark:bg-dark-900": useFullPage,
+				"fixed top-0 left-0 z-[100] h-screen w-screen bg-background": useFullPage,
 			})}
 		>
 			<If condition={shouldDisplayLogo}>
 				<div className={"my-2"}>
-					<LogoIcon />
+					<Logo />
 				</div>
 			</If>
 

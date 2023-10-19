@@ -22,7 +22,7 @@ export type SignInPageProps = {
 	providers: Providers
 }
 
-function SignInPage({ paths, providers }: SignInPageProps) {
+export function SignInPage({ paths, providers }: SignInPageProps) {
 	const t = useTranslations("auth")
 
 	return (
@@ -45,5 +45,3 @@ function SignInPage({ paths, providers }: SignInPageProps) {
 		</>
 	)
 }
-
-export default SignInPage

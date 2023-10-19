@@ -10,7 +10,7 @@ interface Credentials {
 /**
  * @name useSignInWithEmailPassword
  */
-function useSignInWithEmailPassword() {
+export function useSignInWithEmailPassword() {
 	const client = useSupabase()
 	const key = ["auth", "sign-in-with-email-password"]
 
@@ -24,5 +24,3 @@ function useSignInWithEmailPassword() {
 		})
 	})
 }
-
-export default useSignInWithEmailPassword

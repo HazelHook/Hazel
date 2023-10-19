@@ -11,5 +11,3 @@ export function useSignOut() {
 		await client.auth.signOut()
 	}, [client.auth])
 }
-
-export default useSignOut

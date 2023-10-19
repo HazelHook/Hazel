@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation"
 import If from "@hazel/ui/if"
 import { useTranslations } from "next-intl"
 
-import EmailLinkAuth from "./EmailLinkAuth"
-import EmailPasswordSignInContainer from "./EmailPasswordSignInContainer"
+import { EmailLinkAuth } from "./email-link-auth"
+import { EmailPasswordSignInContainer } from "./emai-password-signIn-container"
 import OAuthProviders from "./oAuth-providers"
-import PhoneNumberSignInContainer from "./PhoneNumberSignInContainer"
 import type { Paths, Providers } from "../pages"
+import { PhoneNumberSignInContainer } from "./phone-numbe-signIn-container"
 
 export type SignInMethodsContainerProps = {
 	paths: Paths
@@ -29,7 +29,7 @@ export function SignInMethodsContainer({ paths, providers }: SignInMethodsContai
 	return (
 		<>
 			<If condition={providers.oAuth.length}>
-				<OAuthProviders providers={providers.oAuth} callbackUrl={paths.authCallback} />
+				<OAuthProviders providers={providers.oAuth as any} callbackUrl={paths.authCallback} />
 
 				<div>
 					<span className={"text-xs text-gray-400"}>{t("auth.orContinueWithEmail")}</span>
@@ -41,11 +41,11 @@ export function SignInMethodsContainer({ paths, providers }: SignInMethodsContai
 			</If>
 
 			<If condition={providers.phoneNumber}>
-				<PhoneNumberSignInContainer onSuccess={onSignIn} mode={"signIn"} />
+				<PhoneNumberSignInContainer paths={paths} onSuccess={onSignIn} mode={"signIn"} />
 			</If>
 
 			<If condition={providers.magicLink}>
-				<EmailLinkAuth />
+				<EmailLinkAuth paths={paths} />
 			</If>
 		</>
 	)

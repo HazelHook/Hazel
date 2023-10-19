@@ -7,7 +7,7 @@ import useCsrfToken from "@/core/hooks/use-csrf-token"
 
 import { handleOnboardingAction } from "@/server/actions/onboarding"
 import { useAction } from "@/server/client"
-import Spinner from "@/components/spinner"
+import { Spinner } from "@hazel/ui/spinner"
 
 interface CompleteOnboardingStepData {
 	organization: string

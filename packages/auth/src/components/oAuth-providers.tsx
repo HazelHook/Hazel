@@ -1,16 +1,17 @@
 "use client"
 
 import { useCallback } from "react"
-import useSignInWithProvider from "@/core/hooks/use-sign-in-with-provider"
 import { useTranslations } from "next-intl"
 
-import PageLoadingIndicator from "@/components/page-loading-indicator"
+import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 
-import AuthErrorMessage from "./AuthErrorMessage"
-import AuthProviderButton from "./AuthProviderButton"
+import { AuthProviderButton } from "./auth-provider-button"
+import { useSignInWithProvider } from "../hooks"
+import { AuthErrorMessage } from "./auth-error-messave"
+import { Provider } from "@supabase/supabase-js"
 
 const OAuthProviders: React.FCC<{
-	providers: string[]
+	providers: Provider[]
 	callbackUrl: string
 	returnUrl?: string
 }> = ({ returnUrl, callbackUrl, providers }) => {

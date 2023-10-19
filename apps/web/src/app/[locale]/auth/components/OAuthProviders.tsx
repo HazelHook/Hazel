@@ -5,10 +5,9 @@ import configuration from "@/configuration"
 import useSignInWithProvider from "@/core/hooks/use-sign-in-with-provider"
 import { useTranslations } from "next-intl"
 
-import PageLoadingIndicator from "@/components/page-loading-indicator"
-
 import AuthErrorMessage from "./AuthErrorMessage"
 import AuthProviderButton from "./AuthProviderButton"
+import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 
 const OAUTH_PROVIDERS = configuration.auth.providers.oAuth
 

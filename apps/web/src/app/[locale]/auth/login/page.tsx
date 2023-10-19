@@ -1,36 +1,22 @@
-import Link from "next/link"
 import configuration from "@/configuration"
-import { Heading } from "@hazel/ui/heading"
-import { useTranslations } from "next-intl"
 
-import SignInMethodsContainer from "@/app/[locale]/auth/components/SignInMethodsContainer"
+import { SignInPage } from "@hazel/auth/pages"
 
 export const metadata = {
 	title: "Sign In",
 }
 
-function SignInPage() {
-	const t = useTranslations("auth")
-
+function LoginPage() {
 	return (
-		<>
-			<div>
-				<Heading type={5}>{t("signInHeading")}</Heading>
-			</div>
-
-			<SignInMethodsContainer />
-
-			<div className={"flex justify-center text-xs"}>
-				<p className={"flex space-x-1"}>
-					<span>{t("doNotHaveAccountYet")}</span>
-
-					<Link className={"text-primary hover:underline"} href={configuration.paths.signUp}>
-						{t("signUp")}
-					</Link>
-				</p>
-			</div>
-		</>
+		<SignInPage
+			providers={configuration.auth.providers}
+			paths={{
+				redirect: configuration.paths.home,
+				authCallback: configuration.paths.authCallback,
+				signUp: configuration.paths.signUp,
+			}}
+		/>
 	)
 }
 
-export default SignInPage
+export default LoginPage

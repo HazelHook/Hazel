@@ -1,4 +1,4 @@
-import PageLoadingIndicator from "@/components/page-loading-indicator"
+import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 
 function Loading() {
 	return (

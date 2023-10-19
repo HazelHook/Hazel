@@ -1,4 +1,4 @@
-import { LogoIcon } from "@/components/icons/logo"
+import { Logo } from "@hazel/ui/logo"
 
 function AuthPageShell({ children }: React.PropsWithChildren) {
 	return (
@@ -7,7 +7,7 @@ function AuthPageShell({ children }: React.PropsWithChildren) {
 				"flex h-screen flex-col items-center justify-center space-y-4 md:space-y-8 lg:space-y-16 bg-background"
 			}
 		>
-			<LogoIcon />
+			<Logo />
 
 			<div
 				className={

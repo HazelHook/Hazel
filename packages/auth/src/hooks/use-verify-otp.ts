@@ -7,7 +7,7 @@ import useMutation from "swr/mutation"
  * @name useVerifyOtp
  * @description Verify the OTP sent to the user's phone number
  */
-function useVerifyOtp() {
+export function useVerifyOtp() {
 	const client = useSupabase()
 
 	return useMutation(["verify-otp"], async (_, { arg }: { arg: VerifyOtpParams }) => {
@@ -20,5 +20,3 @@ function useVerifyOtp() {
 		return data
 	})
 }
-
-export default useVerifyOtp
