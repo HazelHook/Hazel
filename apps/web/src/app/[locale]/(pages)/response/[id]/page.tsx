@@ -12,7 +12,7 @@ import { auth } from "@/lib/auth"
 import { getCachedDestination, getCachedSource } from "@/lib/orm"
 import tiny from "@/lib/tiny"
 import { jsonToArray } from "@/lib/utils"
-import { Status } from "@/components/xd"
+import { Status } from "@/components/status"
 
 const ListItem = ({
 	name,

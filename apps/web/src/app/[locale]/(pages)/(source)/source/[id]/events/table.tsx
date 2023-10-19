@@ -11,7 +11,7 @@ import { SheetHeader, SheetTitle } from "@hazel/ui/sheet"
 import { CacheSource } from "@/lib/orm"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { DataTable } from "@/components/data-table"
-import { Status } from "@/components/xd"
+import { Status } from "@/components/status"
 import { columns } from "@/app/[locale]/(pages)/(source)/source/[id]/events/column"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(source)/source/[id]/events/page"
 
