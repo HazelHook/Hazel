@@ -644,7 +644,7 @@ importers:
         version: 1.0.7(@types/react-dom@18.2.13)(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0)
       '@unpic/react':
         specifier: ^0.0.36
-        version: 0.0.36(react-dom@18.2.0)(react@18.2.0)
+        version: 0.0.36(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -727,6 +727,9 @@ importers:
 
   packages/utils:
     dependencies:
+      lago-javascript-client:
+        specifier: 0.49.0-beta
+        version: 0.49.0-beta
       pino:
         specifier: ^8.16.0
         version: 8.16.0
@@ -3972,7 +3975,7 @@ packages:
       unpic: 3.10.1
     dev: false
 
-  /@unpic/react@0.0.36(react-dom@18.2.0)(react@18.2.0):
+  /@unpic/react@0.0.36(next@13.5.4)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-HITDvifa6/0u5GxgTeqlo/QsW1sTpyCPN81z2upfQAtmwKWLY8SeAH5sOzchVlHDlc/QU/dLcs4j9ZI1H/6c4A==}
     peerDependencies:
       next: '>=12'
@@ -3983,6 +3986,7 @@ packages:
         optional: true
     dependencies:
       '@unpic/core': 0.0.31
+      next: 13.5.4(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false

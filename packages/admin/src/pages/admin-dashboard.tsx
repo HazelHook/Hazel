@@ -2,6 +2,7 @@ import AdminHeader from "../internal/components/admin-header"
 import AdminGuard from "../internal/components/admin-guard"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Container } from "@hazel/ui/container"
+import { lago } from "@hazel/utils/lago"
 import AdminDashboard from "../internal/components/admin-dashboard"
 
 export async function AdminDashboardPage() {
@@ -22,7 +23,7 @@ async function loadData() {
 	// TODO: USE DRIZZLE AND NOT THIS SHIT
 	const client = getSupabaseServerClient({ admin: true })
 
-	const { count: usersCount } = await client.from("users").select("*", {
+	const { count: usersCount, data } = await client.from("users").select("*", {
 		count: "exact",
 		head: true,
 	})
@@ -32,26 +33,14 @@ async function loadData() {
 		head: true,
 	})
 
-	const { count: activeSubscriptions } = await client
-		.from("subscriptions")
-		.select("*", {
-			count: "exact",
-			head: true,
-		})
-		.eq("status", "active")
-
-	const { count: trialSubscriptions } = await client
-		.from("subscriptions")
-		.select("*", {
-			count: "exact",
-			head: true,
-		})
-		.eq("status", "trialing")
+	const {
+		data: { subscriptions },
+	} = await lago.subscriptions.findAllSubscriptions({ per_page: 1000 })
 
 	return {
 		usersCount: usersCount || 0,
 		organizationsCount: organizationsCount || 0,
-		activeSubscriptions: activeSubscriptions || 0,
-		trialSubscriptions: trialSubscriptions || 0,
+		activeSubscriptions: subscriptions.length,
+		trialSubscriptions: subscriptions.length,
 	}
 }

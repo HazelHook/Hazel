@@ -10,6 +10,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"lago-javascript-client": "0.49.0-beta",
 		"pino": "^8.16.0",
 		"pino-pretty": "^10.2.3"
 	},
@@ -24,11 +25,14 @@
 	},
 	"exports": {
 		".": "./src/index.ts",
-		"./logger": "./src/logger.ts"
+		"./logger": "./src/logger.ts",
+		"./lago": "./src/lago.ts"
 	},
 	"typesVersions": {
 		"*": {
-			"*": ["src/*"]
+			"*": [
+				"src/*"
+			]
 		}
 	}
 }
