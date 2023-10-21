@@ -1,19 +1,5 @@
 import { ReactNode } from "react"
-import {
-	BarChartUpIcon,
-	CardIcon,
-	DangerIcon,
-	DashboardDynamicIcon,
-	EyeScanIcon,
-	FocusIcon,
-	KeyIcon,
-	LockedIcon,
-	Settings02Icon,
-	User2Icon,
-	User3Icon,
-	UserIcon,
-	UserPlusIcon,
-} from "@hazel/icons"
+import { DashboardDynamicIcon, Settings02Icon, User3Icon } from "@hazel/icons"
 
 import { Sidebar } from "@/components/sidebar"
 

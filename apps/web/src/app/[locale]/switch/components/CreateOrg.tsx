@@ -52,7 +52,9 @@ export const CreateOrg = () => {
 				</AutoForm>
 			</DialogContent>
 			<DialogTrigger asChild>
-				<Button variant="outline">Create Organization</Button>
+				<Button variant="outline" className="w-full">
+					Create Organization
+				</Button>
 			</DialogTrigger>
 		</Dialog>
 	)

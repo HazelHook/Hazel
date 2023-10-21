@@ -36,6 +36,7 @@ export const withI18n = (next: NextMiddleware) => {
 
 export default withI18n(async function middleware(req: NextRequest) {
 	// const res = await withCsrfMiddleware(req)
+	console.log(req.url)
 
 	return sessionMiddleware(req, NextResponse.next())
 })

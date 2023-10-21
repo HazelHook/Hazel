@@ -1,59 +1,72 @@
+"use server"
+
 import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 
-import { createAction } from "@hazel/server/actions/trpc"
+import { TRPCError, createAction, protectedAdminProcedure } from "@hazel/server/actions/trpc"
+import { z } from "zod"
 
-export const impersonateUser = createAction(async ({ userId }) => {
-	const client = getSupabaseServerActionClient({ admin: true })
+export const impersonateUserAction = createAction(
+	protectedAdminProcedure.input(z.object({ userId: z.string() })).mutation(async ({ input }) => {
+		const client = getSupabaseServerActionClient({ admin: true })
 
-	const {
-		data: { user },
-		error,
-	} = await client.auth.admin.getUserById(userId)
+		const {
+			data: { user },
+			error,
+		} = await client.auth.admin.getUserById(input.userId)
 
-	if (error || !user) {
-		throw new Error("Error fetching user")
-	}
+		if (error || !user) {
+			throw new TRPCError({ message: "Error fetching user", code: "INTERNAL_SERVER_ERROR" })
+		}
 
-	const email = user.email
+		const email = user.email
 
-	if (!email) {
-		throw new Error("User has no email. Cannot impersonate")
-	}
+		console.log(email)
 
-	const { error: linkError, data } = await client.auth.admin.generateLink({
-		type: "magiclink",
-		email,
-		options: {
-			redirectTo: "/",
-		},
-	})
+		if (!email) {
+			throw new TRPCError({ message: "User has no email. Cannot impersonate", code: "FORBIDDEN" })
+		}
 
-	if (linkError || !data) {
-		throw new Error("Error generating magic link")
-	}
+		const { error: linkError, data } = await client.auth.admin.generateLink({
+			type: "magiclink",
+			email,
+			options: {
+				redirectTo: "/",
+			},
+		})
 
-	const response = await fetch(data.properties?.action_link, {
-		method: "GET",
-		redirect: "manual",
-	})
+		if (linkError || !data) {
+			throw new TRPCError({ message: "Error generating magic link", code: "INTERNAL_SERVER_ERROR" })
+		}
 
-	const location = response.headers.get("Location")
+		const response = await fetch(data.properties?.action_link, {
+			method: "GET",
+			redirect: "manual",
+		})
 
-	if (!location) {
-		throw new Error("Error generating magic link. Location header not found")
-	}
+		const location = response.headers.get("Location")
 
-	const hash = new URL(location).hash.substring(1)
-	const query = new URLSearchParams(hash)
-	const accessToken = query.get("access_token")
-	const refreshToken = query.get("refresh_token")
+		if (!location) {
+			throw new TRPCError({
+				message: "Error generating magic link. Location header not found",
+				code: "BAD_REQUEST",
+			})
+		}
 
-	if (!accessToken || !refreshToken) {
-		throw new Error("Error generating magic link. Tokens not found in URL hash.")
-	}
+		const hash = new URL(location).hash.substring(1)
+		const query = new URLSearchParams(hash)
+		const accessToken = query.get("access_token")
+		const refreshToken = query.get("refresh_token")
 
-	return {
-		accessToken,
-		refreshToken,
-	}
-})
+		if (!accessToken || !refreshToken) {
+			throw new TRPCError({
+				message: "Error generating magic link. Tokens not found in URL hash.",
+				code: "BAD_REQUEST",
+			})
+		}
+
+		return {
+			accessToken,
+			refreshToken,
+		}
+	}),
+)

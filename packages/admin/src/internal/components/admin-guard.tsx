@@ -1,5 +1,5 @@
+import { isUserSuperAdmin } from "@hazel/auth/utils"
 import { notFound } from "next/navigation"
-import isUserSuperAdmin from "../utils/is-user-super-admin"
 
 type LayoutOrPageComponent<Params> = React.ComponentType<Params>
 

@@ -29,7 +29,9 @@ async function OrganizationsPage() {
 	const membershipId = cookiesList.get("membership_id")?.value
 
 	if (membershipId) {
-		const currOrg = await db.organization.memberships.getOne({ membershipId })
+		const currOrg = await db.db.query.organizationMembers.findFirst({
+			where: (members, { eq, and }) => and(eq(members.publicId, membershipId), eq(members.userId, user.id)),
+		})
 
 		if (currOrg) {
 			redirect(configuration.paths.home)
@@ -40,17 +42,15 @@ async function OrganizationsPage() {
 		customerId: user.id,
 	})
 
-	if (memberships.length === 1) {
-		const organization = memberships[0].organization
+	// if (memberships.length === 1) {
+	// 	await switchOrganizationAction({ publicId: memberships[0].publicId })
 
-		await switchOrganizationAction({ publicId: organization.publicId })
-
-		return redirect(configuration.paths.home)
-	}
+	// 	return redirect(configuration.paths.home)
+	// }
 
 	return (
 		<Container>
-			<div className="h-full w-full flex justify-center items-center">
+			<div className="min-h-screen h-full w-full flex justify-center items-center">
 				<Card className={"w-[300px]"}>
 					{memberships.map((membership) => {
 						return (

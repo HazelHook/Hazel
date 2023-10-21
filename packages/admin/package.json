@@ -18,18 +18,20 @@
 		"@supabase/supabase-js": "^2.38.1",
 		"next": "13.5.4",
 		"@tanstack/react-table": "^8.10.7",
+		"@hazel/auth": "workspace:*",
 		"@hazel/db": "workspace:*",
 		"@hazel/ui": "workspace:*",
 		"@hazel/icons": "workspace:*",
 		"@hazel/supabase": "workspace:*",
-		"@hazel/utils": "workspace:*"
+		"@hazel/utils": "workspace:*",
+		"@hazel/server": "workspace:*"
 	},
 	"devDependencies": {
 		"@hazel/tailwind-config": "workspace:*",
 		"@hazel/tsconfig": "workspace:*",
-		"@types/react": "^18.2.30",
+		"@types/react": "^18.2.31",
 		"@types/react-dom": "^18.2.14",
-		"eslint": "^8.51.0",
+		"eslint": "^8.52.0",
 		"prettier": "^3.0.3",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",

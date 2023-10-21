@@ -14,7 +14,7 @@ const ENFORCE_MFA = false
  * @description Checks if the current user is an admin by checking the
  * user_metadata.role field in Supabase Auth is set to a SuperAdmin role.
  */
-const isUserSuperAdmin = async (
+export const isUserSuperAdmin = async (
 	params: {
 		enforceMfa?: boolean
 	} = {
@@ -42,8 +42,6 @@ const isUserSuperAdmin = async (
 
 	return role === "super-admin"
 }
-
-export default isUserSuperAdmin
 
 async function verifyIsMultiFactorAuthenticated(client: SupabaseClient) {
 	const { data, error } = await client.auth.mfa.getAuthenticatorAssuranceLevel()

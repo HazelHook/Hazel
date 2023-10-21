@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 	const [user, setUser] = useState<User>()
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		const { data } = supabase.auth.onAuthStateChange((event, session) => {
 			switch (event) {

@@ -4,26 +4,24 @@ import { Alert, AlertHeading } from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import { If } from "@hazel/ui/if"
 import { Modal } from "@hazel/ui/modal"
+import { useAction } from "@hazel/server/actions/client"
+import type { impersonateUserAction } from "@hazel/auth/actions"
 import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 import { User } from "@supabase/supabase-js"
 import { useRouter } from "next/navigation"
-import { useState, useTransition } from "react"
+import { useState } from "react"
+import { ImpersonateUserAuthSetter } from "./impersonate-user-auth-setter"
 
 function ImpersonateUserConfirmationModal({
 	user,
+	impersonateAction,
 }: React.PropsWithChildren<{
 	user: User
+	impersonateAction: typeof impersonateUserAction
 }>) {
+	const action = useAction(impersonateAction)
 	const router = useRouter()
 	const [isOpen, setIsOpen] = useState(true)
-	const [pending, startTransition] = useTransition()
-	const csrfToken = useCsrfToken()
-	const [error, setError] = useState<boolean>()
-
-	const [tokens, setTokens] = useState<{
-		accessToken: string
-		refreshToken: string
-	}>()
 
 	const displayText = user.email ?? user.phone ?? ""
 
@@ -33,28 +31,13 @@ function ImpersonateUserConfirmationModal({
 		setIsOpen(false)
 	}
 
-	const onConfirm = () => {
-		startTransition(async () => {
-			try {
-				const response = await impersonateUser({
-					userId: user.id,
-					csrfToken,
-				})
-
-				setTokens(response)
-			} catch (e) {
-				setError(true)
-			}
-		})
-	}
-
 	return (
 		<Modal heading={"Impersonate User"} isOpen={isOpen} setIsOpen={onDismiss}>
-			<If condition={tokens}>
+			<If condition={action.data}>
 				{(tokens) => {
 					return (
 						<>
-							<ImpersonateUserAuthSetter tokens={tokens} />
+							<ImpersonateUserAuthSetter tokens={tokens as any} />
 
 							<PageLoadingIndicator>Setting up your session...</PageLoadingIndicator>
 						</>
@@ -62,14 +45,14 @@ function ImpersonateUserConfirmationModal({
 				}}
 			</If>
 
-			<If condition={error}>
+			<If condition={action.error}>
 				<Alert type={"error"}>
 					<AlertHeading>Impersonation Error</AlertHeading>
 					Sorry, something went wrong. Please check the logs.
 				</Alert>
 			</If>
 
-			<If condition={!error && !tokens}>
+			<If condition={!action.error && !action.data}>
 				<div className={"flex flex-col space-y-4"}>
 					<div className={"flex flex-col space-y-2 text-sm"}>
 						<p>
@@ -86,11 +69,16 @@ function ImpersonateUserConfirmationModal({
 					</div>
 
 					<div className={"flex space-x-2.5 justify-end"}>
-						<Modal.CancelButton disabled={pending} onClick={onDismiss}>
+						<Modal.CancelButton disabled={action.status === "loading"} onClick={onDismiss}>
 							Cancel
 						</Modal.CancelButton>
 
-						<Button type={"button"} loading={pending} variant={"destructive"} onClick={onConfirm}>
+						<Button
+							type={"button"}
+							loading={action.status === "loading"}
+							variant={"destructive"}
+							onClick={() => action.mutate({ userId: user.id })}
+						>
 							Yes, let&apos;s do it
 						</Button>
 					</div>

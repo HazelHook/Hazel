@@ -7,7 +7,7 @@ import { ZodError } from "zod"
 
 import { Context } from "./context"
 import { db } from "@hazel/db/src"
-import { requireSession } from "@hazel/auth/utils"
+import { isUserSuperAdmin, requireSession } from "@hazel/auth/utils"
 
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,
@@ -57,10 +57,12 @@ export const createAction = experimental_createServerActionHandler(t, {
 	},
 })
 
-const isBaiscAuthed = t.middleware(({ next, ctx }) => {
+const isBasicAuth = t.middleware(({ next, ctx, input }) => {
 	if (!ctx.auth.customerid) {
 		throw new TRPCError({ code: "UNAUTHORIZED" })
 	}
+
+	console.log(input, "XD")
 
 	return next({
 		ctx: {
@@ -93,11 +95,37 @@ const isAuthed = t.middleware(({ next, ctx }) => {
 	})
 })
 
+const isAdmin = t.middleware(async ({ next, ctx }) => {
+	if (!ctx.auth.workspaceId || !ctx.auth.customerid) {
+		throw new TRPCError({ code: "UNAUTHORIZED" })
+	}
+
+	if (!ctx.auth.workspaceId) {
+		throw new TRPCError({ code: "UNAUTHORIZED" })
+	}
+
+	const isAdmin = await isUserSuperAdmin()
+
+	if (!isAdmin) {
+		throw new TRPCError({ code: "UNAUTHORIZED" })
+	}
+
+	return next({
+		ctx: {
+			auth: {
+				workspaceId: ctx.auth.workspaceId,
+				customerId: ctx.auth.customerid,
+				user: ctx.auth.user,
+			},
+		},
+	})
+})
 export const router = t.router
 export const publicProcedure = t.procedure
 
-export const basicProtectedProcedure = t.procedure.use(isBaiscAuthed)
+export const basicProtectedProcedure = t.procedure.use(isBasicAuth)
 export const protectedProcedure = t.procedure.use(isAuthed)
+export const protectedAdminProcedure = t.procedure.use(isAdmin)
 
 export { TRPCError } from "@trpc/server"
 export type { TRPCActionHandler } from "@trpc/next/app-dir/server"
