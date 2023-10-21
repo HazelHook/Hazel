@@ -2,7 +2,7 @@ import type { Provider } from "@supabase/supabase-js"
 
 const production = process.env.NODE_ENV === "production"
 
-const configuration = {
+export const configuration = {
 	site: {
 		name: "Hazel - Webhook",
 		description: "Amazing Webhook app wow",

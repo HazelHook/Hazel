@@ -96,4 +96,4 @@ function CancelButton<Props extends React.ButtonHTMLAttributes<unknown>>(props: 
 
 Modal.CancelButton = CancelButton
 
-export { CancelButton }
+export { CancelButton, Modal }

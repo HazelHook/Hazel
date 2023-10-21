@@ -1,15 +1,15 @@
 import { redirect } from "next/navigation"
-import configuration from "@/configuration"
-import { Database } from "@/database.types"
-import { checkSessionRequireMfa } from "@hazel/auth/utils"
+import configuration from "@hazel/utils/configuration"
 import type { SupabaseClient } from "@supabase/supabase-js"
+import { checkSessionRequireMfa } from "./check-requires-mfa"
+import { Database } from "@hazel/db/src/database.types"
 
 /**
  * @name requireSession
  * @description Require a session to be present in the request
  * @param client
  */
-async function requireSession(client: SupabaseClient<Database>) {
+export async function requireSession(client: SupabaseClient<Database>) {
 	const { data, error } = await client.auth.getSession()
 
 	if (!data.session || error) {
@@ -26,5 +26,3 @@ async function requireSession(client: SupabaseClient<Database>) {
 
 	return data.session
 }
-
-export default requireSession

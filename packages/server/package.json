@@ -1,0 +1,49 @@
+{
+	"name": "@hazel/server",
+	"private": true,
+	"version": "0.1.0",
+	"scripts": {
+		"clean": "git clean -xdf .turbo node_modules",
+		"format": "prettier --check \"**/*.{ts,tsx}\"",
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@trpc/client": "10.41.0",
+		"@trpc/next": "10.41.0",
+		"@trpc/server": "10.41.0",
+		"superjson": "^2.0.0"
+	},
+	"peerDependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"zod": "^3.22.4",
+		"@supabase/supabase-js": "^2.38.1",
+		"next": "13.5.4",
+		"@hazel/auth": "workspace:*",
+		"@hazel/db": "workspace:*",
+		"@hazel/supabase": "workspace:*",
+		"@hazel/utils": "workspace:*"
+	},
+	"devDependencies": {
+		"@hazel/tailwind-config": "workspace:*",
+		"@hazel/tsconfig": "workspace:*",
+		"@types/react": "^18.2.31",
+		"@types/react-dom": "^18.2.14",
+		"eslint": "^8.52.0",
+		"prettier": "^3.0.3",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"typescript": "^5.2.2"
+	},
+	"exports": {
+		".": "./src/index.ts",
+		"./actions": "./src/actions.ts",
+		"./actions/client": "./src/actions/client.ts"
+	},
+	"typesVersions": {
+		"*": {
+			"*": ["src/*"]
+		}
+	}
+}

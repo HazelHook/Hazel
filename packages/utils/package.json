@@ -21,18 +21,18 @@
 		"@types/react-dom": "^18.2.13",
 		"eslint": "^8.51.0",
 		"prettier": "^3.0.3",
+		"@supabase/supabase-js": "^2.38.1",
 		"typescript": "^5.2.2"
 	},
 	"exports": {
 		".": "./src/index.ts",
 		"./logger": "./src/logger.ts",
-		"./lago": "./src/lago.ts"
+		"./lago": "./src/lago.ts",
+		"./configuration": "./src/configuration.ts"
 	},
 	"typesVersions": {
 		"*": {
-			"*": [
-				"src/*"
-			]
+			"*": ["src/*"]
 		}
 	}
 }

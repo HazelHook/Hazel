@@ -12,6 +12,13 @@
 		],
 		"tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
 	},
-	"include": ["next-env.d.ts", ".next/types/**/*.ts", "*.ts", "*.mjs", "src"],
+	"include": [
+		"next-env.d.ts",
+		".next/types/**/*.ts",
+		"*.ts",
+		"*.mjs",
+		"src",
+		"../../packages/auth/src/utils/require-session.ts"
+	],
 	"exclude": ["node_modules"]
 }
