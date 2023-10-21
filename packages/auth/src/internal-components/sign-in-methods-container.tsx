@@ -19,7 +19,7 @@ export function SignInMethodsContainer() {
 
 	const onSignIn = useCallback(() => {
 		router.push(authConfig.paths.signInRedirect)
-	}, [router])
+	}, [router, authConfig.paths.signInRedirect])
 
 	return (
 		<>

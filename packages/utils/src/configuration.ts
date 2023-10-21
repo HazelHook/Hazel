@@ -8,7 +8,6 @@ export const configuration = {
 		description: "Amazing Webhook app wow",
 		themeColor: "#ffffff",
 		themeColorDark: "#0a0a0a",
-		siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
 		siteName: "Hazel",
 		twitterHandle: "@makisuo__",
 		githubHandle: "makisuo",
@@ -52,9 +51,6 @@ export const configuration = {
 		user: "",
 		password: "",
 		senderAddress: "Hazel Team <info@hazelapp.dev>",
-	},
-	sentry: {
-		dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 	},
 }
 

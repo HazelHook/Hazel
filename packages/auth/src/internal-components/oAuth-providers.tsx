@@ -18,8 +18,6 @@ const OAuthProviders: React.FCC<{
 	const signInWithProviderMutation = useSignInWithProvider()
 
 	// we make the UI "busy" until the next page is fully loaded
-	const loading = signInWithProviderMutation.isMutating
-
 	const onSignInWithProvider = useCallback(async (signInRequest: () => Promise<unknown>) => {
 		try {
 			const credential = await signInRequest()
@@ -39,7 +37,7 @@ const OAuthProviders: React.FCC<{
 
 	return (
 		<>
-			{loading && <PageLoadingIndicator />}
+			{signInWithProviderMutation.isMutating && <PageLoadingIndicator />}
 
 			<div className={"flex w-full flex-1 flex-col space-y-3"}>
 				<div className={"flex-col space-y-2"}>
