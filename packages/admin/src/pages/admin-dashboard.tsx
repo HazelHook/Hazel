@@ -1,8 +1,9 @@
-import AdminHeader from "../internal/components/admin-header"
-import AdminGuard from "../internal/components/admin-guard"
+import { AdminHeader } from "../internal/components/admin-header"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Container } from "@hazel/ui/container"
 import { lago } from "@hazel/utils/lago"
+import { db } from "@hazel/db/src"
+import * as schema from "@hazel/db/src/drizzle/schema"
 import AdminDashboard from "../internal/components/admin-dashboard"
 
 export async function AdminDashboardPage() {
@@ -23,7 +24,7 @@ async function loadData() {
 	// TODO: USE DRIZZLE AND NOT THIS SHIT
 	const client = getSupabaseServerClient({ admin: true })
 
-	const { count: usersCount, data } = await client.from("users").select("*", {
+	const { count: usersCount } = await client.from("users").select("*", {
 		count: "exact",
 		head: true,
 	})

@@ -13,7 +13,6 @@ import {
 	UserPlusIcon,
 } from "@hazel/icons"
 
-import { auth } from "@/lib/auth"
 import { Sidebar } from "@/components/sidebar"
 
 const SettingsLayout = async ({ children }: { children: ReactNode }) => {

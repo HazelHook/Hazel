@@ -4,7 +4,7 @@ import { Container } from "@hazel/ui/container"
 import { Heading } from "@hazel/ui/heading"
 import Link from "next/link"
 
-function AdminHeader({ children }: React.PropsWithChildren) {
+export function AdminHeader({ children }: React.PropsWithChildren) {
 	return (
 		<div className="flex items-center justify-between border-b">
 			<Container>
@@ -27,5 +27,3 @@ function AdminHeader({ children }: React.PropsWithChildren) {
 		</div>
 	)
 }
-
-export default AdminHeader

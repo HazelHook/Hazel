@@ -326,6 +326,9 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.38.1
         version: 2.38.1
+      '@tanstack/react-table':
+        specifier: ^8.10.7
+        version: 8.10.7(react-dom@18.2.0)(react@18.2.0)
       next:
         specifier: 13.5.4
         version: 13.5.4(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
