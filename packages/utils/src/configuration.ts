@@ -2,12 +2,19 @@ import type { Provider } from "@supabase/supabase-js"
 
 const production = process.env.NODE_ENV === "production"
 
+export function getBaseUrl() {
+	if (typeof window !== "undefined") return ""
+	if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
+	return `http://localhost:${process.env.PORT || "3000"}`
+}
+
 export const configuration = {
 	site: {
 		name: "Hazel - Webhook",
 		description: "Amazing Webhook app wow",
 		themeColor: "#ffffff",
 		themeColorDark: "#0a0a0a",
+		siteUrl: getBaseUrl(),
 		siteName: "Hazel",
 		twitterHandle: "@makisuo__",
 		githubHandle: "makisuo",

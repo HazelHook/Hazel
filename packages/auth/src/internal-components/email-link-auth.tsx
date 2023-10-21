@@ -21,6 +21,7 @@ export const EmailLinkAuth: React.FC<{
 
 	const signInWithOtpMutation = useSignInWithOtp()
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(
 		async (event) => {
 			event.preventDefault()
