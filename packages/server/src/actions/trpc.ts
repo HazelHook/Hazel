@@ -62,8 +62,6 @@ const isBasicAuth = t.middleware(({ next, ctx, input }) => {
 		throw new TRPCError({ code: "UNAUTHORIZED" })
 	}
 
-	console.log(input, "XD")
-
 	return next({
 		ctx: {
 			auth: {

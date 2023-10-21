@@ -29,7 +29,7 @@ const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 })
 const enabled = boolean("enabled").default(true).notNull()
 
-const role = varchar("role", { enum: ["owner", "admin", "member"] })
+const role = varchar("role", { enum: ["owner", "admin", "member"] }).notNull()
 
 export const user = pgTable("users", {
 	id: uuid("id").primaryKey().notNull(),

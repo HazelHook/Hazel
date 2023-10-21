@@ -106,7 +106,7 @@ export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAct
 					</TableBody>
 				</Table>
 			</div>
-			<DataTablePagination hasFilter table={table} />
+			<DataTablePagination hasFilter maxCount={data.length} table={table} />
 		</div>
 	)
 }

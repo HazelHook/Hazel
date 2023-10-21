@@ -11,7 +11,7 @@ import db from "@/lib/db"
 import { requireSession } from "@hazel/auth/utils"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 
-import { CreateOrg } from "./components/CreateOrg"
+import { CreateOrg } from "./components/cretae-org-modal"
 import { OrgButton } from "./components/org-button"
 
 async function OrganizationsPage() {
@@ -60,7 +60,7 @@ async function OrganizationsPage() {
 								avatarUrl={getSeededProfileImageUrl(membership.organization.publicId)}
 								name={membership.organization.name}
 								membershipId={membership.publicId}
-								role="TODO"
+								role={membership.role}
 							/>
 						)
 					})}
