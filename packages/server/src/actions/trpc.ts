@@ -98,3 +98,6 @@ export const publicProcedure = t.procedure
 
 export const basicProtectedProcedure = t.procedure.use(isBaiscAuthed)
 export const protectedProcedure = t.procedure.use(isAuthed)
+
+export { TRPCError } from "@trpc/server"
+export type { TRPCActionHandler } from "@trpc/next/app-dir/server"

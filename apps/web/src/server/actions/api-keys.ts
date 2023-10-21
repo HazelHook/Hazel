@@ -5,7 +5,7 @@ import { z } from "zod"
 import db from "@/lib/db"
 import { createApiKeySchema } from "@/lib/schemas/api-key"
 
-import { createAction, protectedProcedure } from "../trpc"
+import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 
 export const createApiKeyAction = createAction(
 	protectedProcedure.input(z.object({ workspaceId: z.string() }).merge(createApiKeySchema)).mutation(async (opts) => {

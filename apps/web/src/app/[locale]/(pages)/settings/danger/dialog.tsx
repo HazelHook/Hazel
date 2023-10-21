@@ -14,7 +14,7 @@ import {
 } from "@hazel/ui/dialog"
 
 import type { deleteOrganzationAction } from "@/server/actions/organization"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
 
 interface OrganizationDeleteDialogProps {
 	isAllowedToDelete: boolean

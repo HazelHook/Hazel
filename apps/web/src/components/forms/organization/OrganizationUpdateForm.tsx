@@ -7,7 +7,8 @@ import { Button } from "@hazel/ui/button"
 import { z } from "zod"
 
 import { updateOrganzationAction } from "@/server/actions/organization"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { orgUpdateFormSchema } from "@/lib/schemas/organization"
 
 export const OrganizationUpdateForm = ({

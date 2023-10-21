@@ -39,7 +39,9 @@
 	"exports": {
 		".": "./src/index.ts",
 		"./actions": "./src/actions.ts",
-		"./actions/client": "./src/actions/client.ts"
+		"./actions/client": "./src/actions/client.ts",
+		"./actions/trpc": "./src/actions/trpc.ts",
+		"./actions/context": "./src/actions/context.ts"
 	},
 	"typesVersions": {
 		"*": {

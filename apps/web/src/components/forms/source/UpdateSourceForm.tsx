@@ -9,7 +9,8 @@ import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 
 import { updateSourceAction } from "@/server/actions/source"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { updateSourceSchema } from "@/lib/schemas/source"
 
 interface UpdateSourceFormProps {

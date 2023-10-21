@@ -8,7 +8,7 @@ import type { Session } from "@supabase/auth-helpers-nextjs"
 import { useTranslations } from "next-intl"
 
 import type { acceptOrganizationInvite } from "@/server/actions/organization-invite"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
 
 function ExistingUserInviteForm(
 	props: React.PropsWithChildren<{

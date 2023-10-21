@@ -1,6 +1,7 @@
 "use server"
 
-import { createAction, protectedProcedure } from "@/server/trpc"
+import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
+
 import db from "@/lib/db"
 import { createSourceSchema, updateSourceSchema } from "@/lib/schemas/source"
 

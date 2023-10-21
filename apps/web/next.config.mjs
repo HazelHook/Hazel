@@ -21,8 +21,10 @@ const nextConfig = {
 		"@hazel/db",
 		"@hazel/email",
 		"@hazel/ui",
+		"@hazel/utils",
 		"@hazel/icons",
 		"@hazel/supabase",
+		"@hazel/server",
 	],
 	webpack: (config, { isServer }) => {
 		if (config.name === "server" || config.name === "edge-server") config.optimization.concatenateModules = false

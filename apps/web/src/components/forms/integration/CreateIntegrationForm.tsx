@@ -9,7 +9,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { createIntegrationAction } from "@/server/actions/integrations"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { LabeledSeparator } from "@/components/labeled-separator"
 import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
 

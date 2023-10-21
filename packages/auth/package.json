@@ -19,6 +19,7 @@
 		"@supabase/supabase-js": "^2.38.1",
 		"@supabase/auth-helpers-nextjs": "^0.8.1",
 		"next-intl": "3.0.0-rc.5",
+		"@hazel/server": "workspace:*",
 		"@hazel/db": "workspace:*",
 		"@hazel/ui": "workspace:*",
 		"@hazel/icons": "workspace:*",

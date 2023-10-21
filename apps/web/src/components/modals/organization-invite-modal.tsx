@@ -17,10 +17,10 @@ import { toast } from "sonner"
 import { z } from "zod"
 
 import type { createOrganizationInvite } from "@/server/actions/organization-invite"
-import { useAction } from "@/server/client"
-import { getBaseUrl } from "@/server/shared"
+import { useAction } from "@hazel/server/actions/client"
 
 import { orgInviteFormSchema } from "../../lib/schemas/organization"
+import { getBaseUrl } from "@hazel/server/actions"
 
 interface CreateOrganizationModalProps {
 	children: ReactNode

@@ -16,7 +16,7 @@ import {
 import { toast } from "sonner"
 
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
 import { UpdateIntegrationForm } from "@/components/forms/integration/UpdateIntegrationForm"
 
 export const IntegrationsActions = ({

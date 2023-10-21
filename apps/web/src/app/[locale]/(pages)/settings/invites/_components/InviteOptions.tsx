@@ -11,7 +11,7 @@ import {
 import { toast } from "sonner"
 
 import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
 
 export interface InviteOptionsProps {
 	emailAdress: string

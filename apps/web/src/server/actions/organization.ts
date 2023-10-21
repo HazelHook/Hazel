@@ -1,13 +1,12 @@
 "use server"
 
 import { cookies } from "next/headers"
-import { TRPCError } from "@trpc/server"
 import { z } from "zod"
 
 import db from "@/lib/db"
 import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
 
-import { basicProtectedProcedure, createAction, protectedProcedure } from "../trpc"
+import { createAction, protectedProcedure, basicProtectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
 
 export const createOrganzationAction = createAction(
 	protectedProcedure.input(createOrgFormSchema).mutation(async (opts) => {

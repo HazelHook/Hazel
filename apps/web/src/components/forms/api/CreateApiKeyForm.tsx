@@ -5,7 +5,8 @@ import AutoForm from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 
 import type { createApiKeyAction } from "@/server/actions/api-keys"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { createApiKeySchema } from "@/lib/schemas/api-key"
 
 interface CreateApiKeyFormProps {

@@ -5,7 +5,8 @@ import AutoForm from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 
 import type { createDestinationAction } from "@/server/actions/destination"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { createDestinationSchema } from "@/lib/schemas/destination"
 
 interface CreateDestinationFormProps {

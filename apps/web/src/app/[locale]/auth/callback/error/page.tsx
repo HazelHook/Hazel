@@ -1,4 +1,5 @@
-import configuration from "@/configuration"
+import configuration from "@hazel/utils/configuration"
+
 import { AuthCallbackErrorPage } from "@hazel/auth/pages"
 
 interface Params {

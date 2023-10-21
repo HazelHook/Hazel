@@ -1,6 +1,7 @@
 "use client"
 
-import configuration from "@/configuration"
+import configuration from "@hazel/utils/configuration"
+
 import useUpdateUserMutation from "@/core/hooks/use-update-user-mutation"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"

@@ -1,13 +1,14 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import configuration from "@/configuration"
+import configuration from "@hazel/utils/configuration"
+
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
 
 import { switchOrganizationAction } from "@/server/actions/organization"
 import db from "@/lib/db"
-import requireSession from "@/lib/user/require-session"
+import { requireSession } from "@hazel/auth/utils"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 
 import { CreateOrg } from "./components/CreateOrg"

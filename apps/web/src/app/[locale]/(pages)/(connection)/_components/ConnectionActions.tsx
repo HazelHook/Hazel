@@ -16,7 +16,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { toast } from "sonner"
 
 import type { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
 export const ConnectionActions = ({

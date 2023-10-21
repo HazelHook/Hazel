@@ -1,6 +1,8 @@
 import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 
-export const impersonateUser = withAdminSession(async ({ userId }) => {
+import { createAction } from "@hazel/server/actions/trpc"
+
+export const impersonateUser = createAction(async ({ userId }) => {
 	const client = getSupabaseServerActionClient({ admin: true })
 
 	const {

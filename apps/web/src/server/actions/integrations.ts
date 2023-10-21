@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 
-import { createAction, protectedProcedure } from "@/server/trpc"
+import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 import db from "@/lib/db"
 
 const formSchema = z.object({

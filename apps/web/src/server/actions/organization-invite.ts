@@ -1,12 +1,11 @@
 "use server"
 
-import { TRPCError } from "@trpc/server"
 import { z } from "zod"
 
 import db from "@/lib/db"
 import { orgInviteFormSchema } from "@/lib/schemas/organization"
 
-import { basicProtectedProcedure, createAction, protectedProcedure } from "../trpc"
+import { createAction, basicProtectedProcedure, protectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
 
 // import { Resend } from "resend"
 // import { OrganizationInviteEmail } from "@/lib/emails/organization/Invite"

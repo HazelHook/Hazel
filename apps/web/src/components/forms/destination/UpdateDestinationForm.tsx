@@ -6,7 +6,8 @@ import AutoForm from "@hazel/ui/auto-form"
 import { LoadingButton } from "@hazel/ui/loading-button"
 
 import type { updateDestinationAction } from "@/server/actions/destination"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { updateDestinationSchema } from "@/lib/schemas/destination"
 
 export const UpdateDestinationForm = ({

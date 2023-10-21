@@ -3,9 +3,9 @@ import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
 import csrf from "edge-csrf"
 import createI18nMiddleware from "next-intl/middleware"
 
-import configuration from "./configuration"
 import HttpStatusCode from "./core/generic/http-status-code.enum"
 import { isPublicRoute } from "./core/generic/route-matcher"
+import configuration from "@hazel/utils/configuration"
 
 const CSRF_TOKEN_HEADER = "X-CSRF-Token"
 const CSRF_SECRET_COOKIE = "csrfSecret"

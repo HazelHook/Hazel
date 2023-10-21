@@ -5,7 +5,7 @@ import * as schema from "@hazel/db/src/drizzle/schema"
 import { generatePublicId } from "@hazel/db/src/drizzle/schema/common"
 import { z } from "zod"
 
-import { basicProtectedProcedure, createAction } from "@/server/trpc"
+import { createAction, basicProtectedProcedure } from "@hazel/server/actions/trpc"
 import db from "@/lib/db"
 
 const formSchema = z.object({

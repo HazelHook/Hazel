@@ -15,7 +15,8 @@ import {
 import { toast } from "sonner"
 
 import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
 
 export const DestinationsActions = ({

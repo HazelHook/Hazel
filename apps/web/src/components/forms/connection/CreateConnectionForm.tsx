@@ -15,7 +15,8 @@ import { z } from "zod"
 import type { createConnectionAction } from "@/server/actions/connections"
 import { createDestinationAction } from "@/server/actions/destination"
 import { createSourceAction } from "@/server/actions/source"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { createConnectionSchema } from "@/lib/schemas/connection"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 

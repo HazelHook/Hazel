@@ -11,7 +11,8 @@ import { toast } from "sonner"
 import { z } from "zod"
 
 import { updateIntegrationAction } from "@/server/actions/integrations"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
+
 import { LabeledSeparator } from "@/components/labeled-separator"
 import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
 

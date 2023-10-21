@@ -41,9 +41,10 @@ import { useLocale } from "next-intl"
 import { useTheme } from "next-themes"
 
 import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
-import { useAction } from "@/server/client"
 import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { cn } from "@/lib/utils"
+
+import { useAction } from "@hazel/server/actions/client"
 
 type Membership = OrganizationMember & {
 	organization: Organization

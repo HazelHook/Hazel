@@ -2,7 +2,7 @@ import "@/styles/global.css"
 
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import configuration from "@/configuration"
+import configuration from "@hazel/utils/configuration"
 import { AuthConfigProvider, AuthProvider } from "@hazel/auth/provider"
 import { Toaster } from "sonner"
 

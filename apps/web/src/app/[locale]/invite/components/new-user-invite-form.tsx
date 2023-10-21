@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import configuration from "@/configuration"
+import configuration from "@hazel/utils/configuration"
+
 import isBrowser from "@/core/generic/is-browser"
 import { EmailPasswordSignInContainer } from "@hazel/auth/internal-components/emai-password-signIn-container"
 import { EmailLinkAuth } from "@hazel/auth/internal-components/email-link-auth"
@@ -14,7 +15,7 @@ import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 import { useTranslations } from "next-intl"
 
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
-import { useAction } from "@/server/client"
+import { useAction } from "@hazel/server/actions/client"
 
 enum Mode {
 	SignUp = 0,
