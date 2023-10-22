@@ -12,6 +12,7 @@
 	"dependencies": {
 		"lago-javascript-client": "0.49.0-beta",
 		"pino": "^8.16.0",
+		"nanoid": "^5.0.2",
 		"pino-pretty": "^10.2.3"
 	},
 	"devDependencies": {

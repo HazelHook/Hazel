@@ -1,4 +1,4 @@
-import { InferInsertModel, InferModel, InferSelectModel, relations } from "drizzle-orm"
+import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm"
 import {
 	boolean,
 	index,
@@ -14,16 +14,20 @@ import {
 } from "drizzle-orm/pg-core"
 
 import { INTEGRATIONS } from "../integrations/data"
+import { SchemaType, generatePublicId } from "./common"
 
-const commonFields = {
+const commonFields = (type: SchemaType) => ({
 	id: serial("id").primaryKey(),
 
-	publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+	publicId: varchar("public_id", { length: 21 })
+		.unique()
+		.notNull()
+		.$defaultFn(() => generatePublicId(type)),
 
 	createdAt: timestamp("created_at").defaultNow().notNull(),
 	updatedAt: timestamp("updated_at").defaultNow().notNull(),
 	deletedAt: timestamp("deleted_at"),
-}
+})
 
 const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 })
@@ -41,7 +45,7 @@ export const user = pgTable("users", {
 export const source = pgTable(
 	"sources",
 	{
-		...commonFields,
+		...commonFields("src"),
 		workspaceId: varchar("workspace_id", { length: 128 })
 			.notNull()
 			.references(() => organizations.publicId),
@@ -56,7 +60,7 @@ export const source = pgTable(
 export const integration = pgTable(
 	"integrations",
 	{
-		...commonFields,
+		...commonFields("itg"),
 		workspaceId: varchar("workspace_id", { length: 128 })
 			.notNull()
 			.references(() => organizations.publicId),
@@ -75,7 +79,7 @@ export const integration = pgTable(
 export const destination = pgTable(
 	"destinations",
 	{
-		...commonFields,
+		...commonFields("dst"),
 		workspaceId: varchar("workspace_id", { length: 128 })
 			.notNull()
 			.references(() => organizations.publicId),
@@ -90,7 +94,7 @@ export const destination = pgTable(
 export const connection = pgTable(
 	"connections",
 	{
-		...commonFields,
+		...commonFields("con"),
 		workspaceId: varchar("workspace_id", { length: 128 })
 			.notNull()
 			.references(() => organizations.publicId),
@@ -121,7 +125,7 @@ export const connection = pgTable(
 export const apiKeys = pgTable(
 	"api_keys",
 	{
-		...commonFields,
+		...commonFields("sk"),
 		workspaceId: varchar("workspace_id", { length: 128 })
 			.notNull()
 			.references(() => organizations.publicId),
@@ -137,7 +141,10 @@ export const organizations = pgTable(
 	"organizations",
 	{
 		id: serial("id").primaryKey(),
-		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+		publicId: varchar("public_id", { length: 21 })
+			.unique()
+			.notNull()
+			.$defaultFn(() => generatePublicId("org")),
 
 		ownerId: varchar("owner_id", { length: 128 }).notNull(),
 
@@ -156,7 +163,10 @@ export const organizationMembers = pgTable(
 	"organization_members",
 	{
 		id: serial("id").primaryKey(),
-		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+		publicId: varchar("public_id", { length: 21 })
+			.unique()
+			.notNull()
+			.$defaultFn(() => generatePublicId("mem")),
 
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 		updatedAt: timestamp("updated_at").defaultNow().notNull(),
@@ -179,7 +189,10 @@ export const organizationInvites = pgTable(
 	"organization_invites",
 	{
 		id: serial("id").primaryKey(),
-		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
+		publicId: varchar("public_id", { length: 21 })
+			.unique()
+			.notNull()
+			.$defaultFn(() => generatePublicId("inv")),
 
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 		revokedAt: timestamp("revoked_at"),

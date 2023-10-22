@@ -1,0 +1,12 @@
+{
+	"name": "@hazel/lago",
+	"version": "0.1.0",
+	"main": "index.ts",
+	"license": "MIT",
+	"scripts": {
+		"deploy": "pnpm deploy:api && pnpm deploy:web && pnpm deploy:pdf",
+		"deploy:api": "cd ./api && fly deploy && cd ..",
+		"deploy:web": "cd ./web && fly deploy && cd ..",
+		"deploy:pdf": "cd ./pdf && fly deploy && cd .."
+	}
+}

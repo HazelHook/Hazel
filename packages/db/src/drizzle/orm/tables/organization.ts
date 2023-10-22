@@ -1,4 +1,4 @@
-import { and, eq, isNull, sql } from "drizzle-orm"
+import { and, eq, isNull } from "drizzle-orm"
 
 import { EntityLogic } from "."
 import { DB, OptionalExceptFor } from ".."
@@ -47,7 +47,7 @@ const organizationsLogic = (db: DB) =>
 
 			return { publicId }
 		},
-		update: async (data: OptionalExceptFor<schema.InsertOrganization, "publicId">) => {
+		update: async (data: OptionalExceptFor<schema.Organization, "publicId">) => {
 			const res = await db
 				.update(schema.organizations)
 				.set(data)
@@ -87,6 +87,7 @@ const organizationsLogic = (db: DB) =>
 					...data,
 					publicId,
 				})
+
 				return { res, publicId }
 			},
 			revoke: async (data: { publicInviteId: string }) => {

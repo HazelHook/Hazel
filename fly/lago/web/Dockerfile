@@ -1,2 +1,2 @@
-FROM getlago/front:v0.49.1-beta
+FROM getlago/front:v0.50.0-beta
 EXPOSE 80
