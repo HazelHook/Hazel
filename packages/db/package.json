@@ -4,6 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"db:push": "drizzle-kit push:pg",
+		"db:pull": "drizzle-kit introspect:pg",
 		"db:generate": "drizzle-kit generate:pg",
 		"tb:pull": "tb pull --auto --force"
 	},

@@ -23,11 +23,11 @@ export const ingestMetric = async (input: { externalId: string; type: Domain; pr
 	}
 }
 
-export const createSubscription = async (input: { planCode: string; externalId: string }) => {
+export const createSubscription = async (input: { planCode: string; workspaceId: string }) => {
 	const { data } = await lago.subscriptions.createSubscription({
 		subscription: {
 			plan_code: input.planCode,
-			external_customer_id: input.externalId,
+			external_customer_id: input.workspaceId,
 			external_id: genId(),
 			billing_time: "anniversary",
 		},
@@ -40,7 +40,7 @@ export const createCustomer = async (input: {
 	workspaceId: string
 	email: string
 	name: string
-	legalName: string
+	legalName?: string
 	phone?: string
 }) => {
 	const { data } = await lago.customers.createCustomer({
@@ -60,11 +60,11 @@ export const createCustomer = async (input: {
 	return data
 }
 
-export const isLimited = async (input: { externalId: string; metric: Domain; limit: number }) => {
+export const isLimited = async (input: { workspaceId: string; metric: Domain; limit: number }) => {
 	const {
 		data: { subscriptions },
 	} = await lago.subscriptions.findAllSubscriptions({
-		external_customer_id: input.externalId,
+		external_customer_id: input.workspaceId,
 	})
 
 	const subscription = subscriptions[0]
@@ -72,7 +72,7 @@ export const isLimited = async (input: { externalId: string; metric: Domain; lim
 	// If no subscription subscripe to free. But this shouldnt happen
 	if (!subscription) {
 		await createSubscription({
-			externalId: input.externalId,
+			workspaceId: input.workspaceId,
 			planCode: "free",
 		})
 
@@ -86,7 +86,7 @@ export const isLimited = async (input: { externalId: string; metric: Domain; lim
 
 	const {
 		data: { customer_usage: usage },
-	} = await lago.customers.findCustomerCurrentUsage(input.externalId, {
+	} = await lago.customers.findCustomerCurrentUsage(input.workspaceId, {
 		external_subscription_id: subscription.external_id,
 	})
 

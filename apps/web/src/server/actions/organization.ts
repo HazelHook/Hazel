@@ -7,16 +7,45 @@ import db from "@/lib/db"
 import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
 
 import { createAction, protectedProcedure, basicProtectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
+import { generatePublicId } from "@hazel/db/src/drizzle/schema/common"
+import * as schema from "@hazel/db/src/drizzle/schema"
+import { createCustomer, createSubscription } from "@hazel/utils/lago"
 
 export const createOrganzationAction = createAction(
-	protectedProcedure.input(createOrgFormSchema).mutation(async (opts) => {
-		const organization = await db.organization.create({
-			...opts.input,
-			ownerId: opts.ctx.auth.customerId,
+	basicProtectedProcedure.input(createOrgFormSchema).mutation(async (opts) => {
+		const orgId = generatePublicId("org")
+		const memberPublicId = generatePublicId("mem")
+
+		const sub = await db.db.transaction(async (tx) => {
+			await createCustomer({
+				workspaceId: orgId,
+				email: opts.ctx.auth.user.email!,
+				name: opts.input.name,
+			})
+
+			const sub = await createSubscription({
+				planCode: opts.input.plan,
+				workspaceId: orgId,
+			})
+
+			const res = await tx
+				.insert(schema.organizations)
+				.values({ ...opts.input, ownerId: opts.ctx.auth.customerId, publicId: orgId })
+				.returning({ insertedId: schema.organizations.id })
+
+			await tx.insert(schema.organizationMembers).values({
+				publicId: memberPublicId,
+				userId: opts.ctx.auth.customerId,
+				organizationId: Number(res[0].insertedId),
+				role: "admin",
+			})
+
+			return sub
 		})
 
 		return {
-			id: organization.publicId,
+			id: orgId,
+			subscription: sub,
 		}
 	}),
 )

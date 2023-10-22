@@ -4,8 +4,10 @@ import {
 	index,
 	integer,
 	json,
+	jsonb,
 	pgTable,
 	serial,
+	text,
 	timestamp,
 	unique,
 	uniqueIndex,
@@ -33,7 +35,9 @@ const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 })
 const enabled = boolean("enabled").default(true).notNull()
 
-const role = varchar("role", { enum: ["owner", "admin", "member"] }).notNull()
+const role = varchar("role", { enum: ["owner", "admin", "member"] })
+	.notNull()
+	.default("member")
 
 export const user = pgTable("users", {
 	id: uuid("id").primaryKey().notNull(),
@@ -207,6 +211,15 @@ export const organizationInvites = pgTable(
 		emailIdx: uniqueIndex("email_idx").on(table.email),
 	}),
 )
+
+export const stripeCustomers = pgTable("stripe_customers", {
+	id: text("id"),
+	email: text("email"),
+	name: text("name"),
+	description: text("description"),
+	created: timestamp("created", { mode: "string" }),
+	attrs: jsonb("attrs"),
+})
 
 export const userRelation = relations(user, ({ many }) => ({
 	memberships: many(organizationMembers),

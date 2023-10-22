@@ -3,12 +3,11 @@ import { auth } from "@/lib/auth"
 import Alert, { AlertHeading } from "@hazel/ui/alert"
 import { Container } from "@hazel/ui/container"
 import { Separator } from "@hazel/ui/separator"
-import { createCustomer, lago } from "@hazel/utils/lago"
+import { lago } from "@hazel/utils/lago"
 
 export default async function BillingPage() {
-	const { workspaceId, organization, user } = await auth()
+	const { workspaceId } = await auth()
 
-	await createCustomer({ workspaceId, name: organization.name, legalName: user.name!, email: user.email! })
 	const {
 		data: { subscriptions },
 	} = await lago.subscriptions.findAllSubscriptions({
