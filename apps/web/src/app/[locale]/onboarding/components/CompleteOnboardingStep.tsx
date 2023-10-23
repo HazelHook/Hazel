@@ -44,6 +44,7 @@ function useCompleteOnboarding(data: CompleteOnboardingStepData) {
 		},
 	})
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (submitted.current) {
 			return

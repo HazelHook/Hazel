@@ -11,42 +11,57 @@ import { generatePublicId } from "@hazel/db/src/drizzle/schema/common"
 import * as schema from "@hazel/db/src/drizzle/schema"
 import { createCustomer, createSubscription } from "@hazel/utils/lago"
 
-export const createOrganzationAction = createAction(
-	basicProtectedProcedure.input(createOrgFormSchema).mutation(async (opts) => {
-		const orgId = generatePublicId("org")
-		const memberPublicId = generatePublicId("mem")
+export const createOrganzation = async ({
+	plan = "free",
+	name,
+	primaryEmail,
+	ownerId,
+}: {
+	plan: schema.Organization["plan"]
+	name: string
+	primaryEmail: string
+	ownerId: string
+}) => {
+	const orgId = generatePublicId("org")
+	const memberPublicId = generatePublicId("mem")
 
-		const sub = await db.db.transaction(async (tx) => {
-			await createCustomer({
-				workspaceId: orgId,
-				email: opts.ctx.auth.user.email!,
-				name: opts.input.name,
-			})
-
-			const sub = await createSubscription({
-				planCode: opts.input.plan,
-				workspaceId: orgId,
-			})
-
-			const res = await tx
-				.insert(schema.organizations)
-				.values({ ...opts.input, ownerId: opts.ctx.auth.customerId, publicId: orgId })
-				.returning({ insertedId: schema.organizations.id })
-
-			await tx.insert(schema.organizationMembers).values({
-				publicId: memberPublicId,
-				userId: opts.ctx.auth.customerId,
-				organizationId: Number(res[0].insertedId),
-				role: "admin",
-			})
-
-			return sub
+	const sub = await db.db.transaction(async (tx) => {
+		await createCustomer({
+			workspaceId: orgId,
+			email: primaryEmail,
+			name: name,
 		})
 
-		return {
-			id: orgId,
-			subscription: sub,
-		}
+		const sub = await createSubscription({
+			planCode: plan!,
+			workspaceId: orgId,
+		})
+
+		const res = await tx
+			.insert(schema.organizations)
+			.values({ plan, name, ownerId: ownerId, publicId: orgId })
+			.returning({ insertedId: schema.organizations.id })
+
+		await tx.insert(schema.organizationMembers).values({
+			publicId: memberPublicId,
+			userId: ownerId,
+			organizationId: Number(res[0].insertedId),
+			role: "admin",
+		})
+
+		return sub
+	})
+
+	return {
+		subscription: sub,
+		orgId,
+		membershipId: memberPublicId,
+	}
+}
+
+export const createOrganzationAction = createAction(
+	basicProtectedProcedure.input(createOrgFormSchema).mutation(async ({ input, ctx }) => {
+		return await createOrganzation({ ...input, primaryEmail: ctx.auth.user.email!, ownerId: ctx.auth.customerId })
 	}),
 )
 
