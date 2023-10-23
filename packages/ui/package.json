@@ -103,6 +103,7 @@
 		"./page-header": "./src/page-header.tsx",
 		"./popover": "./src/popover.tsx",
 		"./page-loading-indicator": "./src/page-loading-indicator.tsx",
+		"./radial-progress": "./src/radial-progress.tsx",
 		"./scroll-area": "./src/scroll-area.tsx",
 		"./select": "./src/select.tsx",
 		"./separator": "./src/separator.tsx",
