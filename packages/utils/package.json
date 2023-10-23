@@ -13,7 +13,8 @@
 		"lago-javascript-client": "0.49.0-beta",
 		"pino": "^8.16.0",
 		"nanoid": "^5.0.2",
-		"pino-pretty": "^10.2.3"
+		"pino-pretty": "^10.2.3",
+		"stripe": "^14.1.0"
 	},
 	"devDependencies": {
 		"@hazel/tailwind-config": "workspace:*",
@@ -29,6 +30,7 @@
 		".": "./src/index.ts",
 		"./logger": "./src/logger.ts",
 		"./lago": "./src/lago.ts",
+		"./stripe": "./src/stripe.ts",
 		"./configuration": "./src/configuration.ts"
 	},
 	"typesVersions": {

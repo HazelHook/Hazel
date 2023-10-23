@@ -4,6 +4,8 @@ import Alert, { AlertHeading } from "@hazel/ui/alert"
 import { Container } from "@hazel/ui/container"
 import { Separator } from "@hazel/ui/separator"
 import { lago } from "@hazel/utils/lago"
+import { PaymentSection } from "./components/payment-section"
+import { Card } from "@hazel/ui/card"
 
 export default async function BillingPage() {
 	const { workspaceId } = await auth()
@@ -26,8 +28,6 @@ export default async function BillingPage() {
 			</Container>
 		)
 	}
-
-	console.log(subscriptions)
 
 	const {
 		data: { customer_usage: usage },
@@ -68,14 +68,14 @@ export default async function BillingPage() {
 					))}
 				</div>
 			</div>
-			{/* <div className="flex w-full flex-col justify-center gap-6">
-				<h4 className="text-lg font-medium">Payment Methods</h4>
-				<PaymentSection externalId={externalId}></PaymentSection>
-			</div>
 			<div className="flex w-full flex-col justify-center gap-6">
+				<h4 className="text-lg font-medium">Payment Methods</h4>
+				<PaymentSection workspaceId={workspaceId} />
+			</div>
+			{/* <div className="flex w-full flex-col justify-center gap-6">
 				<h4 className="text-lg font-medium">Pricing Breakdown</h4>
 				<Card className="w-full max-w-5xl">
-					<BillingTable usage={usage} currentPlan={currentPlan!}></BillingTable>
+					<BillingTable usage={usage} currentPlan={currentPlan!} />
 				</Card>
 			</div> */}
 		</Container>
