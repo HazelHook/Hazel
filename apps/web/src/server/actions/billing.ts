@@ -20,7 +20,7 @@ export const changeSubscribtionAction = createAction(
 
 			await createSubscription({
 				planCode: input.plan,
-				externalId: ctx.auth.workspaceId,
+				workspaceId: ctx.auth.workspaceId,
 			})
 
 			return { url: undefined, org: ctx.auth.workspaceId }

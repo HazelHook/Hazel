@@ -5,6 +5,7 @@ import { Container } from "@hazel/ui/container"
 import { Separator } from "@hazel/ui/separator"
 import { lago } from "@hazel/utils/lago"
 import { PaymentSection } from "./components/payment-section"
+import { BillingTable } from "./components/billing-table"
 import { Card } from "@hazel/ui/card"
 
 export default async function BillingPage() {
@@ -72,12 +73,12 @@ export default async function BillingPage() {
 				<h4 className="text-lg font-medium">Payment Methods</h4>
 				<PaymentSection workspaceId={workspaceId} />
 			</div>
-			{/* <div className="flex w-full flex-col justify-center gap-6">
+			<div className="flex w-full flex-col justify-center gap-6">
 				<h4 className="text-lg font-medium">Pricing Breakdown</h4>
 				<Card className="w-full max-w-5xl">
 					<BillingTable usage={usage} currentPlan={currentPlan!} />
 				</Card>
-			</div> */}
+			</div>
 		</Container>
 	)
 }

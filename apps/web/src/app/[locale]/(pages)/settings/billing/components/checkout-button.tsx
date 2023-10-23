@@ -14,18 +14,21 @@ interface CheckoutButtonProps {
 
 export const CheckoutButton = ({ planId, disabled, previousSubscriptionId, subscribeAction }: CheckoutButtonProps) => {
 	const router = useRouter()
-	const { mutateAsync } = useAction(subscribeAction)
+	const { mutate, status } = useAction(subscribeAction, {
+		onSuccess: (data) => {
+			if (data.url) {
+				router.push(data.url)
+			} else {
+				router.refresh()
+			}
+		},
+	})
 
 	return (
 		<Button
-			onClick={async () => {
-				const data = await mutateAsync({ plan: planId, previousSubscriptionId })
-
-				if (data.url) {
-					router.push(data.url)
-				} else {
-					router.refresh()
-				}
+			loading={status === "loading"}
+			onClick={() => {
+				mutate({ plan: planId, previousSubscriptionId })
 			}}
 			disabled={disabled}
 		>
