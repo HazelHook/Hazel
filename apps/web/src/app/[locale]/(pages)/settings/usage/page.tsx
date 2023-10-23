@@ -9,6 +9,7 @@ import { lago } from "@hazel/utils/lago"
 import Link from "next/link"
 import { BillingTable } from "../billing/components/billing-table"
 import { UsageCard } from "./component/usage-card"
+import { PageHeader } from "@hazel/ui/page-header"
 
 export default async function UsagePage() {
 	const { workspaceId } = await auth()
@@ -46,11 +47,7 @@ export default async function UsagePage() {
 
 	return (
 		<Container>
-			<div>
-				<h2 className="text-2xl font-medium">Usage</h2>
-				<p className="text-sm text-muted-foreground">Your current usage for this month.</p>
-			</div>
-			<Separator />
+			<PageHeader title="Usage" subtitle="Your current usage for this month." />
 
 			<Card>
 				<CardHeader className="flex flex-row justify-between">

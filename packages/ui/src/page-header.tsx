@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { Separator } from "./separator"
 
 export const PageHeader = ({
 	title,
@@ -10,12 +11,16 @@ export const PageHeader = ({
 	children?: ReactNode
 }) => {
 	return (
-		<div className="flex flex-row justify-between">
-			<div className="max-w-md">
-				<h1 className="text-3xl font-bold">{title}</h1>
-				<p className="text-lg text-muted-foreground">{subtitle}</p>
+		<>
+			<div className="flex flex-row justify-between">
+				<div className="flex flex-col gap-3">
+					<h2 className="text-2xl font-medium">{title}</h2>
+					<p className="text-sm text-muted-foreground">{subtitle}</p>
+				</div>
+
+				{children}
 			</div>
-			{children}
-		</div>
+			<Separator />
+		</>
 	)
 }

@@ -7,6 +7,7 @@ import { lago } from "@hazel/utils/lago"
 import { PaymentSection } from "./components/payment-section"
 import { BillingTable } from "./components/billing-table"
 import { Card } from "@hazel/ui/card"
+import { PageHeader } from "@hazel/ui/page-header"
 
 export default async function BillingPage() {
 	const { workspaceId } = await auth()
@@ -48,12 +49,11 @@ export default async function BillingPage() {
 
 	return (
 		<Container>
-			<div>
-				<h3 className="text-lg font-medium">Billing</h3>
-				<p className="text-sm text-muted-foreground">
-					Update your account settings. Set your preferred language and timezone.
-				</p>
-			</div>
+			<PageHeader
+				title="Billing"
+				subtitle="	Update your account settings. Set your preferred language and timezone."
+			/>
+
 			<Separator />
 			<div className="flex w-full flex-col justify-center gap-6">
 				<h4 className="text-lg font-medium">Your Current Plan</h4>
