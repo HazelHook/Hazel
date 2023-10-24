@@ -15,6 +15,9 @@ const nextConfig = {
 		serverComponentsExternalPackages: ["@trpc/server"],
 		optimizePackageImports: ["@hazel/icons"],
 	},
+	devIndicators: {
+		buildActivityPosition: "top-right",
+	},
 	transpilePackages: [
 		"@hazel/admin",
 		"@hazel/auth",

@@ -12,11 +12,11 @@
 		"@chronark/zod-bird": "^0.2.2",
 		"drizzle-orm": "^0.28.6",
 		"drizzle-zod": "^0.5.1",
-		"postgres": "^3.4.0",
-		"zod": "^3.22.4"
+		"postgres": "^3.4.0"
 	},
 	"peerDependencies": {
-		"@hazel/utils": "workspace:*"
+		"@hazel/utils": "workspace:*",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@hazel/tsconfig": "workspace:*",

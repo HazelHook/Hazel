@@ -157,9 +157,6 @@ importers:
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
-      cmdk:
-        specifier: ^0.2.0
-        version: 0.2.0(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -748,7 +745,7 @@ importers:
         specifier: ^1.14.0
         version: 1.14.0
       zod:
-        specifier: ^3.22.1
+        specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
       '@hazel/tailwind-config':
