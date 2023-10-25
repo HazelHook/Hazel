@@ -5,5 +5,5 @@ export const Container = ({
 }: {
 	children: ReactNode | ReactElement
 }) => {
-	return <main className="py-8 container space-y-6">{children}</main>
+	return <main className="py-8 container space-y-12">{children}</main>
 }

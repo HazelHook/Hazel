@@ -73,7 +73,7 @@
 		"./accordion": "./src/accordion.tsx.tsx",
 		"./alert-dialog": "./src/alert-dialog.tsx",
 		"./alert": "./src/alert.tsx",
-		"./auto-form": "./src/auto-form.tsx",
+		"./auto-form": "./src/auto-form/index.tsx",
 		"./avatar": "./src/avatar.tsx",
 		"./badge": "./src/badge.tsx",
 		"./button": "./src/button.tsx",

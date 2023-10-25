@@ -9,6 +9,7 @@ import { Card } from "@hazel/ui/card"
 import { PageHeader } from "@hazel/ui/page-header"
 import { InvoiceTable } from "./components/invoice-table"
 import { format } from "date-fns"
+import Heading from "@hazel/ui/heading"
 
 export default async function BillingPage() {
 	const { workspaceId } = await auth()
@@ -53,10 +54,14 @@ export default async function BillingPage() {
 		<Container>
 			<PageHeader
 				title="Billing"
-				subtitle="	Update your account settings. Set your preferred language and timezone."
+				subtitle="Update your account settings. Set your preferred language and timezone."
 			/>
 			<div className="flex w-full flex-col justify-center gap-6">
-				<h4 className="text-lg font-medium">Your Current Plan</h4>
+				<div>
+					<Heading type={3}>Your current plan</Heading>
+					<p className="text-muted-foreground text-sm">Upgrade, cancel or switch your subscription plan</p>
+				</div>
+
 				<div className="flex flex-col justify-center gap-4 md:flex-row">
 					{plans.map((plan) => (
 						<PlanCard
@@ -70,17 +75,24 @@ export default async function BillingPage() {
 				</div>
 			</div>
 			<div className="flex w-full flex-col justify-center gap-6">
-				<h4 className="text-lg font-medium">Payment Methods</h4>
+				<Heading type={3}>Payment Methods</Heading>
 				<PaymentSection workspaceId={workspaceId} />
 			</div>
 			<div className="flex w-full flex-col justify-center gap-6">
-				<h4 className="text-lg font-medium">Pricing Breakdown</h4>
+				<div>
+					<Heading type={3}>Pricing Breakdown</Heading>
+					<p className="text-muted-foreground text-sm">A breakdown of your current billing cycle</p>
+				</div>
+
 				<Card className="w-full max-w-5xl">
 					<BillingTable usage={usage} currentPlan={currentPlan!} />
 				</Card>
 			</div>
 			<div className="flex w-full flex-col justify-center gap-6">
-				<h4 className="text-lg font-medium">Invoices</h4>
+				<div>
+					<Heading type={3}>Invoices</Heading>
+					<p className="text-muted-foreground text-sm">All your invoices in one place</p>
+				</div>
 				<Card className="w-full max-w-5xl">
 					<InvoiceTable workspaceID={workspaceId} />
 				</Card>

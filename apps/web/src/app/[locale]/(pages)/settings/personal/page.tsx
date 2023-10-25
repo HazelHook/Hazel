@@ -2,6 +2,9 @@ import { Container } from "@hazel/ui/container"
 
 import { auth } from "@/lib/auth"
 import { UserUpdateForm } from "@/components/forms/user/user-update-form"
+import { TextField } from "@hazel/ui/text-field"
+import { ImageUploadInput } from "@hazel/ui/image-upload-input"
+import { AvatarUpload } from "./component/AvatarUpload"
 
 const SettingsPage = async () => {
 	const { workspaceId, organization, userId, user } = await auth()
@@ -14,6 +17,8 @@ const SettingsPage = async () => {
 			</div>
 
 			<UserUpdateForm userId={userId} defaultValues={user as any} />
+
+			<AvatarUpload image={user.profileImage!} />
 		</Container>
 	)
 }
