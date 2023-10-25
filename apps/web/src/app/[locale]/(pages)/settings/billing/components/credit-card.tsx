@@ -6,7 +6,7 @@ import { useAction } from "@hazel/server/actions/client"
 import { Card } from "@hazel/ui/card"
 import { Image } from "@hazel/ui/image"
 import { Button, buttonVariants } from "@hazel/ui/button"
-import { CheckTickCircleIcon, CopperXIcon } from "@hazel/icons"
+import { CheckTickCircleIcon, CopperXIcon, CrossCircleIcon, CrossIcon } from "@hazel/icons"
 import { ConfirmationDialog } from "./confirmation-dialog"
 import type { changeDefaultMethodAction, removePaymentMethodAction } from "@/server/actions/stripe"
 import { cn } from "@/lib/utils"
@@ -53,12 +53,12 @@ export const CreditCard = ({
 	const router = useRouter()
 	const changeDefaultMethodHandler = useAction(changeDefaultMethodAction, {
 		onSuccess: (data) => {
-			router.refresh()
+			// router.refresh()
 		},
 	})
 	const removePaymentHandler = useAction(removePaymentMethodAction, {
 		onSuccess: () => {
-			router.refresh()
+			// router.refresh()
 		},
 	})
 
@@ -143,7 +143,7 @@ export const CreditCard = ({
 						onSubmit={() => removePaymentHandler.mutate({ methodId })}
 					>
 						<Button variant="destructive" size="xs" disabled={isLoading} loading={isLoading}>
-							<CopperXIcon className="h-4 w-4" />
+							<CrossCircleIcon className="h-4 w-4" />
 						</Button>
 					</ConfirmationDialog>
 				</div>

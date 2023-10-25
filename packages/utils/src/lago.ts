@@ -51,8 +51,10 @@ export const createCustomer = async (input: {
 			legal_name: input.legalName,
 			phone: input.phone,
 			billing_configuration: {
+				invoice_grace_period: 3,
 				payment_provider: "stripe",
 				sync_with_provider: true,
+				provider_payment_methods: ["card"],
 			},
 		},
 	})

@@ -1,11 +1,10 @@
 "use server"
 
-import { redirect } from "next/navigation"
-
 import { z } from "zod"
 
 import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 import { createCheckoutSession, stripe } from "@hazel/utils/stripe"
+import { revalidatePath } from "next/cache"
 
 export const createCheckoutAction = createAction(
 	protectedProcedure
@@ -39,11 +38,13 @@ export const changeDefaultMethodAction = createAction(
 		)
 		.mutation(async ({ input }) => {
 			const res = await stripe.customers.update(input.stripeCustomerId, {
-				// default_source: methodId,
+				// default_source: input.methodId,
 				invoice_settings: {
 					default_payment_method: input.methodId,
 				},
 			})
+
+			revalidatePath("/settings/billing")
 
 			return res
 		}),
@@ -58,6 +59,8 @@ export const removePaymentMethodAction = createAction(
 		)
 		.mutation(async ({ input }) => {
 			await stripe.paymentMethods.detach(input.methodId)
+
+			revalidatePath("/settings/billing")
 
 			return {
 				success: true,

@@ -16,6 +16,7 @@ export const LoadingButton: React.FC<LoadingButtonProps> = ({
 	const [internalLoading, setInternalLoading] = useState<boolean>(propLoading)
 	const [loadingChangeTimestamp, setLoadingChangeTimestamp] = useState<number | null>(null)
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (loadingChangeTimestamp === null) {
 			setLoadingChangeTimestamp(Date.now())
