@@ -46,10 +46,6 @@ export const BillingTable = ({ usage, currentPlan }: CustomerUsageObjectProps) =
 
 	return (
 		<Table className="w-full">
-			<TableCaption className="mb-4">
-				Billing Cycle from {format(new Date(usage.from_datetime), "MM/dd/yyyy")} to{" "}
-				{format(new Date(usage.to_datetime), "MM/dd/yyyy")}.
-			</TableCaption>
 			<TableHeader>
 				<TableRow>
 					<TableHead>Item</TableHead>
@@ -100,7 +96,12 @@ export const BillingTable = ({ usage, currentPlan }: CustomerUsageObjectProps) =
 						)}
 					</TableCell>
 				</TableRow>
+				<div />
 			</TableBody>
+			<TableCaption className="mb-4">
+				Billing Cycle from {format(new Date(usage.from_datetime), "MM/dd/yyyy")} to{" "}
+				{format(new Date(usage.to_datetime), "MM/dd/yyyy")}.
+			</TableCaption>
 		</Table>
 	)
 }
