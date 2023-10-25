@@ -50,7 +50,7 @@ export async function Sidebar({ className, disableLogo = false, items, children 
 						<div className="hidden flex-row items-center gap-2 px-4 py-2 lg:flex">
 							<Logo className="h-12 w-12" />
 
-							<h1 className="text-3xl font-semibold tracking-tight">Hazel</h1>
+							<h1 className="text-5xl font-semibold tracking-tight">Hazel</h1>
 						</div>
 
 						<div className="flex justify-center py-2 lg:hidden">
