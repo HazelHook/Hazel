@@ -18,7 +18,7 @@ import {
 	RocketIcon,
 	SunIcon,
 } from "@hazel/icons"
-import AutoForm from "@hazel/ui/auto-form"
+import { AutoForm } from "@hazel/ui/auto-form"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"

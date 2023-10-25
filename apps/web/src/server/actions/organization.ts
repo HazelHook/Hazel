@@ -10,6 +10,7 @@ import { createAction, protectedProcedure, basicProtectedProcedure, TRPCError } 
 import { generatePublicId } from "@hazel/db/src/drizzle/schema/common"
 import * as schema from "@hazel/db/src/drizzle/schema"
 import { createCustomer, createSubscription } from "@hazel/utils/lago"
+import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 
 export const createOrganzation = async ({
 	plan = "free",
@@ -75,6 +76,36 @@ export const updateOrganzationAction = createAction(
 			id: opts.input.publicId,
 		}
 	}),
+)
+
+export const updateOrganizationProfileImageAction = createAction(
+	protectedProcedure
+		.input(z.object({ imageBuffer: z.string(), fileExt: z.enum(["jpg", "jpeg", "png", "gif"]) }))
+		.mutation(async ({ input, ctx }) => {
+			const client = getSupabaseServerActionClient({ admin: true })
+			const buffer = Buffer.from(input.imageBuffer, "base64")
+
+			const bucket = client.storage.from("org_avatars")
+			const extension = input.fileExt
+			const fileName = `${ctx.auth.workspaceId}.${extension}`
+
+			const result = await bucket.upload(fileName, buffer, {
+				upsert: true,
+			})
+
+			if (result.error) {
+				throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: result.error.message })
+			}
+
+			await db.organization.update({
+				publicId: ctx.auth.workspaceId,
+				profileImage: bucket.getPublicUrl(fileName).data.publicUrl,
+			})
+
+			return {
+				id: input,
+			}
+		}),
 )
 
 export const deleteOrganzationAction = createAction(

@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from "react"
 import { useRouter } from "next/navigation"
-import AutoForm from "@hazel/ui/auto-form"
+import { AutoForm } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import {
 	Dialog,

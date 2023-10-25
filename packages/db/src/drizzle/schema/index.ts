@@ -156,6 +156,8 @@ export const organizations = pgTable(
 
 		plan: varchar("plan", { enum: ["free", "pro", "enterprise"] }),
 
+		profileImage: varchar("profile_image"),
+
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 		updatedAt: timestamp("updated_at").defaultNow().notNull(),
 		deletedAt: timestamp("deleted_at"),

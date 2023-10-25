@@ -16,16 +16,6 @@ export const UserUpdateForm = ({
 }) => {
 	return (
 		<HazelForm
-			fieldConfig={
-				{
-					// profile_image: {
-					// 	inputProps: {
-					// 		type: "file",
-					// 		accept: "image/png, image/jpeg",
-					// 	},
-					// },
-				}
-			}
 			formSchema={userUpdateFormSchema}
 			extraData={{ id: userId }}
 			action={updateUserAction}

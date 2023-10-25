@@ -2,12 +2,12 @@ import { Container } from "@hazel/ui/container"
 
 import { auth } from "@/lib/auth"
 import { UserUpdateForm } from "@/components/forms/user/user-update-form"
-import { TextField } from "@hazel/ui/text-field"
-import { ImageUploadInput } from "@hazel/ui/image-upload-input"
-import { AvatarUpload } from "./component/AvatarUpload"
+import { Card } from "@hazel/ui/card"
+import { AvatarUpload } from "../components/AvatarUpload"
+import { updateUserProfileImageAction } from "@/server/actions/user"
 
 const SettingsPage = async () => {
-	const { workspaceId, organization, userId, user } = await auth()
+	const { userId, user } = await auth()
 
 	return (
 		<Container>
@@ -16,9 +16,12 @@ const SettingsPage = async () => {
 				<p className="text-lg">Change your personal settings</p>
 			</div>
 
-			<UserUpdateForm userId={userId} defaultValues={user as any} />
-
-			<AvatarUpload image={user.profileImage!} />
+			<Card className="space-y-6 p-6">
+				<AvatarUpload placeholder={user.name!} action={updateUserProfileImageAction} image={user.profileImage!}>
+					Profile Image
+				</AvatarUpload>
+				<UserUpdateForm userId={userId} defaultValues={user as any} />
+			</Card>
 		</Container>
 	)
 }

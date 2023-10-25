@@ -2,8 +2,6 @@ import { z } from "zod"
 
 export const userUpdateFormSchema = z.object({
 	name: z.string().min(3).max(20),
-	profileImage: z.any(),
-	// TODO: READD PROFILE IMAGE UPLOAD
 })
 
 export const userUpdateEmailFormSchema = z

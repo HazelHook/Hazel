@@ -17,7 +17,7 @@ export function AutoFormSubmit({ children }: { children?: React.ReactNode }) {
 	return <Button type="submit">{children ?? "Submit"}</Button>
 }
 
-function AutoForm<SchemaType extends ZodObjectOrWrapped>({
+export function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	formSchema,
 	values: valuesProp,
 	onValuesChange: onValuesChangeProp,
@@ -34,7 +34,7 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 	values?: Partial<z.infer<SchemaType>>
 	onValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
 	onParsedValuesChange?: (values: Partial<z.infer<SchemaType>>) => void
-	onSubmit?: (values: z.infer<SchemaType>) => Promise<void>
+	onSubmit?: (values: z.infer<SchemaType>) => Promise<unknown>
 	fieldConfig?: FieldConfig<z.infer<SchemaType>>
 	children?: ReactNode | ((minSubmitDelay: number) => ReactNode)
 	defaultValues?: any

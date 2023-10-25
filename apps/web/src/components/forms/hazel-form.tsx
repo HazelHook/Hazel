@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import AutoForm, { FieldConfig, ZodObjectOrWrapped } from "@hazel/ui/auto-form"
+import { AutoForm, FieldConfig, ZodObjectOrWrapped } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import { z } from "zod"
 

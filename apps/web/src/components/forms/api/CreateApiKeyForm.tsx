@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import AutoForm from "@hazel/ui/auto-form"
+import { AutoForm } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 
 import type { createApiKeyAction } from "@/server/actions/api-keys"

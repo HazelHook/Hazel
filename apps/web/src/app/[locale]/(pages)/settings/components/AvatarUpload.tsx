@@ -1,0 +1,62 @@
+"use client"
+
+import { useAction } from "@hazel/server/actions/client"
+import { TRPCActionHandler } from "@hazel/server/actions/trpc"
+import Heading from "@hazel/ui/heading"
+import { ImageUpload } from "@hazel/ui/image-upload"
+import { useRouter } from "next/navigation"
+import { ReactNode } from "react"
+import { toast } from "sonner"
+
+export type AvatarUploadProps = {
+	image?: string | null
+	action: TRPCActionHandler<{
+		input: {
+			imageBuffer: string
+			fileExt: "jpg" | "jpeg" | "png" | "gif"
+		}
+		output: any
+		errorShape: any
+	}>
+	placeholder: string
+	children: ReactNode
+}
+
+export const AvatarUpload = ({ image, action, placeholder, children }: AvatarUploadProps) => {
+	const router = useRouter()
+	const { mutateAsync } = useAction(action, {
+		onSuccess: () => {
+			router.refresh()
+		},
+	})
+
+	return (
+		<div className="flex flex-row gap-6">
+			<ImageUpload
+				placeholder={placeholder}
+				initialImageUrl={image!}
+				onChange={(file, _, ext) => {
+					toast.promise(
+						mutateAsync({
+							imageBuffer: file,
+							fileExt: ext,
+						}),
+						{
+							loading: "Uploading new Image...",
+							success: "Sucessfully uploaded new Image",
+							error: "There was an error uploading your new image...",
+						},
+					)
+				}}
+			/>
+			<div>
+				<Heading type={3}>{children}</Heading>
+				<p className="text-muted-foreground text-sm">
+					Click on the avatar to upload a custom one from your files.
+					<br />
+					Square image recommended. Accepted file types: .png, .jpg. Max file size: 1MB.
+				</p>
+			</div>
+		</div>
+	)
+}

@@ -31,6 +31,11 @@ export default function AutoFormObject<SchemaType extends z.ZodObject<any, any>,
 				const zodBaseType = getBaseType(item)
 				const itemName = item._def.description ?? beautifyObjectName(name)
 				const key = [...path, name].join(".")
+				const fieldConfigItem: FieldConfigItem = fieldConfig?.[name] ?? {}
+
+				if (fieldConfigItem.hidden) {
+					return
+				}
 
 				if (zodBaseType === "ZodObject") {
 					return (
@@ -59,7 +64,6 @@ export default function AutoFormObject<SchemaType extends z.ZodObject<any, any>,
 					)
 				}
 
-				const fieldConfigItem: FieldConfigItem = fieldConfig?.[name] ?? {}
 				const zodInputProps = zodToHtmlInputProps(item)
 				const isRequired = zodInputProps.required || fieldConfigItem.inputProps?.required || false
 
