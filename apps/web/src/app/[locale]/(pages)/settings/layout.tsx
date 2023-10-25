@@ -17,7 +17,7 @@ import { Sidebar } from "@/components/sidebar"
 
 const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 	return (
-		<div className="flex flex-row">
+		<>
 			<Sidebar
 				items={[
 					{
@@ -97,7 +97,7 @@ const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 				className="w-12 lg:w-64 fixed"
 			/>
 			<div className="ml-12 lg:ml-64">{children}</div>
-		</div>
+		</>
 	)
 }
 
