@@ -102,12 +102,13 @@ export const ProfileSettings = ({
 				<DropdownMenuTrigger className="flex items-center justify-between gap-4 px-2 py-1 rounded lg:w-full hover:bg-muted">
 					<div className="flex flex-row-reverse items-center justify-start w-full gap-4 lg:flex-row ">
 						<Avatar className="w-8 h-8 lg:w-10 lg:h-10">
-							{user?.app_metadata?.photoUrl ? (
-								<AvatarImage
-									src={user?.app_metadata?.photoUrl}
-									alt={user?.app_metadata?.displayName ?? "Profile picture"}
-								/>
-							) : null}
+							<AvatarImage
+								src={
+									selectedTeam.organization.profileImage ||
+									`https://avatar.vercel.sh/${selectedTeam.organization.publicId}.png`
+								}
+								alt={selectedTeam.organization.name}
+							/>
 							<AvatarFallback>{selectedTeam.organization.name.slice(0, 2).toUpperCase()}</AvatarFallback>
 						</Avatar>
 						<div className="flex flex-row-reverse items-center gap-4 lg:gap-1 lg:items-start lg:flex-col">
@@ -213,7 +214,10 @@ export const ProfileSettings = ({
 							>
 								<Avatar className="mr-2 h-5 w-5">
 									<AvatarImage
-										src={`https://avatar.vercel.sh/${membership.organization.publicId}.png`}
+										src={
+											membership.organization.profileImage ||
+											`https://avatar.vercel.sh/${membership.organization.publicId}.png`
+										}
 										alt={membership.organization.name}
 									/>
 								</Avatar>

@@ -17,7 +17,11 @@ const SettingsPage = async () => {
 			</div>
 
 			<Card className="space-y-6 p-6">
-				<AvatarUpload placeholder={user.name!} action={updateUserProfileImageAction} image={user.profileImage!}>
+				<AvatarUpload
+					generatedImgId={user.id}
+					action={updateUserProfileImageAction}
+					imageUrl={user.profileImage}
+				>
 					Profile Image
 				</AvatarUpload>
 				<UserUpdateForm userId={userId} defaultValues={user as any} />

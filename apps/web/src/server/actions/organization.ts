@@ -80,7 +80,7 @@ export const updateOrganzationAction = createAction(
 
 export const updateOrganizationProfileImageAction = createAction(
 	protectedProcedure
-		.input(z.object({ imageBuffer: z.string(), fileExt: z.enum(["jpg", "jpeg", "png", "gif"]) }))
+		.input(z.object({ imageBuffer: z.string(), fileExt: z.enum(["jpg", "jpeg", "png", "gif", "svg"]) }))
 		.mutation(async ({ input, ctx }) => {
 			const client = getSupabaseServerActionClient({ admin: true })
 			const buffer = Buffer.from(input.imageBuffer, "base64")

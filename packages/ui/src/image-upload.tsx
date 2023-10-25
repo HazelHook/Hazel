@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react"
+import React, { useState, ChangeEvent, useEffect } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
 import { CloudUploadIcon } from "@hazel/icons"
 import { toast } from "sonner"
@@ -9,12 +9,16 @@ type Ext = "jpg" | "jpeg" | "png" | "gif"
 interface ImageUploadProps {
 	className?: string
 	initialImageUrl?: string
-	placeholder: string
+	generatedImgId: string
 	onChange: (file: string, fileName: string, ext: Ext) => void
 }
 
-export const ImageUpload: React.FC<ImageUploadProps> = ({ initialImageUrl, placeholder, onChange, className }) => {
+export const ImageUpload: React.FC<ImageUploadProps> = ({ initialImageUrl, generatedImgId, onChange, className }) => {
 	const [imageUrl, setImageUrl] = useState<string | undefined>(initialImageUrl)
+
+	useEffect(() => {
+		setImageUrl(initialImageUrl)
+	}, [initialImageUrl])
 
 	const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
@@ -43,8 +47,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ initialImageUrl, place
 	return (
 		<div className={cn("relative rounded-full w-24 h-24 overflow-hidden", className)}>
 			<Avatar className="w-full h-full">
-				<AvatarImage src={imageUrl} alt="Uploaded" />
-				<AvatarFallback>{placeholder}</AvatarFallback>
+				<AvatarImage src={imageUrl || `https://avatar.vercel.sh/${generatedImgId}.png`} alt="Uploaded" />
 			</Avatar>
 			<label className="absolute transition-all duration-500 top-0 left-0 w-full h-full flex items-center justify-center cursor-pointer opacity-0 hover:bg-secondary hover:opacity-100">
 				<input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />

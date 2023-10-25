@@ -9,20 +9,20 @@ import { ReactNode } from "react"
 import { toast } from "sonner"
 
 export type AvatarUploadProps = {
-	image?: string | null
+	imageUrl?: string | null
 	action: TRPCActionHandler<{
 		input: {
 			imageBuffer: string
-			fileExt: "jpg" | "jpeg" | "png" | "gif"
+			fileExt: "jpg" | "jpeg" | "png" | "gif" | "svg"
 		}
 		output: any
 		errorShape: any
 	}>
-	placeholder: string
+	generatedImgId: string
 	children: ReactNode
 }
 
-export const AvatarUpload = ({ image, action, placeholder, children }: AvatarUploadProps) => {
+export const AvatarUpload = ({ imageUrl, action, generatedImgId, children }: AvatarUploadProps) => {
 	const router = useRouter()
 	const { mutateAsync } = useAction(action, {
 		onSuccess: () => {
@@ -33,8 +33,8 @@ export const AvatarUpload = ({ image, action, placeholder, children }: AvatarUpl
 	return (
 		<div className="flex flex-row gap-6">
 			<ImageUpload
-				placeholder={placeholder}
-				initialImageUrl={image!}
+				generatedImgId={generatedImgId}
+				initialImageUrl={imageUrl!}
 				onChange={(file, _, ext) => {
 					toast.promise(
 						mutateAsync({

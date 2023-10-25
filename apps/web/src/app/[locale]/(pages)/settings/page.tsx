@@ -17,9 +17,9 @@ const SettingsPage = async () => {
 			</div>
 			<Card className="space-y-6 p-6">
 				<AvatarUpload
-					placeholder={organization.name}
+					generatedImgId={organization.publicId}
 					action={updateOrganizationProfileImageAction}
-					image={organization.profileImage}
+					imageUrl={organization.profileImage}
 				>
 					Organization Image
 				</AvatarUpload>
