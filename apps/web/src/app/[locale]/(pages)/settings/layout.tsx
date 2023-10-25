@@ -94,9 +94,9 @@ const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 					},
 				]}
 				disableLogo
-				className="max-w-min lg:max-w-[200px]"
+				className="w-12 lg:w-64 fixed"
 			/>
-			{children}
+			<div className="ml-12 lg:ml-64">{children}</div>
 		</div>
 	)
 }
