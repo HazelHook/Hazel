@@ -1,6 +1,6 @@
 import "@/styles/global.css"
 
-import { Metadata } from "next"
+import { Metadata, Viewport } from "next"
 import { notFound } from "next/navigation"
 import configuration from "@hazel/utils/configuration"
 import { AuthConfigProvider, AuthProvider } from "@hazel/auth/provider"
@@ -13,16 +13,20 @@ import NextProgress from "@/components/NProgress"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
+export const viewport: Viewport = {
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "white" },
+		{ media: "(prefers-color-scheme: dark)", color: "black" },
+	],
+}
+
 export const metadata: Metadata = {
 	title: {
 		default: configuration.site.name,
 		template: `%s - ${configuration.site.name}`,
 	},
 	description: configuration.site.description,
-	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: "white" },
-		{ media: "(prefers-color-scheme: dark)", color: "black" },
-	],
+
 	icons: {
 		icon: "/favicon.ico",
 		shortcut: "/favicon-16x16.png",

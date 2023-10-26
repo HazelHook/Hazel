@@ -11,7 +11,6 @@ const millionConfig = {
 const nextConfig = {
 	reactStrictMode: true,
 	experimental: {
-		serverActions: true,
 		serverComponentsExternalPackages: ["@trpc/server"],
 		optimizePackageImports: ["@hazel/icons"],
 	},

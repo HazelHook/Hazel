@@ -20,7 +20,7 @@
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
-		"indentSize": 4,
+		"indentWidth": 4,
 		"lineWidth": 120,
 		"ignore": ["node_modules", ".next", "dist"]
 	},
