@@ -541,6 +541,9 @@ importers:
 
   packages/server:
     dependencies:
+      '@baselime/node-opentelemetry':
+        specifier: ^0.2.8
+        version: 0.2.8
       '@hazel/auth':
         specifier: workspace:*
         version: link:../auth

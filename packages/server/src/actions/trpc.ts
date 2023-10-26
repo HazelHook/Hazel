@@ -9,6 +9,8 @@ import { Context } from "./context"
 import { db } from "@hazel/db/src"
 import { isUserSuperAdmin, requireSession } from "@hazel/auth/utils"
 
+import { trpcTracingMiddleware } from "@baselime/node-opentelemetry"
+
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,
 	errorFormatter(opts) {
@@ -121,9 +123,11 @@ const isAdmin = t.middleware(async ({ next, ctx }) => {
 export const router = t.router
 export const publicProcedure = t.procedure
 
-export const basicProtectedProcedure = t.procedure.use(isBasicAuth)
-export const protectedProcedure = t.procedure.use(isAuthed)
-export const protectedAdminProcedure = t.procedure.use(isAdmin)
+const baseProcedure = t.procedure.use(trpcTracingMiddleware({ collectInput: true }))
+
+export const basicProtectedProcedure = baseProcedure.use(isBasicAuth)
+export const protectedProcedure = baseProcedure.use(isAuthed)
+export const protectedAdminProcedure = baseProcedure.use(isAdmin)
 
 export { TRPCError } from "@trpc/server"
 export type { TRPCActionHandler } from "@trpc/next/app-dir/server"
