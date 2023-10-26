@@ -13,6 +13,7 @@ const nextConfig = {
 	experimental: {
 		serverComponentsExternalPackages: ["@trpc/server"],
 		optimizePackageImports: ["@hazel/icons"],
+		webpackBuildWorker: true,
 	},
 	devIndicators: {
 		buildActivityPosition: "top-right",
@@ -21,7 +22,6 @@ const nextConfig = {
 		"@hazel/admin",
 		"@hazel/auth",
 		"@hazel/db",
-		"@hazel/email",
 		"@hazel/ui",
 		"@hazel/utils",
 		"@hazel/icons",
