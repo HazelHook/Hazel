@@ -121,6 +121,9 @@ importers:
       '@ngneat/falso':
         specifier: ^7.1.1
         version: 7.1.1
+      '@opentelemetry/api':
+        specifier: ^1.6.0
+        version: 1.6.0
       '@stripe/react-stripe-js':
         specifier: ^2.3.1
         version: 2.3.1(@stripe/stripe-js@2.1.10)(react-dom@18.2.0)(react@18.2.0)
