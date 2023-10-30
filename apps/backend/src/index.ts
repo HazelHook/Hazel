@@ -52,6 +52,8 @@ const app = new Elysia()
 				const requestId = `req_${nanoid()}`
 
 				const headersObj: Record<string, string> = {}
+
+				// biome-ignore lint/complexity/noForEach: <explanation>
 				request.headers.forEach((value, key) => {
 					headersObj[key] = value
 				})

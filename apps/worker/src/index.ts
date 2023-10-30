@@ -34,6 +34,8 @@ const worker = new Worker<{
 		const res = await consumeBase64(job.data.request)
 
 		const headersObj: Record<string, string> = {}
+
+		// biome-ignore lint/complexity/noForEach: <explanation>
 		res.headers.forEach((value, key) => {
 			headersObj[key] = value
 		})

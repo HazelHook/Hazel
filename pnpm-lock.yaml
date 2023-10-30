@@ -49,37 +49,34 @@ importers:
         version: 1.22.0
       elysia:
         specifier: latest
-        version: 0.7.17(@sinclair/typebox@0.29.4)(typescript@5.2.2)
+        version: 0.7.17(typescript@5.2.2)
 
   apps/backend:
     dependencies:
       '@chronark/zod-bird':
-        specifier: ^0.1.1
-        version: 0.1.1
+        specifier: ^0.2.2
+        version: 0.2.2
       '@hazel/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@planetscale/database':
-        specifier: ^1.8.0
-        version: 1.8.0
       '@sinclair/typebox':
-        specifier: ^0.29.4
-        version: 0.29.4
+        specifier: ^0.31.21
+        version: 0.31.21
       '@types/qs':
-        specifier: ^6.9.7
-        version: 6.9.7
+        specifier: ^6.9.9
+        version: 6.9.9
       bullmq:
-        specifier: ^4.3.0
-        version: 4.6.0
+        specifier: ^4.12.7
+        version: 4.12.7
       drizzle-orm:
-        specifier: ^0.27.0
-        version: 0.27.0(@planetscale/database@1.8.0)
+        specifier: ^0.28.6
+        version: 0.28.6(postgres@3.4.0)
       elysia:
-        specifier: latest
-        version: 0.7.17(@sinclair/typebox@0.29.4)(typescript@5.2.2)
+        specifier: 0.7.21
+        version: 0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2)
       nanoid:
-        specifier: ^4.0.2
-        version: 4.0.2
+        specifier: ^5.0.2
+        version: 5.0.2
       qs:
         specifier: ^6.11.2
         version: 6.11.2
@@ -291,8 +288,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/db
       bullmq:
-        specifier: ^4.12.4
-        version: 4.12.4
+        specifier: ^4.12.7
+        version: 4.12.7
       nanoid:
         specifier: ^5.0.2
         version: 5.0.2
@@ -447,6 +444,49 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.3.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  packages/client:
+    dependencies:
+      '@hazel/utils':
+        specifier: workspace:*
+        version: link:../utils
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
+    devDependencies:
+      '@hazel/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/react':
+        specifier: 18.2.31
+        version: 18.2.31
+      '@types/react-dom':
+        specifier: ^18.2.14
+        version: 18.2.14
+      eslint:
+        specifier: ^8.51.0
+        version: 8.52.0
+      next:
+        specifier: 14.0.0
+        version: 14.0.0(@babel/core@7.23.2)(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)
+      prettier:
+        specifier: ^3.0.3
+        version: 3.0.3
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      tailwindcss:
+        specifier: 3.3.5
+        version: 3.3.5
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.3.5)
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -1352,12 +1392,6 @@ packages:
     dev: true
     optional: true
 
-  /@chronark/zod-bird@0.1.1:
-    resolution: {integrity: sha512-6UD9yhNIsvIP0FUqNuZ+bByQLc0IY2eQpeQn55CsqvZziGKQuPGqJzyq6o283fDgkKXTbXmQ7zC/LDBX6yrBhA==}
-    dependencies:
-      zod: 3.22.4
-    dev: false
-
   /@chronark/zod-bird@0.2.2:
     resolution: {integrity: sha512-0mmiiw4dny1aiEOmawsIJUaYW16vhWRuDGsDa62GfFhdD3F7hHrTi3lWNWYCVq2KsCS+CYwMj8nkdFuOnejCTA==}
     dependencies:
@@ -1399,7 +1433,7 @@ packages:
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.7.17(@sinclair/typebox@0.29.4)(typescript@5.2.2)
+      elysia: 0.7.17(typescript@5.2.2)
     dev: false
 
   /@elysiajs/fn@0.5.2(elysia@0.7.17):
@@ -1411,7 +1445,7 @@ packages:
       superjson:
         optional: true
     dependencies:
-      elysia: 0.7.17(@sinclair/typebox@0.29.4)(typescript@5.2.2)
+      elysia: 0.7.17(typescript@5.2.2)
     dev: false
 
   /@elysiajs/swagger@0.5.2(elysia@0.7.17):
@@ -1419,7 +1453,7 @@ packages:
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.7.17(@sinclair/typebox@0.29.4)(typescript@5.2.2)
+      elysia: 0.7.17(typescript@5.2.2)
     dev: false
 
   /@emotion/is-prop-valid@0.8.8:
@@ -2707,11 +2741,6 @@ packages:
   /@opentelemetry/semantic-conventions@1.17.1:
     resolution: {integrity: sha512-xbR2U+2YjauIuo42qmE8XyJK6dYeRMLJuOlUP5SO4auET4VtOHOzgkRVOq+Ik18N+Xf3YPcqJs9dZMiDddz1eQ==}
     engines: {node: '>=14'}
-    dev: false
-
-  /@planetscale/database@1.8.0:
-    resolution: {integrity: sha512-+zk04eXRiaJGaRnJZkCxXbBtBvQDQJXCoxqlXhLY3HzAovXfsBnh6DjXRujPRQQ7GKtT8/tOlyvZ9h6ReM+GLQ==}
-    engines: {node: '>=16'}
     dev: false
 
   /@protobufjs/aspromise@1.1.2:
@@ -4048,8 +4077,8 @@ packages:
       selderee: 0.10.0
     dev: false
 
-  /@sinclair/typebox@0.29.4:
-    resolution: {integrity: sha512-XSEM1jjL9CPI4pZ0RZs84Oq+jcONXFHljufxrp70rTYTbslDuYDj1wnDCzDb3XC9Tf5C36sGO1Fu7VFXXDTgFw==}
+  /@sinclair/typebox@0.31.21:
+    resolution: {integrity: sha512-Wtq/K44EMkREaXytK+2c5DrygtYsH7ZxT0StQL8HMJz2BoOM7NZ/xfrUFBVuZxDrhJCoXf5Im282P2CCz5DHwQ==}
     dev: false
 
   /@stitches/core@1.2.8:
@@ -4432,8 +4461,8 @@ packages:
   /@types/prop-types@15.7.8:
     resolution: {integrity: sha512-kMpQpfZKSCBqltAJwskgePRaYRFukDkm1oItcAbC3gNELR20XIBcN9VRgg4+m8DKsTfkWeA4m4Imp4DDuWy7FQ==}
 
-  /@types/qs@6.9.7:
-    resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
+  /@types/qs@6.9.9:
+    resolution: {integrity: sha512-wYLxw35euwqGvTDx6zfY1vokBFnsK0HNrzc6xNHchxfO2hpuRg74GbkEW7e3sSmPvj0TjCDT1VCa6OtHXnubsg==}
     dev: false
 
   /@types/react-dom@18.2.13:
@@ -4991,8 +5020,8 @@ packages:
       semver: 7.5.4
     dev: true
 
-  /bullmq@4.12.4:
-    resolution: {integrity: sha512-t+vMfvc2gVZUZWXd0jMh3vr5K83ZEfwwaiLW2HlL+W76ktWzOpwDqkWHmLwu98xylpPI1YcZ2WoGcqG6RsnKiA==}
+  /bullmq@4.12.7:
+    resolution: {integrity: sha512-wigDuI8dyzY1jaUZLrwMp0L7t2glp0eErnRCYlVwi56DUWYSrzrOB3Vz8SaAmpc3Ro5dS4mBwt7RDJG3jiuJKA==}
     dependencies:
       cron-parser: 4.9.0
       glob: 8.1.0
@@ -5000,21 +5029,6 @@ packages:
       lodash: 4.17.21
       msgpackr: 1.9.9
       node-abort-controller: 3.1.1
-      semver: 7.5.4
-      tslib: 2.6.2
-      uuid: 9.0.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /bullmq@4.6.0:
-    resolution: {integrity: sha512-RVJSC/DhruJpSoIWYS69NMZ+qTVZpWF4fZ9WKxP9QqY7WHK6Hbm+S5D7W4XN1HAExIGHTmWYZMiqKnBgxEi9XA==}
-    dependencies:
-      cron-parser: 4.9.0
-      glob: 8.1.0
-      ioredis: 5.3.2
-      lodash: 4.17.21
-      msgpackr: 1.9.9
       semver: 7.5.4
       tslib: 2.6.2
       uuid: 9.0.1
@@ -5727,71 +5741,6 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.27.0(@planetscale/database@1.8.0):
-    resolution: {integrity: sha512-LGiJ0icB+wQwgbSCOvAjONY8Ec6G/EDzQQP5PmUaQYeI9OqgpVKHC2T1fFIbvk5dabWsbokJ5NOciVAxriStig==}
-    peerDependencies:
-      '@aws-sdk/client-rds-data': '>=3'
-      '@cloudflare/workers-types': '>=3'
-      '@libsql/client': '*'
-      '@neondatabase/serverless': '>=0.1'
-      '@opentelemetry/api': ^1.4.1
-      '@planetscale/database': '>=1'
-      '@types/better-sqlite3': '*'
-      '@types/pg': '*'
-      '@types/sql.js': '*'
-      '@vercel/postgres': '*'
-      better-sqlite3: '>=7'
-      bun-types: '*'
-      knex: '*'
-      kysely: '*'
-      mysql2: '>=2'
-      pg: '>=8'
-      postgres: '>=3'
-      sql.js: '>=1'
-      sqlite3: '>=5'
-    peerDependenciesMeta:
-      '@aws-sdk/client-rds-data':
-        optional: true
-      '@cloudflare/workers-types':
-        optional: true
-      '@libsql/client':
-        optional: true
-      '@neondatabase/serverless':
-        optional: true
-      '@opentelemetry/api':
-        optional: true
-      '@planetscale/database':
-        optional: true
-      '@types/better-sqlite3':
-        optional: true
-      '@types/pg':
-        optional: true
-      '@types/sql.js':
-        optional: true
-      '@vercel/postgres':
-        optional: true
-      better-sqlite3:
-        optional: true
-      bun-types:
-        optional: true
-      knex:
-        optional: true
-      kysely:
-        optional: true
-      mysql2:
-        optional: true
-      pg:
-        optional: true
-      postgres:
-        optional: true
-      sql.js:
-        optional: true
-      sqlite3:
-        optional: true
-    dependencies:
-      '@planetscale/database': 1.8.0
-    dev: false
-
   /drizzle-orm@0.28.6(postgres@3.4.0):
     resolution: {integrity: sha512-yBe+F9htrlYER7uXgDJUQsTHFoIrI5yMm5A0bg0GiZ/kY5jNXTWoEy4KQtg35cE27sw1VbgzoMWHAgCckUUUww==}
     peerDependencies:
@@ -5899,7 +5848,7 @@ packages:
   /electron-to-chromium@1.4.554:
     resolution: {integrity: sha512-Q0umzPJjfBrrj8unkONTgbKQXzXRrH7sVV7D9ea2yBV3Oaogz991yhbpfvo2LMNkJItmruXTEzVpP9cp7vaIiQ==}
 
-  /elysia@0.7.17(@sinclair/typebox@0.29.4)(typescript@5.2.2):
+  /elysia@0.7.17(typescript@5.2.2):
     resolution: {integrity: sha512-d+kopAonTBezt5ATijVAe4pwvbxTr+yQAP52K8cbMwbHR07HmnwFa4EpZi+sAjqCU20CJNIs1WpJFnnie2ukwQ==}
     peerDependencies:
       '@sinclair/typebox': '>= 0.31.0'
@@ -5913,7 +5862,28 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@sinclair/typebox': 0.29.4
+      cookie: 0.5.0
+      eventemitter3: 5.0.1
+      fast-querystring: 1.1.2
+      memoirist: 0.1.4
+      typescript: 5.2.2
+    dev: false
+
+  /elysia@0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2):
+    resolution: {integrity: sha512-E0QVS8ry6PGU195FqJPH1B9BViXI0lveazr8zzuojiBwhPZBcL8aeWfIcSyF44i/T+zppeNGrlInU/mpiTZKVg==}
+    peerDependencies:
+      '@sinclair/typebox': '>= 0.31.0'
+      openapi-types: '>= 12.0.0'
+      typescript: '>= 5.0.0'
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      openapi-types:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@sinclair/typebox': 0.31.21
       cookie: 0.5.0
       eventemitter3: 5.0.1
       fast-querystring: 1.1.2

@@ -1,0 +1,48 @@
+{
+	"name": "@hazel/client",
+	"private": true,
+	"version": "0.1.0",
+	"scripts": {
+		"clean": "git clean -xdf .turbo node_modules",
+		"format": "prettier --check \"**/*.{ts,tsx}\"",
+		"generate-barrels": "barrelsby --delete -d ./src",
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {},
+	"peerDependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"tailwindcss": "3.3.2",
+		"next": "14.0.0",
+		"@hazel/utils": "workspace:*",
+		"zod": "^3.22.4"
+	},
+	"devDependencies": {
+		"@hazel/tsconfig": "workspace:*",
+		"@types/react": "18.2.31",
+		"@types/react-dom": "^18.2.14",
+		"eslint": "^8.51.0",
+		"prettier": "^3.0.3",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"next": "14.0.0",
+		"tailwindcss": "3.3.5",
+		"tailwindcss-animate": "^1.0.7",
+		"typescript": "^5.2.2"
+	},
+	"exports": {
+		".": "./src/index.ts",
+		"./pages": "./src/pages.ts",
+		"./provider": "./src/provider.ts",
+		"./utils": "./src/utils.ts",
+		"./hooks": "./src/hooks.ts",
+		"./actions": "./src/actions.ts",
+		"./internal-components/*": "./src/internal-components/*.tsx"
+	},
+	"typesVersions": {
+		"*": {
+			"*": ["src/*"]
+		}
+	}
+}

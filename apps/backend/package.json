@@ -7,15 +7,14 @@
 		"dev:ws": "doppler run -- bun run --watch src/dev-server/index.ts"
 	},
 	"dependencies": {
-		"@chronark/zod-bird": "^0.1.1",
-		"@planetscale/database": "^1.8.0",
-		"@sinclair/typebox": "^0.29.4",
-		"@types/qs": "^6.9.7",
-		"bullmq": "^4.3.0",
+		"@chronark/zod-bird": "^0.2.2",
+		"@sinclair/typebox": "^0.31.21",
+		"@types/qs": "^6.9.9",
+		"bullmq": "^4.12.7",
 		"@hazel/db": "workspace:*",
-		"drizzle-orm": "^0.27.0",
-		"elysia": "latest",
-		"nanoid": "^4.0.2",
+		"drizzle-orm": "^0.28.6",
+		"elysia": "0.7.21",
+		"nanoid": "^5.0.2",
 		"qs": "^6.11.2"
 	},
 

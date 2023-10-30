@@ -1,0 +1,13 @@
+{
+	"extends": "@hazel/tsconfig/base.json",
+	"compilerOptions": {
+		"tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+	},
+	"include": [
+		"*.ts",
+		"src",
+		"../../apps/web/src/app/[locale]/invite/components/existing-user-invite-form.tsx",
+		"../../apps/web/src/app/[locale]/invite/components/new-user-invite-form.tsx"
+	],
+	"exclude": ["node_modules"]
+}
