@@ -1,8 +1,8 @@
-import type { ClientOptions, EventsFromOpts, WebhookOptions, EventNameFromWebhook, Handler } from "./types"
+import type { ClientOptions, EventsFromOpts, WebhookOptions, EventNameFromWebhook, Handler } from "../lib/types"
 import { HazelWebhook } from "./webhook-function"
 
-import pkg from "../package.json"
-import { hazelHeaders } from "./lib/helpers/env"
+import pkg from "../../package.json"
+import { hazelHeaders } from "../lib/helpers/env"
 
 export class Hazel<TOpts extends ClientOptions = ClientOptions> {
 	public readonly id: string
@@ -10,6 +10,8 @@ export class Hazel<TOpts extends ClientOptions = ClientOptions> {
 	public readonly version = pkg.version
 
 	public readonly headers: Record<string, string>
+
+	// private readonly middleware: Promise<MiddlewareRegisterReturn[]>
 
 	constructor({ id, env }: TOpts) {
 		if (!id) {

@@ -1,6 +1,7 @@
-import { Hazel } from "./hazel"
-import { StrictUnion } from "./lib/helpers/types"
-import { AnyHazelWebhook } from "./webhook-function"
+import { Hazel } from "../core/hazel"
+import { StrictUnion } from "./helpers/types"
+import { AnyHazelWebhook } from "../core/webhook-function"
+import { HazelMiddleware, MiddlewareOptions } from "../core/middleware"
 
 export type SupportedFrameworks =
 	// | "cloudflare-pages"
@@ -247,3 +248,5 @@ export interface RegisterRequest {
 	 */
 	hash?: string
 }
+
+export type MiddlewareStack = [HazelMiddleware<MiddlewareOptions>, ...HazelMiddleware<MiddlewareOptions>[]]

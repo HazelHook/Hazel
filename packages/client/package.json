@@ -33,7 +33,7 @@
 	},
 	"exports": {
 		"./next": "./src/next.ts",
-		"./hazel": "./src/hazel.ts"
+		".": "./src/index.ts"
 	},
 	"typesVersions": {
 		"*": {

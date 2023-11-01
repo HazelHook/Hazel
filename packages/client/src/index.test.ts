@@ -1,4 +1,4 @@
-import { Hazel } from "./hazel"
+import { Hazel } from "./core/hazel"
 
 const hazel = new Hazel({ id: "wowsies" })
 

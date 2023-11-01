@@ -7,7 +7,7 @@ import type {
 	Handler,
 	WebhookConfig,
 	WebhookOptions,
-} from "./types"
+} from "../lib/types"
 
 export type AnyHazelWebhook = HazelWebhook<any, any, any>
 

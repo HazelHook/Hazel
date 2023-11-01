@@ -1,7 +1,7 @@
 import { type NextApiRequest, type NextApiResponse } from "next"
 import { NextRequest } from "next/server"
-import type { SupportedFrameworks, ServeHandlerOptions } from "./types"
-import { HazelCommHandler } from "./hazel-comm-handler"
+import type { SupportedFrameworks, ServeHandlerOptions } from "./lib/types"
+import { HazelCommHandler } from "./core/hazel-comm-handler"
 
 export const frameworkName: SupportedFrameworks = "nextjs"
 

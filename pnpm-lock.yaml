@@ -70,7 +70,7 @@ importers:
         version: 4.12.7
       drizzle-orm:
         specifier: ^0.28.6
-        version: 0.28.6(postgres@3.4.0)
+        version: 0.28.6(@planetscale/database@1.11.0)(postgres@3.4.0)
       elysia:
         specifier: 0.7.21
         version: 0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2)
@@ -505,9 +505,12 @@ importers:
       '@hazel/utils':
         specifier: workspace:*
         version: link:../utils
+      '@planetscale/database':
+        specifier: ^1.11.0
+        version: 1.11.0
       drizzle-orm:
         specifier: ^0.28.6
-        version: 0.28.6(postgres@3.4.0)
+        version: 0.28.6(@planetscale/database@1.11.0)(postgres@3.4.0)
       drizzle-zod:
         specifier: ^0.5.1
         version: 0.5.1(drizzle-orm@0.28.6)(zod@3.22.4)
@@ -2747,6 +2750,11 @@ packages:
   /@opentelemetry/semantic-conventions@1.17.1:
     resolution: {integrity: sha512-xbR2U+2YjauIuo42qmE8XyJK6dYeRMLJuOlUP5SO4auET4VtOHOzgkRVOq+Ik18N+Xf3YPcqJs9dZMiDddz1eQ==}
     engines: {node: '>=14'}
+    dev: false
+
+  /@planetscale/database@1.11.0:
+    resolution: {integrity: sha512-aWbU+D/IRHoDE9975y+Q4c+EwwAWxCPwFId+N1AhQVFXzbeJMkj6KN2iQtoi03elcLMRdfT+V3i9Z4WRw+/oIA==}
+    engines: {node: '>=16'}
     dev: false
 
   /@protobufjs/aspromise@1.1.2:
@@ -5747,7 +5755,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.28.6(postgres@3.4.0):
+  /drizzle-orm@0.28.6(@planetscale/database@1.11.0)(postgres@3.4.0):
     resolution: {integrity: sha512-yBe+F9htrlYER7uXgDJUQsTHFoIrI5yMm5A0bg0GiZ/kY5jNXTWoEy4KQtg35cE27sw1VbgzoMWHAgCckUUUww==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -5809,6 +5817,7 @@ packages:
       sqlite3:
         optional: true
     dependencies:
+      '@planetscale/database': 1.11.0
       postgres: 3.4.0
     dev: false
 
@@ -5818,7 +5827,7 @@ packages:
       drizzle-orm: '>=0.23.13'
       zod: '*'
     dependencies:
-      drizzle-orm: 0.28.6(postgres@3.4.0)
+      drizzle-orm: 0.28.6(@planetscale/database@1.11.0)(postgres@3.4.0)
       zod: 3.22.4
     dev: false
 

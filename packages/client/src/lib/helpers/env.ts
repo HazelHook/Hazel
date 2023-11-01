@@ -1,4 +1,4 @@
-import { Hazel } from "../../hazel"
+import { Hazel } from "../../core/hazel"
 
 declare const EdgeRuntime: string | undefined
 

@@ -1,13 +1,13 @@
 import { Hazel } from "./hazel"
-import { Env, allProcessEnv, hazelHeaders } from "./lib/helpers/env"
-import { rethrowError, serializeError } from "./lib/helpers/errors"
-import { runAsPromise } from "./lib/helpers/promises"
-import { IntrospectRequest, MaybePromise } from "./lib/helpers/types"
-import { RegisterOptions, RegisterRequest, SupportedFrameworks, WebhookConfig } from "./types"
+import { Env, allProcessEnv, hazelHeaders } from "../lib/helpers/env"
+import { rethrowError, serializeError } from "../lib/helpers/errors"
+import { runAsPromise } from "../lib/helpers/promises"
+import { IntrospectRequest, MaybePromise } from "../lib/helpers/types"
+import { RegisterOptions, RegisterRequest, SupportedFrameworks, WebhookConfig } from "../lib/types"
 import { AnyHazelWebhook, HazelWebhook } from "./webhook-function"
 
-import { safeStringify } from "./lib/helpers/safe-stringify"
-import { awaitSync } from "./lib/helpers/sync"
+import { safeStringify } from "../lib/helpers/safe-stringify"
+import { awaitSync } from "../lib/helpers/sync"
 
 /**
  * The broad definition of a handler passed when instantiating an

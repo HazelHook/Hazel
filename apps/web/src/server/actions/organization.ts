@@ -38,15 +38,12 @@ export const createOrganzation = async ({
 			workspaceId: orgId,
 		})
 
-		const res = await tx
-			.insert(schema.organizations)
-			.values({ plan, name, ownerId: ownerId, publicId: orgId })
-			.returning({ insertedId: schema.organizations.id })
+		const res = await tx.insert(schema.organizations).values({ plan, name, ownerId: ownerId, publicId: orgId })
 
 		await tx.insert(schema.organizationMembers).values({
 			publicId: memberPublicId,
 			userId: ownerId,
-			organizationId: Number(res[0].insertedId),
+			organizationId: Number(res.insertId),
 			role: "admin",
 		})
 

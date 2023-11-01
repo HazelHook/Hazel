@@ -28,8 +28,7 @@ export const handleOnboardingAction = createAction(
 					id: ctx.auth.customerId,
 					onboarded: true,
 				})
-				.onConflictDoUpdate({
-					target: schema.user.id,
+				.onDuplicateKeyUpdate({
 					set: {
 						id: ctx.auth.customerId,
 						onboarded: true,

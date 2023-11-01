@@ -32,15 +32,12 @@ const organizationsLogic = (db: DB) =>
 			const memberPublicId = generatePublicId("mem")
 
 			await db.transaction(async (tx) => {
-				const res = await tx
-					.insert(schema.organizations)
-					.values({ ...data, publicId: publicId })
-					.returning({ insertedId: schema.organizations.id })
+				const res = await tx.insert(schema.organizations).values({ ...data, publicId: publicId })
 
 				await tx.insert(schema.organizationMembers).values({
 					publicId: memberPublicId,
 					userId: data.ownerId,
-					organizationId: Number(res[0].insertedId),
+					organizationId: Number(res.insertId),
 					role: "admin",
 				})
 			})

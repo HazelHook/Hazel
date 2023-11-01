@@ -1,5 +1,5 @@
-import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js"
-import postgres from "postgres"
+import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
+import { connect } from "@planetscale/database"
 
 import * as integrations from "../integrations/common"
 import * as integrationsData from "../integrations/data"
@@ -16,16 +16,16 @@ export { integrationsData }
 
 export { integrations }
 
-export type DB = PostgresJsDatabase<typeof schema>
+export type DB = PlanetScaleDatabase<typeof schema>
 
 export type OptionalExceptFor<T, K extends keyof T> = Partial<T> & Pick<T, K>
 
-export function connectDB({ connectionString }: { connectionString: string }) {
+export function connectDB({ host, username, password }: { host: string; username: string; password: string }) {
 	// if (!connectionString) {
 	// 	throw new Error("Connection String cant be empty")
 	// }
 
-	const client = postgres(connectionString)
+	const client = connect({ host, username, password })
 
 	const db = drizzle(client, { schema })
 
@@ -42,5 +42,7 @@ export function connectDB({ connectionString }: { connectionString: string }) {
 }
 
 export default connectDB({
-	connectionString: process.env.DB_CONNECTION_STRING as string,
+	username: process.env.DATABASE_USERNAME as string,
+	host: process.env.DATABASE_HOST as string,
+	password: process.env.DATABASE_PASSWORD as string,
 })

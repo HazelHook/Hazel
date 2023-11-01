@@ -1,5 +1,5 @@
 import { serve } from "@hazel/client/next"
-import { Hazel } from "@hazel/client/hazel"
+import { Hazel } from "@hazel/client"
 
 const hazel = new Hazel({ id: "hazel" })
 

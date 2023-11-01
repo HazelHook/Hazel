@@ -2,18 +2,16 @@ import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm"
 import {
 	boolean,
 	index,
-	integer,
+	int,
 	json,
-	jsonb,
-	pgTable,
+	mysqlEnum,
+	mysqlTable,
 	serial,
-	text,
 	timestamp,
 	unique,
 	uniqueIndex,
-	uuid,
 	varchar,
-} from "drizzle-orm/pg-core"
+} from "drizzle-orm/mysql-core"
 
 import { INTEGRATIONS } from "../integrations/data"
 import { SchemaType, generatePublicId } from "./common"
@@ -27,7 +25,7 @@ const commonFields = (type: SchemaType) => ({
 		.$defaultFn(() => generatePublicId(type)),
 
 	createdAt: timestamp("created_at").defaultNow().notNull(),
-	updatedAt: timestamp("updated_at").defaultNow().notNull(),
+	updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
 	deletedAt: timestamp("deleted_at"),
 })
 
@@ -35,18 +33,16 @@ const name = varchar("name", { length: 64 }).notNull()
 const url = varchar("url", { length: 128 })
 const enabled = boolean("enabled").default(true).notNull()
 
-const role = varchar("role", { enum: ["owner", "admin", "member"] })
-	.notNull()
-	.default("member")
+const role = mysqlEnum("role", ["owner", "admin", "member"]).notNull().default("member")
 
-export const user = pgTable("users", {
-	id: uuid("id").primaryKey().notNull(),
+export const user = mysqlTable("users", {
+	id: varchar("id", { length: 256 }).primaryKey().notNull(),
 	name: varchar("name", { length: 128 }),
 	onboarded: boolean("onboarded").default(false).notNull(),
-	profileImage: varchar("profile_image"),
+	profileImage: varchar("profile_image", { length: 128 }),
 })
 
-export const source = pgTable(
+export const source = mysqlTable(
 	"sources",
 	{
 		...commonFields("src"),
@@ -56,12 +52,12 @@ export const source = pgTable(
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		url,
-		integrationId: integer("integration_id").references(() => integration.id),
+		integrationId: int("integration_id").references(() => integration.id),
 	},
 	(table) => ({}),
 )
 
-export const integration = pgTable(
+export const integration = mysqlTable(
 	"integrations",
 	{
 		...commonFields("itg"),
@@ -70,9 +66,7 @@ export const integration = pgTable(
 			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
-		tool: varchar("tool", {
-			enum: Object.keys(INTEGRATIONS) as [string, ...string[]],
-		}),
+		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]),
 		config: json("config"),
 	},
 	(table) => ({
@@ -80,7 +74,7 @@ export const integration = pgTable(
 	}),
 )
 
-export const destination = pgTable(
+export const destination = mysqlTable(
 	"destinations",
 	{
 		...commonFields("dst"),
@@ -95,7 +89,7 @@ export const destination = pgTable(
 	(table) => ({}),
 )
 
-export const connection = pgTable(
+export const connection = mysqlTable(
 	"connections",
 	{
 		...commonFields("con"),
@@ -106,18 +100,18 @@ export const connection = pgTable(
 		name,
 		enabled,
 
-		sourceId: integer("source_id")
+		sourceId: int("source_id")
 			.notNull()
 			.references(() => source.id),
-		destinationId: integer("destination_id")
+		destinationId: int("destination_id")
 			.notNull()
 			.references(() => destination.id),
 
-		delay: integer("delay"),
+		delay: int("delay"),
 
-		retyCount: integer("retry_count"),
-		retryDelay: integer("retry_delay"),
-		retryType: varchar("retry_type", { enum: ["fixed", "exponential"] }),
+		retyCount: int("retry_count"),
+		retryDelay: int("retry_delay"),
+		retryType: mysqlEnum("retry_type", ["fixed", "exponential"]),
 
 		fluxConfig: json("flux_config"),
 	},
@@ -126,7 +120,7 @@ export const connection = pgTable(
 	}),
 )
 
-export const apiKeys = pgTable(
+export const apiKeys = mysqlTable(
 	"api_keys",
 	{
 		...commonFields("sk"),
@@ -136,12 +130,12 @@ export const apiKeys = pgTable(
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		ownerId: varchar("owner_id", { length: 128 }),
 		name: varchar("name", { length: 128 }),
-		expires: timestamp("expires", { precision: 3 }),
+		expires: timestamp("expires", { fsp: 3 }),
 	},
 	(table) => ({}),
 )
 
-export const organizations = pgTable(
+export const organizations = mysqlTable(
 	"organizations",
 	{
 		id: serial("id").primaryKey(),
@@ -154,9 +148,9 @@ export const organizations = pgTable(
 
 		name: varchar("name", { length: 128 }).notNull(),
 
-		plan: varchar("plan", { enum: ["free", "pro", "enterprise"] }),
+		plan: mysqlEnum("plan", ["free", "pro", "enterprise"]),
 
-		profileImage: varchar("profile_image"),
+		profileImage: varchar("profile_image", { length: 256 }),
 
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 		updatedAt: timestamp("updated_at").defaultNow().notNull(),
@@ -165,7 +159,7 @@ export const organizations = pgTable(
 	(table) => ({}),
 )
 
-export const organizationMembers = pgTable(
+export const organizationMembers = mysqlTable(
 	"organization_members",
 	{
 		id: serial("id").primaryKey(),
@@ -178,10 +172,10 @@ export const organizationMembers = pgTable(
 		updatedAt: timestamp("updated_at").defaultNow().notNull(),
 		deletedAt: timestamp("deleted_at"),
 
-		userId: uuid("user_id")
+		userId: varchar("user_id", { length: 256 })
 			.references(() => user.id)
 			.notNull(),
-		organizationId: integer("organization_id")
+		organizationId: int("organization_id")
 			.notNull()
 			.references(() => organizations.id, { onDelete: "cascade" }),
 		role: role,
@@ -191,7 +185,7 @@ export const organizationMembers = pgTable(
 	}),
 )
 
-export const organizationInvites = pgTable(
+export const organizationInvites = mysqlTable(
 	"organization_invites",
 	{
 		id: serial("id").primaryKey(),
@@ -205,7 +199,7 @@ export const organizationInvites = pgTable(
 
 		email: varchar("email", { length: 128 }).notNull(),
 		role: role,
-		organizationId: integer("organization_id")
+		organizationId: int("organization_id")
 			.notNull()
 			.references(() => organizations.id, { onDelete: "cascade" }),
 	},
@@ -213,15 +207,6 @@ export const organizationInvites = pgTable(
 		emailIdx: uniqueIndex("email_idx").on(table.email),
 	}),
 )
-
-export const stripeCustomers = pgTable("stripe_customers", {
-	id: text("id"),
-	email: text("email"),
-	name: text("name"),
-	description: text("description"),
-	created: timestamp("created", { mode: "string" }),
-	attrs: jsonb("attrs"),
-})
 
 export const userRelation = relations(user, ({ many }) => ({
 	memberships: many(organizationMembers),

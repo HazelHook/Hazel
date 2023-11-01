@@ -3,13 +3,14 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"db:push": "drizzle-kit push:pg",
-		"db:pull": "drizzle-kit introspect:pg",
-		"db:generate": "drizzle-kit generate:pg",
+		"db:push": "drizzle-kit push:mysql",
+		"db:pull": "drizzle-kit introspect:mysql",
+		"db:generate": "drizzle-kit generate:mysql",
 		"tb:pull": "tb pull --auto --force"
 	},
 	"dependencies": {
 		"@chronark/zod-bird": "^0.2.2",
+		"@planetscale/database": "^1.11.0",
 		"drizzle-orm": "^0.28.6",
 		"drizzle-zod": "^0.5.1",
 		"postgres": "^3.4.0"
@@ -21,7 +22,7 @@
 	"devDependencies": {
 		"@hazel/tsconfig": "workspace:*",
 		"dotenv": "^16.3.1",
-		"typescript": "^5.2.2",
-		"drizzle-kit": "^0.19.13"
+		"drizzle-kit": "^0.19.13",
+		"typescript": "^5.2.2"
 	}
 }
