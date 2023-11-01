@@ -32,19 +32,12 @@
 		"typescript": "^5.2.2"
 	},
 	"exports": {
-		".": "./src/index.ts",
-		"./pages": "./src/pages.ts",
-		"./provider": "./src/provider.ts",
-		"./utils": "./src/utils.ts",
-		"./hooks": "./src/hooks.ts",
-		"./actions": "./src/actions.ts",
-		"./internal-components/*": "./src/internal-components/*.tsx"
+		"./next": "./src/next.ts",
+		"./hazel": "./src/hazel.ts"
 	},
 	"typesVersions": {
 		"*": {
-			"*": [
-				"src/*"
-			]
+			"*": ["src/*"]
 		}
 	}
 }

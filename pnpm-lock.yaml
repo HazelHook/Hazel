@@ -94,6 +94,9 @@ importers:
       '@hazel/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@hazel/client':
+        specifier: workspace:*
+        version: link:../../packages/client
       '@hazel/db':
         specifier: workspace:*
         version: link:../../packages/db

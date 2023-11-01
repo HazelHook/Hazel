@@ -220,3 +220,28 @@ export type IsEmptyObject<T> = {} extends T
 		? true
 		: false
 	: false
+
+/**
+ * The response to send to the local SDK UI when an introspection request is
+ * made.
+ *
+ * @internal
+ */
+export interface IntrospectRequest {
+	message: string
+
+	/**
+	 * Represents whether a signing key could be found when running this handler.
+	 */
+	hasSecretKey: boolean
+
+	/**
+	 * Represents whether an event key could be found when running this handler.
+	 */
+	hasProjectKey: boolean
+
+	/**
+	 * The number of Inngest functions found at this handler.
+	 */
+	webhookHandlerFound: number
+}

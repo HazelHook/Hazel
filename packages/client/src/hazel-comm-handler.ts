@@ -1,14 +1,13 @@
-import { z } from "zod"
 import { Hazel } from "./hazel"
-import { Env, allProcessEnv } from "./lib/helpers/env"
-import { rethrowError } from "./lib/helpers/errors"
+import { Env, allProcessEnv, hazelHeaders } from "./lib/helpers/env"
+import { rethrowError, serializeError } from "./lib/helpers/errors"
 import { runAsPromise } from "./lib/helpers/promises"
-import { ServerTiming } from "./lib/helpers/server-timing"
-import { MaybePromise } from "./lib/helpers/types"
-import { RegisterOptions, SupportedFrameworks } from "./types"
+import { IntrospectRequest, MaybePromise } from "./lib/helpers/types"
+import { RegisterOptions, RegisterRequest, SupportedFrameworks, WebhookConfig } from "./types"
 import { AnyHazelWebhook, HazelWebhook } from "./webhook-function"
 
-import pkg from "../package.json"
+import { safeStringify } from "./lib/helpers/safe-stringify"
+import { awaitSync } from "./lib/helpers/sync"
 
 /**
  * The broad definition of a handler passed when instantiating an
@@ -165,8 +164,6 @@ export interface ActionResponse<TBody extends string | ReadableStream = string> 
 	 * A stringified body to return.
 	 */
 	body: TBody
-
-	version: number
 }
 
 export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamOutput = any> {
@@ -194,8 +191,6 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 	 * environment during execution if needed.
 	 */
 	protected readonly secret: string
-
-	protected readonly version = pkg.version
 
 	/**
 	 * A property that can be set to indicate whether or not we believe we are in
@@ -265,17 +260,15 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 		this.secret = options.secret
 	}
 
-	public createHandler(): (...args: Input) => Promise<Awaited<Output>> {
+	public createHandler(): (...args: Input) => Promise<Output> {
 		return async (...args: Input) => {
-			const timer = new ServerTiming()
-
 			/**
 			 * We purposefully `await` the handler, as it could be either sync or
 			 * async.
 			 */
-			const rawActions = await timer
-				.wrap("handler", () => this.handler(...args))
-				.catch(rethrowError("Serve handler failed to run"))
+			const rawActions = await awaitSync(() => this.handler(...args)).catch(
+				rethrowError("Serve handler failed to run"),
+			)
 
 			/**
 			 * Map over every `action` in `rawActions` and create a new `actions`
@@ -313,17 +306,7 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 
 			this.env = (await actions.env?.("starting to handle request")) ?? allProcessEnv()
 
-			const getInngestHeaders = (): Record<string, string> =>
-				inngestHeaders({
-					env: this.env,
-					framework: this.frameworkName,
-					client: this.client,
-					extras: {
-						"Server-Timing": timer.getHeader(),
-					},
-				})
-
-			const actionRes = timer.wrap("action", () => this.handleAction(actions, timer, getInngestHeaders))
+			const actionRes = this.handleAction(actions)
 
 			/**
 			 * Prepares an action response by merging returned data to provide
@@ -331,148 +314,80 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 			 *
 			 * It should always prioritize the headers returned by the action, as
 			 * they may contain important information such as `Content-Type`.
+			 *
 			 */
-			const prepareActionRes = (res: ActionResponse): ActionResponse => ({
-				...res,
-				headers: {
-					...getInngestHeaders(),
-					...res.headers,
-				},
-			})
+			const prepareActionRes = (res: ActionResponse): ActionResponse => {
+				return {
+					...res,
+					headers: {
+						...hazelHeaders(),
+						...res.headers,
+					},
+				}
+			}
 
-			return timer.wrap("res", async () => {
-				return actionRes.then(prepareActionRes).then((actionRes) => {
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-					return actions.transformResponse("sending back response", actionRes)
-				})
+			return actionRes.then(prepareActionRes).then((actionRes) => {
+				return actions.transformResponse("sending back response", actionRes)
 			})
 		}
 	}
 
-	/**
-	 * Given a set of functions to check if an action is available from the
-	 * instance's handler, enact any action that is found.
-	 *
-	 * This method can fetch varying payloads of data, but ultimately is the place
-	 * where _decisions_ are made regarding functionality.
-	 *
-	 * For example, if we find that we should be viewing the UI, this function
-	 * will decide whether the UI should be visible based on the payload it has
-	 * found (e.g. env vars, options, etc).
-	 */
-	private async handleAction(actions: HandlerResponseWithErrors, timer: ServerTiming): Promise<ActionResponse> {
-		this._isProd = (await actions.isProduction?.("starting to handle request")) ?? isProd(this.env)
-
-		this.upsertKeysFromEnv()
-
+	private async handleAction(actions: HandlerResponseWithErrors) {
 		try {
 			const url = await actions.url("starting to handle request")
+
 			const method = await actions.method("starting to handle request")
 
-			const getQuerystring = async (reason: string, key: string): Promise<string | undefined> => {
-				const ret = (await actions.queryString?.(reason, key, url)) || url.searchParams.get(key) || undefined
+			const hazel_key = await actions.headers("getting headers", "hazel_key")
 
-				return ret
+			if (!hazel_key) {
+				throw new Error("No webhook ID found in request")
 			}
 
-			if (method === "POST") {
-				const signature = await actions.headers("checking signature for run request", headerKeys.Signature)
+			const fn = this.fns[hazel_key]
 
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-				const body = await actions.body("processing run request")
-				this.validateSignature(signature ?? undefined, body)
-
-				const fnId = await getQuerystring("processing run request", queryKeys.FnId)
-				if (!fnId) {
-					// TODO PrettyError
-					throw new Error("No function ID found in request")
-				}
-
-				const { result } = this.runStep(fnId, stepId, body, timer)
-				const stepOutput = await result
-
-				const resultHandlers: ExecutionResultHandlers<ActionResponse> = {
-					"function-rejected": (result) => {
-						return {
-							status: result.retriable ? 500 : 400,
-							headers: {
-								"Content-Type": "application/json",
-								[headerKeys.NoRetry]: result.retriable ? "false" : "true",
-								...(typeof result.retriable === "string"
-									? { [headerKeys.RetryAfter]: result.retriable }
-									: {}),
-							},
-							body: stringify(undefinedToNull(result.error)),
-							version: this.version,
-						}
-					},
-					"function-resolved": (result) => {
-						return {
-							status: 200,
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: stringify(undefinedToNull(result.data)),
-							version,
-						}
-					},
-				}
-
-				const handler = resultHandlers[stepOutput.type] as ExecutionResultHandler<ActionResponse>
-
-				try {
-					return await handler(stepOutput)
-				} catch (err) {
-					console.error("error", "Error handling execution result", err)
-					throw err
-				}
+			if (!fn) {
+				throw new Error(`Could not find webhook handler with Key "${hazel_key}"`)
 			}
+
+			const body = await actions.body("getting body")
+
+			const res = await fn.fn.execute({ data: body })
 
 			if (method === "GET") {
-				const registerBody = this.registerBody(this.reqUrl(url))
+				const registerBody = this.registerBody()
 
 				const introspection: IntrospectRequest = {
 					message: "Inngest endpoint configured correctly.",
-					hasEventKey: Boolean(this.client["eventKey"]),
-					hasSigningKey: Boolean(this.signingKey),
-					functionsFound: registerBody.functions.length,
+					hasProjectKey: Boolean(this.client.id),
+					hasSecretKey: Boolean(this.secret),
+					webhookHandlerFound: registerBody.webhooks.length,
 				}
 
 				return {
 					status: 200,
-					body: stringify(introspection),
+					body: safeStringify(introspection),
 					headers: {
 						"Content-Type": "application/json",
 					},
-					version,
 				}
 			}
 
-			if (method === "PUT") {
-				const deployId = await getQuerystring("processing deployment request", queryKeys.DeployId)
-
-				const { status, message, modified } = await this.register(this.reqUrl(url), deployId, getInngestHeaders)
-
+			if (method === "POST") {
 				return {
-					status,
-					body: stringify({ message, modified }),
-					headers: {
-						"Content-Type": "application/json",
-					},
-					version: undefined,
+					status: 201,
+					body: safeStringify(res),
+					headers: hazelHeaders(),
 				}
 			}
-		} catch (err) {
+		} catch (error) {
 			return {
 				status: 500,
-				body: stringify({
+				body: safeStringify({
 					type: "internal",
-					...serializeError(err as Error),
+					...serializeError(error as Error),
 				}),
-				headers: {
-					"Content-Type": "application/json",
-				},
-				version: undefined,
+				headers: hazelHeaders(),
 			}
 		}
 
@@ -481,11 +396,30 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 			body: JSON.stringify({
 				message: "No action found; request was likely not POST, PUT, or GET",
 				isProd: this._isProd,
-				skipDevServer: this._skipDevServer,
 			}),
-			headers: {},
-			version: undefined,
+			headers: hazelHeaders(),
 		}
+	}
+
+	protected registerBody(): RegisterRequest {
+		const body: RegisterRequest = {
+			deployType: "ping",
+			framework: this.frameworkName,
+			appName: this.id,
+			webhooks: this.configs(),
+			sdk: `js:${this.client.version}`,
+			v: "0.1",
+		}
+
+		return body
+	}
+
+	protected configs(): WebhookConfig[] {
+		return Object.values(this.rawFns).reduce<WebhookConfig[]>(
+			// biome-ignore lint/performance/noAccumulatingSpread: <explanation>
+			(acc, fn) => [...acc, ...fn.getConfig(this.id)],
+			[],
+		)
 	}
 }
 

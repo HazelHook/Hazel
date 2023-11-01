@@ -27,6 +27,7 @@
 		"@hazel/supabase": "workspace:*",
 		"@hazel/ui": "workspace:*",
 		"@hazel/utils": "workspace:*",
+		"@hazel/client": "workspace:*",
 		"@hookform/resolvers": "^3.3.2",
 		"@ngneat/falso": "^7.1.1",
 		"@opentelemetry/api": "^1.6.0",

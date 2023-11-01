@@ -106,6 +106,15 @@ export type ClientOptions = {
 	 * back to a Node implementation if no global fetch can be found.
 	 */
 	fetch?: typeof fetch
+
+	/**
+	 * The Inngest environment to send events to. Defaults to whichever
+	 * environment this client's event key is associated with.
+	 *
+	 * It's likely you never need to change this unless you're trying to sync
+	 * multiple systems together using branch names.
+	 */
+	env?: string
 }
 
 /**
@@ -171,6 +180,8 @@ export type Context<
 	TOverrides extends Record<string, unknown> = Record<never, never>,
 > = Omit<BaseContext<TOpts, TTrigger>, keyof TOverrides> & TOverrides
 
+export type AnyContext = Context<any, any, any, any>
+
 /**
  * The shape of a Hazel function, taking in event, step, ctx, and step
  * tooling.
@@ -189,3 +200,50 @@ export type Handler<
 	 */
 	ctx: Context<TOpts, TEvents, TTrigger, TOverrides>,
 ) => unknown
+
+/**
+ * The response to send to Inngest when pushing function config either directly
+ * or when pinged by Inngest Cloud.
+ *
+ * @internal
+ */
+export interface RegisterRequest {
+	/**
+	 * Response version, allowing Inngest to change any top-level field.
+	 */
+	v: `${number}.${number}`
+
+	/**
+	 * SDK version from `package.json` for our internal metrics and to warn users
+	 * they need to upgrade.
+	 */
+	sdk: string
+
+	/**
+	 * The method used to deploy these functions.
+	 */
+	deployType: "ping"
+
+	/**
+	 * The name of the framework being used for this instance, e.g. "nextjs",
+	 * "vercel", "netlify", "lambda", etc. Uses the `framework` specified when
+	 * creating a new `InngestCommHandler`.
+	 */
+	framework: string
+
+	/**
+	 * The name of this particular app, used for grouping and easier viewing in
+	 * the UI.
+	 */
+	appName: string
+
+	/**
+	 * The functions available at this particular handler.
+	 */
+	webhooks: WebhookConfig[]
+
+	/**
+	 * The hash of the current commit used to track deploys
+	 */
+	hash?: string
+}

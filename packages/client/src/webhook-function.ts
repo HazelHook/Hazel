@@ -1,5 +1,6 @@
 import { Hazel } from "./hazel"
 import type {
+	AnyContext,
 	ClientOptions,
 	EventNameFromWebhook,
 	EventsFromOpts,
@@ -87,5 +88,9 @@ export class HazelWebhook<
 		const config: WebhookConfig[] = [fn]
 
 		return config
+	}
+
+	public execute(ctx: AnyContext) {
+		return this.fn(ctx)
 	}
 }
