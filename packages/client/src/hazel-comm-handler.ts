@@ -334,8 +334,6 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 
 	private async handleAction(actions: HandlerResponseWithErrors) {
 		try {
-			const url = await actions.url("starting to handle request")
-
 			const method = await actions.method("starting to handle request")
 
 			const hazel_key = await actions.headers("getting headers", "hazel_key")
@@ -358,7 +356,7 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 				const registerBody = this.registerBody()
 
 				const introspection: IntrospectRequest = {
-					message: "Inngest endpoint configured correctly.",
+					message: "Hazel endpoint configured correctly.",
 					hasProjectKey: Boolean(this.client.id),
 					hasSecretKey: Boolean(this.secret),
 					webhookHandlerFound: registerBody.webhooks.length,

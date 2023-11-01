@@ -10,19 +10,19 @@ const isNextEdgeRequest = (req: NextApiRequest | NextRequest): req is NextReques
 }
 
 /**
- * In Next.js, serve and register any declared functions with Inngest, making
+ * In Next.js, serve and register any declared functions with Hazel, making
  * them available to be triggered by events.
  *
  * @example Next.js <=12 or the pages router can export the handler directly
  * ```ts
- * export default serve({ client: inngest, functions: [fn1, fn2] });
+ * export default serve({ client: hazel, webhooks: [wh1, wh2] });
  * ```
  *
  * @example Next.js >=13 with the `app` dir must export individual methods
  * ```ts
  * export const { GET, POST, PUT } = serve({
- *            client: inngest,
- *            functions: [fn1, fn2],
+ *            client: hazel,
+ *            webhooks: [wh1, wh2],
  * });
  * ```
  *
@@ -89,7 +89,7 @@ export const serve = (options: ServeHandlerOptions) => {
 					let scheme: "http" | "https" = "https"
 
 					try {
-						// eslint-disable-next-line @inngest/internal/process-warn
+						// eslint-disable-next-line @hazel/internal/process-warn
 						if (process.env.NODE_ENV === "development") {
 							scheme = "http"
 						}

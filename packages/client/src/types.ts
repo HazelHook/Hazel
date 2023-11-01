@@ -63,7 +63,7 @@ export interface RegisterOptions {
 	fetch?: typeof fetch
 
 	/**
-	 * The ID of this app. This is used to group functions together in the Inngest
+	 * The ID of this app. This is used to group functions together in the Hazel
 	 * UI. The ID of the passed client is used by default.
 	 */
 	id?: string
@@ -76,13 +76,13 @@ export interface ServeHandlerOptions extends RegisterOptions {
 	client: Hazel<any>
 
 	/**
-	 * An array of the functions to serve and register with Inngest.
+	 * An array of the functions to serve and register with Hazel.
 	 */
 	webhooks: readonly AnyHazelWebhook[]
 }
 
 /**
- * A set of options for configuring the Inngest client.
+ * A set of options for configuring the Hazel client.
  *
  * @public
  */
@@ -92,7 +92,7 @@ export type ClientOptions = {
 	 * resides in.
 	 *
 	 * The ID of your client should remain the same for its lifetime; if you'd
-	 * like to change the name of your client as it appears in the Inngest UI,
+	 * like to change the name of your client as it appears in the Hazel UI,
 	 * change the `name` property instead.
 	 */
 	id: string
@@ -108,7 +108,7 @@ export type ClientOptions = {
 	fetch?: typeof fetch
 
 	/**
-	 * The Inngest environment to send events to. Defaults to whichever
+	 * The Hazel environment to send events to. Defaults to whichever
 	 * environment this client's event key is associated with.
 	 *
 	 * It's likely you never need to change this unless you're trying to sync
@@ -118,7 +118,7 @@ export type ClientOptions = {
 }
 
 /**
- * Given a set of client options for Inngest, return the event types that can
+ * Given a set of client options for Hazel, return the event types that can
  * be sent or received.
  *
  * @public
@@ -126,7 +126,7 @@ export type ClientOptions = {
 export type EventsFromOpts = Record<string, EventPayload>
 
 /**
- * A user-friendly method of specifying a trigger for an Inngest function.
+ * A user-friendly method of specifying a trigger for an Hazel function.
  *
  * @public
  */
@@ -139,7 +139,7 @@ export type WebhookOptions<T extends string> = StrictUnion<{
 }>
 
 /**
- * A block representing an individual function being registered to Inngest
+ * A block representing an individual function being registered to Hazel
  * Cloud.
  *
  * @internal
@@ -170,7 +170,7 @@ export type BaseContext<TOpts extends ClientOptions, TTrigger extends keyof Even
 }
 
 /**
- * Builds a context object for an Inngest handler, optionally overriding some
+ * Builds a context object for an Hazel handler, optionally overriding some
  * keys.
  */
 export type Context<
@@ -202,14 +202,14 @@ export type Handler<
 ) => unknown
 
 /**
- * The response to send to Inngest when pushing function config either directly
- * or when pinged by Inngest Cloud.
+ * The response to send to Hazel when pushing function config either directly
+ * or when pinged by Hazel Cloud.
  *
  * @internal
  */
 export interface RegisterRequest {
 	/**
-	 * Response version, allowing Inngest to change any top-level field.
+	 * Response version, allowing Hazel to change any top-level field.
 	 */
 	v: `${number}.${number}`
 
@@ -227,7 +227,7 @@ export interface RegisterRequest {
 	/**
 	 * The name of the framework being used for this instance, e.g. "nextjs",
 	 * "vercel", "netlify", "lambda", etc. Uses the `framework` specified when
-	 * creating a new `InngestCommHandler`.
+	 * creating a new `HazelCommHandler`.
 	 */
 	framework: string
 

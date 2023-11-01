@@ -15,7 +15,7 @@ export type AnyHazelWebhook = HazelWebhook<any, any, any>
  * A stateless Hazel function, wrapping up function configuration and any
  * in-memory steps to run when triggered.
  *
- * This function can be "registered" to create a handler that Inngest can
+ * This function can be "registered" to create a handler that Hazel can
  * trigger remotely.
  *
  * @public
@@ -32,10 +32,10 @@ export class HazelWebhook<
 	private readonly fn: Handler<TOpts, Events, keyof Events & string>
 
 	/**
-	 * A stateless Inngest function, wrapping up function configuration and any
+	 * A stateless Hazel function, wrapping up function configuration and any
 	 * in-memory steps to run when triggered.
 	 *
-	 * This function can be "registered" to create a handler that Inngest can
+	 * This function can be "registered" to create a handler that Hazel can
 	 * trigger remotely.
 	 */
 	constructor(
@@ -60,7 +60,7 @@ export class HazelWebhook<
 	}
 
 	/**
-	 * The name of this function as it will appear in the Inngest Cloud UI.
+	 * The name of this function as it will appear in the Hazel Cloud UI.
 	 */
 	public get name(): string {
 		return this.opts.name || this.id()

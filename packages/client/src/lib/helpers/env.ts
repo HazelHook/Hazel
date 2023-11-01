@@ -16,42 +16,6 @@ export type Env = Record<string, EnvValue>
 export type EnvValue = string | undefined
 
 /**
- * Given a potential fetch function, return the fetch function to use based on
- * this and the environment.
- */
-export const getFetch = (givenFetch?: typeof fetch): typeof fetch => {
-	if (givenFetch) {
-		return givenFetch
-	}
-
-	/**
-	 * Browser or Node 18+
-	 */
-	try {
-		if (typeof globalThis !== "undefined" && "fetch" in globalThis) {
-			return fetch.bind(globalThis)
-		}
-	} catch (err) {
-		// no-op
-	}
-
-	/**
-	 * Existing polyfilled fetch
-	 */
-	if (typeof fetch !== "undefined") {
-		return fetch
-	}
-
-	console.log(fetch, "XD")
-
-	/**
-	 * Environments where fetch cannot be found and must be polyfilled
-	 */
-	// eslint-disable-next-line @typescript-eslint/no-var-requires
-	return fetch
-}
-
-/**
  * getEnvironmentName returns the suspected branch name for this environment by
  * searching through a set of common environment variables.
  *
@@ -64,7 +28,7 @@ export const getEnvironmentName = (env: Env = allProcessEnv()): EnvValue => {
 	 * that we check the most specific, most reliable env vars first.
 	 */
 	return (
-		env[envKeys.InngestEnvironment] ||
+		env[envKeys.HazelEnvironment] ||
 		env[envKeys.BranchName] ||
 		env[envKeys.VercelBranch] ||
 		env[envKeys.NetlifyBranch] ||
@@ -122,7 +86,7 @@ export const hazelHeaders = (opts?: {
 	 */
 	env?: Env
 	/**
-	 * The framework name to use in the `X-Inngest-Framework` header. This is not
+	 * The framework name to use in the `X-Hazel-Framework` header. This is not
 	 * always available, hence being optional.
 	 */
 	framework?: string

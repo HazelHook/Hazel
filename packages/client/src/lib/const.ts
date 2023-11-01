@@ -1,24 +1,6 @@
 export enum envKeys {
-	InngestSigningKey = "INNGEST_SIGNING_KEY",
-	InngestEventKey = "INNGEST_EVENT_KEY",
-
-	/**
-	 * @deprecated Removed in v3. Use {@link InngestBaseUrl} instead.
-	 */
-	InngestDevServerUrl = "INNGEST_DEVSERVER_URL",
-	InngestEnvironment = "INNGEST_ENV",
-	InngestBaseUrl = "INNGEST_BASE_URL",
-	InngestServeHost = "INNGEST_SERVE_HOST",
-	InngestServePath = "INNGEST_SERVE_PATH",
-	InngestLogLevel = "INNGEST_LOG_LEVEL",
-	InngestStreaming = "INNGEST_STREAMING",
-
+	HazelEnvironment = "HAZEL_ENV",
 	BranchName = "BRANCH_NAME",
-
-	/**
-	 * @deprecated Removed in v3. Use {@link InngestBaseUrl} instead.
-	 */
-	InngestApiBaseUrl = "INNGEST_API_BASE_URL",
 
 	/**
 	 * The git branch of the commit the deployment was triggered by. Example:
@@ -86,7 +68,7 @@ export enum envKeys {
 }
 
 /**
- * Keys for accessing headers included in requests from Inngest to run
+ * Keys for accessing headers included in requests from Hazel to run
  * functions.
  *
  * Used internally to create handlers using `HazelCommHandler`, but can be

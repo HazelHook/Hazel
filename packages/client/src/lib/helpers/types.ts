@@ -20,7 +20,7 @@ export type PartialK<T, K extends PropertyKey = PropertyKey> = Partial<Pick<T, E
 	: never
 
 /**
- * A payload that could be sent to Inngest, based on the given `Events`.
+ * A payload that could be sent to Hazel, based on the given `Events`.
  */
 export type SendEventPayload<Events extends Record<string, EventPayload>> = SingleOrArray<
 	{
@@ -241,7 +241,7 @@ export interface IntrospectRequest {
 	hasProjectKey: boolean
 
 	/**
-	 * The number of Inngest functions found at this handler.
+	 * The number of Hazel functions found at this handler.
 	 */
 	webhookHandlerFound: number
 }
