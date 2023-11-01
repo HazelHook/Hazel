@@ -4,8 +4,8 @@ import type {
 	EventNameFromWebhook,
 	EventsFromOpts,
 	Handler,
+	WebhookConfig,
 	WebhookOptions,
-	WebhookTrigger,
 } from "./types"
 
 export type AnyHazelWebhook = HazelWebhook<any, any, any>
@@ -22,16 +22,9 @@ export type AnyHazelWebhook = HazelWebhook<any, any, any>
 export class HazelWebhook<
 	TOpts extends ClientOptions = ClientOptions,
 	Events extends EventsFromOpts = EventsFromOpts,
-	Trigger extends WebhookTrigger<keyof Events & string> = WebhookTrigger<keyof Events & string>,
-	Opts extends WebhookOptions<EventNameFromWebhook<Events, Trigger>> = WebhookOptions<
-		EventNameFromWebhook<Events, Trigger>
-	>,
+	Opts extends WebhookOptions<EventNameFromWebhook<Events, any>> = WebhookOptions<EventNameFromWebhook<Events, any>>,
 > {
-	static stepId = "step"
-	static failureSuffix = "-failure"
-
 	public readonly opts: Opts
-	public readonly trigger: Trigger
 
 	readonly #client: Hazel<TOpts>
 
@@ -51,12 +44,10 @@ export class HazelWebhook<
 		 * Options
 		 */
 		opts: Opts,
-		trigger: Trigger,
 		fn: Handler<TOpts, Events, keyof Events & string>,
 	) {
 		this.#client = client
 		this.opts = opts
-		this.trigger = trigger
 		this.fn = fn
 	}
 
@@ -72,5 +63,29 @@ export class HazelWebhook<
 	 */
 	public get name(): string {
 		return this.opts.name || this.id()
+	}
+
+	/**
+	 * Retrieve the Hazel config for this function.
+	 */
+	public getConfig(
+		/**
+		 * Must be provided a URL that will be used to access the function and step.
+		 * This function can't be expected to know how it will be accessed, so
+		 * relies on an outside method providing context.
+		 */
+		appPrefix?: string,
+	): WebhookConfig[] {
+		const fnId = this.id(appPrefix)
+
+		const fn: WebhookConfig = {
+			...this.opts,
+			id: fnId,
+			name: this.name,
+		}
+
+		const config: WebhookConfig[] = [fn]
+
+		return config
 	}
 }

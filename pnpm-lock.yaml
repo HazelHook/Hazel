@@ -31,13 +31,13 @@ importers:
     dependencies:
       '@elysiajs/bearer':
         specifier: ^0.5.2
-        version: 0.5.2(elysia@0.7.17)
+        version: 0.5.2(elysia@0.7.21)
       '@elysiajs/fn':
         specifier: ^0.5.2
-        version: 0.5.2(elysia@0.7.17)
+        version: 0.5.2(elysia@0.7.21)
       '@elysiajs/swagger':
         specifier: ^0.5.2
-        version: 0.5.2(elysia@0.7.17)
+        version: 0.5.2(elysia@0.7.21)
       '@hazel/db':
         specifier: workspace:*
         version: link:../../packages/db
@@ -49,7 +49,7 @@ importers:
         version: 1.22.0
       elysia:
         specifier: latest
-        version: 0.7.17(typescript@5.2.2)
+        version: 0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2)
 
   apps/backend:
     dependencies:
@@ -487,6 +487,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.3.5)
+      type-fest:
+        specifier: ^3.12.0
+        version: 3.13.0
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -1428,15 +1431,15 @@ packages:
     resolution: {integrity: sha512-ps5qF0tMxWRVu+V5gvCRrQNqlY92aTnIKdq27gm9LZMSdaKYZt6AVvSK1dlUMzs6Rt0Jm80b+eWct6xShBKhIw==}
     dev: true
 
-  /@elysiajs/bearer@0.5.2(elysia@0.7.17):
+  /@elysiajs/bearer@0.5.2(elysia@0.7.21):
     resolution: {integrity: sha512-RsTzXbi+gfu9fzXhqXphYTqWF69r7Pvn5JYJYgywFWBYAFJSUQlsGXt9arduA1JWiwZboBePa74e4sCWtBvQbg==}
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.7.17(typescript@5.2.2)
+      elysia: 0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2)
     dev: false
 
-  /@elysiajs/fn@0.5.2(elysia@0.7.17):
+  /@elysiajs/fn@0.5.2(elysia@0.7.21):
     resolution: {integrity: sha512-LG7Tbl9z0lZYANf1ku4x5BCXn4UDGk6cgRQuzir/uBRyFxHB6UadA8sJKVcE4+CjDsm82wjcKLlw+JRgVIT4HQ==}
     peerDependencies:
       elysia: '>= 0.5.0'
@@ -1445,15 +1448,15 @@ packages:
       superjson:
         optional: true
     dependencies:
-      elysia: 0.7.17(typescript@5.2.2)
+      elysia: 0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2)
     dev: false
 
-  /@elysiajs/swagger@0.5.2(elysia@0.7.17):
+  /@elysiajs/swagger@0.5.2(elysia@0.7.21):
     resolution: {integrity: sha512-5LyxGs/J4wrk6xLjn74hFPyCsTnPJlvWa6EBblM1lmoK6e7Rl2d5IFf6i+f30+Nye5isoWkRnuLB3qeNqVBgYA==}
     peerDependencies:
       elysia: '>= 0.5.12'
     dependencies:
-      elysia: 0.7.17(typescript@5.2.2)
+      elysia: 0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2)
     dev: false
 
   /@emotion/is-prop-valid@0.8.8:
@@ -5848,27 +5851,6 @@ packages:
   /electron-to-chromium@1.4.554:
     resolution: {integrity: sha512-Q0umzPJjfBrrj8unkONTgbKQXzXRrH7sVV7D9ea2yBV3Oaogz991yhbpfvo2LMNkJItmruXTEzVpP9cp7vaIiQ==}
 
-  /elysia@0.7.17(typescript@5.2.2):
-    resolution: {integrity: sha512-d+kopAonTBezt5ATijVAe4pwvbxTr+yQAP52K8cbMwbHR07HmnwFa4EpZi+sAjqCU20CJNIs1WpJFnnie2ukwQ==}
-    peerDependencies:
-      '@sinclair/typebox': '>= 0.31.0'
-      openapi-types: '>= 12.0.0'
-      typescript: '>= 5.0.0'
-    peerDependenciesMeta:
-      '@sinclair/typebox':
-        optional: true
-      openapi-types:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      cookie: 0.5.0
-      eventemitter3: 5.0.1
-      fast-querystring: 1.1.2
-      memoirist: 0.1.4
-      typescript: 5.2.2
-    dev: false
-
   /elysia@0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2):
     resolution: {integrity: sha512-E0QVS8ry6PGU195FqJPH1B9BViXI0lveazr8zzuojiBwhPZBcL8aeWfIcSyF44i/T+zppeNGrlInU/mpiTZKVg==}
     peerDependencies:
@@ -10113,7 +10095,6 @@ packages:
   /type-fest@3.13.0:
     resolution: {integrity: sha512-Gur3yQGM9qiLNs0KPP7LPgeRbio2QTt4xXouobMCarR0/wyW3F+F/+OWwshg3NG0Adon7uQfSZBpB46NfhoF1A==}
     engines: {node: '>=14.16'}
-    dev: false
 
   /type@1.2.0:
     resolution: {integrity: sha512-+5nt5AAniqsCnu2cEQQdpzCAh33kVx8n0VoFidKpB1dVVLAN/F+bgVOqOJqOnEnrhp222clB5p3vUlD+1QAnfg==}

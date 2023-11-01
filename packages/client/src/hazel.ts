@@ -13,9 +13,9 @@ export class Hazel<TOpts extends ClientOptions = ClientOptions> {
 	}
 
 	public createWebhook<
-		TWebhook extends WebhookOptions<keyof EventsFromOpts>,
-		TTriggerName extends keyof EventsFromOpts & string = EventNameFromWebhook<EventsFromOpts, TWebhook>,
-	>(options: TWebhook, handler: Handler<TOpts, EventsFromOpts, TTriggerName>) {
-		return new HazelWebhook(this, {}, options, handler)
+		TWebhookOpt extends WebhookOptions<keyof EventsFromOpts>,
+		TTriggerName extends keyof EventsFromOpts & string = EventNameFromWebhook<EventsFromOpts, TWebhookOpt>,
+	>(options: TWebhookOpt, handler: Handler<TOpts, EventsFromOpts, TTriggerName>) {
+		return new HazelWebhook(this, options, handler)
 	}
 }

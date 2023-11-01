@@ -1,6 +1,7 @@
 import { type NextApiRequest, type NextApiResponse } from "next"
 import { NextRequest } from "next/server"
 import type { SupportedFrameworks, ServeHandlerOptions } from "./types"
+import { HazelCommHandler } from "./hazel-comm-handler"
 
 export const frameworkName: SupportedFrameworks = "nextjs"
 
@@ -28,7 +29,7 @@ const isNextEdgeRequest = (req: NextApiRequest | NextRequest): req is NextReques
  * @public
  */
 export const serve = (options: ServeHandlerOptions) => {
-	const handler = new InngestCommHandler({
+	const handler = new HazelCommHandler({
 		frameworkName,
 		...options,
 		handler: (reqMethod: "GET" | "POST" | "PUT" | undefined, expectedReq: NextRequest, res: NextApiResponse) => {
@@ -38,7 +39,6 @@ export const serve = (options: ServeHandlerOptions) => {
 
 			return {
 				body: () => {
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 					return isEdge ? req.json() : req.body
 				},
 				headers: (key) => {

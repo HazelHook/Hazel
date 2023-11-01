@@ -1,4 +1,6 @@
+import { Hazel } from "./hazel"
 import { StrictUnion } from "./lib/helpers/types"
+import { AnyHazelWebhook } from "./webhook-function"
 
 export type SupportedFrameworks =
 	// | "cloudflare-pages"
@@ -48,7 +50,7 @@ export interface EventPayload {
 }
 
 export interface RegisterOptions {
-	secret?: string
+	secret: string
 
 	/**
 	 * If provided, will override the used `fetch` implementation. Useful for
@@ -71,12 +73,12 @@ export interface ServeHandlerOptions extends RegisterOptions {
 	/**
 	 * The `Hazel` instance used to declare all functions.
 	 */
-	client: any
+	client: Hazel<any>
 
 	/**
 	 * An array of the functions to serve and register with Inngest.
 	 */
-	functions: readonly any[]
+	webhooks: readonly AnyHazelWebhook[]
 }
 
 /**
@@ -121,8 +123,22 @@ export type EventsFromOpts = Record<string, EventPayload>
  */
 export type WebhookOptions<T extends string> = StrictUnion<{
 	event: T
-	if?: string
+
+	id: string
+
+	name?: string
 }>
+
+/**
+ * A block representing an individual function being registered to Inngest
+ * Cloud.
+ *
+ * @internal
+ */
+export interface WebhookConfig {
+	name?: string
+	id: string
+}
 
 /**
  * Given a set of events and a user-friendly trigger paramter, returns the name
@@ -173,17 +189,3 @@ export type Handler<
 	 */
 	ctx: Context<TOpts, TEvents, TTrigger, TOverrides>,
 ) => unknown
-
-/**
- * An individual function trigger.
- *
- * @internal
- */
-export type WebhookTrigger<T = string> =
-	| {
-			event: T
-			expression?: string
-	  }
-	| {
-			cron: string
-	  }
