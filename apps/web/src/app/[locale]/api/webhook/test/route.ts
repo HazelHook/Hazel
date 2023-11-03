@@ -10,4 +10,4 @@ export const GET = () => {
 	return new Response("Hello Post")
 }
 
-// export const runtime = "edge"
+export const runtime = "edge"
