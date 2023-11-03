@@ -13,7 +13,7 @@ const nextConfig = {
 	experimental: {
 		serverComponentsExternalPackages: ["@trpc/server"],
 		optimizePackageImports: ["@hazel/icons"],
-		webpackBuildWorker: true,
+		webpackBuildWorker: false,
 		instrumentationHook: false,
 	},
 	devIndicators: {
