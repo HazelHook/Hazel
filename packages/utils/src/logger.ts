@@ -11,13 +11,13 @@ export function getLogger() {
 	const isDev = process.env.NODE_ENV !== "production"
 
 	if (isDev) {
-		const pretty = require("pino-pretty")
+		// const pretty = require("pino-pretty")
 
 		logger = pino(
 			{},
-			pretty({
-				colorize: true,
-			}),
+			// pretty({
+			// 	colorize: true,
+			// }),
 		)
 	} else {
 		logger = pino({
