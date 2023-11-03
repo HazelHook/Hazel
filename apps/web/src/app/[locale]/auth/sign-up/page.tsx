@@ -10,4 +10,6 @@ function NextSignUpPage() {
 	return <SignUpPage signInPath={configuration.paths.signIn} />
 }
 
+export const runtime = "edge"
+
 export default NextSignUpPage

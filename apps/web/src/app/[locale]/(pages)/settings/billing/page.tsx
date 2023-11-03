@@ -100,3 +100,5 @@ export default async function BillingPage() {
 		</Container>
 	)
 }
+
+export const runtime = "edge"

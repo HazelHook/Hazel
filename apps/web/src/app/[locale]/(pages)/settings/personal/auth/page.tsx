@@ -4,4 +4,6 @@ const MultiAuthPage = () => {
 	return <MultiFactorAuthenticationSettings />
 }
 
+export const runtime = "edge"
+
 export default MultiAuthPage

@@ -91,4 +91,6 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 	)
 }
 
+
+
 export const dynamic = "force-dynamic"

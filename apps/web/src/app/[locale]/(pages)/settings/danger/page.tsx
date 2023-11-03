@@ -26,4 +26,6 @@ const DangerPage = async () => {
 	)
 }
 
+export const runtime = "edge"
+
 export default DangerPage

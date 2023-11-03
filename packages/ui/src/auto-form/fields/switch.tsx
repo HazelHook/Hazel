@@ -24,3 +24,5 @@ export default function AutoFormSwitch({
 		</FormItem>
 	)
 }
+
+export const runtime = "edge"

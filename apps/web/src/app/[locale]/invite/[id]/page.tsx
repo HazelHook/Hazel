@@ -66,4 +66,6 @@ const InvitePage = async ({ params }: Props) => {
 	)
 }
 
+export const runtime = "edge"
+
 export default InvitePage

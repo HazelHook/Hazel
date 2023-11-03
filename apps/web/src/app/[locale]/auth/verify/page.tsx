@@ -10,4 +10,6 @@ async function NextVerifyPage() {
 	return <VerifyPage signInPath={configuration.paths.signIn} signInRedirectPath={configuration.paths.home} />
 }
 
+export const runtime = "edge"
+
 export default NextVerifyPage

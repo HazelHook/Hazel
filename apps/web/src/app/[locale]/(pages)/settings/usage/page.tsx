@@ -84,3 +84,5 @@ export default async function UsagePage() {
 		</Container>
 	)
 }
+
+export const runtime = "edge"

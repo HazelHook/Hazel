@@ -16,4 +16,6 @@ const UpdateEmailPage = async () => {
 	)
 }
 
+export const runtime = "edge"
+
 export default UpdateEmailPage
