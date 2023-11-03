@@ -9,7 +9,7 @@ import { Context } from "./context"
 import { db } from "@hazel/db/src"
 import { isUserSuperAdmin, requireSession } from "@hazel/auth/utils"
 
-import { trpcTracingMiddleware } from "@baselime/node-opentelemetry"
+// import { trpcTracingMiddleware } from "@baselime/node-opentelemetry"
 
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,
@@ -123,7 +123,8 @@ const isAdmin = t.middleware(async ({ next, ctx }) => {
 export const router = t.router
 export const publicProcedure = t.procedure
 
-const baseProcedure = t.procedure.use(trpcTracingMiddleware({ collectInput: true }))
+const baseProcedure = t.procedure
+// const baseProcedure = t.procedure.use(trpcTracingMiddleware({ collectInput: true }))
 
 export const basicProtectedProcedure = baseProcedure.use(isBasicAuth)
 export const protectedProcedure = baseProcedure.use(isAuthed)
