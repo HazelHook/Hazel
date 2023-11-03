@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "infisical run -- next dev --port 3004",
 		"dev:raw": "next dev",
-		"dev:turbo": "infisical run -- next dev --turbo",
+		"dev:turbo": "infisical run -- next dev --turbo --port 3004",
 		"dev:build": "infisical run --next build",
 		"build": "next build",
 		"start": "next start",
