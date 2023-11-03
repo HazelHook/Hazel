@@ -1,8 +1,17 @@
 import { Simplify } from "type-fest"
-import { Await, MaybePromise, ObjectAssign, PartialK } from "../lib/helpers/types"
+import {
+	Await,
+	IncomingOp,
+	MaybePromise,
+	ObjectAssign,
+	OutgoingOp,
+	PartialK,
+	SendEventBaseOutput,
+} from "../lib/helpers/types"
 import { Hazel } from "./hazel"
 import { AnyHazelWebhook } from "./webhook-function"
 import { BaseContext, ClientOptions, EventPayload, MiddlewareStack } from "../lib/types"
+import { cacheFn, waterfall } from "../lib/helpers/functions"
 
 /**
  * A middleware that can be registered with Inngest to hook into various
@@ -124,12 +133,12 @@ export const getHookStack = async <
 			) => Parameters<TResult[K]>[0]
 		},
 		keyof {
-			[K in
-				keyof TResult as Await<TResult[K]> extends Parameters<TResult[K]>[0]
-					? K
-					: Await<TResult[K]> extends VoidType | undefined
-					? Parameters<TResult[K]>[0] extends VoidType | undefined
-						? K
+			[K2 in
+				keyof TResult as Await<TResult[K2]> extends Parameters<TResult[K2]>[0]
+					? K2
+					: Await<TResult[K2]> extends VoidType | undefined
+					? Parameters<TResult[K2]>[0] extends VoidType | undefined
+						? K2
 						: never
 					: never]: VoidType
 		}

@@ -1,5 +1,6 @@
 import { type IsEqual, type Simplify } from "type-fest"
 import { EventPayload } from "../types"
+import { z } from "zod"
 
 /**
  * Returns the given generic as either itself or an array of itself.
@@ -244,4 +245,102 @@ export interface IntrospectRequest {
 	 * The number of Hazel functions found at this handler.
 	 */
 	webhookHandlerFound: number
+}
+
+export const incomingOpSchema = z.object({
+	id: z.string().min(1),
+	data: z.any().optional(),
+	error: z.any().optional(),
+})
+
+export type IncomingOp = z.output<typeof incomingOpSchema>
+export type OutgoingOp = Pick<HashedOp, "id" | "name" | "opts" | "data" | "error" | "displayName">
+
+/**
+ * The shape of a hashed operation in a step function. Used to communicate
+ * desired and received operations to Inngest.
+ */
+export type HashedOp = Op & {
+	/**
+	 * The hashed identifier for this operation, used to confirm that the
+	 * operation was completed when it is received from Inngest.
+	 */
+	id: string
+}
+
+/**
+ * The shape of a single operation in a step function. Used to communicate
+ * desired and received operations to Inngest.
+ */
+export type Op = {
+	/**
+	 * The unique code for this operation.
+	 */
+
+	/**
+	 * The unhashed step name for this operation. This is a legacy field that is
+	 * sometimes used for critical data, like the sleep duration for
+	 * `step.sleep()`.
+	 *
+	 * @deprecated For display name, use `displayName` instead.
+	 */
+	name?: string
+
+	/**
+	 * An optional name for this step that can be used to display in the Inngest
+	 * UI.
+	 */
+	displayName?: string
+
+	/**
+	 * Any additional data required for this operation to send to Inngest. This
+	 * is not compared when confirming that the operation was completed; use `id`
+	 * for this.
+	 */
+	opts?: Record<string, unknown>
+
+	/**
+	 * Any data present for this operation. If data is present, this operation is
+	 * treated as completed.
+	 */
+	data?: unknown
+
+	/**
+	 * An error present for this operation. If an error is present, this operation
+	 * is treated as completed, but failed. When this is read from the op stack,
+	 * the SDK will throw the error via a promise rejection when it is read.
+	 *
+	 * This allows users to handle step failures using common tools such as
+	 * try/catch or `.catch()`.
+	 */
+	error?: unknown
+}
+
+export const sendEventResponseSchema = z.object({
+	/**
+	 * Event IDs
+	 */
+	ids: z.array(z.string()),
+
+	/**
+	 * HTTP Status Code. Will be undefined if no request was sent.
+	 */
+	status: z.number(),
+
+	/**
+	 * Error message. Will be undefined if no error occurred.
+	 */
+	error: z.string().optional(),
+})
+
+/**
+ * The response from the Inngest Event API
+ */
+export type SendEventResponse = z.output<typeof sendEventResponseSchema>
+
+/**
+ * The response in code from sending an event to Inngest.
+ */
+export type SendEventBaseOutput = {
+	ids: SendEventResponse["ids"]
 }
