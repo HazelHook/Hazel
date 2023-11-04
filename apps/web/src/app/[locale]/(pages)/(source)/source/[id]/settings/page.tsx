@@ -34,6 +34,6 @@ const SettingsPage = async ({ params }: EventsPageProps) => {
 	)
 }
 
-export const runtime = "edge"
+// export const runtime = "edge"
 
 export default SettingsPage

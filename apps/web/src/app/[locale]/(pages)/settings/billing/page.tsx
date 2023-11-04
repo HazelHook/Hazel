@@ -101,4 +101,4 @@ export default async function BillingPage() {
 	)
 }
 
-export const runtime = "edge"
+// export const runtime = "edge"

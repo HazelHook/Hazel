@@ -10,6 +10,6 @@ function LoginPage() {
 	return <SignInPage signUpPath={configuration.paths.signUp} />
 }
 
-export const runtime = "edge"
+// export const runtime = "edge"
 
 export default LoginPage

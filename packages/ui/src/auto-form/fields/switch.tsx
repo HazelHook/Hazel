@@ -25,4 +25,4 @@ export default function AutoFormSwitch({
 	)
 }
 
-export const runtime = "edge"
+// export const runtime = "edge"

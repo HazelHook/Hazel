@@ -30,4 +30,4 @@ const MemberListPage = async ({ params, searchParams }: any) => {
 
 export default MemberListPage
 
-export const runtime = "edge"
+// export const runtime = "edge"

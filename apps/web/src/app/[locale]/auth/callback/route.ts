@@ -6,4 +6,4 @@ export const GET = authCallbackGetRoute({
 	redirectPath: configuration.paths.home,
 })
 
-export const runtime = "edge"
+// export const runtime = "edge"
