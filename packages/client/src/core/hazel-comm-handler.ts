@@ -338,6 +338,25 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 
 			const hazel_key = await actions.headers("getting headers", "hazel_key")
 
+			const url = await actions.url("getting url")
+
+			const hazel_overview_mode = url.searchParams.get("hazel_overview")
+
+			if (hazel_overview_mode === "true") {
+				const registerBody = this.registerBody()
+
+				return {
+					status: 200,
+					body: safeStringify(registerBody),
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Access-Control-Allow-Methods": "GET, POST",
+						"Access-Control-Allow-Headers": "Content-Type, Authorization",
+						...hazelHeaders(),
+					},
+				}
+			}
+
 			if (!hazel_key) {
 				throw new Error("No webhook ID found in request")
 			}
@@ -366,7 +385,10 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 					status: 200,
 					body: safeStringify(introspection),
 					headers: {
-						"Content-Type": "application/json",
+						"Access-Control-Allow-Origin": "*",
+						"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+						"Access-Control-Allow-Headers": "Content-Type, Authorization",
+						...hazelHeaders(),
 					},
 				}
 			}
@@ -401,7 +423,6 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 
 	protected registerBody(): RegisterRequest {
 		const body: RegisterRequest = {
-			deployType: "ping",
 			framework: this.frameworkName,
 			appName: this.id,
 			webhooks: this.configs(),

@@ -221,11 +221,6 @@ export interface RegisterRequest {
 	sdk: string
 
 	/**
-	 * The method used to deploy these functions.
-	 */
-	deployType: "ping"
-
-	/**
 	 * The name of the framework being used for this instance, e.g. "nextjs",
 	 * "vercel", "netlify", "lambda", etc. Uses the `framework` specified when
 	 * creating a new `HazelCommHandler`.
