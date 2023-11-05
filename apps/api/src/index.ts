@@ -36,7 +36,7 @@ const app = new Elysia()
 
 		return new Response(error.message, {
 			status: statusCode,
-			statusText: error.cause as string,
+			statusText: error.message as string,
 		})
 	})
 	.get("/", () => "Hello Elysia")
