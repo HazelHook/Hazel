@@ -3,10 +3,10 @@
 	"version": "0.0.1",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "doppler run -- bun run --watch src/index.ts"
+		"dev": "infisical run -- bun run --watch src/index.ts"
 	},
 	"dependencies": {
-		"bullmq": "^4.12.7",
+		"bullmq": "^4.13.0",
 		"@hazel/db": "workspace:*",
 		"nanoid": "^5.0.2",
 		"zod": "^3.22.4"
