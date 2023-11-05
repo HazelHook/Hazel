@@ -2,9 +2,9 @@
 	"name": "api",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "doppler run -- bun run --watch src/index.ts",
+		"dev": "infisical run -- bun run --watch src/index.ts",
 		"build": "bun build ./src/index.ts --outdir ./packed",
-		"start": "doppler run -- bun run packed/index.js",
+		"start": "infisical run -- bun run packed/index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {
