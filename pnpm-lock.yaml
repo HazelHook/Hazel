@@ -50,6 +50,10 @@ importers:
       elysia:
         specifier: 0.7.21
         version: 0.7.21(@sinclair/typebox@0.31.21)(typescript@5.2.2)
+    devDependencies:
+      bun:
+        specifier: ^1.0.9
+        version: 1.0.9
 
   apps/backend:
     dependencies:
@@ -2747,6 +2751,54 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
+  /@oven/bun-darwin-aarch64@1.0.9:
+    resolution: {integrity: sha512-VHg8pVamtj86svBfa8vkBNMBWUv46Rrm90qbs3SnzMBhRL+6ov2K7gFnbZMvYuf+lnURTZoF+jcmGXu0ylC2YQ==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@oven/bun-darwin-x64-baseline@1.0.9:
+    resolution: {integrity: sha512-Mdw8FPKFa8qlp7qu4clfEZWSBhq6uz8MSMuhverCVaAhpAQmv2NwTtwpYp957gzO5vQFjoTUes/gZng/isdUOA==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@oven/bun-darwin-x64@1.0.9:
+    resolution: {integrity: sha512-66jM+06cZplHPFqO9iof8m7oVyv3v0DnAx8jlfHUvji0OULmwaCtYVonxuwCkBcdKWOORfAnkovy3bqk1tZ6UA==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@oven/bun-linux-aarch64@1.0.9:
+    resolution: {integrity: sha512-HAe1tUG42tKVb1d7lHMneSYPDvChRETY9r3ABbYzrV3DoV8wDd4ZV3xhitspH6cbD0rV9Z9BNOHrlT1lC2PlmA==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@oven/bun-linux-x64-baseline@1.0.9:
+    resolution: {integrity: sha512-m4XZSKCXB2UTDbBHWgkcrcVeXAIYOe+NMNxJVpPdZy6Gkr8OSuz+6vTVGlVxlKpn4UyUWzu/8qfj1vEl7CCoOw==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@oven/bun-linux-x64@1.0.9:
+    resolution: {integrity: sha512-VwcN/h6kbOxXQ6fAfULhCXhOC7+VC91Y0YjMJOxxYZT+bTNrtDAYd5TMdeEjqYqh24TMMLSnXNC8Smm3zGnv+w==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   /@planetscale/database@1.11.0:
     resolution: {integrity: sha512-aWbU+D/IRHoDE9975y+Q4c+EwwAWxCPwFId+N1AhQVFXzbeJMkj6KN2iQtoi03elcLMRdfT+V3i9Z4WRw+/oIA==}
     engines: {node: '>=16'}
@@ -5052,6 +5104,21 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /bun@1.0.9:
+    resolution: {integrity: sha512-xKE+PG21J6jg1BgqE77b/Qavz6XuCVO0y41DKrD/YwKr/eqMeJ2oqqR+pLG//8/Nvc7RISb27Bkk5kz3XwQe1Q==}
+    cpu: [arm64, x64]
+    os: [darwin, linux]
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      '@oven/bun-darwin-aarch64': 1.0.9
+      '@oven/bun-darwin-x64': 1.0.9
+      '@oven/bun-darwin-x64-baseline': 1.0.9
+      '@oven/bun-linux-aarch64': 1.0.9
+      '@oven/bun-linux-x64': 1.0.9
+      '@oven/bun-linux-x64-baseline': 1.0.9
+    dev: true
 
   /bundle-require@4.0.2(esbuild@0.18.20):
     resolution: {integrity: sha512-jwzPOChofl67PSTW2SGubV9HBQAhhR2i6nskiOThauo9dzwDUgOWQScFVaJkjEfYX+UXiD+LEx8EblQMc2wIag==}
