@@ -1,4 +1,4 @@
-import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm"
+import { InferInsertModel, InferSelectModel, relations, sql } from "drizzle-orm"
 import {
 	boolean,
 	index,
@@ -24,8 +24,8 @@ const commonFields = (type: SchemaType) => ({
 		.notNull()
 		.$defaultFn(() => generatePublicId(type)),
 
-	createdAt: timestamp("created_at").defaultNow().notNull(),
-	updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
 	deletedAt: timestamp("deleted_at"),
 })
 
@@ -46,13 +46,13 @@ export const source = mysqlTable(
 	"sources",
 	{
 		...commonFields("src"),
-		workspaceId: varchar("workspace_id", { length: 128 })
-			.notNull()
-			.references(() => organizations.publicId),
+		workspaceId: varchar("workspace_id", { length: 128 }).notNull(),
+		// .references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		url,
-		integrationId: int("integration_id").references(() => integration.id),
+		integrationId: int("integration_id"),
+		// .references(() => integration.id),
 	},
 	(table) => ({}),
 )
@@ -61,9 +61,8 @@ export const integration = mysqlTable(
 	"integrations",
 	{
 		...commonFields("itg"),
-		workspaceId: varchar("workspace_id", { length: 128 })
-			.notNull()
-			.references(() => organizations.publicId),
+		workspaceId: varchar("workspace_id", { length: 128 }).notNull(),
+		// .references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]),
@@ -78,11 +77,11 @@ export const destination = mysqlTable(
 	"destinations",
 	{
 		...commonFields("dst"),
-		workspaceId: varchar("workspace_id", { length: 128 })
-			.notNull()
-			.references(() => organizations.publicId),
+		workspaceId: varchar("workspace_id", { length: 128 }).notNull(),
+		// .references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
+		key: varchar("key", { length: 256 }).notNull().unique(),
 		url: url.notNull(),
 		websocket_connection: boolean("websocket_connection").default(false).notNull(),
 	},
@@ -93,19 +92,16 @@ export const connection = mysqlTable(
 	"connections",
 	{
 		...commonFields("con"),
-		workspaceId: varchar("workspace_id", { length: 128 })
-			.notNull()
-			.references(() => organizations.publicId),
+		workspaceId: varchar("workspace_id", { length: 128 }).notNull(),
+		// .references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
 		enabled,
 
-		sourceId: int("source_id")
-			.notNull()
-			.references(() => source.id),
-		destinationId: int("destination_id")
-			.notNull()
-			.references(() => destination.id),
+		sourceId: int("source_id").notNull(),
+		// .references(() => source.id),
+		destinationId: int("destination_id").notNull(),
+		// .references(() => destination.id),
 
 		delay: int("delay"),
 
@@ -124,9 +120,8 @@ export const apiKeys = mysqlTable(
 	"api_keys",
 	{
 		...commonFields("sk"),
-		workspaceId: varchar("workspace_id", { length: 128 })
-			.notNull()
-			.references(() => organizations.publicId),
+		workspaceId: varchar("workspace_id", { length: 128 }).notNull(),
+		// .references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		ownerId: varchar("owner_id", { length: 128 }),
 		name: varchar("name", { length: 128 }),
@@ -152,8 +147,8 @@ export const organizations = mysqlTable(
 
 		profileImage: varchar("profile_image", { length: 256 }),
 
-		createdAt: timestamp("created_at").defaultNow().notNull(),
-		updatedAt: timestamp("updated_at").defaultNow().notNull(),
+		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		deletedAt: timestamp("deleted_at"),
 	},
 	(table) => ({}),
@@ -168,16 +163,15 @@ export const organizationMembers = mysqlTable(
 			.notNull()
 			.$defaultFn(() => generatePublicId("mem")),
 
-		createdAt: timestamp("created_at").defaultNow().notNull(),
-		updatedAt: timestamp("updated_at").defaultNow().notNull(),
+		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		deletedAt: timestamp("deleted_at"),
 
-		userId: varchar("user_id", { length: 256 })
-			.references(() => user.id)
-			.notNull(),
-		organizationId: int("organization_id")
-			.notNull()
-			.references(() => organizations.id, { onDelete: "cascade" }),
+		userId: varchar("user_id", { length: 256 }).notNull(),
+		// .references(() => user.id)
+
+		organizationId: int("organization_id").notNull(),
+		// .references(() => organizations.id, { onDelete: "cascade" }),
 		role: role,
 	},
 	(table) => ({
@@ -194,14 +188,13 @@ export const organizationInvites = mysqlTable(
 			.notNull()
 			.$defaultFn(() => generatePublicId("inv")),
 
-		createdAt: timestamp("created_at").defaultNow().notNull(),
+		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		revokedAt: timestamp("revoked_at"),
 
 		email: varchar("email", { length: 128 }).notNull(),
 		role: role,
-		organizationId: int("organization_id")
-			.notNull()
-			.references(() => organizations.id, { onDelete: "cascade" }),
+		organizationId: int("organization_id").notNull(),
+		// .references(() => organizations.id, { onDelete: "cascade" }),
 	},
 	(table) => ({
 		emailIdx: uniqueIndex("email_idx").on(table.email),

@@ -7,6 +7,9 @@ export const createDestinationSchema = z.object({
 			message: "Name must be between atleast 2 characters long",
 		})
 		.max(20),
+	key: z.string().regex(/^[a-z_-]+$/, {
+		message: "Only lowercase letters a-z, underscores, and hyphens are allowed",
+	}),
 	url: z.string().url(),
 })
 

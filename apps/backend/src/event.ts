@@ -29,9 +29,18 @@ export const sendEvent = async ({
 }: Event) => {
 	try {
 		const sendTime = new Date().toISOString()
-		const res = await fetch(connection.destination.url, request.clone())
+		const res = await fetch(connection.destination.url, {
+			...request.clone(),
+			headers: {
+				...request.headers,
+				"X-HAZEL_KEY": connection.destination.key,
+				"X-HAZEL_SIGNATURE": "TODO: create signature",
+			},
+		})
 
 		const headersObj: Record<string, string> = {}
+
+		// biome-ignore lint/complexity/noForEach: <explanation>
 		res.headers.forEach((value, key) => {
 			headersObj[key] = value
 		})
@@ -40,7 +49,7 @@ export const sendEvent = async ({
 			id: `res_${nanoid(17)}`,
 			received_at: received_at,
 			send_at: sendTime,
-			response_at: new Date().toISOString(),
+			response_at: new Date(performance.now()).toISOString(),
 			source_id: sourceId,
 			workspace_id: workspaceId,
 			version: "1.0",

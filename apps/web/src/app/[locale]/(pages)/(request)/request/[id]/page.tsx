@@ -37,6 +37,8 @@ interface ResponsePageProps {
 
 const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { workspaceId } = await auth()
+
+	console.log(workspaceId)
 	const { data } = await tiny.request.get({
 		request_id: params.id,
 		workspace_id: workspaceId,

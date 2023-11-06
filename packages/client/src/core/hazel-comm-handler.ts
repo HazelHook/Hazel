@@ -336,8 +336,11 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 		try {
 			const method = await actions.method("starting to handle request")
 
-			const hazel_key = await actions.headers("getting headers", "hazel_key")
+			const hazelKey = await actions.headers("getting headers", "X-HAZEL_KEY")
 
+			const hazelSignature = await actions.headers("getting headers", "X-HAZEL_SIGNATURE")
+
+			console.log(hazelKey, hazelSignature)
 			const url = await actions.url("getting url")
 
 			const hazel_overview_mode = url.searchParams.get("hazel_overview")
@@ -357,14 +360,14 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 				}
 			}
 
-			if (!hazel_key) {
+			if (!hazelKey) {
 				throw new Error("No webhook ID found in request")
 			}
 
-			const fn = this.fns[hazel_key]
+			const fn = this.fns[hazelKey]
 
 			if (!fn) {
-				throw new Error(`Could not find webhook handler with Key "${hazel_key}"`)
+				throw new Error(`Could not find webhook handler with Key "${hazelKey}"`)
 			}
 
 			const body = await actions.body("getting body")
