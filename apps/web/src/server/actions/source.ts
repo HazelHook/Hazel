@@ -17,6 +17,7 @@ export const createSourceAction = createAction(
 			name: opts.input.name,
 			url: opts.input.url!,
 			integrationId: integrationResult?.id,
+			key: opts.input.key,
 			workspaceId: opts.ctx.auth.workspaceId,
 		})
 

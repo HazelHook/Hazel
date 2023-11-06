@@ -3,10 +3,12 @@ import { NextRequest } from "next/server"
 import type { SupportedFrameworks, ServeHandlerOptions } from "./lib/types"
 import { HazelCommHandler } from "./core/hazel-comm-handler"
 
+import { isWorkerd } from "std-env"
+
 export const frameworkName: SupportedFrameworks = "nextjs"
 
 const isNextEdgeRequest = (req: NextApiRequest | NextRequest): req is NextRequest => {
-	return typeof req?.headers?.get === "function"
+	return isWorkerd
 }
 
 /**
@@ -100,15 +102,7 @@ export const serve = (options: ServeHandlerOptions) => {
 					return new URL(req.url as string, `${scheme}://${req.headers.host || ""}`)
 				},
 				transformResponse: ({ body, headers, status }) => {
-					if (isNextEdgeRequest(req)) {
-						return new Response(body, { status, headers })
-					}
-
-					for (const [key, value] of Object.entries(headers)) {
-						res.setHeader(key, value)
-					}
-
-					res.status(status).send(body)
+					return new Response(body, { status, headers })
 				},
 				transformStreamingResponse: ({ body, headers, status }) => {
 					return new Response(body, { status, headers })

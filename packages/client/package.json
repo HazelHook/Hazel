@@ -37,7 +37,12 @@
 	},
 	"typesVersions": {
 		"*": {
-			"*": ["src/*"]
+			"*": [
+				"src/*"
+			]
 		}
+	},
+	"dependencies": {
+		"std-env": "^3.4.3"
 	}
 }

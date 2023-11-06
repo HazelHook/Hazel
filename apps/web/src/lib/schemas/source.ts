@@ -11,6 +11,12 @@ export const createSourceSchema = z.object({
 		.union([z.literal(""), z.string().trim().url()])
 		.optional()
 		.describe("Source URL"),
+	key: z
+		.string()
+		.regex(/^[a-z_-]+$/, {
+			message: "Only lowercase letters a-z, underscores, and hyphens are allowed",
+		})
+		.describe("Unique Identifier (to be used in our sdk)"),
 	integrationId: z.string().optional().describe("Integration"),
 })
 

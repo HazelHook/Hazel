@@ -1,10 +1,10 @@
 import { serve } from "@hazel/client/next"
 import { Hazel } from "@hazel/client"
 
-const hazel = new Hazel({ id: "hazel" })
+const hazel = new Hazel({ id: "test" })
 
-const test = hazel.createWebhook({ event: "hello", id: "hello" }, async (opts) => {
-	console.log(opts, "opts")
+const test = hazel.createWebhook({ event: "stripe", id: "stripe" }, async (opts) => {
+	console.log("opts")
 	return { body: "Hello, World!" }
 })
 
@@ -13,3 +13,5 @@ export const { GET, POST, PUT } = serve({
 	secret: "",
 	webhooks: [test],
 })
+
+// export const runtime = "edge"

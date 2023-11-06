@@ -19,13 +19,13 @@ export type Column = TBResponse
 export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: "id",
-		header: "Request ID",
+		header: "Response ID",
 		cell: ({ cell }) => {
-			const requestId = cell.getValue() as string
+			const responseId = cell.getValue() as string
 
 			return (
-				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/request/${requestId}`}>
-					{requestId}
+				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/response/${responseId}`}>
+					{responseId}
 				</Link>
 			)
 		},
@@ -48,7 +48,7 @@ export const columns: ColumnDef<Column>[] = [
 	},
 
 	{
-		accessorKey: "timestamp",
+		accessorKey: "response_at",
 		header: "Timestamp",
 		cell: ({ cell }) => {
 			const date = new Date(cell.getValue<string>())

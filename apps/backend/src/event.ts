@@ -9,17 +9,18 @@ interface Event {
 	connection: Connection & {
 		destination: Destination
 	}
+	sourceKey: string
 	request: Request
 	body: string
 	sourceId: string
 	requestId: string
 	workspaceId: string
-	data: string
 	received_at: string
 }
 
 export const sendEvent = async ({
 	connection,
+	sourceKey,
 	sourceId,
 	requestId,
 	workspaceId,
@@ -31,9 +32,10 @@ export const sendEvent = async ({
 		const sendTime = new Date().toISOString()
 		const res = await fetch(connection.destination.url, {
 			...request.clone(),
+			method: "POST",
 			headers: {
 				...request.headers,
-				"X-HAZEL_KEY": connection.destination.key,
+				"X-HAZEL_KEY": `${connection.destination.key}-${sourceKey}`,
 				"X-HAZEL_SIGNATURE": "TODO: create signature",
 			},
 		})
@@ -49,13 +51,13 @@ export const sendEvent = async ({
 			id: `res_${nanoid(17)}`,
 			received_at: received_at,
 			send_at: sendTime,
-			response_at: new Date(performance.now()).toISOString(),
+			response_at: new Date().toISOString(),
 			source_id: sourceId,
 			workspace_id: workspaceId,
 			version: "1.0",
 			request_id: requestId,
 			destination_id: connection.destination.publicId,
-			body: body,
+			body: await res.text(),
 			headers: JSON.stringify(headersObj),
 			status: res.status,
 			success: Number(res.ok),

@@ -50,6 +50,7 @@ export const source = mysqlTable(
 		// .references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		name,
+		key: varchar("key", { length: 256 }).notNull().unique(),
 		url,
 		integrationId: int("integration_id"),
 		// .references(() => integration.id),

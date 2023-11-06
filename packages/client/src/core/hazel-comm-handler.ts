@@ -340,7 +340,6 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 
 			const hazelSignature = await actions.headers("getting headers", "X-HAZEL_SIGNATURE")
 
-			console.log(hazelKey, hazelSignature)
 			const url = await actions.url("getting url")
 
 			const hazel_overview_mode = url.searchParams.get("hazel_overview")
@@ -365,6 +364,8 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 			}
 
 			const fn = this.fns[hazelKey]
+
+			console.log(fn, method)
 
 			if (!fn) {
 				throw new Error(`Could not find webhook handler with Key "${hazelKey}"`)

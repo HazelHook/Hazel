@@ -457,6 +457,9 @@ importers:
       '@hazel/utils':
         specifier: workspace:*
         version: link:../utils
+      std-env:
+        specifier: ^3.4.3
+        version: 3.4.3
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -9550,6 +9553,10 @@ packages:
 
   /standard-as-callback@2.1.0:
     resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
+    dev: false
+
+  /std-env@3.4.3:
+    resolution: {integrity: sha512-f9aPhy8fYBuMN+sNfakZV18U39PbalgjXG3lLB9WkaYTxijru61wb57V9wxxNthXM5Sd88ETBWi29qLAsHO52Q==}
     dev: false
 
   /streamsearch@1.1.0:
