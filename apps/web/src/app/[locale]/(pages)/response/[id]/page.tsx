@@ -133,10 +133,15 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 							}).format(new Date(res.received_at))}
 						/>
 						<ListItem
-							name="Added Latency"
-							description={`${new Date(res.received_at).getTime() - new Date(res.send_at).getTime()}ms`}
+							name="Added Hazel Latency"
+							description={`${new Date(res.send_at).getTime() - new Date(res.received_at).getTime()}ms`}
 						/>
+
 						<ListItem name="Status" description={res.status} />
+						<ListItem
+							name="Your API Latency"
+							description={`${new Date(res.response_at).getTime() - new Date(res.send_at).getTime()}ms`}
+						/>
 					</div>
 				</CardContent>
 			</Card>

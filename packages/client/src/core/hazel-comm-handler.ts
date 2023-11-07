@@ -359,6 +359,8 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 				}
 			}
 
+			console.log(hazelKey)
+
 			if (!hazelKey) {
 				throw new Error("No webhook ID found in request")
 			}

@@ -44,12 +44,12 @@ export const serve = (options: ServeHandlerOptions) => {
 					return isEdge ? req.json() : req.body
 				},
 				headers: (key) => {
-					if (isEdge) {
-						return req.headers.get(key)
-					}
+					// @ts-expect-error
+					return req.headers.get(key)
 
-					const header = req.headers[key]
-					return Array.isArray(header) ? header[0] : header
+					// TODO: THIS CODE NEEDS TO BE RUN IF WE ARE IN PAGES DIR INSTEAD
+					// const header = req.headers[key]
+					// return Array.isArray(header) ? header[0] : header
 				},
 				method: () => {
 					/**
@@ -88,18 +88,21 @@ export const serve = (options: ServeHandlerOptions) => {
 						return new URL(req.url)
 					}
 
-					let scheme: "http" | "https" = "https"
+					return new URL(req.url as string)
 
-					try {
-						// eslint-disable-next-line @hazel/internal/process-warn
-						if (process.env.NODE_ENV === "development") {
-							scheme = "http"
-						}
-					} catch (err) {
-						// no-op
-					}
+					// TODO: THIS CODE NEEDS TO BE RUN IF WE ARE IN PAGES DIR INSTEAD
+					// let scheme: "http" | "https" = "https"
 
-					return new URL(req.url as string, `${scheme}://${req.headers.host || ""}`)
+					// try {
+					// 	// eslint-disable-next-line @hazel/internal/process-warn
+					// 	if (process.env.NODE_ENV === "development") {
+					// 		scheme = "http"
+					// 	}
+					// } catch (err) {
+					// 	// no-op
+					// }
+
+					// return new URL(req.url as string, `${scheme}://${req.headers.host || ""}`)
 				},
 				transformResponse: ({ body, headers, status }) => {
 					return new Response(body, { status, headers })

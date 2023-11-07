@@ -134,7 +134,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 					<div className="flex flex-col gap-2">
 						<Suspense>
 							{resData.map((res) => (
-								<Link href={`/response/${res.id}`}>
+								<Link href={`/response/${res.id}`} key={res.id}>
 									<div className="flex flex-row items-center">
 										<Status size={4} status={res.success ? "success" : "error"} />
 										<Button variant="link" className="uppercase">

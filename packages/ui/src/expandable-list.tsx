@@ -30,7 +30,7 @@ export const ExpandableList = ({ title, maxItems = 3, items }: ExpandableListPro
 			{maxItems < items.length && (
 				<>
 					{isExpanded ? (
-						// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 						<div
 							className="w-full px-6 py-3 text-cyan-500 text-sm cursor-pointer flex flex-row items-center gap-2"
 							onClick={() => setIsExpanded(false)}
@@ -39,7 +39,7 @@ export const ExpandableList = ({ title, maxItems = 3, items }: ExpandableListPro
 							Collapse
 						</div>
 					) : (
-						// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 						<div
 							className="w-full px-6 py-3 text-cyan-500 text-sm cursor-pointer flex flex-row items-center gap-2"
 							onClick={() => setIsExpanded(true)}
