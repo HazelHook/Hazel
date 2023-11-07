@@ -26,7 +26,7 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 		},
 	},
 	{
-		accessorKey: "timestamp",
+		accessorKey: "send_at",
 		header: "Timestamp",
 		cell: ({ cell }) => {
 			return <p>{cell.getValue<string>()}</p>
@@ -34,7 +34,7 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 	},
 	{
 		accessorKey: "success",
-		header: () => <div className="text-center">Status</div>,
+		header: () => <div>Status</div>,
 		cell: ({ cell }) => {
 			const success = Boolean(cell.getValue() as number)
 
@@ -43,6 +43,7 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 	},
 	{
 		id: "actions",
+		header: "Actions",
 		cell: ({ row }) => {
 			const request = row.original
 

@@ -5,23 +5,33 @@ import { getCachedDestination } from "@/lib/orm"
 import tiny from "@/lib/tiny"
 import { PromiseType } from "@/lib/ts/helpers"
 import { TableWrapper } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/table"
+import { getTableParams } from "@/lib/data-table-helpers"
 
 interface EventsPageProps {
 	params: {
 		id: string
+	}
+	searchParams: {
+		[key: string]: string | string[] | undefined
 	}
 }
 
 async function fetchData({
 	workspace_id,
 	destination_id,
+	offset,
+	limit,
 }: {
 	workspace_id: string
 	destination_id: string
+	limit: number
+	offset: number
 }) {
 	const destinations = await tiny.response.get({
 		workspace_id,
 		destination_id,
+		limit,
+		offset,
 	})
 
 	return destinations
@@ -29,18 +39,22 @@ async function fetchData({
 
 export type EventDataRowType = PromiseType<ReturnType<typeof fetchData>>["data"][number]
 
-const EventsPage = async ({ params }: EventsPageProps) => {
+const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
+	const { workspaceId } = await auth()
+
 	const destination = await getCachedDestination({ publicId: params.id })
 
 	if (!destination) {
 		notFound()
 	}
 
-	const { workspaceId } = await auth()
+	const { offset, limit } = getTableParams(searchParams)
 
 	const destinations = await fetchData({
 		workspace_id: workspaceId,
 		destination_id: params.id,
+		offset,
+		limit,
 	})
 
 	return (

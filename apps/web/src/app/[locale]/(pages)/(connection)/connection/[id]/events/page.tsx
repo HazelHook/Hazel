@@ -6,14 +6,19 @@ import { getCachedConnection } from "@/lib/orm"
 import { DataTable } from "@/components/data-table"
 
 import { columns } from "./column"
+import { searchParamsSchema } from "@/lib/validators/params"
+import { getTableParams } from "@/lib/data-table-helpers"
 
 interface EventsPageProps {
 	params: {
 		id: string
 	}
+	searchParams: {
+		[key: string]: string | string[] | undefined
+	}
 }
 
-const EventsPage = async ({ params }: EventsPageProps) => {
+const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 	const { workspaceId } = await auth()
 	const tiny = Tiny(process.env.TINY_TOKEN as string)
 
@@ -23,10 +28,16 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 		notFound()
 	}
 
+	// TODO: SSR SORTING IN TB
+
+	const { sort, offset, limit } = getTableParams(searchParams)
+
 	const { data, rows_before_limit_at_least } = await tiny.response.get({
 		workspace_id: workspaceId,
 		source_id: connection.source?.publicId,
 		destination_id: connection.destination?.publicId,
+		offset,
+		limit,
 	})
 
 	return (

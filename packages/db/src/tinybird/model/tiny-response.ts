@@ -34,6 +34,8 @@ const parameters = {
 	request_id: z.string().optional(),
 	source_id: z.string().optional(),
 	response_id: z.string().optional(),
+	limit: z.number().optional(),
+	offset: z.number().optional(),
 }
 export type TBResponseParameters = ZodMapped<typeof parameters>
 

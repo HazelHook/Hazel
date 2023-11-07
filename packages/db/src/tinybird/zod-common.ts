@@ -1,5 +1,5 @@
 import { Tinybird } from "@chronark/zod-bird"
-import { AnyZodObject, z, ZodOptional, ZodTypeAny } from "zod"
+import { AnyZodObject, z, ZodTypeAny } from "zod"
 
 // Common
 export const period = z
