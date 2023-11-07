@@ -40,6 +40,8 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 		limit,
 	})
 
+	console.log(data)
+
 	return (
 		<div>
 			<div className="w-full">

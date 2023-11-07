@@ -12,16 +12,18 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
+import { Status } from "@/components/status"
 
 export type Column = TBResponse
 
-export const columns: ColumnDef<Column>[] = [
-	{
-		accessorKey: "id",
+const columnHelper = createColumnHelper<TBResponse>()
+
+export const columns = [
+	columnHelper.accessor("id", {
 		header: "Response ID",
 		cell: ({ cell }) => {
-			const responseId = cell.getValue() as string
+			const responseId = cell.getValue()
 
 			return (
 				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/response/${responseId}`}>
@@ -29,12 +31,11 @@ export const columns: ColumnDef<Column>[] = [
 				</Link>
 			)
 		},
-	},
-	{
-		accessorKey: "destination_id",
+	}),
+	columnHelper.accessor("destination_id", {
 		header: "Destination ID",
 		cell: ({ cell }) => {
-			const destinationId = cell.getValue() as string
+			const destinationId = cell.getValue()
 
 			return (
 				<Link
@@ -45,17 +46,26 @@ export const columns: ColumnDef<Column>[] = [
 				</Link>
 			)
 		},
-	},
+	}),
 
-	{
-		accessorKey: "response_at",
+	columnHelper.accessor("response_at", {
 		header: "Timestamp",
 		cell: ({ cell }) => {
-			const date = new Date(cell.getValue<string>())
+			const date = new Date(cell.getValue())
 			return <p>{cell.getValue<string>()}</p>
 		},
-	},
-	{
+	}),
+
+	columnHelper.accessor("success", {
+		header: "Success",
+		cell: ({ cell }) => {
+			const success = Boolean(cell.getValue())
+
+			return <Status status={success ? "success" : "error"} />
+		},
+	}),
+
+	columnHelper.display({
 		id: "actions",
 		cell: ({ row }) => {
 			const request = row.original
@@ -80,5 +90,5 @@ export const columns: ColumnDef<Column>[] = [
 				</DropdownMenu>
 			)
 		},
-	},
-]
+	}),
+] as ColumnDef<TBResponse>[]
