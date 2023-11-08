@@ -5,7 +5,7 @@ export const getTableParams = <SchemaType extends z.ZodObject<any, any>>(
 	searchParams: {
 		[key: string]: string | string[] | undefined
 	},
-	extendedSchema: SchemaType | undefined,
+	extendedSchema?: SchemaType,
 ) => {
 	const extendedSchemaWithDefault = extendedSchema || z.object({})
 
