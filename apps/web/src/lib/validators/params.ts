@@ -12,3 +12,7 @@ export const searchParamsSchema = z.object({
 	// priority: z.string().optional(),
 	// operator: z.string().optional(),
 })
+
+export const errorPageSearchParamsSchema = z.object({
+	dest: z.string().optional(),
+})

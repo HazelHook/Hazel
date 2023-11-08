@@ -2,8 +2,6 @@ import { AdminHeader } from "../internal/components/admin-header"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Container } from "@hazel/ui/container"
 import { lago } from "@hazel/utils/lago"
-import { db } from "@hazel/db/src"
-import * as schema from "@hazel/db/src/drizzle/schema"
 import AdminDashboard from "../internal/components/admin-dashboard"
 
 export async function AdminDashboardPage() {

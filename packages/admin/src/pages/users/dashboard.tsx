@@ -24,7 +24,7 @@ export async function UsersAdminPage({ searchParams }: UsersAdminPageProps) {
 			<AdminHeader>Users</AdminHeader>
 
 			<Container>
-				<DataTable columns={columns} data={users} />
+				<DataTable columns={columns} data={users} disableRedirect />
 			</Container>
 		</div>
 	)

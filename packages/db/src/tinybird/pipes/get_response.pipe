@@ -16,6 +16,10 @@ SQL >
                 required=True,
             )
         }}
+        {% if defined(success) %}
+            AND success
+            = {{ Int32(success, description="Success (0 | 1)", required=False) }}
+        {% end %}
         {% if defined(source_id) %}
             AND source_id
             = {{ String(source_id, description="Source ID", required=False) }}

@@ -1,9 +1,15 @@
+import { z } from "zod"
 import { searchParamsSchema } from "./validators/params"
 
-export const getTableParams = (searchParams: {
-	[key: string]: string | string[] | undefined
-}) => {
-	const { page, per_page, sort } = searchParamsSchema.parse(searchParams)
+export const getTableParams = <SchemaType extends z.ZodObject<any, any>>(
+	searchParams: {
+		[key: string]: string | string[] | undefined
+	},
+	extendedSchema: SchemaType | undefined,
+) => {
+	const extendedSchemaWithDefault = extendedSchema || z.object({})
+
+	const { page, per_page, sort, ...rest } = searchParamsSchema.merge(extendedSchemaWithDefault).parse(searchParams)
 
 	// Fallback page for invalid page numbers
 	const pageAsNumber = Number(page)
@@ -14,5 +20,12 @@ export const getTableParams = (searchParams: {
 	// Number of items to skip
 	const offset = fallbackPage > 0 ? (fallbackPage - 1) * limit : 0
 
-	return { offset, limit, sort, per_page, page }
+	return {
+		offset,
+		limit,
+		sort,
+		per_page,
+		page,
+		...(rest as z.infer<SchemaType>),
+	}
 }
