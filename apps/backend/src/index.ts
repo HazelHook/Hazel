@@ -4,15 +4,18 @@ import { logger } from "@bogeychan/elysia-logger"
 
 import { sourceQueue } from "./lib/queue"
 import { v1Route } from "./routes/v1"
+import serverTiming from "@elysiajs/server-timing"
 
 export const routeSetup = new Elysia({ name: "setup" }).use(
 	logger({
 		level: "error",
-	}).trace(async ({ handle }) => {
-		const { time, end } = await handle
+	})
+		.use(serverTiming())
+		.trace(async ({ handle }) => {
+			const { time, end } = await handle
 
-		console.log("beforeHandle took", (await end) - time)
-	}),
+			console.log("beforeHandle took", (await end) - time)
+		}),
 )
 
 export const app = new Elysia()

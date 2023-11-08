@@ -63,6 +63,9 @@ importers:
       '@chronark/zod-bird':
         specifier: ^0.2.2
         version: 0.2.2
+      '@elysiajs/server-timing':
+        specifier: ^0.7.1
+        version: 0.7.1(elysia@0.7.21)
       '@hazel/db':
         specifier: workspace:*
         version: link:../../packages/db
@@ -75,6 +78,9 @@ importers:
       '@types/qs':
         specifier: ^6.9.9
         version: 6.9.9
+      add:
+        specifier: ^2.0.6
+        version: 2.0.6
       bullmq:
         specifier: ^4.13.0s
         version: 4.13.0
@@ -1466,6 +1472,14 @@ packages:
     peerDependenciesMeta:
       superjson:
         optional: true
+    dependencies:
+      elysia: 0.7.21(@sinclair/typebox@0.31.22)(typescript@5.2.2)
+    dev: false
+
+  /@elysiajs/server-timing@0.7.1(elysia@0.7.21):
+    resolution: {integrity: sha512-4iRAkPZZjh+lMX85vBfL4EKiY2sIkt25JXIhQogLfCN9MRZRt38QTOQL7w+oI3+BWJ//EQn37ENpI1schMX/mA==}
+    peerDependencies:
+      elysia: '>= 0.7.23'
     dependencies:
       elysia: 0.7.21(@sinclair/typebox@0.31.22)(typescript@5.2.2)
     dev: false
@@ -4811,6 +4825,10 @@ packages:
     resolution: {integrity: sha512-F0SAmZ8iUtS//m8DmCTA0jlh6TDKkHQyK6xc6V4KDTyZKA9dnvX9/3sRTVQrWm79glUAZbnmmNcdYwUIHWVybw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  /add@2.0.6:
+    resolution: {integrity: sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==}
+    dev: false
 
   /agent-base@7.1.0:
     resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}

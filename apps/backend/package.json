@@ -9,10 +9,12 @@
 	"dependencies": {
 		"@bogeychan/elysia-logger": "^0.0.13",
 		"@chronark/zod-bird": "^0.2.2",
+		"@elysiajs/server-timing": "^0.7.1",
 		"@hazel/db": "workspace:*",
 		"@hazel/utils": "workspace:*",
 		"@sinclair/typebox": "^0.31.22",
 		"@types/qs": "^6.9.9",
+		"add": "^2.0.6",
 		"bullmq": "^4.13.0s",
 		"drizzle-orm": "^0.28.6",
 		"elysia": "0.7.21",
