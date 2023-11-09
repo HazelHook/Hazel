@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
@@ -29,7 +31,6 @@ interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	maxItems: number
 	data: TData[]
-	pageCount: number
 	filterableColumns?: DataTableFilterableColumn<TData>[]
 	searchableColumns?: DataTableSearchableColumn<TData>[]
 	advancedFilter?: boolean
@@ -38,7 +39,6 @@ interface DataTableProps<TData, TValue> {
 export function AdvancedDataTable<TData, TValue>({
 	columns,
 	data,
-	pageCount,
 	maxItems,
 	filterableColumns = [],
 	searchableColumns = [],
@@ -208,7 +208,7 @@ export function AdvancedDataTable<TData, TValue>({
 	const table = useReactTable({
 		data,
 		columns,
-		pageCount: pageCount ?? -1,
+		pageCount: Math.ceil(maxItems / pageSize),
 		state: {
 			pagination,
 			sorting,

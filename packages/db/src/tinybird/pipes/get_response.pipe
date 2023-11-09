@@ -2,7 +2,6 @@ TOKEN "get_res_endpoint_read_2469" READ
 
 NODE endpoint
 SQL >
-
     %
     SELECT *
     FROM response_events
@@ -17,27 +16,32 @@ SQL >
             )
         }}
         {% if defined(success) %}
-            AND success
-            = {{ Int32(success, description="Success (0 | 1)", required=False) }}
+            AND success = {{ Int32(success, description="Success (0 | 1)", required=False) }}
+        {% end %}
+        {% if defined(status) %}
+            AND status IN (
+                {{
+                    Array(
+                        status,
+                        "Int32",
+                        description="Statuses eg. [200, 201, 404, 500]",
+                        required=False,
+                    )
+                }}
+            )
         {% end %}
         {% if defined(source_id) %}
-            AND source_id
-            = {{ String(source_id, description="Source ID", required=False) }}
+            AND source_id = {{ String(source_id, description="Source ID", required=False) }}
         {% end %}
         {% if defined(destination_id) %}
-            AND destination_id
-            = {{ String(destination_id, description="Source ID", required=False) }}
+            AND destination_id = {{ String(destination_id, description="Source ID", required=False) }}
         {% end %}
         {% if defined(request_id) %}
-            AND request_id
-            = {{ String(request_id, description="Request ID", required=False) }}
+            AND request_id = {{ String(request_id, description="Request ID", required=False) }}
         {% end %}
         {% if defined(response_id) %}
-            AND id
-            = {{ String(response_id, description="Response ID", required=False) }}
+            AND id LIKE '%' || {{ String(response_id, description="Response ID", required=False) }}
         {% end %}
     ORDER BY received_at DESC
     LIMIT {{ Int32(limit, 100, description="Limit of Entries", required=False) }}
     OFFSET {{ Int32(offset, 0, description="Offset", required=False) }}
-
-

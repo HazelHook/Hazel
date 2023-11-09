@@ -34,6 +34,7 @@ const parameters = {
 	request_id: z.string().optional(),
 	source_id: z.string().optional(),
 	response_id: z.string().optional(),
+	status: z.number().array().optional(),
 	success: z
 		.boolean()
 		.optional()

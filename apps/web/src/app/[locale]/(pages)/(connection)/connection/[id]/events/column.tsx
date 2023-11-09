@@ -65,6 +65,13 @@ export const columns = [
 		},
 	}),
 
+	columnHelper.accessor("status", {
+		header: "Status",
+		cell: ({ cell }) => {
+			return cell.getValue()
+		},
+	}),
+
 	columnHelper.display({
 		id: "actions",
 		cell: ({ row }) => {
