@@ -15,6 +15,7 @@ export const usePagination = () => {
 	const createQueryString = useCallback(
 		(values: { name: string; value: string | number }[]) => {
 			const params = new URLSearchParams(searchParams as any)
+			// biome-ignore lint/complexity/noForEach: <explanation>
 			values.forEach(({ name, value }) => {
 				params.set(name, String(value))
 			})
@@ -24,6 +25,7 @@ export const usePagination = () => {
 		[searchParams],
 	)
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		router.push(
 			`${pathname}?${createQueryString([
@@ -33,6 +35,7 @@ export const usePagination = () => {
 		)
 	}, [pageState])
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (searchParams.has("limit") || searchParams.get("page")) {
 			setPagination({
