@@ -79,7 +79,7 @@ export const DatePicker = () => {
 						<p className="font-medium">{interval.name}</p>
 					</SelectItem>
 				))}
-				<div className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+				<div className="flex w-full cursor-default items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground">
 					{value === "custom" && (
 						<span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
 							<CheckTickIcon className="h-4 w-4" />

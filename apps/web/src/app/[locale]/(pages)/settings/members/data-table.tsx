@@ -3,7 +3,7 @@
 import { ReactNode, useState } from "react"
 import { AddIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
-import { DataTablePagination } from "@hazel/ui/data-table-pagination"
+import { DataTablePagination } from "@hazel/ui/data-table"
 import { Input } from "@hazel/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 import {

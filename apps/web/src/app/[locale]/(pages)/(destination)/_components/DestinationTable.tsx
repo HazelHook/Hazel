@@ -1,6 +1,6 @@
 "use client"
 
-import { DataTable } from "@hazel/ui/data-table"
+import { SimpleDataTable } from "@hazel/ui/data-table"
 
 import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 import { columns } from "@/app/[locale]/(pages)/(destination)/destinations/columns"
@@ -16,7 +16,7 @@ export const DestinationTable = ({
 	deleteAction: typeof deleteDestinationAction
 }) => {
 	return (
-		<DataTable
+		<SimpleDataTable
 			rootPath="/destination"
 			disableRedirect
 			columns={columns(deleteAction, updateAction)}

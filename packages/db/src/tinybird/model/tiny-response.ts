@@ -37,10 +37,11 @@ const parameters = {
 	success: z
 		.boolean()
 		.optional()
-		.transform<boolean | undefined>(Number as any),
+		.transform<boolean | undefined>((input) => (input ? Number(input) : undefined) as any),
 	limit: z.number().optional(),
 	offset: z.number().optional(),
 }
+
 export type TBResponseParameters = ZodMapped<typeof parameters>
 
 const kpiSchema = {

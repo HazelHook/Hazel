@@ -4,7 +4,7 @@ import { getPageFromQueryParams } from "../../internal/utils/get-page-from-query
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { db } from "@hazel/db/src"
 import { User } from "@hazel/db/src/drizzle"
-import { DataTable } from "@hazel/ui/data-table"
+import { SimpleDataTable } from "@hazel/ui/data-table"
 import { columns } from "./column"
 
 export interface UsersAdminPageProps {
@@ -24,7 +24,7 @@ export async function UsersAdminPage({ searchParams }: UsersAdminPageProps) {
 			<AdminHeader>Users</AdminHeader>
 
 			<Container>
-				<DataTable columns={columns} data={users} disableRedirect />
+				<SimpleDataTable columns={columns} data={users} disableRedirect />
 			</Container>
 		</div>
 	)

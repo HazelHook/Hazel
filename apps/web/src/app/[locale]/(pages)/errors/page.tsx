@@ -7,8 +7,9 @@ import tiny from "@/lib/tiny"
 import db from "@/lib/db"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { errorPageSearchParamsSchema } from "@/lib/validators/params"
-import { DataTable } from "@/components/data-table"
+import { DataTable } from "@hazel/ui/data-table"
 import { columns } from "./column"
+import { DatePicker } from "../_component/DatePicker"
 
 type ErrorPageProps = {
 	searchParams: any
@@ -39,6 +40,7 @@ const ErrorPage = async ({ searchParams }: ErrorPageProps) => {
 					data={destinations.map((dest) => ({ id: dest.publicId, name: dest.name }))}
 					searchParamKey="dest"
 				/>
+				<DatePicker />
 			</div>
 			<DataTable
 				data={responses.data}

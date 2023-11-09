@@ -1,6 +1,6 @@
 "use client"
 
-import { DataTable } from "@hazel/ui/data-table"
+import { SimpleDataTable } from "@hazel/ui/data-table"
 
 import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { columns } from "@/app/[locale]/(pages)/(connection)/connections/columns"
@@ -15,5 +15,12 @@ export const ConnectionTable = ({
 	pauseAction: typeof pauseConnectionAction
 	deleteAction: typeof deleteConnectionAction
 }) => {
-	return <DataTable rootPath="/connection" disableRedirect columns={columns(deleteAction, pauseAction)} data={data} />
+	return (
+		<SimpleDataTable
+			rootPath="/connection"
+			disableRedirect
+			columns={columns(deleteAction, pauseAction)}
+			data={data}
+		/>
+	)
 }

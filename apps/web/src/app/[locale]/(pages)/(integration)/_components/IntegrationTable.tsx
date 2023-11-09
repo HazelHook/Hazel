@@ -1,6 +1,6 @@
 "use client"
 
-import { DataTable } from "@hazel/ui/data-table"
+import { SimpleDataTable } from "@hazel/ui/data-table"
 
 import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { columns } from "@/app/[locale]/(pages)/(integration)/integrations/columns"
@@ -17,7 +17,7 @@ export const IntegrationsTable = ({
 }) => {
 	return (
 		<>
-			<DataTable
+			<SimpleDataTable
 				disableRedirect
 				rootPath="/integrations"
 				columns={columns(deleteAction, updateAction)}

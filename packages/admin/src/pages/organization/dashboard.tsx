@@ -3,10 +3,9 @@ import { getPageFromQueryParams } from "../../internal/utils/get-page-from-query
 import { AdminHeader } from "../../internal/components/admin-header"
 import { Container } from "@hazel/ui/container"
 import { TextFieldInput } from "@hazel/ui/text-field"
-import { DataTable } from "@hazel/ui/data-table"
+import { SimpleDataTable } from "@hazel/ui/data-table"
 import { columns } from "./column"
 import { db } from "@hazel/db/src"
-import { Organization } from "@hazel/db/src/drizzle"
 
 export interface OrganizationsAdminPageProps {
 	searchParams: {
@@ -35,7 +34,7 @@ export async function OrganizationsAdminPage({ searchParams }: OrganizationsAdmi
 					<form method={"GET"}>
 						<TextFieldInput name={"search"} defaultValue={search} placeholder={"Search Organization..."} />
 					</form>
-					<DataTable disableRedirect columns={columns} data={data} />
+					<SimpleDataTable disableRedirect columns={columns} data={data} />
 				</div>
 			</Container>
 		</div>

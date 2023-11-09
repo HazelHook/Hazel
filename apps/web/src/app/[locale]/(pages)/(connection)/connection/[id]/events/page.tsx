@@ -3,10 +3,9 @@ import { Tiny } from "@hazel/db/src/tinybird"
 
 import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
-import { DataTable } from "@/components/data-table"
+import { DataTable } from "@hazel/ui/data-table"
 
 import { columns } from "./column"
-import { searchParamsSchema } from "@/lib/validators/params"
 import { getTableParams } from "@/lib/data-table-helpers"
 
 interface EventsPageProps {

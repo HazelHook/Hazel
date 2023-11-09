@@ -3,7 +3,7 @@ import { Destination } from "@hazel/db/src/drizzle/schema"
 import { Tiny } from "@hazel/db/src/tinybird"
 import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
-import { DataTable } from "@hazel/ui/data-table"
+import { SimpleDataTable } from "@hazel/ui/data-table"
 import { sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
@@ -51,7 +51,7 @@ const SourcePage = async ({
 			</div>
 			<div className="flex flex-row gap-2 w-full">
 				<div className="min-w-max">
-					<DataTable
+					<SimpleDataTable
 						rootPath="/destination"
 						columns={columns}
 						data={
