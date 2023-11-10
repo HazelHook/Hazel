@@ -1,30 +1,40 @@
-import { and, eq, isNull } from "drizzle-orm"
+import { SQL, WithSubquery, and, eq, isNull } from "drizzle-orm"
 
 import { EntityLogic } from "."
 import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"
 import { DrizzleTable } from "../db-table"
+import { TrxType } from "../../utils"
+
+type Test = {
+	publicId: string
+	where?: SQL
+	include?: any
+}
 
 const sourceLogic = (db: DB) =>
 	({
 		table: new DrizzleTable("source", schema.source, db),
-		getOne: async ({
-			publicId,
-			includeDeleted,
-		}: {
-			publicId: string
-			includeDeleted?: boolean
-		}) => {
-			let filter
-			if (!includeDeleted) {
-				filter = and(eq(schema.source.publicId, publicId), isNull(schema.source.deletedAt))
-			} else {
-				filter = eq(schema.source.publicId, publicId)
-			}
+		getOne: async (
+			{
+				publicId,
+				where,
+				include = {
+					connections: {
+						with: {
+							destination: true,
+						},
+					},
+					integration: true,
+				},
+			}: Test,
+			tx?: TrxType,
+		) => {
+			const client = tx || db
 
-			return db.query.source.findFirst({
-				where: filter,
+			return client.query.source.findFirst({
+				where: and(eq(schema.source.publicId, publicId), isNull(schema.source.deletedAt), where),
 				with: {
 					connections: {
 						with: {
@@ -37,17 +47,10 @@ const sourceLogic = (db: DB) =>
 		},
 		getMany: async ({
 			workspaceId,
-			includeDeleted,
 		}: {
 			workspaceId: string
-			includeDeleted?: boolean
 		}) => {
-			let filter
-			if (!includeDeleted) {
-				filter = and(eq(schema.source.workspaceId, workspaceId), isNull(schema.source.deletedAt))
-			} else {
-				filter = eq(schema.source.workspaceId, workspaceId)
-			}
+			const filter = and(eq(schema.source.workspaceId, workspaceId), isNull(schema.source.deletedAt))
 
 			return await db.query.source.findMany({
 				where: filter,

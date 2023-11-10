@@ -18,6 +18,7 @@ export const connectionRouter = (app: Elysia) =>
 					const source = await db.source.getOne({
 						publicId: body.publicSourceId,
 					})
+
 					const destination = await db.destination.getOne({
 						publicId: body.publiceDestinationId,
 					})

@@ -21,6 +21,6 @@ export function withPagination<T extends MySqlSelect<any, any, any, any>>(qb: T,
 	return qb.limit(pageSize).offset(page * pageSize)
 }
 
-type TrxType = Parameters<Parameters<DB["transaction"]>[0]>[0]
+export type TrxType = Parameters<Parameters<DB["transaction"]>[0]>[0]
 
 export type EitherAClientOrTrx = typeof db.db.transaction | TrxType
