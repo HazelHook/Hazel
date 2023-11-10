@@ -19,6 +19,7 @@ export const sourceRouter = (app: Elysia) =>
 						name: body.name,
 						url: body.url,
 						workspaceId: workspace_id,
+						key: body.key,
 					})
 
 					return {
@@ -32,7 +33,11 @@ export const sourceRouter = (app: Elysia) =>
 					body: t.Object({
 						name: t.String({
 							minLength: 2,
-							maxLength: 3,
+							maxLength: 16,
+						}),
+						key: t.String({
+							minLength: 2,
+							maxLength: 12,
 						}),
 						url: t.Optional(t.String()),
 					}),

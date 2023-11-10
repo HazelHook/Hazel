@@ -1,5 +1,5 @@
 import bearer from "@elysiajs/bearer"
-import db from "@hazel/db/src/drizzle/orm"
+import { db } from "@hazel/db"
 import Elysia from "elysia"
 
 import { ratelimit } from "./ratelimit.guard"
