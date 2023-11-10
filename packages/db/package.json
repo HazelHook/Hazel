@@ -11,9 +11,8 @@
 	"dependencies": {
 		"@chronark/zod-bird": "^0.2.2",
 		"@planetscale/database": "^1.11.0",
-		"drizzle-orm": "^0.28.6",
-		"drizzle-zod": "^0.5.1",
-		"postgres": "^3.4.0"
+		"drizzle-orm": "^0.29.0",
+		"drizzle-zod": "^0.5.1"
 	},
 	"peerDependencies": {
 		"@hazel/utils": "workspace:*",
@@ -22,14 +21,15 @@
 	"devDependencies": {
 		"@hazel/tsconfig": "workspace:*",
 		"dotenv": "^16.3.1",
-		"drizzle-kit": "^0.19.13",
+		"drizzle-kit": "^0.20.1",
 		"typescript": "^5.2.2"
 	},
 	"exports": {
 		"./*": "./src/*.ts",
 		".": "./src/index.ts",
 		"./schema": "./src/schema.ts",
-		"./utils": "./src/utils.ts"
+		"./utils": "./src/utils.ts",
+		"./integrations": "./src/integrations.ts"
 	},
 	"typesVersions": {
 		"*": {
