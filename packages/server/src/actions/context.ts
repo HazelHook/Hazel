@@ -2,7 +2,7 @@ import { cookies, headers } from "next/headers"
 import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
 
-import { db } from "@hazel/db/src/index"
+import { db } from "@hazel/db"
 import { requireSession } from "@hazel/auth/utils"
 
 export async function createContext(opts?: FetchCreateContextFnOptions) {

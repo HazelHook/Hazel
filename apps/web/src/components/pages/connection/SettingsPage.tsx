@@ -2,7 +2,7 @@ import "server-only"
 
 import { updateConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { UpdateConnectionForm } from "@/app/[locale]/(pages)/(connection)/connection/[id]/settings/form"
 
 export interface SettingsProps {

@@ -12,7 +12,7 @@ import { TooltipProvider } from "@hazel/ui/tooltip"
 
 import { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { ProfileSettings } from "@/components/profile-settings"
 import { Sidebar } from "@/components/sidebar"
 

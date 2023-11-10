@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation"
-import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
-import { Integration } from "@hazel/db/src/drizzle/schema"
+import { INTEGRATIONS } from "@hazel/db/integrations"
+import { Integration } from "@hazel/db/schema"
 import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import {

@@ -5,7 +5,7 @@ import { Container } from "@hazel/ui/container"
 import { TextFieldInput } from "@hazel/ui/text-field"
 import { SimpleDataTable } from "@hazel/ui/data-table"
 import { columns } from "./column"
-import { db } from "@hazel/db/src"
+import { db } from "@hazel/db"
 
 export interface OrganizationsAdminPageProps {
 	searchParams: {

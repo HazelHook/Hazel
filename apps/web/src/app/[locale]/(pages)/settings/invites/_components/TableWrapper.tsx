@@ -1,6 +1,6 @@
 "use client"
 
-import { OrganizationInvite } from "@hazel/db/src/drizzle/schema"
+import { OrganizationInvite } from "@hazel/db/schema"
 
 import type { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
 

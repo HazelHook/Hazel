@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation"
 
 import { PromiseType } from "@/lib/ts/helpers"
-
-import db from "./db"
+import { db } from "@hazel/db"
 
 export const getCachedConnection = async ({
 	publicId,

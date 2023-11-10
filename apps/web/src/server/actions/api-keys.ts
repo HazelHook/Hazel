@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { createApiKeySchema } from "@/lib/schemas/api-key"
 
 import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"

@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Destination } from "@hazel/db/src/drizzle/schema"
+import { Destination } from "@hazel/db/schema"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { LoadingButton } from "@hazel/ui/loading-button"
 

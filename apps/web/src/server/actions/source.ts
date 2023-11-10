@@ -2,7 +2,7 @@
 
 import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { createSourceSchema, updateSourceSchema } from "@/lib/schemas/source"
 
 export const createSourceAction = createAction(

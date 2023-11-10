@@ -1,4 +1,4 @@
-import type { Connection, Destination } from "@hazel/db/src/drizzle/schema"
+import type { Connection, Destination } from "@hazel/db/schema"
 import tiny from "@hazel/tinybird"
 import { nanoid } from "nanoid"
 

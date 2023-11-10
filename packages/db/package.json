@@ -24,5 +24,18 @@
 		"dotenv": "^16.3.1",
 		"drizzle-kit": "^0.19.13",
 		"typescript": "^5.2.2"
+	},
+	"exports": {
+		"./*": "./src/*.ts",
+		".": "./src/index.ts",
+		"./schema": "./src/schema.ts",
+		"./utils": "./src/utils.ts"
+	},
+	"typesVersions": {
+		"*": {
+			"*": [
+				"src/*"
+			]
+		}
 	}
 }

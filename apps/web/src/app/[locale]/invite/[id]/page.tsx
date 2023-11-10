@@ -6,7 +6,7 @@ import { getLogger } from "@hazel/utils"
 import { useTranslations } from "next-intl"
 
 import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 
 import ExistingUserInviteForm from "../components/existing-user-invite-form"
 import NewUserInviteForm from "../components/new-user-invite-form"

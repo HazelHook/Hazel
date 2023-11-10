@@ -3,7 +3,7 @@
 import { z } from "zod"
 
 import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 
 const formSchema = z.object({
 	name: z.string(),

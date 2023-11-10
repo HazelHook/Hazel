@@ -6,7 +6,7 @@ import { Container } from "@hazel/ui/container"
 
 import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { PromiseType } from "@/lib/ts/helpers"
 import { DestinationTable } from "@/app/[locale]/(pages)/(destination)/_components/DestinationTable"
 

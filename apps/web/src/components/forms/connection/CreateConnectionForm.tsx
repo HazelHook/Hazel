@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import type { Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
+import type { Destination, Integration, Source } from "@hazel/db/schema"
 import { AddIcon } from "@hazel/icons"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"

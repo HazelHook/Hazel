@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { userUpdateFormSchema } from "@/lib/schemas/user"
 
 import { TRPCError, createAction, protectedProcedure } from "@hazel/server/actions/trpc"

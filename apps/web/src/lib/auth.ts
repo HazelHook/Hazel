@@ -6,8 +6,8 @@ import configuration from "@hazel/utils/configuration"
 
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
-import db from "./db"
 import { requireSession } from "@hazel/auth/utils"
+import { db } from "@hazel/db"
 
 export const auth = async () => {
 	const client = getSupabaseServerClient()

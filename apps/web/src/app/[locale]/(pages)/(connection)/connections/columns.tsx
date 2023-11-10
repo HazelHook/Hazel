@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Connection, Destination, Source } from "@hazel/db/src/drizzle/schema"
+import { Connection, Destination, Source } from "@hazel/db"
 import { CheckTickIcon, EyeOpenIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"

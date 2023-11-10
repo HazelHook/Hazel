@@ -1,6 +1,6 @@
 import { createConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { CreateConnectionForm } from "@/components/forms/connection/CreateConnectionForm"
 
 const NewConnectionPage = async () => {

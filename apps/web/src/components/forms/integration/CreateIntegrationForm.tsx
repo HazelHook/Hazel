@@ -1,7 +1,7 @@
 "use client"
 
 import { notFound, useRouter } from "next/navigation"
-import { createZodIntegrationSchema, IntegrationTool } from "@hazel/db/src/drizzle/integrations/common"
+import { createZodIntegrationSchema, IntegrationTool } from "@hazel/db/integrations"
 import { Button } from "@hazel/ui/button"
 import { Form } from "@hazel/ui/form"
 import { zodResolver } from "@hookform/resolvers/zod"

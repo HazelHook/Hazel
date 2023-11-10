@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Connection } from "@hazel/db/src/drizzle/schema"
+import { Connection } from "@hazel/db/schema"
 import { ChevronDownIcon, ChevronRightIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { Image } from "@hazel/ui/image"

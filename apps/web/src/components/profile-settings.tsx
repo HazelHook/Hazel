@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useSignOut } from "@hazel/auth/hooks"
 import { useAuth } from "@hazel/auth/provider"
-import { Organization, OrganizationMember } from "@hazel/db/src/drizzle/schema"
+import { Organization, OrganizationMember } from "@hazel/db/schema"
 import {
 	AddCircleIcon,
 	CardIcon,

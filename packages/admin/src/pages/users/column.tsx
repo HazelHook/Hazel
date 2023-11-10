@@ -1,6 +1,6 @@
 "use client"
 
-import { User } from "@hazel/db/src/drizzle"
+import { User } from "@hazel/db"
 import { ThreeDotsVerticalIcon } from "@hazel/icons"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
 import { Button } from "@hazel/ui/button"

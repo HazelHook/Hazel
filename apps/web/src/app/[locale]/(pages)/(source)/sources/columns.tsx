@@ -1,8 +1,8 @@
 "use client"
 
-import { IntegrationToolSlug } from "@hazel/db/src/drizzle/integrations/common"
-import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
-import { Connection, Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
+import { IntegrationToolSlug } from "@hazel/db/integrations"
+import { INTEGRATIONS } from "@hazel/db/integrations"
+import { Connection, Destination, Integration, Source } from "@hazel/db/schema"
 import { CheckTickIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"

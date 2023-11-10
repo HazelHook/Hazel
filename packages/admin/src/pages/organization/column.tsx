@@ -1,6 +1,6 @@
 "use client"
 
-import { Organization, OrganizationMember } from "@hazel/db/src/drizzle"
+import { Organization, OrganizationMember } from "@hazel/db"
 import { ColumnDef } from "@tanstack/react-table"
 
 import {

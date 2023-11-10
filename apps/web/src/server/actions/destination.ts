@@ -4,7 +4,7 @@ import { z } from "zod"
 
 import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { createDestinationSchema, updateDestinationSchema } from "@/lib/schemas/destination"
 
 export const createDestinationAction = createAction(

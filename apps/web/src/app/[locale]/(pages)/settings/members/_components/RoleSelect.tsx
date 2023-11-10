@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { useAuth } from "@hazel/auth/provider"
-import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
+import { OrganizationMember } from "@hazel/db/schema"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 import { toast } from "sonner"
 

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Destination, Integration, Source } from "@hazel/db/src/drizzle/schema"
+import { Destination, Integration, Source } from "@hazel/db/schema"
 import { AddIcon } from "@hazel/icons"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"

@@ -4,7 +4,7 @@ import { ProjectPicker } from "./components/project-picker"
 import { auth } from "@/lib/auth"
 
 import tiny from "@/lib/tiny"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { errorPageSearchParamsSchema } from "@/lib/validators/params"
 import { DataTable } from "@hazel/ui/data-table"

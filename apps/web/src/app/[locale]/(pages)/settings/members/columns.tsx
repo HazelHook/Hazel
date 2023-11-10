@@ -1,6 +1,6 @@
 "use client"
 
-import { OrganizationMember } from "@hazel/db/src/drizzle/schema"
+import { OrganizationMember } from "@hazel/db/schema"
 import { User } from "@supabase/supabase-js"
 import { ColumnDef } from "@tanstack/react-table"
 import { formatDistance } from "date-fns"

@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { orgInviteFormSchema } from "@/lib/schemas/organization"
 
 import { createAction, basicProtectedProcedure, protectedProcedure, TRPCError } from "@hazel/server/actions/trpc"

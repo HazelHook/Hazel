@@ -3,12 +3,12 @@
 import { cookies } from "next/headers"
 import { z } from "zod"
 
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
 
 import { createAction, protectedProcedure, basicProtectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
-import { generatePublicId } from "@hazel/db/src/drizzle/schema/common"
-import * as schema from "@hazel/db/src/drizzle/schema"
+import { generatePublicId } from "@hazel/db/schema/common"
+import * as schema from "@hazel/db/schema"
 import { createCustomer, createSubscription } from "@hazel/utils/lago"
 import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 

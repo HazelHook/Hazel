@@ -1,10 +1,10 @@
-import { OrganizationMember, sql } from "@hazel/db/src/drizzle"
+import { OrganizationMember, sql } from "@hazel/db"
 import { Container } from "@hazel/ui/container"
 import { User } from "@supabase/supabase-js"
 
 import { createOrganizationInvite } from "@/server/actions/organization-invite"
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 
 import { columns } from "./columns"
 import { DataTable } from "./data-table"

@@ -1,8 +1,8 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { IntegrationTools } from "@hazel/db/src/drizzle/integrations/data"
-import { Integration } from "@hazel/db/src/drizzle/schema"
+import { IntegrationTools } from "@hazel/db/integrations"
+import { Integration } from "@hazel/db/schema"
 import { AutoForm, AutoFormInputComponentProps } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"

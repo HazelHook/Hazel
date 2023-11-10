@@ -1,8 +1,8 @@
-import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
+import { INTEGRATIONS } from "@hazel/db/integrations"
 
 import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { PromiseType } from "@/lib/ts/helpers"
 import { IntegrationsTable } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationTable"
 import { IntegrationToolCard } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolCard"

@@ -1,4 +1,4 @@
-import db from "@hazel/db/src/drizzle"
+import db from "@hazel/db"
 import Elysia, { t, ws } from "elysia"
 import { ElysiaWS } from "elysia/dist/ws"
 

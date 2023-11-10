@@ -1,4 +1,11 @@
-import { connectDB } from "./drizzle"
+import { connectDB } from "./orm"
+
+export * from "./orm"
+export * from "./schema"
+
+export * from "drizzle-orm"
+
+export { default } from "./orm"
 
 export const db = connectDB({
 	username: process.env.DATABASE_USERNAME as string,

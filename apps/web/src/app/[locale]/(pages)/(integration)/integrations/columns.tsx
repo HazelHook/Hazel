@@ -1,6 +1,6 @@
 "use client"
 
-import { INTEGRATIONS } from "@hazel/db/src/drizzle/integrations/data"
+import { INTEGRATIONS } from "@hazel/db/integrations"
 import { CheckTickIcon } from "@hazel/icons"
 import { Badge } from "@hazel/ui/badge"
 import { SortableHeader } from "@hazel/ui/data-table"

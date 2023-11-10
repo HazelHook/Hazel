@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation"
-import { Destination } from "@hazel/db/src/drizzle/schema"
+import { Destination } from "@hazel/db/schema"
 import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
 import { SimpleDataTable } from "@hazel/ui/data-table"

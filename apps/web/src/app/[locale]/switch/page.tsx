@@ -7,7 +7,7 @@ import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
 
 import { switchOrganizationAction } from "@/server/actions/organization"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { requireSession } from "@hazel/auth/utils"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 

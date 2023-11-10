@@ -6,7 +6,7 @@ import superjson from "superjson"
 import { ZodError } from "zod"
 
 import { Context } from "./context"
-import { db } from "@hazel/db/src"
+import { db } from "@hazel/db"
 import { isUserSuperAdmin, requireSession } from "@hazel/auth/utils"
 
 // import { trpcTracingMiddleware } from "@baselime/node-opentelemetry"

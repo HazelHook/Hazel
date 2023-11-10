@@ -6,7 +6,7 @@ import { Container } from "@hazel/ui/container"
 import { SimpleDataTable } from "@hazel/ui/data-table"
 
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 
 import { columns } from "./columns"
 

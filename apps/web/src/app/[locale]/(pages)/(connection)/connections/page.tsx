@@ -5,7 +5,7 @@ import { Container } from "@hazel/ui/container"
 
 import { deleteConnectionAction, pauseConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 import { PromiseType } from "@/lib/ts/helpers"
 import { ConnectionTable } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionTable"
 

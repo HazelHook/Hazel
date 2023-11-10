@@ -1,4 +1,4 @@
-import { Destination } from "@hazel/db/src/drizzle/schema"
+import { Destination } from "@hazel/db/schema"
 
 import { ForwardResult } from "./forward"
 

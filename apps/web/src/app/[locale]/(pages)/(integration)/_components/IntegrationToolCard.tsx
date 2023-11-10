@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { IntegrationTool } from "@hazel/db/src/drizzle/integrations/common"
-import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "@hazel/db/src/drizzle/integrations/data"
+import { IntegrationTool, INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "@hazel/db/integrations"
 import { DatabaseIcon, ShieldCheckIcon } from "@hazel/icons"
 import { Badge } from "@hazel/ui/badge"
 import { Card } from "@hazel/ui/card"

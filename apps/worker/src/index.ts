@@ -1,4 +1,4 @@
-import db from "@hazel/db/src/drizzle"
+import db from "@hazel/db"
 import tiny from "@hazel/tinybird"
 import { ConnectionOptions, MetricsTime, Worker } from "bullmq"
 import { nanoid } from "nanoid"

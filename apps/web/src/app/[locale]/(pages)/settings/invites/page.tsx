@@ -3,7 +3,7 @@ import { Container } from "@hazel/ui/container"
 
 import { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
 import { auth } from "@/lib/auth"
-import db from "@/lib/db"
+import { db } from "@hazel/db"
 
 import { TableWrapper } from "./_components/TableWrapper"
 

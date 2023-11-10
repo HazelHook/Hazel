@@ -1,6 +1,6 @@
 import { Elysia } from "elysia"
 
-import db from "@hazel/db/src/drizzle"
+import db from "@hazel/db"
 import tiny from "@hazel/tinybird"
 
 import { sendEvent } from "../../event"
