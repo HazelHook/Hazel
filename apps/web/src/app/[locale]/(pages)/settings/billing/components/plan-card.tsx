@@ -49,16 +49,12 @@ export const PlanCard = ({ plan, currentPlanId, currentSubscriptionId, metrics }
 				{plan.lago_id === currentPlanId && plan.code !== "free" ? (
 					<CancelButton subscriptionId={currentSubscriptionId} unsubscribeAction={unsubscribeAction} />
 				) : (
-					<>
-						{plan.lago_id !== currentPlanId && (
-							<CheckoutButton
-								previousSubscriptionId={currentSubscriptionId}
-								planId={plan.code}
-								disabled={plan.lago_id === currentPlanId}
-								subscribeAction={changeSubscribtionAction}
-							/>
-						)}
-					</>
+					<CheckoutButton
+						previousSubscriptionId={currentSubscriptionId}
+						planId={plan.code}
+						disabled={plan.lago_id === currentPlanId}
+						subscribeAction={changeSubscribtionAction}
+					/>
 				)}
 			</CardFooter>
 		</Card>

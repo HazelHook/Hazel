@@ -36,81 +36,75 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 	})
 
 	return (
-		<>
-			<AutoForm
-				onSubmit={async (data) => {
-					await createSource.mutateAsync(data)
-				}}
-				formSchema={createSourceSchema}
-				fieldConfig={{
-					name: {
-						description: "A name to identify your sources.",
-						inputProps: {
-							placeholder: "Source Name",
-						},
+		<AutoForm
+			onSubmit={async (data) => {
+				await createSource.mutateAsync(data)
+			}}
+			formSchema={createSourceSchema}
+			fieldConfig={{
+				name: {
+					description: "A name to identify your sources.",
+					inputProps: {
+						placeholder: "Source Name",
 					},
-					url: {
-						description: "The endpoint that will send the webhooks.",
-						inputProps: {
-							type: "email",
-							placeholder: "E.g. example.com",
-						},
+				},
+				url: {
+					description: "The endpoint that will send the webhooks.",
+					inputProps: {
+						type: "email",
+						placeholder: "E.g. example.com",
 					},
-					integrationId: {
-						fieldType: ({
-							label,
-							isRequired,
-							field,
-							fieldConfigItem,
-							fieldProps,
-						}: AutoFormInputComponentProps) => (
-							<FormItem>
-								<FormLabel>
-									{label}
-									{isRequired && <span className="text-destructive"> *</span>}
-								</FormLabel>
-								<FormControl>
-									{IntegrationTools.length > 0 && (
-										<Select onValueChange={field.onChange} value={field.value || undefined}>
-											<FormControl>
-												<SelectTrigger>
-													<SelectValue
-														placeholder={
-															<p className="text-muted-foreground">Connect...</p>
-														}
-														className="focus:text-muted-foreground"
-													/>
-												</SelectTrigger>
-											</FormControl>
-											<SelectContent className="max-h-96">
-												{integrations.map((integration) => (
-													<SelectItem key={integration.publicId} value={integration.publicId}>
-														<div className="flex flex-row items-center">
-															{integration.name}
-														</div>
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-									)}
-								</FormControl>
-								{fieldConfigItem.description && (
-									<FormDescription>{fieldConfigItem.description}</FormDescription>
+				},
+				integrationId: {
+					fieldType: ({
+						label,
+						isRequired,
+						field,
+						fieldConfigItem,
+						fieldProps,
+					}: AutoFormInputComponentProps) => (
+						<FormItem>
+							<FormLabel>
+								{label}
+								{isRequired && <span className="text-destructive"> *</span>}
+							</FormLabel>
+							<FormControl>
+								{IntegrationTools.length > 0 && (
+									<Select onValueChange={field.onChange} value={field.value || undefined}>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue
+													placeholder={<p className="text-muted-foreground">Connect...</p>}
+													className="focus:text-muted-foreground"
+												/>
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent className="max-h-96">
+											{integrations.map((integration) => (
+												<SelectItem key={integration.publicId} value={integration.publicId}>
+													<div className="flex flex-row items-center">{integration.name}</div>
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
 								)}
-								<FormMessage />
-							</FormItem>
-						),
-					},
-				}}
+							</FormControl>
+							{fieldConfigItem.description && (
+								<FormDescription>{fieldConfigItem.description}</FormDescription>
+							)}
+							<FormMessage />
+						</FormItem>
+					),
+				},
+			}}
+		>
+			<Button
+				type="submit"
+				disabled={createSource.status === "loading"}
+				loading={createSource.status === "loading"}
 			>
-				<Button
-					type="submit"
-					disabled={createSource.status === "loading"}
-					loading={createSource.status === "loading"}
-				>
-					Create
-				</Button>
-			</AutoForm>
-		</>
+				Create
+			</Button>
+		</AutoForm>
 	)
 }

@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
 import { Skeleton } from "@hazel/ui/skeleton"
+import { Await } from "@hazel/ui/await"
 import { formatDistanceToNow, sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
@@ -91,59 +92,65 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 			</div>
 
 			<div className="flex gap-4 flex-col md:flex-row">
-				<Suspense fallback={<KpiLoadingCard color={chartColors[0]} title={"Events"} />}>
-					<KpiCard
-						key={"events"}
-						color={chartColors[0]}
-						title={"Events"}
-						subtitle={String((await kpiRequest).data.reduce((curr, el) => curr + el.events, 0))}
-						group="kpis"
-						id={"events"}
-						series={[
-							{
-								name: "Events",
-								data: (await kpiRequest).data.map((datum) => datum.events),
-							},
-						]}
-						labels={(await kpiRequest).data.map((datum) => formatDateTime(new Date(datum.date)))}
-					/>
-				</Suspense>
+				<Await promise={kpiRequest} fallback={<KpiLoadingCard color={chartColors[0]} title={"Events"} />}>
+					{({ data }) => (
+						<KpiCard
+							key={"events"}
+							color={chartColors[0]}
+							title={"Events"}
+							subtitle={String(data.reduce((curr, el) => curr + el.events, 0))}
+							group="kpis"
+							id={"events"}
+							series={[
+								{
+									name: "Events",
+									data: data.map((datum) => datum.events),
+								},
+							]}
+							labels={data.map((datum) => formatDateTime(new Date(datum.date)))}
+						/>
+					)}
+				</Await>
 
-				<Suspense fallback={<KpiLoadingCard color={chartColors[1]} title={"Request"} />}>
-					<KpiCard
-						key={"requests"}
-						color={chartColors[1]}
-						title={"Requests"}
-						subtitle={String((await kpiResponse).data.reduce((curr, el) => curr + el.requests, 0))}
-						id={"req"}
-						group="kpis"
-						series={[
-							{
-								name: "Requests",
-								data: (await kpiResponse).data.map((datum) => datum.requests),
-							},
-						]}
-						labels={(await kpiResponse).data.map((datum) => formatDateTime(new Date(datum.date)))}
-					/>
-				</Suspense>
+				<Await promise={kpiResponse} fallback={<KpiLoadingCard color={chartColors[1]} title={"Request"} />}>
+					{({ data }) => (
+						<KpiCard
+							key={"requests"}
+							color={chartColors[1]}
+							title={"Requests"}
+							subtitle={String(data.reduce((curr, el) => curr + el.requests, 0))}
+							id={"req"}
+							group="kpis"
+							series={[
+								{
+									name: "Requests",
+									data: data.map((datum) => datum.requests),
+								},
+							]}
+							labels={data.map((datum) => formatDateTime(new Date(datum.date)))}
+						/>
+					)}
+				</Await>
 
-				<Suspense fallback={<KpiLoadingCard color={chartColors[3]} title={"Errors"} />}>
-					<KpiCard
-						key={"errors"}
-						color={chartColors[3]}
-						title={"Errors"}
-						subtitle={String((await kpiError).data.reduce((curr, el) => curr + el.requests, 0))}
-						id={"errors"}
-						group="kpis"
-						series={[
-							{
-								name: "Errors",
-								data: (await kpiError).data.map((datum) => datum.requests),
-							},
-						]}
-						labels={(await kpiError).data.map((datum) => formatDateTime(new Date(datum.date)))}
-					/>
-				</Suspense>
+				<Await promise={kpiError} fallback={<KpiLoadingCard color={chartColors[3]} title={"Errors"} />}>
+					{({ data }) => (
+						<KpiCard
+							key={"errors"}
+							color={chartColors[3]}
+							title={"Errors"}
+							subtitle={String(data.reduce((curr, el) => curr + el.requests, 0))}
+							id={"errors"}
+							group="kpis"
+							series={[
+								{
+									name: "Errors",
+									data: data.map((datum) => datum.requests),
+								},
+							]}
+							labels={data.map((datum) => formatDateTime(new Date(datum.date)))}
+						/>
+					)}
+				</Await>
 			</div>
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3">
 				<Card className="col-span-2 w-full h-full overflow-hidden">
@@ -197,32 +204,36 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 						<CardTitle>Recent Events</CardTitle>
 					</CardHeader>
 					<CardContent className="flex flex-col gap-4">
-						{(await requests).data.map((request) => (
-							<div key={request.id} className="flex flex-row gap-2 justify-between">
-								<div className="flex flex-row gap-4 justify-center items-center max-w-[70%] overflow-hidden">
-									<div className="flex flex-col gap-1">
-										<SourceLink sourceId={request.source_id} />
-										<Link
-											href={`/request/${request.id}`}
-											className="text-muted-foreground text-sm underline-offset-4 text-ellipsis hover:underline"
-										>
-											{request.id.replace("req_", "")}
-										</Link>
-									</div>
-								</div>
+						<Await promise={requests}>
+							{({ data }) =>
+								data.map((request) => (
+									<div key={request.id} className="flex flex-row gap-2 justify-between">
+										<div className="flex flex-row gap-4 justify-center items-center max-w-[70%] overflow-hidden">
+											<div className="flex flex-col gap-1">
+												<SourceLink sourceId={request.source_id} />
+												<Link
+													href={`/request/${request.id}`}
+													className="text-muted-foreground text-sm underline-offset-4 text-ellipsis hover:underline"
+												>
+													{request.id.replace("req_", "")}
+												</Link>
+											</div>
+										</div>
 
-								<div className="flex flex-col gap-2 justify-end items-end">
-									{
-										<p className="text-sm">
-											{formatDistanceToNow(new Date(request.timestamp), {
-												addSuffix: true,
-											})}
-										</p>
-									}
-									<StatusBadge status={request.rejected ? "error" : "success"} />
-								</div>
-							</div>
-						))}
+										<div className="flex flex-col gap-2 justify-end items-end">
+											{
+												<p className="text-sm">
+													{formatDistanceToNow(new Date(request.timestamp), {
+														addSuffix: true,
+													})}
+												</p>
+											}
+											<StatusBadge status={request.rejected ? "error" : "success"} />
+										</div>
+									</div>
+								))
+							}
+						</Await>
 					</CardContent>
 				</Card>
 			</div>
@@ -232,6 +243,6 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 // export const fetchCache = "force-no-store"
 
-// export const runtime = "edge"
+export const runtime = "edge"
 
 export default Dashboard

@@ -16,13 +16,11 @@ export const IntegrationsTable = ({
 	deleteAction: typeof deleteIntegrationAction
 }) => {
 	return (
-		<>
-			<SimpleDataTable
-				disableRedirect
-				rootPath="/integrations"
-				columns={columns(deleteAction, updateAction)}
-				data={integrations as any}
-			/>
-		</>
+		<SimpleDataTable
+			disableRedirect
+			rootPath="/integrations"
+			columns={columns(deleteAction, updateAction)}
+			data={integrations as any}
+		/>
 	)
 }

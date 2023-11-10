@@ -130,7 +130,7 @@ const TableSheet = ({
 						<CardContent>
 							<div className="flex flex-col gap-2">
 								{data.responses.map((res) => (
-									<Link href={`/response/${res.id}`}>
+									<Link href={`/response/${res.id}`} key={res.id}>
 										<div className="flex flex-row items-center">
 											<Status size={4} status={res.success ? "success" : "error"} />
 											<Button variant="link" className="uppercase">

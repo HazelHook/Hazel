@@ -33,85 +33,79 @@ export function UpdateSourceForm({ onClose, source, action, integrations }: Upda
 	})
 
 	return (
-		<>
-			<AutoForm
-				defaultValues={{ ...source }}
-				onSubmit={async (data) => {
-					await updateSource.mutateAsync({
-						...(data as any),
-						publicId: source.publicId,
-					})
-				}}
-				formSchema={updateSourceSchema.omit({ publicId: true })}
-				fieldConfig={{
-					name: {
-						description: "A name to identify your sources.",
-						inputProps: {
-							placeholder: "Source Name",
-						},
+		<AutoForm
+			defaultValues={{ ...source }}
+			onSubmit={async (data) => {
+				await updateSource.mutateAsync({
+					...(data as any),
+					publicId: source.publicId,
+				})
+			}}
+			formSchema={updateSourceSchema.omit({ publicId: true })}
+			fieldConfig={{
+				name: {
+					description: "A name to identify your sources.",
+					inputProps: {
+						placeholder: "Source Name",
 					},
-					url: {
-						description: "The endpoint that will send the webhooks.",
-						inputProps: {
-							type: "email",
-							placeholder: "E.g. example.com",
-						},
+				},
+				url: {
+					description: "The endpoint that will send the webhooks.",
+					inputProps: {
+						type: "email",
+						placeholder: "E.g. example.com",
 					},
-					integrationId: {
-						fieldType: ({
-							label,
-							isRequired,
-							field,
-							fieldConfigItem,
-							fieldProps,
-						}: AutoFormInputComponentProps) => (
-							<FormItem>
-								<FormLabel>
-									{label}
-									{isRequired && <span className="text-destructive"> *</span>}
-								</FormLabel>
-								<FormControl>
-									{IntegrationTools.length > 0 && (
-										<Select onValueChange={field.onChange} value={field.value || undefined}>
-											<FormControl>
-												<SelectTrigger>
-													<SelectValue
-														placeholder={
-															<p className="text-muted-foreground">Connect...</p>
-														}
-														className="focus:text-muted-foreground"
-													/>
-												</SelectTrigger>
-											</FormControl>
-											<SelectContent className="max-h-96">
-												{integrations.map((integration) => (
-													<SelectItem key={integration.publicId} value={integration.publicId}>
-														<div className="flex flex-row items-center">
-															{integration.name}
-														</div>
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-									)}
-								</FormControl>
-								{fieldConfigItem.description && (
-									<FormDescription>{fieldConfigItem.description}</FormDescription>
+				},
+				integrationId: {
+					fieldType: ({
+						label,
+						isRequired,
+						field,
+						fieldConfigItem,
+						fieldProps,
+					}: AutoFormInputComponentProps) => (
+						<FormItem>
+							<FormLabel>
+								{label}
+								{isRequired && <span className="text-destructive"> *</span>}
+							</FormLabel>
+							<FormControl>
+								{IntegrationTools.length > 0 && (
+									<Select onValueChange={field.onChange} value={field.value || undefined}>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue
+													placeholder={<p className="text-muted-foreground">Connect...</p>}
+													className="focus:text-muted-foreground"
+												/>
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent className="max-h-96">
+											{integrations.map((integration) => (
+												<SelectItem key={integration.publicId} value={integration.publicId}>
+													<div className="flex flex-row items-center">{integration.name}</div>
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
 								)}
-								<FormMessage />
-							</FormItem>
-						),
-					},
-				}}
+							</FormControl>
+							{fieldConfigItem.description && (
+								<FormDescription>{fieldConfigItem.description}</FormDescription>
+							)}
+							<FormMessage />
+						</FormItem>
+					),
+				},
+			}}
+		>
+			<Button
+				type="submit"
+				disabled={updateSource.status === "loading"}
+				loading={updateSource.status === "loading"}
 			>
-				<Button
-					type="submit"
-					disabled={updateSource.status === "loading"}
-					loading={updateSource.status === "loading"}
-				>
-					Update
-				</Button>
-			</AutoForm>
-		</>
+				Update
+			</Button>
+		</AutoForm>
 	)
 }

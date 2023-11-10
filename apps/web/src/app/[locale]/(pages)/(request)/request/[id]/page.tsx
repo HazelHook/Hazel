@@ -11,6 +11,7 @@ import { getCachedSource } from "@/lib/orm"
 import tiny from "@/lib/tiny"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { Status } from "@/components/status"
+import { Await } from "@hazel/ui/await"
 
 const ListItem = ({
 	name,
@@ -75,13 +76,15 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 						<ListItem
 							name="Source"
 							description={
-								<Suspense>
-									<Link href={`/source/${req.source_id}`}>
-										<Button size="xs" variant="link">
-											{(await source)?.name}
-										</Button>
-									</Link>
-								</Suspense>
+								<Await promise={source}>
+									{(data) => (
+										<Link href={`/source/${req.source_id}`}>
+											<Button size="xs" variant="link">
+												{data?.name}
+											</Button>
+										</Link>
+									)}
+								</Await>
 							}
 						/>
 						<ListItem name="Status" description={req.rejected ? "Rejected" : "Accepted"} />

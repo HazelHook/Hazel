@@ -70,7 +70,8 @@
 	"exports": {
 		"./*": "./src/*.tsx",
 		"./utils": "./src/utils/index.ts",
-		"./accordion": "./src/accordion.tsx.tsx",
+		"./await": "./src/await.tsx",
+		"./accordion": "./src/accordion.tsx",
 		"./alert-dialog": "./src/alert-dialog.tsx",
 		"./alert": "./src/alert.tsx",
 		"./auto-form": "./src/auto-form.tsx",
@@ -120,7 +121,9 @@
 	},
 	"typesVersions": {
 		"*": {
-			"*": ["src/*"]
+			"*": [
+				"src/*"
+			]
 		}
 	}
 }
