@@ -1,6 +1,5 @@
 import { notFound, redirect } from "next/navigation"
 import { Destination } from "@hazel/db/src/drizzle/schema"
-import { Tiny } from "@hazel/db/src/tinybird"
 import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
 import { SimpleDataTable } from "@hazel/ui/data-table"
@@ -12,6 +11,7 @@ import { chartColors, formatDateTime } from "@/lib/utils"
 import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
 import { columns } from "./column"
+import tiny from "@/lib/tiny"
 
 const SourcePage = async ({
 	params,
@@ -33,7 +33,6 @@ const SourcePage = async ({
 		redirect("/")
 	}
 
-	const tiny = Tiny(process.env.TINY_TOKEN!)
 	const req = await tiny.request.timeline({
 		workspace_id: workspaceId,
 		source_id: source.publicId,

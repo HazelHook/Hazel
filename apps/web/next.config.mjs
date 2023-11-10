@@ -27,6 +27,7 @@ const nextConfig = {
 		"@hazel/ui",
 		"@hazel/utils",
 		"@hazel/icons",
+		"@hazel/tinybird",
 		"@hazel/supabase",
 		"@hazel/server",
 	],

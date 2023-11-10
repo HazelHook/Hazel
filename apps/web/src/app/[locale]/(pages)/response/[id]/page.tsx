@@ -1,7 +1,7 @@
 import { ReactNode, Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { TBRequest } from "@hazel/db/src/tinybird/model/tiny-request"
+import { TBRequest } from "@hazel/tinybird"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"

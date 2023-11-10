@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation"
-import { Tiny } from "@hazel/db/src/tinybird"
 
 import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
@@ -9,6 +8,7 @@ import { columns } from "./column"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { responseTableSearchParamsSchema } from "@/lib/validators/params"
 import { httpStatusCodes } from "@/lib/utils"
+import tiny from "@/lib/tiny"
 
 interface EventsPageProps {
 	params: {
@@ -21,7 +21,6 @@ interface EventsPageProps {
 
 const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 	const { workspaceId } = await auth()
-	const tiny = Tiny(process.env.TINY_TOKEN as string)
 
 	const connection = await getCachedConnection({ publicId: params.id })
 
@@ -33,7 +32,6 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 
 	const { sort, offset, limit, status, id } = getTableParams(searchParams, responseTableSearchParamsSchema)
 
-	console.log(id)
 	const { data, rows_before_limit_at_least } = await tiny.response.get({
 		workspace_id: workspaceId,
 		source_id: connection.source?.publicId,

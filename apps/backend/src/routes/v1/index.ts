@@ -1,7 +1,7 @@
 import { Elysia } from "elysia"
 
 import db from "@hazel/db/src/drizzle"
-import tiny from "@hazel/db/src/tinybird"
+import tiny from "@hazel/tinybird"
 
 import { sendEvent } from "../../event"
 import { sourceQueue } from "../../lib/queue"

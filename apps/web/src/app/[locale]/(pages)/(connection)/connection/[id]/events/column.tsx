@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { TBResponse } from "@hazel/db/src/tinybird/model/tiny-response"
+import { TBResponse } from "@hazel/tinybird"
 import { FilterVerticalIcon } from "@hazel/icons"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {

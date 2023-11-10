@@ -27,6 +27,7 @@
 		"@hazel/ui": "workspace:*",
 		"@hazel/utils": "workspace:*",
 		"@hazel/client": "workspace:*",
+		"@hazel/tinybird": "workspace:*",
 		"@hookform/resolvers": "^3.3.2",
 		"@ngneat/falso": "^7.1.1",
 		"@stripe/react-stripe-js": "^2.3.1",

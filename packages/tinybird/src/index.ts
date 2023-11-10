@@ -15,4 +15,7 @@ export const Tiny = (token: string) => {
 	}
 }
 
+export * from "./model/tiny-request"
+export * from "./model/tiny-response"
+
 export default Tiny(process.env.TINY_TOKEN as string)
