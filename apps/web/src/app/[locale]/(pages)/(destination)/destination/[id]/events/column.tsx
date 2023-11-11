@@ -1,7 +1,9 @@
 "use client"
 
+import Link from "next/link"
+import { TBResponse } from "@hazel/tinybird"
 import { FilterVerticalIcon } from "@hazel/icons"
-import { Button } from "@hazel/ui/button"
+import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -10,40 +12,69 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import { ColumnDef } from "@tanstack/react-table"
-
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import { Status } from "@/components/status"
-import { EventDataRowType } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/page"
 
-export const columns: ColumnDef<EventDataRowType>[] = [
-	{
-		accessorKey: "id",
-		header: "Request ID",
-		cell: ({ cell, row }) => {
-			const requestId = cell.getValue() as string
+export type Column = TBResponse
 
-			return <div>{requestId}</div>
+const columnHelper = createColumnHelper<TBResponse>()
+
+export const columns = [
+	columnHelper.accessor("id", {
+		id: "response_id",
+		header: "Response ID",
+		cell: ({ cell }) => {
+			const responseId = cell.getValue()
+
+			return (
+				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/response/${responseId}`}>
+					{responseId}
+				</Link>
+			)
 		},
-	},
-	{
-		accessorKey: "send_at",
+	}),
+	columnHelper.accessor("destination_id", {
+		header: "Destination ID",
+		cell: ({ cell }) => {
+			const destinationId = cell.getValue()
+
+			return (
+				<Link
+					className={buttonVariants({ variant: "link", size: "none" })}
+					href={`/destination/${destinationId}`}
+				>
+					{destinationId}
+				</Link>
+			)
+		},
+	}),
+
+	columnHelper.accessor("response_at", {
 		header: "Timestamp",
 		cell: ({ cell }) => {
+			const date = new Date(cell.getValue())
 			return <p>{cell.getValue<string>()}</p>
 		},
-	},
-	{
-		accessorKey: "success",
-		header: () => <div>Status</div>,
+	}),
+
+	columnHelper.accessor("success", {
+		header: "Success",
 		cell: ({ cell }) => {
-			const success = Boolean(cell.getValue() as number)
+			const success = Boolean(cell.getValue())
 
 			return <Status status={success ? "success" : "error"} />
 		},
-	},
-	{
+	}),
+
+	columnHelper.accessor("status", {
+		header: "Status",
+		cell: ({ cell }) => {
+			return cell.getValue()
+		},
+	}),
+
+	columnHelper.display({
 		id: "actions",
-		header: "Actions",
 		cell: ({ row }) => {
 			const request = row.original
 
@@ -67,5 +98,5 @@ export const columns: ColumnDef<EventDataRowType>[] = [
 				</DropdownMenu>
 			)
 		},
-	},
-]
+	}),
+] as ColumnDef<TBResponse>[]

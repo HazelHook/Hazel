@@ -7,9 +7,9 @@ import tiny from "@/lib/tiny"
 import { db } from "@hazel/db"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { errorPageSearchParamsSchema } from "@/lib/validators/params"
-import { DataTable } from "@hazel/ui/data-table"
 import { columns } from "./column"
 import { DatePicker } from "../_component/DatePicker"
+import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 type ErrorPageProps = {
 	searchParams: any
@@ -42,7 +42,7 @@ const ErrorPage = async ({ searchParams }: ErrorPageProps) => {
 				/>
 				<DatePicker />
 			</div>
-			<DataTable
+			<AdvancedDataTable
 				data={responses.data}
 				columns={columns}
 				maxItems={responses.rows_before_limit_at_least || responses.rows || responses.data.length}

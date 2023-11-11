@@ -10,10 +10,10 @@ import { SheetHeader, SheetTitle } from "@hazel/ui/sheet"
 
 import { CacheSource } from "@/lib/orm"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
-import { DataTable } from "@hazel/ui/data-table"
 import { Status } from "@/components/status"
 import { columns } from "@/app/[locale]/(pages)/(source)/source/[id]/events/column"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(source)/source/[id]/events/page"
+import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 export const TableWrapper = ({
 	data,
@@ -25,11 +25,12 @@ export const TableWrapper = ({
 	source: CacheSource
 }) => {
 	return (
-		<DataTable
+		<AdvancedDataTable
 			columns={columns}
 			data={data}
 			maxItems={maxItems}
-			renderSheet={(data) => <TableSheet data={data} source={source} />}
+			// TODO: READD THIS SOMEHOW
+			// renderSheet={(data) => <TableSheet data={data} source={source} />}
 		/>
 	)
 }

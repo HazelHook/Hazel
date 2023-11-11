@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 
 import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
-import { AdvancedDataTable, DataTable } from "@hazel/ui/data-table"
+import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { columns } from "./column"
 import { getTableParams } from "@/lib/data-table-helpers"

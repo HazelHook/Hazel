@@ -4,8 +4,10 @@ import { auth } from "@/lib/auth"
 import { getCachedDestination } from "@/lib/orm"
 import tiny from "@/lib/tiny"
 import { PromiseType } from "@/lib/ts/helpers"
-import { TableWrapper } from "@/app/[locale]/(pages)/(destination)/destination/[id]/events/table"
 import { getTableParams } from "@/lib/data-table-helpers"
+import { AdvancedDataTable } from "@hazel/ui/data-table"
+import { columns } from "./column"
+import { httpStatusCodes } from "@/lib/utils"
 
 interface EventsPageProps {
 	params: {
@@ -60,9 +62,26 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 	return (
 		<div>
 			<div className="w-full">
-				<TableWrapper
+				<AdvancedDataTable
+					searchableColumns={[
+						{
+							id: "response_id",
+							title: "responses",
+						},
+					]}
+					filterableColumns={[
+						{
+							id: "status",
+							title: "Status",
+							options: httpStatusCodes.map((status) => ({
+								label: `${status.code} - ${status.name}`,
+								value: `${status.code}`,
+							})),
+						},
+					]}
 					data={destinations.data}
 					maxItems={destinations.rows_before_limit_at_least || destinations.data.length}
+					columns={columns}
 				/>
 			</div>
 		</div>
