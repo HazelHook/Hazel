@@ -25,7 +25,16 @@ export const getCachedSource = async ({
 	publicId: string
 	redirectMissing?: boolean
 }) => {
-	const source = await db.source.getOne({ publicId })
+	const source = await db.source.getOne({
+		publicId,
+		include: {
+			connections: {
+				with: {
+					destination: true,
+				},
+			},
+		},
+	})
 
 	if (!source) {
 		if (redirectMissing) {

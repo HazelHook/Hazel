@@ -1,5 +1,5 @@
 import { SQL, WithSubquery } from "drizzle-orm"
-import { TrxType } from "../../utils"
+import { TrxType, WithInput } from "../../utils"
 
 export type EntityLogic = {
 	table: any
@@ -7,7 +7,7 @@ export type EntityLogic = {
 		data: {
 			publicId: string
 			where?: SQL
-			include?: WithSubquery
+			include?: WithInput<any>
 		},
 		tx?: TrxType,
 	) => any | null

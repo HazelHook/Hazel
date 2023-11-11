@@ -1,7 +1,9 @@
 import { MySqlSelect } from "drizzle-orm/mysql-core"
 
-import { db } from "."
+import { DBQueryConfig, ExtractTablesWithRelations, db } from "."
 import { DB } from "./orm"
+
+import * as schema from "./schema"
 
 /**
  * Query helper extending the query adding offset based pagination to it
@@ -24,3 +26,10 @@ export function withPagination<T extends MySqlSelect<any, any, any, any>>(qb: T,
 export type TrxType = Parameters<Parameters<DB["transaction"]>[0]>[0]
 
 export type EitherAClientOrTrx = typeof db.db.transaction | TrxType
+
+export type WithInput<Table extends ExtractTablesWithRelations<typeof schema>["source"]> = DBQueryConfig<
+	"one",
+	true,
+	ExtractTablesWithRelations<typeof schema>,
+	Table
+>["with"]

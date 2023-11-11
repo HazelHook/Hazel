@@ -1,36 +1,24 @@
-import { SQL, WithSubquery, and, eq, isNull } from "drizzle-orm"
+import { DBQueryConfig, ExtractTablesWithRelations, SQL, WithSubquery, and, eq, isNull } from "drizzle-orm"
 
 import { EntityLogic } from "."
 import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"
 import { DrizzleTable } from "../db-table"
-import { TrxType } from "../../utils"
+import { TrxType, WithInput } from "../../utils"
 
-type Test = {
+type Test<T> = {
 	publicId: string
 	where?: SQL
-	include?: any
+	include?: T
 }
+
+type IncludeType = NonNullable<Parameters<DB["query"]["source"]["findFirst"]>[0]>["with"]
 
 const sourceLogic = (db: DB) =>
 	({
 		table: new DrizzleTable("source", schema.source, db),
-		getOne: async (
-			{
-				publicId,
-				where,
-				include = {
-					connections: {
-						with: {
-							destination: true,
-						},
-					},
-					integration: true,
-				},
-			}: Test,
-			tx?: TrxType,
-		) => {
+		getOne: async <T extends IncludeType>({ publicId, where }: Test<T>, tx?: TrxType) => {
 			const client = tx || db
 
 			return client.query.source.findFirst({
