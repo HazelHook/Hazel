@@ -814,8 +814,8 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(@types/react-dom@18.2.14)(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
       '@unpic/react':
-        specifier: ^0.0.37
-        version: 0.0.37(next@14.0.2)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.0.42
+        version: 0.0.42(next@14.0.2)(react-dom@18.2.0)(react@18.2.0)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -872,8 +872,8 @@ importers:
         specifier: ^8.53.0
         version: 8.53.0
       prettier:
-        specifier: ^3.0.3
-        version: 3.0.3
+        specifier: ^3.1.0
+        version: 3.1.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -5030,14 +5030,14 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@unpic/core@0.0.32:
-    resolution: {integrity: sha512-n/7Ym+mksDlNTekbSgoUgxJQ6P6VtrcyMRFLgW+fsvyJoM1a87BBZQsp/SYO+N0apPX8m8eFGHhoS+us9FKbFg==}
+  /@unpic/core@0.0.37:
+    resolution: {integrity: sha512-GxVLhlG0Q/nwS2ygV09xLqCJMUwUnFoRl1RBSNZEWi1MzgjM1kzl1Hb7uz7MYaADAdlvNp6dDW1DLFIXaD3WyA==}
     dependencies:
-      unpic: 3.10.1
+      unpic: 3.13.0
     dev: false
 
-  /@unpic/react@0.0.37(next@14.0.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-9+XEN48JaIw9F2267cjkJHTTHlrPUlrYPYhug1xQAlx5EXLOyctFGjrnNxJhGjeG7c3Ja9pkCH4zNlzY9Q+IEA==}
+  /@unpic/react@0.0.42(next@14.0.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-C0xY1DI3XT7uLtFzISqhZob4XY3PBIOC16Y7KlteNyBRkNuSsqu7zSg6E4HXWEyvACzJtB3fJF0tv59rrfaHjQ==}
     peerDependencies:
       next: '>=12'
       react: '>=17'
@@ -5046,7 +5046,7 @@ packages:
       next:
         optional: true
     dependencies:
-      '@unpic/core': 0.0.32
+      '@unpic/core': 0.0.37
       next: 14.0.2(@babel/core@7.23.2)(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9165,6 +9165,12 @@ packages:
     hasBin: true
     dev: true
 
+  /prettier@3.1.0:
+    resolution: {integrity: sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
     engines: {node: '>=6'}
@@ -10857,8 +10863,8 @@ packages:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
 
-  /unpic@3.10.1:
-    resolution: {integrity: sha512-7mmLrd6RWdt2Sp015Fgf80oKBmHIEwIDXBQJIImJ/Mj/XaDrOlzX/CWmiRoXOXYj9bLNq0MryOxosMmNXrBOGA==}
+  /unpic@3.13.0:
+    resolution: {integrity: sha512-SVrWh8ZpCwf6XZSpmFM0qXnBKBXEu+/G26R6aoIZhPuBBTz26d8dmu85Bz6vCo5zhZIkWOZvwi4fy9Ppcv2PRg==}
     dev: false
 
   /unplugin@1.5.0:
