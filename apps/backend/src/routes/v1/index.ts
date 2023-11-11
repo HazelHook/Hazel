@@ -33,13 +33,13 @@ export const v1Route = new Elysia()
 					}
 				}
 
-				if (source.url && source.url !== request.url) {
-					set.status = 403
-					return {
-						status: "403",
-						message: `${request.url} doesn't match Source (${source.url})`,
-					}
-				}
+				// if (source.url && source.url !== request.url) {
+				// 	set.status = 403
+				// 	return {
+				// 		status: "403",
+				// 		message: `${request.url} doesn't match Source (${source.url})`,
+				// 	}
+				// }
 
 				if (source.connections.length === 0) {
 					set.status = 404
