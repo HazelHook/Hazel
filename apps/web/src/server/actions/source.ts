@@ -15,7 +15,6 @@ export const createSourceAction = createAction(
 
 		const source = await db.source.create({
 			name: opts.input.name,
-			url: opts.input.url!,
 			integrationId: integrationResult?.id,
 			key: opts.input.key,
 			workspaceId: opts.ctx.auth.workspaceId,
@@ -38,7 +37,6 @@ export const updateSourceAction = createAction(
 		const source = await db.source.update({
 			integrationId: integration?.id,
 			name: opts.input.name,
-			url: opts.input.url,
 			workspaceId: opts.ctx.auth.workspaceId,
 			publicId: opts.input.publicId,
 		})

@@ -49,13 +49,6 @@ export function UpdateSourceForm({ onClose, source, action, integrations }: Upda
 						placeholder: "Source Name",
 					},
 				},
-				url: {
-					description: "The endpoint that will send the webhooks.",
-					inputProps: {
-						type: "email",
-						placeholder: "E.g. example.com",
-					},
-				},
 				integrationId: {
 					fieldType: ({
 						label,

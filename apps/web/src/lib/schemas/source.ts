@@ -7,10 +7,6 @@ export const createSourceSchema = z.object({
 			message: "Name must be between atleast 2 characters long",
 		})
 		.max(20),
-	url: z
-		.union([z.literal(""), z.string().trim().url()])
-		.optional()
-		.describe("Source URL"),
 	key: z
 		.string()
 		.regex(/^[a-z_-]+$/, {
@@ -28,6 +24,5 @@ export const updateSourceSchema = z.object({
 			message: "Name must be between atleast 2 characters long",
 		})
 		.max(20),
-	url: z.union([z.literal(""), z.string().trim().url()]).optional(),
 	integrationId: z.string().nullable(),
 })
