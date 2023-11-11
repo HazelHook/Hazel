@@ -30,12 +30,13 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 
 	// TODO: SSR SORTING IN TB
 
-	const { sort, offset, limit, status, id } = getTableParams(searchParams, responseTableSearchParamsSchema)
+	const { sort, offset, limit, status, response_id } = getTableParams(searchParams, responseTableSearchParamsSchema)
 
 	const { data, rows_before_limit_at_least } = await tiny.response.get({
 		workspace_id: workspaceId,
 		source_id: connection.source?.publicId,
 		destination_id: connection.destination?.publicId,
+		response_id: response_id,
 		status: status,
 		offset,
 		limit,
@@ -47,7 +48,7 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 				<AdvancedDataTable
 					searchableColumns={[
 						{
-							id: "id",
+							id: "response_id",
 							title: "responses",
 						},
 					]}

@@ -21,6 +21,7 @@ const columnHelper = createColumnHelper<TBResponse>()
 
 export const columns = [
 	columnHelper.accessor("id", {
+		id: "response_id",
 		header: "Response ID",
 		cell: ({ cell }) => {
 			const responseId = cell.getValue()

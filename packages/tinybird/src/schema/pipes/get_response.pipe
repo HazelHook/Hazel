@@ -40,7 +40,7 @@ SQL >
             AND request_id = {{ String(request_id, description="Request ID", required=False) }}
         {% end %}
         {% if defined(response_id) %}
-            AND id LIKE '%' || {{ String(response_id, description="Response ID", required=False) }}
+            AND id LIKE '%' || {{ String(response_id, description="Response ID", required=False) }} || '%'
         {% end %}
     ORDER BY received_at DESC
     LIMIT {{ Int32(limit, 100, description="Limit of Entries", required=False) }}
