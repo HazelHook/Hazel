@@ -18,14 +18,14 @@ type SubItem = {
 	size?: "default" | "xs" | "sm" | "lg"
 }
 
-type Item = {
+export type SidebarItem = {
 	title?: string
 	items: SubItem[]
 }
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	disableLogo?: boolean
-	items: Item[]
+	items: SidebarItem[]
 }
 
 export const SidebarItem = ({ icon, endIcon, ...rest }: SubItem) => {

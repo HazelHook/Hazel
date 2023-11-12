@@ -7,7 +7,7 @@ export const QuestionIcon = (props: IconProps) => (
 			strokeLinecap="round"
 			strokeLinejoin="round"
 			strokeWidth="2"
-			d="M7.728 9.272a4.272 4.272 0 1 1 6.595 3.586C13.185 13.596 12 14.644 12 16m.001 3h.001"
+			d="M7.728 9.272a4.272 4.272 0 1 1 6.595 3.586C13.185 13.596 12 14.644 12 16m0 3h.01"
 		/>
 		<title>questionIcon</title>
 	</svg>

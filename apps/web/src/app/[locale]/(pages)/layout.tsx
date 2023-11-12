@@ -7,6 +7,7 @@ import {
 	HomeIcon,
 	LinkChainIcon,
 	Settings01Icon,
+	WebhookIcon,
 } from "@hazel/icons"
 import { TooltipProvider } from "@hazel/ui/tooltip"
 
@@ -47,6 +48,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 										title: "Overview",
 										href: "/",
 										icon: HomeIcon,
+									},
+									{
+										title: "Webhooks",
+										href: "/webhooks",
+										icon: WebhookIcon,
 									},
 									{
 										title: "Integrations",
