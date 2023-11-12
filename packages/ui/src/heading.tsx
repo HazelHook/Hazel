@@ -15,6 +15,7 @@ export const Heading: React.FCC<{ type?: HeadingType; className?: string }> = ({
 				<h2
 					className={cn(
 						"font-heading scroll-m-20 pb-2 text-3xl font-medium tracking-tight transition-colors first:mt-0",
+						className,
 					)}
 				>
 					{children}

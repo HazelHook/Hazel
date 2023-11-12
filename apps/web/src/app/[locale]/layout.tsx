@@ -6,12 +6,15 @@ import configuration from "@hazel/utils/configuration"
 import { AuthConfigProvider, AuthProvider } from "@hazel/auth/provider"
 import { Toaster } from "sonner"
 
-import { fontSans } from "@/lib/fonts"
 import { I18Provider } from "@/lib/provider/i18-provider"
 import { cn } from "@/lib/utils"
 import NextProgress from "@/components/NProgress"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
+import { fontMono, fontSans } from "@/lib/fonts"
 
 export const viewport: Viewport = {
 	themeColor: [
@@ -51,7 +54,13 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 	return (
 		<html lang={params.locale} suppressHydrationWarning>
 			<head />
-			<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+			<body
+				className={cn(
+					"min-h-screen bg-background font-sans antialiased",
+					GeistSans.variable,
+					GeistMono.variable,
+				)}
+			>
 				<I18Provider locale={params.locale}>
 					<AuthConfigProvider
 						providers={configuration.auth.providers}

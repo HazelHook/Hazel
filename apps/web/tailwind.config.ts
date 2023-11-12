@@ -81,6 +81,10 @@ export default {
 			translate: {
 				101: "-0.02%",
 			},
+			fontFamily: {
+				sans: ["var(--font-geist-sans)"],
+				mono: ["var(--font-geist-mono)"],
+			},
 		},
 	},
 } satisfies Config
