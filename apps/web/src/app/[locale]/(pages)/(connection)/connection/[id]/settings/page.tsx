@@ -18,4 +18,4 @@ const EditConnectionPage = async ({
 
 export default EditConnectionPage
 
-// export const runtime = "edge"
+export const runtime = "edge"
