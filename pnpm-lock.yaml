@@ -59,13 +59,13 @@ importers:
     dependencies:
       '@bogeychan/elysia-logger':
         specifier: ^0.0.13
-        version: 0.0.13(elysia@0.7.24)
+        version: 0.0.13(elysia@0.7.25)
       '@chronark/zod-bird':
         specifier: ^0.2.2
         version: 0.2.2
       '@elysiajs/server-timing':
         specifier: ^0.7.1
-        version: 0.7.1(elysia@0.7.24)
+        version: 0.7.1(elysia@0.7.25)
       '@hazel/db':
         specifier: workspace:*
         version: link:../../packages/db
@@ -91,8 +91,8 @@ importers:
         specifier: ^0.29.0
         version: 0.29.0(@planetscale/database@1.11.0)
       elysia:
-        specifier: 0.7.24
-        version: 0.7.24(@sinclair/typebox@0.31.23)(typescript@5.2.2)
+        specifier: 0.7.25
+        version: 0.7.25(@sinclair/typebox@0.31.23)(typescript@5.2.2)
       nanoid:
         specifier: ^5.0.3
         version: 5.0.3
@@ -1448,12 +1448,12 @@ packages:
     dev: true
     optional: true
 
-  /@bogeychan/elysia-logger@0.0.13(elysia@0.7.24):
+  /@bogeychan/elysia-logger@0.0.13(elysia@0.7.25):
     resolution: {integrity: sha512-j3Fllw6nRs6Xzi8bT0E0WfVb+Q2oKKfz1ATUfb5qHREy+qqJmdCm+WIUNnadv+bwzxq/oWAOOSR1A840cbBH1A==}
     peerDependencies:
       elysia: '>= 0.7.6'
     dependencies:
-      elysia: 0.7.24(@sinclair/typebox@0.31.23)(typescript@5.2.2)
+      elysia: 0.7.25(@sinclair/typebox@0.31.23)(typescript@5.2.2)
       pino: 8.16.1
     dev: false
 
@@ -1564,12 +1564,12 @@ packages:
       elysia: 0.7.21(typescript@5.2.2)
     dev: false
 
-  /@elysiajs/server-timing@0.7.1(elysia@0.7.24):
+  /@elysiajs/server-timing@0.7.1(elysia@0.7.25):
     resolution: {integrity: sha512-4iRAkPZZjh+lMX85vBfL4EKiY2sIkt25JXIhQogLfCN9MRZRt38QTOQL7w+oI3+BWJ//EQn37ENpI1schMX/mA==}
     peerDependencies:
       elysia: '>= 0.7.23'
     dependencies:
-      elysia: 0.7.24(@sinclair/typebox@0.31.23)(typescript@5.2.2)
+      elysia: 0.7.25(@sinclair/typebox@0.31.23)(typescript@5.2.2)
     dev: false
 
   /@elysiajs/swagger@0.7.4(elysia@0.7.21):
@@ -6360,8 +6360,8 @@ packages:
       typescript: 5.2.2
     dev: false
 
-  /elysia@0.7.24(@sinclair/typebox@0.31.23)(typescript@5.2.2):
-    resolution: {integrity: sha512-dc6HBKtWm7GxL2hM34tiku3bRdl4PkkHBJGu02JiEfNaLb/neWjl6BIlkb+SIieKt1LLTD9LgDxRHjTjp4SMiA==}
+  /elysia@0.7.25(@sinclair/typebox@0.31.23)(typescript@5.2.2):
+    resolution: {integrity: sha512-uNzPzau0IWA/CO+IudRlwcjAJKejZ9UwsSGgX1Y+phvSwEsHQGR9OveGlpuSn6qwJwmVjNl6jCb+19jimtqIkQ==}
     peerDependencies:
       '@sinclair/typebox': '>= 0.31.0'
       openapi-types: '>= 12.0.0'
