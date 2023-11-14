@@ -70,7 +70,7 @@ export const KpiCard = ({ series, labels, title, subtitle, group, id, color }: K
 					}}
 					series={series}
 					type="area"
-					height={120}
+					height={124}
 					width={"100%"}
 				/>
 			</div>
