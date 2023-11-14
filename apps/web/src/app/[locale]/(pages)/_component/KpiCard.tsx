@@ -15,7 +15,7 @@ export interface KpiCardProps {
 
 export const KpiCard = ({ series, labels, title, subtitle, group, id, color }: KpiCardProps) => {
 	return (
-		<Card className="w-full h-full overflow-hidden">
+		<Card className="w-full h-[140px] overflow-hidden">
 			<div className="pt-4">
 				<Chart
 					options={{
