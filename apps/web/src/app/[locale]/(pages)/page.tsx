@@ -21,6 +21,7 @@ import { Container } from "@hazel/ui/container"
 import Link from "next/link"
 import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
+import { TBRequest, TBResponse } from "@hazel/tinybird"
 
 interface DashboardPageProps {
 	searchParams: {
@@ -180,11 +181,14 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					</div>
 				</UnstyledTabsList>
 				<TabsContent value="request">
-					<Await promise={requests} fallback={<DataTableLoading columnCount={5} />}>
+					<Await
+						promise={buildRequestTableData(response, requests)}
+						fallback={<DataTableLoading columnCount={5} />}
+					>
 						{({ data, rows_before_limit_at_least }) => (
 							<AdvancedDataTable
 								maxItems={rows_before_limit_at_least || data.length}
-								data={data as any}
+								data={data}
 								columns={requestColumns}
 								disableViewToggle
 								searchableColumns={[{ id: "source_id", title: "Search for Source" }]}
@@ -225,7 +229,25 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	)
 }
 
-// export const fetchCache = "force-no-store"
+const buildRequestTableData = async (
+	res: Promise<{ data: TBResponse[] }>,
+	req: Promise<{ data: TBRequest[]; rows_before_limit_at_least?: number }>,
+) => {
+	const [resData, reqData] = await Promise.all([res, req])
+
+	const mappedData = reqData.data.map((req) => {
+		const responses = resData.data.filter((res) => res.request_id === req.id)
+
+		return { ...req, responses: responses }
+	})
+
+	console.log(mappedData)
+
+	return {
+		data: mappedData,
+		rows_before_limit_at_least: reqData.rows_before_limit_at_least,
+	}
+}
 
 export const runtime = "edge"
 

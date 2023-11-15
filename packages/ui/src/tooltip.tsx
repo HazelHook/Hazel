@@ -35,7 +35,7 @@ const SimpleTooltip = ({ children, content }: SimpleTooltipProps) => {
 	return (
 		<Tooltip delayDuration={300}>
 			<TooltipContent>{content}</TooltipContent>
-			<TooltipTrigger>{children}</TooltipTrigger>
+			<TooltipTrigger asChild>{children}</TooltipTrigger>
 		</Tooltip>
 	)
 }

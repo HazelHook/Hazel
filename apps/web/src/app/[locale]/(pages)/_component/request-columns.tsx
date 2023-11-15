@@ -14,12 +14,15 @@ import {
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import { dataTableTimestampFormatter } from "@/lib/formatters"
-import { Status } from "@/components/status"
 import { Badge } from "@hazel/ui/badge"
+import { SimpleTooltip } from "@hazel/ui/tooltip"
+import { cn } from "@/lib/utils"
 
-type Column = TBRequest
+type Column = TBRequest & {
+	responses: TBResponse[]
+}
 
-const columnHelper = createColumnHelper<TBRequest>()
+const columnHelper = createColumnHelper<Column>()
 
 export const requestColumns = [
 	columnHelper.accessor("timestamp", {
@@ -62,6 +65,25 @@ export const requestColumns = [
 		header: "Status",
 		cell: ({ cell }) => {
 			const rejected = cell.getValue() === 1
+			const responses = cell.row.original.responses
+
+			// TODO: REPLACE TOOLTIP WITH HOVER CARD
+			if (responses.length > 0) {
+				return (
+					<div className="flex gap-0.5 w-[100px]">
+						{responses.map((res) => (
+							<SimpleTooltip key={res.id} content={res.status}>
+								<div
+									className={cn(
+										"w-full h-6 rounded-md",
+										res.success === 1 ? "bg-emerald-500" : "bg-red-500",
+									)}
+								/>
+							</SimpleTooltip>
+						))}
+					</div>
+				)
+			}
 
 			// TODO:GET THE STATUS FROM THE RESPONSE
 			return (
@@ -96,4 +118,4 @@ export const requestColumns = [
 			)
 		},
 	}),
-] as ColumnDef<TBResponse>[]
+] as ColumnDef<Column>[]
