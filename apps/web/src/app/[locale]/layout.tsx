@@ -14,7 +14,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
-import { fontMono, fontSans } from "@/lib/fonts"
+
+import { Analytics } from "maple-sdk/react"
 
 export const viewport: Viewport = {
 	themeColor: [
@@ -61,6 +62,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 					GeistMono.variable,
 				)}
 			>
+				<Analytics token={"pqeMBcOChlaOxeUHQ1MQp"} />
 				<I18Provider locale={params.locale}>
 					<AuthConfigProvider
 						providers={configuration.auth.providers}

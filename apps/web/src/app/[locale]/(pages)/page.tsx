@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
-import { Tabs, TabsContent, TabsList, TabsTrigger, UnstyledTabsList } from "@hazel/ui/tabs"
+import { Tabs, TabsContent, TabsTrigger, UnstyledTabsList } from "@hazel/ui/tabs"
 import { Skeleton } from "@hazel/ui/skeleton"
 import { Await } from "@hazel/ui/await"
 import { ReloadButton } from "@hazel/ui/reload-button"

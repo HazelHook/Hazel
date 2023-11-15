@@ -191,6 +191,9 @@ importers:
       lago-javascript-client:
         specifier: 0.51.0-beta
         version: 0.51.0-beta
+      maple-sdk:
+        specifier: ^0.3.0
+        version: 0.3.0
       million:
         specifier: ^2.6.4
         version: 2.6.4
@@ -8180,6 +8183,10 @@ packages:
   /map-obj@4.3.0:
     resolution: {integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==}
     engines: {node: '>=8'}
+    dev: false
+
+  /maple-sdk@0.3.0:
+    resolution: {integrity: sha512-ski0xYnD/4UBLAy+4jqt85RkTxrUzGDiiSxymDGrQHMEnzLvdt8Mxkih3O1vB9BkQRpAM/80mMzsyCMcHZJKaA==}
     dev: false
 
   /marked-terminal@5.2.0(marked@5.1.0):

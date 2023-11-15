@@ -4,7 +4,7 @@ import { t } from "elysia"
 import { CLIAuthenticatedDTO } from "."
 import { ElysiaCLIHandler } from ".."
 
-const USERINFO_URL = process.env["CLERK_OAUTH2_USERINFO_URL"] as string
+const USERINFO_URL = process.env.CLERK_OAUTH2_USERINFO_URL as string
 
 export function retryRequest(elyisa: ElysiaCLIHandler) {
 	return elyisa.post(
