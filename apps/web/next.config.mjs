@@ -14,7 +14,7 @@ const nextConfig = {
 		serverComponentsExternalPackages: ["@trpc/server"],
 		optimizePackageImports: ["@hazel/icons"],
 		webpackBuildWorker: false,
-		instrumentationHook: false,
+		instrumentationHook: true,
 	},
 	devIndicators: {
 		buildActivityPosition: "top-right",
