@@ -4,7 +4,7 @@ export async function register() {
 
 		const sdk = new BaselimeSDK({
 			serverless: true,
-			service: "your-project-name",
+			service: "hazel",
 			instrumentations: [
 				new BetterHttpInstrumentation({
 					plugins: [
