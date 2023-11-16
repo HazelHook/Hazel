@@ -39,7 +39,7 @@
 		"@hazel/icons": "workspace:*",
 		"@hookform/resolvers": "^3.3.2",
 		"@tanstack/react-table": "^8.10.7",
-		"next": "14.0.2",
+		"next": "14.0.3",
 		"next-intl": "3.0.1",
 		"react": "^18.2.0",
 		"react-apexcharts": "^1.4.1",
