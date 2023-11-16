@@ -12,7 +12,7 @@ export const StatusBadge = ({ status }: StatusProps) => {
 		<Badge
 			className={cn(
 				match(status)
-					.with("success", () => "bg-green-500")
+					.with("success", () => "bg-emerald-500")
 					.otherwise(() => ""),
 			)}
 			variant={

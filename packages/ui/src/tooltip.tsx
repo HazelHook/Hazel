@@ -33,7 +33,7 @@ type SimpleTooltipProps = {
 }
 const SimpleTooltip = ({ children, content }: SimpleTooltipProps) => {
 	return (
-		<Tooltip delayDuration={300}>
+		<Tooltip delayDuration={50}>
 			<TooltipContent>{content}</TooltipContent>
 			<TooltipTrigger asChild>{children}</TooltipTrigger>
 		</Tooltip>

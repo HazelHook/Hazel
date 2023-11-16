@@ -241,8 +241,6 @@ const buildRequestTableData = async (
 		return { ...req, responses: responses }
 	})
 
-	console.log(mappedData)
-
 	return {
 		data: mappedData,
 		rows_before_limit_at_least: reqData.rows_before_limit_at_least,

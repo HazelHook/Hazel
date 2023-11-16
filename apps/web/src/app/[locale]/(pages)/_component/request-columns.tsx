@@ -17,6 +17,8 @@ import { dataTableTimestampFormatter } from "@/lib/formatters"
 import { Badge } from "@hazel/ui/badge"
 import { SimpleTooltip } from "@hazel/ui/tooltip"
 import { cn } from "@/lib/utils"
+import { formatDistanceToNow } from "date-fns"
+import { calcDiffInMillis } from "@/lib/date-helpers"
 
 type Column = TBRequest & {
 	responses: TBResponse[]
@@ -67,15 +69,41 @@ export const requestColumns = [
 			const rejected = cell.getValue() === 1
 			const responses = cell.row.original.responses
 
-			// TODO: REPLACE TOOLTIP WITH HOVER CARD
 			if (responses.length > 0) {
 				return (
 					<div className="flex gap-0.5 w-[100px]">
 						{responses.map((res) => (
-							<SimpleTooltip key={res.id} content={res.status}>
+							<SimpleTooltip
+								key={res.id}
+								content={
+									<div className="flex flex-col gap-2">
+										<p className="font-semibold text-base">
+											{formatDistanceToNow(new Date(res.response_at), { addSuffix: true })}
+										</p>
+										<div className="flex flex-row gap-2 items-center">
+											<p className="font-semibold text-base">Status </p>
+											<p className="text-sm">{res.status}</p>
+										</div>
+										<div className="flex flex-row gap-2 items-center">
+											<p className="font-semibold text-base">Hazel Delay</p>
+											<p className="text-sm">
+												{calcDiffInMillis(new Date(res.received_at), new Date(res.send_at))}
+												ms
+											</p>
+										</div>
+										<div className="flex flex-row gap-2 items-center">
+											<p className="font-semibold text-base">Response Time</p>
+											<p className="text-sm">
+												{calcDiffInMillis(new Date(res.received_at), new Date(res.response_at))}
+												ms
+											</p>
+										</div>
+									</div>
+								}
+							>
 								<div
 									className={cn(
-										"w-full h-6 rounded-md",
+										"w-full h-6 rounded-md max-w-[12px]",
 										res.success === 1 ? "bg-emerald-500" : "bg-red-500",
 									)}
 								/>
@@ -85,7 +113,6 @@ export const requestColumns = [
 				)
 			}
 
-			// TODO:GET THE STATUS FROM THE RESPONSE
 			return (
 				<Badge variant={rejected ? "destructive" : "outline"}>{rejected ? "Unauthorized" : "Delivering"}</Badge>
 			)
