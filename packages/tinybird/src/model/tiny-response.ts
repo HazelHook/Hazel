@@ -38,7 +38,9 @@ const parameters = {
 	success: z
 		.boolean()
 		.optional()
-		.transform<boolean | undefined>((input) => (input ? Number(input) : undefined) as any),
+		.transform<boolean | undefined>((input) => {
+			return (input === undefined ? undefined : Number(input)) as any
+		}),
 	limit: z.number().optional(),
 	offset: z.number().optional(),
 }

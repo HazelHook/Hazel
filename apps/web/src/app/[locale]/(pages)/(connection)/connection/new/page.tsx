@@ -1,7 +1,8 @@
 import { createConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
 import { db } from "@hazel/db"
-import { CreateConnectionForm } from "@/components/forms/connection/CreateConnectionForm"
+import { NewConnectionForm } from "./new-connection-form"
+import { Container } from "@hazel/ui/container"
 
 const NewConnectionPage = async () => {
 	const { workspaceId } = await auth()
@@ -13,14 +14,14 @@ const NewConnectionPage = async () => {
 	const [sources, destinations, integrations] = await Promise.all([pSources, pDestinations, pIntegrations])
 
 	return (
-		<main className="p-4">
-			<CreateConnectionForm
+		<Container className="space-y-0">
+			<NewConnectionForm
 				action={createConnectionAction}
 				destinations={destinations}
 				sources={sources}
 				integrations={integrations}
 			/>
-		</main>
+		</Container>
 	)
 }
 

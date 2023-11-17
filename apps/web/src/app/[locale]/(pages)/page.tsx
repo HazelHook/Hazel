@@ -36,7 +36,7 @@ interface DashboardPageProps {
 const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const { workspaceId, user } = await auth()
 
-	const { sort, offset, limit, source_id, response_id, status } = getTableParams(
+	const { sort, offset, limit, source_id, response_id, status, success } = getTableParams(
 		searchParams,
 		requestTableSearchParamsSchema.merge(responseTableSearchParamsSchema),
 	)
@@ -60,6 +60,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		response_id,
 		status,
 		limit,
+		success,
 		offset,
 	})
 
@@ -216,11 +217,14 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 									{
 										id: "success",
 										title: "Success",
-										options: [{ label: <Status status="success" />, value: "true" }],
+										options: [
+											{ label: "Success", value: "true" },
+											{ label: "Error", value: "false" },
+										],
 									},
 									{
 										id: "status",
-										title: "Status",
+										title: "Status Code",
 										options: httpStatusCodes.map((status) => ({
 											label: `${status.code} - ${status.name}`,
 											value: `${status.code}`,

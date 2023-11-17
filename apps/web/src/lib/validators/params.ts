@@ -13,6 +13,10 @@ export const errorPageSearchParamsSchema = z.object({
 
 export const responseTableSearchParamsSchema = z.object({
 	response_id: z.string().optional(),
+	success: z
+		.string()
+		.transform((val) => val === "true")
+		.optional(),
 	status: z
 		.string()
 		.transform((value) => value.split(".").map(Number))
