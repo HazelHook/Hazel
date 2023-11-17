@@ -1,5 +1,7 @@
+import { ReactNode } from "react"
+
 export type Option = {
-	label: string
+	label: ReactNode
 	value: string
 	icon?: React.ComponentType<{ className?: string }>
 }
@@ -14,7 +16,6 @@ export interface DataTableFilterOption<TData> {
 
 export interface DataTableSearchableColumn<TData> {
 	id: keyof TData | (string & {})
-	remappedKey?: string
 	title: string
 }
 

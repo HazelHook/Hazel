@@ -14,7 +14,7 @@ import {
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import { Status } from "@/components/status"
-import { dashboardNumberFormatter, dataTableTimestampFormatter } from "@/lib/formatters"
+import { dataTableTimestampFormatter } from "@/lib/formatters"
 
 export type Column = TBResponse
 
@@ -75,7 +75,7 @@ export const responseColumns = [
 	columnHelper.display({
 		id: "actions",
 		cell: ({ row }) => {
-			const request = row.original
+			const response = row.original
 
 			return (
 				<DropdownMenu>
@@ -87,12 +87,21 @@ export const responseColumns = [
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
 						<DropdownMenuLabel>Actions</DropdownMenuLabel>
-						<DropdownMenuItem>View Request</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => (navigator as any).clipboard.writeText(request.id)}>
-							Copy request ID
+						<DropdownMenuItem asChild>
+							<Link href={`/response/${response.id}`}>View Respone</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem onClick={() => navigator.clipboard.writeText(response.id)}>
+							Copy response ID
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>Resend (?)</DropdownMenuItem>
+						<DropdownMenuItem
+							onClick={(e) => {
+								e.stopPropagation()
+								console.log("Resend")
+							}}
+						>
+							Resend (?)
+						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			)

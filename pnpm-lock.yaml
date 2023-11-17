@@ -192,8 +192,8 @@ importers:
         specifier: 0.51.0-beta
         version: 0.51.0-beta
       maple-sdk:
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.0
+        version: 0.4.0
       million:
         specifier: ^2.6.4
         version: 2.6.4
@@ -204,8 +204,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3(@babel/core@7.23.2)(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)
       next-intl:
-        specifier: 3.0.1
-        version: 3.0.1(next@14.0.3)(react@18.2.0)
+        specifier: 3.1.0
+        version: 3.1.0(next@14.0.3)(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
@@ -213,8 +213,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       pino:
-        specifier: ^8.16.1
-        version: 8.16.1
+        specifier: ^8.16.2
+        version: 8.16.2
       pino-pretty:
         specifier: ^10.2.3
         version: 10.2.3
@@ -8217,8 +8217,8 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /maple-sdk@0.3.0:
-    resolution: {integrity: sha512-ski0xYnD/4UBLAy+4jqt85RkTxrUzGDiiSxymDGrQHMEnzLvdt8Mxkih3O1vB9BkQRpAM/80mMzsyCMcHZJKaA==}
+  /maple-sdk@0.4.0:
+    resolution: {integrity: sha512-fQ06oLny6nS38c63Vg2uxxL+1WzsxqGXIQgiWFBvBw8svc/etHqyH+7ub7hgf33OmKpzPayYfxOtQyfan+my9w==}
     dev: false
 
   /marked-terminal@5.2.0(marked@5.1.0):
@@ -8519,6 +8519,19 @@ packages:
       next: 14.0.3(@babel/core@7.23.2)(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       use-intl: 3.0.1(react@18.2.0)
+    dev: false
+
+  /next-intl@3.1.0(next@14.0.3)(react@18.2.0):
+    resolution: {integrity: sha512-ZbQeJO0RcORFljtNjQmbXRnyS4KwiI0DCMemdIl0OmwoI3PWSpJojE/0hmy6RRZJHEtrWQnpS+afCBpvqgii+A==}
+    peerDependencies:
+      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@formatjs/intl-localematcher': 0.2.32
+      negotiator: 0.6.3
+      next: 14.0.3(@babel/core@7.23.2)(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      use-intl: 3.1.0(react@18.2.0)
     dev: false
 
   /next-themes@0.2.1(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
@@ -9081,6 +9094,23 @@ packages:
 
   /pino@8.16.1:
     resolution: {integrity: sha512-3bKsVhBmgPjGV9pyn4fO/8RtoVDR8ssW1ev819FsRXlRNgW8gR/9Kx+gCK4UPWd4JjrRDLWpzd/pb1AyWm3MGA==}
+    hasBin: true
+    dependencies:
+      atomic-sleep: 1.0.0
+      fast-redact: 3.3.0
+      on-exit-leak-free: 2.1.2
+      pino-abstract-transport: 1.1.0
+      pino-std-serializers: 6.2.2
+      process-warning: 2.2.0
+      quick-format-unescaped: 4.0.4
+      real-require: 0.2.0
+      safe-stable-stringify: 2.4.3
+      sonic-boom: 3.7.0
+      thread-stream: 2.4.1
+    dev: false
+
+  /pino@8.16.2:
+    resolution: {integrity: sha512-2advCDGVEvkKu9TTVSa/kWW7Z3htI/sBKEZpqiHk6ive0i/7f5b1rsU8jn0aimxqfnSz5bj/nOYkwhBUn5xxvg==}
     hasBin: true
     dependencies:
       atomic-sleep: 1.0.0
@@ -11060,6 +11090,16 @@ packages:
 
   /use-intl@3.0.1(react@18.2.0):
     resolution: {integrity: sha512-JJlRsWYQoV0ju5X2fDDTAFvnSY0IKgxkfxKYSRXzqDPqMAUeaoJM/KCgBiuBQ0TzDMrcmVltg6k3rxS+ryXeAw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.17.2
+      intl-messageformat: 9.13.0
+      react: 18.2.0
+    dev: false
+
+  /use-intl@3.1.0(react@18.2.0):
+    resolution: {integrity: sha512-PT6g2BISl93vzkUlbEPG6WN6ztOe75F+d3flxCzn4MpHEDdiDwlc6WpNcoOnlIfxEQvYKr66zDA0QrJAEB8yAQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:

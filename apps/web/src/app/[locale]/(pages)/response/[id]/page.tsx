@@ -65,6 +65,7 @@ const RequestLink = async ({
 
 const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { workspaceId } = await auth()
+
 	const { data } = await tiny.response.get({
 		workspace_id: workspaceId,
 		response_id: params.id,
@@ -72,6 +73,8 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 		source_id: undefined,
 		request_id: undefined,
 	})
+
+	console.log(data)
 
 	if (data.length === 0) {
 		notFound()

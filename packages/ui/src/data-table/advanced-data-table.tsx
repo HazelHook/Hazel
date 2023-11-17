@@ -18,6 +18,7 @@ import {
 	type PaginationState,
 	type SortingState,
 	type VisibilityState,
+	Row,
 } from "@tanstack/react-table"
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../table"
@@ -35,6 +36,7 @@ interface DataTableProps<TData, TValue> {
 	searchableColumns?: DataTableSearchableColumn<TData>[]
 	disableViewToggle?: boolean
 	advancedFilter?: boolean
+	onRowClick?: (data: Row<TData>) => void
 }
 
 export function AdvancedDataTable<TData, TValue>({
@@ -45,6 +47,7 @@ export function AdvancedDataTable<TData, TValue>({
 	searchableColumns = [],
 	advancedFilter = false,
 	disableViewToggle = false,
+	onRowClick,
 }: DataTableProps<TData, TValue>) {
 	const router = useRouter()
 	const pathname = usePathname()
@@ -271,7 +274,11 @@ export function AdvancedDataTable<TData, TValue>({
 					<TableBody>
 						{table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map((row) => (
-								<TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+								<TableRow
+									key={row.id}
+									onClick={() => onRowClick?.(row)}
+									data-state={row.getIsSelected() && "selected"}
+								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell key={cell.id}>
 											{flexRender(cell.column.columnDef.cell, cell.getContext())}

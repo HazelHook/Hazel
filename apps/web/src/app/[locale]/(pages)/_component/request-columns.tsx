@@ -134,8 +134,10 @@ export const requestColumns = [
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
 						<DropdownMenuLabel>Actions</DropdownMenuLabel>
-						<DropdownMenuItem>View Request</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => (navigator as any).clipboard.writeText(request.id)}>
+						<DropdownMenuItem asChild>
+							<Link href={`/request/${request.id}`}>View Request</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.id)}>
 							Copy request ID
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />

@@ -22,6 +22,8 @@ import Link from "next/link"
 import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { TBRequest, TBResponse } from "@hazel/tinybird"
+import { Status } from "@/components/status"
+import { redirect } from "next/navigation"
 
 interface DashboardPageProps {
 	searchParams: {
@@ -211,6 +213,11 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 									},
 								]}
 								filterableColumns={[
+									{
+										id: "success",
+										title: "Success",
+										options: [{ label: <Status status="success" />, value: "true" }],
+									},
 									{
 										id: "status",
 										title: "Status",
