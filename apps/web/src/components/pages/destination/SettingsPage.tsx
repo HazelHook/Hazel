@@ -4,7 +4,7 @@ import { notFound } from "next/navigation"
 
 import { updateDestinationAction } from "@/server/actions/destination"
 import { db } from "@hazel/db"
-import { UpdateDestinationForm } from "@/components/forms/destination/UpdateDestinationForm"
+import { UpdateDestinationForm } from "@/components/forms/destination/update-destination-form"
 
 export interface SettingsProps {
 	id: string

@@ -3,7 +3,6 @@ import {
 	DeleteAltIcon,
 	ExternalLink01Icon,
 	LinkChainIcon,
-	LogInLeftIcon,
 	Settings02Icon,
 	ThreeDotsHorizontalIcon,
 	TimerIcon,

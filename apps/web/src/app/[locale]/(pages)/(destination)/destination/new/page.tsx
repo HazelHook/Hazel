@@ -1,5 +1,5 @@
 import { createDestinationAction } from "@/server/actions/destination"
-import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
+import { CreateDestinationForm } from "@/components/forms/destination/create-destination-form"
 
 const NewSourcePage = () => {
 	return (

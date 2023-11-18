@@ -23,7 +23,7 @@ import { getCachedConnection } from "@/lib/orm"
 import { updateConnectionSchema } from "@/lib/schemas/connection"
 import { PromiseType } from "@/lib/ts/helpers"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
+import { CreateDestinationForm } from "@/components/forms/destination/create-destination-form"
 import { CreateSourceForm } from "@/components/forms/source/create-source-form"
 
 interface NewSourceFormProps {

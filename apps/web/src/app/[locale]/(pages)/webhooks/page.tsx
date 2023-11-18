@@ -44,4 +44,6 @@ const WebhooksPage = async () => {
 	)
 }
 
+export const runtime = "edge"
+
 export default WebhooksPage
