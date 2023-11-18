@@ -12,10 +12,10 @@ import { createDestinationSchema } from "@/lib/schemas/destination"
 interface CreateDestinationFormProps {
 	action: typeof createDestinationAction
 	shouldRedirect?: boolean
-	onClose?: (id: string) => void
+	onSuccess?: (id: string) => void
 }
 
-export function CreateDestinationForm({ onClose, action, shouldRedirect = true }: CreateDestinationFormProps) {
+export function CreateDestinationForm({ onSuccess, action, shouldRedirect = true }: CreateDestinationFormProps) {
 	const router = useRouter()
 
 	const createSource = useAction(action, {
@@ -25,7 +25,7 @@ export function CreateDestinationForm({ onClose, action, shouldRedirect = true }
 				router.push(`/destination/${data.id}/`)
 			}
 
-			onClose?.(data.id)
+			onSuccess?.(data.id)
 		},
 	})
 

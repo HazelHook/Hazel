@@ -17,10 +17,10 @@ interface CreateSourceFormProps {
 	action: typeof createSourceAction
 	integrations: Integration[]
 	shouldRedirect?: boolean
-	onClose?: (id: string) => void
+	onSuccess?: (id: string) => void
 }
 
-export function CreateSourceForm({ onClose, action, shouldRedirect = true, integrations }: CreateSourceFormProps) {
+export function CreateSourceForm({ onSuccess, action, shouldRedirect = true, integrations }: CreateSourceFormProps) {
 	const router = useRouter()
 
 	const createSource = useAction(action, {
@@ -31,7 +31,7 @@ export function CreateSourceForm({ onClose, action, shouldRedirect = true, integ
 				router.push(`/source/${data.id}/`)
 			}
 
-			onClose?.(data.id)
+			onSuccess?.(data.id)
 		},
 	})
 

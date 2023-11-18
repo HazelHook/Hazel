@@ -64,7 +64,6 @@ export function AutoForm<SchemaType extends ZodObjectOrWrapped>({
 					loading: toastValues?.loading || "Saving Data...",
 					success: toastValues?.success || "Sucessfully Saved",
 					error: (error) => {
-						console.log(error)
 						return (
 							String(error) ||
 							toastValues?.error ||

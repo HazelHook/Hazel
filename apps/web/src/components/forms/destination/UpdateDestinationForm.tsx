@@ -13,19 +13,19 @@ import { updateDestinationSchema } from "@/lib/schemas/destination"
 export const UpdateDestinationForm = ({
 	destination,
 	updateAction,
-	onClose,
+	onSuccess,
 	isModal,
 }: {
 	destination: Destination
 	updateAction: typeof updateDestinationAction
 	isModal?: boolean
-	onClose?: (id: string) => void
+	onSuccess?: (id: string) => void
 }) => {
 	const router = useRouter()
 
 	const updateDestination = useAction(updateAction, {
 		onSuccess() {
-			onClose?.(destination.publicId)
+			onSuccess?.(destination.publicId)
 
 			if (isModal) {
 				router.back()

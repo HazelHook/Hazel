@@ -18,17 +18,17 @@ interface UpdateSourceFormProps {
 	action: typeof updateSourceAction
 	integrations: Integration[]
 	shouldRedirect?: boolean
-	onClose?: (id: string) => void
+	onSuccess?: (id: string) => void
 }
 
-export function UpdateSourceForm({ onClose, source, action, integrations }: UpdateSourceFormProps) {
+export function UpdateSourceForm({ onSuccess, source, action, integrations }: UpdateSourceFormProps) {
 	const router = useRouter()
 
 	const updateSource = useAction(action, {
 		onSuccess(data) {
 			router.refresh()
 
-			onClose?.(data.id)
+			onSuccess?.(data.id)
 		},
 	})
 

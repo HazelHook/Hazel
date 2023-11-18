@@ -16,10 +16,10 @@ import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_comp
 
 export const NewIntegrationForm = ({
 	integration: { config, slug },
-	onClose,
+	onSuccess,
 }: {
 	integration: IntegrationTool
-	onClose?: (id: string) => void
+	onSuccess?: (id: string) => void
 }) => {
 	const router = useRouter()
 
@@ -27,7 +27,7 @@ export const NewIntegrationForm = ({
 
 	const createIntegration = useAction(createIntegrationAction, {
 		onSuccess(data) {
-			onClose?.(data.id)
+			onSuccess?.(data.id)
 			router.refresh()
 		},
 	})

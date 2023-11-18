@@ -24,7 +24,7 @@ import { updateConnectionSchema } from "@/lib/schemas/connection"
 import { PromiseType } from "@/lib/ts/helpers"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
-import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
+import { CreateSourceForm } from "@/components/forms/source/create-source-form"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction
@@ -214,7 +214,7 @@ export function UpdateConnectionForm({
 				<DialogContent>
 					<CreateSourceForm
 						shouldRedirect={false}
-						onClose={(id) => {
+						onSuccess={(id) => {
 							setSourceModal(false)
 							setValues({ ...values, publicSourceId: id })
 						}}
@@ -227,7 +227,7 @@ export function UpdateConnectionForm({
 			<Dialog open={destinationModal} onOpenChange={setDestinationModal}>
 				<DialogContent>
 					<CreateDestinationForm
-						onClose={(id) => {
+						onSuccess={(id) => {
 							setDestinationModal(false)
 							setValues({ ...values, publiceDestinationId: id })
 						}}

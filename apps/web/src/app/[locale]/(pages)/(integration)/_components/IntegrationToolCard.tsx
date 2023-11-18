@@ -100,7 +100,7 @@ export const IntegrationToolCard = ({
 						</DialogHeader>
 
 						<Separator />
-						<NewIntegrationForm integration={integration} onClose={() => setModalOpen(false)} />
+						<NewIntegrationForm integration={integration} onSuccess={() => setModalOpen(false)} />
 					</DialogContent>
 				</Dialog>
 			) : null}

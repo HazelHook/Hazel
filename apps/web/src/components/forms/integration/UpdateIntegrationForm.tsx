@@ -20,12 +20,12 @@ export const UpdateIntegrationForm = ({
 	data,
 	integration,
 	updateAction,
-	onClose,
+	onSuccess,
 }: {
 	data: Integration
 	integration: IntegrationTool
 	updateAction: typeof updateIntegrationAction
-	onClose?: (id: string) => void
+	onSuccess?: (id: string) => void
 }) => {
 	const { config, slug } = integration
 	const router = useRouter()
@@ -43,7 +43,7 @@ export const UpdateIntegrationForm = ({
 
 	const updateIntegration = useAction(updateAction, {
 		onSuccess() {
-			onClose?.(data.publicId)
+			onSuccess?.(data.publicId)
 			router.refresh()
 		},
 	})

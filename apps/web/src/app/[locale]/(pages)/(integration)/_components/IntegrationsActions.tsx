@@ -51,12 +51,7 @@ export const IntegrationsActions = ({
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">
-					<UpdateIntegrationForm
-						data={data}
-						integration={INTEGRATIONS[tool]}
-						onClose={() => {}}
-						updateAction={updateAction}
-					/>
+					<UpdateIntegrationForm data={data} integration={INTEGRATIONS[tool]} updateAction={updateAction} />
 				</DialogContent>
 			</Dialog>
 			<Dialog>

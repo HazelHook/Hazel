@@ -1,7 +1,7 @@
 "use client"
 
 import { CreateDestinationForm } from "@/components/forms/destination/CreateDestinationForm"
-import { CreateSourceForm } from "@/components/forms/source/CreateSourceForm"
+import { CreateSourceForm } from "@/components/forms/source/create-source-form"
 import { HorizontalStep } from "@/components/horizontal-step"
 import { createConnectionSchema } from "@/lib/schemas/connection"
 import type { createConnectionAction } from "@/server/actions/connections"
@@ -28,6 +28,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
 export type NewConnectionFormProps = {
@@ -77,7 +78,6 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 	})
 
 	function onSubmit(values: z.infer<typeof createConnectionSchema>) {
-		console.log(values)
 		createConnection.mutateAsync(values)
 	}
 
@@ -146,7 +146,7 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 								<TabsContent value="create" className="rounded-lg border shadow-md p-4">
 									<CreateSourceForm
 										shouldRedirect={false}
-										onClose={(id) => {
+										onSuccess={(id) => {
 											setSourceTabs("select")
 											form.setValue("publicSourceId", id)
 										}}
@@ -217,7 +217,7 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 								</TabsContent>
 								<TabsContent value="create" className="rounded-lg border shadow-md p-4">
 									<CreateDestinationForm
-										onClose={(id) => {
+										onSuccess={(id) => {
 											form.setValue("publiceDestinationId", id)
 										}}
 										shouldRedirect={false}
