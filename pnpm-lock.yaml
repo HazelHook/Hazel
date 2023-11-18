@@ -192,8 +192,8 @@ importers:
         specifier: 0.51.0-beta
         version: 0.51.0-beta
       maple-sdk:
-        specifier: 0.4.2
-        version: 0.4.2
+        specifier: 0.4.3
+        version: 0.4.3
       million:
         specifier: ^2.6.4
         version: 2.6.4
@@ -8217,8 +8217,8 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /maple-sdk@0.4.2:
-    resolution: {integrity: sha512-Kd4DXzS2EPvQ9fmFyTtRANQkNADRrDn4BN29Ys+ckTSUXKJSx/ZH4nkJ/sIlpdlcrMTxp5zgI7zOpNeTkaLNSA==}
+  /maple-sdk@0.4.3:
+    resolution: {integrity: sha512-TR80HUjFrfUfUUlNRk92zbY/LoSc33AjckWnOlDHjalQmlwnoHdO1HLhu+sN29oMIZTkX7M5O9GibWl6BXm/iw==}
     dev: false
 
   /marked-terminal@5.2.0(marked@5.1.0):
