@@ -37,7 +37,7 @@ const WebhooksPage = async () => {
 					<SourceCard name={source.name} id={source.publicId} />
 					<ConnectionPath name={name} id={publicId} delay={delay} retryType={retryType} />
 
-					<DestinationCard name={destination.name} id={destination.publicId} />
+					<DestinationCard name={destination.name} url={destination.url} id={destination.publicId} />
 				</div>
 			))}
 		</Container>

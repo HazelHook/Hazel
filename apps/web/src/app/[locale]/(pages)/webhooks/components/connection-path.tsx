@@ -20,6 +20,7 @@ import { useAction } from "@hazel/server/actions/client"
 import { deleteConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+import { LoadingButton } from "@hazel/ui/loading-button"
 
 export type ConnectionPathProps = {
 	id: string
@@ -48,7 +49,9 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 			<PopoverTrigger asChild>
 				<div className="w-full flex items-center h-10 cursor-pointer">
 					<div className="w-full flex justify-between items-center h-0.5 bg-border group-hover:bg-muted-foreground relative">
-						<div />
+						<div className="border rounded-sm text-sm px-1 py-0.5 bg-card ml-4 group-hover:border-muted-foreground">
+							{name}
+						</div>
 						<Button size="none" className="p-1 mr-4 group-hover:border-muted-foreground">
 							{retryType && <AutomationIcon className="w-4 h-4" />}
 
@@ -66,7 +69,6 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 							<LinkChainIcon className="w-4 h-4" />
 							<h4 className="font-medium leading-none">Connection</h4>
 						</div>
-						{/* TODO: ADD DELETE SETTING HERE  */}
 						<DropdownMenu>
 							<DropdownMenuTrigger>
 								<ThreeDotsHorizontalIcon />
@@ -93,7 +95,7 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 						onSubmit={async (values) => {
 							return await handleUpdateConnection.mutateAsync({ ...values, publicId: id })
 						}}
-						defaultValues={{ name }}
+						defaultValues={{ name, retryType, delay }}
 						formSchema={updateConnectionSchema}
 					>
 						<Separator className="-mx-4" />
@@ -102,7 +104,9 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 								<ExternalLink01Icon className="mr-2 w-4 h-4" />
 								Open Connection
 							</Link>
-							<Button>Update</Button>
+							<LoadingButton type="submit" loading={handleUpdateConnection.status === "loading"}>
+								Update
+							</LoadingButton>
 						</div>
 					</AutoForm>
 				</div>

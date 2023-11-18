@@ -24,5 +24,5 @@ export const updateSourceSchema = z.object({
 			message: "Name must be between atleast 2 characters long",
 		})
 		.max(20),
-	integrationId: z.string().nullable(),
+	integrationId: z.string().nullable().optional(),
 })

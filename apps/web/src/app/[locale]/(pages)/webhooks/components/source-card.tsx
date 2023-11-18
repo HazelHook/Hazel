@@ -1,13 +1,21 @@
+"use client"
+
 import { CopyButton } from "@/components/copy-button"
+import { updateSourceSchema } from "@/lib/schemas/source"
+import { deleteSourceAction, updateSourceAction } from "@/server/actions/source"
 import { DeleteAltIcon, ExternalLink01Icon, LogInLeftIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
+import { useAction } from "@hazel/server/actions/client"
+import { AutoForm } from "@hazel/ui/auto-form"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
-import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
+import { LoadingButton } from "@hazel/ui/loading-button"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import configuration from "@hazel/utils/configuration"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 type SourceCardProps = {
 	id: string
@@ -15,6 +23,20 @@ type SourceCardProps = {
 }
 
 export const SourceCard = ({ name, id }: SourceCardProps) => {
+	const router = useRouter()
+
+	const handleDelete = useAction(deleteSourceAction, {
+		onSuccess: () => {
+			router.refresh()
+		},
+	})
+
+	const handleUpdate = useAction(updateSourceAction, {
+		onSuccess: () => {
+			router.refresh()
+		},
+	})
+
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
@@ -41,7 +63,16 @@ export const SourceCard = ({ name, id }: SourceCardProps) => {
 								<ThreeDotsHorizontalIcon />
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
-								<DropdownMenuItem className="text-destructive">
+								<DropdownMenuItem
+									className="text-destructive"
+									onClick={async () => {
+										toast.promise(() => handleDelete.mutateAsync(id), {
+											loading: "Deleting Source...",
+											success: "Successfully deleted the Source",
+											error: "There was an error deleting the Source",
+										})
+									}}
+								>
 									<DeleteAltIcon className="w-4 h-4 mr-1" />
 									<p>Delete Source</p>
 								</DropdownMenuItem>
@@ -49,30 +80,33 @@ export const SourceCard = ({ name, id }: SourceCardProps) => {
 						</DropdownMenu>
 					</div>
 
-					<div className="flex flex-col gap-2">
-						<Label className="ml-1" htmlFor="name">
-							Source Name
-						</Label>
-						<Input id="name" defaultValue={name} />
-					</div>
-					<div className="flex flex-col gap-2">
-						<Label className="ml-1">Source Url</Label>
-						<CopyButton
-							value={
-								configuration.production
-									? `https://api.hazelapp.dev/v1/webhook/${id}`
-									: `http://localhost:3003v/v1/webhook/${id}`
-							}
-						/>
-					</div>
-					<Separator className="-mx-4" />
-					<div className="flex flex-row justify-between">
-						<Link href={`/source/${id}`} className={buttonVariants({ variant: "outline" })}>
-							<ExternalLink01Icon className="mr-2 w-4 h-4" />
-							Open Source
-						</Link>
-						<Button>Update</Button>
-					</div>
+					<AutoForm
+						onSubmit={async (values) => {
+							return await handleUpdate.mutateAsync({ ...values, publicId: id })
+						}}
+						defaultValues={{ name }}
+						formSchema={updateSourceSchema.omit({ publicId: true })}
+					>
+						<Separator className="-mx-4" />
+						<div className="flex flex-col gap-2">
+							<Label className="ml-1">Source Url</Label>
+							<CopyButton
+								value={
+									configuration.production
+										? `https://api.hazelapp.dev/v1/webhook/${id}`
+										: `http://localhost:3003v/v1/webhook/${id}`
+								}
+							/>
+						</div>
+						<Separator className="-mx-4" />
+						<div className="flex flex-row justify-between">
+							<Link href={`/source/${id}`} className={buttonVariants({ variant: "outline" })}>
+								<ExternalLink01Icon className="mr-2 w-4 h-4" />
+								Open Source
+							</Link>
+							<LoadingButton loading={handleUpdate.status === "loading"}>Update</LoadingButton>
+						</div>
+					</AutoForm>
 				</div>
 			</PopoverContent>
 		</Popover>

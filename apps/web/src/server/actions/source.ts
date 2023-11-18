@@ -4,6 +4,7 @@ import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 
 import { db } from "@hazel/db"
 import { createSourceSchema, updateSourceSchema } from "@/lib/schemas/source"
+import { z } from "zod"
 
 export const createSourceAction = createAction(
 	protectedProcedure.input(createSourceSchema).mutation(async (opts) => {
@@ -44,5 +45,13 @@ export const updateSourceAction = createAction(
 		return {
 			id: source.publicId,
 		}
+	}),
+)
+
+export const deleteSourceAction = createAction(
+	protectedProcedure.input(z.string()).mutation(async (opts) => {
+		await db.source.markAsDeleted({
+			publicId: opts.input,
+		})
 	}),
 )
