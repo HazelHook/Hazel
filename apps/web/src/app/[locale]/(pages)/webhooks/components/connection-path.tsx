@@ -1,3 +1,5 @@
+"use client"
+
 import {
 	AutomationIcon,
 	DeleteAltIcon,
@@ -7,13 +9,17 @@ import {
 	ThreeDotsHorizontalIcon,
 	TimerIcon,
 } from "@hazel/icons"
+import { AutoForm } from "@hazel/ui/auto-form"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
-import { Input } from "@hazel/ui/input"
-import { Label } from "@hazel/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import Link from "next/link"
+import { updateConnectionSchema } from "@/lib/schemas/connection"
+import { useAction } from "@hazel/server/actions/client"
+import { deleteConnectionAction, updateConnectionAction } from "@/server/actions/connections"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 export type ConnectionPathProps = {
 	id: string
@@ -23,6 +29,20 @@ export type ConnectionPathProps = {
 }
 
 export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathProps) => {
+	const router = useRouter()
+
+	const handleDeleteConnection = useAction(deleteConnectionAction, {
+		onSuccess: () => {
+			router.refresh()
+		},
+	})
+
+	const handleUpdateConnection = useAction(updateConnectionAction, {
+		onSuccess: () => {
+			router.refresh()
+		},
+	})
+
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
@@ -52,7 +72,16 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 								<ThreeDotsHorizontalIcon />
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
-								<DropdownMenuItem className="text-destructive">
+								<DropdownMenuItem
+									className="text-destructive"
+									onClick={async () => {
+										toast.promise(() => handleDeleteConnection.mutateAsync(id), {
+											loading: "Deleting Connection...",
+											success: "Successfully deleted the Connection",
+											error: "There was an error deleting the Connection",
+										})
+									}}
+								>
 									<DeleteAltIcon className="w-4 h-4 mr-1" />
 									<p>Delete Connection</p>
 								</DropdownMenuItem>
@@ -60,21 +89,22 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 						</DropdownMenu>
 					</div>
 
-					<div className="flex flex-col gap-2">
-						<Label className="ml-1" htmlFor="name">
-							Connection Name
-						</Label>
-						<Input id="name" defaultValue={name || ""} />
-					</div>
-
-					<Separator className="-mx-4" />
-					<div className="flex flex-row justify-between gap-2">
-						<Link href={`/connection/${id}`} className={buttonVariants({ variant: "outline" })}>
-							<ExternalLink01Icon className="mr-2 w-4 h-4" />
-							Open Connection
-						</Link>
-						<Button>Update</Button>
-					</div>
+					<AutoForm
+						onSubmit={async (values) => {
+							return await handleUpdateConnection.mutateAsync({ ...values, publicId: id })
+						}}
+						defaultValues={{ name }}
+						formSchema={updateConnectionSchema}
+					>
+						<Separator className="-mx-4" />
+						<div className="flex flex-row justify-between gap-2">
+							<Link href={`/connection/${id}`} className={buttonVariants({ variant: "outline" })}>
+								<ExternalLink01Icon className="mr-2 w-4 h-4" />
+								Open Connection
+							</Link>
+							<Button>Update</Button>
+						</div>
+					</AutoForm>
 				</div>
 			</PopoverContent>
 		</Popover>

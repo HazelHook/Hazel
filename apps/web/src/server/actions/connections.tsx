@@ -50,22 +50,20 @@ export const updateConnectionAction = createAction(
 	protectedProcedure
 		.input(z.object({ publicId: z.string() }).merge(updateConnectionSchema))
 		.mutation(async (opts) => {
-			const source = await db.db.query.source.findFirst({
-				where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
-			})
+			// const source = await db.db.query.source.findFirst({
+			// 	where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
+			// })
 
-			const destination = await db.db.query.destination.findFirst({
-				where: (source, { eq }) => eq(source.publicId, opts.input.publiceDestinationId),
-			})
+			// const destination = await db.db.query.destination.findFirst({
+			// 	where: (source, { eq }) => eq(source.publicId, opts.input.publiceDestinationId),
+			// })
 
-			if (!destination || !source) {
-				throw new Error("Doesnt exist bruw")
-			}
+			// if (!destination || !source) {
+			// 	throw new Error("Doesnt exist bruw")
+			// }
 
 			const connection = await db.connection.update({
 				name: opts.input.name,
-				sourceId: source.id,
-				destinationId: destination.id,
 				workspaceId: opts.ctx.auth.workspaceId,
 				publicId: opts.input.publicId,
 			})

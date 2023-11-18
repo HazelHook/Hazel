@@ -46,7 +46,7 @@
 		"react-day-picker": "^8.8.0",
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.48.2",
-		"sonner": "^1.0.3",
+		"sonner": "^1.2.0",
 		"tailwindcss": "3.3.2",
 		"tailwindcss-animate": "^1.0.6"
 	},

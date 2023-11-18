@@ -26,7 +26,7 @@
 		"@hazel/supabase": "workspace:*",
 		"@hazel/utils": "workspace:*",
 		"react-hook-form": "^7.48.2",
-		"sonner": "^1.0.3",
+		"sonner": "^1.2.0",
 		"tailwindcss-animate": "^1.0.6",
 		"zod": "^3.22.4"
 	},

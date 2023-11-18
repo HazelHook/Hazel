@@ -4,6 +4,7 @@ import { updateConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
 import { db } from "@hazel/db"
 import { UpdateConnectionForm } from "@/app/[locale]/(pages)/(connection)/connection/[id]/settings/form"
+import { notFound } from "next/navigation"
 
 export interface SettingsProps {
 	id: string
@@ -11,28 +12,13 @@ export interface SettingsProps {
 }
 
 export const ConnectionSettingsPage = async ({ id, isModal }: SettingsProps) => {
-	const { workspaceId } = await auth()
+	await auth()
 
-	const pSources = db.source.getMany({ workspaceId })
-	const pDestinations = db.destination.getMany({ workspaceId })
-	const pIntegrations = db.integration.getMany({ workspaceId })
-	const pConnection = db.connection.getOne({ publicId: id })
+	const connection = await db.connection.getOne({ publicId: id })
 
-	const [sources, destinations, integrations, connection] = await Promise.all([
-		pSources,
-		pDestinations,
-		pIntegrations,
-		pConnection,
-	])
+	if (!connection) {
+		notFound()
+	}
 
-	return (
-		<UpdateConnectionForm
-			connection={connection as any}
-			action={updateConnectionAction}
-			destinations={destinations}
-			sources={sources}
-			integrations={integrations}
-			isModal={isModal}
-		/>
-	)
+	return <UpdateConnectionForm connection={connection} action={updateConnectionAction} isModal={isModal} />
 }
