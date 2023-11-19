@@ -3,7 +3,7 @@ import db from "@hazel/db"
 import { CLIAuthenticatedDTO } from "."
 import { ElysiaCLIHandler } from ".."
 
-const USERINFO_URL = process.env["CLERK_OAUTH2_USERINFO_URL"] as string
+const USERINFO_URL = process.env.CLERK_OAUTH2_USERINFO_URL as string
 
 export function getUser(elyisa: ElysiaCLIHandler) {
 	return elyisa.post(

@@ -22,8 +22,12 @@ export const app = new Elysia()
 	.use(routeSetup)
 	.use(v1Route)
 	.get("/", async () => {
-		return "Hello Elysia"
+		return "Hello Hazel"
 	})
+	.get("/liveness", async () => {
+		return process.uptime
+	})
+	.get("/status", () => `Uptime: ${process.uptime().toFixed()}s`)
 	.group("internal", (app) =>
 		app.group("queue", (app) =>
 			app.get("/metrics", async () => {

@@ -14,11 +14,11 @@
 		"@elysiajs/swagger": "^0.7.4",
 		"@hazel/db": "workspace:*",
 		"@upstash/ratelimit": "0.4.4",
-		"@upstash/redis": "^1.24.3",
-		"elysia": "0.7.21"
+		"@upstash/redis": "^1.25.1",
+		"elysia": "0.7.28"
 	},
 	"module": "src/index.js",
 	"devDependencies": {
-		"bun": "^1.0.9"
+		"bun": "^1.0.13"
 	}
 }

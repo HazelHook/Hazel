@@ -3,8 +3,8 @@ import qs from "qs"
 
 import { ElysiaCLIHandler } from ".."
 
-const TOKEN_URL = process.env["CLERK_OAUTH2_TOKEN_URL"] as string
-const USERINFO_URL = process.env["CLERK_OAUTH2_USERINFO_URL"] as string
+const TOKEN_URL = process.env.CLERK_OAUTH2_TOKEN_URL as string
+const USERINFO_URL = process.env.CLERK_OAUTH2_USERINFO_URL as string
 
 export function getOAuthToken(elysia: ElysiaCLIHandler) {
 	return elysia

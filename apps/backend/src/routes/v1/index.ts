@@ -1,4 +1,4 @@
-import { Elysia } from "elysia"
+import { Elysia, t } from "elysia"
 
 import db from "@hazel/db"
 import tiny from "@hazel/tinybird"
@@ -17,7 +17,6 @@ export const v1Route = new Elysia()
 			.get("/", () => {
 				return "V1 API"
 			})
-			.get("/status", () => `Uptime: ${process.uptime().toFixed()}s`)
 			.post("/hook/:sourceId", async ({ params, set, request, body }) => {
 				const received_at = new Date().toISOString()
 
@@ -119,5 +118,26 @@ export const v1Route = new Elysia()
 					message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestId}`,
 					request_id: requestId,
 				}
+			})
+			.ws("/ws/:destId", {
+				open(ws) {
+					console.log("Opened")
+
+					const destinationId: string = (ws.data.params as any).destId
+
+					// Giga insecure
+					db.destination.update({
+						publicId: destinationId,
+						websocket_connection: true,
+					})
+
+					// sockets.set(destinationId, ws)
+				},
+				message(ws, _) {},
+				close(ws) {
+					console.log("Closed")
+					const destinationId: string = (ws.data.params as any).destId
+					// sockets.delete(destinationId)
+				},
 			}),
 	)
