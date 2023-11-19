@@ -1,16 +1,12 @@
 FROM oven/bun
 
 WORKDIR /app
-RUN ls -la
-
 
 COPY package.json .
-COPY pnpm-lock.yaml .
+COPY bun.lockb .
+COPY . .
 
-RUN corepack enable
-
-RUN pnpm install --production
-
+RUN bun install --production
 
 COPY apps/backend/src src 
 COPY tsconfig.json .
