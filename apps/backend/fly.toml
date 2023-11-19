@@ -7,19 +7,19 @@ app = "hazel-backend"
 primary_region = "ams"
 
 [http_service]
-  internal_port = 3003
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 1
-  processes = ["app"]
+internal_port = 3003
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+min_machines_running = 1
+processes = ["app"]
 
 [checks]
-  [checks.alive]
-    port = 3003
-    type = "http"
-    interval = "15s"
-    timeout = "10s"
-    grace_period = "30s"
-    method = "get"
-    path = "/v1/liveness"
+[checks.alive]
+port = 3003
+type = "http"
+interval = "15s"
+timeout = "10s"
+grace_period = "30s"
+method = "get"
+path = "/liveness"
