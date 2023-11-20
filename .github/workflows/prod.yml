@@ -5,7 +5,7 @@ on:
       - production
 jobs:
   deploy-backend:
-    name: Deploy app
+    name: Deploy Backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -13,3 +13,25 @@ jobs:
       - run: flyctl deploy --remote-only --dockerfile ./apps/backend/Dockerfile --config apps/backend/fly.toml 
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  deploy-worker:
+    name: Deploy Worker
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - uses: superfly/flyctl-actions/setup-flyctl@master
+        - run: flyctl deploy --remote-only --dockerfile ./apps/worker/Dockerfile --config apps/worker/fly.toml 
+          env:
+           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  deploy-lago:
+      name: Deploy Worker
+      runs-on: ubuntu-latest
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      steps:
+            - uses: actions/checkout@v3
+            - uses: superfly/flyctl-actions/setup-flyctl@master
+            - run: flyctl deploy --remote-only ./fly/lago/api 
+            - run: flyctl deploy --remote-only ./fly/lago/backend 
+            - run: flyctl deploy --remote-only ./fly/lago/backend 
+              
+    

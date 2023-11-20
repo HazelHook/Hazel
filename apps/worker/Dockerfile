@@ -1,39 +1,53 @@
-# syntax = docker/dockerfile:1
+FROM imbios/bun-node:20-debian as base
 
-# Adjust NODE_VERSION as desired
-ARG NODE_VERSION=18.18.0
-FROM node:${NODE_VERSION}-slim as base
 
-LABEL fly_launch_runtime="NodeJS"
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 
-# NodeJS app lives here
+RUN corepack enable
+
+# RUN apk add --no-cache libc6-compat
+
+RUN apt-get update \
+    && apt-get install -y python3 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+
+FROM base AS builder
+
+# Set working directory
+WORKDIR /app
+COPY . .
+
+
+RUN pnpm dlx turbo prune worker --docker 
+RUN find /app/out/full -name "node_modules" -type d -exec rm -rf '{}' +
+
+# Add lockfile and package.json's of isolated subworkspace
+FROM base AS installer
+WORKDIR /app
+ 
+# First install the dependencies (as they change less often)
+COPY .gitignore .gitignore
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+RUN pnpm install
+ 
+# Build the project
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+RUN pnpm turbo run build --filter=worker...
+
+FROM base AS runner
 WORKDIR /app
 
-# Set production environment
-ENV NODE_ENV=production
+
+COPY --from=installer /app .
+
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+CMD ["bun", "apps/worker/src/index.ts"]
 
-# Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install -y python-is-python3 pkg-config build-essential 
-
-# Install node modules
-COPY --link package.json .
-RUN npm install
-
-# Copy application code
-COPY --link . .
-
-
-
-# Final stage for app image
-FROM base
-
-# Copy built application
-COPY --from=build /app /app
-
-# Start the server by default, this can be overwritten at runtime
-CMD [ "npm", "run", "start" ]
+EXPOSE 3003
