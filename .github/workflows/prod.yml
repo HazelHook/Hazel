@@ -23,7 +23,7 @@ jobs:
           env:
            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   deploy-lago:
-      name: Deploy Worker
+      name: Deploy Lago
       runs-on: ubuntu-latest
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -31,7 +31,7 @@ jobs:
             - uses: actions/checkout@v3
             - uses: superfly/flyctl-actions/setup-flyctl@master
             - run: flyctl deploy --remote-only ./fly/lago/api 
-            - run: flyctl deploy --remote-only ./fly/lago/backend 
-            - run: flyctl deploy --remote-only ./fly/lago/backend 
+            - run: flyctl deploy --remote-only ./fly/lago/pdf 
+            - run: flyctl deploy --remote-only ./fly/lago/web 
               
     
