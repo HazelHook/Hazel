@@ -116,7 +116,8 @@ export const connection = mysqlTable(
 		fluxConfig: json("flux_config"),
 	},
 	(table) => ({
-		workspaceIdx: index("workspace_idx").on(table.workspaceId),
+		destinationIdx: index("destionation_idx").on(table.destinationId),
+		sourceIdx: index("source_idx").on(table.sourceId),
 		unq: unique().on(table.sourceId, table.destinationId),
 	}),
 )
