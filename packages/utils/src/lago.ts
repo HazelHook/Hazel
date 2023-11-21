@@ -2,7 +2,7 @@ import { Client, getLagoError } from "lago-javascript-client"
 import { genId } from "."
 
 export const lago = Client(process.env.LAGO_API_KEY as string, {
-	baseUrl: "https://api.lago.hazelapp.dev/api/v1",
+	baseUrl: process.env.LAGO_API_URL,
 })
 export { getLagoError }
 
