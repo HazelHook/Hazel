@@ -38,12 +38,13 @@ class TinybirdEndpoint<TSchema extends SchemaRecordType, TParams extends SchemaR
 	}) {
 		this._name = name
 
+		// TODO: FIX THIS ANY
 		if (datasource) {
 			this._publish = tb.buildIngestEndpoint({
 				datasource,
 				// @ts-ignore
 				event: z.object(schema),
-			})
+			}) as any
 		}
 
 		// @ts-ignore

@@ -6,9 +6,9 @@
 		"dev": "infisical run -- bun run --watch src/index.ts"
 	},
 	"dependencies": {
-		"bullmq": "^4.13.2",
 		"@hazel/db": "workspace:*",
 		"@hazel/tinybird": "workspace:*",
+		"bullmq": "^4.14.0",
 		"nanoid": "^5.0.3",
 		"zod": "^3.22.4"
 	},
