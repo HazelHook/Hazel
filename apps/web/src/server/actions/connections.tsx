@@ -76,7 +76,7 @@ export const updateConnectionAction = createAction(
 
 export const deleteConnectionAction = createAction(
 	protectedProcedure.input(z.string()).mutation(async (opts) => {
-		await db.connection.markAsDeleted({
+		await db.connection.delete({
 			publicId: opts.input,
 		})
 	}),

@@ -14,7 +14,7 @@ export type EntityLogic = {
 	getMany: (params: any, tx?: TrxType) => Promise<any[]>
 	create: (data: any, tx?: TrxType) => Promise<{ publicId: string; [keys: string]: any }>
 	update: (data: any, tx?: TrxType) => Promise<{ publicId: string; [keys: string]: any }>
-	markAsDeleted: (
+	delete: (
 		params: {
 			publicId: string
 		},

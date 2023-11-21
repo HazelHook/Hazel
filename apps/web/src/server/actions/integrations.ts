@@ -34,7 +34,7 @@ export const updateIntegrationAction = createAction(
 
 export const deleteIntegrationAction = createAction(
 	protectedProcedure.input(z.string()).mutation(async (opts) => {
-		await db.integration.markAsDeleted({
+		await db.integration.delete({
 			publicId: opts.input,
 		})
 	}),

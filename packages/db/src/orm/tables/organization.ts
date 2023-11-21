@@ -11,7 +11,7 @@ const organizationsLogic = (db: DB) =>
 		table: new DrizzleTable("organizations", schema.organizations, db),
 		getOne: async ({ publicId }: { publicId: string }) => {
 			return db.query.organizations.findFirst({
-				where: and(eq(schema.organizations.publicId, publicId), isNull(schema.organizations.deletedAt)),
+				where: eq(schema.organizations.publicId, publicId),
 				with: {
 					members: true,
 					invites: true,
@@ -20,7 +20,7 @@ const organizationsLogic = (db: DB) =>
 		},
 		getMany: async ({ ownerId }: { ownerId: string }) => {
 			return db.query.organizations.findMany({
-				where: and(eq(schema.organizations.ownerId, ownerId), isNull(schema.organizations.deletedAt)),
+				where: eq(schema.organizations.ownerId, ownerId),
 				with: {
 					members: true,
 					invites: true,
@@ -51,13 +51,10 @@ const organizationsLogic = (db: DB) =>
 				.where(eq(schema.organizations.publicId, data.publicId))
 			return { publicId: data.publicId }
 		},
-		markAsDeleted: async ({ publicId }: { publicId: string }) => {
-			const res = await db
-				.update(schema.organizations)
-				.set({
-					deletedAt: new Date(),
-				})
-				.where(eq(schema.organizations.publicId, publicId))
+		delete: async ({ publicId }: { publicId: string }) => {
+			const res = await db.delete(schema.organizations)
+
+			.where(eq(schema.organizations.publicId, publicId))
 			return { publicId }
 		},
 		invite: {
@@ -139,7 +136,7 @@ const organizationsLogic = (db: DB) =>
 				}
 
 				const memberShips = db.query.organizationMembers.findMany({
-					where: and(whereClause, isNull(schema.organizationMembers.deletedAt)),
+					where: whereClause,
 					with: {
 						organization: true,
 					},

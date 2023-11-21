@@ -9,6 +9,7 @@ import { getTableParams } from "@/lib/data-table-helpers"
 import { responseTableSearchParamsSchema } from "@/lib/validators/params"
 import { httpStatusCodes } from "@/lib/utils"
 import tiny from "@/lib/tiny"
+import { db } from "@hazel/db"
 
 interface EventsPageProps {
 	params: {
@@ -42,6 +43,16 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 		limit,
 	})
 
+	const pSources = await db.source.getMany({
+		workspaceId,
+	})
+
+	const pDestinations = await db.destination.getMany({
+		workspaceId,
+	})
+
+	const [sources, destinations] = await Promise.all([pSources, pDestinations])
+
 	return (
 		<div>
 			<div className="w-full">
@@ -62,7 +73,7 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 							})),
 						},
 					]}
-					columns={responseColumns}
+					columns={responseColumns(sources, destinations)}
 					data={data}
 					maxItems={rows_before_limit_at_least || data.length}
 				/>

@@ -11,38 +11,20 @@ const destinationLogic = (db: DB) =>
 		table: new DrizzleTable("destination", schema.destination, db),
 		getOne: async ({
 			publicId,
-			includeDeleted,
 		}: {
 			publicId: string
-			includeDeleted?: boolean
 		}) => {
-			let filter
-			if (!includeDeleted) {
-				filter = and(eq(schema.destination.publicId, publicId), isNull(schema.destination.deletedAt))
-			} else {
-				filter = eq(schema.destination.publicId, publicId)
-			}
-
 			return await db.query.destination.findFirst({
-				where: filter,
+				where: eq(schema.destination.publicId, publicId),
 			})
 		},
 		getMany: async ({
 			workspaceId,
-			includeDeleted,
 		}: {
 			workspaceId: string
-			includeDeleted?: boolean
 		}) => {
-			let filter
-			if (!includeDeleted) {
-				filter = and(eq(schema.destination.workspaceId, workspaceId), isNull(schema.destination.deletedAt))
-			} else {
-				filter = eq(schema.destination.workspaceId, workspaceId)
-			}
-
 			return await db.query.destination.findMany({
-				where: filter,
+				where: eq(schema.destination.workspaceId, workspaceId),
 				with: {
 					connections: {
 						with: {
@@ -67,13 +49,10 @@ const destinationLogic = (db: DB) =>
 
 			return { publicId }
 		},
-		markAsDeleted: async ({ publicId }: { publicId: string }) => {
-			const res = await db
-				.update(schema.destination)
-				.set({
-					deletedAt: new Date(),
-				})
-				.where(eq(schema.destination.publicId, publicId))
+		delete: async ({ publicId }: { publicId: string }) => {
+			const res = await db.delete(schema.destination)
+
+			.where(eq(schema.destination.publicId, publicId))
 			return { publicId }
 		},
 	}) satisfies EntityLogic

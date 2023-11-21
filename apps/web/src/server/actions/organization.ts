@@ -131,7 +131,7 @@ export const deleteOrganzationAction = createAction(
 			})
 		}
 
-		const deletedOrg = await db.organization.markAsDeleted({
+		const deletedOrg = await db.organization.delete({
 			publicId: opts.input.publicId,
 		})
 

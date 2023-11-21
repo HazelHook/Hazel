@@ -26,7 +26,6 @@ const commonFields = (type: SchemaType) => ({
 
 	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).onUpdateNow().notNull(),
-	deletedAt: timestamp("deleted_at"),
 })
 
 const name = varchar("name", { length: 64 }).notNull()
@@ -54,7 +53,9 @@ export const source = mysqlTable(
 		integrationId: int("integration_id"),
 		// .references(() => integration.id),
 	},
-	(table) => ({}),
+	(table) => ({
+		workspaceIdx: index("workspace_idx").on(table.workspaceId),
+	}),
 )
 
 export const integration = mysqlTable(
@@ -69,6 +70,7 @@ export const integration = mysqlTable(
 		config: json("config"),
 	},
 	(table) => ({
+		workspaceIdx: index("workspace_idx").on(table.workspaceId),
 		nameIndex: index("itg_name_idx").on(table.name),
 	}),
 )
@@ -85,7 +87,9 @@ export const destination = mysqlTable(
 		url: url.notNull(),
 		websocket_connection: boolean("websocket_connection").default(false).notNull(),
 	},
-	(table) => ({}),
+	(table) => ({
+		workspaceIdx: index("workspace_idx").on(table.workspaceId),
+	}),
 )
 
 export const connection = mysqlTable(
@@ -112,6 +116,7 @@ export const connection = mysqlTable(
 		fluxConfig: json("flux_config"),
 	},
 	(table) => ({
+		workspaceIdx: index("workspace_idx").on(table.workspaceId),
 		unq: unique().on(table.sourceId, table.destinationId),
 	}),
 )
@@ -127,7 +132,9 @@ export const apiKeys = mysqlTable(
 		name: varchar("name", { length: 128 }),
 		expires: timestamp("expires", { fsp: 3 }),
 	},
-	(table) => ({}),
+	(table) => ({
+		workspaceIdx: index("workspace_idx").on(table.workspaceId),
+	}),
 )
 
 export const organizations = mysqlTable(
@@ -149,7 +156,6 @@ export const organizations = mysqlTable(
 
 		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
-		deletedAt: timestamp("deleted_at"),
 	},
 	(table) => ({}),
 )
@@ -165,7 +171,6 @@ export const organizationMembers = mysqlTable(
 
 		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
-		deletedAt: timestamp("deleted_at"),
 
 		userId: varchar("user_id", { length: 256 }).notNull(),
 		// .references(() => user.id)

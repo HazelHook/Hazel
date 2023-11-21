@@ -11,20 +11,11 @@ const integrationLogic = (db: DB) =>
 		table: new DrizzleTable("integration", schema.integration, db),
 		getOne: async ({
 			publicId,
-			includeDeleted = false,
 		}: {
 			publicId: string
-			includeDeleted?: boolean
 		}) => {
-			let filter
-			if (!includeDeleted) {
-				filter = and(eq(schema.integration.publicId, publicId), isNull(schema.integration.deletedAt))
-			} else {
-				filter = eq(schema.integration.publicId, publicId)
-			}
-
 			return await db.query.integration.findFirst({
-				where: filter,
+				where: eq(schema.integration.publicId, publicId),
 				with: {
 					source: true,
 				},
@@ -32,20 +23,11 @@ const integrationLogic = (db: DB) =>
 		},
 		getMany: async ({
 			workspaceId,
-			includeDeleted = false,
 		}: {
 			workspaceId: string
-			includeDeleted?: boolean
 		}) => {
-			let filter
-			if (!includeDeleted) {
-				filter = and(eq(schema.integration.workspaceId, workspaceId), isNull(schema.integration.deletedAt))
-			} else {
-				filter = eq(schema.integration.workspaceId, workspaceId)
-			}
-
 			return await db.query.integration.findMany({
-				where: filter,
+				where: eq(schema.integration.workspaceId, workspaceId),
 				with: {
 					source: true,
 				},
@@ -66,13 +48,8 @@ const integrationLogic = (db: DB) =>
 				.where(eq(schema.integration.publicId, data.publicId))
 			return { publicId: data.publicId }
 		},
-		markAsDeleted: async ({ publicId }: { publicId: string }) => {
-			const res = await db
-				.update(schema.integration)
-				.set({
-					deletedAt: new Date(),
-				})
-				.where(eq(schema.integration.publicId, publicId))
+		delete: async ({ publicId }: { publicId: string }) => {
+			const res = await db.delete(schema.integration).where(eq(schema.integration.publicId, publicId))
 			return { publicId }
 		},
 	}) satisfies EntityLogic

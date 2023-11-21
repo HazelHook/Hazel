@@ -22,10 +22,7 @@ const userLogic = (db: DB) => ({
 			where: eq(schema.user.id, id),
 			with: {
 				memberships: {
-					where: and(
-						eq(schema.organizationMembers.publicId, membershipId),
-						isNull(schema.organizationMembers.deletedAt),
-					),
+					where: eq(schema.organizationMembers.publicId, membershipId),
 					with: {
 						organization: true,
 					},

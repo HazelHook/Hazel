@@ -50,7 +50,7 @@ export const updateSourceAction = createAction(
 
 export const deleteSourceAction = createAction(
 	protectedProcedure.input(z.string()).mutation(async (opts) => {
-		await db.source.markAsDeleted({
+		await db.source.delete({
 			publicId: opts.input,
 		})
 	}),

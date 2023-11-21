@@ -5,7 +5,7 @@ import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"
 import { DrizzleTable } from "../db-table"
-import { TrxType, WithInput } from "../../utils"
+import { TrxType } from "../../utils"
 
 type Test<T> = {
 	publicId: string
@@ -13,16 +13,16 @@ type Test<T> = {
 	include?: T
 }
 
-type IncludeType = NonNullable<Parameters<DB["query"]["source"]["findFirst"]>[0]>["with"]
+type WithInput = NonNullable<Parameters<DB["query"]["source"]["findFirst"]>[0]>["with"]
 
 const sourceLogic = (db: DB) =>
 	({
 		table: new DrizzleTable("source", schema.source, db),
-		getOne: async <T extends IncludeType>({ publicId, where }: Test<T>, tx?: TrxType) => {
+		getOne: async <T extends WithInput>({ publicId, where }: Test<T>, tx?: TrxType) => {
 			const client = tx || db
 
 			return client.query.source.findFirst({
-				where: and(eq(schema.source.publicId, publicId), isNull(schema.source.deletedAt), where),
+				where: and(eq(schema.source.publicId, publicId), where),
 				with: {
 					connections: {
 						with: {
@@ -38,10 +38,8 @@ const sourceLogic = (db: DB) =>
 		}: {
 			workspaceId: string
 		}) => {
-			const filter = and(eq(schema.source.workspaceId, workspaceId), isNull(schema.source.deletedAt))
-
 			return await db.query.source.findMany({
-				where: filter,
+				where: eq(schema.source.workspaceId, workspaceId),
 				with: {
 					connections: {
 						with: {
@@ -67,13 +65,10 @@ const sourceLogic = (db: DB) =>
 
 			return { publicId }
 		},
-		markAsDeleted: async ({ publicId }: { publicId: string }) => {
-			const res = await db
-				.update(schema.source)
-				.set({
-					deletedAt: new Date(),
-				})
-				.where(eq(schema.source.publicId, publicId))
+		delete: async ({ publicId }: { publicId: string }) => {
+			const res = await db.delete(schema.source)
+
+			.where(eq(schema.source.publicId, publicId))
 			return { publicId }
 		},
 	}) satisfies EntityLogic
