@@ -22,8 +22,9 @@ import Link from "next/link"
 import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { TBRequest, TBResponse } from "@hazel/tinybird"
-import { Status } from "@/components/status"
-import { redirect } from "next/navigation"
+import { db } from "@hazel/db"
+import { ResponseTable } from "./_component/response-table"
+import { RequestTable } from "./_component/request-table"
 
 interface DashboardPageProps {
 	searchParams: {
@@ -83,6 +84,16 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		start_date: startTime,
 		end_date: endTime,
 	})
+
+	const pSources = await db.source.getMany({
+		workspaceId,
+	})
+
+	const pDestinations = await db.destination.getMany({
+		workspaceId,
+	})
+
+	const [sources, destinations] = await Promise.all([pSources, pDestinations])
 
 	return (
 		<Container>
@@ -189,12 +200,11 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 						fallback={<DataTableLoading columnCount={5} />}
 					>
 						{({ data, rows_before_limit_at_least }) => (
-							<AdvancedDataTable
+							<RequestTable
 								maxItems={rows_before_limit_at_least || data.length}
 								data={data}
-								columns={requestColumns}
-								disableViewToggle
-								searchableColumns={[{ id: "source_id", title: "Search for Source" }]}
+								sources={sources}
+								destinations={destinations}
 							/>
 						)}
 					</Await>
@@ -202,35 +212,11 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 				<TabsContent value="response">
 					<Await promise={response} fallback={<DataTableLoading columnCount={5} />}>
 						{({ data, rows_before_limit_at_least }) => (
-							<AdvancedDataTable
+							<ResponseTable
 								maxItems={rows_before_limit_at_least || data.length}
 								data={data}
-								columns={responseColumns}
-								disableViewToggle
-								searchableColumns={[
-									{
-										id: "response_id",
-										title: "responses",
-									},
-								]}
-								filterableColumns={[
-									{
-										id: "success",
-										title: "Success",
-										options: [
-											{ label: "Success", value: "true" },
-											{ label: "Error", value: "false" },
-										],
-									},
-									{
-										id: "status",
-										title: "Status Code",
-										options: httpStatusCodes.map((status) => ({
-											label: `${status.code} - ${status.name}`,
-											value: `${status.code}`,
-										})),
-									},
-								]}
+								sources={sources}
+								destinations={destinations}
 							/>
 						)}
 					</Await>
