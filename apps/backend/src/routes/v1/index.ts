@@ -8,6 +8,10 @@ import { sourceQueue } from "../../lib/queue"
 import { handleRequest } from "../../lib/request.helper"
 import { nanoid } from "nanoid"
 
+import crypto from "crypto"
+import { extractSvixSignatures } from "../../lib/verification/provider/svix"
+import { WebhookVerifierFactory } from "../../lib/verification"
+
 export const v1Route = new Elysia()
 	.onParse(({ request }) => {
 		return request.text()
@@ -17,7 +21,7 @@ export const v1Route = new Elysia()
 			.get("/", () => {
 				return "V1 API"
 			})
-			.post("/hook/:sourceId", async ({ params, set, request, body }) => {
+			.post("/hook/:sourceId", async ({ params, set, request, body, headers }) => {
 				const received_at = new Date().toISOString()
 
 				const source = await db.source.getOne({
@@ -29,6 +33,19 @@ export const v1Route = new Elysia()
 					return {
 						status: "404",
 						message: "No source found with that id",
+					}
+				}
+
+				if (source.integration) {
+					const webhookVerificationHandler = WebhookVerifierFactory.getVerifier(
+						source.integration.tool!,
+						source.integration.config,
+					)
+
+					if (!webhookVerificationHandler) {
+						console.log("Integration isnt implemented")
+					} else {
+						console.log(webhookVerificationHandler.verifySignature(headers, body as string))
 					}
 				}
 
