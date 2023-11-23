@@ -16,7 +16,7 @@ export const extractSvixSignatures = (header: string) => {
 	return signatures
 }
 
-export class SvixVerifier extends WebhookVerifier {
+export class SvixVerifier extends WebhookVerifier<{ webhookSigningSecret: string }> {
 	verifySignature(headers: Record<string, string | null>, body: string): boolean {
 		const sigHeader = headers["svix-signature"]!
 		const svixTimestamp = headers["svix-timestamp"]

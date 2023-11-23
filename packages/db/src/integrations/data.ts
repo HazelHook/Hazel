@@ -44,7 +44,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		subtitle: "Verify the authenticity of the webhook request using HMAC.",
 		features: ["authentication"],
 		config: hmacForm,
-		disabled: true,
+		disabled: false,
 	},
 	basic_auth: {
 		slug: "basic_auth",

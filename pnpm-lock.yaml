@@ -16,7 +16,7 @@ importers:
         version: 4.1.1(prettier@3.0.3)
       '@turbo/gen':
         specifier: 1.10.16
-        version: 1.10.16(@types/node@20.9.3)(typescript@5.3.2)
+        version: 1.10.16(@types/node@20.9.5)(typescript@5.3.2)
       prettier:
         specifier: 3.0.3
         version: 3.0.3
@@ -69,6 +69,9 @@ importers:
       '@hazel/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@hazel/integrations':
+        specifier: workspace:*
+        version: link:../../packages/integrations
       '@hazel/tinybird':
         specifier: workspace:*
         version: link:../../packages/tinybird
@@ -613,6 +616,34 @@ importers:
         specifier: ^5.3.2
         version: 5.3.2
 
+  packages/integrations:
+    dependencies:
+      '@chronark/zod-bird':
+        specifier: ^0.3.1
+        version: 0.3.1
+    devDependencies:
+      '@hazel/tailwind-config':
+        specifier: workspace:*
+        version: link:../../tooling/tailwind
+      '@hazel/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20.9.5
+        version: 20.9.5
+      eslint:
+        specifier: ^8.54.0
+        version: 8.54.0
+      prettier:
+        specifier: ^3.1.0
+        version: 3.1.0
+      typescript:
+        specifier: ^5.3.2
+        version: 5.3.2
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
+
   packages/server:
     dependencies:
       '@baselime/node-opentelemetry':
@@ -824,7 +855,7 @@ importers:
         version: 1.0.7(@types/react-dom@18.2.16)(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
       '@unpic/react':
         specifier: ^0.1.3
-        version: 0.1.3(react-dom@18.2.0)(react@18.2.0)
+        version: 0.1.3(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
       avvvatars-react:
         specifier: ^0.4.2
         version: 0.4.2(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
@@ -1121,7 +1152,7 @@ importers:
         version: link:../typescript
       ts-node:
         specifier: ^10.9.1
-        version: 10.9.1(@types/node@20.9.3)(typescript@5.3.2)
+        version: 10.9.1(@types/node@20.9.5)(typescript@5.3.2)
 
   tooling/tailwind:
     dependencies:
@@ -2387,7 +2418,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.9.3
+      '@types/node': 20.9.5
     dev: false
 
   /@grpc/proto-loader@0.7.10:
@@ -5095,7 +5126,7 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: true
 
-  /@turbo/gen@1.10.16(@types/node@20.9.3)(typescript@5.3.2):
+  /@turbo/gen@1.10.16(@types/node@20.9.5)(typescript@5.3.2):
     resolution: {integrity: sha512-PzyluADjVuy5OcIi+/aRcD70OElQpRVRDdfZ9fH8G5Fv75lQcNrjd1bBGKmhjSw+g+eTEkXMGnY7s6gsCYjYTQ==}
     hasBin: true
     dependencies:
@@ -5107,7 +5138,7 @@ packages:
       minimatch: 9.0.3
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.1(@types/node@20.9.3)(typescript@5.3.2)
+      ts-node: 10.9.1(@types/node@20.9.5)(typescript@5.3.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -5140,7 +5171,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.9.3
+      '@types/node': 20.9.5
     dev: true
 
   /@types/inquirer@6.5.0:
@@ -5167,11 +5198,17 @@ packages:
   /@types/node-forge@1.3.9:
     resolution: {integrity: sha512-meK88cx/sTalPSLSoCzkiUB4VPIFHmxtXm5FaaqRDqBX2i/Sy8bJ4odsan0b20RBjPh06dAQ+OTTdnyQyhJZyQ==}
     dependencies:
-      '@types/node': 20.9.3
+      '@types/node': 20.9.5
     dev: true
 
   /@types/node@20.9.3:
     resolution: {integrity: sha512-nk5wXLAXGBKfrhLB0cyHGbSqopS+nz0BUgZkUQqSHSSgdee0kssp1IAqlQOu333bW+gMNs2QREx7iynm19Abxw==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: true
+
+  /@types/node@20.9.5:
+    resolution: {integrity: sha512-Uq2xbNq0chGg+/WQEU0LJTSs/1nKxz6u1iemLcGomkSnKokbW1fbLqc3HOqCf2JP7KjlL4QkS7oZZTrOQHQYgQ==}
     dependencies:
       undici-types: 5.26.5
 
@@ -5219,7 +5256,7 @@ packages:
   /@types/through@0.0.31:
     resolution: {integrity: sha512-LpKpmb7FGevYgXnBXYs6HWnmiFyVG07Pt1cnbgM1IhEacITTiUaBXXvOR3Y50ksaJWGSfhbEvQFivQEFGCC55w==}
     dependencies:
-      '@types/node': 20.9.3
+      '@types/node': 20.9.5
     dev: true
 
   /@types/tinycolor2@1.4.4:
@@ -5228,7 +5265,7 @@ packages:
   /@types/websocket@1.0.7:
     resolution: {integrity: sha512-62Omr8U0PO+hgjLCpPnMsmjh2/FRwIGOktZHyYAUzooEJotwkXHMp7vCacdYi8haxBNOiw9bc2HIHI+b/MPNjA==}
     dependencies:
-      '@types/node': 20.9.3
+      '@types/node': 20.9.5
 
   /@types/yargs-parser@21.0.1:
     resolution: {integrity: sha512-axdPBuLuEJt0c4yI5OZssC19K2Mq1uKdrfZBzuxLvaztgqUtFYZUNw7lETExPYJR9jdEoIg4mb7RQKRQzOkeGQ==}
@@ -5313,7 +5350,7 @@ packages:
       unpic: 3.14.1
     dev: false
 
-  /@unpic/react@0.1.3(react-dom@18.2.0)(react@18.2.0):
+  /@unpic/react@0.1.3(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-CIAzeFp4seXmzoNlPrI/C22dI3CkO/SPD/jixN//+ECejOA1d7azDhqcWT4YHON4dN7tqujtLR6pULl6so4VZQ==}
     peerDependencies:
       next: '>=14'
@@ -5324,6 +5361,7 @@ packages:
         optional: true
     dependencies:
       '@unpic/core': 0.0.40
+      next: 14.0.3(@babel/core@7.23.2)(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -9437,7 +9475,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.9.3
+      '@types/node': 20.9.5
       long: 5.2.3
     dev: false
 
@@ -10350,7 +10388,7 @@ packages:
     resolution: {integrity: sha512-MTt0P0VYDAj2VZyZMW41AxcXVs9s06EDFIHYat4UUkluJgnBHo4T4E2byPhnxoJCPvdzWBwBLnhWbSOg//VTpA==}
     engines: {node: '>=12.*'}
     dependencies:
-      '@types/node': 20.9.3
+      '@types/node': 20.9.5
       qs: 6.11.2
     dev: false
 
@@ -10800,7 +10838,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.1(@types/node@20.9.3)(typescript@5.3.2):
+  /ts-node@10.9.1(@types/node@20.9.5)(typescript@5.3.2):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -10819,7 +10857,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.9.3
+      '@types/node': 20.9.5
       acorn: 8.10.0
       acorn-walk: 8.2.0
       arg: 4.1.3

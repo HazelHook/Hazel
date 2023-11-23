@@ -7,10 +7,7 @@ import { sendEvent } from "../../event"
 import { sourceQueue } from "../../lib/queue"
 import { handleRequest } from "../../lib/request.helper"
 import { nanoid } from "nanoid"
-
-import crypto from "crypto"
-import { extractSvixSignatures } from "../../lib/verification/provider/svix"
-import { WebhookVerifierFactory } from "../../lib/verification"
+import { WebhookVerifierFactory } from "@hazel/integrations"
 
 export const v1Route = new Elysia()
 	.onParse(({ request }) => {
@@ -36,27 +33,6 @@ export const v1Route = new Elysia()
 					}
 				}
 
-				if (source.integration) {
-					const webhookVerificationHandler = WebhookVerifierFactory.getVerifier(
-						source.integration.tool!,
-						source.integration.config,
-					)
-
-					if (!webhookVerificationHandler) {
-						console.log("Integration isnt implemented")
-					} else {
-						console.log(webhookVerificationHandler.verifySignature(headers, body as string))
-					}
-				}
-
-				// if (source.url && source.url !== request.url) {
-				// 	set.status = 403
-				// 	return {
-				// 		status: "403",
-				// 		message: `${request.url} doesn't match Source (${source.url})`,
-				// 	}
-				// }
-
 				if (source.connections.length === 0) {
 					set.status = 404
 					return {
@@ -65,74 +41,89 @@ export const v1Route = new Elysia()
 					}
 				}
 
+				const verified = {
+					valid: false,
+					validated: false,
+				}
+
+				// Verify Signature if Integration Added to Source
+				if (source.integration) {
+					verified.validated = true
+					const webhookVerificationHandler = WebhookVerifierFactory.getVerifier(
+						source.integration.tool!,
+						source.integration.config,
+					)
+
+					if (!webhookVerificationHandler) {
+						console.log("Integration isnt implemented")
+					} else {
+						verified.valid = webhookVerificationHandler.verifySignature(headers, body as string)
+					}
+				}
+
 				const requestId = `req_${nanoid()}`
-
-				const headersObj: Record<string, string> = {}
-
-				// biome-ignore lint/complexity/noForEach: <explanation>
-				request.headers.forEach((value, key) => {
-					headersObj[key] = value
-				})
 
 				await tiny.request.publish({
 					id: requestId,
 					timestamp: new Date().toISOString(),
 					source_id: source.publicId,
 					workspace_id: source.workspaceId,
-					version: "1.0",
 					body: String(body),
-					headers: JSON.stringify(headersObj),
-					validated: 0,
-					rejected: 0,
+					headers: JSON.stringify(headers),
+					validated: Number(verified.validated),
+					rejected: Number(!verified.valid),
+					version: "1.0",
 				})
 
-				for (const connection of source.connections) {
-					if (!connection.destination) {
-						// TODO: LOG HERE THAT USER NEEDS DESTINATION
-						return
-					}
-
-					if (!connection.enabled) {
-						// TODO: Log it
-						return
-					}
-
-					if (connection.delay && connection.delay > 0) {
-						const parsed: {
-							connectionId: string
-							requestId: string
-							request: string
-						} = {
-							requestId,
-							connectionId: connection.publicId,
-							request: await handleRequest(connection.destination.url, request, String(body)),
+				if (!verified.validated || (verified.validated && verified.valid)) {
+					for (const connection of source.connections) {
+						if (!connection.destination) {
+							// TODO: LOG HERE THAT USER NEEDS DESTINATION
+							return
 						}
 
-						await sourceQueue.add(requestId, parsed, {
-							delay: connection.delay as any,
-							attempts: connection.retyCount as any,
-							backoff: {
-								type: connection.retryType || "fixed",
-								delay: connection.retryDelay as any,
-							},
-						})
-					} else {
-						await sendEvent({
-							request,
-							body: String(body),
-							connection: connection,
-							requestId,
-							workspaceId: source.workspaceId,
-							sourceId: source.publicId,
-							sourceKey: source.key,
-							received_at,
-						})
+						if (!connection.enabled) {
+							// TODO: Log it
+							return
+						}
+
+						if (connection.delay && connection.delay > 0) {
+							const parsed: {
+								connectionId: string
+								requestId: string
+								request: string
+							} = {
+								requestId,
+								connectionId: connection.publicId,
+								request: await handleRequest(connection.destination.url, request, String(body)),
+							}
+
+							await sourceQueue.add(requestId, parsed, {
+								delay: connection.delay as any,
+								attempts: connection.retyCount as any,
+								backoff: {
+									type: connection.retryType || "fixed",
+									delay: connection.retryDelay as any,
+								},
+							})
+						} else {
+							await sendEvent({
+								request,
+								body: String(body),
+								connection: connection,
+								requestId,
+								workspaceId: source.workspaceId,
+								sourceId: source.publicId,
+								sourceKey: source.key,
+								received_at,
+							})
+						}
 					}
 				}
 
 				return {
 					status: "SUCCESS",
-					message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestId}`,
+					message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelapp.dev/request/${requestId}`,
 					request_id: requestId,
 				}
 			})

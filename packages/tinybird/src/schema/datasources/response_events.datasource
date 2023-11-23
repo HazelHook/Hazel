@@ -14,7 +14,7 @@ SCHEMA >
     `source_id` String `json:$.source_id`,
     `destination_id` String `json:$.destination_id`,
     `status` Int32 `json:$.status`,
-    `success` Int32 `json:$.success`,
+    `success` Int8 `json:$.success`,
     `body` String `json:$.body`,
     `headers` String `json:$.headers`
 
