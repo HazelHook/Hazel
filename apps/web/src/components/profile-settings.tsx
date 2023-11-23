@@ -101,6 +101,7 @@ export const ProfileSettings = ({
 			<DropdownMenu>
 				<DropdownMenuTrigger className="flex items-center justify-between gap-4 px-2 py-1 rounded lg:w-full hover:bg-muted">
 					<div className="flex flex-row-reverse items-center justify-start w-full gap-4 lg:flex-row ">
+						{/* <NewAvatar value={selectedTeam.organization.publicId} size={48} /> */}
 						<Avatar className="w-8 h-8 lg:w-10 lg:h-10">
 							<AvatarImage
 								src={
