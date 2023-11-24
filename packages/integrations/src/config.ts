@@ -33,6 +33,7 @@ export const IntegrationTools = [
 	"ayden",
 	"jira",
 	"svix",
+	"clerk",
 ] as const
 export type IntegrationTools = typeof IntegrationTools[number]
 
@@ -183,6 +184,16 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		features: ["authentication"],
 		config: jiraForm,
 		disabled: true,
+	},
+	clerk: {
+		slug: "clerk",
+		name: "Clerk",
+		categories: ["development"],
+		subtitle:
+			"Make managing users simpler and by seamlessly connecting your application's webhook events, and reduce the overhead of webhook management.",
+		features: ["authentication"],
+		config: svixForm,
+		disabled: false,
 	},
 	svix: {
 		slug: "svix",

@@ -66,13 +66,13 @@ const nameField = {
 	placeholder: "Enter a name for this integration...",
 } as const
 
-export function createIntegrationForm<T extends IntegrationToolFields>({
+export function createIntegrationForm({
 	name,
 	schema,
 }: {
 	name: IntegrationToolSlug
-	schema: T
-}): IntegrationToolForm<T> {
+	schema: IntegrationToolFields
+}): IntegrationToolForm<typeof schema> {
 	return {
 		name,
 		fields: schema,
@@ -82,13 +82,13 @@ export function createIntegrationForm<T extends IntegrationToolFields>({
 }
 
 export function createZodIntegrationSchema<T extends IntegrationToolForm<any>>(schema: T) {
-	const data: Record<keyof T["config"], z.ZodString | z.ZodEnum<any>> = {} as any
+	const data = {} as Record<keyof T["config"], any>
 
 	for (const [name, field] of Object.entries(schema.config)) {
 		if (field.type === "text") {
-			data[name as keyof T["config"]] = z.string().nonempty()
+			data[name as keyof T["config"]] = z.string().min(3)
 		} else if (field.type === "secret") {
-			data[name as keyof T["config"]] = z.string().nonempty()
+			data[name as keyof T["config"]] = z.string().min(3)
 		} else if (field.type === "select") {
 			data[name as keyof T["config"]] = z.enum(field.options)
 		}

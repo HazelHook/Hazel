@@ -1,5 +1,6 @@
 import crypto from "crypto"
 import { WebhookVerifier } from "../base"
+import { SvixProviderProps } from "../data/vendor/svix"
 
 export const extractSvixSignatures = (header: string) => {
 	// Regular expression to match each signature with its version
@@ -16,7 +17,7 @@ export const extractSvixSignatures = (header: string) => {
 	return signatures
 }
 
-export class SvixVerifier extends WebhookVerifier<{ webhookSigningSecret: string }> {
+export class SvixVerifier extends WebhookVerifier<SvixProviderProps> {
 	verifySignature(headers: Record<string, string | null>, body: string): boolean {
 		const sigHeader = headers["svix-signature"]!
 		const svixTimestamp = headers["svix-timestamp"]

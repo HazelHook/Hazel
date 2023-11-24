@@ -1,12 +1,6 @@
 import { WebhookVerifier } from "./base"
 import { SvixVerifier } from "./provider/svix"
 
-export function RegisterWebhookVerifier(type: string) {
-	return function <T extends { new (...args: any[]): WebhookVerifier<any> }>(classValues: T) {
-		WebhookVerifierFactory.registerVerifier(type, classValues)
-	}
-}
-
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class WebhookVerifierFactory {
 	private static verifiers: Record<string, new (config: any) => WebhookVerifier<any>> = {}

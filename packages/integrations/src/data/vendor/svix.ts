@@ -1,4 +1,9 @@
 import { createIntegrationForm } from "../../types"
+
+export type SvixProviderProps = {
+	webhookSigningSecret: string
+}
+
 export const svixForm = createIntegrationForm({
 	name: "svix",
 	schema: {
@@ -6,8 +11,7 @@ export const svixForm = createIntegrationForm({
 			type: "secret",
 			label: "Webhook Signing Secret",
 			placeholder: "Secret key...",
-			description:
-				"The webhook signing secret for your Stripe account. [Click here](https://dashboard.stripe.com/webhooks) to access the secret in Stripe.",
+			description: "The webhook signing secret for your Svix account should have this format: whsec_xxxx... ",
 		},
 	},
 })
