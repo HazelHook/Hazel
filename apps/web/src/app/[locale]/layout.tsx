@@ -8,7 +8,6 @@ import { Toaster } from "sonner"
 
 import { I18Provider } from "@/lib/provider/i18-provider"
 import { cn } from "@/lib/utils"
-import NextProgress from "@/components/NProgress"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -80,7 +79,6 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 					>
 						<AuthProvider>
 							<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-								<NextProgress />
 								{children}
 								<TailwindIndicator />
 							</ThemeProvider>
