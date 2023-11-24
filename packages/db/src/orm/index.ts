@@ -1,8 +1,6 @@
 import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
 import { connect } from "@planetscale/database"
 
-import * as integrations from "../integrations/common"
-import * as integrationsData from "../integrations/data"
 import * as schema from "../schema"
 import apiKeysLogic from "./tables/apiKeys"
 import connectionLogic from "./tables/connection"
@@ -11,10 +9,6 @@ import integrationLogic from "./tables/integration"
 import organizationsLogic from "./tables/organization"
 import sourceLogic from "./tables/source"
 import userLogic from "./tables/user"
-
-export { integrationsData }
-
-export { integrations }
 
 export type DB = PlanetScaleDatabase<typeof schema>
 

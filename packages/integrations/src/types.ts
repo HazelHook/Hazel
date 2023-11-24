@@ -1,6 +1,5 @@
 import { z } from "zod"
-
-import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES, INTEGRATIONS } from "./data"
+import { INTEGRATIONS, INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "./config"
 
 export interface IntegrationToolCategoryData {
 	name: string

@@ -1,7 +1,6 @@
-import { createIntegrationForm } from "../common"
-
-export const stripeForm = createIntegrationForm({
-	name: "stripe",
+import { createIntegrationForm } from "../../types"
+export const svixForm = createIntegrationForm({
+	name: "svix",
 	schema: {
 		webhookSigningSecret: {
 			type: "secret",

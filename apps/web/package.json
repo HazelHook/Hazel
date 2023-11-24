@@ -24,6 +24,7 @@
 		"@hazel/client": "workspace:*",
 		"@hazel/db": "workspace:*",
 		"@hazel/icons": "workspace:*",
+		"@hazel/integrations": "workspace:*",
 		"@hazel/server": "workspace:*",
 		"@hazel/supabase": "workspace:*",
 		"@hazel/tinybird": "workspace:*",

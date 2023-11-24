@@ -1,6 +1,6 @@
 "use client"
 
-import { AnyIntegrationFormField } from "@hazel/db/integrations"
+import { AnyIntegrationFormField } from "@hazel/integrations/web"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Input } from "@hazel/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"

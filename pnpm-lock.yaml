@@ -125,6 +125,9 @@ importers:
       '@hazel/icons':
         specifier: workspace:*
         version: link:../../packages/icons
+      '@hazel/integrations':
+        specifier: workspace:*
+        version: link:../../packages/integrations
       '@hazel/server':
         specifier: workspace:*
         version: link:../../packages/server
@@ -533,6 +536,9 @@ importers:
       '@chronark/zod-bird':
         specifier: ^0.3.1
         version: 0.3.1
+      '@hazel/integrations':
+        specifier: workspace:*
+        version: link:../integrations
       '@hazel/utils':
         specifier: workspace:*
         version: link:../utils

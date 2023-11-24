@@ -18,7 +18,6 @@
 		"*.ts",
 		"*.mjs",
 		"src",
-		"../../packages/auth/src/utils/require-session.ts"
 	],
 	"exclude": ["node_modules"]
 }

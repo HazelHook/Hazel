@@ -1,7 +1,7 @@
 "use client"
 
-import { IntegrationToolSlug } from "@hazel/db/integrations"
-import { INTEGRATIONS } from "@hazel/db/integrations"
+import { INTEGRATIONS, IntegrationToolSlug } from "@hazel/integrations/web"
+
 import { Connection, Destination, Integration, Source } from "@hazel/db/schema"
 import { CheckTickIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"

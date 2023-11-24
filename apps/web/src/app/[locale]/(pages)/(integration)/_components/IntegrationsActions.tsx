@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation"
-import { INTEGRATIONS } from "@hazel/db/integrations"
+import { INTEGRATIONS } from "@hazel/integrations/web"
 import { Integration } from "@hazel/db/schema"
 import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"

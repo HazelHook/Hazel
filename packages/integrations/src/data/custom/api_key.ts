@@ -1,5 +1,4 @@
-import { createIntegrationForm } from "../common"
-
+import { createIntegrationForm } from "../../types"
 export const apiKeyForm = createIntegrationForm({
 	name: "api_key",
 	schema: {

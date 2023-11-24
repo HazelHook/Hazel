@@ -1,4 +1,4 @@
-import { createIntegrationForm } from "../common"
+import { createIntegrationForm } from "../../types"
 
 export const sendgridForm = createIntegrationForm({
 	name: "sendgrid",

@@ -1,4 +1,4 @@
-import { INTEGRATIONS } from "@hazel/db/integrations"
+import { INTEGRATIONS } from "@hazel/integrations/web"
 
 import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { auth } from "@/lib/auth"

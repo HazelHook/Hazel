@@ -1,6 +1,6 @@
 import crypto from "crypto"
 
-import { WebhookVerifier } from "../verification/base"
+import { WebhookVerifier } from "../base"
 
 export class Hmac extends WebhookVerifier<any> {
 	verifySignature(headers: Record<string, string | null>, body: string): boolean {

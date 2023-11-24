@@ -13,8 +13,8 @@ import {
 	varchar,
 } from "drizzle-orm/mysql-core"
 
-import { INTEGRATIONS } from "../integrations/data"
 import { SchemaType, generatePublicId } from "./common"
+import { INTEGRATIONS } from "@hazel/integrations/web"
 
 const commonFields = (type: SchemaType) => ({
 	id: serial("id").primaryKey(),
