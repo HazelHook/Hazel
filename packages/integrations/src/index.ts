@@ -1,3 +1,4 @@
+import { getLogger } from "@hazel/utils"
 import { WebhookVerifier } from "./base"
 import { SvixVerifier } from "./provider/svix"
 
@@ -10,6 +11,7 @@ export class WebhookVerifierFactory {
 	}
 
 	static getVerifier(type: string, config: any): WebhookVerifier<any> | null {
+		getLogger().debug(`Retrieving Verifier: ${type}`)
 		const Verifier = this.verifiers[type]
 		return Verifier ? new Verifier(config) : null
 	}
@@ -22,3 +24,4 @@ export class WebhookVerifierFactory {
 
 WebhookVerifierFactory.registerVerifier("svix", SvixVerifier)
 WebhookVerifierFactory.registerVerifier("clerk", SvixVerifier)
+WebhookVerifierFactory.registerVerifier("resend", SvixVerifier)

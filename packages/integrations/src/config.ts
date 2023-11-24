@@ -155,16 +155,6 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		config: sendgridForm,
 		disabled: true,
 	},
-	resend: {
-		slug: "resend",
-		name: "Resend",
-		categories: ["crm", "communication"],
-		subtitle:
-			"Boost your CRM and communication efforts by integrating Resend's webhook services, guaranteeing efficient message delivery and user engagement tracking.",
-		features: ["authentication"],
-		config: resendForm,
-		disabled: true,
-	},
 	ayden: {
 		slug: "ayden",
 		name: "Ayden",
@@ -185,6 +175,16 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		config: jiraForm,
 		disabled: true,
 	},
+	svix: {
+		slug: "svix",
+		name: "Svix",
+		categories: ["development"],
+		subtitle:
+			"Facilitate your development process with Svix, seamlessly connecting your application's webhook events, and reduce the overhead of webhook management.",
+		features: ["authentication"],
+		config: svixForm,
+		disabled: false,
+	},
 	clerk: {
 		slug: "clerk",
 		name: "Clerk",
@@ -195,14 +195,14 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 		config: svixForm,
 		disabled: false,
 	},
-	svix: {
-		slug: "svix",
-		name: "Svix",
-		categories: ["development"],
+	resend: {
+		slug: "resend",
+		name: "Resend",
+		categories: ["crm", "communication"],
 		subtitle:
-			"Facilitate your development process with Svix, seamlessly connecting your application's webhook events, and reduce the overhead of webhook management.",
+			"Boost your CRM and communication efforts by integrating Resend's webhook services, guaranteeing efficient message delivery and user engagement tracking.",
 		features: ["authentication"],
-		config: svixForm,
+		config: resendForm,
 		disabled: false,
 	},
 }

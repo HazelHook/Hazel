@@ -11,10 +11,10 @@ export const routeSetup = new Elysia({ name: "setup" }).use(
 		level: "error",
 	})
 		.use(serverTiming())
-		.trace(async ({ handle }) => {
-			const { time, end } = await handle
+		.trace(async ({ beforeHandle }) => {
+			const { time, end } = await beforeHandle
 
-			console.log("beforeHandle took", (await end) - time)
+			console.log("Handle took", (await end) - time)
 		}),
 )
 

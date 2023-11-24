@@ -627,6 +627,9 @@ importers:
       '@chronark/zod-bird':
         specifier: ^0.3.1
         version: 0.3.1
+      '@hazel/utils':
+        specifier: workspace:*
+        version: link:../utils
     devDependencies:
       '@hazel/tailwind-config':
         specifier: workspace:*

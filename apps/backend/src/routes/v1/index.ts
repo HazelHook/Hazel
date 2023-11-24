@@ -2,6 +2,7 @@ import { Elysia, t } from "elysia"
 
 import db from "@hazel/db"
 import tiny from "@hazel/tinybird"
+import { getLogger } from "@hazel/utils"
 
 import { sendEvent } from "../../event"
 import { sourceQueue } from "../../lib/queue"
@@ -54,10 +55,10 @@ export const v1Route = new Elysia()
 						source.integration.config,
 					)
 
-					if (!webhookVerificationHandler) {
-						console.log("Integration isnt implemented")
-					} else {
+					if (webhookVerificationHandler) {
 						verified.valid = webhookVerificationHandler.verifySignature(headers, body as string)
+					} else {
+						getLogger().error("Integration isnt implemented")
 					}
 				}
 

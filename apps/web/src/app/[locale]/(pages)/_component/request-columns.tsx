@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils"
 import { formatDistanceToNow } from "date-fns"
 import { calcDiffInMillis } from "@/lib/date-helpers"
 import type { Destination, Source } from "@hazel/db"
+import { Status } from "@/components/status"
 
 type Column = TBRequest & {
 	responses: TBResponse[]
@@ -117,6 +118,22 @@ export const requestColumns = (sources: Source[], destinations: Destination[]) =
 					<Badge variant={rejected ? "destructive" : "outline"}>
 						{rejected ? "Unauthorized" : "Delivering"}
 					</Badge>
+				)
+			},
+		}),
+
+		columnHelper.accessor("rejected", {
+			header: "Verified",
+			cell: ({ cell, row }) => {
+				const rejected = cell.getValue() === 1
+				const validated = row.original.validated === 1
+
+				if (!validated) {
+					return "-"
+				}
+
+				return (
+					<Badge variant={rejected ? "destructive" : "success"}>{rejected ? "Unauthorized" : "Valid"}</Badge>
 				)
 			},
 		}),

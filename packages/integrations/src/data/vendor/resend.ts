@@ -2,12 +2,12 @@ import { createIntegrationForm } from "../../types"
 export const resendForm = createIntegrationForm({
 	name: "resend",
 	schema: {
-		apiKey: {
+		webhookSigningSecret: {
 			type: "secret",
-			label: "API Key",
+			label: "Webhook Signing Secret",
 			placeholder: "API key...",
 			description:
-				"The webhook API key for your Resend account. You can find it [here](https://resend.com/onboarding).",
+				"The webhook API key for your Resend account. You can find it [here](https://resend.com/webhooks).",
 		},
 	},
 })
