@@ -1,11 +1,30 @@
 import crypto from "crypto"
 
 import { WebhookVerifier } from "../base"
+import { HmacProviderProps } from "../data/custom/hmac"
+import { getLogger } from "@hazel/utils"
 
-export class Hmac extends WebhookVerifier<any> {
+export class Hmac extends WebhookVerifier<HmacProviderProps> {
 	verifySignature(headers: Record<string, string | null>, body: string): boolean {
-		const valid = false
+		const headerKey = this.config.signature_header
+		const secret = this.config.signature_secret
 
-		return valid
+		const algorithm = this.config.algorithm
+		const encoding = this.config.encoding
+
+		const signature = headers[headerKey]
+
+		if (!signature) {
+			getLogger().debug("No Signature found for HMAC")
+			return false
+		}
+
+		const newSignature = crypto.createHmac(algorithm, secret).update(body).digest(encoding)
+
+		if (newSignature !== signature) {
+			return false
+		}
+
+		return true
 	}
 }

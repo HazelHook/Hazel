@@ -1,4 +1,12 @@
 import { createIntegrationForm } from "../../types"
+
+export type HmacProviderProps = {
+	algorithm: "SHA-384" | "SHA-256" | "SHA-512"
+	encoding: "hex" | "base64" | "binary"
+	signature_header: string
+	signature_secret: string
+}
+
 export const hmacForm = createIntegrationForm({
 	name: "hmac",
 	schema: {
@@ -6,13 +14,14 @@ export const hmacForm = createIntegrationForm({
 			type: "select",
 			label: "Algorithm",
 			placeholder: "Select...",
-			options: ["SHA-1", "SHA-256", "SHA-512", "MD5"],
+			// SHA-1 AMD "MD5" should not be used, considered insecure TODO: DOCS THIS
+			options: ["SHA-384", "SHA-256", "SHA-512"],
 		},
 		encoding: {
 			type: "select",
 			label: "Encoding",
 			placeholder: "Select...",
-			options: ["Hex", "base64"],
+			options: ["hex", "base64"],
 		},
 		signature_header: {
 			type: "text",
