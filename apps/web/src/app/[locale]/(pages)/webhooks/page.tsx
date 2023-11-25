@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 import { db } from "@hazel/db"
-import { AddIcon, AutomationIcon, InfoCircleIcon, Settings02Icon, TimerIcon } from "@hazel/icons"
-import { Button, buttonVariants } from "@hazel/ui/button"
+import { AddIcon, InfoCircleIcon } from "@hazel/icons"
+import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 import Heading from "@hazel/ui/heading"
 import { SimpleTooltip } from "@hazel/ui/tooltip"
@@ -34,7 +34,7 @@ const WebhooksPage = async () => {
 
 			{connections.map(({ source, name, publicId, destination, delay, retryType }) => (
 				<div className={"flex group justify-between items-center"} key={publicId}>
-					<SourceCard name={source.name} id={source.publicId} />
+					<SourceCard name={source.name} id={source.publicId} integration={source.integration} />
 					<ConnectionPath name={name} id={publicId} delay={delay} retryType={retryType} />
 
 					<DestinationCard name={destination.name} url={destination.url} id={destination.publicId} />

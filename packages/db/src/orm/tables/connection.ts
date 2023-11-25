@@ -31,7 +31,11 @@ const connectionLogic = (db: DB) =>
 				where: eq(schema.connection.workspaceId, workspaceId),
 				with: {
 					destination: true,
-					source: true,
+					source: {
+						with: {
+							integration: true,
+						},
+					},
 				},
 			})
 		},

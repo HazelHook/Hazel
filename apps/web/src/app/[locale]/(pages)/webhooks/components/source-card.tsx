@@ -3,11 +3,14 @@
 import { CopyButton } from "@/components/copy-button"
 import { updateSourceSchema } from "@/lib/schemas/source"
 import { deleteSourceAction, updateSourceAction } from "@/server/actions/source"
+import { Integration } from "@hazel/db"
 import { DeleteAltIcon, ExternalLink01Icon, LogInLeftIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
+import { INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
+import { Image } from "@hazel/ui/image"
 import { Label } from "@hazel/ui/label"
 import { LoadingButton } from "@hazel/ui/loading-button"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
@@ -20,9 +23,10 @@ import { toast } from "sonner"
 type SourceCardProps = {
 	id: string
 	name: string
+	integration: Integration | null
 }
 
-export const SourceCard = ({ name, id }: SourceCardProps) => {
+export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 	const router = useRouter()
 
 	const handleDelete = useAction(deleteSourceAction, {
@@ -46,7 +50,15 @@ export const SourceCard = ({ name, id }: SourceCardProps) => {
 						"rounded-lg border bg-card text-card-foreground shadow-sm  p-2 w-full flex flex-row items-center gap-2 group-hover:border-muted-foreground"
 					}
 				>
-					<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+					{integration ? (
+						<img
+							src={`/assets/integrations/${integration?.tool}.svg`}
+							alt={integration?.tool}
+							className="mr-2 w-4"
+						/>
+					) : (
+						<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+					)}
 					{name}
 				</button>
 			</PopoverTrigger>
@@ -85,8 +97,21 @@ export const SourceCard = ({ name, id }: SourceCardProps) => {
 							return await handleUpdate.mutateAsync({ ...values, publicId: id })
 						}}
 						defaultValues={{ name }}
-						formSchema={updateSourceSchema.omit({ publicId: true })}
+						formSchema={updateSourceSchema.omit({ publicId: true, integrationId: true })}
 					>
+						{integration && (
+							<div className="flex flex-col gap-2">
+								<Label className="ml-1">Integration</Label>
+								<Button type="button" variant="outline" className="justify-start">
+									<img
+										src={`/assets/integrations/${integration?.tool}.svg`}
+										alt={integration?.tool}
+										className="mr-2 w-5"
+									/>
+									{INTEGRATIONS[integration.tool as IntegrationTools].name}
+								</Button>
+							</div>
+						)}
 						<Separator className="-mx-4" />
 						<div className="flex flex-col gap-2">
 							<Label className="ml-1">Source Url</Label>
