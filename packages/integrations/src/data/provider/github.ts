@@ -1,5 +1,8 @@
 import { z } from "zod"
-import { createIntegrationForm } from "../../types"
+import { InferIntegrationType, createIntegrationForm } from "../../types"
+
+export type GithubProviderProps = InferIntegrationType<typeof githubForm>
+
 export const githubForm = createIntegrationForm({
 	name: "github",
 	schema: {

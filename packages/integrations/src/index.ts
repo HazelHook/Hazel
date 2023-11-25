@@ -1,6 +1,8 @@
 import { getLogger } from "@hazel/utils"
 import { WebhookVerifier } from "./base"
 import { SvixVerifier } from "./provider/svix"
+import { LinearVerifier } from "./provider/linear"
+import { HmacVerifier } from "./provider/hmac"
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class WebhookVerifierFactory {
@@ -22,6 +24,10 @@ export class WebhookVerifierFactory {
 	}
 }
 
+WebhookVerifierFactory.registerVerifier("hmac", HmacVerifier)
+
 WebhookVerifierFactory.registerVerifier("svix", SvixVerifier)
 WebhookVerifierFactory.registerVerifier("clerk", SvixVerifier)
 WebhookVerifierFactory.registerVerifier("resend", SvixVerifier)
+
+WebhookVerifierFactory.registerVerifier("linear", LinearVerifier)

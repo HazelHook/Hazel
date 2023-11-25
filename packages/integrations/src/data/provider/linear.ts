@@ -1,5 +1,8 @@
 import { z } from "zod"
-import { createIntegrationForm } from "../../types"
+import { InferIntegrationType, createIntegrationForm } from "../../types"
+
+export type LinearProviderProps = InferIntegrationType<typeof linearForm>
+
 export const linearForm = createIntegrationForm({
 	name: "linear",
 	schema: {
