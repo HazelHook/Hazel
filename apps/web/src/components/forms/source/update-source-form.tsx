@@ -76,7 +76,7 @@ export function UpdateSourceForm({ onSuccess, source, action, integrations }: Up
 										<SelectContent className="max-h-96">
 											{integrations.map((integration) => (
 												<SelectItem key={integration.publicId} value={integration.publicId}>
-													<div className="flex flex-row items-center">{integration.name}</div>
+													<div className="flex flex-row items-center">{integration.tool}</div>
 												</SelectItem>
 											))}
 										</SelectContent>

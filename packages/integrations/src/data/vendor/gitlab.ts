@@ -1,11 +1,13 @@
+import { z } from "zod"
 import { createIntegrationForm } from "../../types"
 export const gitlabForm = createIntegrationForm({
 	name: "gitlab",
 	schema: {
 		webhookSigningSecret: {
-			type: "secret",
-			label: "API key",
-			placeholder: "API key...",
+			validator: z.string(),
+			inputProps: {
+				placeholder: "Secret key...",
+			},
 			description: "The webhook signing secret for your GitLab account.",
 		},
 	},

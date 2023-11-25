@@ -1,14 +1,13 @@
+import { z } from "zod"
 import { createIntegrationForm } from "../../types"
 export const basicAuthForm = createIntegrationForm({
 	name: "basic_auth",
 	schema: {
 		username: {
-			type: "text",
-			label: "Username",
+			validator: z.string(),
 		},
 		password: {
-			type: "secret",
-			label: "Password",
+			validator: z.string(),
 		},
 	},
 })

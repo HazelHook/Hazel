@@ -1,14 +1,13 @@
+import { z } from "zod"
 import { createIntegrationForm } from "../../types"
 export const postmarkForm = createIntegrationForm({
 	name: "postmark",
 	schema: {
 		username: {
-			type: "text",
-			label: "Username",
+			validator: z.string(),
 		},
 		password: {
-			type: "secret",
-			label: "Password",
+			validator: z.string(),
 		},
 	},
 })
