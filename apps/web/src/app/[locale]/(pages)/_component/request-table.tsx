@@ -5,6 +5,7 @@ import { AdvancedDataTable } from "@hazel/ui/data-table"
 import { httpStatusCodes } from "@/lib/utils"
 import { Destination, Source } from "@hazel/db"
 import { requestColumns } from "./request-columns"
+import { retryRequestAction } from "@/server/actions/retry"
 
 type RequestTableProps = {
 	data: TBRequest[]
@@ -18,7 +19,7 @@ export const RequestTable = ({ data, sources, destinations, maxItems }: RequestT
 		<AdvancedDataTable
 			maxItems={maxItems}
 			data={data}
-			columns={requestColumns(sources, destinations) as any}
+			columns={requestColumns(sources, destinations, retryRequestAction) as any}
 			disableViewToggle
 			searchableColumns={[{ id: "request_id", title: "for ID" }]}
 			filterableColumns={[

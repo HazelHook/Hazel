@@ -21,6 +21,9 @@ import { formatDistanceToNow } from "date-fns"
 import { calcDiffInMillis } from "@/lib/date-helpers"
 import type { Destination, Source } from "@hazel/db"
 import { Status } from "@/components/status"
+import { useAction } from "@hazel/server/actions/client"
+import { retryRequestAction } from "@/server/actions/retry"
+import { toast } from "sonner"
 
 type Column = TBRequest & {
 	responses: TBResponse[]
@@ -28,7 +31,11 @@ type Column = TBRequest & {
 
 const columnHelper = createColumnHelper<Column>()
 
-export const requestColumns = (sources: Source[], destinations: Destination[]) =>
+export const requestColumns = (
+	sources: Source[],
+	destinations: Destination[],
+	retryAction: typeof retryRequestAction,
+) =>
 	[
 		columnHelper.accessor("timestamp", {
 			id: "timestamp",
@@ -143,6 +150,8 @@ export const requestColumns = (sources: Source[], destinations: Destination[]) =
 			cell: ({ row }) => {
 				const request = row.original
 
+				const handleRetry = useAction(retryAction)
+
 				return (
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
@@ -154,13 +163,23 @@ export const requestColumns = (sources: Source[], destinations: Destination[]) =
 						<DropdownMenuContent align="end">
 							<DropdownMenuLabel>Actions</DropdownMenuLabel>
 							<DropdownMenuItem asChild>
-								<Link href={`/request/${request.id}`}>View Request</Link>
+								<Link prefetch={false} href={`/request/${request.id}`} >View Request</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.id)}>
 								Copy request ID
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
-							<DropdownMenuItem>Resend (?)</DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => {
+									toast.promise(handleRetry.mutateAsync({ id: request.id }), {
+										success: "Retried action",
+										loading: "Sending retry request...",
+										error: "There was an error, please try again"
+									})
+								}}
+							>
+								Resend 
+							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
 				)
