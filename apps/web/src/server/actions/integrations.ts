@@ -6,22 +6,28 @@ import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 import { db } from "@hazel/db"
 
 const formSchema = z.object({
-	name: z.string(),
 	tool: z.string(),
 	config: z.any(),
 })
 
 export const createIntegrationAction = createAction(
-	protectedProcedure.input(formSchema).mutation(async ({ ctx, input }) => {
-		const integrationResult = await db.integration.create({
-			workspaceId: ctx.auth.workspaceId,
-			...input,
-		})
+	protectedProcedure
+		.input(
+			z.object({
+				tool: z.string(),
+				config: z.record(z.any()),
+			}),
+		)
+		.mutation(async ({ ctx, input }) => {
+			const integrationResult = await db.integration.create({
+				workspaceId: ctx.auth.workspaceId,
+				...input,
+			})
 
-		return {
-			id: integrationResult.publicId,
-		}
-	}),
+			return {
+				id: integrationResult.publicId,
+			}
+		}),
 )
 
 export const updateIntegrationAction = createAction(

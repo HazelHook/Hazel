@@ -24,6 +24,7 @@ import { Status } from "@/components/status"
 import { useAction } from "@hazel/server/actions/client"
 import { retryRequestAction } from "@/server/actions/retry"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 type Column = TBRequest & {
 	responses: TBResponse[]
@@ -148,9 +149,14 @@ export const requestColumns = (
 		columnHelper.display({
 			id: "actions",
 			cell: ({ row }) => {
+				const router = useRouter()
 				const request = row.original
 
-				const handleRetry = useAction(retryAction)
+				const handleRetry = useAction(retryAction, {
+					onSuccess: () => {
+						router.refresh()
+					},
+				})
 
 				return (
 					<DropdownMenu>
@@ -163,7 +169,9 @@ export const requestColumns = (
 						<DropdownMenuContent align="end">
 							<DropdownMenuLabel>Actions</DropdownMenuLabel>
 							<DropdownMenuItem asChild>
-								<Link prefetch={false} href={`/request/${request.id}`} >View Request</Link>
+								<Link prefetch={false} href={`/request/${request.id}`}>
+									View Request
+								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.id)}>
 								Copy request ID
@@ -174,11 +182,11 @@ export const requestColumns = (
 									toast.promise(handleRetry.mutateAsync({ id: request.id }), {
 										success: "Retried action",
 										loading: "Sending retry request...",
-										error: "There was an error, please try again"
+										error: "There was an error, please try again",
 									})
 								}}
 							>
-								Resend 
+								Resend
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>

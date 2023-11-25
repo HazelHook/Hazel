@@ -1,12 +1,13 @@
 import { z } from "zod"
-import { INTEGRATIONS, INTEGRATION_CATERGORIES, INTEGRATION_FEATURES } from "./config"
+import { INTEGRATIONS, INTEGRATION_CATEGORIES, INTEGRATION_FEATURES } from "./config"
+import { InputHTMLAttributes, ReactNode } from "react"
 
 export interface IntegrationToolCategoryData {
 	name: string
 	slug: string
 }
 
-export type IntegrationToolCategory = keyof typeof INTEGRATION_CATERGORIES
+export type IntegrationToolCategory = keyof typeof INTEGRATION_CATEGORIES
 
 export interface IntegrationToolFeatureData {
 	name: string
@@ -16,7 +17,7 @@ export type IntegrationToolFeature = keyof typeof INTEGRATION_FEATURES
 
 export interface IntegrationTool {
 	name: string & {}
-	config?: IntegrationToolForm<any>
+	config: IntegrationToolForm<any>
 	slug: string
 	disabled?: boolean
 	categories: IntegrationToolCategory[]
@@ -26,72 +27,49 @@ export interface IntegrationTool {
 
 export type IntegrationToolSlug = keyof typeof INTEGRATIONS
 
-type IntegrationFormFieldText = {
-	type: "text"
-	label: string
-	placeholder?: string
-	description?: string
-}
-type IntegrationFormFieldSecret = {
-	type: "secret"
-	label: string
-	placeholder?: string
-	description?: string
-}
-type IntegrationFormSelect = {
-	type: "select"
-	label: string
-	placeholder?: string
-	description?: string
-	options: [string, ...string[]]
+type IntegrationFormField<T> = {
+	validator: T
+	description?: string | ReactNode
+	inputProps?:
+		| (InputHTMLAttributes<HTMLInputElement> & {
+				showLabel?: boolean | undefined
+		  })
+		| undefined
 }
 
-export type AnyIntegrationFormField = IntegrationFormFieldText | IntegrationFormFieldSecret | IntegrationFormSelect
+export type IntegrationToolFields<T> = Record<string & {}, IntegrationFormField<T>>
 
-type GeneralIntegrationToolSchema = {
-	name: IntegrationFormFieldText
-}
-export type IntegrationToolFields = Record<string & {}, AnyIntegrationFormField>
-
-export interface IntegrationToolForm<T extends IntegrationToolFields> {
-	config: IntegrationToolFields
-	general: GeneralIntegrationToolSchema
-	fields: T
+export interface IntegrationToolForm<T extends IntegrationToolFields<any>> {
+	schema: T
 	name: IntegrationToolSlug
 }
 
-const nameField = {
-	type: "text",
-	label: "Integration Name",
-	placeholder: "Enter a name for this integration...",
-} as const
-
-export function createIntegrationForm({
+export function createIntegrationForm<T extends IntegrationToolFields<any>>({
 	name,
 	schema,
 }: {
 	name: IntegrationToolSlug
-	schema: IntegrationToolFields
-}): IntegrationToolForm<typeof schema> {
+	schema: T
+}): IntegrationToolForm<T> {
 	return {
 		name,
-		fields: schema,
-		general: { name: nameField },
-		config: { name: nameField, ...schema },
+		schema: schema,
 	}
 }
 
-export function createZodIntegrationSchema<T extends IntegrationToolForm<any>>(schema: T) {
-	const data = {} as Record<keyof T["config"], any>
+export type InferInegrationSchema<T extends IntegrationToolForm<any>> = {
+	[K in keyof T["schema"]]: T["schema"][K]["validator"]
+}
 
-	for (const [name, field] of Object.entries(schema.config)) {
-		if (field.type === "text") {
-			data[name as keyof T["config"]] = z.string().min(3)
-		} else if (field.type === "secret") {
-			data[name as keyof T["config"]] = z.string().min(3)
-		} else if (field.type === "select") {
-			data[name as keyof T["config"]] = z.enum(field.options)
-		}
+export type InferIntegrationType<T extends IntegrationToolForm<any>> = {
+	[K in keyof T["schema"]]: z.infer<T["schema"][K]["validator"]>
+}
+
+export function createZodIntegrationSchema<T extends IntegrationToolForm<any>>(schema: T) {
+	const data = {} as InferInegrationSchema<T>
+
+	for (const [name] of Object.entries(schema.schema)) {
+		data[name as keyof T["schema"]] = schema.schema[name as keyof T["schema"]].validator
 	}
 
 	return z.object(data)

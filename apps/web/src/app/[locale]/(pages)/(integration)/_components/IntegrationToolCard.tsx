@@ -1,7 +1,13 @@
 "use client"
 
 import React, { useState } from "react"
-import { INTEGRATION_CATERGORIES, INTEGRATION_FEATURES, IntegrationTool } from "@hazel/integrations/web"
+import {
+	INTEGRATIONS,
+	INTEGRATION_CATEGORIES,
+	INTEGRATION_FEATURES,
+	IntegrationTool,
+	IntegrationTools,
+} from "@hazel/integrations/web"
 import { DatabaseIcon, ShieldCheckIcon } from "@hazel/icons"
 import { Badge } from "@hazel/ui/badge"
 import { Card } from "@hazel/ui/card"
@@ -18,10 +24,12 @@ const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	})[props.slug] || null
 
 export const IntegrationToolCard = ({
-	integration,
+	integrationKey,
 }: {
-	integration: IntegrationTool
+	integrationKey: IntegrationTools
 }) => {
+	const integration = INTEGRATIONS[integrationKey]
+
 	const { slug, name, subtitle, categories, features, disabled } = integration
 
 	const [coords, setCoords] = useState({ x: 50, y: 50 })
@@ -82,7 +90,7 @@ export const IntegrationToolCard = ({
 								key={`badge-${category}`}
 								className="transition-all group-hover:shadow-badgeHover"
 							>
-								{INTEGRATION_CATERGORIES[category].name}
+								{INTEGRATION_CATEGORIES[category].name}
 							</Badge>
 						))}
 					</div>

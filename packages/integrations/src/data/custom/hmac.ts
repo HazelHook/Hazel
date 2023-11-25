@@ -1,3 +1,4 @@
+import { z } from "zod"
 import { createIntegrationForm } from "../../types"
 
 export type HmacProviderProps = {
@@ -11,26 +12,24 @@ export const hmacForm = createIntegrationForm({
 	name: "hmac",
 	schema: {
 		algorithm: {
-			type: "select",
 			label: "Algorithm",
-			placeholder: "Select...",
 			// SHA-1 AMD "MD5" should not be used, considered insecure TODO: DOCS THIS
-			options: ["SHA-384", "SHA-256", "SHA-512"],
+			validator: z.enum(["SHA-384", "SHA-256", "SHA-512"]),
+			placeholder: "Select...",
 		},
 		encoding: {
-			type: "select",
 			label: "Encoding",
+			validator: z.enum(["hex", "base64"]),
 			placeholder: "Select...",
-			options: ["hex", "base64"],
 		},
 		signature_header: {
-			type: "text",
+			validator: z.string(),
 			label: "Signature Header Key",
 			placeholder: "Enter the header key...",
 			description: "The header key that contains the signature. This is usually `X-API-Signature`.",
 		},
 		signature_secret: {
-			type: "secret",
+			validator: z.string(),
 			label: "Signature Secret",
 			placeholder: "Enter the secret...",
 			description: "The secret used to sign the webhook payload.",

@@ -1,4 +1,4 @@
-import { INTEGRATIONS } from "@hazel/integrations/web"
+import { INTEGRATIONS, IntegrationTools, createZodIntegrationSchema } from "@hazel/integrations/web"
 
 import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { auth } from "@/lib/auth"
@@ -27,8 +27,8 @@ const IntegrationsPage = async () => {
 				/>
 				<h2 className="text-xl font-semibold">Integrations</h2>
 				<div className="grid grid-flow-row-dense md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-					{Object.values(INTEGRATIONS).map((item, index) => (
-						<IntegrationToolCard key={index} integration={item} />
+					{Object.keys(INTEGRATIONS).map((key, index) => (
+						<IntegrationToolCard key={index} integrationKey={key as IntegrationTools} />
 					))}
 				</div>
 			</div>

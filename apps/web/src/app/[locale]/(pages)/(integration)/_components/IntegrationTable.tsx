@@ -20,7 +20,7 @@ export const IntegrationsTable = ({
 			disableRedirect
 			rootPath="/integrations"
 			columns={columns(deleteAction, updateAction)}
-			data={integrations as any}
+			data={integrations}
 		/>
 	)
 }

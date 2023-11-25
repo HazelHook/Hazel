@@ -14,7 +14,6 @@ import { updateIntegrationAction } from "@/server/actions/integrations"
 import { useAction } from "@hazel/server/actions/client"
 
 import { LabeledSeparator } from "@/components/labeled-separator"
-import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
 
 export const UpdateIntegrationForm = ({
 	data,
@@ -31,10 +30,10 @@ export const UpdateIntegrationForm = ({
 	const router = useRouter()
 
 	if (!config) {
-		notFound()
+		return notFound()
 	}
 
-	const schema = createZodIntegrationSchema(integration.config!) as any
+	const schema = createZodIntegrationSchema(integration.config!)
 
 	const form = useForm<z.infer<typeof schema>>({
 		resolver: zodResolver(schema),
@@ -56,7 +55,6 @@ export const UpdateIntegrationForm = ({
 				publicId: data.publicId,
 				config: rest,
 				tool: slug as any,
-				name: name as string,
 			}),
 			{
 				loading: "Update Integration...",
@@ -69,13 +67,10 @@ export const UpdateIntegrationForm = ({
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-				{Object.entries(config.general).map(([key, config]) => (
-					<IntegrationToolField fieldDef={config} pathKey={key} key={key} control={form.control} />
-				))}
 				<LabeledSeparator label="Configuration" className="pt-4" />
-				{Object.entries(config.fields).map(([key, integField]) => (
+				{/* {Object.entries(config.schema).map(([key, integField]) => (
 					<IntegrationToolField fieldDef={integField as any} pathKey={key} key={key} control={form.control} />
-				))}
+				))} */}
 
 				<div className="flex justify-end">
 					<Button

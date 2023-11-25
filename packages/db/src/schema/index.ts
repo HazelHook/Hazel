@@ -65,13 +65,11 @@ export const integration = mysqlTable(
 		workspaceId: varchar("workspace_id", { length: 128 }).notNull(),
 		// .references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
-		name,
-		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]),
-		config: json("config"),
+		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]).notNull(),
+		config: json("config").notNull(),
 	},
 	(table) => ({
 		workspaceIdx: index("workspace_idx").on(table.workspaceId),
-		nameIndex: index("itg_name_idx").on(table.name),
 	}),
 )
 

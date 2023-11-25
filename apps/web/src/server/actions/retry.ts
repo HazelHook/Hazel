@@ -16,27 +16,21 @@ export const retryRequestAction = createAction(
 			throw new TRPCError({ message: "Request with this ID doesn't exist", code: "NOT_FOUND" })
 		}
 
-		// console.log(request.headers)
-
 		const headers = JSON.parse(request.headers)
 
-		console.log(headers)
-
-		const retryRes = await fetch(`http://localhost:3003/v1/hook/${request.id}`, {
+		const retryRes = await fetch(`http://localhost:3003/v1/hook/${request.source_id}`, {
 			headers: headers,
 			body: request.body,
 			method: "POST",
 		})
 
-        console.log(retryRes.ok)
+		console.log(retryRes.ok)
 
-        if(!retryRes.ok) {
-       const body = await retryRes.json()
+		if (!retryRes.ok) {
+			const body = await retryRes.json()
 
-            throw new TRPCError({message: body.message, code: "NOT_FOUND"})
-        }
-
-
+			throw new TRPCError({ message: body.message, code: "NOT_FOUND" })
+		}
 
 		return {
 			id: input.id,

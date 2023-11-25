@@ -2,17 +2,12 @@
 
 import { notFound, useRouter } from "next/navigation"
 import { createZodIntegrationSchema, IntegrationTool } from "@hazel/integrations/web"
-import { Button } from "@hazel/ui/button"
-import { Form } from "@hazel/ui/form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
 
 import { createIntegrationAction } from "@/server/actions/integrations"
 import { useAction } from "@hazel/server/actions/client"
 
-import { LabeledSeparator } from "@/components/labeled-separator"
-import { IntegrationToolField } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolField"
+import { AutoForm } from "@hazel/ui/auto-form"
+import { LoadingButton } from "@hazel/ui/loading-button"
 
 export const NewIntegrationForm = ({
 	integration: { config, slug },
@@ -32,39 +27,24 @@ export const NewIntegrationForm = ({
 		},
 	})
 
-	function onSubmit({ name, ...data }: any) {
-		createIntegration.mutate({
-			config: data,
-			tool: slug,
-			name: name,
-		})
-	}
-	const schema = createZodIntegrationSchema(config) as any
+	const schema = createZodIntegrationSchema(config)
 
-	const form = useForm<z.infer<typeof schema>>({
-		resolver: zodResolver(schema),
-	})
+	console.log(schema)
+
+	// <LabeledSeparator label="Configuration" className="pt-4" />
+
+	const test = Object.values(config).map((item, xd) => {})
 
 	return (
-		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full">
-				{Object.entries(config.general).map(([key, config]) => (
-					<IntegrationToolField control={form.control} fieldDef={config} pathKey={key} key={key} />
-				))}
-				<LabeledSeparator label="Configuration" className="pt-4" />
-				{Object.entries(config.fields).map(([key, integField]) => (
-					<IntegrationToolField control={form.control} fieldDef={integField as any} pathKey={key} key={key} />
-				))}
-
-				<Button
-					type="submit"
-					disabled={createIntegration.status === "loading"}
-					loading={createIntegration.status === "loading"}
-					className="w-full mt-5"
-				>
-					Create Integration
-				</Button>
-			</form>
-		</Form>
+		<AutoForm
+			className="w-full"
+			formSchema={schema}
+			fieldConfig={config.schema as any}
+			onSubmit={async (data) => createIntegration.mutateAsync({ config: data, tool: slug })}
+		>
+			<LoadingButton type="submit" loading={createIntegration.status === "loading"}>
+				Create Integration
+			</LoadingButton>
+		</AutoForm>
 	)
 }

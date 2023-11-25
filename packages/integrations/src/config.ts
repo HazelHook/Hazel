@@ -220,7 +220,7 @@ export const INTEGRATION_FEATURES = {
 	},
 }
 
-export const INTEGRATION_CATERGORIES = {
+export const INTEGRATION_CATEGORIES = {
 	payment: { name: "Payment", slug: "payment" },
 	communication: { name: "Communication", slug: "communication" },
 	email_marketing: { name: "Email Marketing", slug: "email_marketing" },
