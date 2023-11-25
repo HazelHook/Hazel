@@ -131,6 +131,7 @@ export const requestColumns = (
 		}),
 
 		columnHelper.accessor("rejected", {
+			id: "verified",
 			header: "Verified",
 			cell: ({ cell, row }) => {
 				const rejected = cell.getValue() === 1

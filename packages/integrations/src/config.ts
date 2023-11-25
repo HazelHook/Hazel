@@ -1,19 +1,19 @@
 import { apiKeyForm } from "./data/custom/api_key"
 import { basicAuthForm } from "./data/custom/basic-auth"
 import { hmacForm } from "./data/custom/hmac"
-import { aydenForm } from "./data/vendor/ayden"
-import { githubForm } from "./data/vendor/github"
-import { gitlabForm } from "./data/vendor/gitlab"
-import { jiraForm } from "./data/vendor/jira"
-import { linearForm } from "./data/vendor/linear"
-import { mailgunForm } from "./data/vendor/mailgun"
-import { postmarkForm } from "./data/vendor/postmark"
-import { resendForm } from "./data/vendor/resend"
-import { sendgridForm } from "./data/vendor/sendgrid"
-import { shopifyForm } from "./data/vendor/shopify"
-import { stripeForm } from "./data/vendor/stripe"
-import { svixForm } from "./data/vendor/svix"
-import { typeformForm } from "./data/vendor/typeform"
+import { aydenForm } from "./data/provider/ayden"
+import { githubForm } from "./data/provider/github"
+import { gitlabForm } from "./data/provider/gitlab"
+import { jiraForm } from "./data/provider/jira"
+import { linearForm } from "./data/provider/linear"
+import { mailgunForm } from "./data/provider/mailgun"
+import { postmarkForm } from "./data/provider/postmark"
+import { resendForm } from "./data/provider/resend"
+import { sendgridForm } from "./data/provider/sendgrid"
+import { shopifyForm } from "./data/provider/shopify"
+import { stripeForm } from "./data/provider/stripe"
+import { svixForm } from "./data/provider/svix"
+import { typeformForm } from "./data/provider/typeform"
 import { IntegrationTool } from "./types"
 
 export const IntegrationTools = [
@@ -113,7 +113,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 			"Empower your project management capabilities by integrating webhook processing for Linear, thereby ensuring seamless issue tracking and task assignments.",
 		features: ["authentication"],
 		config: linearForm,
-		disabled: true,
+		disabled: false,
 	},
 	postmark: {
 		slug: "postmark",

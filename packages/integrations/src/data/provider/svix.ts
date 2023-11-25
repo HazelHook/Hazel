@@ -3,7 +3,7 @@ import { InferIntegrationType, createIntegrationForm } from "../../types"
 
 export type SvixProviderProps = InferIntegrationType<typeof svixForm>
 
-export const svixSecretValidator = z.string().regex(/^whsec_[A-Za-z0-9]+$/, {
+export const svixSecretValidator = z.string().regex(/^whsec_.*/, {
 	message: "Invalid format: The Secret must start with 'whsec_'",
 })
 
