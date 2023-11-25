@@ -55,7 +55,7 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 		sources.length === 0 ? "create" : "select",
 	)
 
-	const [destionationTabs, setDestionationTabs] = useState<"select" | "create" | string>(
+	const [destinationTabs, setDestinationTabs] = useState<"select" | "create" | string>(
 		destinations.length === 0 ? "create" : "select",
 	)
 
@@ -167,7 +167,7 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 						</p>
 					</div>
 					<div>
-						<Tabs onValueChange={setDestionationTabs} value={destionationTabs}>
+						<Tabs onValueChange={setDestinationTabs} value={destinationTabs}>
 							<TabsList>
 								<TabsTrigger value="select">Use existing Destination</TabsTrigger>
 								<TabsTrigger value="create">Create New Destination</TabsTrigger>
@@ -217,6 +217,7 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 							<TabsContent value="create" className="rounded-lg border shadow-md p-4">
 								<CreateDestinationForm
 									onSuccess={(id) => {
+										setDestinationTabs("select")
 										form.setValue("publiceDestinationId", id)
 									}}
 									shouldRedirect={false}

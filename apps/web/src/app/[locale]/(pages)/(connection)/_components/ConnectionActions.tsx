@@ -85,14 +85,9 @@ export const ConnectionActions = ({
 
 			<Dialog>
 				<DialogTrigger asChild>
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<Button variant="destructive_ghost">
-								<DeleteDustbinIcon className="h-4 w-4" />
-							</Button>
-						</TooltipTrigger>
-						<TooltipContent>Delete Connection</TooltipContent>
-					</Tooltip>
+					<Button variant="destructive_ghost">
+						<DeleteDustbinIcon className="h-4 w-4" />
+					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">
 					<DialogHeader>

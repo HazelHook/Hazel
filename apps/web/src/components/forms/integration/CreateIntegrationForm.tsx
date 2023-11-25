@@ -16,24 +16,18 @@ export const NewIntegrationForm = ({
 	integration: IntegrationTool
 	onSuccess?: (id: string) => void
 }) => {
-	const router = useRouter()
-
 	if (!config) return notFound()
 
 	const createIntegration = useAction(createIntegrationAction, {
 		onSuccess(data) {
 			onSuccess?.(data.id)
-			router.refresh()
+			// router.refresh()
 		},
 	})
 
 	const schema = createZodIntegrationSchema(config)
 
-	console.log(schema)
-
 	// <LabeledSeparator label="Configuration" className="pt-4" />
-
-	const test = Object.values(config).map((item, xd) => {})
 
 	return (
 		<AutoForm
