@@ -115,7 +115,13 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 						<Separator className="-mx-4" />
 						<div className="flex flex-col gap-2">
 							<Label className="ml-1">Source Url</Label>
-							<CopyButton value={`${process.env.NEXT_PUBLIC_HAZEL_BACKEND_URL}/v1/hook/${id}`} />
+							<CopyButton
+								value={`${process.env.NEXT_PUBLIC_HAZEL_BACKEND_URL}/v1/hook/${id}`}
+								display={`${process.env.NEXT_PUBLIC_HAZEL_BACKEND_URL}/v1/hook/${id}`.replace(
+									"https://",
+									"",
+								)}
+							/>
 						</div>
 						<Separator className="-mx-4" />
 						<div className="flex flex-row justify-between">

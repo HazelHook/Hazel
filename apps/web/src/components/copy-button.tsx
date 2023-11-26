@@ -9,6 +9,7 @@ import { inputStyle } from "@hazel/ui/input"
 interface CopyButtonProps {
 	className?: string
 	value: string
+	display?: string
 }
 
 export const CopyButton: FC<CopyButtonProps> = (props) => {
@@ -31,13 +32,13 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
 		<button
 			className={cn(
 				inputStyle,
-				"flex flex-row justify-between items-center cursor-pointer bg-muted/60 w-full overflow-hidden",
+				"flex flex-row flex-nowrap justify-between items-center cursor-pointer bg-muted/60 w-full overflow-hidden",
 				props.className,
 			)}
 			type="button"
 			onClick={handleClipboard}
 		>
-			<p className="text-ellipsis overflow-hidden">{props.value}</p>
+			<p className="text-ellipsis overflow-hidden whitespace-nowrap">{props.display || props.value}</p>
 			<AnimatePresence>
 				<svg
 					className="w-6 h-6 ml-2"
