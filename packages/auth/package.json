@@ -1,64 +1,63 @@
 {
-	"name": "@hazel/auth",
-	"private": true,
-	"version": "0.1.0",
-	"scripts": {
-		"clean": "git clean -xdf .turbo node_modules",
-		"format": "prettier --check \"**/*.{ts,tsx}\"",
-		"generate-barrels": "barrelsby --delete -d ./src",
-		"lint": "eslint .",
-		"typecheck": "tsc --noEmit"
-	},
-	"dependencies": {},
-	"peerDependencies": {
-		"react": "^18.x",
-		"react-dom": "^18.x",
-		"next": "14.x",
-		"swr": "^2.x",
-		"@supabase/supabase-js": "^2.x",
-		"@supabase/auth-helpers-nextjs": "^0.8.x",
-		"next-intl": "3.x",
-		"@hazel/server": "workspace:*",
-		"@hazel/db": "workspace:*",
-		"@hazel/ui": "workspace:*",
-		"@hazel/icons": "workspace:*",
-		"@hazel/supabase": "workspace:*",
-		"@hazel/utils": "workspace:*",
-		"react-hook-form": "^7.x",
-		"sonner": "^1.x",
-		"tailwindcss-animate": "^1.x",
-		"zod": "^3.x"
-	},
-	"devDependencies": {
-		"@hazel/supabase": "workspace:*",
-		"@hazel/tailwind-config": "workspace:*",
-		"@hazel/tsconfig": "workspace:*",
-		"@types/react": "18.2.31",
-		"@types/react-dom": "^18.2.16",
-		"barrelsby": "^2.8.1",
-		"eslint": "^8.54.0",
-		"next": "14.0.3",
-		"prettier": "^3.1.0",
-		"react": "18.2.0",
-		"react-dom": "18.2.0",
-		"tailwindcss": "3.3.3",
-		"tailwindcss-animate": "^1.0.7",
-		"typescript": "^5.3.2"
-	},
-	"exports": {
-		".": "./src/index.ts",
-		"./pages": "./src/pages.ts",
-		"./provider": "./src/provider.ts",
-		"./utils": "./src/utils.ts",
-		"./hooks": "./src/hooks.ts",
-		"./actions": "./src/actions.ts",
-		"./internal-components/*": "./src/internal-components/*.tsx"
-	},
-	"typesVersions": {
-		"*": {
-			"*": [
-				"src/*"
-			]
-		}
-	}
+  "name": "@hazel/auth",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "git clean -xdf .turbo node_modules",
+    "format": "prettier --check \"**/*.{ts,tsx}\"",
+    "generate-barrels": "barrelsby --delete -d ./src",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "react": "^18.x",
+    "react-dom": "^18.x",
+    "next": "14.x",
+    "swr": "^2.x",
+    "@supabase/supabase-js": "^2.x",
+    "@supabase/auth-helpers-nextjs": "^0.8.x",
+    "next-intl": "3.x",
+    "@hazel/server": "workspace:*",
+    "@hazel/db": "workspace:*",
+    "@hazel/ui": "workspace:*",
+    "@hazel/icons": "workspace:*",
+    "@hazel/supabase": "workspace:*",
+    "@hazel/utils": "workspace:*",
+    "react-hook-form": "^7.x",
+    "sonner": "^1.x",
+    "tailwindcss-animate": "^1.x",
+    "zod": "^3.x"
+  },
+  "devDependencies": {
+    "@hazel/supabase": "workspace:*",
+    "@hazel/tailwind-config": "workspace:*",
+    "@hazel/tsconfig": "workspace:*",
+    "@types/react": "18.2.31",
+    "@types/react-dom": "^18.2.16",
+    "barrelsby": "^2.8.1",
+    "eslint": "^8.54.0",
+    "next": "14.0.3",
+    "prettier": "^3.1.0",
+    "react": "^18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.5",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.3.2"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./pages": "./src/pages.ts",
+    "./provider": "./src/provider.ts",
+    "./utils": "./src/utils.ts",
+    "./hooks": "./src/hooks.ts",
+    "./actions": "./src/actions.ts",
+    "./internal-components/*": "./src/internal-components/*.tsx"
+  }
 }

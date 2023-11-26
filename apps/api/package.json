@@ -1,24 +1,24 @@
 {
-	"name": "api",
-	"version": "0.0.1",
-	"scripts": {
-		"dev": "infisical run -- bun run --watch src/index.ts",
-		"build": "bun build ./src/index.ts --outdir ./packed",
-		"start:env": "infisical run -- bun run packed/index.js",
-		"start": "bun run packed/index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"dependencies": {
-		"@elysiajs/bearer": "^0.7.0",
-		"@elysiajs/fn": "^0.6.1",
-		"@elysiajs/swagger": "^0.7.4",
-		"@hazel/db": "workspace:*",
-		"@upstash/ratelimit": "0.4.4",
-		"@upstash/redis": "^1.25.1",
-		"elysia": "0.7.28"
-	},
-	"module": "src/index.js",
-	"devDependencies": {
-		"bun": "^1.0.13"
-	}
+  "name": "api",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "infisical run -- bun run --watch src/index.ts",
+    "build": "bun build ./src/index.ts --outdir ./packed",
+    "start:env": "infisical run -- bun run packed/index.js",
+    "start": "bun run packed/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@elysiajs/bearer": "^0.7.0",
+    "@elysiajs/fn": "^0.6.1",
+    "@elysiajs/swagger": "^0.7.4",
+    "@hazel/db": "workspace:*",
+    "@upstash/ratelimit": "0.4.4",
+    "@upstash/redis": "^1.25.1",
+    "elysia": "0.7.28"
+  },
+  "module": "src/index.js",
+  "devDependencies": {
+    "bun": "^1.0.13"
+  }
 }

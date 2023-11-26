@@ -1,7 +1,7 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"organizeImports": {
-		"enabled": false
+		"enabled": true
 	},
 	"linter": {
 		"enabled": true,
@@ -13,16 +13,27 @@
 			"suspicious": {
 				"noExplicitAny": "off",
 				"noArrayIndexKey": "off"
+			},
+			"nursery": {
+				"noUnusedImports": "error"
 			}
 		},
-		"ignore": ["node_modules", ".next", "dist"]
+		"ignore": [
+			"node_modules",
+			".next",
+			"dist"
+		]
 	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
 		"indentWidth": 4,
 		"lineWidth": 120,
-		"ignore": ["node_modules", ".next", "dist"]
+		"ignore": [
+			"node_modules",
+			".next",
+			"dist"
+		]
 	},
 	"javascript": {
 		"formatter": {

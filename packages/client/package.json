@@ -1,48 +1,48 @@
 {
-	"name": "@hazel/client",
-	"private": true,
-	"version": "0.1.0",
-	"scripts": {
-		"clean": "git clean -xdf .turbo node_modules",
-		"format": "prettier --check \"**/*.{ts,tsx}\"",
-		"generate-barrels": "barrelsby --delete -d ./src",
-		"lint": "eslint .",
-		"typecheck": "tsc --noEmit"
-	},
-	"peerDependencies": {
-		"@hazel/utils": "workspace:*",
-		"next": "14.0.3",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"tailwindcss": "3.3.2",
-		"zod": "^3.22.4"
-	},
-	"devDependencies": {
-		"@hazel/tsconfig": "workspace:*",
-		"@types/react": "18.2.31",
-		"@types/react-dom": "^18.2.16",
-		"eslint": "^8.54.0",
-		"next": "14.0.3",
-		"prettier": "^3.1.0",
-		"react": "18.2.0",
-		"react-dom": "18.2.0",
-		"tailwindcss": "3.3.5",
-		"tailwindcss-animate": "^1.0.7",
-		"type-fest": "^4.8.2",
-		"typescript": "^5.3.2"
-	},
-	"exports": {
-		"./next": "./src/next.ts",
-		".": "./src/index.ts"
-	},
-	"typesVersions": {
-		"*": {
-			"*": [
-				"src/*"
-			]
-		}
-	},
-	"dependencies": {
-		"std-env": "^3.5.0"
-	}
+  "name": "@hazel/client",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "git clean -xdf .turbo node_modules",
+    "format": "prettier --check \"**/*.{ts,tsx}\"",
+    "generate-barrels": "barrelsby --delete -d ./src",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@hazel/utils": "workspace:*",
+    "next": "14.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "3.3.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@hazel/tsconfig": "workspace:*",
+    "@types/react": "18.2.31",
+    "@types/react-dom": "^18.2.16",
+    "eslint": "^8.54.0",
+    "next": "14.0.3",
+    "prettier": "^3.1.0",
+    "react": "^18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.5",
+    "tailwindcss-animate": "^1.0.7",
+    "type-fest": "^4.8.2",
+    "typescript": "^5.3.2"
+  },
+  "exports": {
+    "./next": "./src/next.ts",
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+  "dependencies": {
+    "std-env": "^3.5.0"
+  }
 }

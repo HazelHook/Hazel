@@ -1,27 +1,27 @@
 {
-	"name": "@hazel/tailwind-config",
-	"version": "0.1.0",
-	"main": "index.ts",
-	"license": "MIT",
-	"files": [
-		"index.ts",
-		"postcss.js"
-	],
-	"scripts": {
-		"clean": "rm -rf .turbo node_modules",
-		"lint": "eslint .",
-		"format": "prettier --check \"**/*.{js,ts,json}\"",
-		"typecheck": "tsc --noEmit"
-	},
-	"dependencies": {
-		"autoprefixer": "^10.4.16",
-		"postcss": "8.4.31",
-		"tailwindcss": "3.3.3"
-	},
-	"devDependencies": {
-		"@hazel/tsconfig": "workspace:*",
-		"eslint": "^8.54.0",
-		"prettier": "^3.1.0",
-		"typescript": "^5.3.2"
-	}
+  "name": "@hazel/tailwind-config",
+  "version": "0.1.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "files": [
+    "index.ts",
+    "postcss.js"
+  ],
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "eslint .",
+    "format": "prettier --check \"**/*.{js,ts,json}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "8.4.31",
+    "tailwindcss": "3.3.5"
+  },
+  "devDependencies": {
+    "@hazel/tsconfig": "workspace:*",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2"
+  }
 }

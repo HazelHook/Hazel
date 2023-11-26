@@ -1,36 +1,36 @@
 {
-	"name": "@hazel/tinybird",
-	"private": true,
-	"version": "0.1.0",
-	"scripts": {
-		"clean": "git clean -xdf .turbo node_modules",
-		"format": "prettier --check \"**/*.{ts,tsx}\"",
-		"lint": "eslint .",
-		"typecheck": "tsc --noEmit",
-		"tb:pull": "tb pull --auto --force"
-	},
-	"dependencies": {
-		"@chronark/zod-bird": "^0.3.1"
-	},
-	"devDependencies": {
-		"@hazel/tailwind-config": "workspace:*",
-		"@hazel/tsconfig": "workspace:*",
-		"@types/node": "^20.9.3",
-		"eslint": "^8.54.0",
-		"prettier": "^3.1.0",
-		"typescript": "^5.3.2"
-	},
-	"peerDependencies": {
-		"zod": "3.x"
-	},
-	"exports": {
-		".": "./src/index.ts"
-	},
-	"typesVersions": {
-		"*": {
-			"*": [
-				"src/*"
-			]
-		}
-	}
+  "name": "@hazel/tinybird",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "git clean -xdf .turbo node_modules",
+    "format": "prettier --check \"**/*.{ts,tsx}\"",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "tb:pull": "tb pull --auto --force"
+  },
+  "dependencies": {
+    "@chronark/zod-bird": "^0.3.1"
+  },
+  "devDependencies": {
+    "@hazel/tailwind-config": "workspace:*",
+    "@hazel/tsconfig": "workspace:*",
+    "@types/node": "^20.9.5",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2"
+  },
+  "peerDependencies": {
+    "zod": "3.x"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  }
 }
