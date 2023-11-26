@@ -5,14 +5,18 @@ import Link from "next/link"
 
 import { getCachedSource } from "@/lib/orm"
 import { Await } from "@hazel/ui/await"
+import { auth } from "@/lib/auth"
 
 interface SourceLinkProps {
 	sourceId: string
 }
 
 export const SourceLink = async ({ sourceId }: SourceLinkProps) => {
+	const { workspaceId } = await auth()
+
 	const source = getCachedSource({
 		publicId: sourceId,
+		workspaceId,
 		redirectMissing: false,
 	})
 

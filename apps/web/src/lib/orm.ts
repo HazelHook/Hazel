@@ -20,14 +20,17 @@ export type CacheConnection = PromiseType<ReturnType<typeof getCachedConnection>
 
 export const getCachedSource = async ({
 	publicId,
+	workspaceId,
 	redirectMissing = true,
 }: {
 	publicId: string
+	workspaceId: string
 	redirectMissing?: boolean
 }) => {
 	const source = await db.source.getOne({
 		publicId,
-		include: {
+		workspaceId,
+		with: {
 			connections: {
 				with: {
 					destination: true,

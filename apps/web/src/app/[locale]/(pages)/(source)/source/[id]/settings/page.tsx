@@ -13,13 +13,13 @@ interface EventsPageProps {
 }
 
 const SettingsPage = async ({ params }: EventsPageProps) => {
-	const source = await getCachedSource({ publicId: params.id })
+	const { workspaceId } = await auth()
+
+	const source = await getCachedSource({ publicId: params.id, workspaceId })
 
 	if (!source) {
 		notFound()
 	}
-
-	const { workspaceId } = await auth()
 
 	const integrations = await db.integration.getMany({
 		workspaceId: workspaceId,

@@ -52,4 +52,5 @@ const nextConfig = {
 
 const intlConfig = withNextIntl("./src/i18n/index.ts")
 
-export default million.next(intlConfig(nextConfig), millionConfig)
+// export default million.next(intlConfig(nextConfig), millionConfig)
+export default intlConfig(nextConfig)

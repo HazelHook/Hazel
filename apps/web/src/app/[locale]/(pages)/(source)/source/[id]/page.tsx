@@ -20,14 +20,14 @@ const SourcePage = async ({
 		id: string
 	}
 }) => {
-	const source = await getCachedSource({ publicId: params.id })
+	const { workspaceId } = await auth()
+
+	const source = await getCachedSource({ publicId: params.id, workspaceId })
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	if (!source) {
 		notFound()
 	}
-
-	const { workspaceId } = await auth()
 
 	if (source.workspaceId !== workspaceId) {
 		redirect("/")

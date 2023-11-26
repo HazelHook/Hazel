@@ -61,7 +61,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	// TODO: ADD ACCEPETED/REJECTED TO TINYBIRD => Wasnt valid
 
 	const headers = JSON.parse(req.headers)
-	const source = getCachedSource({ publicId: req.source_id })
+	const source = getCachedSource({ publicId: req.source_id, workspaceId })
 
 	return (
 		<div className="p-6 container space-y-4">

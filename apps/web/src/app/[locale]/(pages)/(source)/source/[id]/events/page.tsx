@@ -58,7 +58,7 @@ export type EventDataRowType = PromiseType<ReturnType<typeof fetchData>>["data"]
 
 const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 	const { workspaceId } = await auth()
-	const source = await getCachedSource({ publicId: params.id })
+	const source = await getCachedSource({ publicId: params.id, workspaceId })
 
 	if (!source) {
 		notFound()

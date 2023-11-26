@@ -8,8 +8,9 @@ import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 import { requireSession } from "@hazel/auth/utils"
 import { db } from "@hazel/db"
+import { cache } from "react"
 
-export const auth = async () => {
+export const auth = cache(async () => {
 	const client = getSupabaseServerClient()
 	const session = await requireSession(client)
 	const userSession = session.user
@@ -48,4 +49,4 @@ export const auth = async () => {
 			email: userSession.email,
 		},
 	}
-}
+})

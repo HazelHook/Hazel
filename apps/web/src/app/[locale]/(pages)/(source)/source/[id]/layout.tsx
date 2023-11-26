@@ -5,6 +5,7 @@ import { LinkTab } from "@hazel/ui/link-tabs"
 import { NavTabs } from "@hazel/ui/nav-tabs"
 
 import { getCachedSource } from "@/lib/orm"
+import { auth } from "@/lib/auth"
 
 const ConnectionLayout = async ({
 	children,
@@ -15,7 +16,9 @@ const ConnectionLayout = async ({
 		id: string
 	}
 }) => {
-	const source = await getCachedSource({ publicId: params.id })
+	const { workspaceId } = await auth()
+
+	const source = await getCachedSource({ publicId: params.id, workspaceId })
 	const slug = source?.integration?.tool
 	return (
 		<main className="p-6 space-y-4">

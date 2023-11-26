@@ -87,7 +87,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 		request_id: res.request_id,
 	})
 
-	const source = await getCachedSource({ publicId: res.source_id })
+	const source = await getCachedSource({ publicId: res.source_id, workspaceId })
 	const destination = await getCachedDestination({
 		publicId: res.destination_id,
 	})
