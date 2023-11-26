@@ -115,13 +115,7 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 						<Separator className="-mx-4" />
 						<div className="flex flex-col gap-2">
 							<Label className="ml-1">Source Url</Label>
-							<CopyButton
-								value={
-									configuration.production
-										? `https://api.hazelapp.dev/v1/webhook/${id}`
-										: `http://localhost:3003v/v1/webhook/${id}`
-								}
-							/>
+							<CopyButton value={`${process.env.NEXT_PUBLIC_HAZEL_BACKEND_URL}/v1/hook/${id}`} />
 						</div>
 						<Separator className="-mx-4" />
 						<div className="flex flex-row justify-between">
