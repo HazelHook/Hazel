@@ -1,12 +1,11 @@
 "use server"
 
+import { db } from "@hazel/db"
+import { createAction, protectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
+import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 import { z } from "zod"
 
-import { db } from "@hazel/db"
 import { userUpdateFormSchema } from "@/lib/schemas/user"
-
-import { TRPCError, createAction, protectedProcedure } from "@hazel/server/actions/trpc"
-import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 
 export const updateUserAction = createAction(
 	protectedProcedure.input(z.object({ id: z.string() }).merge(userUpdateFormSchema)).mutation(async ({ input }) => {
@@ -24,7 +23,12 @@ export const updateUserAction = createAction(
 
 export const updateUserProfileImageAction = createAction(
 	protectedProcedure
-		.input(z.object({ imageBuffer: z.string(), fileExt: z.enum(["jpg", "jpeg", "png", "gif", "svg"]) }))
+		.input(
+			z.object({
+				imageBuffer: z.string(),
+				fileExt: z.enum(["jpg", "jpeg", "png", "gif", "svg"]),
+			}),
+		)
 		.mutation(async ({ input, ctx }) => {
 			const client = getSupabaseServerActionClient({ admin: true })
 			const buffer = Buffer.from(input.imageBuffer, "base64")
@@ -38,7 +42,10 @@ export const updateUserProfileImageAction = createAction(
 			})
 
 			if (result.error) {
-				throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: result.error.message })
+				throw new TRPCError({
+					code: "INTERNAL_SERVER_ERROR",
+					message: result.error.message,
+				})
 			}
 
 			await db.user.update({

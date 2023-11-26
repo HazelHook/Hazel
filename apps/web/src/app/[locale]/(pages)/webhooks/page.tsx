@@ -1,14 +1,16 @@
-import { auth } from "@/lib/auth"
+import Link from "next/link"
 import { db } from "@hazel/db"
 import { AddIcon, InfoCircleIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 import Heading from "@hazel/ui/heading"
 import { SimpleTooltip } from "@hazel/ui/tooltip"
-import Link from "next/link"
-import { SourceCard } from "./components/source-card"
-import { DestinationCard } from "./components/destination-card"
+
+import { auth } from "@/lib/auth"
+
 import { ConnectionPath } from "./components/connection-path"
+import { DestinationCard } from "./components/destination-card"
+import { SourceCard } from "./components/source-card"
 
 const WebhooksPage = async () => {
 	const { workspaceId } = await auth()

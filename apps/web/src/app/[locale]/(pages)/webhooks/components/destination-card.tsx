@@ -1,18 +1,19 @@
 "use client"
 
-import { DeleteAltIcon, ExternalLink01Icon, InboxInIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
-import { buttonVariants } from "@hazel/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
-import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
-import { Separator } from "@hazel/ui/separator"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { DeleteAltIcon, ExternalLink01Icon, InboxInIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
-import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
-import { toast } from "sonner"
 import { AutoForm } from "@hazel/ui/auto-form"
-import { updateDestinationSchema } from "@/lib/schemas/destination"
+import { buttonVariants } from "@hazel/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
 import { LoadingButton } from "@hazel/ui/loading-button"
+import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
+import { Separator } from "@hazel/ui/separator"
+import { toast } from "sonner"
+
+import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
+import { updateDestinationSchema } from "@/lib/schemas/destination"
 
 export type DestinationCardProps = {
 	id: string
@@ -79,7 +80,10 @@ export const DestinationCard = ({ id, name, ...rest }: DestinationCardProps) => 
 
 					<AutoForm
 						onSubmit={async (values) => {
-							return await handleUpdate.mutateAsync({ ...values, publicId: id })
+							return await handleUpdate.mutateAsync({
+								...values,
+								publicId: id,
+							})
 						}}
 						defaultValues={{ name, ...rest }}
 						formSchema={updateDestinationSchema}

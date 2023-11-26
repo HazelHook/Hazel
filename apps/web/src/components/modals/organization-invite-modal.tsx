@@ -2,6 +2,8 @@
 
 import { ReactNode, useState } from "react"
 import { useRouter } from "next/navigation"
+import { getBaseUrl } from "@hazel/server/actions"
+import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import {
@@ -17,10 +19,8 @@ import { toast } from "sonner"
 import { z } from "zod"
 
 import type { createOrganizationInvite } from "@/server/actions/organization-invite"
-import { useAction } from "@hazel/server/actions/client"
 
 import { orgInviteFormSchema } from "../../lib/schemas/organization"
-import { getBaseUrl } from "@hazel/server/actions"
 
 interface CreateOrganizationModalProps {
 	children: ReactNode

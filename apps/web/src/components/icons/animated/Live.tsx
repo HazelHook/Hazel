@@ -1,12 +1,6 @@
 import { cn } from "@/lib/utils"
 
-export const LiveIcon = ({
-	className,
-	inactive,
-}: {
-	className?: string
-	inactive?: boolean
-}) => {
+export const LiveIcon = ({ className, inactive }: { className?: string; inactive?: boolean }) => {
 	return (
 		<div className={cn(className, "relative flex h-3 w-3")}>
 			<span

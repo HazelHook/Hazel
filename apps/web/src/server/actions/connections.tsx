@@ -1,9 +1,9 @@
 "use server"
 
+import { db } from "@hazel/db"
+import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 import { z } from "zod"
 
-import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
-import { db } from "@hazel/db"
 import { createConnectionSchema, updateConnectionSchema } from "@/lib/schemas/connection"
 
 export const createConnectionAction = createAction(

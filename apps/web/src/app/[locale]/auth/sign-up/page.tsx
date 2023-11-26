@@ -1,6 +1,5 @@
-import configuration from "@hazel/utils/configuration"
-
 import { SignUpPage } from "@hazel/auth/pages"
+import configuration from "@hazel/utils/configuration"
 
 export const metadata = {
 	title: "Sign up",

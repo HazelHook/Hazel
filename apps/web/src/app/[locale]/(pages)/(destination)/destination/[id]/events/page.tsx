@@ -1,13 +1,14 @@
 import { notFound } from "next/navigation"
+import tiny from "@hazel/tinybird"
+import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { auth } from "@/lib/auth"
-import { getCachedDestination } from "@/lib/orm"
-import tiny from "@hazel/tinybird"
-import { PromiseType } from "@/lib/ts/helpers"
 import { getTableParams } from "@/lib/data-table-helpers"
-import { AdvancedDataTable } from "@hazel/ui/data-table"
-import { columns } from "./column"
+import { getCachedDestination } from "@/lib/orm"
+import { PromiseType } from "@/lib/ts/helpers"
 import { httpStatusCodes } from "@/lib/utils"
+
+import { columns } from "./column"
 
 interface EventsPageProps {
 	params: {

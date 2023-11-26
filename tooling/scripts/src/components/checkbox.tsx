@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+
 import figures from "figures"
 
-import { Box, Text, useInput } from "../ext/ink"
+import { Text, useInput } from "../ext/ink"
 
 export function Checkbox({
 	selected,

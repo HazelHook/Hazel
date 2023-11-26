@@ -1,6 +1,6 @@
 import { and, eq } from "drizzle-orm"
 
-import { BaseFilters, EntityLogic } from "."
+import { BaseFilters, } from "."
 import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"

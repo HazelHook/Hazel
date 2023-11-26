@@ -1,13 +1,12 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { ChevronRightIcon } from "@hazel/icons"
+import { useAction } from "@hazel/server/actions/client"
+import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import configuration from "@hazel/utils/configuration"
 
-import { ChevronRightIcon } from "@hazel/icons"
-import { Avatar, AvatarImage } from "@hazel/ui/avatar"
-
 import type { switchOrganizationAction } from "@/server/actions/organization"
-import { useAction } from "@hazel/server/actions/client"
 
 interface OrgButtonProps {
 	name: string

@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import figures from "figures"
 
-import { Box, Text } from "../ext/ink"
+
+
+import { Text } from "../ext/ink"
 
 export function Quicklinks({
 	mode,

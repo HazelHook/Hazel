@@ -1,11 +1,11 @@
 "use client"
 
+import { ReactNode } from "react"
+import { useRouter } from "next/navigation"
 import { useAction } from "@hazel/server/actions/client"
 import { TRPCActionHandler } from "@hazel/server/actions/trpc"
 import Heading from "@hazel/ui/heading"
 import { ImageUpload } from "@hazel/ui/image-upload"
-import { useRouter } from "next/navigation"
-import { ReactNode } from "react"
 import { toast } from "sonner"
 
 export type AvatarUploadProps = {

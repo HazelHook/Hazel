@@ -1,4 +1,5 @@
 import { z } from "zod"
+
 import { searchParamsSchema } from "./validators/params"
 
 export const getTableParams = <SchemaType extends z.ZodObject<any, any>>(

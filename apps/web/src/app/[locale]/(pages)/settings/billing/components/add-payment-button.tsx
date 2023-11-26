@@ -1,10 +1,11 @@
 "use client"
 
-import { createCheckoutAction } from "@/server/actions/stripe"
+import { useRouter } from "next/navigation"
 import { AddIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Card } from "@hazel/ui/card"
-import { useRouter } from "next/navigation"
+
+import { createCheckoutAction } from "@/server/actions/stripe"
 
 export interface AddPaymentButtonProps {
 	stripeCustomerId: string

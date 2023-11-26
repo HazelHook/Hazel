@@ -1,7 +1,7 @@
 "use client"
 
-import { INTEGRATIONS } from "@hazel/integrations/web"
 import { CheckTickIcon } from "@hazel/icons"
+import { INTEGRATIONS } from "@hazel/integrations/web"
 import { Badge } from "@hazel/ui/badge"
 import { SortableHeader } from "@hazel/ui/data-table"
 import { ColumnDef } from "@tanstack/react-table"

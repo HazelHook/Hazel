@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, useEffect } from "react"
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
+import { Avatar, AvatarImage } from "./avatar"
 import { CloudUploadIcon } from "@hazel/icons"
 import { toast } from "sonner"
 import { cn } from "./utils"

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ClockIcon, DeleteDustbinIcon, EditPencilIcon, PlayBigIcon } from "@hazel/icons"
+import { useAction } from "@hazel/server/actions/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	Dialog,
@@ -16,8 +17,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { toast } from "sonner"
 
 import type { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
-import { useAction } from "@hazel/server/actions/client"
-
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
 export const ConnectionActions = ({

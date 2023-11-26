@@ -1,10 +1,11 @@
 import "server-only"
 
+import { notFound } from "next/navigation"
+import { db } from "@hazel/db"
+
 import { updateConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
-import { db } from "@hazel/db"
 import { UpdateConnectionForm } from "@/app/[locale]/(pages)/(connection)/connection/[id]/settings/form"
-import { notFound } from "next/navigation"
 
 export interface SettingsProps {
 	id: string

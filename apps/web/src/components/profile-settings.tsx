@@ -18,6 +18,7 @@ import {
 	RocketIcon,
 	SunIcon,
 } from "@hazel/icons"
+import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
@@ -43,8 +44,6 @@ import { useTheme } from "next-themes"
 import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
 import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { cn } from "@/lib/utils"
-
-import { useAction } from "@hazel/server/actions/client"
 
 type Membership = OrganizationMember & {
 	organization: Organization

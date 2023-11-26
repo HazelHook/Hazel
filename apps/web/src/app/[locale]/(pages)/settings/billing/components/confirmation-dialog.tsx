@@ -1,4 +1,4 @@
-import { Button } from "@hazel/ui/button"
+import { ReactNode } from "react"
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -10,7 +10,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@hazel/ui/alert-dialog"
-import { ReactNode } from "react"
+import { Button } from "@hazel/ui/button"
 
 export interface ConfirmationDialogProps {
 	children: ReactNode

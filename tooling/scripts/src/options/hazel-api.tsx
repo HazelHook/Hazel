@@ -1,6 +1,6 @@
-import React from "react"
 
-import { Box, Text } from "../ext/ink"
+
+import { Text } from "../ext/ink"
 
 export function HazelAPI({
 	mode,

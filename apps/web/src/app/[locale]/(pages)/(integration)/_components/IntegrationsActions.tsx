@@ -1,7 +1,8 @@
 import { useRouter } from "next/navigation"
-import { INTEGRATIONS } from "@hazel/integrations/web"
 import { Integration } from "@hazel/db/schema"
 import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
+import { INTEGRATIONS } from "@hazel/integrations/web"
+import { useAction } from "@hazel/server/actions/client"
 import { Button } from "@hazel/ui/button"
 import {
 	Dialog,
@@ -16,7 +17,6 @@ import {
 import { toast } from "sonner"
 
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
-import { useAction } from "@hazel/server/actions/client"
 import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
 
 export const IntegrationsActions = ({

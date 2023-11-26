@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
+import { useAction } from "@hazel/server/actions/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	Dialog,
@@ -15,8 +16,6 @@ import {
 import { toast } from "sonner"
 
 import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
-import { useAction } from "@hazel/server/actions/client"
-
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
 
 export const DestinationsActions = ({

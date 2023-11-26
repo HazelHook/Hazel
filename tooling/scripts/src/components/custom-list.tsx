@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import figures from "figures"
 
 import { Box, Text, useInput } from "../ext/ink"

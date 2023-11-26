@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation"
+import { db } from "@hazel/db"
 
 import { updateSourceAction } from "@/server/actions/source"
 import { auth } from "@/lib/auth"
-import { db } from "@hazel/db"
 import { getCachedSource } from "@/lib/orm"
 import { UpdateSourceForm } from "@/components/forms/source/update-source-form"
 

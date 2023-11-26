@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Quicklinks } from "@hazel/ui"
 
-import { Box, Newline, useInput } from "../ext/ink"
+import { Box, useInput } from "../ext/ink"
 import { HazelAPI } from "./hazel-api.jsx"
 import { Planter } from "./planter.jsx"
 import { Purger } from "./purger"

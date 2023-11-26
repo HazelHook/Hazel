@@ -1,4 +1,4 @@
-import { and, eq, isNull } from "drizzle-orm"
+import { eq, } from "drizzle-orm"
 
 import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"

@@ -1,6 +1,6 @@
-import Elysia, { t } from "elysia"
+import Elysia from "elysia"
 
-import { authGuard } from "../../guard/authGuard"
+
 import { connectionRouter } from "./connections"
 import { destinationRouter } from "./destination"
 import { sourceRouter } from "./sources"

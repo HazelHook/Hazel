@@ -1,15 +1,16 @@
-import { Container } from "@hazel/ui/container"
-import { PageHeader } from "@hazel/ui/page-header"
-import { ProjectPicker } from "./components/project-picker"
-import { auth } from "@/lib/auth"
-
-import tiny from "@hazel/tinybird"
 import { db } from "@hazel/db"
+import tiny from "@hazel/tinybird"
+import { Container } from "@hazel/ui/container"
+import { AdvancedDataTable } from "@hazel/ui/data-table"
+import { PageHeader } from "@hazel/ui/page-header"
+
+import { auth } from "@/lib/auth"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { errorPageSearchParamsSchema } from "@/lib/validators/params"
-import { columns } from "./column"
+
 import { DatePicker } from "../_component/date-picker"
-import { AdvancedDataTable } from "@hazel/ui/data-table"
+import { columns } from "./column"
+import { ProjectPicker } from "./components/project-picker"
 
 type ErrorPageProps = {
 	searchParams: any
@@ -37,7 +38,10 @@ const ErrorPage = async ({ searchParams }: ErrorPageProps) => {
 			<PageHeader title="Errors" subtitle="Error things" />
 			<div>
 				<ProjectPicker
-					data={destinations.map((dest) => ({ id: dest.publicId, name: dest.name }))}
+					data={destinations.map((dest) => ({
+						id: dest.publicId,
+						name: dest.name,
+					}))}
 					searchParamKey="dest"
 				/>
 				<DatePicker />

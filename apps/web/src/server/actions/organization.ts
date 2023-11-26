@@ -1,16 +1,15 @@
 "use server"
 
 import { cookies } from "next/headers"
+import { db } from "@hazel/db"
+import * as schema from "@hazel/db/schema"
+import { generatePublicId } from "@hazel/db/schema/common"
+import { basicProtectedProcedure, createAction, protectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
+import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
+import { createCustomer, createSubscription } from "@hazel/utils/lago"
 import { z } from "zod"
 
-import { db } from "@hazel/db"
 import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
-
-import { createAction, protectedProcedure, basicProtectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
-import { generatePublicId } from "@hazel/db/schema/common"
-import * as schema from "@hazel/db/schema"
-import { createCustomer, createSubscription } from "@hazel/utils/lago"
-import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 
 export const createOrganzation = async ({
 	plan = "free",
@@ -59,7 +58,11 @@ export const createOrganzation = async ({
 
 export const createOrganzationAction = createAction(
 	basicProtectedProcedure.input(createOrgFormSchema).mutation(async ({ input, ctx }) => {
-		return await createOrganzation({ ...input, primaryEmail: ctx.auth.user.email!, ownerId: ctx.auth.customerId })
+		return await createOrganzation({
+			...input,
+			primaryEmail: ctx.auth.user.email!,
+			ownerId: ctx.auth.customerId,
+		})
 	}),
 )
 
@@ -77,7 +80,12 @@ export const updateOrganzationAction = createAction(
 
 export const updateOrganizationProfileImageAction = createAction(
 	protectedProcedure
-		.input(z.object({ imageBuffer: z.string(), fileExt: z.enum(["jpg", "jpeg", "png", "gif", "svg"]) }))
+		.input(
+			z.object({
+				imageBuffer: z.string(),
+				fileExt: z.enum(["jpg", "jpeg", "png", "gif", "svg"]),
+			}),
+		)
 		.mutation(async ({ input, ctx }) => {
 			const client = getSupabaseServerActionClient({ admin: true })
 			const buffer = Buffer.from(input.imageBuffer, "base64")
@@ -91,7 +99,10 @@ export const updateOrganizationProfileImageAction = createAction(
 			})
 
 			if (result.error) {
-				throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: result.error.message })
+				throw new TRPCError({
+					code: "INTERNAL_SERVER_ERROR",
+					message: result.error.message,
+				})
 			}
 
 			await db.organization.update({

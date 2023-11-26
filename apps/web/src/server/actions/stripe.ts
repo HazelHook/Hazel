@@ -1,10 +1,9 @@
 "use server"
 
-import { z } from "zod"
-
+import { revalidatePath } from "next/cache"
 import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 import { createCheckoutSession, stripe } from "@hazel/utils/stripe"
-import { revalidatePath } from "next/cache"
+import { z } from "zod"
 
 export const createCheckoutAction = createAction(
 	protectedProcedure

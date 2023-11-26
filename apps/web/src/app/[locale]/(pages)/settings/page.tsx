@@ -1,10 +1,11 @@
+import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
 
+import { updateOrganizationProfileImageAction } from "@/server/actions/organization"
 import { auth } from "@/lib/auth"
 import { OrganizationUpdateForm } from "@/components/forms/organization/OrganizationUpdateForm"
+
 import { AvatarUpload } from "./components/AvatarUpload"
-import { Card } from "@hazel/ui/card"
-import { updateOrganizationProfileImageAction } from "@/server/actions/organization"
 
 const SettingsPage = async () => {
 	const { workspaceId, organization } = await auth()

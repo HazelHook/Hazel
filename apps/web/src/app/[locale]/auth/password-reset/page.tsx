@@ -1,6 +1,5 @@
-import configuration from "@hazel/utils/configuration"
-
 import { PasswordResetPage } from "@hazel/auth/pages"
+import configuration from "@hazel/utils/configuration"
 
 export const metadata = {
 	title: "Password Reset",

@@ -1,7 +1,6 @@
 import { cookies } from "next/headers"
 import {
 	AutomationIcon,
-	DashboardSimpleIcon,
 	FileInfoIcon,
 	GitCommitIcon,
 	HomeIcon,

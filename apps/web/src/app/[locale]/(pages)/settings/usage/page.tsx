@@ -4,7 +4,7 @@ import Alert, { AlertHeading } from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
-import { Separator } from "@hazel/ui/separator"
+
 import { lago } from "@hazel/utils/lago"
 import Link from "next/link"
 import { BillingTable } from "../billing/components/billing-table"

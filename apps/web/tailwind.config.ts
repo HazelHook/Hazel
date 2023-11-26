@@ -1,4 +1,4 @@
-import baseConfig from "@hazel/tailwind-config"
+
 import type { Config } from "tailwindcss"
 
 export default {

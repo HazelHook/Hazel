@@ -1,10 +1,12 @@
 "use client"
 
+import { Destination, Source } from "@hazel/db"
 import { TBResponse } from "@hazel/tinybird"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
-import { responseColumns } from "./response-column"
+
 import { httpStatusCodes } from "@/lib/utils"
-import { Destination, Source } from "@hazel/db"
+
+import { responseColumns } from "./response-column"
 
 type ResponseTableProps = {
 	data: TBResponse[]

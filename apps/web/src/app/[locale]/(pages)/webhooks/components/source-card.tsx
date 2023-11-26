@@ -15,7 +15,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@hazel/ui/dialog"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
 import { Label } from "@hazel/ui/label"
 import { LoadingButton } from "@hazel/ui/loading-button"
-import Modal from "@hazel/ui/modal"
+
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import Link from "next/link"

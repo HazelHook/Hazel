@@ -1,12 +1,12 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { db } from "@hazel/db"
 import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 import { SimpleDataTable } from "@hazel/ui/data-table"
 
 import { auth } from "@/lib/auth"
-import { db } from "@hazel/db"
 
 import { columns } from "./columns"
 

@@ -1,5 +1,5 @@
 import childProcess from "node:child_process"
-import React, { useState } from "react"
+import { useState } from "react"
 
 import { Button } from "../components/button"
 import { Checkbox } from "../components/checkbox"

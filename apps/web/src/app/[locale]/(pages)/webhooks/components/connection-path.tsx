@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import {
 	AutomationIcon,
 	DeleteAltIcon,
@@ -9,18 +11,17 @@ import {
 	ThreeDotsHorizontalIcon,
 	TimerIcon,
 } from "@hazel/icons"
+import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
+import { LoadingButton } from "@hazel/ui/loading-button"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
-import Link from "next/link"
-import { updateConnectionSchema } from "@/lib/schemas/connection"
-import { useAction } from "@hazel/server/actions/client"
-import { deleteConnectionAction, updateConnectionAction } from "@/server/actions/connections"
-import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { LoadingButton } from "@hazel/ui/loading-button"
+
+import { deleteConnectionAction, updateConnectionAction } from "@/server/actions/connections"
+import { updateConnectionSchema } from "@/lib/schemas/connection"
 
 export type ConnectionPathProps = {
 	id: string
@@ -93,7 +94,10 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 
 					<AutoForm
 						onSubmit={async (values) => {
-							return await handleUpdateConnection.mutateAsync({ ...values, publicId: id })
+							return await handleUpdateConnection.mutateAsync({
+								...values,
+								publicId: id,
+							})
 						}}
 						defaultValues={{ name, retryType, delay }}
 						formSchema={updateConnectionSchema}

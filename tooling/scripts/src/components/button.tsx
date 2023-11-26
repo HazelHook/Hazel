@@ -1,4 +1,4 @@
-import React from "react"
+
 
 import { Box, Text, useInput } from "../ext/ink"
 

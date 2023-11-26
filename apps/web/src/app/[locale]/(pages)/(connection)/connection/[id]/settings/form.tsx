@@ -3,14 +3,13 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { buttonVariants } from "@hazel/ui/button"
 import { LoadingButton } from "@hazel/ui/loading-button"
 import * as z from "zod"
 
 import type { updateConnectionAction } from "@/server/actions/connections"
-import { useAction } from "@hazel/server/actions/client"
-
 import { getCachedConnection } from "@/lib/orm"
 import { updateConnectionSchema } from "@/lib/schemas/connection"
 import { PromiseType } from "@/lib/ts/helpers"
@@ -44,7 +43,12 @@ export function UpdateConnectionForm({ action, isModal, connection }: NewSourceF
 				values={values}
 				onValuesChange={setValues}
 				formSchema={updateConnectionSchema}
-				onSubmit={async (val) => await createSource.mutateAsync({ ...val, publicId: connection.publicId })}
+				onSubmit={async (val) =>
+					await createSource.mutateAsync({
+						...val,
+						publicId: connection.publicId,
+					})
+				}
 				fieldConfig={{
 					name: {
 						description: "A name to identify your connection.",

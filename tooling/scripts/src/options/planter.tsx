@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Tiny } from "@hazel/db/src/tinybird/index.js"
 import { rand, randBetweenDate, randJSON, randNumber, randText, randUrl, randWord } from "@ngneat/falso"
-import figures from "figures"
+
 import { nanoid } from "nanoid"
 
 import { Box, measureElement, Newline, Text, useInput } from "../ext/ink"

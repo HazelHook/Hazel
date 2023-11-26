@@ -17,18 +17,17 @@ import {
 	CommandList,
 	CommandGroup,
 	CommandItem,
-	CommandSeparator,
 	CommandShortcut,
 	CommandEmpty,
 } from "@hazel/ui/command"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Input } from "@hazel/ui/input"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@hazel/ui/tabs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
-import { toast } from "sonner"
+
 import { z } from "zod"
 
 export type NewConnectionFormProps = {

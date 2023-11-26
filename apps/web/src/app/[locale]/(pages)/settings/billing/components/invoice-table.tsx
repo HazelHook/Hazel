@@ -1,14 +1,15 @@
+import { revalidatePath } from "next/cache"
+import { File2DocumentIcon } from "@hazel/icons"
+import { Button } from "@hazel/ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
+import { SimpleTooltip } from "@hazel/ui/tooltip"
+import { lago } from "@hazel/utils/lago"
 import { format } from "date-fns"
 
 import { currencyFormatter } from "@/lib/formatters"
-import { lago } from "@hazel/utils/lago"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 import { capitalizeFirstLetter, cn } from "@/lib/utils"
-import { Button } from "@hazel/ui/button"
-import { File2DocumentIcon } from "@hazel/icons"
-import { revalidatePath } from "next/cache"
+
 import { FormLoadButton } from "./form-load-button"
-import { SimpleTooltip } from "@hazel/ui/tooltip"
 
 const PaymentStatus = ({ status }: { status: "succeeded" | "failed" | "pending" }) => {
 	const statusMap = {

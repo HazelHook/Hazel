@@ -1,7 +1,6 @@
 import Link from "next/link"
-import configuration from "@hazel/utils/configuration"
-
 import { Logo } from "@hazel/ui/logo"
+import configuration from "@hazel/utils/configuration"
 
 export const dynamic = "force-dynamic"
 

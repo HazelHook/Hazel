@@ -1,8 +1,10 @@
+import { db } from "@hazel/db"
+import { Container } from "@hazel/ui/container"
+
 import { createConnectionAction } from "@/server/actions/connections"
 import { auth } from "@/lib/auth"
-import { db } from "@hazel/db"
+
 import { NewConnectionForm } from "./new-connection-form"
-import { Container } from "@hazel/ui/container"
 
 const NewConnectionPage = async () => {
 	const { workspaceId } = await auth()

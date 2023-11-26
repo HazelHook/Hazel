@@ -1,15 +1,17 @@
-import { PlanCard } from "@/app/[locale]/(pages)/settings/billing/components/plan-card"
-import { auth } from "@/lib/auth"
 import Alert, { AlertHeading } from "@hazel/ui/alert"
-import { Container } from "@hazel/ui/container"
-import { lago } from "@hazel/utils/lago"
-import { PaymentSection } from "./components/payment-section"
-import { BillingTable } from "./components/billing-table"
 import { Card } from "@hazel/ui/card"
-import { PageHeader } from "@hazel/ui/page-header"
-import { InvoiceTable } from "./components/invoice-table"
-import { format } from "date-fns"
+import { Container } from "@hazel/ui/container"
 import Heading from "@hazel/ui/heading"
+import { PageHeader } from "@hazel/ui/page-header"
+import { lago } from "@hazel/utils/lago"
+
+
+import { auth } from "@/lib/auth"
+import { PlanCard } from "@/app/[locale]/(pages)/settings/billing/components/plan-card"
+
+import { BillingTable } from "./components/billing-table"
+import { InvoiceTable } from "./components/invoice-table"
+import { PaymentSection } from "./components/payment-section"
 
 export default async function BillingPage() {
 	const { workspaceId } = await auth()

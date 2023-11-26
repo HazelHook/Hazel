@@ -9,6 +9,7 @@
 		"format": "pnpm prettier:write && pnpm rome:format:write",
 		"prettier:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
 		"rome:format:write": "biome format --write ./",
+		"biome:lint": "biome lint --apply  ./",
 		"supabase:gen": "supabase gen types typescript --linked > ./packages/db/src/database.types.ts"
 	},
 	"devDependencies": {

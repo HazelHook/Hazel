@@ -1,9 +1,8 @@
 "use client"
 
-import { INTEGRATIONS, IntegrationToolSlug } from "@hazel/integrations/web"
-
 import { Connection, Destination, Integration, Source } from "@hazel/db/schema"
 import { CheckTickIcon } from "@hazel/icons"
+import { INTEGRATIONS, IntegrationToolSlug } from "@hazel/integrations/web"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Cell, SortableHeader } from "@hazel/ui/data-table"

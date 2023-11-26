@@ -5,13 +5,7 @@ import Link from "next/link"
 import { Button } from "@hazel/ui/button"
 import { Image } from "@hazel/ui/image"
 
-export default function ErrorPage({
-	error,
-	reset,
-}: {
-	error: Error
-	reset: () => void
-}) {
+export default function ErrorPage({ error, reset }: { error: Error; reset: () => void }) {
 	useEffect(() => {
 		// Log the error to an error reporting service
 		console.error(error)

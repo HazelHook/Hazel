@@ -1,10 +1,11 @@
 "use client"
 
-import { FC, ReactNode, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
+import { inputStyle } from "@hazel/ui/input"
 import { AnimatePresence, motion } from "framer-motion"
 import { toast } from "sonner"
+
 import { cn } from "@/lib/utils"
-import { inputStyle } from "@hazel/ui/input"
 
 interface CopyButtonProps {
 	className?: string

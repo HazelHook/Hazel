@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { INTEGRATIONS, IntegrationTool, IntegrationTools } from "@hazel/integrations/web"
+import { INTEGRATIONS, IntegrationTool, } from "@hazel/integrations/web"
 import { Integration } from "@hazel/db/schema"
 import { AutoForm, AutoFormInputComponentProps } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"

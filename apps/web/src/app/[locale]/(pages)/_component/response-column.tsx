@@ -1,8 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { TBResponse } from "@hazel/tinybird"
+import { Destination, Source } from "@hazel/db"
 import { FilterVerticalIcon } from "@hazel/icons"
+import { TBResponse } from "@hazel/tinybird"
+import { Badge } from "@hazel/ui/badge"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -13,10 +15,9 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
-import { Status } from "@/components/status"
+
 import { dataTableTimestampFormatter } from "@/lib/formatters"
-import { Destination, Source } from "@hazel/db"
-import { Badge } from "@hazel/ui/badge"
+import { Status } from "@/components/status"
 
 export type Column = TBResponse & {
 	sources: Source[]

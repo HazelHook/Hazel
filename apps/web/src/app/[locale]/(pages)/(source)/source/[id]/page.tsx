@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation"
 import { Destination } from "@hazel/db/schema"
+import tiny from "@hazel/tinybird"
 import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
 import { SimpleDataTable } from "@hazel/ui/data-table"
@@ -11,8 +12,6 @@ import { chartColors, formatDateTime } from "@/lib/utils"
 import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
 import { columns } from "./column"
-
-import tiny from "@hazel/tinybird"
 
 const SourcePage = async ({
 	params,

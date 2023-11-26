@@ -1,11 +1,11 @@
 "use server"
 
 import { cookies } from "next/headers"
+import { db } from "@hazel/db"
 import * as schema from "@hazel/db/schema"
+import { basicProtectedProcedure, createAction } from "@hazel/server/actions/trpc"
 import { z } from "zod"
 
-import { createAction, basicProtectedProcedure } from "@hazel/server/actions/trpc"
-import { db } from "@hazel/db"
 import { createOrganzation } from "./organization"
 
 const formSchema = z.object({

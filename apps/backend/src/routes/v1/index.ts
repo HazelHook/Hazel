@@ -1,4 +1,4 @@
-import { Elysia, t } from "elysia"
+import { Elysia, } from "elysia"
 
 import db from "@hazel/db"
 import tiny from "@hazel/tinybird"
