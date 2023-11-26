@@ -1,5 +1,8 @@
 import { z } from "zod"
-import { createIntegrationForm } from "../../types"
+import { InferIntegrationType, createIntegrationForm } from "../../types"
+
+export type StripeProviderProps = InferIntegrationType<typeof stripeForm>
+
 export const stripeForm = createIntegrationForm({
 	name: "stripe",
 	schema: {

@@ -55,16 +55,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 										icon: WebhookIcon,
 									},
 									{
-										title: "Integrations",
-										href: "/integrations",
-										icon: DashboardSimpleIcon,
-									},
-								],
-							},
-							{
-								title: "Setup",
-								items: [
-									{
 										title: "Connections",
 										href: "/connections",
 										icon: LinkChainIcon,

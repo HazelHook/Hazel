@@ -3,6 +3,7 @@ import { WebhookVerifier } from "./base"
 import { SvixVerifier } from "./provider/svix"
 import { LinearVerifier } from "./provider/linear"
 import { HmacVerifier } from "./provider/hmac"
+import { StripeVerfier } from "./provider/stripe"
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class WebhookVerifierFactory {
@@ -31,3 +32,4 @@ WebhookVerifierFactory.registerVerifier("clerk", SvixVerifier)
 WebhookVerifierFactory.registerVerifier("resend", SvixVerifier)
 
 WebhookVerifierFactory.registerVerifier("linear", LinearVerifier)
+WebhookVerifierFactory.registerVerifier("stripe", StripeVerfier)
