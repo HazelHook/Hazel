@@ -11,7 +11,8 @@ import { chartColors, formatDateTime } from "@/lib/utils"
 import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
 import { columns } from "./column"
-import tiny from "@/lib/tiny"
+
+import tiny from "@hazel/tinybird"
 
 const SourcePage = async ({
 	params,

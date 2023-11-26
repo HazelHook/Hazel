@@ -5,7 +5,7 @@ import { sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination } from "@/lib/orm"
-import tiny from "@/lib/tiny"
+import tiny from "@hazel/tinybird"
 import { chartColors, formatDateTime } from "@/lib/utils"
 import { transformDestinationsChartData, transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 

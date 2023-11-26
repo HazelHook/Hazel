@@ -1,6 +1,6 @@
 "use server"
 
-import tiny from "@/lib/tiny"
+import tiny from "@hazel/tinybird"
 import { TRPCError, createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 import { z } from "zod"
 

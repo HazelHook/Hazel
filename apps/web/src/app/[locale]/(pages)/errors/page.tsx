@@ -3,7 +3,7 @@ import { PageHeader } from "@hazel/ui/page-header"
 import { ProjectPicker } from "./components/project-picker"
 import { auth } from "@/lib/auth"
 
-import tiny from "@/lib/tiny"
+import tiny from "@hazel/tinybird"
 import { db } from "@hazel/db"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { errorPageSearchParamsSchema } from "@/lib/validators/params"

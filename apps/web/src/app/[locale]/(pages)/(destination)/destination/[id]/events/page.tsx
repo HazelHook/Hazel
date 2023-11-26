@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination } from "@/lib/orm"
-import tiny from "@/lib/tiny"
+import tiny from "@hazel/tinybird"
 import { PromiseType } from "@/lib/ts/helpers"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { AdvancedDataTable } from "@hazel/ui/data-table"

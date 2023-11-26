@@ -10,7 +10,7 @@ import { Code } from "bright"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination, getCachedSource } from "@/lib/orm"
-import tiny from "@/lib/tiny"
+import tiny from "@hazel/tinybird"
 import { jsonToArray } from "@/lib/utils"
 import { Status } from "@/components/status"
 

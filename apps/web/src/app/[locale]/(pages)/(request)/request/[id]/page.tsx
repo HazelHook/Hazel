@@ -8,7 +8,7 @@ import { Code } from "bright"
 
 import { auth } from "@/lib/auth"
 import { getCachedSource } from "@/lib/orm"
-import tiny from "@/lib/tiny"
+import tiny from "@hazel/tinybird"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { Status } from "@/components/status"
 import { Await } from "@hazel/ui/await"
