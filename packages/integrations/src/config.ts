@@ -73,7 +73,7 @@ export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 			"Easily integrate and automate webhook processing for Stripe, a comprehensive solution for online payments, and manage transactions more efficiently.",
 		features: ["database", "authentication"],
 		config: stripeForm,
-		disabled: true,
+		disabled: false,
 	},
 	github: {
 		slug: "github",

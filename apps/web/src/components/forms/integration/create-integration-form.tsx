@@ -1,6 +1,6 @@
 "use client"
 
-import { notFound, useRouter } from "next/navigation"
+import { notFound } from "next/navigation"
 import { createZodIntegrationSchema, IntegrationTool } from "@hazel/integrations/web"
 
 import { createIntegrationAction } from "@/server/actions/integrations"
@@ -21,7 +21,6 @@ export const NewIntegrationForm = ({
 	const createIntegration = useAction(createIntegrationAction, {
 		onSuccess(data) {
 			onSuccess?.(data.id)
-			// router.refresh()
 		},
 	})
 
@@ -33,7 +32,7 @@ export const NewIntegrationForm = ({
 		<AutoForm
 			className="w-full"
 			formSchema={schema}
-			fieldConfig={config.schema as any}
+			fieldConfig={config.schema}
 			onSubmit={async (data) => createIntegration.mutateAsync({ config: data, tool: slug })}
 		>
 			<LoadingButton type="submit" loading={createIntegration.status === "loading"}>

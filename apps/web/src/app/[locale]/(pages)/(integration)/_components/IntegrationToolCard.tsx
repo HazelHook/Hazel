@@ -15,7 +15,7 @@ import { Dialog, DialogContent, DialogHeader } from "@hazel/ui/dialog"
 import { Separator } from "@hazel/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@hazel/ui/tooltip"
 
-import { NewIntegrationForm } from "@/components/forms/integration/CreateIntegrationForm"
+import { NewIntegrationForm } from "@/components/forms/integration/create-integration-form"
 
 const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	({

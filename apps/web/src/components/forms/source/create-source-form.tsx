@@ -18,7 +18,7 @@ import { Label } from "@hazel/ui/label"
 import { useState } from "react"
 import { Dialog, DialogContent, DialogHeader } from "@hazel/ui/dialog"
 import { Separator } from "@hazel/ui/separator"
-import { NewIntegrationForm } from "../integration/CreateIntegrationForm"
+import { NewIntegrationForm } from "../integration/create-integration-form"
 import { z } from "zod"
 
 interface CreateSourceFormProps {
