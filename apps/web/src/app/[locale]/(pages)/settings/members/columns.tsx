@@ -1,16 +1,15 @@
 "use client"
 
-import { OrganizationMember } from "@hazel/db/schema"
-import { User } from "@supabase/supabase-js"
+import { User } from "@hazel/db/schema"
 import { ColumnDef } from "@tanstack/react-table"
 import { formatDistance } from "date-fns"
 
 import { MemberOptions } from "./_components/MemberOptions"
 import { RoleSelect } from "./_components/RoleSelect"
 import { UserCell } from "./_components/UserCell"
-import { AugmentedMember } from "./page"
+import { MmeberListPageData } from "./page"
 
-export const columns: ColumnDef<AugmentedMember>[] = [
+export const columns: ColumnDef<MmeberListPageData>[] = [
 	{
 		accessorKey: "user",
 		id: "name",

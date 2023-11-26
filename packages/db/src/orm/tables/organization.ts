@@ -139,6 +139,7 @@ const organizationsLogic = (db: DB) =>
 					where: whereClause,
 					with: {
 						organization: true,
+						user: true,
 					},
 				})
 				return memberShips
