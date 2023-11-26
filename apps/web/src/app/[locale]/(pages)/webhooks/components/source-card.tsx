@@ -1,7 +1,9 @@
 "use client"
 
 import { CopyButton } from "@/components/copy-button"
+import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
 import { updateSourceSchema } from "@/lib/schemas/source"
+import { updateIntegrationAction } from "@/server/actions/integrations"
 import { deleteSourceAction, updateSourceAction } from "@/server/actions/source"
 import { Integration } from "@hazel/db"
 import { DeleteAltIcon, ExternalLink01Icon, LogInLeftIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
@@ -9,13 +11,13 @@ import { INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Button, buttonVariants } from "@hazel/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@hazel/ui/dialog"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
-import { Image } from "@hazel/ui/image"
 import { Label } from "@hazel/ui/label"
 import { LoadingButton } from "@hazel/ui/loading-button"
+import Modal from "@hazel/ui/modal"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
-import configuration from "@hazel/utils/configuration"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -102,14 +104,25 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 						{integration && (
 							<div className="flex flex-col gap-2">
 								<Label className="ml-1">Integration</Label>
-								<Button type="button" variant="outline" className="justify-start">
-									<img
-										src={`/assets/integrations/${integration?.tool}.svg`}
-										alt={integration?.tool}
-										className="mr-2 w-5"
-									/>
-									{INTEGRATIONS[integration.tool as IntegrationTools].name}
-								</Button>
+								<Dialog>
+									<DialogContent>
+										<UpdateIntegrationForm
+											data={integration}
+											integration={INTEGRATIONS[integration.tool as IntegrationTools]}
+											updateAction={updateIntegrationAction}
+										/>
+									</DialogContent>
+									<DialogTrigger asChild>
+										<Button type="button" variant="outline" className="justify-start">
+											<img
+												src={`/assets/integrations/${integration?.tool}.svg`}
+												alt={integration?.tool}
+												className="mr-2 w-5"
+											/>
+											{INTEGRATIONS[integration.tool as IntegrationTools].name}
+										</Button>
+									</DialogTrigger>
+								</Dialog>
 							</div>
 						)}
 						<Separator className="-mx-4" />
