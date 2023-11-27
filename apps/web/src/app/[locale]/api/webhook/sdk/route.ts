@@ -13,10 +13,15 @@ const svix = hazel.createWebhook({ event: "svix", id: "svix" }, async (opts) => 
 	return { body: "Hello, World!" }
 })
 
+const linear = hazel.createWebhook({ event: "linear", id: "linear" }, async (opts) => {
+	console.log(opts.event.data, "XD")
+	return { body: "Hello, World!" }
+})
+
 export const { GET, POST, PUT } = serve({
 	client: hazel,
 	secret: "",
-	webhooks: [svix, stripe],
+	webhooks: [svix, stripe, linear],
 })
 
 // export const runtime = "edge"

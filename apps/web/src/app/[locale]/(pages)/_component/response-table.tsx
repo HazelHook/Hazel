@@ -12,7 +12,7 @@ import { LogInLeftIcon } from "@hazel/icons"
 type ResponseTableProps = {
 	data: TBResponse[]
 	sources: (Source & {
-		integration: Integration
+		integration: Integration | null
 	})[]
 	destinations: Destination[]
 	maxItems: number

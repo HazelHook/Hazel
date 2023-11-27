@@ -3,65 +3,60 @@
 import { getSeededProfileImageUrl } from "@/lib/utils"
 
 import { Connection, Destination, Integration, Source } from "@hazel/db/schema"
-import { CheckTickIcon } from "@hazel/icons"
-import { INTEGRATIONS, IntegrationToolSlug } from "@hazel/integrations/web"
+import { CheckTickIcon, LogInLeftIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
-import { Cell, SortableHeader } from "@hazel/ui/data-table"
-import { ColumnDef } from "@tanstack/react-table"
+import { Button } from "@hazel/ui/button"
+import { SortableHeader } from "@hazel/ui/data-table"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
+import { createColumnHelper } from "@tanstack/react-table"
+import Link from "next/link"
+import { SourceActions } from "./source-actions"
+import { deleteSourceAction } from "@/server/actions/source"
 
 export type Column = Source & {
-	connections: Connection[]
+	connections: (Connection & {
+		destination: Destination
+	})[]
 	integration: Integration
 }
 
-export const columns: ColumnDef<Column>[] = [
-	{
-		accessorKey: "name",
+const columnHelper = createColumnHelper<Column>()
+
+export const columns = [
+	columnHelper.accessor("name", {
 		header: ({ column }) => {
 			return <SortableHeader name={"Name"} column={column} />
 		},
 		cell: ({ cell, row }) => {
-			const id = row.original.publicId
 			return (
-				<Cell>
-					<Avatar className="w-4 h-4 mr-2">
-						<AvatarImage src={getSeededProfileImageUrl(id)} />
-					</Avatar>
-					{cell.getValue<string>()}
-				</Cell>
+				<Link prefetch={false} href={`/source/${row.original.publicId}`} className="flex flex-row items-center">
+					<Tooltip delayDuration={200}>
+						<TooltipTrigger>
+							<Button className="gap-2" variant="ghost">
+								{row.original.integration ? (
+									<img
+										src={`/assets/integrations/${row.original.integration.tool}.svg`}
+										alt={row.original.integration.tool}
+										className="w-6 h-6"
+									/>
+								) : (
+									<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+								)}
+								{cell.getValue<string>()}
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>View Detailed</TooltipContent>
+					</Tooltip>
+				</Link>
 			)
 		},
-	},
-	{
-		accessorKey: "integration",
-		header: ({ column }) => {
-			return <SortableHeader name={"Type"} column={column} />
-		},
-		cell: ({ cell }) => {
-			const value = cell.getValue() as Integration
-			if (!value) return <div className="flex flex-row justify-center">Custom</div>
-
-			const integrationDefinition = INTEGRATIONS[value.tool as IntegrationToolSlug]
-
-			return (
-				<Cell>
-					<img
-						src={`/assets/integrations/${integrationDefinition.slug}.svg`}
-						alt={integrationDefinition.slug}
-						className="w-7 h-7"
-					/>
-				</Cell>
-			)
-		},
-	},
-	{
-		accessorKey: "connections",
+	}),
+	columnHelper.accessor("connections", {
+		id: "destinations",
 		header: "Destination",
 		cell: ({ cell }) => {
-			const connections = cell.getValue() as (Connection & {
-				destination: Destination
-			})[]
+			const connections = cell.getValue()
 
 			return (
 				<div className="flex flex-row gap-1">
@@ -81,27 +76,11 @@ export const columns: ColumnDef<Column>[] = [
 				</div>
 			)
 		},
-	},
-	{
-		accessorKey: "group",
-		header: ({ column }) => {
-			return <SortableHeader name={"Group"} column={column} />
-		},
-		cell: ({ cell }) => {
-			return (
-				<Cell>
-					<p>-</p>
-				</Cell>
-			)
-		},
-	},
-	{
-		accessorKey: "connections",
+	}),
+	columnHelper.accessor("connections", {
 		header: "Status",
 		cell: ({ cell }) => {
-			const connections = cell.getValue() as (Connection & {
-				destination: Destination
-			})[]
+			const connections = cell.getValue()
 
 			return (
 				<Badge>
@@ -110,5 +89,11 @@ export const columns: ColumnDef<Column>[] = [
 				</Badge>
 			)
 		},
-	},
+	}),
+	columnHelper.display({
+		id: "actions",
+		cell: ({ row }) => {
+			return <SourceActions data={row.original} deleteAction={deleteSourceAction} />
+		},
+	}),
 ]

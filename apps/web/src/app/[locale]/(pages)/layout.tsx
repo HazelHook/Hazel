@@ -6,15 +6,7 @@ import { ProfileSettings } from "@/components/profile-settings"
 import { Sidebar } from "@/components/sidebar"
 
 import { db } from "@hazel/db"
-import {
-	AutomationIcon,
-	FileInfoIcon,
-	GitCommitIcon,
-	HomeIcon,
-	LinkChainIcon,
-	Settings01Icon,
-	WebhookIcon,
-} from "@hazel/icons"
+import { AutomationIcon, FileInfoIcon, GitCommitIcon, HomeIcon, Settings01Icon, WebhookIcon } from "@hazel/icons"
 import { TooltipProvider } from "@hazel/ui/tooltip"
 
 interface RootLayoutProps {
@@ -53,11 +45,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 										title: "Webhooks",
 										href: "/webhooks",
 										icon: WebhookIcon,
-									},
-									{
-										title: "Connections",
-										href: "/connections",
-										icon: LinkChainIcon,
 									},
 									{
 										title: "Sources",
