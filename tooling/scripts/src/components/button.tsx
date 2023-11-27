@@ -1,5 +1,3 @@
-
-
 import { Box, Text, useInput } from "../ext/ink"
 
 export function Button({

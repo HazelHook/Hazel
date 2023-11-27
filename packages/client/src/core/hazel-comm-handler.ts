@@ -1,13 +1,12 @@
-import { Hazel } from "./hazel"
-import { Env, allProcessEnv, hazelHeaders } from "../lib/helpers/env"
+import { allProcessEnv, Env, hazelHeaders } from "../lib/helpers/env"
 import { rethrowError, serializeError } from "../lib/helpers/errors"
 import { runAsPromise } from "../lib/helpers/promises"
-import { IntrospectRequest, MaybePromise } from "../lib/helpers/types"
-import { RegisterOptions, RegisterRequest, SupportedFrameworks, WebhookConfig } from "../lib/types"
-import { AnyHazelWebhook, HazelWebhook } from "./webhook-function"
-
 import { safeStringify } from "../lib/helpers/safe-stringify"
 import { awaitSync } from "../lib/helpers/sync"
+import { IntrospectRequest, MaybePromise } from "../lib/helpers/types"
+import { RegisterOptions, RegisterRequest, SupportedFrameworks, WebhookConfig } from "../lib/types"
+import { Hazel } from "./hazel"
+import { AnyHazelWebhook, HazelWebhook } from "./webhook-function"
 
 /**
  * The broad definition of a handler passed when instantiating an
@@ -149,7 +148,7 @@ export type HandlerResponse<Output = any, StreamOutput = any> = {
  * The response from the Hazel SDK before it is transformed in to a
  * framework-compatible response by an {@link HazelCommHandler} instance.
  */
-export interface ActionResponse<TBody extends string | ReadableStream = string> {
+export interface ActionResponse<TBody extends string | ReadableStream = string,> {
 	/**
 	 * The HTTP status code to return.
 	 */

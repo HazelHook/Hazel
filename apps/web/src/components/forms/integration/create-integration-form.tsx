@@ -1,11 +1,11 @@
 "use client"
 
 import { notFound } from "next/navigation"
-import { createZodIntegrationSchema, IntegrationTool } from "@hazel/integrations/web"
 
 import { createIntegrationAction } from "@/server/actions/integrations"
-import { useAction } from "@hazel/server/actions/client"
 
+import { createZodIntegrationSchema, IntegrationTool } from "@hazel/integrations/web"
+import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { LoadingButton } from "@hazel/ui/loading-button"
 

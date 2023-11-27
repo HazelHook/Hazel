@@ -1,4 +1,3 @@
-
 import figures from "figures"
 
 import { Text, useInput } from "../ext/ink"

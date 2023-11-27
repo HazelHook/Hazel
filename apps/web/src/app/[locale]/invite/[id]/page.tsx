@@ -1,12 +1,13 @@
 import { notFound } from "next/navigation"
+
+import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
+
+import { db } from "@hazel/db"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Heading } from "@hazel/ui/heading"
 import { If } from "@hazel/ui/if"
 import { getLogger } from "@hazel/utils"
 import { useTranslations } from "next-intl"
-
-import { acceptOrganizationInvite } from "@/server/actions/organization-invite"
-import { db } from "@hazel/db"
 
 import ExistingUserInviteForm from "../components/existing-user-invite-form"
 import NewUserInviteForm from "../components/new-user-invite-form"

@@ -1,10 +1,11 @@
 import "server-only"
 
 import { notFound } from "next/navigation"
-import { db } from "@hazel/db"
 
 import { updateDestinationAction } from "@/server/actions/destination"
 import { UpdateDestinationForm } from "@/components/forms/destination/update-destination-form"
+
+import { db } from "@hazel/db"
 
 export interface SettingsProps {
 	id: string

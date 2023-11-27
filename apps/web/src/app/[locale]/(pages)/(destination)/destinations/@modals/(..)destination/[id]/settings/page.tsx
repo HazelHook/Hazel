@@ -1,6 +1,6 @@
-import { Dialog, InterceptedDialogContent } from "@hazel/ui/dialog"
-
 import { DestinationSettingsPage } from "@/components/pages/destination/SettingsPage"
+
+import { Dialog, InterceptedDialogContent } from "@hazel/ui/dialog"
 
 const ConnectionUpdateFormPage = ({
 	params,

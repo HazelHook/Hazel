@@ -2,18 +2,19 @@
 
 import { ReactNode, Suspense } from "react"
 import Link from "next/link"
-import { Button } from "@hazel/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
-import { ExpandableList } from "@hazel/ui/expandable-list"
-import { ScrollArea } from "@hazel/ui/scroll-area"
-import { SheetHeader, SheetTitle } from "@hazel/ui/sheet"
 
 import { CacheSource } from "@/lib/orm"
 import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
 import { Status } from "@/components/status"
 import { columns } from "@/app/[locale]/(pages)/(source)/source/[id]/events/column"
 import { EventDataRowType } from "@/app/[locale]/(pages)/(source)/source/[id]/events/page"
+
+import { Button } from "@hazel/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
+import { ExpandableList } from "@hazel/ui/expandable-list"
+import { ScrollArea } from "@hazel/ui/scroll-area"
+import { SheetHeader, SheetTitle } from "@hazel/ui/sheet"
 
 export const TableWrapper = ({
 	data,

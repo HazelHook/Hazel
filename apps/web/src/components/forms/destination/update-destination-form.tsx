@@ -1,14 +1,14 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Destination } from "@hazel/db/schema"
-import { AutoForm } from "@hazel/ui/auto-form"
-import { LoadingButton } from "@hazel/ui/loading-button"
 
 import type { updateDestinationAction } from "@/server/actions/destination"
-import { useAction } from "@hazel/server/actions/client"
-
 import { updateDestinationSchema } from "@/lib/schemas/destination"
+
+import { Destination } from "@hazel/db/schema"
+import { useAction } from "@hazel/server/actions/client"
+import { AutoForm } from "@hazel/ui/auto-form"
+import { LoadingButton } from "@hazel/ui/loading-button"
 
 export const UpdateDestinationForm = ({
 	destination,

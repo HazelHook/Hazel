@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import type { NextRequest } from "next/server"
+
 import type { Database } from "@hazel/supabase/database.types"
 import { getLogger } from "@hazel/utils"
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"

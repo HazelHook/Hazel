@@ -1,6 +1,7 @@
-import { getSupabaseServerClient } from "@hazel/supabase/clients"
-import ImpersonateUserConfirmationModal from "../../../internal/components/impersonate-user-confirmation-modal"
 import { impersonateUserAction } from "@hazel/auth/actions"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
+
+import ImpersonateUserConfirmationModal from "../../../internal/components/impersonate-user-confirmation-modal"
 
 export interface ImpersonateUserModalPageProps {
 	params: {

@@ -1,15 +1,15 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import configuration from "@hazel/utils/configuration"
 
+import { switchOrganizationAction } from "@/server/actions/organization"
+import { getSeededProfileImageUrl } from "@/lib/utils"
+
+import { requireSession } from "@hazel/auth/utils"
+import { db } from "@hazel/db"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
-
-import { switchOrganizationAction } from "@/server/actions/organization"
-import { db } from "@hazel/db"
-import { requireSession } from "@hazel/auth/utils"
-import { getSeededProfileImageUrl } from "@/lib/utils"
+import configuration from "@hazel/utils/configuration"
 
 import { CreateOrg } from "./components/cretae-org-modal"
 import { OrgButton } from "./components/org-button"

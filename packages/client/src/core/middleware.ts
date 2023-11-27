@@ -1,4 +1,6 @@
 import { Simplify } from "type-fest"
+
+import { cacheFn, waterfall } from "../lib/helpers/functions"
 import {
 	Await,
 	IncomingOp,
@@ -8,10 +10,9 @@ import {
 	PartialK,
 	SendEventBaseOutput,
 } from "../lib/helpers/types"
+import { BaseContext, ClientOptions, EventPayload, MiddlewareStack } from "../lib/types"
 import { Hazel } from "./hazel"
 import { AnyHazelWebhook } from "./webhook-function"
-import { BaseContext, ClientOptions, EventPayload, MiddlewareStack } from "../lib/types"
-import { cacheFn, waterfall } from "../lib/helpers/functions"
 
 /**
  * A middleware that can be registered with Inngest to hook into various
@@ -456,7 +457,7 @@ type MiddlewareRunOutput = (ctx: {
 /**
  * @internal
  */
-type GetMiddlewareRunInputMutation<TMiddleware extends HazelMiddleware<MiddlewareOptions>> =
+type GetMiddlewareRunInputMutation<TMiddleware extends HazelMiddleware<MiddlewareOptions>,> =
 	TMiddleware extends HazelMiddleware<infer TOpts>
 		? TOpts["init"] extends MiddlewareRegisterFn
 			? Await<Await<Await<TOpts["init"]>["onFunctionRun"]>["transformInput"]> extends {
@@ -475,7 +476,7 @@ type GetMiddlewareRunInputMutation<TMiddleware extends HazelMiddleware<Middlewar
 /**
  * @internal
  */
-type GetMiddlewareSendEventOutputMutation<TMiddleware extends HazelMiddleware<MiddlewareOptions>> =
+type GetMiddlewareSendEventOutputMutation<TMiddleware extends HazelMiddleware<MiddlewareOptions>,> =
 	TMiddleware extends HazelMiddleware<infer TOpts>
 		? TOpts["init"] extends MiddlewareRegisterFn
 			? Await<Await<Await<TOpts["init"]>["onSendEvent"]>["transformOutput"]> extends {

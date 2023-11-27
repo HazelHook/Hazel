@@ -1,11 +1,12 @@
+import { AddIcon, DeleteAltIcon } from "@hazel/icons"
 import { useFieldArray, useForm } from "react-hook-form"
 import * as z from "zod"
+
 import { AccordionContent, AccordionItem, AccordionTrigger } from "../../accordion"
 import { Button } from "../../button"
 import { Separator } from "../../separator"
-import AutoFormObject from "./object"
-import { AddIcon, DeleteAltIcon } from "@hazel/icons"
 import { beautifyObjectName } from "../utils"
+import AutoFormObject from "./object"
 
 export default function AutoFormArray({
 	name,

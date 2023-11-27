@@ -1,4 +1,7 @@
 import { ReactNode } from "react"
+
+import { Sidebar } from "@/components/sidebar"
+
 import {
 	BarChartUpIcon,
 	CardIcon,
@@ -12,8 +15,6 @@ import {
 	UserIcon,
 	UserPlusIcon,
 } from "@hazel/icons"
-
-import { Sidebar } from "@/components/sidebar"
 
 const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 	return (

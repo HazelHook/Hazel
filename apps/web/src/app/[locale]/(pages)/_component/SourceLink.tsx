@@ -3,9 +3,10 @@ import "server-only"
 import { Suspense } from "react"
 import Link from "next/link"
 
-import { getCachedSource } from "@/lib/orm"
-import { Await } from "@hazel/ui/await"
 import { auth } from "@/lib/auth"
+import { getCachedSource } from "@/lib/orm"
+
+import { Await } from "@hazel/ui/await"
 
 interface SourceLinkProps {
 	sourceId: string

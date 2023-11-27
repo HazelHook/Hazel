@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState } from "react"
+
 import { Provider } from "@supabase/supabase-js"
 
 export type Providers = {

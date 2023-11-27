@@ -1,11 +1,11 @@
-import { db } from "@hazel/db"
-import { INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
-
 import { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { auth } from "@/lib/auth"
 import { PromiseType } from "@/lib/ts/helpers"
 import { IntegrationsTable } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationTable"
 import { IntegrationToolCard } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationToolCard"
+
+import { db } from "@hazel/db"
+import { INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
 
 export type IntegrationToolColumn = PromiseType<ReturnType<typeof db.integration.getMany>>[number]
 

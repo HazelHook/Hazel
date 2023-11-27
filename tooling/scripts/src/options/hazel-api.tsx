@@ -1,5 +1,3 @@
-
-
 import { Text } from "../ext/ink"
 
 export function HazelAPI({

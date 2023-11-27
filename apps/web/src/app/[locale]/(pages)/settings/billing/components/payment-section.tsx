@@ -1,9 +1,11 @@
+import { changeDefaultMethodAction, createCheckoutAction, removePaymentMethodAction } from "@/server/actions/stripe"
+
 import { Spinner } from "@hazel/ui/spinner"
 import { lago } from "@hazel/utils/lago"
 import { stripe, type Stripe } from "@hazel/utils/stripe"
-import { CreditCard } from "./credit-card"
+
 import { AddPaymentButton } from "./add-payment-button"
-import { changeDefaultMethodAction, createCheckoutAction, removePaymentMethodAction } from "@/server/actions/stripe"
+import { CreditCard } from "./credit-card"
 
 interface PaymentSectionProps {
 	workspaceId: string

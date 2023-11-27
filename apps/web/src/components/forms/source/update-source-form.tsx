@@ -1,17 +1,17 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { IntegrationTools } from "@hazel/integrations/web"
+
+import { updateSourceAction } from "@/server/actions/source"
+import { updateSourceSchema } from "@/lib/schemas/source"
+
 import { Integration, Source } from "@hazel/db/schema"
+import { IntegrationTools } from "@hazel/integrations/web"
+import { useAction } from "@hazel/server/actions/client"
 import { AutoForm, AutoFormInputComponentProps } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-
-import { updateSourceAction } from "@/server/actions/source"
-import { useAction } from "@hazel/server/actions/client"
-
-import { updateSourceSchema } from "@/lib/schemas/source"
 
 interface UpdateSourceFormProps {
 	source: Source

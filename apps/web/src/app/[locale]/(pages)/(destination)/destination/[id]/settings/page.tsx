@@ -1,6 +1,6 @@
-import { Container } from "@hazel/ui/container"
-
 import { DestinationSettingsPage } from "@/components/pages/destination/SettingsPage"
+
+import { Container } from "@hazel/ui/container"
 
 const UpdateDestinationPage = async ({
 	params,

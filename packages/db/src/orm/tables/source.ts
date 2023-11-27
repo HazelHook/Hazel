@@ -26,11 +26,7 @@ const sourceLogic = (db: DB) => ({
 			},
 		})
 	},
-	getMany: async ({
-		workspaceId,
-	}: {
-		workspaceId: string
-	}) => {
+	getMany: async ({ workspaceId }: { workspaceId: string }) => {
 		return await db.query.source.findMany({
 			where: eq(schema.source.workspaceId, workspaceId),
 			with: {

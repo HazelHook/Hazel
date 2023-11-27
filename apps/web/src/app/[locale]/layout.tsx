@@ -2,17 +2,18 @@ import "@/styles/global.css"
 
 import { Metadata, Viewport } from "next"
 import { notFound } from "next/navigation"
+
+import { I18Provider } from "@/lib/provider/i18-provider"
+import { cn } from "@/lib/utils"
+import { TailwindIndicator } from "@/components/tailwind-indicator"
+import { ThemeProvider } from "@/components/theme-provider"
+
 import { AuthConfigProvider, AuthProvider } from "@hazel/auth/provider"
 import configuration from "@hazel/utils/configuration"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 import { Analytics } from "maple-sdk/react"
 import { Toaster } from "sonner"
-
-import { I18Provider } from "@/lib/provider/i18-provider"
-import { cn } from "@/lib/utils"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
 
 export const viewport: Viewport = {
 	themeColor: [

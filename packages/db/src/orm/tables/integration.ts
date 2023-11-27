@@ -1,4 +1,4 @@
-import { eq, } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 
 import { EntityLogic } from "."
 import { DB, OptionalExceptFor } from ".."
@@ -9,11 +9,7 @@ import { DrizzleTable } from "../db-table"
 const integrationLogic = (db: DB) =>
 	({
 		table: new DrizzleTable("integration", schema.integration, db),
-		getOne: async ({
-			publicId,
-		}: {
-			publicId: string
-		}) => {
+		getOne: async ({ publicId }: { publicId: string }) => {
 			return await db.query.integration.findFirst({
 				where: eq(schema.integration.publicId, publicId),
 				with: {
@@ -21,11 +17,7 @@ const integrationLogic = (db: DB) =>
 				},
 			})
 		},
-		getMany: async ({
-			workspaceId,
-		}: {
-			workspaceId: string
-		}) => {
+		getMany: async ({ workspaceId }: { workspaceId: string }) => {
 			return await db.query.integration.findMany({
 				where: eq(schema.integration.workspaceId, workspaceId),
 				with: {

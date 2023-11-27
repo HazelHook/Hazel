@@ -1,4 +1,5 @@
 import Image from "next/image"
+
 import { KeyIcon, PhoneIcon } from "@hazel/icons"
 
 const DEFAULT_IMAGE_SIZE = 22

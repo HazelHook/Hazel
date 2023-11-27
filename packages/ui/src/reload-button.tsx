@@ -1,8 +1,10 @@
 "use client"
 
-import { RefreshIcon } from "@hazel/icons"
-import { Button } from "./button"
 import { useRouter } from "next/navigation"
+
+import { RefreshIcon } from "@hazel/icons"
+
+import { Button } from "./button"
 import { SimpleTooltip } from "./tooltip"
 
 export const ReloadButton = () => {

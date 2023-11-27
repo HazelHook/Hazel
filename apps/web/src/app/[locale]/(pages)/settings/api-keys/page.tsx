@@ -1,9 +1,9 @@
+import { createApiKeyAction } from "@/server/actions/api-keys"
+import { auth } from "@/lib/auth"
+
 import { db } from "@hazel/db"
 import { Container } from "@hazel/ui/container"
 import { PageHeader } from "@hazel/ui/page-header"
-
-import { createApiKeyAction } from "@/server/actions/api-keys"
-import { auth } from "@/lib/auth"
 
 import { ApiKeyModal } from "./modal"
 

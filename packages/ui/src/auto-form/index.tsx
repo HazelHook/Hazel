@@ -1,17 +1,18 @@
 "use client"
+
 import React, { ReactNode } from "react"
-import { z } from "zod"
-import { Form } from "../form"
-import { DefaultValues, useForm } from "react-hook-form"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Button } from "../button"
+import { DefaultValues, useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { z } from "zod"
 
-import { FieldConfig } from "./types"
-import { ZodObjectOrWrapped, getDefaultValues, getObjectFormSchema } from "./utils"
+import { Button } from "../button"
+import { Form } from "../form"
 import { cn, minDelay } from "../utils"
 import AutoFormObject from "./fields/object"
-import { toast } from "sonner"
+import { FieldConfig } from "./types"
+import { getDefaultValues, getObjectFormSchema, ZodObjectOrWrapped } from "./utils"
 
 export function AutoFormSubmit({ children }: { children?: React.ReactNode }) {
 	return <Button type="submit">{children ?? "Submit"}</Button>

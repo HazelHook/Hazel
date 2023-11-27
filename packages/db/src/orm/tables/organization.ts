@@ -1,4 +1,4 @@
-import { eq, } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 
 import { EntityLogic } from "."
 import { DB, OptionalExceptFor } from ".."

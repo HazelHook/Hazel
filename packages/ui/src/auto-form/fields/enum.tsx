@@ -1,8 +1,9 @@
+import * as z from "zod"
+
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "../../form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../select"
 import { AutoFormInputComponentProps } from "../types"
 import { getBaseSchema } from "../utils"
-import * as z from "zod"
 
 export default function AutoFormEnum({
 	label,

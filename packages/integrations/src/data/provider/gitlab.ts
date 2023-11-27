@@ -1,5 +1,7 @@
 import { z } from "zod"
+
 import { createIntegrationForm } from "../../types"
+
 export const gitlabForm = createIntegrationForm({
 	name: "gitlab",
 	schema: {

@@ -1,10 +1,10 @@
 "use client"
 
-import { SimpleDataTable } from "@hazel/ui/data-table"
-
-import { deleteConnectionAction, pauseConnectionAction, } from "@/server/actions/connections"
+import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { columns } from "@/app/[locale]/(pages)/(connection)/connections/columns"
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
+
+import { SimpleDataTable } from "@hazel/ui/data-table"
 
 export const ConnectionTable = ({
 	data,

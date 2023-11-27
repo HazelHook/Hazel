@@ -3,10 +3,11 @@
 import { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@hazel/ui/button"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 
 import { cn } from "@/lib/utils"
+
+import { Button } from "@hazel/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 
 export const SidebarClientItem = ({
 	className,

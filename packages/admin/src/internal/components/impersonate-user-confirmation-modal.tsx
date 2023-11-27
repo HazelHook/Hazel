@@ -1,15 +1,17 @@
 "use client"
 
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+
+import type { impersonateUserAction } from "@hazel/auth/actions"
+import { useAction } from "@hazel/server/actions/client"
 import { Alert, AlertHeading } from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import { If } from "@hazel/ui/if"
 import { Modal } from "@hazel/ui/modal"
-import { useAction } from "@hazel/server/actions/client"
-import type { impersonateUserAction } from "@hazel/auth/actions"
 import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 import { User } from "@supabase/supabase-js"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+
 import { ImpersonateUserAuthSetter } from "./impersonate-user-auth-setter"
 
 function ImpersonateUserConfirmationModal({

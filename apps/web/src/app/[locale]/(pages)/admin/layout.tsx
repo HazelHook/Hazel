@@ -1,7 +1,8 @@
 import { ReactNode } from "react"
-import { DashboardDynamicIcon, Settings02Icon, User3Icon } from "@hazel/icons"
 
 import { Sidebar } from "@/components/sidebar"
+
+import { DashboardDynamicIcon, Settings02Icon, User3Icon } from "@hazel/icons"
 
 const AdminLayout = async ({ children }: { children: ReactNode }) => {
 	return (

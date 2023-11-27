@@ -1,10 +1,11 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useAction } from "@hazel/server/actions/client"
-import { Button } from "@hazel/ui/button"
 
 import { changeSubscribtionAction } from "@/server/actions/billing"
+
+import { useAction } from "@hazel/server/actions/client"
+import { Button } from "@hazel/ui/button"
 
 interface CheckoutButtonProps {
 	disabled?: boolean

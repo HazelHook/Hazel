@@ -1,10 +1,10 @@
 "use server"
 
+import { createDestinationSchema, updateDestinationSchema } from "@/lib/schemas/destination"
+
 import { db } from "@hazel/db"
 import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 import { z } from "zod"
-
-import { createDestinationSchema, updateDestinationSchema } from "@/lib/schemas/destination"
 
 export const createDestinationAction = createAction(
 	protectedProcedure.input(createDestinationSchema).mutation(async (opts) => {

@@ -1,8 +1,7 @@
-
+import { getLogger } from "@hazel/utils"
 
 import { WebhookVerifier } from "../base"
 import { HmacProviderProps } from "../data/custom/hmac"
-import { getLogger } from "@hazel/utils"
 import { validateWithHmac } from "../utils"
 
 export class HmacVerifier extends WebhookVerifier<HmacProviderProps> {

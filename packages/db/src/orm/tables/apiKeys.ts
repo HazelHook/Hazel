@@ -1,4 +1,4 @@
-import { eq, } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 
 import { EntityLogic } from "."
 import { DB, OptionalExceptFor } from ".."
@@ -14,11 +14,7 @@ const apiKeysLogic = (db: DB) =>
 				where: eq(schema.apiKeys.publicId, publicId),
 			})
 		},
-		getMany: async ({
-			workspaceId,
-		}: {
-			workspaceId: string
-		}) => {
+		getMany: async ({ workspaceId }: { workspaceId: string }) => {
 			return await db.query.apiKeys.findMany({
 				where: eq(schema.apiKeys.workspaceId, workspaceId),
 			})

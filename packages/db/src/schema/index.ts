@@ -1,3 +1,4 @@
+import { INTEGRATIONS } from "@hazel/integrations/web"
 import { InferInsertModel, InferSelectModel, relations, sql } from "drizzle-orm"
 import {
 	boolean,
@@ -13,8 +14,7 @@ import {
 	varchar,
 } from "drizzle-orm/mysql-core"
 
-import { SchemaType, generatePublicId } from "./common"
-import { INTEGRATIONS } from "@hazel/integrations/web"
+import { generatePublicId, SchemaType } from "./common"
 
 const commonFields = (type: SchemaType) => ({
 	id: serial("id").primaryKey(),

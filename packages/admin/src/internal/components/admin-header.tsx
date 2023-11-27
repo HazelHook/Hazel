@@ -1,8 +1,9 @@
+import Link from "next/link"
+
 import { ArrowLeftIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 import { Heading } from "@hazel/ui/heading"
-import Link from "next/link"
 
 export function AdminHeader({ children }: React.PropsWithChildren) {
 	return (

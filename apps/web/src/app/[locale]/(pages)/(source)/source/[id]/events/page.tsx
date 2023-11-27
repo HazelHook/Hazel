@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation"
-import tiny from "@hazel/tinybird"
 
 import { auth } from "@/lib/auth"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { getCachedSource } from "@/lib/orm"
 import { PromiseType } from "@/lib/ts/helpers"
 import { TableWrapper } from "@/app/[locale]/(pages)/(source)/source/[id]/events/table"
+
+import tiny from "@hazel/tinybird"
 
 interface EventsPageProps {
 	params: {

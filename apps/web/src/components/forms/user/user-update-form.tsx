@@ -1,9 +1,9 @@
 "use client"
 
-import { z } from "zod"
-
 import { updateUserAction } from "@/server/actions/user"
 import { userUpdateFormSchema } from "@/lib/schemas/user"
+
+import { z } from "zod"
 
 import { HazelForm } from "../hazel-form"
 

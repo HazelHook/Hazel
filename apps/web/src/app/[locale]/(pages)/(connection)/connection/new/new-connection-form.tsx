@@ -1,33 +1,34 @@
 "use client"
 
-import { CreateDestinationForm } from "@/components/forms/destination/create-destination-form"
-import { CreateSourceForm } from "@/components/forms/source/create-source-form"
-import { HorizontalStep } from "@/components/horizontal-step"
-import { createConnectionSchema } from "@/lib/schemas/connection"
+import { useMemo, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+
 import type { createConnectionAction } from "@/server/actions/connections"
 import { createDestinationAction } from "@/server/actions/destination"
 import { createSourceAction } from "@/server/actions/source"
+import { createConnectionSchema } from "@/lib/schemas/connection"
+import { CreateDestinationForm } from "@/components/forms/destination/create-destination-form"
+import { CreateSourceForm } from "@/components/forms/source/create-source-form"
+import { HorizontalStep } from "@/components/horizontal-step"
+
 import type { Destination, Integration, Source } from "@hazel/db"
-import { LogInLeftIcon, CheckTickIcon, InboxInIcon } from "@hazel/icons"
+import { CheckTickIcon, InboxInIcon, LogInLeftIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button } from "@hazel/ui/button"
 import {
 	Command,
-	CommandInput,
-	CommandList,
-	CommandGroup,
-	CommandItem,
-	CommandShortcut,
 	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+	CommandShortcut,
 } from "@hazel/ui/command"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@hazel/ui/form"
 import { Input } from "@hazel/ui/input"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@hazel/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hazel/ui/tabs"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
-
 import { z } from "zod"
 
 export type NewConnectionFormProps = {

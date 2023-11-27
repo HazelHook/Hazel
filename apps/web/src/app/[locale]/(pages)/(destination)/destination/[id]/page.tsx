@@ -1,13 +1,14 @@
 import { notFound, redirect } from "next/navigation"
-import tiny from "@hazel/tinybird"
-import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
-import { Chart } from "@hazel/ui/chart"
-import { sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination } from "@/lib/orm"
 import { chartColors, formatDateTime } from "@/lib/utils"
-import { transformDestinationsChartData, } from "@/app/[locale]/(pages)/_utils"
+import { transformDestinationsChartData } from "@/app/[locale]/(pages)/_utils"
+
+import tiny from "@hazel/tinybird"
+import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
+import { Chart } from "@hazel/ui/chart"
+import { sub } from "date-fns"
 
 const DestinationPage = async ({
 	params,

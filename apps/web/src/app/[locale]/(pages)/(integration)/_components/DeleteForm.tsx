@@ -1,12 +1,19 @@
 "use client"
 
-
 import { MinusIcon } from "@hazel/icons"
 import { Card } from "@hazel/ui/card"
 import { Dialog, DialogContent } from "@hazel/ui/dialog"
 import { Separator } from "@hazel/ui/separator"
 
-export function DeleteForm({ onClose, slug, name }: { onClose: () => void; name: string; slug: string }) {
+export function DeleteForm({
+	onClose,
+	slug,
+	name,
+}: {
+	onClose: () => void
+	name: string
+	slug: string
+}) {
 	return (
 		<Dialog>
 			<DialogContent

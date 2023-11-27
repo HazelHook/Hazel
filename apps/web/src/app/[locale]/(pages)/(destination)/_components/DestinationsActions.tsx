@@ -1,5 +1,9 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+
+import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
+import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
+
 import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
@@ -14,9 +18,6 @@ import {
 	DialogTrigger,
 } from "@hazel/ui/dialog"
 import { toast } from "sonner"
-
-import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
-import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
 
 export const DestinationsActions = ({
 	updateAction,

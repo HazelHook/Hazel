@@ -1,7 +1,9 @@
 "use client"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+
 import { useCallback, useState } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 
 export type ProjectPickerProps = {
 	data: { id: string; name: string }[]

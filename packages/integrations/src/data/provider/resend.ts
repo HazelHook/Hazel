@@ -1,4 +1,4 @@
-import { InferIntegrationType, createIntegrationForm } from "../../types"
+import { createIntegrationForm, InferIntegrationType } from "../../types"
 import { svixSecretValidator } from "./svix"
 
 export type ResendProviderProps = InferIntegrationType<typeof resendForm>

@@ -1,13 +1,12 @@
+import { auth } from "@/lib/auth"
+import { PlanCard } from "@/app/[locale]/(pages)/settings/billing/components/plan-card"
+
 import Alert, { AlertHeading } from "@hazel/ui/alert"
 import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
 import Heading from "@hazel/ui/heading"
 import { PageHeader } from "@hazel/ui/page-header"
 import { lago } from "@hazel/utils/lago"
-
-
-import { auth } from "@/lib/auth"
-import { PlanCard } from "@/app/[locale]/(pages)/settings/billing/components/plan-card"
 
 import { BillingTable } from "./components/billing-table"
 import { InvoiceTable } from "./components/invoice-table"

@@ -1,9 +1,10 @@
 import { Fragment } from "react"
 import Link from "next/link"
-import { IconProps } from "@hazel/icons"
-import { Logo } from "@hazel/ui/logo"
 
 import { cn } from "@/lib/utils"
+
+import { IconProps } from "@hazel/icons"
+import { Logo } from "@hazel/ui/logo"
 
 import { SidebarClientItem } from "./sidebar-item"
 

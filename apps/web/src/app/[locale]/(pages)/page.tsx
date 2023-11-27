@@ -1,5 +1,11 @@
-import { Suspense } from "react"
 import Link from "next/link"
+import { Suspense } from "react"
+
+import { auth } from "@/lib/auth"
+import { getTableParams } from "@/lib/data-table-helpers"
+import { chartColors, formatDateTime, subtractFromString } from "@/lib/utils"
+import { requestTableSearchParamsSchema, responseTableSearchParamsSchema } from "@/lib/validators/params"
+
 import { db } from "@hazel/db"
 import { AddIcon } from "@hazel/icons"
 import tiny, { TBRequest, TBResponse } from "@hazel/tinybird"
@@ -13,13 +19,8 @@ import { Skeleton } from "@hazel/ui/skeleton"
 import { Tabs, TabsContent, TabsTrigger, UnstyledTabsList } from "@hazel/ui/tabs"
 import { sub } from "date-fns"
 
-import { auth } from "@/lib/auth"
-import { getTableParams } from "@/lib/data-table-helpers"
-import { chartColors, formatDateTime, subtractFromString } from "@/lib/utils"
-import { requestTableSearchParamsSchema, responseTableSearchParamsSchema } from "@/lib/validators/params"
-
-import { DatePicker } from "./_component/date-picker"
 import { KpiCard, KpiLoadingCard } from "./_component/KpiCard"
+import { DatePicker } from "./_component/date-picker"
 import { RequestTable } from "./_component/request-table"
 import { ResponseTable } from "./_component/response-table"
 

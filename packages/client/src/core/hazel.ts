@@ -1,8 +1,7 @@
-import type { ClientOptions, EventsFromOpts, WebhookOptions, EventNameFromWebhook, Handler } from "../lib/types"
-import { HazelWebhook } from "./webhook-function"
-
 import pkg from "../../package.json"
 import { hazelHeaders } from "../lib/helpers/env"
+import type { ClientOptions, EventNameFromWebhook, EventsFromOpts, Handler, WebhookOptions } from "../lib/types"
+import { HazelWebhook } from "./webhook-function"
 
 export class Hazel<TOpts extends ClientOptions = ClientOptions> {
 	public readonly id: string

@@ -1,12 +1,12 @@
 "use client"
 
 import { notFound, useRouter } from "next/navigation"
-import { createZodIntegrationSchema, IntegrationTool } from "@hazel/integrations/web"
-import { Integration } from "@hazel/db/schema"
 
 import { updateIntegrationAction } from "@/server/actions/integrations"
-import { useAction } from "@hazel/server/actions/client"
 
+import { Integration } from "@hazel/db/schema"
+import { createZodIntegrationSchema, IntegrationTool } from "@hazel/integrations/web"
+import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { LoadingButton } from "@hazel/ui/loading-button"
 
@@ -44,7 +44,11 @@ export const UpdateIntegrationForm = ({
 			defaultValues={data.config}
 			fieldConfig={config.schema}
 			onSubmit={async (data) =>
-				await updateIntegration.mutateAsync({ publicId: data.publicId, tool: slug, config: data })
+				await updateIntegration.mutateAsync({
+					publicId: data.publicId,
+					tool: slug,
+					config: data,
+				})
 			}
 			toastValues={{
 				loading: "Update Integration...",

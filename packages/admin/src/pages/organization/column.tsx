@@ -1,8 +1,10 @@
 "use client"
 
-import { Organization, OrganizationMember } from "@hazel/db"
-import { ColumnDef } from "@tanstack/react-table"
+import Link from "next/link"
 
+import { Organization, OrganizationMember } from "@hazel/db"
+import { ThreeDotsVerticalIcon } from "@hazel/icons"
+import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -10,9 +12,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
-import Link from "next/link"
-import { Button } from "@hazel/ui/button"
-import { ThreeDotsVerticalIcon } from "@hazel/icons"
+import { ColumnDef } from "@tanstack/react-table"
 
 export const columns: Array<
 	ColumnDef<

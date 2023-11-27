@@ -1,5 +1,7 @@
 import { z } from "zod"
+
 import { createIntegrationForm } from "../../types"
+
 export const shopifyForm = createIntegrationForm({
 	name: "shopify",
 	schema: {

@@ -1,13 +1,13 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { AutoForm } from "@hazel/ui/auto-form"
-import { Button } from "@hazel/ui/button"
 
 import type { createApiKeyAction } from "@/server/actions/api-keys"
-import { useAction } from "@hazel/server/actions/client"
-
 import { createApiKeySchema } from "@/lib/schemas/api-key"
+
+import { useAction } from "@hazel/server/actions/client"
+import { AutoForm } from "@hazel/ui/auto-form"
+import { Button } from "@hazel/ui/button"
 
 interface CreateApiKeyFormProps {
 	createAction: typeof createApiKeyAction

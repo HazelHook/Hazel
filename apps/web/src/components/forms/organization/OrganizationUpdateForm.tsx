@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+
+import { updateOrganzationAction } from "@/server/actions/organization"
+import { orgUpdateFormSchema } from "@/lib/schemas/organization"
+
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Button } from "@hazel/ui/button"
 import { z } from "zod"
-
-import { updateOrganzationAction } from "@/server/actions/organization"
-import { orgUpdateFormSchema } from "@/lib/schemas/organization"
 
 export const OrganizationUpdateForm = ({
 	pOrgId,

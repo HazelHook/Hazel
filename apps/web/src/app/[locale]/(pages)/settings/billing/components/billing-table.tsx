@@ -1,8 +1,8 @@
+import { currencyFormatter, dashboardNumberFormatter } from "@/lib/formatters"
+
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 import { format } from "date-fns"
 import { CustomerUsageObject, PlanObject } from "lago-javascript-client"
-
-import { currencyFormatter, dashboardNumberFormatter } from "@/lib/formatters"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 
 export interface CustomerUsageObjectProps {
 	usage: CustomerUsageObject

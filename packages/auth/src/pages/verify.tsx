@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation"
+
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 import { VerifyFormContainer } from "../internal-components/verify-form-container"

@@ -1,7 +1,9 @@
-import React, { useState, ChangeEvent, useEffect } from "react"
-import { Avatar, AvatarImage } from "./avatar"
+import React, { ChangeEvent, useEffect, useState } from "react"
+
 import { CloudUploadIcon } from "@hazel/icons"
 import { toast } from "sonner"
+
+import { Avatar, AvatarImage } from "./avatar"
 import { cn } from "./utils"
 
 type Ext = "jpg" | "jpeg" | "png" | "gif"

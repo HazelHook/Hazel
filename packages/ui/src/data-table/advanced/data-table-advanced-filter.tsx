@@ -1,12 +1,13 @@
 "use client"
 
 import * as React from "react"
-import type { DataTableFilterOption } from "../types"
+
+import { AddIcon, ChevronDownIcon, ChevronSortVerticalIcon, FontAaIcon } from "@hazel/icons"
 
 import { Button } from "../../button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandSeparator } from "../../command"
 import { Popover, PopoverContent, PopoverTrigger } from "../../popover"
-import { AddIcon, ChevronDownIcon, ChevronSortVerticalIcon, FontAaIcon } from "@hazel/icons"
+import type { DataTableFilterOption } from "../types"
 
 interface DataTableAdvancedFilterProps<TData> {
 	options: DataTableFilterOption<TData>[]

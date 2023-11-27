@@ -1,4 +1,5 @@
 import Link from "next/link"
+
 import { Logo } from "@hazel/ui/logo"
 import configuration from "@hazel/utils/configuration"
 

@@ -1,20 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import {
-	INTEGRATIONS,
-	INTEGRATION_CATEGORIES,
-	INTEGRATION_FEATURES,
-	IntegrationTools,
-} from "@hazel/integrations/web"
+
+import { NewIntegrationForm } from "@/components/forms/integration/create-integration-form"
+
 import { DatabaseIcon, ShieldCheckIcon } from "@hazel/icons"
+import { INTEGRATION_CATEGORIES, INTEGRATION_FEATURES, INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
 import { Badge } from "@hazel/ui/badge"
 import { Card } from "@hazel/ui/card"
 import { Dialog, DialogContent, DialogHeader } from "@hazel/ui/dialog"
 import { Separator } from "@hazel/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@hazel/ui/tooltip"
-
-import { NewIntegrationForm } from "@/components/forms/integration/create-integration-form"
 
 const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	({

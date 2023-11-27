@@ -1,10 +1,11 @@
-import * as z from "zod"
 import { useForm } from "react-hook-form"
-import { FieldConfig, FieldConfigItem } from "../types"
+import * as z from "zod"
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../accordion"
-import { beautifyObjectName, getBaseSchema, getBaseType, zodToHtmlInputProps } from "../utils"
 import { FormField } from "../../form"
 import { DEFAULT_ZOD_HANDLERS, INPUT_COMPONENTS } from "../config"
+import { FieldConfig, FieldConfigItem } from "../types"
+import { beautifyObjectName, getBaseSchema, getBaseType, zodToHtmlInputProps } from "../utils"
 import AutoFormArray from "./array"
 
 function DefaultParent({ children }: { children: React.ReactNode }) {

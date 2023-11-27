@@ -1,8 +1,8 @@
 "use client"
 
-import { OrganizationInvite } from "@hazel/db/schema"
-
 import type { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
+
+import { OrganizationInvite } from "@hazel/db/schema"
 
 import { DataTable } from "../../members/data-table"
 import { columns } from "../columns"

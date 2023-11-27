@@ -1,8 +1,8 @@
 import { getLogger } from "@hazel/utils"
-import { WebhookVerifier } from "../base"
 
-import { validateWithHmac } from "../utils"
+import { WebhookVerifier } from "../base"
 import { GithubProviderProps } from "../data/provider/github"
+import { validateWithHmac } from "../utils"
 
 // TODO: INCOMPLETE
 export class GithubVerifier extends WebhookVerifier<GithubProviderProps> {

@@ -1,5 +1,7 @@
 import { z } from "zod"
+
 import { createIntegrationForm } from "../../types"
+
 export const mailgunForm = createIntegrationForm({
 	name: "mailgun",
 	schema: {

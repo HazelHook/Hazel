@@ -1,9 +1,8 @@
+import pkg from "../../../package.json"
 import { Hazel } from "../../core/hazel"
+import { envKeys, headerKeys } from "../const"
 
 declare const EdgeRuntime: string | undefined
-
-import pkg from "../../../package.json"
-import { envKeys, headerKeys } from "../const"
 
 /**
  * @public

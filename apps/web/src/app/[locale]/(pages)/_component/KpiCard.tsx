@@ -1,7 +1,7 @@
+import { chartColors } from "@/lib/utils"
+
 import { Card } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
-
-import { chartColors } from "@/lib/utils"
 
 export interface KpiCardProps {
 	title: string

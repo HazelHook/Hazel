@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { AutoForm, FieldConfig, ZodObjectOrWrapped } from "@hazel/ui/auto-form"
-import { Button } from "@hazel/ui/button"
-import { z } from "zod"
 
 import { useAction } from "@hazel/server/actions/client"
 import { TRPCActionHandler } from "@hazel/server/actions/trpc"
+import { AutoForm, FieldConfig, ZodObjectOrWrapped } from "@hazel/ui/auto-form"
+import { Button } from "@hazel/ui/button"
+import { z } from "zod"
 
 export const HazelForm = <SchemaType extends ZodObjectOrWrapped>({
 	action,

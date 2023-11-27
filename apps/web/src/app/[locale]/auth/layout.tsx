@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation"
+
 import { AuthPageShell } from "@hazel/auth"
 import { checkSessionRequireMfa } from "@hazel/auth/utils"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"

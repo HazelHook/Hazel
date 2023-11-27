@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+
 import { SearchRegularIcon } from "@hazel/icons"
 import { DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"

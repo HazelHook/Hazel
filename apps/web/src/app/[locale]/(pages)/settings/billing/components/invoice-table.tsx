@@ -1,4 +1,8 @@
 import { revalidatePath } from "next/cache"
+
+import { currencyFormatter } from "@/lib/formatters"
+import { capitalizeFirstLetter, cn } from "@/lib/utils"
+
 import { File2DocumentIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
@@ -6,12 +10,13 @@ import { SimpleTooltip } from "@hazel/ui/tooltip"
 import { lago } from "@hazel/utils/lago"
 import { format } from "date-fns"
 
-import { currencyFormatter } from "@/lib/formatters"
-import { capitalizeFirstLetter, cn } from "@/lib/utils"
-
 import { FormLoadButton } from "./form-load-button"
 
-const PaymentStatus = ({ status }: { status: "succeeded" | "failed" | "pending" }) => {
+const PaymentStatus = ({
+	status,
+}: {
+	status: "succeeded" | "failed" | "pending"
+}) => {
 	const statusMap = {
 		failed: "bg-destructive",
 		succeeded: "bg-green-600",

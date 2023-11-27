@@ -1,5 +1,7 @@
 import { z } from "zod"
+
 import { createIntegrationForm } from "../../types"
+
 export const basicAuthForm = createIntegrationForm({
 	name: "basic_auth",
 	schema: {

@@ -3,6 +3,11 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+
+import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
+import { createOrgFormSchema } from "@/lib/schemas/organization"
+import { cn } from "@/lib/utils"
+
 import { useSignOut } from "@hazel/auth/hooks"
 import { useAuth } from "@hazel/auth/provider"
 import { Organization, OrganizationMember } from "@hazel/db/schema"
@@ -40,10 +45,6 @@ import {
 } from "@hazel/ui/dropdown-menu"
 import { useLocale } from "next-intl"
 import { useTheme } from "next-themes"
-
-import type { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
-import { createOrgFormSchema } from "@/lib/schemas/organization"
-import { cn } from "@/lib/utils"
 
 type Membership = OrganizationMember & {
 	organization: Organization

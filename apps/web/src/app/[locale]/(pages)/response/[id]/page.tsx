@@ -1,18 +1,18 @@
 import { ReactNode, Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { TBRequest } from "@hazel/tinybird"
+
+import { auth } from "@/lib/auth"
+import { getCachedDestination, getCachedSource } from "@/lib/orm"
+import { jsonToArray } from "@/lib/utils"
+import { Status } from "@/components/status"
+
+import tiny, { TBRequest } from "@hazel/tinybird"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { ExpandableList } from "@hazel/ui/expandable-list"
 import { Code } from "bright"
-
-import { auth } from "@/lib/auth"
-import { getCachedDestination, getCachedSource } from "@/lib/orm"
-import tiny from "@hazel/tinybird"
-import { jsonToArray } from "@/lib/utils"
-import { Status } from "@/components/status"
 
 const ListItem = ({
 	name,
@@ -87,7 +87,10 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 		request_id: res.request_id,
 	})
 
-	const source = await getCachedSource({ publicId: res.source_id, workspaceId })
+	const source = await getCachedSource({
+		publicId: res.source_id,
+		workspaceId,
+	})
 	const destination = await getCachedDestination({
 		publicId: res.destination_id,
 	})

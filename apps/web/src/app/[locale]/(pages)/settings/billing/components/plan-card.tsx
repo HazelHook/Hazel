@@ -1,12 +1,12 @@
-import { BillableMetricObject, PlanObject } from "lago-javascript-client"
-
+import { changeSubscribtionAction, unsubscribeAction } from "@/server/actions/billing"
 import { currencyFormatter, dashboardNumberFormatter } from "@/lib/formatters"
 import { cn } from "@/lib/utils"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@hazel/ui/card"
-import { CheckTickCircleIcon } from "@hazel/icons"
-import { CheckoutButton } from "@/app/[locale]/(pages)/settings/billing/components/checkout-button"
-import { changeSubscribtionAction, unsubscribeAction } from "@/server/actions/billing"
 import { CancelButton } from "@/app/[locale]/(pages)/settings/billing/components/cancel-button"
+import { CheckoutButton } from "@/app/[locale]/(pages)/settings/billing/components/checkout-button"
+
+import { CheckTickCircleIcon } from "@hazel/icons"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@hazel/ui/card"
+import { BillableMetricObject, PlanObject } from "lago-javascript-client"
 
 export interface PlanCardProps {
 	plan: PlanObject

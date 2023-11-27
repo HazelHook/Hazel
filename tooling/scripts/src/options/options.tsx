@@ -1,4 +1,5 @@
 import { useState } from "react"
+
 import { Quicklinks } from "@hazel/ui"
 
 import { Box, useInput } from "../ext/ink"

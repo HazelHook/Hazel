@@ -1,7 +1,8 @@
 import * as z from "zod"
-import { AutoFormInputComponentProps } from "../types"
+
 import { FormControl, FormItem, FormLabel, FormMessage } from "../../form"
 import { RadioGroup, RadioGroupItem } from "../../radio-group"
+import { AutoFormInputComponentProps } from "../types"
 
 export default function AutoFormRadioGroup({
 	label,

@@ -1,9 +1,9 @@
-import { Card } from "@hazel/ui/card"
-import { Container } from "@hazel/ui/container"
-
 import { updateOrganizationProfileImageAction } from "@/server/actions/organization"
 import { auth } from "@/lib/auth"
 import { OrganizationUpdateForm } from "@/components/forms/organization/OrganizationUpdateForm"
+
+import { Card } from "@hazel/ui/card"
+import { Container } from "@hazel/ui/container"
 
 import { AvatarUpload } from "./components/AvatarUpload"
 

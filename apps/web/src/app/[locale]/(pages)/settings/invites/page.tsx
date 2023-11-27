@@ -1,9 +1,8 @@
+import { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
+import { auth } from "@/lib/auth"
 
 import { db } from "@hazel/db"
 import { Container } from "@hazel/ui/container"
-
-import { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
-import { auth } from "@/lib/auth"
 
 import { TableWrapper } from "./_components/TableWrapper"
 

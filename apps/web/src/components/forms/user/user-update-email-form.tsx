@@ -1,12 +1,12 @@
 "use client"
 
+import { userUpdateEmailFormSchema } from "@/lib/schemas/user"
+
 import useUpdateUserMutation from "@/core/hooks/use-update-user-mutation"
 import configuration from "@hazel/utils/configuration"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 import { z } from "zod"
-
-import { userUpdateEmailFormSchema } from "@/lib/schemas/user"
 
 import { HazelForm } from "../hazel-form"
 

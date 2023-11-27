@@ -1,6 +1,9 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+
+import type { deleteOrganzationAction } from "@/server/actions/organization"
+
 import { useAction } from "@hazel/server/actions/client"
 import { Button } from "@hazel/ui/button"
 import {
@@ -13,8 +16,6 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@hazel/ui/dialog"
-
-import type { deleteOrganzationAction } from "@/server/actions/organization"
 
 interface OrganizationDeleteDialogProps {
 	isAllowedToDelete: boolean

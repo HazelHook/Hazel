@@ -1,6 +1,6 @@
-import { match } from "ts-pattern"
-
 import { cn } from "@/lib/utils"
+
+import { match } from "ts-pattern"
 
 interface StatusProps {
 	status: "error" | "success" | "pending"

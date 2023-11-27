@@ -1,6 +1,8 @@
 import { useMemo } from "react"
-import Heading from "./heading"
+
 import { ArrowDownIcon, ArrowUpIcon, PauseBigIcon } from "@hazel/icons"
+
+import Heading from "./heading"
 
 export const Tile: React.FCC & {
 	Header: typeof TileHeader

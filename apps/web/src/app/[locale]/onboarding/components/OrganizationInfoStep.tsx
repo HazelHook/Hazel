@@ -2,6 +2,7 @@
 
 import type { FormEvent } from "react"
 import { useCallback } from "react"
+
 import { useAuth } from "@hazel/auth/provider"
 import { ArrowRightIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"

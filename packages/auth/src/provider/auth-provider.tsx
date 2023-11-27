@@ -2,6 +2,7 @@
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+
 import { OrganizationMember } from "@hazel/db"
 import { useSupabase } from "@hazel/supabase/hooks"
 import { User } from "@supabase/supabase-js"

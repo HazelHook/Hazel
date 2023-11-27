@@ -1,17 +1,17 @@
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import type { DataTableFilterOption } from "../types"
+
+import { DeleteAltIcon } from "@hazel/icons"
 import type { Table } from "@tanstack/react-table"
 
-import { useDebounce } from "../../hooks/use-debounce"
 import { Button } from "../../button"
+import { useDebounce } from "../../hooks/use-debounce"
 import { Input } from "../../input"
 import { Popover, PopoverContent, PopoverTrigger } from "../../popover"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../select"
-
-import { DataTableFacetedFilter } from "../data-table-faceted-filter"
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react"
-import { DeleteAltIcon } from "@hazel/icons"
 import { cn } from "../../utils"
+import { DataTableFacetedFilter } from "../data-table-faceted-filter"
+import type { DataTableFilterOption } from "../types"
 
 interface DataTableAdvancedFilterItemProps<TData> {
 	table: Table<TData>

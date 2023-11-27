@@ -1,11 +1,12 @@
-import { getSupabaseServerClient } from "@hazel/supabase/clients"
-import { getPageFromQueryParams } from "../../internal/utils/get-page-from-query-params"
-import { AdminHeader } from "../../internal/components/admin-header"
-import { Container } from "@hazel/ui/container"
-import { TextFieldInput } from "@hazel/ui/text-field"
-import { SimpleDataTable } from "@hazel/ui/data-table"
-import { columns } from "./column"
 import { db } from "@hazel/db"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
+import { Container } from "@hazel/ui/container"
+import { SimpleDataTable } from "@hazel/ui/data-table"
+import { TextFieldInput } from "@hazel/ui/text-field"
+
+import { AdminHeader } from "../../internal/components/admin-header"
+import { getPageFromQueryParams } from "../../internal/utils/get-page-from-query-params"
+import { columns } from "./column"
 
 export interface OrganizationsAdminPageProps {
 	searchParams: {
@@ -23,7 +24,9 @@ export async function OrganizationsAdminPage({ searchParams }: OrganizationsAdmi
 	// const { organizations, count } = use(getOrganizations(client, search, page))
 	// const pageCount = count ? Math.ceil(count / perPage) : 0
 
-	const data = await db.db.query.organizations.findMany({ with: { members: true } })
+	const data = await db.db.query.organizations.findMany({
+		with: { members: true },
+	})
 
 	return (
 		<div className={"flex flex-1 flex-col"}>

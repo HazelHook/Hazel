@@ -1,13 +1,14 @@
 "use client"
 
 import Link from "next/link"
+
+import { getSeededProfileImageUrl } from "@/lib/utils"
+
 import { Destination } from "@hazel/db/schema"
 import { CheckTickIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { ColumnDef } from "@tanstack/react-table"
-
-import { getSeededProfileImageUrl } from "@/lib/utils"
 
 export type Column = Destination
 

@@ -1,4 +1,8 @@
 import { useRouter } from "next/navigation"
+
+import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
+import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
+
 import { Integration } from "@hazel/db/schema"
 import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
 import { INTEGRATIONS } from "@hazel/integrations/web"
@@ -15,9 +19,6 @@ import {
 	DialogTrigger,
 } from "@hazel/ui/dialog"
 import { toast } from "sonner"
-
-import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
-import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
 
 export const IntegrationsActions = ({
 	updateAction,

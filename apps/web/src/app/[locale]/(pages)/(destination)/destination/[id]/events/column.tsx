@@ -1,6 +1,9 @@
 "use client"
 
 import Link from "next/link"
+
+import { Status } from "@/components/status"
+
 import { FilterVerticalIcon } from "@hazel/icons"
 import { TBResponse } from "@hazel/tinybird"
 import { Button, buttonVariants } from "@hazel/ui/button"
@@ -13,8 +16,6 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
-
-import { Status } from "@/components/status"
 
 export type Column = TBResponse
 

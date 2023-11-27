@@ -1,4 +1,5 @@
 import Link from "next/link"
+
 import { Heading } from "@hazel/ui/heading"
 import { useTranslations } from "next-intl"
 

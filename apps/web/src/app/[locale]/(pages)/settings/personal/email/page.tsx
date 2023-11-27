@@ -1,8 +1,8 @@
-import { Container } from "@hazel/ui/container"
-import { PageHeader } from "@hazel/ui/page-header"
-
 import { auth } from "@/lib/auth"
 import { UserUpdateEmailForm } from "@/components/forms/user/user-update-email-form"
+
+import { Container } from "@hazel/ui/container"
+import { PageHeader } from "@hazel/ui/page-header"
 
 const UpdateEmailPage = async () => {
 	const { user } = await auth()

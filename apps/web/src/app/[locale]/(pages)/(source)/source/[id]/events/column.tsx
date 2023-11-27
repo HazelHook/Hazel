@@ -1,5 +1,8 @@
 "use client"
 
+import { Status } from "@/components/status"
+import { EventDataRowType } from "@/app/[locale]/(pages)/(source)/source/[id]/events/page"
+
 import { FilterVerticalIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import {
@@ -11,9 +14,6 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
-
-import { Status } from "@/components/status"
-import { EventDataRowType } from "@/app/[locale]/(pages)/(source)/source/[id]/events/page"
 
 export const columns: ColumnDef<EventDataRowType>[] = [
 	{

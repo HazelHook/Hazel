@@ -1,6 +1,7 @@
 import { ReactNode } from "react"
-import { Separator } from "./separator"
+
 import Heading from "./heading"
+import { Separator } from "./separator"
 
 export const PageHeader = ({
 	title,

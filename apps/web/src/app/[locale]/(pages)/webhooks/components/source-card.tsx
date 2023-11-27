@@ -1,10 +1,14 @@
 "use client"
 
-import { CopyButton } from "@/components/copy-button"
-import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
-import { updateSourceSchema } from "@/lib/schemas/source"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 import { updateIntegrationAction } from "@/server/actions/integrations"
 import { deleteSourceAction, updateSourceAction } from "@/server/actions/source"
+import { updateSourceSchema } from "@/lib/schemas/source"
+import { CopyButton } from "@/components/copy-button"
+import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
+
 import { Integration } from "@hazel/db"
 import { DeleteAltIcon, ExternalLink01Icon, LogInLeftIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
 import { INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
@@ -15,11 +19,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@hazel/ui/dialog"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@hazel/ui/dropdown-menu"
 import { Label } from "@hazel/ui/label"
 import { LoadingButton } from "@hazel/ui/loading-button"
-
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 type SourceCardProps = {
@@ -96,10 +97,16 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 
 					<AutoForm
 						onSubmit={async (values) => {
-							return await handleUpdate.mutateAsync({ ...values, publicId: id })
+							return await handleUpdate.mutateAsync({
+								...values,
+								publicId: id,
+							})
 						}}
 						defaultValues={{ name }}
-						formSchema={updateSourceSchema.omit({ publicId: true, integrationId: true })}
+						formSchema={updateSourceSchema.omit({
+							publicId: true,
+							integrationId: true,
+						})}
 					>
 						{integration && (
 							<div className="flex flex-col gap-2">

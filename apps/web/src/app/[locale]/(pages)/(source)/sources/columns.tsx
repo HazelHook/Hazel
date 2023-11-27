@@ -1,5 +1,7 @@
 "use client"
 
+import { getSeededProfileImageUrl } from "@/lib/utils"
+
 import { Connection, Destination, Integration, Source } from "@hazel/db/schema"
 import { CheckTickIcon } from "@hazel/icons"
 import { INTEGRATIONS, IntegrationToolSlug } from "@hazel/integrations/web"
@@ -7,8 +9,6 @@ import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Cell, SortableHeader } from "@hazel/ui/data-table"
 import { ColumnDef } from "@tanstack/react-table"
-
-import { getSeededProfileImageUrl } from "@/lib/utils"
 
 export type Column = Source & {
 	connections: Connection[]

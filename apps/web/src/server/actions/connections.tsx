@@ -1,10 +1,10 @@
 "use server"
 
+import { createConnectionSchema, updateConnectionSchema } from "@/lib/schemas/connection"
+
 import { db } from "@hazel/db"
 import { createAction, protectedProcedure } from "@hazel/server/actions/trpc"
 import { z } from "zod"
-
-import { createConnectionSchema, updateConnectionSchema } from "@/lib/schemas/connection"
 
 export const createConnectionAction = createAction(
 	protectedProcedure.input(createConnectionSchema).mutation(async (opts) => {

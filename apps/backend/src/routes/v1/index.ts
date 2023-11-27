@@ -1,14 +1,13 @@
-import { Elysia, } from "elysia"
-
 import db from "@hazel/db"
+import { WebhookVerifierFactory } from "@hazel/integrations"
 import tiny from "@hazel/tinybird"
 import { getLogger } from "@hazel/utils"
+import { Elysia } from "elysia"
+import { nanoid } from "nanoid"
 
 import { sendEvent } from "../../event"
 import { sourceQueue } from "../../lib/queue"
 import { handleRequest } from "../../lib/request.helper"
-import { nanoid } from "nanoid"
-import { WebhookVerifierFactory } from "@hazel/integrations"
 
 export const v1Route = new Elysia()
 	.onParse(({ request }) => {

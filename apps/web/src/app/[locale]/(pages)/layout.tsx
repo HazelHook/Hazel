@@ -1,4 +1,11 @@
 import { cookies } from "next/headers"
+
+import { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
+import { auth } from "@/lib/auth"
+import { ProfileSettings } from "@/components/profile-settings"
+import { Sidebar } from "@/components/sidebar"
+
+import { db } from "@hazel/db"
 import {
 	AutomationIcon,
 	FileInfoIcon,
@@ -9,12 +16,6 @@ import {
 	WebhookIcon,
 } from "@hazel/icons"
 import { TooltipProvider } from "@hazel/ui/tooltip"
-
-import { createOrganzationAction, switchOrganizationAction } from "@/server/actions/organization"
-import { auth } from "@/lib/auth"
-import { db } from "@hazel/db"
-import { ProfileSettings } from "@/components/profile-settings"
-import { Sidebar } from "@/components/sidebar"
 
 interface RootLayoutProps {
 	children: React.ReactNode

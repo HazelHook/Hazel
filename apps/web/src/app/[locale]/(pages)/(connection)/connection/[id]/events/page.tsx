@@ -1,15 +1,16 @@
 import { notFound } from "next/navigation"
 
 import { auth } from "@/lib/auth"
+import { getTableParams } from "@/lib/data-table-helpers"
 import { getCachedConnection } from "@/lib/orm"
+import { httpStatusCodes } from "@/lib/utils"
+import { responseTableSearchParamsSchema } from "@/lib/validators/params"
+
+import { db } from "@hazel/db"
+import tiny from "@hazel/tinybird"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { responseColumns } from "../../../../_component/response-column"
-import { getTableParams } from "@/lib/data-table-helpers"
-import { responseTableSearchParamsSchema } from "@/lib/validators/params"
-import { httpStatusCodes } from "@/lib/utils"
-import tiny from "@hazel/tinybird"
-import { db } from "@hazel/db"
 
 interface EventsPageProps {
 	params: {

@@ -2,6 +2,10 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+
+import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
+import { updateDestinationSchema } from "@/lib/schemas/destination"
+
 import { DeleteAltIcon, ExternalLink01Icon, InboxInIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
@@ -11,9 +15,6 @@ import { LoadingButton } from "@hazel/ui/loading-button"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import { toast } from "sonner"
-
-import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
-import { updateDestinationSchema } from "@/lib/schemas/destination"
 
 export type DestinationCardProps = {
 	id: string

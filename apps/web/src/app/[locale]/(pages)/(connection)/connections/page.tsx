@@ -1,13 +1,14 @@
 import Link from "next/link"
+
+import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
+import { auth } from "@/lib/auth"
+import { PromiseType } from "@/lib/ts/helpers"
+import { ConnectionTable } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionTable"
+
 import { db } from "@hazel/db"
 import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
-
-import { deleteConnectionAction, pauseConnectionAction, } from "@/server/actions/connections"
-import { auth } from "@/lib/auth"
-import { PromiseType } from "@/lib/ts/helpers"
-import { ConnectionTable } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionTable"
 
 const fetchData = async ({ workspaceId }: { workspaceId: string }) => {
 	return await db.connection.getMany({

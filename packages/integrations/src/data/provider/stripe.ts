@@ -1,5 +1,6 @@
 import { z } from "zod"
-import { InferIntegrationType, createIntegrationForm } from "../../types"
+
+import { createIntegrationForm, InferIntegrationType } from "../../types"
 
 export type StripeProviderProps = InferIntegrationType<typeof stripeForm>
 

@@ -1,14 +1,15 @@
 "use client"
 
 import { useCallback } from "react"
+
+import type { acceptOrganizationInvite } from "@/server/actions/organization-invite"
+
 import useRefresh from "@/core/hooks/use-refresh"
 import { useSignOut } from "@hazel/auth/hooks"
 import { useAction } from "@hazel/server/actions/client"
 import { Button } from "@hazel/ui/button"
 import type { Session } from "@supabase/auth-helpers-nextjs"
 import { useTranslations } from "next-intl"
-
-import type { acceptOrganizationInvite } from "@/server/actions/organization-invite"
 
 function ExistingUserInviteForm(
 	props: React.PropsWithChildren<{

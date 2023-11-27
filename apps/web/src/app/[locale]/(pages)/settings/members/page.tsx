@@ -1,9 +1,8 @@
-import { db, OrganizationMember, User } from "@hazel/db"
-
-import { Container } from "@hazel/ui/container"
-
 import { createOrganizationInvite } from "@/server/actions/organization-invite"
 import { auth } from "@/lib/auth"
+
+import { db, OrganizationMember, User } from "@hazel/db"
+import { Container } from "@hazel/ui/container"
 
 import { columns } from "./columns"
 import { DataTable } from "./data-table"

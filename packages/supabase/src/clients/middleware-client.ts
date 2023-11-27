@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
+
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
 import { createClient } from "@supabase/supabase-js"
 import invariant from "tiny-invariant"
+
 import { Database } from "../database.types"
 
 /**

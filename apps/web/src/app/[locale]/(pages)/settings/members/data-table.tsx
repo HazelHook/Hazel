@@ -1,6 +1,11 @@
 "use client"
 
 import { ReactNode, useState } from "react"
+
+import type { createOrganizationInvite } from "@/server/actions/organization-invite"
+import { usePagination } from "@/lib/hooks/usePagination"
+import { OrganizationInviteModal } from "@/components/modals/organization-invite-modal"
+
 import { AddIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { DataTablePagination } from "@hazel/ui/data-table"
@@ -15,10 +20,6 @@ import {
 	getPaginationRowModel,
 	useReactTable,
 } from "@tanstack/react-table"
-
-import type { createOrganizationInvite } from "@/server/actions/organization-invite"
-import { usePagination } from "@/lib/hooks/usePagination"
-import { OrganizationInviteModal } from "@/components/modals/organization-invite-modal"
 
 interface DataTableProps<TData, TValue> {
 	orgId: number

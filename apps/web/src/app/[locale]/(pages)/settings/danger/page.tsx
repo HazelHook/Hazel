@@ -1,8 +1,8 @@
-import { Container } from "@hazel/ui/container"
-import { PageHeader } from "@hazel/ui/page-header"
-
 import { deleteOrganzationAction } from "@/server/actions/organization"
 import { auth } from "@/lib/auth"
+
+import { Container } from "@hazel/ui/container"
+import { PageHeader } from "@hazel/ui/page-header"
 
 import { DeleteOrganizationDialog } from "./dialog"
 

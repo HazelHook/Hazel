@@ -1,15 +1,15 @@
 "use client"
 
-
 import { useRouter } from "next/navigation"
+
+import type { changeDefaultMethodAction, removePaymentMethodAction } from "@/server/actions/stripe"
+import { cn } from "@/lib/utils"
+
 import { CheckTickCircleIcon, CrossCircleIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import { Card } from "@hazel/ui/card"
 import { Image } from "@hazel/ui/image"
-
-import type { changeDefaultMethodAction, removePaymentMethodAction } from "@/server/actions/stripe"
-import { cn } from "@/lib/utils"
 
 import { ConfirmationDialog } from "./confirmation-dialog"
 

@@ -1,4 +1,4 @@
-import type { Option } from "./types"
+import { AddCircleIcon, CheckTickIcon } from "@hazel/icons"
 import { type Column } from "@tanstack/react-table"
 
 import { Badge } from "../badge"
@@ -14,8 +14,8 @@ import {
 } from "../command"
 import { Popover, PopoverContent, PopoverTrigger } from "../popover"
 import { Separator } from "../separator"
-import { AddCircleIcon, CheckTickIcon } from "@hazel/icons"
 import { cn } from "../utils"
+import type { Option } from "./types"
 
 interface DataTableFacetedFilter<TData, TValue> {
 	column?: Column<TData, TValue>

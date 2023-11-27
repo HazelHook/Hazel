@@ -1,7 +1,7 @@
-import { Avatar, AvatarImage } from "@hazel/ui/avatar"
-
 import { getSeededProfileImageUrl } from "@/lib/utils"
+
 import { User } from "@hazel/db"
+import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 
 export const UserCell = ({ user }: { user: User }) => {
 	return (

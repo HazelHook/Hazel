@@ -1,7 +1,7 @@
 import { Hazel } from "../core/hazel"
-import { StrictUnion } from "./helpers/types"
-import { AnyHazelWebhook } from "../core/webhook-function"
 import { HazelMiddleware, MiddlewareOptions } from "../core/middleware"
+import { AnyHazelWebhook } from "../core/webhook-function"
+import { StrictUnion } from "./helpers/types"
 
 export type SupportedFrameworks =
 	// | "cloudflare-pages"

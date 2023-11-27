@@ -1,14 +1,13 @@
 import "server-only"
 
+import { cache } from "react"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import configuration from "@hazel/utils/configuration"
-
-import { getSupabaseServerClient } from "@hazel/supabase/clients"
 
 import { requireSession } from "@hazel/auth/utils"
 import { db } from "@hazel/db"
-import { cache } from "react"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
+import configuration from "@hazel/utils/configuration"
 
 export const auth = cache(async () => {
 	const client = getSupabaseServerClient()

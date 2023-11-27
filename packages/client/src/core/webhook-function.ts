@@ -1,4 +1,3 @@
-import { Hazel } from "./hazel"
 import type {
 	AnyContext,
 	ClientOptions,
@@ -8,6 +7,7 @@ import type {
 	WebhookConfig,
 	WebhookOptions,
 } from "../lib/types"
+import { Hazel } from "./hazel"
 
 export type AnyHazelWebhook = HazelWebhook<any, any, any>
 

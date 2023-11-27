@@ -1,11 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@hazel/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@hazel/ui/dialog"
 
 import type { createApiKeyAction } from "@/server/actions/api-keys"
 import { CreateApiKeyForm } from "@/components/forms/api/CreateApiKeyForm"
+
+import { Button } from "@hazel/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@hazel/ui/dialog"
 
 export const ApiKeyModal = ({
 	createAction,

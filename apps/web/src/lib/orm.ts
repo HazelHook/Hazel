@@ -1,9 +1,14 @@
 import { notFound } from "next/navigation"
-import { db } from "@hazel/db"
 
 import { PromiseType } from "@/lib/ts/helpers"
 
-export const getCachedConnection = async ({ publicId }: { publicId: string }) => {
+import { db } from "@hazel/db"
+
+export const getCachedConnection = async ({
+	publicId,
+}: {
+	publicId: string
+}) => {
 	const connection = await db.connection.getOne({ publicId })
 
 	if (!connection) {
@@ -48,7 +53,11 @@ export const getCachedSource = async ({
 
 export type CacheSource = PromiseType<ReturnType<typeof getCachedSource>>
 
-export const getCachedDestination = async ({ publicId }: { publicId: string }) => {
+export const getCachedDestination = async ({
+	publicId,
+}: {
+	publicId: string
+}) => {
 	const destination = await db.destination.getOne({ publicId })
 
 	if (!destination) {
@@ -59,7 +68,11 @@ export const getCachedDestination = async ({ publicId }: { publicId: string }) =
 }
 export type CacheDestination = PromiseType<ReturnType<typeof getCachedDestination>>
 
-export const getCachedIntegrations = async ({ workspaceId }: { workspaceId: string }) => {
+export const getCachedIntegrations = async ({
+	workspaceId,
+}: {
+	workspaceId: string
+}) => {
 	const integration = await db.integration.getMany({ workspaceId })
 
 	if (!integration) {

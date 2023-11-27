@@ -1,6 +1,7 @@
 import { type IsEqual, type Simplify } from "type-fest"
-import { EventPayload } from "../types"
 import { z } from "zod"
+
+import { EventPayload } from "../types"
 
 /**
  * Returns the given generic as either itself or an array of itself.

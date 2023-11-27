@@ -1,9 +1,9 @@
-import { getLogger } from "@hazel/utils"
-import { WebhookVerifier } from "../base"
-
-import { StripeProviderProps } from "../data/provider/stripe"
-
 import crypto from "crypto"
+
+import { getLogger } from "@hazel/utils"
+
+import { WebhookVerifier } from "../base"
+import { StripeProviderProps } from "../data/provider/stripe"
 
 function extractStripeSignature(header: string) {
 	const elements = header.split(",")

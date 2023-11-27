@@ -1,10 +1,9 @@
 "use client"
 
+import { Icons } from "@/components/icons"
 
 import { Button } from "@hazel/ui/button"
 import { useTheme } from "next-themes"
-
-import { Icons } from "@/components/icons"
 
 export function ThemeToggle() {
 	const { setTheme, theme } = useTheme()

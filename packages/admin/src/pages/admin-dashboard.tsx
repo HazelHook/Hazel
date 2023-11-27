@@ -1,8 +1,9 @@
-import { AdminHeader } from "../internal/components/admin-header"
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Container } from "@hazel/ui/container"
 import { lago } from "@hazel/utils/lago"
+
 import AdminDashboard from "../internal/components/admin-dashboard"
+import { AdminHeader } from "../internal/components/admin-header"
 
 export async function AdminDashboardPage() {
 	const data = await loadData()

@@ -1,11 +1,12 @@
 "use client"
 
+import Link from "next/link"
+
 import { User } from "@hazel/db"
 import { ThreeDotsVerticalIcon } from "@hazel/icons"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
-import { Button } from "@hazel/ui/button"
-import { If } from "@hazel/ui/if"
 import { Badge } from "@hazel/ui/badge"
+import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -13,10 +14,9 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
+import { If } from "@hazel/ui/if"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
-
 import { ColumnDef } from "@tanstack/react-table"
-import Link from "next/link"
 
 type UserRow = {
 	id: string

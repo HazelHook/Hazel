@@ -1,5 +1,5 @@
 import { Skeleton } from "../skeleton"
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "../table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../table"
 
 interface DataTableLoadingProps {
 	columnCount: number

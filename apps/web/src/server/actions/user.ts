@@ -1,11 +1,11 @@
 "use server"
 
+import { userUpdateFormSchema } from "@/lib/schemas/user"
+
 import { db } from "@hazel/db"
 import { createAction, protectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
 import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 import { z } from "zod"
-
-import { userUpdateFormSchema } from "@/lib/schemas/user"
 
 export const updateUserAction = createAction(
 	protectedProcedure.input(z.object({ id: z.string() }).merge(userUpdateFormSchema)).mutation(async ({ input }) => {

@@ -1,6 +1,3 @@
-
-
-
 import { Text } from "../ext/ink"
 
 export function Quicklinks({

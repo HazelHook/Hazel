@@ -1,5 +1,3 @@
-
-
 import withNextIntl from "next-intl/plugin"
 
 const millionConfig = {

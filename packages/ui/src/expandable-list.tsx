@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
+
 import { Maximize02Icon, Minimize02Icon } from "@hazel/icons"
 
 export interface ExpandableListProps {

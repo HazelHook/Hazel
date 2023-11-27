@@ -1,10 +1,10 @@
 "use client"
 
+import { httpStatusCodes } from "@/lib/utils"
+
 import { Destination, Source } from "@hazel/db"
 import { TBResponse } from "@hazel/tinybird"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
-
-import { httpStatusCodes } from "@/lib/utils"
 
 import { responseColumns } from "./response-column"
 

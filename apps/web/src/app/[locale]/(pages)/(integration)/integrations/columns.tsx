@@ -1,14 +1,14 @@
 "use client"
 
+import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
+import { IntegrationsActions } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationsActions"
+import { IntegrationToolColumn } from "@/app/[locale]/(pages)/(integration)/integrations/page"
+
 import { CheckTickIcon } from "@hazel/icons"
 import { INTEGRATIONS } from "@hazel/integrations/web"
 import { Badge } from "@hazel/ui/badge"
 import { SortableHeader } from "@hazel/ui/data-table"
 import { ColumnDef } from "@tanstack/react-table"
-
-import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
-import { IntegrationsActions } from "@/app/[locale]/(pages)/(integration)/_components/IntegrationsActions"
-import { IntegrationToolColumn } from "@/app/[locale]/(pages)/(integration)/integrations/page"
 
 export const columns: (
 	deleteAction: typeof deleteIntegrationAction,

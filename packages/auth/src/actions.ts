@@ -1,8 +1,7 @@
 "use server"
 
+import { createAction, protectedAdminProcedure, TRPCError } from "@hazel/server/actions/trpc"
 import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
-
-import { TRPCError, createAction, protectedAdminProcedure } from "@hazel/server/actions/trpc"
 import { z } from "zod"
 
 export const impersonateUserAction = createAction(
@@ -15,7 +14,10 @@ export const impersonateUserAction = createAction(
 		} = await client.auth.admin.getUserById(input.userId)
 
 		if (error || !user) {
-			throw new TRPCError({ message: "Error fetching user", code: "INTERNAL_SERVER_ERROR" })
+			throw new TRPCError({
+				message: "Error fetching user",
+				code: "INTERNAL_SERVER_ERROR",
+			})
 		}
 
 		const email = user.email
@@ -23,7 +25,10 @@ export const impersonateUserAction = createAction(
 		console.log(email)
 
 		if (!email) {
-			throw new TRPCError({ message: "User has no email. Cannot impersonate", code: "FORBIDDEN" })
+			throw new TRPCError({
+				message: "User has no email. Cannot impersonate",
+				code: "FORBIDDEN",
+			})
 		}
 
 		const { error: linkError, data } = await client.auth.admin.generateLink({
@@ -35,7 +40,10 @@ export const impersonateUserAction = createAction(
 		})
 
 		if (linkError || !data) {
-			throw new TRPCError({ message: "Error generating magic link", code: "INTERNAL_SERVER_ERROR" })
+			throw new TRPCError({
+				message: "Error generating magic link",
+				code: "INTERNAL_SERVER_ERROR",
+			})
 		}
 
 		const response = await fetch(data.properties?.action_link, {

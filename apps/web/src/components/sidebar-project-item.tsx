@@ -1,11 +1,12 @@
 import Link from "next/link"
+
+import { getSeededProfileImageUrl } from "@/lib/utils"
+import { Icons } from "@/components/icons"
+
 import { Connection } from "@hazel/db/schema"
 import { ChevronDownIcon, ChevronRightIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { Image } from "@hazel/ui/image"
-
-import { getSeededProfileImageUrl } from "@/lib/utils"
-import { Icons } from "@/components/icons"
 
 import { SidebarItem } from "./sidebar"
 

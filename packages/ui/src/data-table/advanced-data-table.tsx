@@ -1,9 +1,8 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
-
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import type { DataTableFilterableColumn, DataTableSearchableColumn } from "./types"
+
 import {
 	flexRender,
 	getCoreRowModel,
@@ -12,21 +11,21 @@ import {
 	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
+	Row,
 	useReactTable,
 	type ColumnDef,
 	type ColumnFiltersState,
 	type PaginationState,
 	type SortingState,
 	type VisibilityState,
-	Row,
 } from "@tanstack/react-table"
 
+import { useDebounce } from "../hooks/use-debounce"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../table"
-
 import { DataTableAdvancedToolbar } from "./advanced/data-table-advanced-toolbar"
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableToolbar } from "./data-table-toolbar"
-import { useDebounce } from "../hooks/use-debounce"
+import type { DataTableFilterableColumn, DataTableSearchableColumn } from "./types"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]

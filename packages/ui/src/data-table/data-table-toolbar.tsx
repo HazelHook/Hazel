@@ -2,15 +2,16 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { DataTableFilterableColumn, DataTableSearchableColumn } from "./types"
+
+import { AddCircleIcon, CrossIcon, DeleteAltIcon } from "@hazel/icons"
 import type { Table } from "@tanstack/react-table"
 
 import { Button, buttonVariants } from "../button"
 import { Input } from "../input"
+import { cn } from "../utils"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
 import { DataTableViewOptions } from "./data-table-view-options"
-import { AddCircleIcon, CrossIcon, DeleteAltIcon } from "@hazel/icons"
-import { cn } from "../utils"
+import type { DataTableFilterableColumn, DataTableSearchableColumn } from "./types"
 
 interface DataTableToolbarProps<TData> {
 	table: Table<TData>

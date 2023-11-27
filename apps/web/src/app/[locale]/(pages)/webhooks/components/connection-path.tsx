@@ -2,6 +2,10 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+
+import { deleteConnectionAction, updateConnectionAction } from "@/server/actions/connections"
+import { updateConnectionSchema } from "@/lib/schemas/connection"
+
 import {
 	AutomationIcon,
 	DeleteAltIcon,
@@ -19,9 +23,6 @@ import { LoadingButton } from "@hazel/ui/loading-button"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import { toast } from "sonner"
-
-import { deleteConnectionAction, updateConnectionAction } from "@/server/actions/connections"
-import { updateConnectionSchema } from "@/lib/schemas/connection"
 
 export type ConnectionPathProps = {
 	id: string

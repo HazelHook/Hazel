@@ -1,6 +1,8 @@
-import { z } from "zod"
-import { INTEGRATIONS, INTEGRATION_CATEGORIES, INTEGRATION_FEATURES } from "./config"
 import { InputHTMLAttributes, ReactNode } from "react"
+
+import { z } from "zod"
+
+import { INTEGRATION_CATEGORIES, INTEGRATION_FEATURES, INTEGRATIONS } from "./config"
 
 export interface IntegrationToolCategoryData {
 	name: string

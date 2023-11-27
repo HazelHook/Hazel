@@ -1,9 +1,10 @@
+import { db, User } from "@hazel/db"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
 import { Container } from "@hazel/ui/container"
+import { SimpleDataTable } from "@hazel/ui/data-table"
+
 import { AdminHeader } from "../../internal/components/admin-header"
 import { getPageFromQueryParams } from "../../internal/utils/get-page-from-query-params"
-import { getSupabaseServerClient } from "@hazel/supabase/clients"
-import { db, User } from "@hazel/db"
-import { SimpleDataTable } from "@hazel/ui/data-table"
 import { columns } from "./column"
 
 export interface UsersAdminPageProps {
@@ -50,7 +51,9 @@ async function loadUsers(page = 1, perPage = 20) {
 	const { users: authUsers, total } = await loadAuthUsers(page, perPage)
 
 	const ids = authUsers.map((user) => user.id)
-	const usersData = await db.db.query.user.findMany({ where: (user, { inArray }) => inArray(user.id, ids) })
+	const usersData = await db.db.query.user.findMany({
+		where: (user, { inArray }) => inArray(user.id, ids),
+	})
 
 	const users = authUsers
 		.map((user) => {

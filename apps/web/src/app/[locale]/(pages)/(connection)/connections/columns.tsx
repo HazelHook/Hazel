@@ -1,6 +1,12 @@
 "use client"
 
 import Link from "next/link"
+
+import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
+import { getSeededProfileImageUrl } from "@/lib/utils"
+import { ConnectionActions } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionActions"
+import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
+
 import { Connection, Destination, Source } from "@hazel/db"
 import { CheckTickIcon, EyeOpenIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
@@ -9,11 +15,6 @@ import { Button } from "@hazel/ui/button"
 import { Cell, SortableHeader } from "@hazel/ui/data-table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { ColumnDef } from "@tanstack/react-table"
-
-import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
-import { getSeededProfileImageUrl } from "@/lib/utils"
-import { ConnectionActions } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionActions"
-import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
 export type Column = Connection & {
 	source: Source | null

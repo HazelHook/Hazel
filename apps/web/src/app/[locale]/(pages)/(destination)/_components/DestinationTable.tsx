@@ -1,10 +1,10 @@
 "use client"
 
-import { SimpleDataTable } from "@hazel/ui/data-table"
-
 import { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 import { columns } from "@/app/[locale]/(pages)/(destination)/destinations/columns"
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
+
+import { SimpleDataTable } from "@hazel/ui/data-table"
 
 export const DestinationTable = ({
 	destination,

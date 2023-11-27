@@ -1,7 +1,7 @@
+import { dashboardNumberFormatter } from "@/lib/formatters"
+
 import { RadialProgressBar } from "@hazel/ui/radial-progress"
 import { ChargeObject, CustomerChargeUsageObject } from "lago-javascript-client"
-
-import { dashboardNumberFormatter } from "@/lib/formatters"
 
 interface UsageCardProps {
 	item: CustomerChargeUsageObject

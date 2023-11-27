@@ -1,4 +1,7 @@
 import { useRouter } from "next/navigation"
+
+import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
+
 import { ClipboardIcon, ThreeDotsVerticalIcon, UserCrossIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button } from "@hazel/ui/button"
@@ -10,8 +13,6 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { toast } from "sonner"
-
-import type { revokeOrganizationInvite } from "@/server/actions/organization-invite"
 
 export interface InviteOptionsProps {
 	emailAdress: string

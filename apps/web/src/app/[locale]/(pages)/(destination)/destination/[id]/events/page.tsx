@@ -1,12 +1,13 @@
 import { notFound } from "next/navigation"
-import tiny from "@hazel/tinybird"
-import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { auth } from "@/lib/auth"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { getCachedDestination } from "@/lib/orm"
 import { PromiseType } from "@/lib/ts/helpers"
 import { httpStatusCodes } from "@/lib/utils"
+
+import tiny from "@hazel/tinybird"
+import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { columns } from "./column"
 

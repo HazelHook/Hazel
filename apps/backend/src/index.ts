@@ -1,10 +1,9 @@
-import { Elysia } from "elysia"
-
 import { logger } from "@bogeychan/elysia-logger"
+import serverTiming from "@elysiajs/server-timing"
+import { Elysia } from "elysia"
 
 import { sourceQueue } from "./lib/queue"
 import { v1Route } from "./routes/v1"
-import serverTiming from "@elysiajs/server-timing"
 
 export const routeSetup = new Elysia({ name: "setup" }).use(
 	logger({

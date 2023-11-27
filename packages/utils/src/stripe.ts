@@ -5,7 +5,11 @@ export const stripe = new Stripe.Stripe(process.env.STRIPE_API_KEY as string, {
 	httpClient: Stripe.Stripe.createFetchHttpClient(),
 })
 
-export const createCheckoutSession = async (data: { customerId: string; successUrl: string; cancelUrl: string }) => {
+export const createCheckoutSession = async (data: {
+	customerId: string
+	successUrl: string
+	cancelUrl: string
+}) => {
 	const session = await stripe.checkout.sessions.create({
 		payment_method_types: ["card"],
 		mode: "setup",

@@ -1,11 +1,10 @@
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
-import configuration from "@hazel/utils/configuration"
 
-import { getSupabaseServerClient } from "@hazel/supabase/clients"
-
-import { db } from "@hazel/db"
 import { requireSession } from "@hazel/auth/utils"
+import { db } from "@hazel/db"
+import { getSupabaseServerClient } from "@hazel/supabase/clients"
+import configuration from "@hazel/utils/configuration"
 
 import OnboardingContainer from "./components/OnboardingContainer"
 

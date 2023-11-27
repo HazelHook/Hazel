@@ -1,5 +1,6 @@
 "use client"
 
+import { FilterHorizontalIcon } from "@hazel/icons"
 import { type Table } from "@tanstack/react-table"
 
 import { Button } from "../button"
@@ -11,7 +12,6 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../dropdown-menu"
-import { FilterHorizontalIcon } from "@hazel/icons"
 
 interface DataTableViewOptionsProps<TData> {
 	table: Table<TData>

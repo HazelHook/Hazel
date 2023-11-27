@@ -1,9 +1,10 @@
 "use client"
 
 import { useCallback, useState } from "react"
-import { If } from "@hazel/ui/if"
 
 import CsrfTokenContext from "@/lib/contexts/csrf"
+
+import { If } from "@hazel/ui/if"
 
 import CompleteOnboardingStep from "./CompleteOnboardingStep"
 import OrganizationInfoStep, { OrganizationInfoStepData } from "./OrganizationInfoStep"

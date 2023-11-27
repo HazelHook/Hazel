@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback } from "react"
+
 import { PageLoadingIndicator } from "@hazel/ui/page-loading-indicator"
 import { Provider } from "@supabase/supabase-js"
 import { useTranslations } from "next-intl"

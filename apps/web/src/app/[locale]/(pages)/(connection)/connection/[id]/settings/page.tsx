@@ -1,6 +1,6 @@
-import { Container } from "@hazel/ui/container"
-
 import { ConnectionSettingsPage } from "@/components/pages/connection/SettingsPage"
+
+import { Container } from "@hazel/ui/container"
 
 const EditConnectionPage = async ({
 	params,

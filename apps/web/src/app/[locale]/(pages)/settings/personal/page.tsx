@@ -1,9 +1,9 @@
-import { Card } from "@hazel/ui/card"
-import { Container } from "@hazel/ui/container"
-
 import { updateUserProfileImageAction } from "@/server/actions/user"
 import { auth } from "@/lib/auth"
 import { UserUpdateForm } from "@/components/forms/user/user-update-form"
+
+import { Card } from "@hazel/ui/card"
+import { Container } from "@hazel/ui/container"
 
 import { AvatarUpload } from "../components/AvatarUpload"
 

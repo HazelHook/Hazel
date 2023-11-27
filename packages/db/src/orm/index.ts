@@ -1,5 +1,5 @@
-import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
 import { connect } from "@planetscale/database"
+import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
 
 import * as schema from "../schema"
 import apiKeysLogic from "./tables/apiKeys"
@@ -14,7 +14,15 @@ export type DB = PlanetScaleDatabase<typeof schema>
 
 export type OptionalExceptFor<T, K extends keyof T> = Partial<T> & Pick<T, K>
 
-export function connectDB({ host, username, password }: { host: string; username: string; password: string }) {
+export function connectDB({
+	host,
+	username,
+	password,
+}: {
+	host: string
+	username: string
+	password: string
+}) {
 	// if (!connectionString) {
 	// 	throw new Error("Connection String cant be empty")
 	// }

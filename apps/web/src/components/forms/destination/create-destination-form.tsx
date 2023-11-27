@@ -1,13 +1,13 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { AutoForm } from "@hazel/ui/auto-form"
-import { Button } from "@hazel/ui/button"
 
 import type { createDestinationAction } from "@/server/actions/destination"
-import { useAction } from "@hazel/server/actions/client"
-
 import { createDestinationSchema } from "@/lib/schemas/destination"
+
+import { useAction } from "@hazel/server/actions/client"
+import { AutoForm } from "@hazel/ui/auto-form"
+import { Button } from "@hazel/ui/button"
 
 interface CreateDestinationFormProps {
 	action: typeof createDestinationAction

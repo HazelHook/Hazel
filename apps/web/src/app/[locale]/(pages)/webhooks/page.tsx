@@ -1,12 +1,13 @@
 import Link from "next/link"
+
+import { auth } from "@/lib/auth"
+
 import { db } from "@hazel/db"
 import { AddIcon, InfoCircleIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 import Heading from "@hazel/ui/heading"
 import { SimpleTooltip } from "@hazel/ui/tooltip"
-
-import { auth } from "@/lib/auth"
 
 import { ConnectionPath } from "./components/connection-path"
 import { DestinationCard } from "./components/destination-card"

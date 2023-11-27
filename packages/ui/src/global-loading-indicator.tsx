@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl"
+
 import { PageLoadingIndicator } from "./page-loading-indicator"
 import { TopLoadingBarIndicator } from "./top-loading-bar-indicator"
 

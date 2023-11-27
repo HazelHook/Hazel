@@ -1,7 +1,7 @@
 import { getLogger } from "@hazel/utils"
+
 import { WebhookVerifier } from "../base"
 import { LinearProviderProps } from "../data/provider/linear"
-
 import { validateWithHmac } from "../utils"
 
 export class LinearVerifier extends WebhookVerifier<LinearProviderProps> {
