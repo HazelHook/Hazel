@@ -2,15 +2,16 @@
 
 import { retryRequestAction } from "@/server/actions/retry"
 
-import { Destination, Source } from "@hazel/db"
+import { Destination, Integration, Source } from "@hazel/db"
 import { TBRequest } from "@hazel/tinybird"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { requestColumns } from "./request-columns"
+import { LogInLeftIcon } from "@hazel/icons"
 
 type RequestTableProps = {
 	data: TBRequest[]
-	sources: Source[]
+	sources: (Source & { integration: Integration | null })[]
 	destinations: Destination[]
 	maxItems: number
 }
@@ -28,7 +29,21 @@ export const RequestTable = ({ data, sources, destinations, maxItems }: RequestT
 					id: "source_id",
 					title: "Source",
 					options: sources.map((source) => ({
-						label: source.name,
+						label: (
+							<div className="flex gap-2 justify-center">
+								{source.integration ? (
+									<img
+										src={`/assets/integrations/${source.integration.tool}.svg`}
+										alt={source.integration.tool}
+										className="w-4 h-4"
+									/>
+								) : (
+									<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+								)}
+
+								<p>{source.name}</p>
+							</div>
+						),
 						value: source.publicId,
 					})),
 				},

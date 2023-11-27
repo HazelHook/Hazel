@@ -2,15 +2,18 @@
 
 import { httpStatusCodes } from "@/lib/utils"
 
-import { Destination, Source } from "@hazel/db"
+import { Destination, Integration, Source } from "@hazel/db"
 import { TBResponse } from "@hazel/tinybird"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { responseColumns } from "./response-column"
+import { LogInLeftIcon } from "@hazel/icons"
 
 type ResponseTableProps = {
 	data: TBResponse[]
-	sources: Source[]
+	sources: (Source & {
+		integration: Integration
+	})[]
 	destinations: Destination[]
 	maxItems: number
 }
@@ -33,7 +36,21 @@ export const ResponseTable = ({ data, sources, destinations, maxItems }: Respons
 					id: "source_id",
 					title: "Source",
 					options: sources.map((source) => ({
-						label: source.name,
+						label: (
+							<div className="flex gap-2 justify-center">
+								{source.integration ? (
+									<img
+										src={`/assets/integrations/${source.integration.tool}.svg`}
+										alt={source.integration.tool}
+										className="w-4 h-4"
+									/>
+								) : (
+									<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+								)}
+
+								<p>{source.name}</p>
+							</div>
+						),
 						value: source.publicId,
 					})),
 				},
