@@ -1,5 +1,5 @@
-import Link from "next/link"
 import { Suspense } from "react"
+import Link from "next/link"
 
 import { auth } from "@/lib/auth"
 import { getTableParams } from "@/lib/data-table-helpers"
@@ -19,8 +19,8 @@ import { Skeleton } from "@hazel/ui/skeleton"
 import { Tabs, TabsContent, TabsTrigger, UnstyledTabsList } from "@hazel/ui/tabs"
 import { sub } from "date-fns"
 
-import { KpiCard, KpiLoadingCard } from "./_component/KpiCard"
 import { DatePicker } from "./_component/date-picker"
+import { KpiCard, KpiLoadingCard } from "./_component/KpiCard"
 import { RequestTable } from "./_component/request-table"
 import { ResponseTable } from "./_component/response-table"
 

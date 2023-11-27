@@ -25,8 +25,11 @@ export const rethrowError = (prefix: string): ((err: any) => never) => {
 }
 
 export function serializeError(error: Error): Record<string, any> {
-	return Object.getOwnPropertyNames(error).reduce((errorObject, key) => {
-		errorObject[key] = (error as any)[key]
-		return errorObject
-	}, {} as Record<string, any>)
+	return Object.getOwnPropertyNames(error).reduce(
+		(errorObject, key) => {
+			errorObject[key] = (error as any)[key]
+			return errorObject
+		},
+		{} as Record<string, any>,
+	)
 }

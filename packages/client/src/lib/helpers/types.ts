@@ -65,8 +65,8 @@ type AnyIsEqual<T1, T2> = T1 extends T2 ? (IsEqual<T1, T2> extends true ? true :
 type PathImpl<K extends string | number, V, TraversedTypes> = V extends Primitive | Date
 	? `${K}`
 	: true extends AnyIsEqual<TraversedTypes, V>
-	? `${K}`
-	: `${K}` | `${K}.${PathInternal<V, TraversedTypes | V>}`
+	  ? `${K}`
+	  : `${K}` | `${K}.${PathInternal<V, TraversedTypes | V>}`
 
 /**
  * Start iterating over a given object `T` and return all string paths used to

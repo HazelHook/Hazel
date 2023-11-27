@@ -148,7 +148,7 @@ export type HandlerResponse<Output = any, StreamOutput = any> = {
  * The response from the Hazel SDK before it is transformed in to a
  * framework-compatible response by an {@link HazelCommHandler} instance.
  */
-export interface ActionResponse<TBody extends string | ReadableStream = string,> {
+export interface ActionResponse<TBody extends string | ReadableStream = string> {
 	/**
 	 * The HTTP status code to return.
 	 */

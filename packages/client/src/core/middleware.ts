@@ -70,18 +70,17 @@ export class HazelMiddleware<TOpts extends MiddlewareOptions> {
 // biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
 type VoidType = void
 
-type FnsWithSameInputAsOutput<TRecord extends Record<string, (arg: any) => any>,> = {
-	[K in
-		keyof TRecord as Await<TRecord[K]> extends Parameters<TRecord[K]>[0]
-			? K
-			: Await<TRecord[K]> extends VoidType | undefined
-			? Parameters<TRecord[K]>[0] extends VoidType | undefined
+type FnsWithSameInputAsOutput<TRecord extends Record<string, (arg: any) => any>> = {
+	[K in keyof TRecord as Await<TRecord[K]> extends Parameters<TRecord[K]>[0]
+		? K
+		: Await<TRecord[K]> extends VoidType | undefined
+		  ? Parameters<TRecord[K]>[0] extends VoidType | undefined
 				? K
 				: never
-			: never]: TRecord[K]
+		  : never]: TRecord[K]
 }
 
-type PromisifiedFunctionRecord<TRecord extends Record<string, (arg: any) => any>,> = Pick<
+type PromisifiedFunctionRecord<TRecord extends Record<string, (arg: any) => any>> = Pick<
 	Partial<{
 		[K in keyof TRecord]: (...args: Parameters<TRecord[K]>) => Promise<Await<TRecord[K]>>
 	}>,
@@ -134,14 +133,13 @@ export const getHookStack = async <
 			) => Parameters<TResult[K]>[0]
 		},
 		keyof {
-			[K2 in
-				keyof TResult as Await<TResult[K2]> extends Parameters<TResult[K2]>[0]
-					? K2
-					: Await<TResult[K2]> extends VoidType | undefined
-					? Parameters<TResult[K2]>[0] extends VoidType | undefined
+			[K2 in keyof TResult as Await<TResult[K2]> extends Parameters<TResult[K2]>[0]
+				? K2
+				: Await<TResult[K2]> extends VoidType | undefined
+				  ? Parameters<TResult[K2]>[0] extends VoidType | undefined
 						? K2
 						: never
-					: never]: VoidType
+				  : never]: VoidType
 		}
 	>,
 ): Promise<TRet> => {
@@ -149,16 +147,19 @@ export const getHookStack = async <
 	const mwStack = await middleware
 
 	// Step through each middleware and get the hook for the given key
-	const keyFns = mwStack.reduce((acc, mw) => {
-		const fn = mw[key]
+	const keyFns = mwStack.reduce(
+		(acc, mw) => {
+			const fn = mw[key]
 
-		if (fn) {
-			// biome-ignore lint/performance/noAccumulatingSpread: <explanation>
-			return [...acc, fn]
-		}
+			if (fn) {
+				// biome-ignore lint/performance/noAccumulatingSpread: <explanation>
+				return [...acc, fn]
+			}
 
-		return acc
-	}, [] as NonNullable<TMiddleware[TKey]>[])
+			return acc
+		},
+		[] as NonNullable<TMiddleware[TKey]>[],
+	)
 
 	// Run each hook found in sequence and collect the results
 	const hooksRegistered = await keyFns.reduce<Promise<Await<TMiddleware[TKey]>[]>>(async (acc, fn) => {
@@ -183,8 +184,8 @@ export const getHookStack = async <
 			}
 
 			const transform = transforms[key as keyof typeof transforms] as (
-				arg: Await<typeof fns[number]>,
-			) => Parameters<typeof fns[number]>
+				arg: Await<(typeof fns)[number]>,
+			) => Parameters<(typeof fns)[number]>
 
 			ret[key] = waterfall(fns, transform) as TRet[keyof TRet]
 		}
@@ -457,7 +458,7 @@ type MiddlewareRunOutput = (ctx: {
 /**
  * @internal
  */
-type GetMiddlewareRunInputMutation<TMiddleware extends HazelMiddleware<MiddlewareOptions>,> =
+type GetMiddlewareRunInputMutation<TMiddleware extends HazelMiddleware<MiddlewareOptions>> =
 	TMiddleware extends HazelMiddleware<infer TOpts>
 		? TOpts["init"] extends MiddlewareRegisterFn
 			? Await<Await<Await<TOpts["init"]>["onFunctionRun"]>["transformInput"]> extends {
@@ -476,7 +477,7 @@ type GetMiddlewareRunInputMutation<TMiddleware extends HazelMiddleware<Middlewar
 /**
  * @internal
  */
-type GetMiddlewareSendEventOutputMutation<TMiddleware extends HazelMiddleware<MiddlewareOptions>,> =
+type GetMiddlewareSendEventOutputMutation<TMiddleware extends HazelMiddleware<MiddlewareOptions>> =
 	TMiddleware extends HazelMiddleware<infer TOpts>
 		? TOpts["init"] extends MiddlewareRegisterFn
 			? Await<Await<Await<TOpts["init"]>["onSendEvent"]>["transformOutput"]> extends {

@@ -92,9 +92,9 @@ export const DatePicker = () => {
 							router.push(
 								`${pathname}?
 									${createQueryStr("date_from", formatDateTime(dateRange.from)!)}&${createQueryStr(
-									"date_to",
-									formatDateTime(dateRange.to)!,
-								)}`,
+										"date_to",
+										formatDateTime(dateRange.to)!,
+									)}`,
 							)
 							setDateRange(dateRange)
 							setValue("custom")

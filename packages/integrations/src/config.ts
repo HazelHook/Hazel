@@ -35,7 +35,7 @@ export const IntegrationTools = [
 	"svix",
 	"clerk",
 ] as const
-export type IntegrationTools = typeof IntegrationTools[number]
+export type IntegrationTools = (typeof IntegrationTools)[number]
 
 export const INTEGRATIONS: Record<IntegrationTools, IntegrationTool> = {
 	hmac: {

@@ -12,7 +12,7 @@ function DefaultParent({ children }: { children: React.ReactNode }) {
 	return <>{children}</>
 }
 
-export default function AutoFormObject<SchemaType extends z.ZodObject<any, any>,>({
+export default function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 	schema,
 	form,
 	fieldConfig,

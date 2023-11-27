@@ -26,7 +26,7 @@ export type TrxType = Parameters<Parameters<DB["transaction"]>[0]>[0]
 
 export type EitherAClientOrTrx = typeof db.db.transaction | TrxType
 
-export type WithInput<Table extends ExtractTablesWithRelations<typeof schema>["source"],> = DBQueryConfig<
+export type WithInput<Table extends ExtractTablesWithRelations<typeof schema>["source"]> = DBQueryConfig<
 	"one",
 	true,
 	ExtractTablesWithRelations<typeof schema>,

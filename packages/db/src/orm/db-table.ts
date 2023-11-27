@@ -25,7 +25,7 @@ export class DrizzleTable<TableType extends keyof DB["query"]> {
 		return this.db.update(this.table).set(...data)
 	}
 
-	public select(data?: Parameters<typeof this.db["select"]>) {
+	public select(data?: Parameters<(typeof this.db)["select"]>) {
 		return data ? this.db.select(...data).from(this.table) : this.db.select().from(this.table)
 	}
 

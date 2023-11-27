@@ -87,8 +87,8 @@ export function DataTableMultiFilter<TData>({
 interface MultiFilterRowProps<TData> extends DataTableMultiFilterProps<TData> {
 	i: number
 	option: DataTableFilterOption<TData>
-	operator?: typeof operators[number]
-	setOperator: Dispatch<SetStateAction<typeof operators[number] | undefined>>
+	operator?: (typeof operators)[number]
+	setOperator: Dispatch<SetStateAction<(typeof operators)[number] | undefined>>
 }
 
 export function MultiFilterRow<TData>({
