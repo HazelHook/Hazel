@@ -1,9 +1,8 @@
-import { SQL, } from "drizzle-orm"
-import { TrxType, } from "../../utils"
+import { SQL } from "drizzle-orm"
+import { TrxType } from "../../utils"
 
 export type BaseFilters<T> = {
 	publicId: string
-	workspaceId: string
 	with?: T
 	where?: SQL
 	[keys: string]: any

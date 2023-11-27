@@ -1,21 +1,21 @@
 import { and, eq } from "drizzle-orm"
 
-import { BaseFilters, } from "."
+import { BaseFilters } from "."
 import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"
-import { DrizzleTable } from "../db-table"
 import { TrxType } from "../../utils"
+import { DrizzleTable } from "../db-table"
 
 type WithInput = NonNullable<Parameters<DB["query"]["source"]["findFirst"]>[0]>["with"]
 
 const sourceLogic = (db: DB) => ({
 	table: new DrizzleTable("source", schema.source, db),
-	getOne: async <T extends WithInput>({ publicId, where, workspaceId }: BaseFilters<T>, tx?: TrxType) => {
+	getOne: async <T extends WithInput>({ publicId, where }: BaseFilters<T>, tx?: TrxType) => {
 		const client = tx || db
 
 		return client.query.source.findFirst({
-			where: and(eq(schema.source.publicId, publicId), eq(schema.source.workspaceId, workspaceId), where),
+			where: and(eq(schema.source.publicId, publicId), where),
 			with: {
 				connections: {
 					with: {
