@@ -5,8 +5,8 @@ import Link from "next/link"
 import { dataTableTimestampFormatter } from "@/lib/formatters"
 import { Status } from "@/components/status"
 
-import { Destination, Source } from "@hazel/db"
-import { FilterVerticalIcon } from "@hazel/icons"
+import { Destination, Integration, Source } from "@hazel/db"
+import { FilterVerticalIcon, LogInLeftIcon } from "@hazel/icons"
 import { TBResponse } from "@hazel/tinybird"
 import { Badge } from "@hazel/ui/badge"
 import { Button, buttonVariants } from "@hazel/ui/button"
@@ -20,14 +20,16 @@ import {
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 
-export type Column = TBResponse & {
-	sources: Source[]
-	destinations: Destination[]
-}
+export type Column = TBResponse
 
 const columnHelper = createColumnHelper<Column>()
 
-export const responseColumns = (sources: Source[], destinations: Destination[]) =>
+export const responseColumns = (
+	sources: (Source & {
+		integration: Integration | null
+	})[],
+	destinations: Destination[],
+) =>
 	[
 		columnHelper.accessor("response_at", {
 			header: "Timestamp",
@@ -63,7 +65,19 @@ export const responseColumns = (sources: Source[], destinations: Destination[]) 
 				}
 
 				return (
-					<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/source/${sourceId}`}>
+					<Link
+						className={buttonVariants({ variant: "outline", size: "xs", className: "gap-2" })}
+						href={`/source/${sourceId}`}
+					>
+						{source.integration ? (
+							<img
+								src={`/assets/integrations/${source.integration.tool}.svg`}
+								alt={source.integration.tool}
+								className="w-5 h-5"
+							/>
+						) : (
+							<LogInLeftIcon className="w-5 h-5 text-muted-foreground" />
+						)}
 						{source.name}
 					</Link>
 				)

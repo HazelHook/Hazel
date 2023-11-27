@@ -8,8 +8,8 @@ import { calcDiffInMillis } from "@/lib/date-helpers"
 import { dataTableTimestampFormatter } from "@/lib/formatters"
 import { cn } from "@/lib/utils"
 
-import type { Destination, Source } from "@hazel/db"
-import { FilterVerticalIcon } from "@hazel/icons"
+import type { Destination, Integration, Source } from "@hazel/db"
+import { FilterVerticalIcon, LogInLeftIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { TBRequest, TBResponse } from "@hazel/tinybird"
 import { Badge } from "@hazel/ui/badge"
@@ -34,7 +34,9 @@ type Column = TBRequest & {
 const columnHelper = createColumnHelper<Column>()
 
 export const requestColumns = (
-	sources: Source[],
+	sources: (Source & {
+		integration: Integration | null
+	})[],
 	destinations: Destination[],
 	retryAction: typeof retryRequestAction,
 ) =>
@@ -75,7 +77,19 @@ export const requestColumns = (
 				}
 
 				return (
-					<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/source/${sourceId}`}>
+					<Link
+						className={buttonVariants({ variant: "outline", size: "xs", className: "gap-2" })}
+						href={`/source/${sourceId}`}
+					>
+						{source.integration ? (
+							<img
+								src={`/assets/integrations/${source.integration.tool}.svg`}
+								alt={source.integration.tool}
+								className="w-5 h-5"
+							/>
+						) : (
+							<LogInLeftIcon className="w-5 h-5 text-muted-foreground" />
+						)}
 						{source.name}
 					</Link>
 				)
