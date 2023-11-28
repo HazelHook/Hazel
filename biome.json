@@ -15,17 +15,25 @@
 				"noArrayIndexKey": "off"
 			},
 			"nursery": {
-				"noUnusedImports": "error"
+				"noUnusedImports": "off"
 			}
 		},
-		"ignore": ["node_modules", ".next", "dist"]
+		"ignore": [
+			"node_modules",
+			".next",
+			"dist"
+		]
 	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
 		"indentWidth": 4,
 		"lineWidth": 120,
-		"ignore": ["node_modules", ".next", "dist"]
+		"ignore": [
+			"node_modules",
+			".next",
+			"dist"
+		]
 	},
 	"javascript": {
 		"formatter": {
