@@ -19,11 +19,13 @@
     "@supabase/supabase-js": "^2.39.0",
     "next": "14.0.3"
   },
-  "devDependencies": {
+  "peerDependencies": {
     "@hazel/auth": "workspace:*",
     "@hazel/db": "workspace:*",
     "@hazel/supabase": "workspace:*",
-    "@hazel/utils": "workspace:*",
+    "@hazel/utils": "workspace:*"
+  },
+  "devDependencies": {
     "@hazel/tailwind-config": "workspace:*",
     "@hazel/tsconfig": "workspace:*",
     "@types/react": "18.2.31",
