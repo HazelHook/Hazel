@@ -18,7 +18,6 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
   },
   "dependencies": {
-    "@baselime/node-opentelemetry": "^0.2.14",
     "@hazel/admin": "workspace:*",
     "@hazel/auth": "workspace:*",
     "@hazel/client": "workspace:*",
