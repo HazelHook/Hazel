@@ -12,15 +12,12 @@
     "@trpc/client": "10.44.1",
     "@trpc/next": "10.44.1",
     "@trpc/server": "10.44.1",
-    "superjson": "^2.2.1"
-  },
-  "peerDependencies": {
+    "superjson": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.22.4",
-    "@supabase/supabase-js": "^2.38.1",
+    "@supabase/supabase-js": "^2.39.0",
     "next": "14.0.3",
-    "@baselime/node-opentelemetry": "^0.2.8",
     "@hazel/auth": "workspace:*",
     "@hazel/db": "workspace:*",
     "@hazel/supabase": "workspace:*",
