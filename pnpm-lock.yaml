@@ -402,6 +402,9 @@ importers:
       '@hazel/server':
         specifier: workspace:*
         version: link:../server
+      '@hazel/supabase':
+        specifier: workspace:*
+        version: link:../supabase
       '@hazel/ui':
         specifier: workspace:*
         version: link:../ui
@@ -409,30 +412,39 @@ importers:
         specifier: workspace:*
         version: link:../utils
       '@supabase/auth-helpers-nextjs':
-        specifier: ^0.8.x
-        version: 0.8.7(@supabase/supabase-js@2.38.5)
+        specifier: ^0.8.7
+        version: 0.8.7(@supabase/supabase-js@2.39.0)
       '@supabase/supabase-js':
-        specifier: ^2.x
-        version: 2.38.5
+        specifier: ^2.39.0
+        version: 2.39.0
+      next:
+        specifier: 14.0.3
+        version: 14.0.3(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
       next-intl:
-        specifier: 3.x
-        version: 3.1.2(next@14.0.3)(react@18.2.0)
+        specifier: 3.1.4
+        version: 3.1.4(next@14.0.3)(react@18.2.0)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
       react-hook-form:
-        specifier: ^7.x
+        specifier: ^7.48.2
         version: 7.48.2(react@18.2.0)
       sonner:
-        specifier: ^1.x
-        version: 1.2.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.2.3
+        version: 1.2.3(react-dom@18.2.0)(react@18.2.0)
       swr:
-        specifier: ^2.x
+        specifier: ^2.2.4
         version: 2.2.4(react@18.2.0)
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.3.5)
       zod:
-        specifier: ^3.x
+        specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
-      '@hazel/supabase':
-        specifier: workspace:*
-        version: link:../supabase
       '@hazel/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
@@ -451,24 +463,12 @@ importers:
       eslint:
         specifier: ^8.54.0
         version: 8.54.0
-      next:
-        specifier: 14.0.3
-        version: 14.0.3(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
       prettier:
         specifier: ^3.1.0
         version: 3.1.0
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: 18.2.0
-        version: 18.2.0(react@18.2.0)
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.5)
       typescript:
         specifier: ^5.3.2
         version: 5.3.2
@@ -8069,19 +8069,6 @@ packages:
       use-intl: 3.0.1(react@18.2.0)
     dev: false
 
-  /next-intl@3.1.2(next@14.0.3)(react@18.2.0):
-    resolution: {integrity: sha512-uVCklsWiYVHklIjhAn152cdmNW+nLll0nhbR4or47sj6t8I2Kd2JOsgoNuJi3XuTOoitdIdNFE+Vwyh56VzGOw==}
-    peerDependencies:
-      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@formatjs/intl-localematcher': 0.2.32
-      negotiator: 0.6.3
-      next: 14.0.3(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      use-intl: 3.1.2(react@18.2.0)
-    dev: false
-
   /next-intl@3.1.4(next@14.0.3)(react@18.2.0):
     resolution: {integrity: sha512-/mewUryIPdoZT7j+8ipN2rfWuuNGdl+xiwxWxYkYko0kGY/a2IlcgqaMBKwue5V5M17Vk9bwiydv/2wySJXG8w==}
     peerDependencies:
@@ -9592,16 +9579,6 @@ packages:
       atomic-sleep: 1.0.0
     dev: false
 
-  /sonner@1.2.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-EHxYBr5tLDQW4CqosTsX95/Qd5oxjDeQN/EbKBZcjdNp4Hjs6snXB6Lmu1kTL27M3su0oG9DxkllfvX+aSoI4Q==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
   /sonner@1.2.3(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-LMr155izOFA8hudzuUVQT0H93VqmcF9ODP475YjjC/4INESYWN1/ioC5SYRG20jmDmwuQDR8ugP7y6ELghT6JQ==}
     peerDependencies:
@@ -9953,7 +9930,6 @@ packages:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
       tailwindcss: 3.3.5
-    dev: true
 
   /tailwindcss@3.2.7(postcss@8.4.21):
     resolution: {integrity: sha512-B6DLqJzc21x7wntlH/GsZwEXTBttVSl1FtCzC8WP4oBc/NKef7kaax5jeihkkCEWc831/5NDJ9gRNDK6NEioQQ==}
@@ -10541,16 +10517,6 @@ packages:
 
   /use-intl@3.0.1(react@18.2.0):
     resolution: {integrity: sha512-JJlRsWYQoV0ju5X2fDDTAFvnSY0IKgxkfxKYSRXzqDPqMAUeaoJM/KCgBiuBQ0TzDMrcmVltg6k3rxS+ryXeAw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@formatjs/ecma402-abstract': 1.17.2
-      intl-messageformat: 9.13.0
-      react: 18.2.0
-    dev: false
-
-  /use-intl@3.1.2(react@18.2.0):
-    resolution: {integrity: sha512-kUmAiYi/ZB2jk/CeRY/IVzp+DRzBkLk2SmeN3DqMf2N9h/oRTm6qlrYzlOCYWdYPpPOJ7rUM7JERiaWox9mIIQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
