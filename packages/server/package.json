@@ -17,13 +17,13 @@
     "react-dom": "^18.2.0",
     "zod": "^3.22.4",
     "@supabase/supabase-js": "^2.39.0",
-    "next": "14.0.3",
+    "next": "14.0.3"
+  },
+  "devDependencies": {
     "@hazel/auth": "workspace:*",
     "@hazel/db": "workspace:*",
     "@hazel/supabase": "workspace:*",
-    "@hazel/utils": "workspace:*"
-  },
-  "devDependencies": {
+    "@hazel/utils": "workspace:*",
     "@hazel/tailwind-config": "workspace:*",
     "@hazel/tsconfig": "workspace:*",
     "@types/react": "18.2.31",
