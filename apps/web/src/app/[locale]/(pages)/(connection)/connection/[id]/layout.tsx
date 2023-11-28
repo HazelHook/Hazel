@@ -27,7 +27,6 @@ const ConnectionLayout = async ({
 			</div>
 			<NavTabs>
 				<LinkTab href={basePath}>Overview</LinkTab>
-				<LinkTab href={`${basePath}/events`}>Events</LinkTab>
 				<LinkTab href={`${basePath}/settings`}>Settings</LinkTab>
 			</NavTabs>
 			{children}

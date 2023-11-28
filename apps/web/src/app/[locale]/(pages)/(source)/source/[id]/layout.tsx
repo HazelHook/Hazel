@@ -51,11 +51,6 @@ const ConnectionLayout = async ({
 				<Link className={buttonVariants()} href={`/connection/new?source=${params.id}`}>
 					Add to New Connection
 				</Link>
-				{/* {slug && (
-					<div className="h-7 flex gap-4 mb-auto">
-						<img src={`/assets/integrations/${slug}.svg`} className="w-7 h-7" />
-					</div>
-				)} */}
 			</div>
 			<NavTabs>
 				<LinkTab href={`/source/${params.id}`}>Overview</LinkTab>

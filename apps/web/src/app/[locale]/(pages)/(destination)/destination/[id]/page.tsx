@@ -9,6 +9,12 @@ import tiny from "@hazel/tinybird"
 import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
 import { sub } from "date-fns"
+import { Tile } from "@hazel/ui/tile"
+import { CopyButton } from "@/components/copy-button"
+import Link from "next/link"
+import { ExternalLink01Icon } from "@hazel/icons"
+import { buttonVariants } from "@hazel/ui/button"
+import { and, db, eq } from "@hazel/db"
 
 const DestinationPage = async ({
 	params,
@@ -17,17 +23,19 @@ const DestinationPage = async ({
 		id: string
 	}
 }) => {
-	const destination = await getCachedDestination({ publicId: params.id })
+	const { workspaceId } = await auth()
+
+	const destination = await db.db.query.destination.findFirst({
+		where: (dest) => and(eq(dest.publicId, params.id), eq(dest.workspaceId, workspaceId)),
+		with: {
+			connections: true,
+		},
+	})
+
 	const startTime = formatDateTime(sub(new Date(), { days: 7 }))
 
 	if (!destination) {
 		notFound()
-	}
-
-	const { workspaceId } = await auth()
-
-	if (destination.workspaceId !== workspaceId) {
-		redirect("/")
 	}
 
 	const req = await tiny.response.timeline({
@@ -43,6 +51,28 @@ const DestinationPage = async ({
 				<div className="p-2">
 					<p className="text-lg font-semibold">Overview</p>
 				</div>
+			</div>
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full justify-between">
+				<Tile className="w-full">
+					<Tile.Heading>Destination ID</Tile.Heading>
+					<Tile.Body>
+						<CopyButton value={destination.publicId} />
+					</Tile.Body>
+				</Tile>
+				<Tile className="w-full">
+					<Tile.Heading>Connections</Tile.Heading>
+					<Tile.Body>
+						<div className="flex justify-between items-center">
+							{destination.connections.length}
+							<Link
+								href={`/webhooks?destination=${destination.publicId}`}
+								className={buttonVariants({ variant: "outline", size: "icon" })}
+							>
+								<ExternalLink01Icon className="w-4 h-4" />
+							</Link>
+						</div>
+					</Tile.Body>
+				</Tile>
 			</div>
 			<div className="flex flex-row gap-2 w-full">
 				<div className="w-full">
