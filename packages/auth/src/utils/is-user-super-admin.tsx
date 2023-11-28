@@ -29,6 +29,7 @@ export const isUserSuperAdmin = async (
 
 	// If we enforce MFA, we need to check that the user is MFA authenticated.
 	if (params.enforceMfa) {
+		// @ts-ignore
 		const isMfaAuthenticated = await verifyIsMultiFactorAuthenticated(client)
 
 		if (!isMfaAuthenticated) {
