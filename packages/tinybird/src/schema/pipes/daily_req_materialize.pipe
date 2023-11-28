@@ -12,4 +12,7 @@ SQL >
         source_id,
         workspace_id
 
+TYPE materialized
+DATASOURCE daily_req_mv
+
 

@@ -14,4 +14,5 @@ SQL >
         workspace_id,
         status
 
-
+TYPE materialized
+DATASOURCE daily_res_mv

@@ -5,40 +5,40 @@ DESCRIPTION >
 SQL >
 
     %
-            {% if not defined(workspace_id) %}
-                {{ error('workspace_id (String) query param is required') }}
-            {% end %}
-            {% if not defined(start_date) %}
-                {{ error('start_date (DateTime) query param is required') }}
-            {% end %}
-            SELECT *
-            FROM hourly_req_mv
-            WHERE
-                workspace_id
-                = {{
-                    String(
-                        workspace_id,
-                        "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
-                        description="Customer ID",
-                        required=True,
-                    )
-                }}
-                AND {% if defined(source_id) %}
-                    source_id
-                    = {{ String(source_id, description="Source ID", required=False) }}
-                    AND
+                {% if not defined(workspace_id) %}
+                    {{ error('workspace_id (String) query param is required') }}
                 {% end %}
-                {% if period == 'daily' or period == 'hourly' or not defined(period) %}
-                    bucket >= {{ DateTime(start_date, required=True) }}
-                    {% if defined(end_date) %}
-                        AND bucket < {{ DateTime(end_date, required=False) }}
-                    {% end %}
-                {% elif period == 'weekly' or period == 'monthly' %}
-                    bucket >= toDate({{ DateTime(start_date, required=True) }})
-                    {% if defined(end_date) %}
-                        AND bucket < toDate({{ DateTime(end_date, required=False) }})
-                    {% end %}
+                {% if not defined(start_date) %}
+                    {{ error('start_date (DateTime) query param is required') }}
                 {% end %}
+                SELECT *
+                FROM hourly_req_mv
+                WHERE
+                    workspace_id
+                    = {{
+                        String(
+                            workspace_id,
+                            "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
+                            description="Customer ID",
+                            required=True,
+                        )
+                    }}
+                    AND {% if defined(source_id) %}
+                        source_id
+                        = {{ String(source_id, description="Source ID", required=False) }}
+                        AND
+                    {% end %}
+                    {% if period == 'daily' or period == 'hourly' or not defined(period) %}
+                        bucket >= {{ DateTime(start_date, required=True) }}
+                        {% if defined(end_date) %}
+                            AND bucket < {{ DateTime(end_date, required=False) }}
+                        {% end %}
+                    {% elif period == 'weekly' or period == 'monthly' %}
+                        bucket >= toDate({{ DateTime(start_date, required=True) }})
+                        {% if defined(end_date) %}
+                            AND bucket < toDate({{ DateTime(end_date, required=False) }})
+                        {% end %}
+                    {% end %}
 
 
 
@@ -49,10 +49,10 @@ DESCRIPTION >
 SQL >
 
     %
-                        WITH toDate(`bucket`) AS date
-                        SELECT date, workspace_id, countMerge(count) AS events, uniq(source_id) AS sources
-                        FROM filtered
-                        GROUP BY date, workspace_id
-                        ORDER BY date DESC, events DESC
+                            WITH toDate(`bucket`) AS date
+                            SELECT date, workspace_id, countMerge(count) AS events, uniq(source_id) AS sources
+                            FROM filtered
+                            GROUP BY date, workspace_id
+                            ORDER BY date DESC, events DESC
 
 
