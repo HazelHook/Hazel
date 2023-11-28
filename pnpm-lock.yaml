@@ -157,16 +157,16 @@ importers:
         version: 2.2.0
       '@supabase/auth-helpers-nextjs':
         specifier: ^0.8.7
-        version: 0.8.7(@supabase/supabase-js@2.38.5)
+        version: 0.8.7(@supabase/supabase-js@2.39.0)
       '@supabase/auth-ui-react':
         specifier: ^0.4.6
-        version: 0.4.6(@supabase/supabase-js@2.38.5)
+        version: 0.4.6(@supabase/supabase-js@2.39.0)
       '@supabase/auth-ui-shared':
         specifier: ^0.1.8
-        version: 0.1.8(@supabase/supabase-js@2.38.5)
+        version: 0.1.8(@supabase/supabase-js@2.39.0)
       '@supabase/supabase-js':
-        specifier: ^2.38.5
-        version: 2.38.5
+        specifier: ^2.39.0
+        version: 2.39.0
       '@tanstack/react-table':
         specifier: ^8.10.7
         version: 8.10.7(react-dom@18.2.0)(react@18.2.0)
@@ -210,8 +210,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3(@babel/core@7.23.2)(@opentelemetry/api@1.7.0)(react-dom@18.2.0)(react@18.2.0)
       next-intl:
-        specifier: 3.1.2
-        version: 3.1.2(next@14.0.3)(react@18.2.0)
+        specifier: 3.1.4
+        version: 3.1.4(next@14.0.3)(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
@@ -246,8 +246,8 @@ importers:
         specifier: ^0.32.6
         version: 0.32.6
       sonner:
-        specifier: ^1.2.2
-        version: 1.2.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.2.3
+        version: 1.2.3(react-dom@18.2.0)(react@18.2.0)
       swr:
         specifier: ^2.2.4
         version: 2.2.4(react@18.2.0)
@@ -890,8 +890,8 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1(react@18.2.0)
       sonner:
-        specifier: ^1.2.0
-        version: 1.2.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.x
+        version: 1.2.3(react-dom@18.2.0)(react@18.2.0)
       tailwind-merge:
         specifier: ^2.0.0
         version: 2.0.0
@@ -976,8 +976,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@supabase/supabase-js':
-        specifier: ^2.38.5
-        version: 2.38.5
+        specifier: ^2.39.0
+        version: 2.39.0
       '@types/react':
         specifier: 18.2.31
         version: 18.2.31
@@ -5196,12 +5196,31 @@ packages:
       set-cookie-parser: 2.6.0
     dev: false
 
+  /@supabase/auth-helpers-nextjs@0.8.7(@supabase/supabase-js@2.39.0):
+    resolution: {integrity: sha512-iYdOjFo0GkRvha340l8JdCiBiyXQuG9v8jnq7qMJ/2fakrskRgHTCOt7ryWbip1T6BExcWKC8SoJrhCzPOxhhg==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.19.0
+    dependencies:
+      '@supabase/auth-helpers-shared': 0.6.3(@supabase/supabase-js@2.39.0)
+      '@supabase/supabase-js': 2.39.0
+      set-cookie-parser: 2.6.0
+    dev: false
+
   /@supabase/auth-helpers-shared@0.6.3(@supabase/supabase-js@2.38.5):
     resolution: {integrity: sha512-xYQRLFeFkL4ZfwC7p9VKcarshj3FB2QJMgJPydvOY7J5czJe6xSG5/wM1z63RmAzGbCkKg+dzpq61oeSyWiGBQ==}
     peerDependencies:
       '@supabase/supabase-js': ^2.19.0
     dependencies:
       '@supabase/supabase-js': 2.38.5
+      jose: 4.15.4
+    dev: false
+
+  /@supabase/auth-helpers-shared@0.6.3(@supabase/supabase-js@2.39.0):
+    resolution: {integrity: sha512-xYQRLFeFkL4ZfwC7p9VKcarshj3FB2QJMgJPydvOY7J5czJe6xSG5/wM1z63RmAzGbCkKg+dzpq61oeSyWiGBQ==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.19.0
+    dependencies:
+      '@supabase/supabase-js': 2.39.0
       jose: 4.15.4
     dev: false
 
@@ -5218,12 +5237,33 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@supabase/auth-ui-react@0.4.6(@supabase/supabase-js@2.39.0):
+    resolution: {integrity: sha512-uvjcH/K0rvFKUE5Uam5JI6IGXUWSv55GTYcVRRQFEwfav2sT4hzBh6A0gkX9gEZEprhSA9S5Pp5+TzkCAKgcbg==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.21.0
+    dependencies:
+      '@stitches/core': 1.2.8
+      '@supabase/auth-ui-shared': 0.1.8(@supabase/supabase-js@2.39.0)
+      '@supabase/supabase-js': 2.39.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@supabase/auth-ui-shared@0.1.8(@supabase/supabase-js@2.38.5):
     resolution: {integrity: sha512-ouQ0DjKcEFg+0gZigFIEgu01V3e6riGZPzgVD0MJsCBNsMsiDT74+GgCEIElMUpTGkwSja3xLwdFRFgMNFKcjg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.21.0
     dependencies:
       '@supabase/supabase-js': 2.38.5
+    dev: false
+
+  /@supabase/auth-ui-shared@0.1.8(@supabase/supabase-js@2.39.0):
+    resolution: {integrity: sha512-ouQ0DjKcEFg+0gZigFIEgu01V3e6riGZPzgVD0MJsCBNsMsiDT74+GgCEIElMUpTGkwSja3xLwdFRFgMNFKcjg==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.21.0
+    dependencies:
+      '@supabase/supabase-js': 2.39.0
     dev: false
 
   /@supabase/functions-js@2.1.5:
@@ -5300,6 +5340,19 @@ packages:
 
   /@supabase/supabase-js@2.38.5:
     resolution: {integrity: sha512-QTXld3AfwAJgeOGyOKsCcT7AjC3jJxN02iHy299Fw+qKX0lJ1tVVhMGlga101C1stUCvgzjcypmMSGiZ2oeKsw==}
+    dependencies:
+      '@supabase/functions-js': 2.1.5
+      '@supabase/gotrue-js': 2.57.0
+      '@supabase/node-fetch': 2.6.14
+      '@supabase/postgrest-js': 1.8.6
+      '@supabase/realtime-js': 2.8.4
+      '@supabase/storage-js': 2.5.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@supabase/supabase-js@2.39.0:
+    resolution: {integrity: sha512-cYfnwWRW5rYBbPT/BNIejtRT9ULdD9PnIExQV28PZpqcqm3PLwS4f3pY7WGB01Da63VYdvktZPKuYvreqsj/Zg==}
     dependencies:
       '@supabase/functions-js': 2.1.5
       '@supabase/gotrue-js': 2.57.0
@@ -8925,9 +8978,22 @@ packages:
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
       negotiator: 0.6.3
-      next: 14.0.3(@babel/core@7.23.2)(@opentelemetry/api@1.7.0)(react-dom@18.2.0)(react@18.2.0)
+      next: 14.0.3(@babel/core@7.23.2)(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       use-intl: 3.1.2(react@18.2.0)
+    dev: false
+
+  /next-intl@3.1.4(next@14.0.3)(react@18.2.0):
+    resolution: {integrity: sha512-/mewUryIPdoZT7j+8ipN2rfWuuNGdl+xiwxWxYkYko0kGY/a2IlcgqaMBKwue5V5M17Vk9bwiydv/2wySJXG8w==}
+    peerDependencies:
+      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@formatjs/intl-localematcher': 0.2.32
+      negotiator: 0.6.3
+      next: 14.0.3(@babel/core@7.23.2)(@opentelemetry/api@1.7.0)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      use-intl: 3.1.4(react@18.2.0)
     dev: false
 
   /next-themes@0.2.1(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
@@ -10515,8 +10581,8 @@ packages:
       atomic-sleep: 1.0.0
     dev: false
 
-  /sonner@1.2.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-4bIPKrhF+Z4yEC4EZvNBswcVzMrUhztOQXqyIoiZqiqN1TT39FeK+TgRsQidvvztnYgOn4+S3LdAsri61c7ATA==}
+  /sonner@1.2.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-EHxYBr5tLDQW4CqosTsX95/Qd5oxjDeQN/EbKBZcjdNp4Hjs6snXB6Lmu1kTL27M3su0oG9DxkllfvX+aSoI4Q==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -10525,8 +10591,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /sonner@1.2.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-EHxYBr5tLDQW4CqosTsX95/Qd5oxjDeQN/EbKBZcjdNp4Hjs6snXB6Lmu1kTL27M3su0oG9DxkllfvX+aSoI4Q==}
+  /sonner@1.2.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-LMr155izOFA8hudzuUVQT0H93VqmcF9ODP475YjjC/4INESYWN1/ioC5SYRG20jmDmwuQDR8ugP7y6ELghT6JQ==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -11448,6 +11514,16 @@ packages:
 
   /use-intl@3.1.2(react@18.2.0):
     resolution: {integrity: sha512-kUmAiYi/ZB2jk/CeRY/IVzp+DRzBkLk2SmeN3DqMf2N9h/oRTm6qlrYzlOCYWdYPpPOJ7rUM7JERiaWox9mIIQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.17.2
+      intl-messageformat: 9.13.0
+      react: 18.2.0
+    dev: false
+
+  /use-intl@3.1.4(react@18.2.0):
+    resolution: {integrity: sha512-iBIHPetLeEdAuIhAXRI9ukfjjvadP2EWoAEl6IvbWojrwYgcP52A6Al1nyzIwZD7iWBU1T3Ri3Hg4HsV7cWlVA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:

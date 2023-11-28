@@ -25,7 +25,7 @@ const WebhooksPage = async () => {
 					<Heading className="pb-0" type={2}>
 						Webhooks
 					</Heading>
-					<SimpleTooltip content="True">
+					<SimpleTooltip content="Webhook Connection Overview">
 						<InfoCircleIcon />
 					</SimpleTooltip>
 				</div>

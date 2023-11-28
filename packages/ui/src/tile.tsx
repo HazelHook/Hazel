@@ -3,16 +3,21 @@ import { useMemo } from "react"
 import { ArrowDownIcon, ArrowUpIcon, PauseBigIcon } from "@hazel/icons"
 
 import Heading from "./heading"
+import { cn } from "./utils"
 
-export const Tile: React.FCC & {
+export const Tile: React.FCC<{ className?: string }> & {
 	Header: typeof TileHeader
 	Heading: typeof TileHeading
 	Body: typeof TileBody
 	Figure: typeof TileFigure
 	Trend: typeof TileTrend
 	Badge: typeof TileBadge
-} = ({ children }) => {
-	return <div className={"flex flex-col space-y-3 rounded-2xl border bg-background p-5"}>{children}</div>
+} = ({ children, className }) => {
+	return (
+		<div className={cn("flex flex-col space-y-3 rounded-lg border bg-card text-card-foreground p-5", className)}>
+			{children}
+		</div>
+	)
 }
 
 function TileHeader(props: React.PropsWithChildren) {
@@ -22,7 +27,7 @@ function TileHeader(props: React.PropsWithChildren) {
 function TileHeading(props: React.PropsWithChildren) {
 	return (
 		<Heading type={5}>
-			<span className={"font-medium text-gray-600 dark:text-gray-400"}>{props.children}</span>
+			<span className={"font-medium"}>{props.children}</span>
 		</Heading>
 	)
 }

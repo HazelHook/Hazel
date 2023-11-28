@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation"
 import { updateIntegrationAction } from "@/server/actions/integrations"
 import { deleteSourceAction, updateSourceAction } from "@/server/actions/source"
 import { updateSourceSchema } from "@/lib/schemas/source"
-import { CopyButton } from "@/components/copy-button"
 import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
 
 import { Integration } from "@hazel/db"
@@ -22,6 +21,7 @@ import { LoadingButton } from "@hazel/ui/loading-button"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import { toast } from "sonner"
+import { SourceCopyButton } from "@/components/source-copy-button"
 
 type SourceCardProps = {
 	id: string
@@ -72,7 +72,6 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 							<LogInLeftIcon className="w-4 h-4" />
 							<h4 className="font-medium leading-none">Source</h4>
 						</div>
-						{/* TODO: ADD DELETE SETTING HERE  */}
 						<DropdownMenu>
 							<DropdownMenuTrigger>
 								<ThreeDotsHorizontalIcon />
@@ -135,13 +134,7 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 						<Separator className="-mx-4" />
 						<div className="flex flex-col gap-2">
 							<Label className="ml-1">Source Url</Label>
-							<CopyButton
-								value={`${process.env.NEXT_PUBLIC_HAZEL_BACKEND_URL}/v1/hook/${id}`}
-								display={`${process.env.NEXT_PUBLIC_HAZEL_BACKEND_URL}/v1/hook/${id}`.replace(
-									"https://",
-									"",
-								)}
-							/>
+							<SourceCopyButton sourceId={id} />
 						</div>
 						<Separator className="-mx-4" />
 						<div className="flex flex-row justify-between">

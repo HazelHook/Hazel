@@ -19,7 +19,7 @@
   "devDependencies": {
     "@hazel/tailwind-config": "workspace:*",
     "@hazel/tsconfig": "workspace:*",
-    "@supabase/supabase-js": "^2.38.5",
+    "@supabase/supabase-js": "^2.39.0",
     "@types/react": "18.2.31",
     "@types/react-dom": "^18.2.16",
     "eslint": "^8.54.0",

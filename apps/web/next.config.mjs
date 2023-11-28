@@ -29,6 +29,11 @@ const nextConfig = {
 		"@hazel/supabase",
 		"@hazel/server",
 	],
+	logging: {
+		fetches: {
+			fullUrl: true,
+		},
+	},
 	webpack: (config, { isServer, nextRuntime }) => {
 		if (config.name === "server" || config.name === "edge-server") config.optimization.concatenateModules = false
 

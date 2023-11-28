@@ -13,6 +13,12 @@ import { SimpleDataTable } from "@hazel/ui/data-table"
 import { sub } from "date-fns"
 
 import { columns } from "./column"
+import { Tile } from "@hazel/ui/tile"
+import { CopyButton } from "@/components/copy-button"
+import { SourceCopyButton } from "@/components/source-copy-button"
+import Link from "next/link"
+import { ExternalLink01Icon } from "@hazel/icons"
+import { buttonVariants } from "@hazel/ui/button"
 
 const SourcePage = async ({
 	params,
@@ -40,76 +46,96 @@ const SourcePage = async ({
 		start_date: startTime,
 	})
 
+	console.log(req)
+
 	const chartData = transformSourcesChartData(req.data)
 
 	return (
-		<main className="space-y-4">
-			<div className="flex flex-row justify-between mb-4">
-				<div className="p-2">
-					<p className="text-lg font-semibold">Overview</p>
-				</div>
+		<div className="w-full space-y-4">
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-2 w-full justify-between">
+				<Tile className="w-full">
+					<Tile.Heading>Source ID</Tile.Heading>
+					<Tile.Body>
+						<CopyButton value={source.publicId} />
+					</Tile.Body>
+				</Tile>
+				<Tile className="w-full">
+					<Tile.Heading>Source URL</Tile.Heading>
+					<Tile.Body>
+						<SourceCopyButton sourceId={source.publicId} />
+					</Tile.Body>
+				</Tile>
+				<Tile className="w-full">
+					<Tile.Heading>Connections</Tile.Heading>
+					<Tile.Body>
+						<div className="flex justify-between items-center">
+							{source.connections.length}
+							<Link
+								href={`/webhooks?source=${source.publicId}`}
+								className={buttonVariants({ variant: "outline", size: "icon" })}
+							>
+								<ExternalLink01Icon className="w-4 h-4" />
+							</Link>
+						</div>
+					</Tile.Body>
+				</Tile>
 			</div>
-			<div className="flex flex-row gap-2 w-full">
-				<div className="min-w-max">
-					<SimpleDataTable
-						rootPath="/destination"
-						columns={columns}
-						data={
-							(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []
-						}
-					/>
-				</div>
+			<div className="w-full">
+				<Card className="col-span-full w-full h-full overflow-hidden">
+					<CardHeader>
+						<CardTitle>Source Metrics</CardTitle>
+					</CardHeader>
 
-				<div className="w-full">
-					<Card className="col-span-full w-full h-full overflow-hidden">
-						<CardHeader>
-							<CardTitle>Usage Overview</CardTitle>
-						</CardHeader>
-
-						<div className="w-full p-6">
-							<Chart
-								options={{
-									chart: {
-										id: "wow",
-										sparkline: {
-											enabled: false,
-										},
-										toolbar: {
-											show: false,
-										},
-									},
-									colors: chartColors,
-									legend: {
-										show: true,
-										position: "top",
-									},
-									dataLabels: {
+					<div className="w-full p-6">
+						<Chart
+							options={{
+								chart: {
+									id: "wow",
+									sparkline: {
 										enabled: false,
 									},
-									stroke: {
-										width: [2, 2, 2],
-										curve: "smooth",
+									toolbar: {
+										show: false,
 									},
-									xaxis: {
-										type: "datetime",
-										categories: chartData.categories,
+								},
+								colors: chartColors,
+								legend: {
+									show: true,
+									position: "top",
+								},
+								dataLabels: {
+									enabled: false,
+								},
+								stroke: {
+									width: [2, 2, 2],
+									curve: "smooth",
+								},
+								xaxis: {
+									type: "datetime",
+									categories: chartData.categories,
+								},
+								tooltip: {
+									x: {
+										format: "dd/MM/yy HH:mm",
 									},
-									tooltip: {
-										x: {
-											format: "dd/MM/yy HH:mm",
-										},
-									},
-								}}
-								series={chartData.series}
-								type="area"
-								height={350}
-								width={"100%"}
-							/>
-						</div>
-					</Card>
-				</div>
+								},
+							}}
+							series={chartData.series}
+							type="area"
+							height={350}
+							width={"100%"}
+						/>
+					</div>
+				</Card>
 			</div>
-		</main>
+			<div className="min-w-max">
+				<SimpleDataTable
+					rootPath="/destination"
+					columns={columns}
+					data={(source.connections.map((conn) => conn.destination).filter(Boolean) as Destination[]) || []}
+				/>
+			</div>
+		</div>
 	)
 }
 
