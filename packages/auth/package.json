@@ -16,20 +16,10 @@
       ]
     }
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "next": "14.0.3",
-    "swr": "^2.2.4",
-    "@supabase/supabase-js": "^2.39.0",
-    "@supabase/auth-helpers-nextjs": "^0.8.7",
-    "react-hook-form": "^7.48.2",
-    "sonner": "^1.2.3",
-    "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.22.4",
-    "next-intl": "3.1.4"
-  },
+  "dependencies": {},
   "peerDependencies": {
+    "@supabase/supabase-js": "^2.x",
+    "@supabase/auth-helpers-nextjs": "^0.x",
     "@hazel/server": "workspace:*",
     "@hazel/db": "workspace:*",
     "@hazel/ui": "workspace:*",
@@ -38,6 +28,11 @@
     "@hazel/supabase": "workspace:*"
   },
   "devDependencies": {
+    "swr": "^2.2.4",
+    "react-hook-form": "^7.48.2",
+    "sonner": "^1.2.3",
+    "zod": "^3.22.4",
+    "next-intl": "3.1.4",
     "@hazel/tailwind-config": "workspace:*",
     "@hazel/tsconfig": "workspace:*",
     "@types/react": "18.2.31",
