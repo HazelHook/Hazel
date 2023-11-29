@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
 
-import { columns } from "./column"
+import { responseColumns } from "../../../../_component/response-column"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { responseTableSearchParamsSchema } from "@/lib/validators/params"
 import { httpStatusCodes } from "@/lib/utils"
@@ -62,7 +62,7 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 							})),
 						},
 					]}
-					columns={columns}
+					columns={responseColumns}
 					data={data}
 					maxItems={rows_before_limit_at_least || data.length}
 				/>

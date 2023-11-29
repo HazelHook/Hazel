@@ -1,21 +1,26 @@
 import { Suspense } from "react"
-import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
-import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
-import { Chart } from "@hazel/ui/chart"
+import { Tabs, TabsContent, TabsList, TabsTrigger, UnstyledTabsList } from "@hazel/ui/tabs"
 import { Skeleton } from "@hazel/ui/skeleton"
 import { Await } from "@hazel/ui/await"
-import { formatDistanceToNow, sub } from "date-fns"
+import { ReloadButton } from "@hazel/ui/reload-button"
+import { sub } from "date-fns"
 
 import { auth } from "@/lib/auth"
 import tiny from "@/lib/tiny"
-import { chartColors, formatDateTime, subtractFromString } from "@/lib/utils"
-import { StatusBadge } from "@/components/status-badge"
-import { SourceLink } from "@/app/[locale]/(pages)/_component/SourceLink"
+import { chartColors, formatDateTime, httpStatusCodes, subtractFromString } from "@/lib/utils"
 
-import { DatePicker } from "./_component/DatePicker"
+import { DatePicker } from "./_component/date-picker"
 import { KpiCard, KpiLoadingCard } from "./_component/KpiCard"
-import { transformSourcesChartData } from "./_utils"
+import { AdvancedDataTable, DataTableLoading } from "@hazel/ui/data-table"
+import { requestColumns } from "./_component/request-columns"
+import { getTableParams } from "@/lib/data-table-helpers"
+import { requestTableSearchParamsSchema, responseTableSearchParamsSchema } from "@/lib/validators/params"
+import { responseColumns } from "./_component/response-column"
+import { Container } from "@hazel/ui/container"
+import Link from "next/link"
+import { AddIcon } from "@hazel/icons"
+import { buttonVariants } from "@hazel/ui/button"
 
 interface DashboardPageProps {
 	searchParams: {
@@ -28,6 +33,11 @@ interface DashboardPageProps {
 const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const { workspaceId, user } = await auth()
 
+	const { sort, offset, limit, source_id, response_id, status } = getTableParams(
+		searchParams,
+		requestTableSearchParamsSchema.merge(responseTableSearchParamsSchema),
+	)
+
 	const endTime = searchParams.date_to || formatDateTime(new Date())
 	const startTime =
 		searchParams.date_from ||
@@ -37,7 +47,17 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 	const requests = tiny.request.get({
 		workspace_id: workspaceId,
-		limit: 5,
+		source_id,
+		limit,
+		offset,
+	})
+
+	const response = tiny.response.get({
+		workspace_id: workspaceId,
+		response_id,
+		status,
+		limit,
+		offset,
 	})
 
 	const kpiRequest = tiny.request.kpi({
@@ -60,16 +80,8 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 		end_date: endTime,
 	})
 
-	const timelineBySources = await tiny.request.timeline({
-		workspace_id: workspaceId,
-		start_date: startTime,
-		end_date: endTime,
-	})
-
-	const chartData = transformSourcesChartData(timelineBySources.data)
-
 	return (
-		<main className="container p-8 space-y-4">
+		<Container>
 			<div className="flex flex-row justify-between">
 				<div className="flex flex-row gap-2">
 					<Suspense fallback={<Skeleton className="w-16 h-16 rounded-full" />}>
@@ -87,7 +99,10 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					</Suspense>
 				</div>
 				<div>
-					<DatePicker />
+					<Link href="/connection/new" className={buttonVariants()}>
+						<AddIcon className="mr-2" />
+						New Connection
+					</Link>
 				</div>
 			</div>
 
@@ -152,92 +167,61 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					)}
 				</Await>
 			</div>
-			<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3">
-				<Card className="col-span-2 w-full h-full overflow-hidden">
-					<CardHeader>
-						<CardTitle>Usage Overview</CardTitle>
-					</CardHeader>
-
-					<div className="w-full p-6">
-						<Chart
-							options={{
-								chart: {
-									id: "wow",
-									sparkline: {
-										enabled: false,
-									},
-									toolbar: {
-										show: false,
-									},
-								},
-								colors: chartColors,
-								legend: {
-									show: true,
-									position: "top",
-								},
-								dataLabels: {
-									enabled: false,
-								},
-								stroke: {
-									width: [2, 2, 2],
-									curve: "smooth",
-								},
-								xaxis: {
-									type: "datetime",
-									categories: chartData.categories,
-								},
-								tooltip: {
-									x: {
-										format: "dd/MM/yy HH:mm",
-									},
-								},
-							}}
-							series={chartData.series}
-							type="area"
-							height={350}
-							width={"100%"}
-						/>
+			<Tabs defaultValue="request">
+				<UnstyledTabsList className="flex flex-row justify-between">
+					<div className="flex flex-row bg-muted p-1 text-muted-foreground rounded-md">
+						<TabsTrigger value="request">Requests</TabsTrigger>
+						<TabsTrigger value="response">Responses</TabsTrigger>
 					</div>
-				</Card>
-				<Card className="col-span-1">
-					<CardHeader>
-						<CardTitle>Recent Events</CardTitle>
-					</CardHeader>
-					<CardContent className="flex flex-col gap-4">
-						<Await promise={requests}>
-							{({ data }) =>
-								data.map((request) => (
-									<div key={request.id} className="flex flex-row gap-2 justify-between">
-										<div className="flex flex-row gap-4 justify-center items-center max-w-[70%] overflow-hidden">
-											<div className="flex flex-col gap-1">
-												<SourceLink sourceId={request.source_id} />
-												<Link
-													href={`/request/${request.id}`}
-													className="text-muted-foreground text-sm underline-offset-4 text-ellipsis hover:underline"
-												>
-													{request.id.replace("req_", "")}
-												</Link>
-											</div>
-										</div>
 
-										<div className="flex flex-col gap-2 justify-end items-end">
-											{
-												<p className="text-sm">
-													{formatDistanceToNow(new Date(request.timestamp), {
-														addSuffix: true,
-													})}
-												</p>
-											}
-											<StatusBadge status={request.rejected ? "error" : "success"} />
-										</div>
-									</div>
-								))
-							}
-						</Await>
-					</CardContent>
-				</Card>
-			</div>
-		</main>
+					<div className="flex flex-row gap-4">
+						<ReloadButton />
+						<DatePicker />
+					</div>
+				</UnstyledTabsList>
+				<TabsContent value="request">
+					<Await promise={requests} fallback={<DataTableLoading columnCount={5} />}>
+						{({ data, rows_before_limit_at_least }) => (
+							<AdvancedDataTable
+								maxItems={rows_before_limit_at_least || data.length}
+								data={data as any}
+								columns={requestColumns}
+								disableViewToggle
+								searchableColumns={[{ id: "source_id", title: "Search for Source" }]}
+							/>
+						)}
+					</Await>
+				</TabsContent>
+				<TabsContent value="response">
+					<Await promise={response} fallback={<DataTableLoading columnCount={5} />}>
+						{({ data, rows_before_limit_at_least }) => (
+							<AdvancedDataTable
+								maxItems={rows_before_limit_at_least || data.length}
+								data={data}
+								columns={responseColumns}
+								disableViewToggle
+								searchableColumns={[
+									{
+										id: "response_id",
+										title: "responses",
+									},
+								]}
+								filterableColumns={[
+									{
+										id: "status",
+										title: "Status",
+										options: httpStatusCodes.map((status) => ({
+											label: `${status.code} - ${status.name}`,
+											value: `${status.code}`,
+										})),
+									},
+								]}
+							/>
+						)}
+					</Await>
+				</TabsContent>
+			</Tabs>
+		</Container>
 	)
 }
 

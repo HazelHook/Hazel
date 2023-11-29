@@ -18,3 +18,7 @@ export const responseTableSearchParamsSchema = z.object({
 		.transform((value) => value.split(".").map(Number))
 		.optional(),
 })
+
+export const requestTableSearchParamsSchema = z.object({
+	source_id: z.string().optional(),
+})

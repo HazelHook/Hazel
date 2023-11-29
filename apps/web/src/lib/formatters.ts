@@ -18,3 +18,14 @@ export const dateFormatter = (locale = "en") => {
 		year: "numeric",
 	})
 }
+
+export const dataTableTimestampFormatter = (locale = "en") => {
+	return Intl.DateTimeFormat(locale, {
+		month: "short",
+		day: "2-digit",
+		hour: "2-digit",
+		minute: "2-digit",
+		second: "numeric",
+		hour12: true,
+	})
+}

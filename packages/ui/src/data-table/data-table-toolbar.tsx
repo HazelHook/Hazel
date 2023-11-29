@@ -18,6 +18,7 @@ interface DataTableToolbarProps<TData> {
 	searchableColumns?: DataTableSearchableColumn<TData>[]
 	newRowLink?: string
 	deleteRowsAction?: React.MouseEventHandler<HTMLButtonElement>
+	disableViewToggle?: boolean
 }
 
 export function DataTableToolbar<TData>({
@@ -26,6 +27,7 @@ export function DataTableToolbar<TData>({
 	searchableColumns = [],
 	newRowLink,
 	deleteRowsAction,
+	disableViewToggle,
 }: DataTableToolbarProps<TData>) {
 	const isFiltered = table.getState().columnFilters.length > 0
 	const [isPending, startTransition] = React.useTransition()
@@ -106,7 +108,7 @@ export function DataTableToolbar<TData>({
 						</div>
 					</Link>
 				) : null}
-				<DataTableViewOptions table={table} />
+				{!disableViewToggle && <DataTableViewOptions table={table} />}
 			</div>
 		</div>
 	)

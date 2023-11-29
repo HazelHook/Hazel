@@ -33,6 +33,7 @@ interface DataTableProps<TData, TValue> {
 	data: TData[]
 	filterableColumns?: DataTableFilterableColumn<TData>[]
 	searchableColumns?: DataTableSearchableColumn<TData>[]
+	disableViewToggle?: boolean
 	advancedFilter?: boolean
 }
 
@@ -43,6 +44,7 @@ export function AdvancedDataTable<TData, TValue>({
 	filterableColumns = [],
 	searchableColumns = [],
 	advancedFilter = false,
+	disableViewToggle = false,
 }: DataTableProps<TData, TValue>) {
 	const router = useRouter()
 	const pathname = usePathname()
@@ -246,6 +248,7 @@ export function AdvancedDataTable<TData, TValue>({
 					table={table}
 					filterableColumns={filterableColumns}
 					searchableColumns={searchableColumns}
+					disableViewToggle={disableViewToggle}
 				/>
 			)}
 			<div className="rounded-md border">

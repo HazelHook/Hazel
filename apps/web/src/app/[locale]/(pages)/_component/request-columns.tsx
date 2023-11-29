@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { TBResponse } from "@hazel/tinybird"
+import { TBRequest, TBResponse } from "@hazel/tinybird"
 import { FilterVerticalIcon } from "@hazel/icons"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
@@ -13,63 +13,60 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
+import { dataTableTimestampFormatter } from "@/lib/formatters"
 import { Status } from "@/components/status"
+import { Badge } from "@hazel/ui/badge"
 
-export type Column = TBResponse
+type Column = TBRequest
 
-const columnHelper = createColumnHelper<TBResponse>()
+const columnHelper = createColumnHelper<TBRequest>()
 
-export const columns = [
-	columnHelper.accessor("id", {
-		id: "response_id",
-		header: "Response ID",
-		cell: ({ cell }) => {
-			const responseId = cell.getValue()
-
-			return (
-				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/response/${responseId}`}>
-					{responseId}
-				</Link>
-			)
-		},
-	}),
-	columnHelper.accessor("destination_id", {
-		header: "Destination ID",
-		cell: ({ cell }) => {
-			const destinationId = cell.getValue()
-
-			return (
-				<Link
-					className={buttonVariants({ variant: "link", size: "none" })}
-					href={`/destination/${destinationId}`}
-				>
-					{destinationId}
-				</Link>
-			)
-		},
-	}),
-
-	columnHelper.accessor("response_at", {
+export const requestColumns = [
+	columnHelper.accessor("timestamp", {
+		id: "timestamp",
 		header: "Timestamp",
 		cell: ({ cell }) => {
-			const date = new Date(cell.getValue())
-			return <p>{cell.getValue<string>()}</p>
+			const timestamp = cell.getValue()
+
+			return dataTableTimestampFormatter().format(new Date(timestamp))
 		},
 	}),
 
-	columnHelper.accessor("success", {
-		header: "Success",
+	columnHelper.accessor("source_id", {
+		header: "Source",
 		cell: ({ cell }) => {
-			const success = Boolean(cell.getValue())
+			const sourceId = cell.getValue()
 
-			return <Status status={success ? "success" : "error"} />
+			return (
+				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/source/${sourceId}`}>
+					{sourceId}
+				</Link>
+			)
 		},
 	}),
 
-	columnHelper.accessor("status", {
+	columnHelper.accessor("id", {
+		id: "request_id",
+		header: "ID",
+		cell: ({ cell }) => {
+			const requestId = cell.getValue()
+
+			return (
+				<Link className={buttonVariants({ variant: "link", size: "none" })} href={`/request/${requestId}`}>
+					{requestId}
+				</Link>
+			)
+		},
+	}),
+	columnHelper.accessor("rejected", {
 		header: "Status",
 		cell: ({ cell }) => {
-			return cell.getValue()
+			const rejected = cell.getValue() === 1
+
+			// TODO:GET THE STATUS FROM THE RESPONSE
+			return (
+				<Badge variant={rejected ? "destructive" : "outline"}>{rejected ? "Unauthorized" : "Delivering"}</Badge>
+			)
 		},
 	}),
 

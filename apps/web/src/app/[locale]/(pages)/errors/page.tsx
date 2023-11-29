@@ -8,7 +8,7 @@ import { db } from "@hazel/db"
 import { getTableParams } from "@/lib/data-table-helpers"
 import { errorPageSearchParamsSchema } from "@/lib/validators/params"
 import { columns } from "./column"
-import { DatePicker } from "../_component/DatePicker"
+import { DatePicker } from "../_component/date-picker"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 type ErrorPageProps = {
