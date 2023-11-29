@@ -414,9 +414,6 @@ importers:
       '@supabase/auth-helpers-nextjs':
         specifier: ^0.x
         version: 0.8.7(@supabase/supabase-js@2.39.0)
-      '@supabase/supabase-js':
-        specifier: ^2.x
-        version: 2.39.0
     devDependencies:
       '@hazel/tailwind-config':
         specifier: workspace:*
@@ -719,21 +716,6 @@ importers:
       '@hazel/db':
         specifier: workspace:*
         version: link:../db
-      '@supabase/auth-helpers-nextjs':
-        specifier: ^0.8.x
-        version: 0.8.7(@supabase/supabase-js@2.38.5)
-      '@supabase/auth-ui-react':
-        specifier: ^0.4.x
-        version: 0.4.6(@supabase/supabase-js@2.38.5)
-      '@supabase/auth-ui-shared':
-        specifier: ^0.1.x
-        version: 0.1.8(@supabase/supabase-js@2.38.5)
-      '@supabase/supabase-js':
-        specifier: ^2.x
-        version: 2.38.5
-      swr:
-        specifier: ^2.x
-        version: 2.2.4(react@18.2.0)
       tiny-invariant:
         specifier: ^1.3.1
         version: 1.3.1
@@ -744,6 +726,18 @@ importers:
       '@hazel/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@supabase/auth-helpers-nextjs':
+        specifier: ^0.8.7
+        version: 0.8.7(@supabase/supabase-js@2.39.0)
+      '@supabase/auth-ui-react':
+        specifier: ^0.4.6
+        version: 0.4.6(@supabase/supabase-js@2.39.0)
+      '@supabase/auth-ui-shared':
+        specifier: ^0.1.8
+        version: 0.1.8(@supabase/supabase-js@2.39.0)
+      '@supabase/supabase-js':
+        specifier: ^2.39.0
+        version: 2.39.0
       '@types/react':
         specifier: 18.2.31
         version: 18.2.31
@@ -765,6 +759,9 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
+      swr:
+        specifier: ^2.2.4
+        version: 2.2.4(react@18.2.0)
       typescript:
         specifier: ^5.3.2
         version: 5.3.2
@@ -4444,7 +4441,6 @@ packages:
 
   /@stitches/core@1.2.8:
     resolution: {integrity: sha512-Gfkvwk9o9kE9r9XNBmJRfV8zONvXThnm1tcuojL04Uy5uRyqg93DC83lDebl0rocZCfKSjUv+fWYtMQmEDJldg==}
-    dev: false
 
   /@stripe/react-stripe-js@2.4.0(@stripe/stripe-js@2.2.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-1jVQEL3OuhuzNlf4OdfqovHt+MkWh8Uh8xpLxx/xUFUDdF+7/kDOrGKy+xJO3WLCfZUL7NAy+/ypwXbbYZi0tg==}
@@ -4463,16 +4459,6 @@ packages:
     resolution: {integrity: sha512-YyXQbsXvnNRJ6MofFhCLIQ4W7UpfkfSOQhjIaHEiCMBv3IBxhzugXiYNNzceGTK/7DL31v7HtTnkJ+FI+6AIow==}
     dev: false
 
-  /@supabase/auth-helpers-nextjs@0.8.7(@supabase/supabase-js@2.38.5):
-    resolution: {integrity: sha512-iYdOjFo0GkRvha340l8JdCiBiyXQuG9v8jnq7qMJ/2fakrskRgHTCOt7ryWbip1T6BExcWKC8SoJrhCzPOxhhg==}
-    peerDependencies:
-      '@supabase/supabase-js': ^2.19.0
-    dependencies:
-      '@supabase/auth-helpers-shared': 0.6.3(@supabase/supabase-js@2.38.5)
-      '@supabase/supabase-js': 2.38.5
-      set-cookie-parser: 2.6.0
-    dev: false
-
   /@supabase/auth-helpers-nextjs@0.8.7(@supabase/supabase-js@2.39.0):
     resolution: {integrity: sha512-iYdOjFo0GkRvha340l8JdCiBiyXQuG9v8jnq7qMJ/2fakrskRgHTCOt7ryWbip1T6BExcWKC8SoJrhCzPOxhhg==}
     peerDependencies:
@@ -4481,16 +4467,6 @@ packages:
       '@supabase/auth-helpers-shared': 0.6.3(@supabase/supabase-js@2.39.0)
       '@supabase/supabase-js': 2.39.0
       set-cookie-parser: 2.6.0
-    dev: false
-
-  /@supabase/auth-helpers-shared@0.6.3(@supabase/supabase-js@2.38.5):
-    resolution: {integrity: sha512-xYQRLFeFkL4ZfwC7p9VKcarshj3FB2QJMgJPydvOY7J5czJe6xSG5/wM1z63RmAzGbCkKg+dzpq61oeSyWiGBQ==}
-    peerDependencies:
-      '@supabase/supabase-js': ^2.19.0
-    dependencies:
-      '@supabase/supabase-js': 2.38.5
-      jose: 4.15.4
-    dev: false
 
   /@supabase/auth-helpers-shared@0.6.3(@supabase/supabase-js@2.39.0):
     resolution: {integrity: sha512-xYQRLFeFkL4ZfwC7p9VKcarshj3FB2QJMgJPydvOY7J5czJe6xSG5/wM1z63RmAzGbCkKg+dzpq61oeSyWiGBQ==}
@@ -4499,20 +4475,6 @@ packages:
     dependencies:
       '@supabase/supabase-js': 2.39.0
       jose: 4.15.4
-    dev: false
-
-  /@supabase/auth-ui-react@0.4.6(@supabase/supabase-js@2.38.5):
-    resolution: {integrity: sha512-uvjcH/K0rvFKUE5Uam5JI6IGXUWSv55GTYcVRRQFEwfav2sT4hzBh6A0gkX9gEZEprhSA9S5Pp5+TzkCAKgcbg==}
-    peerDependencies:
-      '@supabase/supabase-js': ^2.21.0
-    dependencies:
-      '@stitches/core': 1.2.8
-      '@supabase/auth-ui-shared': 0.1.8(@supabase/supabase-js@2.38.5)
-      '@supabase/supabase-js': 2.38.5
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /@supabase/auth-ui-react@0.4.6(@supabase/supabase-js@2.39.0):
     resolution: {integrity: sha512-uvjcH/K0rvFKUE5Uam5JI6IGXUWSv55GTYcVRRQFEwfav2sT4hzBh6A0gkX9gEZEprhSA9S5Pp5+TzkCAKgcbg==}
@@ -4525,15 +4487,6 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  /@supabase/auth-ui-shared@0.1.8(@supabase/supabase-js@2.38.5):
-    resolution: {integrity: sha512-ouQ0DjKcEFg+0gZigFIEgu01V3e6riGZPzgVD0MJsCBNsMsiDT74+GgCEIElMUpTGkwSja3xLwdFRFgMNFKcjg==}
-    peerDependencies:
-      '@supabase/supabase-js': ^2.21.0
-    dependencies:
-      '@supabase/supabase-js': 2.38.5
-    dev: false
 
   /@supabase/auth-ui-shared@0.1.8(@supabase/supabase-js@2.39.0):
     resolution: {integrity: sha512-ouQ0DjKcEFg+0gZigFIEgu01V3e6riGZPzgVD0MJsCBNsMsiDT74+GgCEIElMUpTGkwSja3xLwdFRFgMNFKcjg==}
@@ -4541,7 +4494,6 @@ packages:
       '@supabase/supabase-js': ^2.21.0
     dependencies:
       '@supabase/supabase-js': 2.39.0
-    dev: false
 
   /@supabase/functions-js@2.1.5:
     resolution: {integrity: sha512-BNzC5XhCzzCaggJ8s53DP+WeHHGT/NfTsx2wUSSGKR2/ikLFQTBCDzMvGz/PxYMqRko/LwncQtKXGOYp1PkPaw==}
@@ -7522,7 +7474,6 @@ packages:
 
   /jose@4.15.4:
     resolution: {integrity: sha512-W+oqK4H+r5sITxfxpSU+MMdr/YSWGvgZMQDIsNoBDGGy4i7GBPTtvFKibQzW06n3U3TqHjhvBJsirShsEJ6eeQ==}
-    dev: false
 
   /joycon@3.1.1:
     resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
@@ -8828,7 +8779,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: false
 
   /proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
@@ -8972,7 +8922,6 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: false
 
   /react-property@2.0.0:
     resolution: {integrity: sha512-kzmNjIgU32mO4mmH5+iUyrqlpFQhF8K2k7eZ4fdLSOPFrD1XgEuSBv9LDEgxRXTMBqMd8ppT0x6TIzqE5pdGdw==}
@@ -9413,7 +9362,6 @@ packages:
 
   /set-cookie-parser@2.6.0:
     resolution: {integrity: sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==}
-    dev: false
 
   /setimmediate@1.0.5:
     resolution: {integrity: sha512-MATJdZp8sLqDl/68LfQmbP8zKPLQNV6BIZoIgrscFDQ+RsvK/BxeDQOgyxKKoh0y/8h3BqVFnCqQ/gd+reiIXA==}

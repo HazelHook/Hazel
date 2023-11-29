@@ -16,9 +16,16 @@
       ]
     }
   },
-  "dependencies": {},
+  "exports": {
+    ".": "./src/index.ts",
+    "./pages": "./src/pages.ts",
+    "./provider": "./src/provider.ts",
+    "./utils": "./src/utils.ts",
+    "./hooks": "./src/hooks.ts",
+    "./actions": "./src/actions.ts",
+    "./internal-components/*": "./src/internal-components/*.tsx"
+  },
   "peerDependencies": {
-    "@supabase/supabase-js": "^2.x",
     "@supabase/auth-helpers-nextjs": "^0.x",
     "@hazel/server": "workspace:*",
     "@hazel/db": "workspace:*",
@@ -46,14 +53,5 @@
     "tailwindcss": "3.3.5",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.3.2"
-  },
-  "exports": {
-    ".": "./src/index.ts",
-    "./pages": "./src/pages.ts",
-    "./provider": "./src/provider.ts",
-    "./utils": "./src/utils.ts",
-    "./hooks": "./src/hooks.ts",
-    "./actions": "./src/actions.ts",
-    "./internal-components/*": "./src/internal-components/*.tsx"
   }
 }

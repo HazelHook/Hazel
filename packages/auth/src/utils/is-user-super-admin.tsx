@@ -1,5 +1,5 @@
 import { getSupabaseServerClient } from "@hazel/supabase/clients"
-import type { SupabaseClient } from "@supabase/supabase-js"
+import type { SupabaseClient } from "@hazel/supabase"
 
 /**
  * @name ENFORCE_MFA

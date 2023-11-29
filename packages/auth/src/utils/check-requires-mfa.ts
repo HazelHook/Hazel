@@ -1,4 +1,4 @@
-import type { SupabaseClient } from "@supabase/supabase-js"
+import type { SupabaseClient } from "@hazel/supabase"
 
 const ASSURANCE_LEVEL_2 = "aal2"
 
