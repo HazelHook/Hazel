@@ -1,5 +1,5 @@
 import { useSupabase } from "@hazel/supabase/hooks"
-import { SignInWithOAuthCredentials } from "@supabase/supabase-js"
+import { SignInWithOAuthCredentials } from "@hazel/supabase"
 import useMutation from "swr/mutation"
 
 /**

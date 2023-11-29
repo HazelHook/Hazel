@@ -1,1 +1,1 @@
-export type * from "@supabase/supabase-js"
+export * from "@supabase/supabase-js"

@@ -1,5 +1,5 @@
 import { Alert } from "@hazel/ui/alert"
-import { AuthError } from "@supabase/supabase-js"
+import { AuthError } from "@hazel/supabase"
 import { useTranslations } from "next-intl"
 
 /**

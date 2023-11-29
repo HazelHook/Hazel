@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState } from "react"
 
-import { Provider } from "@supabase/supabase-js"
+import { Provider } from "@hazel/supabase"
 
 export type Providers = {
 	oAuth: Provider[]

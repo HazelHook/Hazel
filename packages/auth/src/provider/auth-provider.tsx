@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 
 import { OrganizationMember } from "@hazel/db"
 import { useSupabase } from "@hazel/supabase/hooks"
-import { User } from "@supabase/supabase-js"
+import { User } from "@hazel/supabase"
 
 interface UserSession {
 	user: Maybe<User>

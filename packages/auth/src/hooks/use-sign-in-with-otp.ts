@@ -1,5 +1,5 @@
 import { useSupabase } from "@hazel/supabase/hooks"
-import { AuthError, SignInWithPasswordlessCredentials } from "@supabase/supabase-js"
+import { AuthError, SignInWithPasswordlessCredentials } from "@hazel/supabase"
 import useMutation from "swr/mutation"
 
 /**
