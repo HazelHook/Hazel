@@ -29,7 +29,7 @@ const SourcePage = async () => {
 					New Source
 				</Link>
 			</div>
-			<SimpleDataTable rootPath="/source" columns={columns as any} data={sources} />
+			<SimpleDataTable rootPath="/source" columns={columns} data={sources} />
 		</Container>
 	)
 }

@@ -9,7 +9,7 @@ import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { SortableHeader } from "@hazel/ui/data-table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
-import { createColumnHelper } from "@tanstack/react-table"
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import { SourceActions } from "./source-actions"
 import { deleteSourceAction } from "@/server/actions/source"
@@ -18,7 +18,7 @@ export type Column = Source & {
 	connections: (Connection & {
 		destination: Destination
 	})[]
-	integration: Integration
+	integration: Integration | null
 }
 
 const columnHelper = createColumnHelper<Column>()
@@ -96,4 +96,4 @@ export const columns = [
 			return <SourceActions data={row.original} deleteAction={deleteSourceAction} />
 		},
 	}),
-]
+] as ColumnDef<Column>[]

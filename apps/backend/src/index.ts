@@ -21,7 +21,7 @@ export const app = new Elysia()
 	.use(routeSetup)
 	.use(v1Route)
 	.get("/", async () => {
-		return "Hello Hazel"
+		return "Hello Hazel WOW"
 	})
 	.get("/liveness", async () => {
 		return process.uptime

@@ -10,6 +10,12 @@ import tiny from "@hazel/tinybird"
 import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"
 import { sub } from "date-fns"
+import { Tile } from "@hazel/ui/tile"
+import { CopyButton } from "@/components/copy-button"
+import Link from "next/link"
+import { buttonVariants } from "@hazel/ui/button"
+import { ExternalLink01Icon } from "@hazel/icons"
+import { SourceLink } from "../../../_component/SourceLink"
 
 const SourcePage = async ({
 	params,
@@ -65,54 +71,56 @@ const SourcePage = async ({
 
 	return (
 		<div className="space-y-4">
-			<div className="flex gap-4 flex-col md:flex-row">
-				<KpiCard
-					color={chartColors[0]}
-					title={"Events"}
-					subtitle={String(requestKpis.data.reduce((curr, el) => curr + el.events, 0))}
-					group="kpis"
-					id={"events"}
-					series={[
-						{
-							name: "Events",
-							data: requestKpis.data.map((datum) => datum.events),
-						},
-					]}
-					labels={requestKpis.data.map((datum) => formatDateTime(new Date(datum.date)))}
-				/>
-				<KpiCard
-					color={chartColors[1]}
-					title={"Requests"}
-					subtitle={String(responseKpis.data.reduce((curr, el) => curr + el.requests, 0))}
-					id={"req"}
-					group="kpis"
-					series={[
-						{
-							name: "Requests",
-							data: responseKpis.data.map((datum) => datum.requests),
-						},
-					]}
-					labels={requestKpis.data.map((datum) => formatDateTime(new Date(datum.date)))}
-				/>
-				<KpiCard
-					color={chartColors[3]}
-					title={"Errors"}
-					subtitle={String(errorKpis.data.reduce((curr, el) => curr + el.requests, 0))}
-					id={"errors"}
-					group="kpis"
-					series={[
-						{
-							name: "Errors",
-							data: errorKpis.data.map((datum) => datum.requests),
-						},
-					]}
-					labels={errorKpis.data.map((datum) => datum.date)}
-				/>
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-2 w-full justify-between">
+				<Tile className="w-full">
+					<Tile.Heading>Connection ID</Tile.Heading>
+					<Tile.Body>
+						<CopyButton value={connection.publicId} />
+					</Tile.Body>
+				</Tile>
+				<Tile className="w-full">
+					<Tile.Heading>Source</Tile.Heading>
+					<Tile.Body>
+						<div className="flex justify-between items-center">
+							<Link
+								className={buttonVariants({ variant: "link", size: "none" })}
+								href={`/source/${connection.source.publicId}`}
+							>
+								{connection.source.name}
+							</Link>
+							<Link
+								href={`/source/${connection.source.publicId}`}
+								className={buttonVariants({ variant: "outline", size: "icon" })}
+							>
+								<ExternalLink01Icon className="w-4 h-4" />
+							</Link>
+						</div>
+					</Tile.Body>
+				</Tile>
+				<Tile className="w-full">
+					<Tile.Heading>Destination</Tile.Heading>
+					<Tile.Body>
+						<div className="flex justify-between items-center">
+							<Link
+								className={buttonVariants({ variant: "link", size: "none", className: "text-2xl" })}
+								href={`/destination/${connection.source.publicId}`}
+							>
+								{connection.destination.name}
+							</Link>
+							<Link
+								href={`/destination/${connection.destination.publicId}`}
+								className={buttonVariants({ variant: "outline", size: "icon" })}
+							>
+								<ExternalLink01Icon className="w-4 h-4" />
+							</Link>
+						</div>
+					</Tile.Body>
+				</Tile>
 			</div>
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
 				<Card className="col-span-full w-full h-full overflow-hidden">
 					<CardHeader>
-						<CardTitle>Usage Overview</CardTitle>
+						<CardTitle>Connection Metrics</CardTitle>
 					</CardHeader>
 
 					<div className="w-full p-6">
