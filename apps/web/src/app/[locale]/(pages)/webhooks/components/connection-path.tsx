@@ -100,6 +100,14 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 								publicId: id,
 							})
 						}}
+						fieldConfig={{
+							delay: {
+								fieldType: "time",
+							},
+							retryDelay: {
+								fieldType: "time",
+							},
+						}}
 						defaultValues={{ name, retryType, delay }}
 						formSchema={updateConnectionSchema}
 					>

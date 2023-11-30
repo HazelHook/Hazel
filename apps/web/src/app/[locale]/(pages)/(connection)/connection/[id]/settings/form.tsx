@@ -14,6 +14,8 @@ import { AutoForm } from "@hazel/ui/auto-form"
 import { buttonVariants } from "@hazel/ui/button"
 import { LoadingButton } from "@hazel/ui/loading-button"
 import * as z from "zod"
+import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "@hazel/ui/form"
+import { TimeInput } from "@hazel/ui/time-input"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction
@@ -22,13 +24,9 @@ interface NewSourceFormProps {
 }
 
 export function UpdateConnectionForm({ action, isModal, connection }: NewSourceFormProps) {
-	const [values, setValues] = useState<Partial<z.infer<typeof updateConnectionSchema>>>({
-		name: connection.name,
-	})
-
 	const router = useRouter()
 
-	const createSource = useAction(action, {
+	const updateConnection = useAction(action, {
 		onSuccess(data) {
 			if (isModal) {
 				router.back()
@@ -38,47 +36,48 @@ export function UpdateConnectionForm({ action, isModal, connection }: NewSourceF
 		},
 	})
 
+	console.log(connection)
+
 	return (
-		<>
-			<AutoForm
-				values={values}
-				onValuesChange={setValues}
-				formSchema={updateConnectionSchema}
-				onSubmit={async (val) =>
-					await createSource.mutateAsync({
-						...val,
-						publicId: connection.publicId,
-					})
-				}
-				fieldConfig={{
-					name: {
-						description: "A name to identify your connection.",
-					},
-					delay: {
-						description: "Add a delay to your webhook delivery.",
-					},
-					retryCount: {
-						description: "Count of times a request should be retried when failing.",
-					},
-					retryDelay: {
-						description: "Delay between retries of requests.",
-					},
-					retryType: {
-						description: (
-							<span>
-								Type of retry, learn more{" "}
-								<Link className={buttonVariants({ variant: "link", size: "none" })} href="todo">
-									here
-								</Link>
-							</span>
-						),
-					},
-				}}
-			>
-				<LoadingButton type="submit" loading={createSource.status === "loading"}>
-					Update
-				</LoadingButton>
-			</AutoForm>
-		</>
+		<AutoForm
+			formSchema={updateConnectionSchema}
+			onSubmit={async (val) =>
+				await updateConnection.mutateAsync({
+					...val,
+					publicId: connection.publicId,
+				})
+			}
+			defaultValues={connection}
+			fieldConfig={{
+				name: {
+					description: "A name to identify your connection.",
+				},
+				delay: {
+					description: "Add a delay to your webhook delivery.",
+					fieldType: "time",
+				},
+				retryCount: {
+					description: "Count of times a request should be retried when failing.",
+				},
+				retryDelay: {
+					description: "Delay between retries of requests.",
+					fieldType: "time",
+				},
+				retryType: {
+					description: (
+						<span>
+							Type of retry, learn more{" "}
+							<Link className={buttonVariants({ variant: "link", size: "none" })} href="todo">
+								here
+							</Link>
+						</span>
+					),
+				},
+			}}
+		>
+			<LoadingButton type="submit" loading={updateConnection.status === "loading"}>
+				Update
+			</LoadingButton>
+		</AutoForm>
 	)
 }

@@ -63,9 +63,8 @@ export const updateConnectionAction = createAction(
 			// }
 
 			const connection = await db.connection.update({
-				name: opts.input.name,
 				workspaceId: opts.ctx.auth.workspaceId,
-				publicId: opts.input.publicId,
+				...opts.input,
 			})
 
 			return {
