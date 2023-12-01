@@ -23,15 +23,18 @@ import { LoadingButton } from "@hazel/ui/loading-button"
 import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import { toast } from "sonner"
+import { Connection } from "@hazel/db"
 
 export type ConnectionPathProps = {
 	id: string
 	name: string | null
-	retryType: string | null
+	retryType: Connection["retryType"]
 	delay: number | null
+	retryDelay: number | null
+	retryCount: number | null
 }
 
-export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathProps) => {
+export const ConnectionPath = ({ retryType, retryDelay, retryCount, delay, id, name }: ConnectionPathProps) => {
 	const router = useRouter()
 
 	const handleDeleteConnection = useAction(deleteConnectionAction, {
@@ -55,17 +58,17 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 							{name}
 						</div>
 						<Button size="none" className="p-1 mr-4 group-hover:border-muted-foreground">
-							{retryType && <AutomationIcon className="w-4 h-4" />}
+							{Boolean(retryDelay) && <AutomationIcon className="w-4 h-4" />}
 
-							{delay && <TimerIcon className="w-4 h-4" />}
+							{Boolean(delay) && <TimerIcon className="w-4 h-4" />}
 
-							{!retryType && !delay && <Settings02Icon className="w-4 h-4" />}
+							{!(Boolean(retryType) && Boolean(delay)) && <Settings02Icon className="w-4 h-4" />}
 						</Button>
 					</div>
 				</div>
 			</PopoverTrigger>
-			<PopoverContent className="min-w-max">
-				<div className="flex flex-col gap-4 max-w-full">
+			<PopoverContent sideOffset={3} className="min-w-max overflow-y-scroll">
+				<div className="flex flex-col gap-4 max-w-full max-h-[calc(var(--radix-popover-content-available-height)-70px)]">
 					<div className="flex justify-between items-start">
 						<div className="flex gap-2">
 							<LinkChainIcon className="w-4 h-4" />
@@ -108,11 +111,11 @@ export const ConnectionPath = ({ retryType, delay, id, name }: ConnectionPathPro
 								fieldType: "time",
 							},
 						}}
-						defaultValues={{ name, retryType, delay }}
+						defaultValues={{ name, retryType, retryDelay, delay, retryCount }}
 						formSchema={updateConnectionSchema}
 					>
 						<Separator className="-mx-4" />
-						<div className="flex flex-row justify-between gap-2">
+						<div className="flex flex-row justify-between gap-2 pb-4">
 							<Link href={`/connection/${id}`} className={buttonVariants({ variant: "outline" })}>
 								<ExternalLink01Icon className="mr-2 w-4 h-4" />
 								Open Connection

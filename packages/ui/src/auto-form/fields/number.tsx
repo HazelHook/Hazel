@@ -1,7 +1,8 @@
+import { forwardRef } from "react"
 import { AutoFormInputComponentProps } from "../types"
 import AutoFormInput from "./input"
 
-export default function AutoFormNumber({ fieldProps, ...props }: AutoFormInputComponentProps) {
+export const AutoFormNumber = forwardRef(({ fieldProps, ...props }: AutoFormInputComponentProps) => {
 	return (
 		<AutoFormInput
 			fieldProps={{
@@ -11,4 +12,6 @@ export default function AutoFormNumber({ fieldProps, ...props }: AutoFormInputCo
 			{...props}
 		/>
 	)
-}
+})
+
+export default AutoFormNumber

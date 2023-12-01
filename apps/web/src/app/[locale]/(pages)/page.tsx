@@ -106,12 +106,10 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 						</Avatar>
 					</Suspense>
 
-					<Suspense>
-						<div className="flex justify-center flex-col">
-							<h3 className="text-2xl">Welcome back, {user.name}</h3>
-							<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
-						</div>
-					</Suspense>
+					<div className="flex justify-center flex-col">
+						<h3 className="text-2xl">Welcome back, {user.name}</h3>
+						<p className="text-muted-foreground">Happy to see you again on your dashboard.</p>
+					</div>
 				</div>
 				<div>
 					<Link href="/connection/new" className={buttonVariants()}>
@@ -122,7 +120,11 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 			</div>
 
 			<div className="flex gap-4 flex-col md:flex-row">
-				<Await promise={kpiRequest} fallback={<KpiLoadingCard color={chartColors[0]} title={"Events"} />}>
+				<Await
+					key="events-loader"
+					promise={kpiRequest}
+					fallback={<KpiLoadingCard key="events-loader" color={chartColors[0]} title={"Events"} />}
+				>
 					{({ data }) => (
 						<KpiCard
 							key={"events"}
@@ -142,7 +144,11 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					)}
 				</Await>
 
-				<Await promise={kpiResponse} fallback={<KpiLoadingCard color={chartColors[1]} title={"Request"} />}>
+				<Await
+					key="requests-loader"
+					promise={kpiResponse}
+					fallback={<KpiLoadingCard key="requests-loader" color={chartColors[1]} title={"Request"} />}
+				>
 					{({ data }) => (
 						<KpiCard
 							key={"requests"}
@@ -162,7 +168,11 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 					)}
 				</Await>
 
-				<Await promise={kpiError} fallback={<KpiLoadingCard color={chartColors[3]} title={"Errors"} />}>
+				<Await
+					key="errors-loader"
+					promise={kpiError}
+					fallback={<KpiLoadingCard key="errors-loader" color={chartColors[3]} title={"Errors"} />}
+				>
 					{({ data }) => (
 						<KpiCard
 							key={"errors"}

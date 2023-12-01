@@ -13,9 +13,6 @@ import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { buttonVariants } from "@hazel/ui/button"
 import { LoadingButton } from "@hazel/ui/loading-button"
-import * as z from "zod"
-import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "@hazel/ui/form"
-import { TimeInput } from "@hazel/ui/time-input"
 
 interface NewSourceFormProps {
 	action: typeof updateConnectionAction
@@ -35,8 +32,6 @@ export function UpdateConnectionForm({ action, isModal, connection }: NewSourceF
 			router.refresh()
 		},
 	})
-
-	console.log(connection)
 
 	return (
 		<AutoForm

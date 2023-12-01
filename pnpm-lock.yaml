@@ -880,9 +880,6 @@ importers:
       react-top-loading-bar:
         specifier: ^2.3.1
         version: 2.3.1(react@18.2.0)
-      sonner:
-        specifier: ^1.x
-        version: 1.2.3(react-dom@18.2.0)(react@18.2.0)
       tailwind-merge:
         specifier: ^2.0.0
         version: 2.0.0
@@ -932,6 +929,9 @@ importers:
       react-hook-form:
         specifier: ^7.48.2
         version: 7.48.2(react@18.2.0)
+      sonner:
+        specifier: ^1.2.4
+        version: 1.2.4(react-dom@18.2.0)(react@18.2.0)
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -9636,16 +9636,6 @@ packages:
     resolution: {integrity: sha512-IudtNvSqA/ObjN97tfgNmOKyDOs4dNcg4cUUsHDebqsgb8wGBBwb31LIgShNO8fye0dFI52X1+tFoKKI6Rq1Gg==}
     dependencies:
       atomic-sleep: 1.0.0
-    dev: false
-
-  /sonner@1.2.3(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-LMr155izOFA8hudzuUVQT0H93VqmcF9ODP475YjjC/4INESYWN1/ioC5SYRG20jmDmwuQDR8ugP7y6ELghT6JQ==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /sonner@1.2.4(react-dom@18.2.0)(react@18.2.0):

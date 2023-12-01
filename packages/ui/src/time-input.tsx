@@ -12,25 +12,35 @@ export type TimeInputProps = {
 }
 
 export const TimeInput = forwardRef(({ value, onChange, ...rest }: TimeInputProps) => {
-	const [currVal, setCurrVal] = useState(value)
+	// Store the numeric value and time unit separately
+	const [numericValue, setNumericValue] = useState(() => convertMillis(value, determineType(value)))
 	const [type, setType] = useState<TimeTypes>(determineType(value))
 
 	useEffect(() => {
-		onChange(currVal)
-	}, [currVal, onChange])
+		// Convert only when passing the value outside
+		onChange(convertToMillis(numericValue, type))
+	}, [numericValue, type, onChange])
 
 	return (
 		<div className="flex flex-row">
 			<Input
 				type="number"
 				onChange={(e) => {
-					const val = parseFloat(e.target.value)
-					setCurrVal(convertToMillis(Number.isNaN(val) ? 0 : val, type))
+					const val = e.target.value
+					// Check if the current value is '0' or empty, and replace it with the new input
+					if (val === "" || numericValue === 0) {
+						setNumericValue(val === "" ? 0 : parseFloat(val))
+					} else {
+						setNumericValue((prev) => {
+							const newVal = parseFloat(val)
+							return Number.isNaN(newVal) ? prev : newVal
+						})
+					}
 				}}
-				value={convertMillis(currVal, type)}
+				value={numericValue}
 				className="rounded-e-none max-w-xs"
 			/>
-			<Select value={type} onValueChange={setType as any}>
+			<Select value={type} onValueChange={(newType) => setType(newType as TimeTypes)}>
 				<SelectTrigger className="rounded-s-none w-max">
 					<SelectValue placeholder="Select a timestamp" />
 				</SelectTrigger>

@@ -49,7 +49,7 @@ export const pauseConnectionAction = createAction(
 export const updateConnectionAction = createAction(
 	protectedProcedure
 		.input(z.object({ publicId: z.string() }).merge(updateConnectionSchema))
-		.mutation(async (opts) => {
+		.mutation(async ({ input, ctx }) => {
 			// const source = await db.db.query.source.findFirst({
 			// 	where: (source, { eq }) => eq(source.publicId, opts.input.publicSourceId),
 			// })
@@ -61,10 +61,14 @@ export const updateConnectionAction = createAction(
 			// if (!destination || !source) {
 			// 	throw new Error("Doesnt exist bruw")
 			// }
+			const { retryCount, ...rest } = input
+
+			console.log(retryCount)
 
 			const connection = await db.connection.update({
-				workspaceId: opts.ctx.auth.workspaceId,
-				...opts.input,
+				workspaceId: ctx.auth.workspaceId,
+				...rest,
+				retyCount: retryCount,
 			})
 
 			return {

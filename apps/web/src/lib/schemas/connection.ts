@@ -21,8 +21,8 @@ export const updateConnectionSchema = z.object({
 			message: "Name must be between 2 and 20 characters long",
 		})
 		.max(20),
-	delay: z.coerce.number().min(0).optional(),
 	retryCount: z.coerce.number().min(0).max(10).optional(),
 	retryDelay: z.coerce.number().min(0).optional(),
 	retryType: z.enum(["fixed", "exponential"]).optional(),
+	delay: z.coerce.number().min(0).optional(),
 })
