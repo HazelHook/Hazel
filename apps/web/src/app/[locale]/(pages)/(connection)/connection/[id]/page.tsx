@@ -14,7 +14,7 @@ import { Tile } from "@hazel/ui/tile"
 import { CopyButton } from "@/components/copy-button"
 import Link from "next/link"
 import { buttonVariants } from "@hazel/ui/button"
-import { ExternalLink01Icon } from "@hazel/icons"
+import { ExternalLink01Icon, LogInLeftIcon } from "@hazel/icons"
 import { SourceLink } from "../../../_component/SourceLink"
 
 const SourcePage = async ({
@@ -86,6 +86,15 @@ const SourcePage = async ({
 								className={buttonVariants({ variant: "link", size: "none" })}
 								href={`/source/${connection.source.publicId}`}
 							>
+								{connection.source.integration?.tool ? (
+									<img
+										src={`/assets/integrations/${connection.source.integration.tool}.svg`}
+										alt={connection.source.integration.tool}
+										className="w-4 h-4 mr-2"
+									/>
+								) : (
+									<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+								)}
 								{connection.source.name}
 							</Link>
 							<Link

@@ -14,7 +14,11 @@ const connectionLogic = (db: DB) =>
 				where: eq(schema.connection.publicId, publicId),
 				with: {
 					destination: true,
-					source: true,
+					source: {
+						with: {
+							integration: true,
+						},
+					},
 				},
 			})
 		},
