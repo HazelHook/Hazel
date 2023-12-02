@@ -26,7 +26,12 @@ const schema = {
 export type TBRequest = ZodMapped<typeof schema>
 const parameters = {
 	workspace_id: z.string(),
-	source_id: z.string().optional(),
+	source_id: z
+		.string()
+		.transform<string | undefined>((val) => {
+			return val.split(".") as any
+		})
+		.optional(),
 	request_id: z.string().optional(),
 	limit: z.number().optional(),
 	offset: z.number().optional(),

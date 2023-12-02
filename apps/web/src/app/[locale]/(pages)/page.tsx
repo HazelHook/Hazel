@@ -35,7 +35,7 @@ interface DashboardPageProps {
 const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 	const { workspaceId, user } = await auth()
 
-	const { sort, offset, limit, source_id, response_id, status, success } = getTableParams(
+	const { sort, offset, limit, source_id, destination_id, response_id, status, success } = getTableParams(
 		searchParams,
 		requestTableSearchParamsSchema.merge(responseTableSearchParamsSchema),
 	)
@@ -56,6 +56,8 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 	const response = tiny.response.get({
 		workspace_id: workspaceId,
+		source_id,
+		destination_id,
 		response_id,
 		status,
 		limit,

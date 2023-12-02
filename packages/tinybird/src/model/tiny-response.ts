@@ -30,9 +30,15 @@ const schema = {
 export type TBResponse = ZodMapped<typeof schema>
 const parameters = {
 	workspace_id: z.string(),
-	destination_id: z.string().optional(),
 	request_id: z.string().optional(),
-	source_id: z.string().optional(),
+	destination_id: z
+		.string()
+		.transform<string | undefined>((val) => val.split(".") as any)
+		.optional(),
+	source_id: z
+		.string()
+		.transform<string | undefined>((val) => val.split(".") as any)
+		.optional(),
 	response_id: z.string().optional(),
 	status: z.number().array().optional(),
 	success: z
