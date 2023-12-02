@@ -1,40 +1,28 @@
 NODE endpoint
 SQL >
-
     %
-        SELECT *
-        FROM request_events
-        WHERE
-            workspace_id
-            = {{
-                String(
-                    workspace_id,
-                    "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
-                    description="Customer ID",
-                    required=True,
-                )
-            }}
-             {% if defined(source_id) %}
+    SELECT *
+    FROM request_events
+    WHERE
+        workspace_id
+        = {{
+            String(
+                workspace_id,
+                "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
+                description="Customer ID",
+                required=True,
+            )
+        }}
+        {% if defined(source_id) %}
             AND (
                 source_id = {{ String(source_id, description="Source ID", required=False) }}
-                OR source_id IN (
-                    {{
-                        Array(
-                            source_id,
-                            "String",
-                            description="Array of Source IDs",
-                            required=False
-                        )
-                    }}
-                )
+                OR source_id
+                IN ({{ Array(source_id, "String", description="Array of Source IDs", required=False) }})
             )
-            {% end %}
-            {% if defined(request_id) %}
-                AND id
-                = {{ String(request_id, description="Request ID", required=False) }}
-            {% end %}
-        ORDER BY timestamp DESC
-        LIMIT {{ Int32(limit, 100, description="Limit of Entries", required=False) }}
-        OFFSET {{ Int32(offset, 0, description="Offset", required=False) }}
-
-
+        {% end %}
+        {% if defined(request_id) %}
+            AND id = {{ String(request_id, description="Request ID", required=False) }}
+        {% end %}
+    ORDER BY timestamp DESC
+    LIMIT {{ Int32(limit, 100, description="Limit of Entries", required=False) }}
+    OFFSET {{ Int32(offset, 0, description="Offset", required=False) }}

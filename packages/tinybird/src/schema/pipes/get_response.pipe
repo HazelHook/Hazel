@@ -2,71 +2,61 @@ TOKEN "get_res_endpoint_read_2469" READ
 
 NODE endpoint
 SQL >
-
     %
-        SELECT *
-        FROM response_events
-        WHERE
-            workspace_id
-            = {{
-                String(
-                    workspace_id,
-                    "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
-                    description="Customer ID",
-                    required=True,
-                )
-            }}
-            {% if defined(success) %}
-                AND success = {{ Int32(success, description="Success (0 | 1)", required=False) }}
-            {% end %}
-            {% if defined(status) %}
-                AND status IN (
-                    {{
-                        Array(
-                            status,
-                            "Int32",
-                            description="Statuses eg. [200, 201, 404, 500]",
-                            required=False,
-                        )
-                    }}
-                )
-            {% end %}
-          {% if defined(source_id) %}
-            AND (
-                source_id = {{ String(source_id, description="Source ID", required=False) }}
-                OR source_id IN (
-                    {{
-                        Array(
-                            source_id,
-                            "String",
-                            description="Array of Source IDs",
-                            required=False
-                        )
-                    }}
-                )
+    SELECT *
+    FROM response_events
+    WHERE
+        workspace_id
+        = {{
+            String(
+                workspace_id,
+                "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
+                description="Customer ID",
+                required=True,
+            )
+        }}
+        {% if defined(success) %}
+            AND success = {{ Int32(success, description="Success (0 | 1)", required=False) }}
+        {% end %}
+        {% if defined(status) %}
+            AND status IN (
+                {{
+                    Array(
+                        status,
+                        "Int32",
+                        description="Statuses eg. [200, 201, 404, 500]",
+                        required=False,
+                    )
+                }}
             )
         {% end %}
-            {% if defined(destination_id) %}
-                AND destination_id = {{ String(destination_id, description="Source ID", required=False) }}
-                OR destination_id IN (
-                    {{
-                        Array(
-                            destination_id,
-                            "String",
-                            description="Array of Destination IDs",
-                            required=False
-                        )
-                    }}
-                )
-            {% end %}
-            {% if defined(request_id) %}
-                AND request_id = {{ String(request_id, description="Request ID", required=False) }}
-            {% end %}
-            {% if defined(response_id) %}
-                AND id LIKE '%' || {{ String(response_id, description="Response ID", required=False) }} || '%'
-            {% end %}
-        ORDER BY received_at DESC
-        LIMIT {{ Int32(limit, 100, description="Limit of Entries", required=False) }}
-        OFFSET {{ Int32(offset, 0, description="Offset", required=False) }}
-
-
+        {% if defined(source_id) %}
+            AND (
+                source_id = {{ String(source_id, description="Source ID", required=False) }}
+                OR source_id
+                IN ({{ Array(source_id, "String", description="Array of Source IDs", required=False) }})
+            )
+        {% end %}
+        {% if defined(destination_id) %}
+            AND destination_id = {{ String(destination_id, description="Source ID", required=False) }}
+            OR destination_id IN (
+                {{
+                    Array(
+                        destination_id,
+                        "String",
+                        description="Array of Destination IDs",
+                        required=False,
+                    )
+                }}
+            )
+        {% end %}
+        {% if defined(request_id) %}
+            AND request_id = {{ String(request_id, description="Request ID", required=False) }}
+        {% end %}
+        {% if defined(response_id) %}
+            AND id
+            LIKE '%' || {{ String(response_id, description="Response ID", required=False) }} || '%'
+        {% end %}
+    ORDER BY received_at DESC
+    LIMIT {{ Int32(limit, 100, description="Limit of Entries", required=False) }}
+    OFFSET {{ Int32(offset, 0, description="Offset", required=False) }}

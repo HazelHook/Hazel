@@ -1,5 +1,4 @@
 TOKEN "response_events_pipe_2118_endpoint_read_4584" READ
-
 TOKEN "kpi_res" READ
 
 NODE filtered
@@ -7,67 +6,47 @@ DESCRIPTION >
     Returns the filtered response events
 
 SQL >
-
     %
-                {% if not defined(workspace_id) %}
-                    {{ error('workspace_id (String) query param is required') }}
-                {% end %}
-                {% if not defined(start_date) %}
-                    {{ error('start_date (DateTime) query param is required') }}
-                {% end %}
-                SELECT *
-                FROM response_events
-                WHERE
-                    workspace_id
-                    = {{
-                        String(
-                            workspace_id,
-                            "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
-                            description="Customer ID",
-                            required=True,
-                        )
-                    }}
-                    AND {% if defined(source_id) %}
-                        source_id
-                        = {{ String(source_id, description="Source ID", required=False) }}
-                        AND
-                    {% end %}
-                    {% if period == 'daily' or period == 'hourly' or not defined(period) %}
-                        received_at >= {{ DateTime(start_date, required=True) }}
-                        {% if defined(end_date) %}
-                            AND received_at < {{ DateTime(end_date, required=False) }}
-                        {% end %}
-                    {% elif period == 'weekly' or period == 'monthly' %}
-                        bucket >= toDate({{ DateTime(start_date, required=True) }})
-                        {% if defined(end_date) %}
-                            AND bucket < toDate({{ DateTime(end_date, required=False) }})
-                        {% end %}
-                    {% end %}
-
-
+    {% if not defined(workspace_id) %}
+        {{ error('workspace_id (String) query param is required') }}
+    {% end %}
+    {% if not defined(start_date) %}
+        {{ error('start_date (DateTime) query param is required') }}
+    {% end %}
+    SELECT *
+    FROM response_events
+    WHERE
+        workspace_id
+        = {{
+            String(
+                workspace_id,
+                "user_2RFXEq9BzmRMggnKwjEeFeHVfMV",
+                description="Customer ID",
+                required=True,
+            )
+        }}
+        AND {% if defined(source_id) %}
+            source_id = {{ String(source_id, description="Source ID", required=False) }} AND
+        {% end %}
+        {% if period == 'daily' or period == 'hourly' or not defined(period) %}
+            received_at >= {{ DateTime(start_date, required=True) }}
+            {% if defined(end_date) %}
+                AND received_at < {{ DateTime(end_date, required=False) }}
+            {% end %}
+        {% elif period == 'weekly' or period == 'monthly' %}
+            bucket >= toDate({{ DateTime(start_date, required=True) }})
+            {% if defined(end_date) %} AND bucket < toDate({{ DateTime(end_date, required=False) }})
+            {% end %}
+        {% end %}
 
 NODE timestamp_data
 DESCRIPTION >
     Returns data sorted by timestamp
 
 SQL >
-
     %
-                                 WITH 
-                                        toDate(`received_at`) AS date
-                                    SELECT 
-                                        date,
-                                        `workspace_id`,
-                                        count() AS requests,
-                                        uniq(source_id) As sources
-                                    FROM 
-                                        filtered
-                                    GROUP BY 
-                                        date, 
-                                        `workspace_id`, 
-                                        `success`
-                                    ORDER BY 
-                                        date DESC,
-                                        requests DESC
-
-
+    WITH toDate(`received_at`) AS date
+    SELECT date, `workspace_id`, count() AS requests, uniq(source_id) As sources
+    FROM filtered
+    GROUP BY date, `workspace_id`, `success`
+    ORDER BY date DESC, requests DESC

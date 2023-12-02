@@ -1,18 +1,8 @@
 NODE daily_res
 SQL >
-
-    SELECT
-        toStartOfDay(received_at) AS bucket,
-        workspace_id,
-        source_id,
-        status,
-        countState() AS count
+    SELECT toStartOfDay(received_at) AS bucket, workspace_id, source_id, status, countState() AS count
     FROM response_events
-    GROUP BY
-        bucket,
-        source_id,
-        workspace_id,
-        status
+    GROUP BY bucket, source_id, workspace_id, status
 
-TYPE materialized
+TYPE MATERIALIZED
 DATASOURCE daily_res_mv

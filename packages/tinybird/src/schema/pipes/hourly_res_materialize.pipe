@@ -1,18 +1,8 @@
 NODE hourly_res
 SQL >
-
-    SELECT
-        toStartOfHour(received_at) AS bucket,
-        workspace_id,
-        source_id,
-        status,
-        countState() AS count
+    SELECT toStartOfHour(received_at) AS bucket, workspace_id, source_id, status, countState() AS count
     FROM response_events
-    GROUP BY
-        bucket,
-        source_id,
-        workspace_id,
-        status
+    GROUP BY bucket, source_id, workspace_id, status
 
-TYPE materialized
+TYPE MATERIALIZED
 DATASOURCE hourly_res_mv

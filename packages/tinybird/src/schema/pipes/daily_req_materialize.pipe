@@ -1,18 +1,8 @@
 NODE daily_req
 SQL >
-
-    SELECT
-        toStartOfDay(timestamp) AS bucket,
-        workspace_id,
-        source_id,
-        countState() AS count
+    SELECT toStartOfDay(timestamp) AS bucket, workspace_id, source_id, countState() AS count
     FROM request_events
-    GROUP BY
-        bucket,
-        source_id,
-        workspace_id
+    GROUP BY bucket, source_id, workspace_id
 
-TYPE materialized
+TYPE MATERIALIZED
 DATASOURCE daily_req_mv
-
-
