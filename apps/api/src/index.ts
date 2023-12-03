@@ -2,9 +2,27 @@ import swagger from "@elysiajs/swagger"
 import { Elysia } from "elysia"
 
 import { connectionRouter } from "./routes/v1/connections"
+import { components } from "./openapi/components"
 
 const app = new Elysia()
-	.use(swagger())
+	.use(
+		swagger({
+			documentation: {
+				info: {
+					title: "Hazel Documentation",
+					version: "1.0.0",
+				},
+				servers: [
+					{
+						url: "https://api.hazel.sh",
+					},
+				],
+				components: components as any,
+				tags: [{ name: "Connections", description: "Endpoints to manage your Connections" }],
+			},
+			exclude: ["/"],
+		}),
+	)
 	.onError(({ code, error, set }) => {
 		let statusCode = 400
 		switch (code) {
@@ -39,7 +57,7 @@ const app = new Elysia()
 			statusText: error.message as string,
 		})
 	})
-	.get("/", () => "Hello Elysia")
+	.get("/", () => "Hazel API")
 	.group("v1", (app) => app.use(connectionRouter))
 
 	.listen(3006)

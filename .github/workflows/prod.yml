@@ -4,6 +4,15 @@ on:
     branches:
       - production
 jobs:
+  deploy-api:
+    name: Deploy API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only --dockerfile ./apps/api/Dockerfile --config apps/api/fly.toml 
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   deploy-backend:
     name: Deploy Backend
     runs-on: ubuntu-latest
