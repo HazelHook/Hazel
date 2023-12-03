@@ -1,7 +1,7 @@
 import db from "@hazel/db"
 import Elysia, { t } from "elysia"
 
-import { authGuard } from "../../guard/authGuard"
+import { authGuard } from "../../guard/auth-guard"
 
 export const sourceRouter = (app: Elysia) =>
 	app.use(authGuard).group("sources", (app) =>
@@ -17,7 +17,6 @@ export const sourceRouter = (app: Elysia) =>
 				async ({ body, workspace_id }) => {
 					const connection = await db.source.create({
 						name: body.name,
-						url: body.url,
 						workspaceId: workspace_id,
 						key: body.key,
 					})
@@ -61,7 +60,7 @@ export const sourceRouter = (app: Elysia) =>
 				},
 			)
 			.delete("/:id", async ({ params }) => {
-				const res = await db.source.markAsDeleted({ publicId: params.id })
+				const res = await db.source.delete({ publicId: params.id })
 				return res
 			}),
 	)

@@ -15,10 +15,10 @@
     "@hazel/db": "workspace:*",
     "@upstash/ratelimit": "0.4.4",
     "@upstash/redis": "^1.25.1",
-    "elysia": "0.7.28"
+    "elysia": "0.7.29"
   },
   "module": "src/index.js",
   "devDependencies": {
-    "bun": "^1.0.13"
+    "bun": "^1.0.15"
   }
 }

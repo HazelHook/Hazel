@@ -1,7 +1,7 @@
 import db from "@hazel/db"
 import Elysia, { t } from "elysia"
 
-import { authGuard } from "../../guard/authGuard"
+import { authGuard } from "../../guard/auth-guard"
 
 export const connectionRouter = (app: Elysia) =>
 	app.use(authGuard).group("connections", (app) =>
@@ -82,7 +82,7 @@ export const connectionRouter = (app: Elysia) =>
 				},
 			)
 			.delete("/:id", async ({ params }) => {
-				const res = await db.connection.markAsDeleted({ publicId: params.id })
+				const res = await db.connection.delete({ publicId: params.id })
 				return res
 			})
 			.put("/:id/pause", async ({ params }) => {
