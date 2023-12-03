@@ -1,8 +1,8 @@
 "use client"
 
-import { Input } from "@hazel/ui/input"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 import { forwardRef, useEffect, useState } from "react"
+import { Input } from "./input"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "./select"
 
 export type TimeTypes = "seconds" | "minutes" | "hours" | "days"
 
