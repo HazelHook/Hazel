@@ -1,21 +1,15 @@
-import { logger } from "@bogeychan/elysia-logger"
 import serverTiming from "@elysiajs/server-timing"
 import { Elysia } from "elysia"
 
 import { sourceQueue } from "./lib/queue"
 import { v1Route } from "./routes/v1"
+import { getLogger } from "@hazel/utils"
 
-export const routeSetup = new Elysia({ name: "setup" }).use(
-	logger({
-		level: "error",
-	})
-		.use(serverTiming())
-		.trace(async ({ beforeHandle }) => {
-			const { time, end } = await beforeHandle
+export const routeSetup = new Elysia({ name: "setup" }).use(serverTiming()).trace(async ({ beforeHandle }) => {
+	const { time, end } = await beforeHandle
 
-			console.log("Handle took", (await end) - time)
-		}),
-)
+	getLogger().info("Handle took", (await end) - time)
+})
 
 export const app = new Elysia()
 	.use(routeSetup)
@@ -41,4 +35,4 @@ export const app = new Elysia()
 	)
 	.listen(3003)
 
-console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`)
+getLogger().info(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`)
