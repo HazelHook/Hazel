@@ -7,7 +7,7 @@ import { consumeBase64 } from "./lib/request.helper"
 import { getLogger } from "@hazel/utils"
 import { ingestMetric } from "@hazel/utils/lago"
 
-console.log("Hazel Worker starting up....")
+getLogger().info("Hazel Worker starting up....")
 
 const redisConnection: ConnectionOptions = {
 	host: process.env.REDIS_HOST,
