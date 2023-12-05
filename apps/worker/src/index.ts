@@ -5,6 +5,7 @@ import { nanoid } from "nanoid"
 
 import { consumeBase64 } from "./lib/request.helper"
 import { getLogger } from "@hazel/utils"
+import { ingestMetric } from "@hazel/utils/lago"
 
 console.log("Hazel Worker starting up....")
 
@@ -33,6 +34,8 @@ const worker = new Worker<{
 			// Connection was probably deleted, so we can just discard it
 			return
 		}
+
+		ingestMetric({ workspaceId: connection.workspaceId, type: "events" })
 
 		const sendTime = new Date().toISOString()
 		const res = await consumeBase64(job.data.request)
