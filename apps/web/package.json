@@ -20,7 +20,7 @@
   "dependencies": {
     "@hazel/admin": "workspace:*",
     "@hazel/auth": "workspace:*",
-    "@hazel/client": "workspace:*",
+    "@hazel/sdk": "workspace:*",
     "@hazel/db": "workspace:*",
     "@hazel/icons": "workspace:*",
     "@hazel/integrations": "workspace:*",

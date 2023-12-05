@@ -111,9 +111,6 @@ importers:
       '@hazel/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@hazel/client':
-        specifier: workspace:*
-        version: link:../../packages/client
       '@hazel/db':
         specifier: workspace:*
         version: link:../../packages/db
@@ -123,6 +120,9 @@ importers:
       '@hazel/integrations':
         specifier: workspace:*
         version: link:../../packages/integrations
+      '@hazel/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
       '@hazel/server':
         specifier: workspace:*
         version: link:../../packages/server
@@ -468,55 +468,6 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
 
-  packages/client:
-    dependencies:
-      '@hazel/utils':
-        specifier: workspace:*
-        version: link:../utils
-      next:
-        specifier: 14.0.3
-        version: 14.0.3(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-      std-env:
-        specifier: ^3.5.0
-        version: 3.5.0
-      tailwindcss:
-        specifier: 3.3.2
-        version: 3.3.2
-      zod:
-        specifier: ^3.22.4
-        version: 3.22.4
-    devDependencies:
-      '@hazel/tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
-      '@types/react':
-        specifier: 18.2.31
-        version: 18.2.31
-      '@types/react-dom':
-        specifier: ^18.2.16
-        version: 18.2.16
-      eslint:
-        specifier: ^8.54.0
-        version: 8.54.0
-      prettier:
-        specifier: ^3.1.0
-        version: 3.1.0
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.2)
-      type-fest:
-        specifier: ^4.8.2
-        version: 4.8.2
-      typescript:
-        specifier: ^5.3.2
-        version: 5.3.2
-
   packages/db:
     dependencies:
       '@chronark/zod-bird':
@@ -644,6 +595,55 @@ importers:
       zod:
         specifier: ^3.22.4
         version: 3.22.4
+
+  packages/sdk:
+    dependencies:
+      '@hazel/utils':
+        specifier: workspace:*
+        version: link:../utils
+      next:
+        specifier: 14.0.3
+        version: 14.0.3(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      std-env:
+        specifier: ^3.5.0
+        version: 3.5.0
+      tailwindcss:
+        specifier: 3.3.2
+        version: 3.3.2
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
+    devDependencies:
+      '@hazel/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/react':
+        specifier: 18.2.31
+        version: 18.2.31
+      '@types/react-dom':
+        specifier: ^18.2.16
+        version: 18.2.16
+      eslint:
+        specifier: ^8.54.0
+        version: 8.54.0
+      prettier:
+        specifier: ^3.1.0
+        version: 3.1.0
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.3.2)
+      type-fest:
+        specifier: ^4.8.2
+        version: 4.8.2
+      typescript:
+        specifier: ^5.3.2
+        version: 5.3.2
 
   packages/server:
     dependencies:

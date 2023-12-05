@@ -5,7 +5,7 @@ import { nanoid } from "nanoid"
 
 import { consumeBase64 } from "./lib/request.helper"
 
-console.log("Hazel Worked startin up....")
+console.log("Hazel Worker starting up....")
 
 const redisConnection: ConnectionOptions = {
 	username: process.env.REDIS_USERNAME,
@@ -71,5 +71,5 @@ const worker = new Worker<{
 )
 
 worker.on("ready", () => {
-	console.log("Worker Started and ready")
+	console.log("Worker Started and Ready")
 })

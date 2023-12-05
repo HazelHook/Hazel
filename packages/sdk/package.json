@@ -1,5 +1,5 @@
 {
-  "name": "@hazel/client",
+  "name": "@hazel/sdk",
   "private": true,
   "version": "0.1.0",
   "scripts": {

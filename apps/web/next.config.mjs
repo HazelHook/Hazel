@@ -19,7 +19,7 @@ const nextConfig = {
 	transpilePackages: [
 		"@hazel/admin",
 		"@hazel/auth",
-		"@hazel/client",
+		"@hazel/sdk",
 		"@hazel/db",
 		"@hazel/ui",
 		"@hazel/utils",
