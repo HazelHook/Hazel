@@ -4,6 +4,7 @@ import { ConnectionOptions, MetricsTime, Worker } from "bullmq"
 import { nanoid } from "nanoid"
 
 import { consumeBase64 } from "./lib/request.helper"
+import { getLogger } from "@hazel/utils"
 
 console.log("Hazel Worker starting up....")
 
@@ -22,7 +23,8 @@ const worker = new Worker<{
 }>(
 	"source_queue",
 	async (job) => {
-		console.info("Doing Job! :) ", job.attemptsMade)
+		getLogger().info("Doing Job! :) ", job.attemptsMade)
+
 		const connection = await db.connection.getOne({
 			publicId: job.data.connectionId,
 		})
@@ -74,9 +76,9 @@ const worker = new Worker<{
 )
 
 worker.on("ready", () => {
-	console.log("Worker Started and Ready")
+	getLogger().info("Worker Started and Ready")
 })
 
 worker.on("error", (err) => {
-	console.log(err)
+	getLogger().error(err)
 })

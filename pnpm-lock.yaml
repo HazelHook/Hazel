@@ -310,6 +310,9 @@ importers:
       '@hazel/tinybird':
         specifier: workspace:*
         version: link:../../packages/tinybird
+      '@hazel/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       bullmq:
         specifier: ^4.15.0
         version: 4.15.0

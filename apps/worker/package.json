@@ -8,6 +8,7 @@
   "dependencies": {
     "@hazel/db": "workspace:*",
     "@hazel/tinybird": "workspace:*",
+    "@hazel/utils": "workspace:*",
     "bullmq": "^4.15.0",
     "nanoid": "^5.0.4",
     "zod": "^3.22.4"
