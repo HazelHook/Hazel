@@ -33,7 +33,7 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "react-top-loading-bar": "^2.3.1",
-    "tailwind-merge": "^2.0.0",
+    "tailwind-merge": "^2.1.0",
     "tw-avatar": "^0.0.0",
     "zod": "^3.22.4"
   },

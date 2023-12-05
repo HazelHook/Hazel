@@ -169,8 +169,8 @@ importers:
         specifier: ^8.10.7
         version: 8.10.7(react-dom@18.2.0)(react@18.2.0)
       apexcharts:
-        specifier: ^3.44.0
-        version: 3.44.0
+        specifier: ^3.44.2
+        version: 3.44.2
       bright:
         specifier: ^0.8.4
         version: 0.8.4(react@18.2.0)
@@ -187,8 +187,8 @@ importers:
         specifier: ^1.0.6
         version: 1.0.6(next@14.0.3)
       framer-motion:
-        specifier: ^10.16.9
-        version: 10.16.9(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^10.16.14
+        version: 10.16.14(react-dom@18.2.0)(react@18.2.0)
       geist:
         specifier: ^1.2.0
         version: 1.2.0(next@14.0.3)
@@ -208,8 +208,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
       next-intl:
-        specifier: 3.2.0
-        version: 3.2.0(next@14.0.3)(react@18.2.0)
+        specifier: 3.2.4
+        version: 3.2.4(next@14.0.3)(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
@@ -224,7 +224,7 @@ importers:
         version: 18.2.0
       react-apexcharts:
         specifier: ^1.4.1
-        version: 1.4.1(apexcharts@3.44.0)(react@18.2.0)
+        version: 1.4.1(apexcharts@3.44.2)(react@18.2.0)
       react-day-picker:
         specifier: ^8.9.1
         version: 8.9.1(date-fns@2.30.0)(react@18.2.0)
@@ -250,14 +250,14 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(react@18.2.0)
       tailwind-merge:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.1.0
+        version: 2.1.0
       tiny-invariant:
         specifier: ^1.3.1
         version: 1.3.1
       ts-pattern:
-        specifier: ^5.0.5
-        version: 5.0.5
+        specifier: ^5.0.6
+        version: 5.0.6
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -441,8 +441,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
       next-intl:
-        specifier: 3.2.0
-        version: 3.2.0(next@14.0.3)(react@18.2.0)
+        specifier: 3.2.4
+        version: 3.2.4(next@14.0.3)(react@18.2.0)
       prettier:
         specifier: ^3.1.0
         version: 3.1.0
@@ -880,13 +880,13 @@ importers:
         version: 3.0.1(next@14.0.3)(react@18.2.0)
       react-apexcharts:
         specifier: ^1.4.1
-        version: 1.4.1(apexcharts@3.44.0)(react@18.2.0)
+        version: 1.4.1(apexcharts@3.44.2)(react@18.2.0)
       react-top-loading-bar:
         specifier: ^2.3.1
         version: 2.3.1(react@18.2.0)
       tailwind-merge:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.1.0
+        version: 2.1.0
       tw-avatar:
         specifier: ^0.0.0
         version: 0.0.0
@@ -1378,6 +1378,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+
+  /@babel/runtime@7.23.5:
+    resolution: {integrity: sha512-NdUTHcPe4C99WxPub+K9l9tK5/lV4UXIoaHSYgzco9BCyjKAAwzdBI+wWtYqHt7LJdbo74ZjRPJgzVweq1sz0w==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.0
+    dev: false
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -5268,8 +5275,8 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  /apexcharts@3.44.0:
-    resolution: {integrity: sha512-u7Xzrbcxc2yWznN78Jh5NMCYVAsWDfBjRl5ea++rVzFAqjU2hLz4RgKIFwYOBDRQtW1e/Qz8azJTqIJ1+Vu9Qg==}
+  /apexcharts@3.44.2:
+    resolution: {integrity: sha512-QWOFS/SC1TDsuI8VudVuIwLhs1qE6kwixRvmABMUgTVeVzizRWgQh8pdEIgwl+Zvr0TlM3vHPz6Dc5NP1hJ7BA==}
     dependencies:
       '@yr/monotone-cubic-spline': 1.0.3
       svg.draggable.js: 2.2.2
@@ -6897,8 +6904,8 @@ packages:
   /fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  /framer-motion@10.16.9(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-tcLz4X7PplYu6f4KHmclZFhHe8bFhCqfIG0z0Ssb+xi6OTfYeAb8BuVD235PMvypwi232VQ68KYlu3pfMKwPzA==}
+  /framer-motion@10.16.14(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-poovsXtR7doXRfjqVjUai82Zl2z5yMUFKtYWHnQK+xsDVPhHVUJEU+Kr2kqEnUV4gry+LcRdrDzcMI7OdJlDMg==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -8155,8 +8162,8 @@ packages:
       use-intl: 3.0.1(react@18.2.0)
     dev: false
 
-  /next-intl@3.2.0(next@14.0.3)(react@18.2.0):
-    resolution: {integrity: sha512-vKGokJvQOdvZG9qGNCIh2bLeoLwPzNXuER5kj1ZWK2Rg1w3vHmBMALS7WOfy7cNkk5rFOa68CYqBE2cjBGapWg==}
+  /next-intl@3.2.4(next@14.0.3)(react@18.2.0):
+    resolution: {integrity: sha512-JadPqGzRtk3C4Pf1i4v9//vvpXrmuKLyIBzrDGYRFyDaAkrV1qorVc9NkBkNCFSqwoM5giSgydEi7fkFtKHhog==}
     peerDependencies:
       next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -8165,7 +8172,7 @@ packages:
       negotiator: 0.6.3
       next: 14.0.3(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
-      use-intl: 3.2.0(react@18.2.0)
+      use-intl: 3.2.4(react@18.2.0)
 
   /next-themes@0.2.1(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
@@ -8955,13 +8962,13 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
-  /react-apexcharts@1.4.1(apexcharts@3.44.0)(react@18.2.0):
+  /react-apexcharts@1.4.1(apexcharts@3.44.2)(react@18.2.0):
     resolution: {integrity: sha512-G14nVaD64Bnbgy8tYxkjuXEUp/7h30Q0U33xc3AwtGFijJB9nHqOt1a6eG0WBn055RgRg+NwqbKGtqPxy15d0Q==}
     peerDependencies:
       apexcharts: ^3.41.0
       react: '>=0.13'
     dependencies:
-      apexcharts: 3.44.0
+      apexcharts: 3.44.2
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
@@ -9945,10 +9952,10 @@ packages:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
 
-  /tailwind-merge@2.0.0:
-    resolution: {integrity: sha512-WO8qghn9yhsldLSg80au+3/gY9E4hFxIvQ3qOmlpXnqpDKoMruKfi/56BbbMg6fHTQJ9QD3cc79PoWqlaQE4rw==}
+  /tailwind-merge@2.1.0:
+    resolution: {integrity: sha512-l11VvI4nSwW7MtLSLYT4ldidDEUwQAMWuSHk7l4zcXZDgnCRa0V3OdCwFfM7DCzakVXMNRwAeje9maFFXT71dQ==}
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.23.5
     dev: false
 
   /tailwindcss-animate@1.0.7(tailwindcss@3.3.2):
@@ -10217,8 +10224,8 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-pattern@5.0.5:
-    resolution: {integrity: sha512-tL0w8U/pgaacOmkb9fRlYzWEUDCfVjjv9dD4wHTgZ61MjhuMt46VNWTG747NqW6vRzoWIKABVhFSOJ82FvXrfA==}
+  /ts-pattern@5.0.6:
+    resolution: {integrity: sha512-Y+jOjihlFriWzcBjncPCf2/am+Hgz7LtsWs77pWg5vQQKLQj07oNrJryo/wK2G0ndNaoVn2ownFMeoeAuReu3Q==}
     dev: false
 
   /tslib@1.14.1:
@@ -10332,7 +10339,7 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      tailwind-merge: 2.0.0
+      tailwind-merge: 2.1.0
     dev: false
 
   /tw-to-css@0.0.11:
@@ -10519,8 +10526,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /use-intl@3.2.0(react@18.2.0):
-    resolution: {integrity: sha512-7Ut3kQTL1WYEgpzJa9jRBaHnnJ0CPRxzNF/U8fNhi05aCBSuhJ3lwQGv9XBpOhDlprnAQUWsCXkvFKV4kLiHEA==}
+  /use-intl@3.2.4(react@18.2.0):
+    resolution: {integrity: sha512-55zHIZ0SWnlzvRvBJhx2iR//SBdItzPF4dEKyWYq2JTSJ5qyGDWb7b2UZ8LXTvhdzptgSL46I6qtYnwoDRvt0A==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
