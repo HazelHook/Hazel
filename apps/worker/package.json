@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "infisical run -- bun run --watch src/index.ts"
+    "dev": "infisical run -- bun run --watch src/index.ts | pino-pretty -c"
   },
   "dependencies": {
     "@hazel/db": "workspace:*",

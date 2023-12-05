@@ -3,7 +3,7 @@
   "version": "1.0.44",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "infisical run -- bun run --watch src/index.ts",
+    "dev": "infisical run -- bun run --watch src/index.ts | pino-pretty -c",
     "dev:ws": "infisical run -- bun run --watch src/dev-server/index.ts"
   },
   "dependencies": {
