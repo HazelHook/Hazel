@@ -129,7 +129,7 @@ export const ProfileSettings = ({
 								<span>Onboarding</span>
 							</DropdownMenuItem>
 						</Link>
-						<Link href="https://docs.hazelhook.dev" target="__blank">
+						<Link href="https://docs.hazel.sh" target="__blank">
 							<DropdownMenuItem className="cursor-pointer">
 								<File2InfoIcon className="w-4 h-4 mr-2" />
 								<span>Docs</span>

@@ -9,7 +9,6 @@ import integrationLogic from "./tables/integration"
 import organizationsLogic from "./tables/organization"
 import sourceLogic from "./tables/source"
 import userLogic from "./tables/user"
-import { getLogger } from "@hazel/utils"
 
 export type DB = PlanetScaleDatabase<typeof schema>
 
@@ -26,7 +25,7 @@ export function connectDB({
 }) {
 	const client = connect({ host, username, password })
 
-	const db = drizzle(client, { schema, logger: true })
+	const db = drizzle(client, { schema, logger: false })
 
 	return {
 		db,

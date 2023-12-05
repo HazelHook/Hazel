@@ -123,7 +123,7 @@ export const v1Route = new Elysia()
 
 				return {
 					status: "SUCCESS",
-					message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelapp.dev/request/${requestId}`,
+					message: `Webhook handled by Hazel. Check your dashboard to inspect the request: https://app.hazelapp.dev/request/${requestId}`,
 					request_id: requestId,
 				}
 			})

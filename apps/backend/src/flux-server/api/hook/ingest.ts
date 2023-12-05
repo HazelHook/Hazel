@@ -29,15 +29,6 @@ export function addHookIngestEndpoint(elysia: Elysia) {
 					}
 				}
 
-				//:!! Comment this out for  dev ya know @JeremyFunk
-				if (source.url !== request.url) {
-					// set.status = 403
-					// return {
-					// 	status: "403",
-					// 	message: `${request.url} doesn't match Source (${source.url})`,
-					// }
-				}
-
 				if (source.connections.length === 0) {
 					set.status = 404
 					return {
@@ -65,7 +56,7 @@ export function addHookIngestEndpoint(elysia: Elysia) {
 
 				return {
 					status: "SUCCESS",
-					message: `Webhook handled by Hazelhook. Check your dashboard to inspect the request: https://app.hazelhook.dev/request/${requestId}`,
+					message: `Webhook handled by Hazel. Check your dashboard to inspect the request: https://app.hazel.sh/request/${requestId}`,
 					request_id: requestId,
 				}
 			})

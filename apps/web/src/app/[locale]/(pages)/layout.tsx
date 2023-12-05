@@ -67,7 +67,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 									},
 									{
 										title: "Documentation",
-										href: "https://docs.hazelhook.dev",
+										href: "https://docs.hazel.sh",
 										target: "__blank",
 										icon: FileInfoIcon,
 									},
