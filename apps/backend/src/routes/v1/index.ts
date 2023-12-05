@@ -84,6 +84,8 @@ export const v1Route = new Elysia()
 
 						if (!connection.enabled) {
 							// TODO: Log it
+							// TODO: Should be put in queue here for later when connection is resumed
+							// => Or higher up the tree
 							return
 						}
 
@@ -99,11 +101,11 @@ export const v1Route = new Elysia()
 							}
 
 							await sourceQueue.add(requestId, parsed, {
-								delay: connection.delay as any,
-								attempts: connection.retyCount as any,
+								delay: connection.delay,
+								attempts: connection.retyCount,
 								backoff: {
-									type: connection.retryType || "fixed",
-									delay: connection.retryDelay as any,
+									type: connection.retryType,
+									delay: connection.retryDelay,
 								},
 							})
 						} else {
@@ -126,26 +128,5 @@ export const v1Route = new Elysia()
 					message: `Webhook handled by Hazel. Check your dashboard to inspect the request: https://app.hazelapp.dev/request/${requestId}`,
 					request_id: requestId,
 				}
-			})
-			.ws("/ws/:destId", {
-				open(ws) {
-					console.log("Opened")
-
-					const destinationId: string = (ws.data.params as any).destId
-
-					// Giga insecure
-					db.destination.update({
-						publicId: destinationId,
-						websocket_connection: true,
-					})
-
-					// sockets.set(destinationId, ws)
-				},
-				message(ws, _) {},
-				close(ws) {
-					console.log("Closed")
-					const destinationId: string = (ws.data.params as any).destId
-					// sockets.delete(destinationId)
-				},
 			}),
 	)

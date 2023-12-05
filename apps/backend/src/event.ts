@@ -4,6 +4,7 @@ import { nanoid } from "nanoid"
 
 import { sourceQueue } from "./lib/queue"
 import { handleRequest } from "./lib/request.helper"
+import { getLogger } from "@hazel/utils"
 
 interface Event {
 	connection: Connection & {
@@ -71,17 +72,16 @@ export const sendEvent = async ({
 			}
 
 			sourceQueue.add(requestId, data, {
-				delay: connection.delay as any,
-				attempts: connection.retyCount as any,
+				delay: connection.delay || 0,
+				attempts: connection.retyCount,
 				backoff: {
-					type: connection.retryType || "fixed",
-					delay: connection.retryDelay as any,
+					type: connection.retryType,
+					delay: connection.retryDelay,
 				},
 			})
 		}
 	} catch (error) {
-		console.log(error)
-		// TODO: LOG ERORS HERE ON OUR SIDE
+		getLogger().info(`Response Failed with Error: ${error}`)
 
 		const data: { connectionId: string; requestId: string; request: string } = {
 			requestId,

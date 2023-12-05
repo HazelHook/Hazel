@@ -1,20 +1,20 @@
 {
-	"version": "5",
-	"dialect": "pg",
-	"entries": [
-		{
-			"idx": 0,
-			"version": "5",
-			"when": 1691962964751,
-			"tag": "0000_classy_phil_sheldon",
-			"breakpoints": true
-		},
-		{
-			"idx": 1,
-			"version": "5",
-			"when": 1692294504015,
-			"tag": "0001_friendly_ben_grimm",
-			"breakpoints": true
-		}
-	]
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1701798752904,
+      "tag": "0000_tidy_silver_surfer",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1701798764740,
+      "tag": "0001_safe_juggernaut",
+      "breakpoints": true
+    }
+  ]
 }

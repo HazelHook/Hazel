@@ -107,9 +107,9 @@ export const connection = mysqlTable(
 
 		delay: int("delay"),
 
-		retyCount: int("retry_count"),
-		retryDelay: int("retry_delay"),
-		retryType: mysqlEnum("retry_type", ["fixed", "exponential"]),
+		retyCount: int("retry_count").default(5).notNull(),
+		retryDelay: int("retry_delay").default(30000).notNull(),
+		retryType: mysqlEnum("retry_type", ["fixed", "exponential"]).default("fixed").notNull(),
 
 		fluxConfig: json("flux_config"),
 	},
