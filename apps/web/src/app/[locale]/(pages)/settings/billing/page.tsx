@@ -6,14 +6,14 @@ import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
 import Heading from "@hazel/ui/heading"
 import { PageHeader } from "@hazel/ui/page-header"
-import { lago } from "@hazel/utils/lago"
+import { createCustomer, createSubscription, lago } from "@hazel/utils/lago"
 
 import { BillingTable } from "./components/billing-table"
 import { InvoiceTable } from "./components/invoice-table"
 import { PaymentSection } from "./components/payment-section"
 
 export default async function BillingPage() {
-	const { workspaceId } = await auth()
+	const { workspaceId, organization, user } = await auth()
 
 	const {
 		data: { subscriptions },
@@ -24,11 +24,18 @@ export default async function BillingPage() {
 	const subscription = subscriptions[0]
 
 	if (!subscription) {
+		const customer = await lago.customers.findCustomer(workspaceId)
+		if (!customer) {
+			createCustomer({ workspaceId, name: organization.name, email: user.email! })
+		}
+
+		await createSubscription({ planCode: "free", workspaceId })
+
 		return (
 			<Container>
 				<Alert type={"error"}>
 					<AlertHeading>You don't have a subscription</AlertHeading>
-					Please contact suppport to get this resolved!
+					Please try to refresh your page, if that didn't help please contact suppport to get this resolved!
 				</Alert>
 			</Container>
 		)
@@ -50,7 +57,6 @@ export default async function BillingPage() {
 
 	const currentPlan = plans.find((plan) => plan.code === subscription.plan_code)
 
-	console.log(workspaceId)
 	return (
 		<Container>
 			<PageHeader

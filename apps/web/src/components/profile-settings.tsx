@@ -135,7 +135,7 @@ export const ProfileSettings = ({
 								<span>Docs</span>
 							</DropdownMenuItem>
 						</Link>
-						<Link href="/">
+						<Link href="/settings/billing">
 							<DropdownMenuItem className="cursor-pointer">
 								<CardIcon className="w-4 h-4 mr-2" />
 								<span>Plans & Billing</span>

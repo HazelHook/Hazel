@@ -24,13 +24,11 @@ export const retryRequestAction = createAction(
 
 		const headers = JSON.parse(request.headers)
 
-		const retryRes = await fetch(`http://localhost:3003/v1/hook/${request.source_id}`, {
+		const retryRes = await fetch(`${process.env.BACKEND_URL}/v1/hook/${request.source_id}`, {
 			headers: headers,
 			body: request.body,
 			method: "POST",
 		})
-
-		console.log(retryRes.ok)
 
 		if (!retryRes.ok) {
 			const body = await retryRes.json()

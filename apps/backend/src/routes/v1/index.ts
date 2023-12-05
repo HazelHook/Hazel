@@ -8,6 +8,7 @@ import { nanoid } from "nanoid"
 import { sendEvent } from "../../event"
 import { sourceQueue } from "../../lib/queue"
 import { handleRequest } from "../../lib/request.helper"
+import { ingestMetric } from "@hazel/utils/lago"
 
 export const v1Route = new Elysia()
 	.onParse(({ request }) => {
@@ -40,6 +41,8 @@ export const v1Route = new Elysia()
 						message: "No connections found for that source",
 					}
 				}
+
+				ingestMetric({ workspaceId: source.workspaceId, type: "requests" })
 
 				const verified = {
 					valid: false,

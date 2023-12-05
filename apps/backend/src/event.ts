@@ -5,6 +5,7 @@ import { nanoid } from "nanoid"
 import { sourceQueue } from "./lib/queue"
 import { handleRequest } from "./lib/request.helper"
 import { getLogger } from "@hazel/utils"
+import { ingestMetric, isLimited } from "@hazel/utils/lago"
 
 interface Event {
 	connection: Connection & {
@@ -30,6 +31,8 @@ export const sendEvent = async ({
 	received_at,
 }: Event) => {
 	try {
+		ingestMetric({ workspaceId, type: "events" })
+
 		const sendTime = new Date().toISOString()
 		const res = await fetch(connection.destination.url, {
 			...request.clone(),

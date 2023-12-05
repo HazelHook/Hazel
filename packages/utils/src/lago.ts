@@ -7,11 +7,11 @@ export const lago = Client(process.env.LAGO_API_KEY as string, {
 })
 export { getLagoError }
 
-export type Domain = "event" | "domain"
+export type Metrics = "events" | "requests"
 
 export const ingestMetric = async (input: {
-	externalId: string
-	type: Domain
+	workspaceId: string
+	type: Metrics
 	properties?: any
 }) => {
 	try {
@@ -19,7 +19,7 @@ export const ingestMetric = async (input: {
 			event: {
 				code: input.type,
 				transaction_id: genId(),
-				external_customer_id: input.externalId,
+				external_customer_id: input.workspaceId,
 				properties: input.properties,
 			},
 		})
@@ -72,7 +72,7 @@ export const createCustomer = async (input: {
 
 export const isLimited = async (input: {
 	workspaceId: string
-	metric: Domain
+	metric: Metrics
 	limit: number
 }) => {
 	const {
