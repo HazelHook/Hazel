@@ -15,7 +15,14 @@ import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import { toast } from "sonner"
 import { Connection } from "@hazel/db"
-import { IconDirection, IconDotsVertical, IconExternalLink, IconHourglassEmpty } from "@tabler/icons-react"
+import {
+	IconClockCode,
+	IconDirection,
+	IconDotsVertical,
+	IconExternalLink,
+	IconHourglassEmpty,
+	IconRotate2,
+} from "@tabler/icons-react"
 import { Icons } from "@/components/icons"
 
 export type ConnectionPathProps = {
@@ -51,11 +58,11 @@ export const ConnectionPath = ({ retryType, retryDelay, retryCount, delay, id, n
 							{name}
 						</div>
 						<Button size="none" className="p-1 mr-4 group-hover:border-muted-foreground">
-							{Boolean(retryDelay) && <IconDirection className="w-4 h-4" />}
+							{Boolean(delay) && <IconClockCode className="w-4 h-4" />}
 
-							{Boolean(delay) && <IconHourglassEmpty className="w-4 h-4" />}
+							{Boolean(retryDelay) && <IconRotate2 className="w-4 h-4" />}
 
-							{!(Boolean(retryType) && Boolean(delay)) && <Icons.Settings className="w-4 h-4" />}
+							{!(Boolean(retryDelay) || Boolean(delay)) && <Icons.Settings className="w-4 h-4" />}
 						</Button>
 					</div>
 				</div>

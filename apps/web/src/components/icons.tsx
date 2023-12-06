@@ -1,11 +1,11 @@
 import {
 	IconLayoutDashboard,
 	IconMoon,
-	IconOutlet,
 	IconPlug,
 	IconPlugConnected,
 	IconSettings,
 	IconSun,
+	IconTerminal2,
 	IconTrash,
 } from "@tabler/icons-react"
 
@@ -14,7 +14,7 @@ export const Icons = {
 	Moon: IconMoon,
 	Connection: IconPlugConnected,
 	Source: IconPlug,
-	Destination: IconOutlet,
+	Destination: IconTerminal2,
 	Settings: IconSettings,
 	Delete: IconTrash,
 	Dashboard: IconLayoutDashboard,

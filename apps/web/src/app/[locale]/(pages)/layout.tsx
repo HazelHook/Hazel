@@ -9,6 +9,7 @@ import { db } from "@hazel/db"
 import { TooltipProvider } from "@hazel/ui/tooltip"
 
 import { IconBook2, IconHome, IconOutlet, IconPlug, IconPlugConnected, IconSettings } from "@tabler/icons-react"
+import { Icons } from "@/components/icons"
 
 interface RootLayoutProps {
 	children: React.ReactNode
@@ -45,17 +46,17 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 									{
 										title: "Connections",
 										href: "/webhooks",
-										icon: IconPlugConnected,
+										icon: Icons.Connection,
 									},
 									{
 										title: "Sources",
 										href: "/sources",
-										icon: IconPlug,
+										icon: Icons.Source,
 									},
 									{
 										title: "Destinations",
 										href: "/destinations",
-										icon: IconOutlet,
+										icon: Icons.Destination,
 									},
 								],
 							},
@@ -64,7 +65,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 									{
 										title: "Settings",
 										href: "/settings",
-										icon: IconSettings,
+										icon: Icons.Settings,
 									},
 									{
 										title: "Documentation",
