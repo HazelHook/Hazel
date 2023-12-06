@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "infisical run -- next dev --port 3004",
+    "dev:prod": "infisical run --env=prod -- next dev --port 3004",
     "dev:raw": "next dev",
     "dev:turbo": "infisical run -- next dev --turbo --port 3004",
     "dev:build": "infisical run --next build",
