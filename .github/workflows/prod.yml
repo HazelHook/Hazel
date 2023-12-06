@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --dockerfile ./apps/api/Dockerfile --config apps/api/fly.toml 
+      - run: flyctl deploy --local-only --dockerfile ./apps/api/Dockerfile --config apps/api/fly.toml 
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   deploy-backend:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --dockerfile ./apps/backend/Dockerfile --config apps/backend/fly.toml 
+      - run: flyctl deploy --local-only --dockerfile ./apps/backend/Dockerfile --config apps/backend/fly.toml 
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   deploy-worker:
@@ -28,7 +28,7 @@ jobs:
     steps:
         - uses: actions/checkout@v3
         - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only --dockerfile ./apps/worker/Dockerfile --config apps/worker/fly.toml 
+        - run: flyctl deploy --local-only --dockerfile ./apps/worker/Dockerfile --config apps/worker/fly.toml 
           env:
            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   deploy-lago:
@@ -39,8 +39,8 @@ jobs:
       steps:
             - uses: actions/checkout@v3
             - uses: superfly/flyctl-actions/setup-flyctl@master
-            - run: flyctl deploy --remote-only ./fly/lago/api 
-            - run: flyctl deploy --remote-only ./fly/lago/pdf 
-            - run: flyctl deploy --remote-only ./fly/lago/web 
+            - run: flyctl deploy --local-only ./fly/lago/api 
+            - run: flyctl deploy --local-only ./fly/lago/pdf 
+            - run: flyctl deploy --local-only ./fly/lago/web 
               
     
