@@ -8,13 +8,13 @@ import { ConnectionActions } from "@/app/[locale]/(pages)/(connection)/_componen
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
 import { Connection, Destination, Source } from "@hazel/db"
-import { CheckTickIcon, EyeOpenIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
 import { Cell, SortableHeader } from "@hazel/ui/data-table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { ColumnDef } from "@tanstack/react-table"
+import { IconCheck, IconEye } from "@tabler/icons-react"
 
 export type Column = Connection & {
 	source: Source | null
@@ -35,7 +35,7 @@ export const columns: (
 				<Tooltip delayDuration={200}>
 					<TooltipTrigger>
 						<Button variant="ghost">
-							<EyeOpenIcon className="mr-2" />
+							<IconEye className="mr-2" />
 							{cell.getValue<string>()}
 						</Button>
 					</TooltipTrigger>
@@ -103,7 +103,7 @@ export const columns: (
 
 			return (
 				<Badge>
-					<CheckTickIcon className="w-4 h-4 mr-2" />
+					<IconCheck className="w-4 h-4 mr-2" />
 				</Badge>
 			)
 		},

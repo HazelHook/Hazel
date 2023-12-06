@@ -3,7 +3,6 @@
 import Link from "next/link"
 
 import { Organization, OrganizationMember } from "@hazel/db"
-import { ThreeDotsVerticalIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -13,6 +12,7 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
+import { IconDotsVertical } from "@tabler/icons-react"
 
 export const columns: Array<
 	ColumnDef<
@@ -126,7 +126,7 @@ export const columns: Array<
 						<DropdownMenuTrigger asChild>
 							<Button variant="ghost">
 								<span className="sr-only">Open menu</span>
-								<ThreeDotsVerticalIcon className="h-4 w-4" />
+								<IconDotsVertical className="h-4 w-4" />
 							</Button>
 						</DropdownMenuTrigger>
 

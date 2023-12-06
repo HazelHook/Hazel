@@ -2,7 +2,6 @@ import { useMemo } from "react"
 
 import { useAuth } from "@hazel/auth/provider"
 import { OrganizationMember } from "@hazel/db/schema"
-import { ClipboardIcon, FolderRemoveIcon, LogOutLeftIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,
@@ -12,6 +11,7 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { toast } from "sonner"
+import { IconClipboard, IconDotsVertical, IconLogout, IconUserMinus } from "@tabler/icons-react"
 
 export interface MemberOptionsProps {
 	orgId: string
@@ -33,12 +33,12 @@ export const MemberOptions = ({ members, memberId, orgId }: MemberOptionsProps) 
 			<DropdownMenuTrigger asChild>
 				<Button variant="ghost" className="h-8 w-8 p-0">
 					<span className="sr-only">Open menu</span>
-					<ThreeDotsHorizontalIcon className="h-4 w-4" />
+					<IconDotsVertical className="h-4 w-4" />
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
 				<DropdownMenuItem onClick={() => (navigator as any).clipboard.writeText(memberId)}>
-					<ClipboardIcon className="mr-2" />
+					<IconClipboard className="mr-2" />
 					<span>Copy user ID</span>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
@@ -46,12 +46,12 @@ export const MemberOptions = ({ members, memberId, orgId }: MemberOptionsProps) 
 					disabled={activeMember?.role !== "admin" || memberId === user?.id}
 					onClick={handleKick}
 				>
-					<FolderRemoveIcon className="mr-2 text-destructive" />
+					<IconUserMinus className="mr-2 text-destructive" />
 					<span>Remove member</span>
 				</DropdownMenuItem>
 				{memberId === user?.id && (
 					<DropdownMenuItem disabled={activeMember?.role === "admin"} onClick={handleKick}>
-						<LogOutLeftIcon className="mr-2" />
+						<IconLogout className="mr-2" />
 						<span>Leave Organization</span>
 					</DropdownMenuItem>
 				)}

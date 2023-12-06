@@ -1,6 +1,8 @@
-import { IconProps } from "@hazel/icons"
+type LogoProps = {
+	className?: string
+}
 
-export const Logo = (props: IconProps) => {
+export const Logo = (props: LogoProps) => {
 	return (
 		<svg width="266" height="219" viewBox="0 0 266 219" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
 			<title>Logo</title>

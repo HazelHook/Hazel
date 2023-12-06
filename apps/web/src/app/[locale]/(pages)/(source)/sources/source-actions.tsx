@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
@@ -17,6 +16,8 @@ import {
 import { toast } from "sonner"
 import { Column } from "./columns"
 import { deleteSourceAction } from "@/server/actions/source"
+import { IconEdit } from "@tabler/icons-react"
+import { Icons } from "@/components/icons"
 
 export const SourceActions = ({
 	deleteAction,
@@ -36,7 +37,7 @@ export const SourceActions = ({
 	return (
 		<div className="flex justify-end">
 			<Link href={`/source/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
-				<EditPencilIcon className="h-4 w-4" />
+				<IconEdit className="h-4 w-4" />
 			</Link>
 
 			<Dialog>
@@ -48,7 +49,7 @@ export const SourceActions = ({
 						}}
 						disabled={data.connections.length > 0}
 					>
-						<DeleteDustbinIcon className="h-4 w-4" />
+						<Icons.Delete className="h-4 w-4" />
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">

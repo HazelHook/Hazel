@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
-import { DeleteAltIcon } from "@hazel/icons"
 import type { Table } from "@tanstack/react-table"
 
 import { Button } from "../../button"
@@ -12,6 +11,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { cn } from "../../utils"
 import { DataTableFacetedFilter } from "../data-table-faceted-filter"
 import type { DataTableFilterOption } from "../types"
+import { IconTrash } from "@tabler/icons-react"
 
 interface DataTableAdvancedFilterItemProps<TData> {
 	table: Table<TData>
@@ -149,7 +149,7 @@ export function DataTableAdvancedFilterItem<TData>({
 							setSelectedOptions((prev) => prev.filter((item) => item.value !== selectedOption.value))
 						}}
 					>
-						<DeleteAltIcon className="h-4 w-4" aria-hidden="true" />
+						<IconTrash className="h-4 w-4" aria-hidden="true" />
 					</Button>
 				</div>
 				{selectedOption.items.length > 0 ? (

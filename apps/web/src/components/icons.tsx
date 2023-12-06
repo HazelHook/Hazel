@@ -1,9 +1,21 @@
-import { DashboardAlt2Icon, LinkChainIcon, MoonIcon, Settings01Icon, SunIcon } from "@hazel/icons"
+import {
+	IconLayoutDashboard,
+	IconMoon,
+	IconOutlet,
+	IconPlug,
+	IconPlugConnected,
+	IconSettings,
+	IconSun,
+	IconTrash,
+} from "@tabler/icons-react"
 
 export const Icons = {
-	sun: SunIcon,
-	moon: MoonIcon,
-	connection: LinkChainIcon,
-	settings: Settings01Icon,
-	dashboard: DashboardAlt2Icon,
+	Sun: IconSun,
+	Moon: IconMoon,
+	Connection: IconPlugConnected,
+	Source: IconPlug,
+	Destination: IconOutlet,
+	Settings: IconSettings,
+	Delete: IconTrash,
+	Dashboard: IconLayoutDashboard,
 }

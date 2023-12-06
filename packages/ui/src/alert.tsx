@@ -2,20 +2,20 @@
 
 import { createContext, ReactNode, useContext, useMemo, useState } from "react"
 
-import { AlertExclamationIcon, CheckTickCircleIcon, CrossIcon, InfoCircleIcon, InfoTriangleIcon } from "@hazel/icons"
 import { cva } from "class-variance-authority"
 import classNames from "clsx"
 
 import { Button } from "./button"
 import Heading from "./heading"
+import { IconAlertHexagon, IconAlertTriangle, IconCheck, IconInfoCircle, IconX } from "@tabler/icons-react"
 
 type AlertType = "success" | "error" | "warn" | "info"
 
 const icons = {
-	success: (className: string) => <CheckTickCircleIcon className={className} />,
-	error: (className: string) => <AlertExclamationIcon className={className} />,
-	warn: (className: string) => <InfoTriangleIcon className={className} />,
-	info: (className: string) => <InfoCircleIcon className={className} />,
+	success: (className: string) => <IconCheck className={className} />,
+	error: (className: string) => <IconAlertHexagon className={className} />,
+	warn: (className: string) => <IconAlertTriangle className={className} />,
+	info: (className: string) => <IconInfoCircle className={className} />,
 }
 
 const AlertContext = createContext<Maybe<AlertType>>(undefined)
@@ -47,7 +47,7 @@ const Alert: React.FC<{
 
 				{useCloseButton && (
 					<Button variant="ghost" className={"dark:hover:bg-transparent"} onClick={() => setVisible(false)}>
-						<CrossIcon className={"h-6"} />
+						<IconX className={"h-6"} />
 					</Button>
 				)}
 			</AlertContext.Provider>

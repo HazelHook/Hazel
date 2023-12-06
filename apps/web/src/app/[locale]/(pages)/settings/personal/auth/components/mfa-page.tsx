@@ -3,7 +3,6 @@
 import { useCallback, useState } from "react"
 
 import { useFactorsMutationKey, useFetchAuthFactors } from "@hazel/auth/hooks"
-import { CrossIcon } from "@hazel/icons"
 import { useSupabase } from "@hazel/supabase/hooks"
 import Alert from "@hazel/ui/alert"
 import { Badge } from "@hazel/ui/badge"
@@ -22,6 +21,7 @@ import { toast } from "sonner"
 import useMutation from "swr/mutation"
 
 import MultiFactorAuthSetupModal from "./mfa-setup-modal"
+import { IconX } from "@tabler/icons-react"
 
 const MAX_FACTOR_COUNT = 10
 
@@ -217,7 +217,7 @@ function FactorsTable({
 							<Tooltip>
 								<TooltipTrigger asChild>
 									<Button onClick={() => setUnenrolling(factor.id)}>
-										<CrossIcon className={"h-4"} />
+										<IconX className={"h-4"} />
 									</Button>
 								</TooltipTrigger>
 

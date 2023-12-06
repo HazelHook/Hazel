@@ -1,9 +1,8 @@
 import { useMemo } from "react"
 
-import { ArrowDownIcon, ArrowUpIcon, PauseBigIcon } from "@hazel/icons"
-
 import Heading from "./heading"
 import { cn } from "./utils"
+import { IconArrowDown, IconArrowUp, IconPlayerPause } from "@tabler/icons-react"
 
 export const Tile: React.FCC<{ className?: string }> & {
 	Header: typeof TileHeader
@@ -48,11 +47,11 @@ function TileTrend(
 	const Icon = useMemo(() => {
 		switch (props.trend) {
 			case "up":
-				return <ArrowUpIcon className={"h-4 text-green-500"} />
+				return <IconArrowUp className={"h-4 text-green-500"} />
 			case "down":
-				return <ArrowDownIcon className={"h-4 text-red-500"} />
+				return <IconArrowDown className={"h-4 text-red-500"} />
 			case "stale":
-				return <PauseBigIcon className={"h-4 text-yellow-500"} />
+				return <IconPlayerPause className={"h-4 text-yellow-500"} />
 		}
 	}, [props.trend])
 

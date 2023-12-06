@@ -12,7 +12,6 @@ import { CreateSourceForm } from "@/components/forms/source/create-source-form"
 import { HorizontalStep } from "@/components/horizontal-step"
 
 import type { Destination, Integration, Source } from "@hazel/db"
-import { CheckTickIcon, InboxInIcon, LogInLeftIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button } from "@hazel/ui/button"
 import {
@@ -30,6 +29,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hazel/ui/tabs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { IconCheck } from "@tabler/icons-react"
+import { Icons } from "@/components/icons"
 
 export type NewConnectionFormProps = {
 	action: typeof createConnectionAction
@@ -112,10 +113,10 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 													value={`${selectedSource.name} ${selectedSource.publicId}`}
 												>
 													<div className="flex gap-2 items-center">
-														<LogInLeftIcon className="w-4 h-4" />
+														<Icons.Source className="w-4 h-4" />
 														{selectedSource.name}
 														<CommandShortcut>
-															<CheckTickIcon className="w-4 h-4" />
+															<IconCheck className="w-4 h-4" />
 														</CommandShortcut>
 													</div>
 												</CommandItem>
@@ -133,7 +134,7 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 														}}
 													>
 														<div className="flex gap-2 items-center">
-															<LogInLeftIcon className="w-4 h-4" />
+															<Icons.Source className="w-4 h-4" />
 															{source.name}
 														</div>
 													</CommandItem>
@@ -184,10 +185,10 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 													value={`${selectedDestination.name} ${selectedDestination.publicId}`}
 												>
 													<div className="flex gap-2 items-center">
-														<LogInLeftIcon className="w-4 h-4" />
+														<Icons.Destination className="w-4 h-4" />
 														{selectedDestination.name}
 														<CommandShortcut>
-															<CheckTickIcon className="w-4 h-4" />
+															<IconCheck className="w-4 h-4" />
 														</CommandShortcut>
 													</div>
 												</CommandItem>
@@ -205,7 +206,7 @@ export const NewConnectionForm = ({ action, sources, destinations, integrations 
 														}}
 													>
 														<div className="flex gap-2 items-center">
-															<InboxInIcon className="w-4 h-4" />
+															<Icons.Destination className="w-4 h-4" />
 															{dest.name}
 														</div>
 													</CommandItem>

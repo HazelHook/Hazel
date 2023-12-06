@@ -3,7 +3,6 @@
 import { getSeededProfileImageUrl } from "@/lib/utils"
 
 import { Connection, Destination, Integration, Source } from "@hazel/db/schema"
-import { CheckTickIcon, LogInLeftIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
@@ -13,6 +12,8 @@ import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import { SourceActions } from "./source-actions"
 import { deleteSourceAction } from "@/server/actions/source"
+import { Icons } from "@/components/icons"
+import { IconCheck } from "@tabler/icons-react"
 
 export type Column = Source & {
 	connections: (Connection & {
@@ -41,7 +42,7 @@ export const columns = [
 										className="w-6 h-6"
 									/>
 								) : (
-									<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+									<Icons.Source className="w-4 h-4 text-muted-foreground" />
 								)}
 								{cell.getValue<string>()}
 							</Button>
@@ -84,7 +85,7 @@ export const columns = [
 
 			return (
 				<Badge>
-					<CheckTickIcon className="w-4 h-4 mr-2" />
+					<IconCheck className="w-4 h-4 mr-2" />
 					<p>{connections.length}</p>
 				</Badge>
 			)

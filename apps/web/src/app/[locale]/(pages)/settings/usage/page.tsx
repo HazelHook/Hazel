@@ -2,7 +2,6 @@ import Link from "next/link"
 
 import { auth } from "@/lib/auth"
 
-import { DoubleChevronUpIcon } from "@hazel/icons"
 import Alert, { AlertHeading } from "@hazel/ui/alert"
 import { Button } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
@@ -12,6 +11,7 @@ import { lago } from "@hazel/utils/lago"
 
 import { BillingTable } from "../billing/components/billing-table"
 import { UsageCard } from "./component/usage-card"
+import { IconChevronsUp } from "@tabler/icons-react"
 
 export default async function UsagePage() {
 	const { workspaceId } = await auth()
@@ -58,7 +58,7 @@ export default async function UsagePage() {
 					</CardTitle>
 					<Link href={"/settings/billing"}>
 						<Button variant="outline">
-							<DoubleChevronUpIcon className="mr-2" />
+							<IconChevronsUp className="mr-2" />
 							Upgrade Plan
 						</Button>
 					</Link>

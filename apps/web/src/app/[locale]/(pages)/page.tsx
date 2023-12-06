@@ -7,7 +7,6 @@ import { chartColors, formatDateTime, subtractFromString } from "@/lib/utils"
 import { requestTableSearchParamsSchema, responseTableSearchParamsSchema } from "@/lib/validators/params"
 
 import { db } from "@hazel/db"
-import { AddIcon } from "@hazel/icons"
 import tiny, { TBRequest, TBResponse } from "@hazel/tinybird"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
 import { Await } from "@hazel/ui/await"
@@ -23,6 +22,7 @@ import { DatePicker } from "./_component/date-picker"
 import { KpiCard, KpiLoadingCard } from "./_component/KpiCard"
 import { RequestTable } from "./_component/request-table"
 import { ResponseTable } from "./_component/response-table"
+import { IconPlus } from "@tabler/icons-react"
 
 interface DashboardPageProps {
 	searchParams: {
@@ -113,7 +113,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 				</div>
 				<div>
 					<Link href="/connection/new" className={buttonVariants()}>
-						<AddIcon className="mr-2" />
+						<IconPlus className="mr-2" />
 						New Connection
 					</Link>
 				</div>

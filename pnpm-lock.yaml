@@ -117,9 +117,6 @@ importers:
       '@hazel/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@hazel/icons':
-        specifier: workspace:*
-        version: link:../../packages/icons
       '@hazel/integrations':
         specifier: workspace:*
         version: link:../../packages/integrations
@@ -165,6 +162,9 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.39.0
         version: 2.39.0
+      '@tabler/icons-react':
+        specifier: ^2.42.0
+        version: 2.42.0(react@18.2.0)
       '@tanstack/react-table':
         specifier: ^8.10.7
         version: 8.10.7(react-dom@18.2.0)(react@18.2.0)
@@ -336,9 +336,6 @@ importers:
       '@hazel/db':
         specifier: workspace:*
         version: link:../db
-      '@hazel/icons':
-        specifier: workspace:*
-        version: link:../icons
       '@hazel/server':
         specifier: workspace:*
         version: link:../server
@@ -354,6 +351,9 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.x
         version: 2.38.5
+      '@tabler/icons-react':
+        specifier: ^2.42.0
+        version: 2.42.0(react@18.2.0)
       '@tanstack/react-table':
         specifier: ^8.x
         version: 8.10.7(react-dom@18.2.0)(react@18.2.0)
@@ -400,9 +400,6 @@ importers:
       '@hazel/db':
         specifier: workspace:*
         version: link:../db
-      '@hazel/icons':
-        specifier: workspace:*
-        version: link:../icons
       '@hazel/server':
         specifier: workspace:*
         version: link:../server
@@ -418,6 +415,9 @@ importers:
       '@supabase/auth-helpers-nextjs':
         specifier: ^0.x
         version: 0.8.7(@supabase/supabase-js@2.39.0)
+      '@tabler/icons-react':
+        specifier: ^2.42.0
+        version: 2.42.0(react@18.2.0)
     devDependencies:
       '@hazel/tailwind-config':
         specifier: workspace:*
@@ -525,45 +525,6 @@ importers:
       react-email:
         specifier: 1.9.5
         version: 1.9.5
-
-  packages/icons:
-    devDependencies:
-      '@hazel/tailwind-config':
-        specifier: workspace:*
-        version: link:../../tooling/tailwind
-      '@hazel/tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
-      '@types/react':
-        specifier: 18.2.31
-        version: 18.2.31
-      '@types/react-dom':
-        specifier: ^18.2.16
-        version: 18.2.16
-      barrelsby:
-        specifier: ^2.8.1
-        version: 2.8.1
-      eslint:
-        specifier: ^8.54.0
-        version: 8.54.0
-      prettier:
-        specifier: ^3.1.0
-        version: 3.1.0
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: 18.2.0
-        version: 18.2.0(react@18.2.0)
-      tailwindcss:
-        specifier: 3.3.5
-        version: 3.3.5
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.5)
-      typescript:
-        specifier: ^5.3.2
-        version: 5.3.2
 
   packages/integrations:
     dependencies:
@@ -800,9 +761,6 @@ importers:
 
   packages/ui:
     dependencies:
-      '@hazel/icons':
-        specifier: workspace:*
-        version: link:../icons
       '@hookform/resolvers':
         specifier: ^3.3.2
         version: 3.3.2(react-hook-form@7.48.2)
@@ -857,6 +815,9 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.0.7
         version: 1.0.7(@types/react-dom@18.2.16)(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
+      '@tabler/icons-react':
+        specifier: ^2.42.0
+        version: 2.42.0(react@18.2.0)
       '@unpic/react':
         specifier: ^0.1.3
         version: 0.1.3(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
@@ -4767,6 +4728,20 @@ packages:
     resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
     dependencies:
       tslib: 2.6.2
+
+  /@tabler/icons-react@2.42.0(react@18.2.0):
+    resolution: {integrity: sha512-2APr++u24P2mx9vJymJQJORRpu2Qej0rPrtAvgXu8YomHjLXVP+O1VtToSGyoSPH1ysA569XbxrwzOau9Ne12A==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tabler/icons': 2.42.0
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
+  /@tabler/icons@2.42.0:
+    resolution: {integrity: sha512-ynV4iaC1c1mUhuAr9HRaoq8KrWYmZ0bJEpOh7qTBE+OfdDsdvQUe+0S7FW+DHkJ4RuxQMdO8djrZK7HrUw9YMA==}
+    dev: false
 
   /@tailwindcss/container-queries@0.1.1(tailwindcss@3.3.5):
     resolution: {integrity: sha512-p18dswChx6WnTSaJCSGx6lTmrGzNNvm2FtXmiO6AuA1V4U5REyoqwmT6kgAsIMdjo07QdAfYXHJ4hnMtfHzWgA==}

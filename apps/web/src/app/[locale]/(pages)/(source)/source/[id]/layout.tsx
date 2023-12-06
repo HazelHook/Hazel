@@ -9,8 +9,9 @@ import { LinkTab } from "@hazel/ui/link-tabs"
 import { NavTabs } from "@hazel/ui/nav-tabs"
 import Heading from "@hazel/ui/heading"
 import { SimpleTooltip } from "@hazel/ui/tooltip"
-import { InfoCircleIcon, LogInLeftIcon } from "@hazel/icons"
 import { Container } from "@hazel/ui/container"
+import { Icons } from "@/components/icons"
+import { IconInfoCircle } from "@tabler/icons-react"
 
 const ConnectionLayout = async ({
 	children,
@@ -34,7 +35,7 @@ const ConnectionLayout = async ({
 						{toolSlug ? (
 							<img src={`/assets/integrations/${toolSlug}.svg`} alt={toolSlug} className="w-7 h-7" />
 						) : (
-							<LogInLeftIcon className="w-7 h-7 text-muted-foreground" />
+							<Icons.Source className="w-7 h-7 text-muted-foreground" />
 						)}
 
 						<Heading className="pb-0" type={2}>
@@ -42,7 +43,7 @@ const ConnectionLayout = async ({
 						</Heading>
 
 						<SimpleTooltip content="Source Overview">
-							<InfoCircleIcon />
+							<IconInfoCircle />
 						</SimpleTooltip>
 					</div>
 					<h4 className="text-lg text-muted-foreground">{source?.name}</h4>

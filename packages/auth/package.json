@@ -30,9 +30,11 @@
     "@hazel/server": "workspace:*",
     "@hazel/db": "workspace:*",
     "@hazel/ui": "workspace:*",
-    "@hazel/icons": "workspace:*",
     "@hazel/utils": "workspace:*",
     "@hazel/supabase": "workspace:*"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^2.42.0"
   },
   "devDependencies": {
     "swr": "^2.2.4",

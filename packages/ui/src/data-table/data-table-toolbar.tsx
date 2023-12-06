@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 
-import { AddCircleIcon, CrossIcon, DeleteAltIcon } from "@hazel/icons"
 import type { Table } from "@tanstack/react-table"
 
 import { Button, buttonVariants } from "../button"
@@ -12,6 +11,7 @@ import { cn } from "../utils"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
 import { DataTableViewOptions } from "./data-table-view-options"
 import type { DataTableFilterableColumn, DataTableSearchableColumn } from "./types"
+import { IconCirclePlus, IconTrash, IconX } from "@tabler/icons-react"
 
 interface DataTableToolbarProps<TData> {
 	table: Table<TData>
@@ -71,7 +71,7 @@ export function DataTableToolbar<TData>({
 						onClick={() => table.resetColumnFilters()}
 					>
 						Reset
-						<CrossIcon className="ml-2 h-4 w-4" aria-hidden="true" />
+						<IconX className="ml-2 h-4 w-4" aria-hidden="true" />
 					</Button>
 				)}
 			</div>
@@ -90,7 +90,7 @@ export function DataTableToolbar<TData>({
 						}}
 						disabled={isPending}
 					>
-						<DeleteAltIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+						<IconTrash className="mr-2 h-4 w-4" aria-hidden="true" />
 						Delete
 					</Button>
 				) : newRowLink ? (
@@ -104,7 +104,7 @@ export function DataTableToolbar<TData>({
 								}),
 							)}
 						>
-							<AddCircleIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+							<IconCirclePlus className="mr-2 h-4 w-4" aria-hidden="true" />
 							New
 						</div>
 					</Link>

@@ -1,6 +1,5 @@
+import { IconKey, IconPhone } from "@tabler/icons-react"
 import Image from "next/image"
-
-import { KeyIcon, PhoneIcon } from "@hazel/icons"
 
 const DEFAULT_IMAGE_SIZE = 22
 
@@ -29,8 +28,8 @@ export const AuthProviderLogo: React.FC<{
 
 function getOAuthProviderLogos(): Record<string, string | React.ReactNode> {
 	return {
-		password: <KeyIcon className={"h-[22px] w-[22px]"} />,
-		phone: <PhoneIcon className={"h-[22px] w-[22px]"} />,
+		password: <IconKey className={"h-[22px] w-[22px]"} />,
+		phone: <IconPhone className={"h-[22px] w-[22px]"} />,
 		google: "/assets/oauth/google.webp",
 		facebook: "/assets/oauth/facebook.webp",
 		twitter: "/assets/oauth/twitter.webp",

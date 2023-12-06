@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react"
 
-import { AddIcon, ChevronSortVerticalIcon } from "@hazel/icons"
 import type { Table } from "@tanstack/react-table"
 
 import { Button } from "../../button"
@@ -12,6 +11,7 @@ import type { DataTableFilterableColumn, DataTableFilterOption, DataTableSearcha
 import { DataTableAdvancedFilter } from "./data-table-advanced-filter"
 import { DataTableAdvancedFilterItem } from "./data-table-advanced-filter-item"
 import { DataTableMultiFilter } from "./data-table-multi-filter"
+import { IconPlus, IconSwitchVertical } from "@tabler/icons-react"
 
 interface DataTableAdvancedToolbarProps<TData> {
 	table: Table<TData>
@@ -74,7 +74,7 @@ export function DataTableAdvancedToolbar<TData>({
 					{selectedOptions.length > 0 ? (
 						<Button variant="outline" size="sm" onClick={() => setOpen((prev) => !prev)}>
 							Filter
-							<ChevronSortVerticalIcon className="ml-2 h-4 w-4 opacity-50" aria-hidden="true" />
+							<IconSwitchVertical className="ml-2 h-4 w-4 opacity-50" aria-hidden="true" />
 						</Button>
 					) : (
 						<DataTableAdvancedFilter
@@ -115,7 +115,7 @@ export function DataTableAdvancedToolbar<TData>({
 						setSelectedOptions={setSelectedOptions}
 					>
 						<Button variant="outline" size="sm" role="combobox" className="rounded-full">
-							<AddIcon className="mr-2 h-4 w-4 opacity-50" aria-hidden="true" />
+							<IconPlus className="mr-2 h-4 w-4 opacity-50" aria-hidden="true" />
 							Add filter
 						</Button>
 					</DataTableAdvancedFilter>

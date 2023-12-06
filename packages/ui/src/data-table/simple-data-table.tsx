@@ -3,7 +3,6 @@
 import { ReactNode, useState } from "react"
 import { useRouter } from "next/navigation"
 
-import { ArrowDownSquareIcon, ArrowUpSquareIcon } from "@hazel/icons"
 import {
 	Column,
 	ColumnDef,
@@ -16,6 +15,7 @@ import {
 
 import { Button } from "../button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../table"
+import { IconArrowDownSquare, IconArrowUpSquare } from "@tabler/icons-react"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -118,9 +118,9 @@ export const SortableHeader = ({
 			>
 				{name}
 				{column.getIsSorted() === "asc" ? (
-					<ArrowUpSquareIcon className="ml-2 h-4 w-4" />
+					<IconArrowUpSquare className="ml-2 h-4 w-4" />
 				) : (
-					<ArrowDownSquareIcon className="ml-2 h-4 w-4" />
+					<IconArrowDownSquare className="ml-2 h-4 w-4" />
 				)}
 			</Button>
 		</div>

@@ -2,11 +2,11 @@
 
 import * as React from "react"
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@hazel/icons"
 import { DayPicker } from "react-day-picker"
 
 import { buttonVariants } from "./button"
 import { cn } from "./utils"
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
@@ -43,8 +43,8 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
 				...classNames,
 			}}
 			components={{
-				IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
-				IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />,
+				IconLeft: ({ ...props }) => <IconChevronLeft className="h-4 w-4" />,
+				IconRight: ({ ...props }) => <IconChevronRight className="h-4 w-4" />,
 			}}
 			{...props}
 		/>

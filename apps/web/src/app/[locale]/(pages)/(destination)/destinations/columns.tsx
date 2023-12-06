@@ -8,12 +8,12 @@ import { DestinationsActions } from "@/app/[locale]/(pages)/(destination)/_compo
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
 
 import { Connection, Destination } from "@hazel/db/schema"
-import { CheckTickIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { buttonVariants } from "@hazel/ui/button"
 import { SortableHeader } from "@hazel/ui/data-table"
 import { ColumnDef } from "@tanstack/react-table"
+import { IconCheck } from "@tabler/icons-react"
 
 export const columns: (
 	deleteAction: typeof deleteDestinationAction,
@@ -74,7 +74,7 @@ export const columns: (
 
 			return (
 				<Badge>
-					<CheckTickIcon className="w-4 h-4 mr-2" />
+					<IconCheck className="w-4 h-4 mr-2" />
 					<p>{connections.length}</p>
 				</Badge>
 			)

@@ -5,10 +5,10 @@ import Link from "next/link"
 import { getSeededProfileImageUrl } from "@/lib/utils"
 
 import { Destination } from "@hazel/db/schema"
-import { CheckTickIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { ColumnDef } from "@tanstack/react-table"
+import { IconCheck } from "@tabler/icons-react"
 
 export type Column = Destination
 
@@ -39,7 +39,7 @@ export const columns: ColumnDef<Column>[] = [
 		cell: ({ cell }) => {
 			return (
 				<Badge>
-					<CheckTickIcon className="w-4 h-4 mr-2" />
+					<IconCheck className="w-4 h-4 mr-2" />
 				</Badge>
 			)
 		},

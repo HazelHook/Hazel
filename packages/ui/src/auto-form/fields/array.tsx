@@ -1,4 +1,3 @@
-import { AddIcon, DeleteAltIcon } from "@hazel/icons"
 import { useFieldArray, useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -7,6 +6,7 @@ import { Button } from "../../button"
 import { Separator } from "../../separator"
 import { beautifyObjectName } from "../utils"
 import AutoFormObject from "./object"
+import { IconPlus, IconTrash } from "@tabler/icons-react"
 
 export default function AutoFormArray({
 	name,
@@ -39,14 +39,14 @@ export default function AutoFormArray({
 								path={[...path, index.toString()]}
 							/>
 							<Button variant="secondary" size="none" type="button" onClick={() => remove(index)}>
-								<DeleteAltIcon className="h-4 w-4" />
+								<IconTrash className="h-4 w-4" />
 							</Button>
 							<Separator />
 						</div>
 					)
 				})}
 				<Button type="button" onClick={() => append({})} className="flex items-center">
-					<AddIcon className="mr-2" size={16} />
+					<IconPlus className="mr-2" size={16} />
 					Add
 				</Button>
 			</AccordionContent>

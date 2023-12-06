@@ -6,9 +6,9 @@ import { PromiseType } from "@/lib/ts/helpers"
 import { ConnectionTable } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionTable"
 
 import { db } from "@hazel/db"
-import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
+import { IconPlus } from "@tabler/icons-react"
 
 const fetchData = async ({ workspaceId }: { workspaceId: string }) => {
 	return await db.connection.getMany({
@@ -30,7 +30,7 @@ const ConnectionsPage = async () => {
 			<div className="flex flex-row justify-between p-1">
 				<h3 className="text-xl font-semibold">Connections</h3>
 				<Link href="/connection/new" className={buttonVariants()}>
-					<AddIcon className="mr-2" />
+					<IconPlus className="mr-2" />
 					New Connection
 				</Link>
 			</div>

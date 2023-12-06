@@ -1,8 +1,8 @@
 import { ReactNode } from "react"
 
 import { Sidebar } from "@/components/sidebar"
-
-import { DashboardDynamicIcon, Settings02Icon, User3Icon } from "@hazel/icons"
+import { Icons } from "@/components/icons"
+import { IconSettings, IconUsers } from "@tabler/icons-react"
 
 const AdminLayout = async ({ children }: { children: ReactNode }) => {
 	return (
@@ -14,17 +14,17 @@ const AdminLayout = async ({ children }: { children: ReactNode }) => {
 						items: [
 							{
 								title: "Dashboard",
-								icon: DashboardDynamicIcon,
+								icon: Icons.Dashboard,
 								href: "/admin",
 							},
 							{
 								title: "Organization",
-								icon: Settings02Icon,
+								icon: IconSettings,
 								href: "/admin/organizations",
 							},
 							{
 								title: "Users",
-								icon: User3Icon,
+								icon: IconUsers,
 								href: "/admin/users",
 							},
 						],

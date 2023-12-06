@@ -1,6 +1,5 @@
 "use client"
 
-import { FilterHorizontalIcon } from "@hazel/icons"
 import { type Table } from "@tanstack/react-table"
 
 import { Button } from "../button"
@@ -12,6 +11,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../dropdown-menu"
+import { IconAdjustmentsHorizontal } from "@tabler/icons-react"
 
 interface DataTableViewOptionsProps<TData> {
 	table: Table<TData>
@@ -22,7 +22,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="outline" size="sm" className="ml-auto hidden h-8 lg:flex">
-					<FilterHorizontalIcon className="mr-2 h-4 w-4" />
+					<IconAdjustmentsHorizontal className="mr-2 h-4 w-4" />
 					View
 				</Button>
 			</DropdownMenuTrigger>

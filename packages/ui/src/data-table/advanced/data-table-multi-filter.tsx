@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
-import { AlignVerticalCenterIcon, CopyIcon, DeleteAltIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
 import type { Table } from "@tanstack/react-table"
 
 import { Button } from "../../button"
@@ -13,6 +12,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Separator } from "../../separator"
 import { DataTableFacetedFilter } from "../data-table-faceted-filter"
 import type { DataTableFilterOption } from "../types"
+import { IconAlignCenter, IconCopy, IconDotsVertical, IconTrash } from "@tabler/icons-react"
 
 const operators = [
 	{
@@ -45,7 +45,7 @@ export function DataTableMultiFilter<TData>({
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
 				<Button variant="outline" size="sm" className="h-7 truncate rounded-full">
-					<AlignVerticalCenterIcon className="mr-2 h-3 w-3" aria-hidden="true" />
+					<IconAlignCenter className="mr-2 h-3 w-3" aria-hidden="true" />
 					{options.length} rule
 				</Button>
 			</PopoverTrigger>
@@ -219,9 +219,9 @@ export function MultiFilterRow<TData>({
 									...item,
 									value,
 								}
-							} else {
-								return item
 							}
+
+							return item
 						}),
 					)
 				}}
@@ -278,7 +278,7 @@ export function MultiFilterRow<TData>({
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
-						<ThreeDotsHorizontalIcon className="h-4 w-4" aria-hidden="true" />
+						<IconDotsVertical className="h-4 w-4" aria-hidden="true" />
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent>
@@ -287,7 +287,7 @@ export function MultiFilterRow<TData>({
 							setSelectedOptions((prev) => prev.filter((item) => item.id !== option.id))
 						}}
 					>
-						<DeleteAltIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+						<IconTrash className="mr-2 h-4 w-4" aria-hidden="true" />
 						Remove
 					</DropdownMenuItem>
 					<DropdownMenuItem
@@ -304,7 +304,7 @@ export function MultiFilterRow<TData>({
 							])
 						}}
 					>
-						<CopyIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+						<IconCopy className="mr-2 h-4 w-4" aria-hidden="true" />
 						Duplicate
 					</DropdownMenuItem>
 				</DropdownMenuContent>

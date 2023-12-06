@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation"
 import type { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
-import { ClockIcon, DeleteDustbinIcon, EditPencilIcon, PlayBigIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
@@ -19,6 +18,7 @@ import {
 } from "@hazel/ui/dialog"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { toast } from "sonner"
+import { IconClock, IconEdit, IconPlayerPlay, IconTrash } from "@tabler/icons-react"
 
 export const ConnectionActions = ({
 	deleteAction,
@@ -51,7 +51,7 @@ export const ConnectionActions = ({
 						href={`/connection/${data.publicId}/settings`}
 						className={buttonVariants({ variant: "ghost" })}
 					>
-						<EditPencilIcon className="h-4 w-4" />
+						<IconEdit className="h-4 w-4" />
 					</Link>
 				</TooltipTrigger>
 				<TooltipContent>Edit Connection</TooltipContent>
@@ -77,7 +77,7 @@ export const ConnectionActions = ({
 						}
 						variant="ghost"
 					>
-						{data.enabled ? <ClockIcon className="h-4 w-4" /> : <PlayBigIcon className="h-4 w-4" />}
+						{data.enabled ? <IconClock className="h-4 w-4" /> : <IconPlayerPlay className="h-4 w-4" />}
 					</Button>
 				</TooltipTrigger>
 				<TooltipContent>{data.enabled ? "Pause Connection" : "Resume Connection"}</TooltipContent>
@@ -86,7 +86,7 @@ export const ConnectionActions = ({
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button variant="destructive_ghost">
-						<DeleteDustbinIcon className="h-4 w-4" />
+						<IconTrash className="h-4 w-4" />
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">

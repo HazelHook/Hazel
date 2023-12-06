@@ -7,7 +7,7 @@ import { TBResponse } from "@hazel/tinybird"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { responseColumns } from "./response-column"
-import { LogInLeftIcon } from "@hazel/icons"
+import { Icons } from "@/components/icons"
 
 type ResponseTableProps = {
 	data: TBResponse[]
@@ -45,7 +45,7 @@ export const ResponseTable = ({ data, sources, destinations, maxItems }: Respons
 										className="w-4 h-4"
 									/>
 								) : (
-									<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+									<Icons.Source className="w-4 h-4 text-muted-foreground" />
 								)}
 
 								<p>{source.name}</p>

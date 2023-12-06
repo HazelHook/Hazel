@@ -9,7 +9,6 @@ import { dataTableTimestampFormatter } from "@/lib/formatters"
 import { cn } from "@/lib/utils"
 
 import type { Destination, Integration, Source } from "@hazel/db"
-import { FilterVerticalIcon, LogInLeftIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { TBRequest, TBResponse } from "@hazel/tinybird"
 import { Badge } from "@hazel/ui/badge"
@@ -26,6 +25,7 @@ import { SimpleTooltip } from "@hazel/ui/tooltip"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import { formatDistanceToNow } from "date-fns"
 import { toast } from "sonner"
+import { IconDotsVertical, IconLogin } from "@tabler/icons-react"
 
 type Column = TBRequest & {
 	responses: TBResponse[]
@@ -88,7 +88,7 @@ export const requestColumns = (
 								className="w-5 h-5"
 							/>
 						) : (
-							<LogInLeftIcon className="w-5 h-5 text-muted-foreground" />
+							<IconLogin className="w-5 h-5 text-muted-foreground" />
 						)}
 						{source.name}
 					</Link>
@@ -179,7 +179,7 @@ export const requestColumns = (
 						<DropdownMenuTrigger asChild>
 							<Button variant="ghost" className="h-8 w-8 p-0">
 								<span className="sr-only">Open menu</span>
-								<FilterVerticalIcon className="h-4 w-4" />
+								<IconDotsVertical className="h-4 w-4" />
 							</Button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end">

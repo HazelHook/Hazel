@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 
-import { FilterVerticalIcon } from "@hazel/icons"
 import { TBResponse } from "@hazel/tinybird"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
@@ -14,6 +13,7 @@ import {
 	DropdownMenuTrigger,
 } from "@hazel/ui/dropdown-menu"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
+import { IconDotsVertical } from "@tabler/icons-react"
 
 export type Column = TBResponse
 
@@ -66,7 +66,7 @@ export const columns = [
 					<DropdownMenuTrigger asChild>
 						<Button variant="ghost" className="h-8 w-8 p-0">
 							<span className="sr-only">Open menu</span>
-							<FilterVerticalIcon className="h-4 w-4" />
+							<IconDotsVertical className="h-4 w-4" />
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">

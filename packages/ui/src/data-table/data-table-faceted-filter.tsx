@@ -1,4 +1,3 @@
-import { AddCircleIcon, CheckTickIcon } from "@hazel/icons"
 import { type Column } from "@tanstack/react-table"
 
 import { Badge } from "../badge"
@@ -16,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../popover"
 import { Separator } from "../separator"
 import { cn } from "../utils"
 import type { Option } from "./types"
+import { IconCheck, IconCirclePlus } from "@tabler/icons-react"
 
 interface DataTableFacetedFilter<TData, TValue> {
 	column?: Column<TData, TValue>
@@ -38,7 +38,7 @@ export function DataTableFacetedFilter<TData, TValue>({
 				<Popover>
 					<PopoverTrigger asChild>
 						<Button variant="outline" size="sm" className="h-8 border-dashed">
-							<AddCircleIcon className="mr-2 h-4 w-4" />
+							<IconCirclePlus className="mr-2 h-4 w-4" />
 							{title}
 							{selectedValues?.size > 0 && (
 								<>
@@ -100,7 +100,7 @@ export function DataTableFacetedFilter<TData, TValue>({
 															: "opacity-50 [&_svg]:invisible",
 													)}
 												>
-													<CheckTickIcon className={cn("h-4 w-4")} aria-hidden="true" />
+													<IconCheck className={cn("h-4 w-4")} aria-hidden="true" />
 												</div>
 												{option.icon && (
 													<option.icon
@@ -163,7 +163,7 @@ export function DataTableFacetedFilter<TData, TValue>({
 													: "opacity-50 [&_svg]:invisible",
 											)}
 										>
-											<CheckTickIcon className={cn("h-4 w-4")} aria-hidden="true" />
+											<IconCheck className={cn("h-4 w-4")} aria-hidden="true" />
 										</div>
 										{option.icon && (
 											<option.icon

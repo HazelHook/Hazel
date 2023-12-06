@@ -5,11 +5,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import { formatDateTime } from "@/lib/utils"
 
-import { CalendarIcon, CheckTickIcon } from "@hazel/icons"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 import { format } from "date-fns"
 
 import { CustomDatePicker } from "./CustomDatePicker"
+import { IconCalendar, IconCheck } from "@tabler/icons-react"
 
 type Interval = {
 	name: string
@@ -65,7 +65,7 @@ export const DatePicker = () => {
 			}}
 		>
 			<SelectTrigger>
-				<CalendarIcon className="mr-2 h-4 w-4" />
+				<IconCalendar className="mr-2 h-4 w-4" />
 				{dateRange ? (
 					<>
 						{format(dateRange.from, "LLL dd, y")} - {format(dateRange.to, "LLL dd, y")}
@@ -83,7 +83,7 @@ export const DatePicker = () => {
 				<div className="flex w-full cursor-default items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground">
 					{value === "custom" && (
 						<span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-							<CheckTickIcon className="h-4 w-4" />
+							<IconCheck className="h-4 w-4" />
 						</span>
 					)}
 

@@ -1,20 +1,18 @@
 import { ReactNode } from "react"
 
 import { Sidebar } from "@/components/sidebar"
-
+import { Icons } from "@/components/icons"
 import {
-	BarChartUpIcon,
-	CardIcon,
-	DangerIcon,
-	EyeScanIcon,
-	FocusIcon,
-	KeyIcon,
-	LockedIcon,
-	Settings02Icon,
-	User2Icon,
-	UserIcon,
-	UserPlusIcon,
-} from "@hazel/icons"
+	IconChartAreaLine,
+	IconCreditCard,
+	IconKey,
+	IconMail,
+	IconPassword,
+	IconSkull,
+	IconUser,
+	IconUserPlus,
+	IconUserScan,
+} from "@tabler/icons-react"
 
 const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 	return (
@@ -26,22 +24,22 @@ const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 						items: [
 							{
 								title: "General",
-								icon: Settings02Icon,
+								icon: Icons.Settings,
 								href: "/settings",
 							},
 							{
 								title: "Billing",
-								icon: CardIcon,
+								icon: IconCreditCard,
 								href: "/settings/billing",
 							},
 							{
 								title: "Usage",
-								icon: BarChartUpIcon,
+								icon: IconChartAreaLine,
 								href: "/settings/usage",
 							},
 							{
 								title: "API Keys",
-								icon: KeyIcon,
+								icon: IconKey,
 								href: "/settings/api-keys",
 							},
 						],
@@ -50,17 +48,17 @@ const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 						items: [
 							{
 								title: "Members",
-								icon: User2Icon,
+								icon: IconUser,
 								href: "/settings/members",
 							},
 							{
 								title: "Invites",
-								icon: UserPlusIcon,
+								icon: IconUserPlus,
 								href: "/settings/invites",
 							},
 							{
 								title: "Danger",
-								icon: DangerIcon,
+								icon: IconSkull,
 								href: "/settings/danger",
 								className: "text-destructive",
 							},
@@ -71,22 +69,22 @@ const SettingsLayout = async ({ children }: { children: ReactNode }) => {
 						items: [
 							{
 								title: "My Details",
-								icon: UserIcon,
+								icon: IconUser,
 								href: "/settings/personal",
 							},
 							{
 								title: "Authentication",
-								icon: EyeScanIcon,
+								icon: IconUserScan,
 								href: "/settings/personal/auth",
 							},
 							{
 								title: "Email",
-								icon: FocusIcon,
+								icon: IconMail,
 								href: "/settings/personal/email",
 							},
 							{
 								title: "Password",
-								icon: LockedIcon,
+								icon: IconPassword,
 								disabled: true,
 								href: "/settings/personal/password",
 								className: "text-destructive",

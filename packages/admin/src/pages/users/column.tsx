@@ -3,7 +3,6 @@
 import Link from "next/link"
 
 import { User } from "@hazel/db"
-import { ThreeDotsVerticalIcon } from "@hazel/icons"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
@@ -17,6 +16,7 @@ import {
 import { If } from "@hazel/ui/if"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@hazel/ui/tooltip"
 import { ColumnDef } from "@tanstack/react-table"
+import { IconTrash } from "@tabler/icons-react"
 
 type UserRow = {
 	id: string
@@ -148,7 +148,7 @@ export const columns: Array<ColumnDef<UserRow>> = [
 						<DropdownMenuTrigger asChild>
 							<Button size="sm" variant="ghost">
 								<span className="sr-only">Open menu</span>
-								<ThreeDotsVerticalIcon className="h-4 w-4" />
+								<IconTrash className="h-4 w-4" />
 							</Button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end">

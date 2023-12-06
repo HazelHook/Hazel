@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation"
 
 import { createCheckoutAction } from "@/server/actions/stripe"
 
-import { AddIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Card } from "@hazel/ui/card"
+import { IconPlus } from "@tabler/icons-react"
 
 export interface AddPaymentButtonProps {
 	stripeCustomerId: string
@@ -35,7 +35,7 @@ export const AddPaymentButton = ({ stripeCustomerId, createCheckoutAction }: Add
 				})
 			}}
 		>
-			<AddIcon className="h-8 w-8" />
+			<IconPlus className="h-8 w-8" />
 		</Card>
 	)
 }

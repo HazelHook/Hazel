@@ -25,10 +25,12 @@
     "@hazel/auth": "workspace:*",
     "@hazel/db": "workspace:*",
     "@hazel/ui": "workspace:*",
-    "@hazel/icons": "workspace:*",
     "@hazel/supabase": "workspace:*",
     "@hazel/utils": "workspace:*",
     "@hazel/server": "workspace:*"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^2.42.0"
   },
   "devDependencies": {
     "@hazel/tailwind-config": "workspace:*",

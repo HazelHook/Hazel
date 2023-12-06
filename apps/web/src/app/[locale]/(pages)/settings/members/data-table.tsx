@@ -6,7 +6,6 @@ import type { createOrganizationInvite } from "@/server/actions/organization-inv
 import { usePagination } from "@/lib/hooks/usePagination"
 import { OrganizationInviteModal } from "@/components/modals/organization-invite-modal"
 
-import { AddIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { DataTablePagination } from "@hazel/ui/data-table"
 import { Input } from "@hazel/ui/input"
@@ -20,6 +19,7 @@ import {
 	getPaginationRowModel,
 	useReactTable,
 } from "@tanstack/react-table"
+import { IconX } from "@tabler/icons-react"
 
 interface DataTableProps<TData, TValue> {
 	orgId: number
@@ -61,7 +61,7 @@ export function DataTable<TData, TValue>({ columns, data, orgId, createInviteAct
 				/>
 				<OrganizationInviteModal orgId={orgId} inviteAction={createInviteAction}>
 					<Button>
-						<AddIcon className="mr-2" />
+						<IconX className="mr-2" />
 						Add Member
 					</Button>
 				</OrganizationInviteModal>

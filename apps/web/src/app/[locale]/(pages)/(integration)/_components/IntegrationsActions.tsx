@@ -4,7 +4,6 @@ import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/
 import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
 
 import { Integration } from "@hazel/db/schema"
-import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
 import { INTEGRATIONS } from "@hazel/integrations/web"
 import { useAction } from "@hazel/server/actions/client"
 import { Button } from "@hazel/ui/button"
@@ -19,6 +18,8 @@ import {
 	DialogTrigger,
 } from "@hazel/ui/dialog"
 import { toast } from "sonner"
+import { IconEdit } from "@tabler/icons-react"
+import { Icons } from "@/components/icons"
 
 export const IntegrationsActions = ({
 	updateAction,
@@ -48,7 +49,7 @@ export const IntegrationsActions = ({
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button variant="ghost">
-						<EditPencilIcon className="h-4 w-4" />
+						<IconEdit className="h-4 w-4" />
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">
@@ -58,7 +59,7 @@ export const IntegrationsActions = ({
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button variant="ghost" disabled={numOfSources > 0}>
-						<DeleteDustbinIcon className="h-4 w-4" />
+						<Icons.Delete className="h-4 w-4" />
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">

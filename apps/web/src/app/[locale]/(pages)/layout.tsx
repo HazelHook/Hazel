@@ -6,8 +6,9 @@ import { ProfileSettings } from "@/components/profile-settings"
 import { Sidebar } from "@/components/sidebar"
 
 import { db } from "@hazel/db"
-import { AutomationIcon, FileInfoIcon, GitCommitIcon, HomeIcon, Settings01Icon, WebhookIcon } from "@hazel/icons"
 import { TooltipProvider } from "@hazel/ui/tooltip"
+
+import { IconBook2, IconHome, IconOutlet, IconPlug, IconPlugConnected, IconSettings } from "@tabler/icons-react"
 
 interface RootLayoutProps {
 	children: React.ReactNode
@@ -39,22 +40,22 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 									{
 										title: "Overview",
 										href: "/",
-										icon: HomeIcon,
+										icon: IconHome,
 									},
 									{
 										title: "Webhooks",
 										href: "/webhooks",
-										icon: WebhookIcon,
+										icon: IconPlugConnected,
 									},
 									{
 										title: "Sources",
 										href: "/sources",
-										icon: GitCommitIcon,
+										icon: IconPlug,
 									},
 									{
 										title: "Destinations",
 										href: "/destinations",
-										icon: AutomationIcon,
+										icon: IconOutlet,
 									},
 								],
 							},
@@ -63,13 +64,13 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 									{
 										title: "Settings",
 										href: "/settings",
-										icon: Settings01Icon,
+										icon: IconSettings,
 									},
 									{
 										title: "Documentation",
 										href: "https://docs.hazel.sh",
 										target: "__blank",
-										icon: FileInfoIcon,
+										icon: IconBook2,
 									},
 								],
 							},

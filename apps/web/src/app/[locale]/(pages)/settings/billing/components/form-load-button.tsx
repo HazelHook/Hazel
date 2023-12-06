@@ -1,7 +1,7 @@
 "use client"
 
-import { FileDownloadIcon } from "@hazel/icons"
 import { LoadingButton } from "@hazel/ui/loading-button"
+import { IconFile } from "@tabler/icons-react"
 import { useFormStatus } from "react-dom"
 
 export const FormLoadButton = () => {
@@ -9,7 +9,7 @@ export const FormLoadButton = () => {
 
 	return (
 		<LoadingButton loading={pending} variant="outline" type="submit">
-			{!pending && <FileDownloadIcon />}
+			{!pending && <IconFile />}
 		</LoadingButton>
 	)
 }

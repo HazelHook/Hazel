@@ -7,9 +7,9 @@ import { PromiseType } from "@/lib/ts/helpers"
 import { DestinationTable } from "@/app/[locale]/(pages)/(destination)/_components/DestinationTable"
 
 import { db } from "@hazel/db"
-import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
+import { IconPlus } from "@tabler/icons-react"
 
 async function dataFetch({ workspaceId }: { workspaceId: string }) {
 	const destinations = await db.destination.getMany({
@@ -37,7 +37,7 @@ const DestinationsPage = async () => {
 			<div className="flex flex-row justify-between p-1">
 				<h3 className="text-xl font-semibold">Destinations</h3>
 				<Link href="/destination/new" className={buttonVariants()}>
-					<AddIcon className="mr-2" />
+					<IconPlus className="mr-2" />
 					New Destination
 				</Link>
 			</div>

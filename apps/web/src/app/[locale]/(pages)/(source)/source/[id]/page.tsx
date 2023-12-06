@@ -17,8 +17,8 @@ import { Tile } from "@hazel/ui/tile"
 import { CopyButton } from "@/components/copy-button"
 import { SourceCopyButton } from "@/components/source-copy-button"
 import Link from "next/link"
-import { ExternalLink01Icon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
+import { IconExternalLink } from "@tabler/icons-react"
 
 const SourcePage = async ({
 	params,
@@ -74,7 +74,7 @@ const SourcePage = async ({
 								href={`/webhooks?source=${source.publicId}`}
 								className={buttonVariants({ variant: "outline", size: "icon" })}
 							>
-								<ExternalLink01Icon className="w-4 h-4" />
+								<IconExternalLink className="w-4 h-4" />
 							</Link>
 						</div>
 					</Tile.Body>

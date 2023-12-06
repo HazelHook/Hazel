@@ -6,15 +6,6 @@ import { useRouter } from "next/navigation"
 import { deleteConnectionAction, updateConnectionAction } from "@/server/actions/connections"
 import { updateConnectionSchema } from "@/lib/schemas/connection"
 
-import {
-	AutomationIcon,
-	DeleteAltIcon,
-	ExternalLink01Icon,
-	LinkChainIcon,
-	Settings02Icon,
-	ThreeDotsHorizontalIcon,
-	TimerIcon,
-} from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Button, buttonVariants } from "@hazel/ui/button"
@@ -24,6 +15,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import { toast } from "sonner"
 import { Connection } from "@hazel/db"
+import { IconDirection, IconDotsVertical, IconExternalLink, IconHourglassEmpty } from "@tabler/icons-react"
+import { Icons } from "@/components/icons"
 
 export type ConnectionPathProps = {
 	id: string
@@ -58,11 +51,11 @@ export const ConnectionPath = ({ retryType, retryDelay, retryCount, delay, id, n
 							{name}
 						</div>
 						<Button size="none" className="p-1 mr-4 group-hover:border-muted-foreground">
-							{Boolean(retryDelay) && <AutomationIcon className="w-4 h-4" />}
+							{Boolean(retryDelay) && <IconDirection className="w-4 h-4" />}
 
-							{Boolean(delay) && <TimerIcon className="w-4 h-4" />}
+							{Boolean(delay) && <IconHourglassEmpty className="w-4 h-4" />}
 
-							{!(Boolean(retryType) && Boolean(delay)) && <Settings02Icon className="w-4 h-4" />}
+							{!(Boolean(retryType) && Boolean(delay)) && <Icons.Settings className="w-4 h-4" />}
 						</Button>
 					</div>
 				</div>
@@ -71,12 +64,12 @@ export const ConnectionPath = ({ retryType, retryDelay, retryCount, delay, id, n
 				<div className="flex flex-col gap-4 max-w-full max-h-[calc(var(--radix-popover-content-available-height)-70px)]">
 					<div className="flex justify-between items-start">
 						<div className="flex gap-2">
-							<LinkChainIcon className="w-4 h-4" />
+							<Icons.Connection className="w-4 h-4" />
 							<h4 className="font-medium leading-none">Connection</h4>
 						</div>
 						<DropdownMenu>
 							<DropdownMenuTrigger>
-								<ThreeDotsHorizontalIcon />
+								<IconDotsVertical />
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
 								<DropdownMenuItem
@@ -89,7 +82,7 @@ export const ConnectionPath = ({ retryType, retryDelay, retryCount, delay, id, n
 										})
 									}}
 								>
-									<DeleteAltIcon className="w-4 h-4 mr-1" />
+									<Icons.Delete className="w-4 h-4 mr-1" />
 									<p>Delete Connection</p>
 								</DropdownMenuItem>
 							</DropdownMenuContent>
@@ -117,7 +110,7 @@ export const ConnectionPath = ({ retryType, retryDelay, retryCount, delay, id, n
 						<Separator className="-mx-4" />
 						<div className="flex flex-row justify-between gap-2 pb-4">
 							<Link href={`/connection/${id}`} className={buttonVariants({ variant: "outline" })}>
-								<ExternalLink01Icon className="mr-2 w-4 h-4" />
+								<IconExternalLink className="mr-2 w-4 h-4" />
 								Open Connection
 							</Link>
 							<LoadingButton type="submit" loading={handleUpdateConnection.status === "loading"}>

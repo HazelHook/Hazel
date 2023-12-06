@@ -3,11 +3,11 @@ import Link from "next/link"
 import { auth } from "@/lib/auth"
 
 import { db } from "@hazel/db"
-import { AddIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { SimpleDataTable } from "@hazel/ui/data-table"
 
 import { columns } from "./columns"
+import { IconPlus } from "@tabler/icons-react"
 
 const SourcePage = async () => {
 	const { workspaceId } = await auth()
@@ -18,7 +18,7 @@ const SourcePage = async () => {
 			<div className="flex flex-row justify-between mb-4">
 				<h3 className="text-xl font-semibold">Sources</h3>
 				<Link href="/source/new" className={buttonVariants()}>
-					<AddIcon className="mr-2" />
+					<IconPlus className="mr-2" />
 					New Source
 				</Link>
 			</div>

@@ -1,8 +1,7 @@
 "use client"
 
+import { IconMaximize, IconMinimize } from "@tabler/icons-react"
 import { useMemo, useState } from "react"
-
-import { Maximize02Icon, Minimize02Icon } from "@hazel/icons"
 
 export interface ExpandableListProps {
 	maxItems?: number
@@ -36,7 +35,7 @@ export const ExpandableList = ({ title, maxItems = 3, items }: ExpandableListPro
 							className="w-full px-6 py-3 text-cyan-500 text-sm cursor-pointer flex flex-row items-center gap-2"
 							onClick={() => setIsExpanded(false)}
 						>
-							<Minimize02Icon className="w-4 h-4" />
+							<IconMinimize className="w-4 h-4" />
 							Collapse
 						</div>
 					) : (
@@ -45,7 +44,7 @@ export const ExpandableList = ({ title, maxItems = 3, items }: ExpandableListPro
 							className="w-full px-6 py-3 text-cyan-500 text-sm cursor-pointer flex flex-row items-center gap-2"
 							onClick={() => setIsExpanded(true)}
 						>
-							<Maximize02Icon className="w-4 h-4" />
+							<IconMaximize className="w-4 h-4" />
 							{`Expand ${items.length - maxItems} more`}
 						</div>
 					)}

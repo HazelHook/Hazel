@@ -2,12 +2,11 @@
 
 import * as React from "react"
 
-import { AddIcon, ChevronDownIcon, ChevronSortVerticalIcon, FontAaIcon } from "@hazel/icons"
-
 import { Button } from "../../button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandSeparator } from "../../command"
 import { Popover, PopoverContent, PopoverTrigger } from "../../popover"
 import type { DataTableFilterOption } from "../types"
+import { IconArrowsVertical, IconChevronDown, IconPlus, IconTextSize } from "@tabler/icons-react"
 
 interface DataTableAdvancedFilterProps<TData> {
 	options: DataTableFilterOption<TData>[]
@@ -32,7 +31,7 @@ export function DataTableAdvancedFilter<TData>({
 				{children ?? (
 					<Button variant="outline" size="sm" role="combobox" className="capitalize">
 						Filter
-						<ChevronSortVerticalIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" aria-hidden="true" />
+						<IconArrowsVertical className="ml-2 h-4 w-4 shrink-0 opacity-50" aria-hidden="true" />
 					</Button>
 				)}
 			</PopoverTrigger>
@@ -53,16 +52,15 @@ export function DataTableAdvancedFilter<TData>({
 									setSelectedOptions((prev) => {
 										if (currentValue === value) {
 											return prev.filter((item) => item.value !== option.value)
-										} else {
-											return [...prev, option]
 										}
+										return [...prev, option]
 									})
 								}}
 							>
 								{option.items.length > 0 ? (
-									<ChevronDownIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+									<IconChevronDown className="mr-2 h-4 w-4" aria-hidden="true" />
 								) : (
-									<FontAaIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+									<IconTextSize className="mr-2 h-4 w-4" aria-hidden="true" />
 								)}
 								{option.label}
 							</CommandItem>
@@ -85,7 +83,7 @@ export function DataTableAdvancedFilter<TData>({
 								])
 							}}
 						>
-							<AddIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+							<IconPlus className="mr-2 h-4 w-4" aria-hidden="true" />
 							Advanced filter
 						</CommandItem>
 					</CommandGroup>

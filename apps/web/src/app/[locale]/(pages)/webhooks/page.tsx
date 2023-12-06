@@ -3,7 +3,6 @@ import Link from "next/link"
 import { auth } from "@/lib/auth"
 
 import { db } from "@hazel/db"
-import { AddIcon, InfoCircleIcon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 import Heading from "@hazel/ui/heading"
@@ -12,6 +11,7 @@ import { SimpleTooltip } from "@hazel/ui/tooltip"
 import { ConnectionPath } from "./components/connection-path"
 import { DestinationCard } from "./components/destination-card"
 import { SourceCard } from "./components/source-card"
+import { IconInfoCircle, IconPlus } from "@tabler/icons-react"
 
 const WebhooksPage = async () => {
 	const { workspaceId } = await auth()
@@ -26,11 +26,11 @@ const WebhooksPage = async () => {
 						Webhooks
 					</Heading>
 					<SimpleTooltip content="Webhook Connection Overview">
-						<InfoCircleIcon />
+						<IconInfoCircle />
 					</SimpleTooltip>
 				</div>
 				<Link href="/connection/new" className={buttonVariants()}>
-					<AddIcon className="mr-2" />
+					<IconPlus className="mr-2" />
 					New Connection
 				</Link>
 			</div>

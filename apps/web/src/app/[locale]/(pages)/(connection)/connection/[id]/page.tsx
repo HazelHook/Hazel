@@ -3,7 +3,6 @@ import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
 import { getCachedConnection } from "@/lib/orm"
 import { chartColors, formatDateTime } from "@/lib/utils"
-import { KpiCard } from "@/app/[locale]/(pages)/_component/KpiCard"
 import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
 import tiny from "@hazel/tinybird"
@@ -14,8 +13,7 @@ import { Tile } from "@hazel/ui/tile"
 import { CopyButton } from "@/components/copy-button"
 import Link from "next/link"
 import { buttonVariants } from "@hazel/ui/button"
-import { ExternalLink01Icon, LogInLeftIcon } from "@hazel/icons"
-import { SourceLink } from "../../../_component/SourceLink"
+import { IconExternalLink, IconLogin } from "@tabler/icons-react"
 
 const SourcePage = async ({
 	params,
@@ -93,7 +91,7 @@ const SourcePage = async ({
 										className="w-4 h-4 mr-2"
 									/>
 								) : (
-									<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+									<IconLogin className="w-4 h-4 text-muted-foreground" />
 								)}
 								{connection.source.name}
 							</Link>
@@ -101,7 +99,7 @@ const SourcePage = async ({
 								href={`/source/${connection.source.publicId}`}
 								className={buttonVariants({ variant: "outline", size: "icon" })}
 							>
-								<ExternalLink01Icon className="w-4 h-4" />
+								<IconExternalLink className="w-4 h-4" />
 							</Link>
 						</div>
 					</Tile.Body>
@@ -120,7 +118,7 @@ const SourcePage = async ({
 								href={`/destination/${connection.destination.publicId}`}
 								className={buttonVariants({ variant: "outline", size: "icon" })}
 							>
-								<ExternalLink01Icon className="w-4 h-4" />
+								<IconExternalLink className="w-4 h-4" />
 							</Link>
 						</div>
 					</Tile.Body>

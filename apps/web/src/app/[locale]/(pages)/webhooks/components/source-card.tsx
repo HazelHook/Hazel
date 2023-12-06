@@ -9,7 +9,6 @@ import { updateSourceSchema } from "@/lib/schemas/source"
 import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
 
 import { Integration } from "@hazel/db"
-import { DeleteAltIcon, ExternalLink01Icon, LogInLeftIcon, ThreeDotsHorizontalIcon } from "@hazel/icons"
 import { INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
@@ -22,6 +21,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@hazel/ui/popover"
 import { Separator } from "@hazel/ui/separator"
 import { toast } from "sonner"
 import { SourceCopyButton } from "@/components/source-copy-button"
+import { IconDotsVertical, IconLogin } from "@tabler/icons-react"
+import { Icons } from "@/components/icons"
 
 type SourceCardProps = {
 	id: string
@@ -60,7 +61,7 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 							className="mr-2 w-4"
 						/>
 					) : (
-						<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+						<IconLogin className="w-4 h-4 text-muted-foreground" />
 					)}
 					{name}
 				</button>
@@ -69,12 +70,12 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 				<div className="flex flex-col gap-4 max-w-full">
 					<div className="flex justify-between items-start">
 						<div className="flex gap-2">
-							<LogInLeftIcon className="w-4 h-4" />
+							<IconLogin className="w-4 h-4" />
 							<h4 className="font-medium leading-none">Source</h4>
 						</div>
 						<DropdownMenu>
 							<DropdownMenuTrigger>
-								<ThreeDotsHorizontalIcon />
+								<IconDotsVertical />
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
 								<DropdownMenuItem
@@ -87,7 +88,7 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 										})
 									}}
 								>
-									<DeleteAltIcon className="w-4 h-4 mr-1" />
+									<Icons.Delete className="w-4 h-4 mr-1" />
 									<p>Delete Source</p>
 								</DropdownMenuItem>
 							</DropdownMenuContent>
@@ -139,7 +140,7 @@ export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
 						<Separator className="-mx-4" />
 						<div className="flex flex-row justify-between">
 							<Link href={`/source/${id}`} className={buttonVariants({ variant: "outline" })}>
-								<ExternalLink01Icon className="mr-2 w-4 h-4" />
+								<Icons.Source className="mr-2 w-4 h-4" />
 								Open Source
 							</Link>
 							<LoadingButton loading={handleUpdate.status === "loading"}>Update</LoadingButton>

@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from "react"
 
-import { CloudUploadIcon } from "@hazel/icons"
 import { toast } from "sonner"
 
 import { Avatar, AvatarImage } from "./avatar"
 import { cn } from "./utils"
+import { IconUpload } from "@tabler/icons-react"
 
 type Ext = "jpg" | "jpeg" | "png" | "gif"
 
@@ -53,7 +53,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ initialImageUrl, gener
 			</Avatar>
 			<label className="absolute transition-all duration-500 top-0 left-0 w-full h-full flex items-center justify-center cursor-pointer opacity-0 hover:bg-secondary hover:opacity-100">
 				<input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
-				<CloudUploadIcon className="w-12 h-12" />
+				<IconUpload className="w-12 h-12" />
 			</label>
 		</div>
 	)

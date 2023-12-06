@@ -1,8 +1,8 @@
-import { ChevronBigLeftIcon, ChevronBigRightIcon, DoubleChevronLeftIcon, DoubleChevronRightIcon } from "@hazel/icons"
 import { Table } from "@tanstack/react-table"
 
 import { Button } from "../button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../select"
+import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react"
 
 interface DataTablePaginationProps<TData> {
 	table: Table<TData>
@@ -62,7 +62,7 @@ export function DataTablePagination<TData>({
 						onClick={() => table.setPageIndex(0)}
 						disabled={!table.getCanPreviousPage()}
 					>
-						<DoubleChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
+						<IconChevronsLeft className="h-4 w-4" aria-hidden="true" />
 					</Button>
 					<Button
 						aria-label="Go to previous page"
@@ -71,7 +71,7 @@ export function DataTablePagination<TData>({
 						onClick={() => table.previousPage()}
 						disabled={!table.getCanPreviousPage()}
 					>
-						<ChevronBigLeftIcon className="h-4 w-4" aria-hidden="true" />
+						<IconChevronLeft className="h-4 w-4" aria-hidden="true" />
 					</Button>
 					<Button
 						aria-label="Go to next page"
@@ -80,7 +80,7 @@ export function DataTablePagination<TData>({
 						onClick={() => table.nextPage()}
 						disabled={!table.getCanNextPage()}
 					>
-						<ChevronBigRightIcon className="h-4 w-4" aria-hidden="true" />
+						<IconChevronsRight className="h-4 w-4" aria-hidden="true" />
 					</Button>
 					<Button
 						aria-label="Go to last page"
@@ -89,7 +89,7 @@ export function DataTablePagination<TData>({
 						onClick={() => table.setPageIndex(table.getPageCount() - 1)}
 						disabled={!table.getCanNextPage()}
 					>
-						<DoubleChevronRightIcon className="h-4 w-4" aria-hidden="true" />
+						<IconChevronRight className="h-4 w-4" aria-hidden="true" />
 					</Button>
 				</div>
 			</div>

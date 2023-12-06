@@ -3,7 +3,6 @@ import { revalidatePath } from "next/cache"
 import { currencyFormatter } from "@/lib/formatters"
 import { capitalizeFirstLetter, cn } from "@/lib/utils"
 
-import { File2DocumentIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@hazel/ui/table"
 import { SimpleTooltip } from "@hazel/ui/tooltip"
@@ -11,6 +10,7 @@ import { lago } from "@hazel/utils/lago"
 import { format } from "date-fns"
 
 import { FormLoadButton } from "./form-load-button"
+import { IconFileInvoice } from "@tabler/icons-react"
 
 const PaymentStatus = ({
 	status,
@@ -82,7 +82,7 @@ export const InvoiceTable = async ({ workspaceID }: CustomerUsageObjectProps) =>
 								<SimpleTooltip content="Download Invoice">
 									<a href={invoice.file_url} target="_blank" download rel="noreferrer">
 										<Button variant="outline">
-											<File2DocumentIcon />
+											<IconFileInvoice />
 										</Button>
 									</a>
 								</SimpleTooltip>

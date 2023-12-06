@@ -2,12 +2,12 @@
 
 import * as React from "react"
 
-import { SearchRegularIcon } from "@hazel/icons"
 import { DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"
 
 import { Dialog, DialogContent } from "./dialog"
 import { cn } from "./utils"
+import { IconSearch } from "@tabler/icons-react"
 
 const Command = React.forwardRef<
 	React.ElementRef<typeof CommandPrimitive>,
@@ -43,7 +43,7 @@ const CommandInput = React.forwardRef<
 	React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
 	<div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-		<SearchRegularIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+		<IconSearch className="mr-2 h-4 w-4 shrink-0 opacity-50" />
 		<CommandPrimitive.Input
 			ref={ref}
 			className={cn(

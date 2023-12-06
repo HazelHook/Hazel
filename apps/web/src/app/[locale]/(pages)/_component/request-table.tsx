@@ -7,7 +7,7 @@ import { TBRequest } from "@hazel/tinybird"
 import { AdvancedDataTable } from "@hazel/ui/data-table"
 
 import { requestColumns } from "./request-columns"
-import { LogInLeftIcon } from "@hazel/icons"
+import { IconLogin } from "@tabler/icons-react"
 
 type RequestTableProps = {
 	data: TBRequest[]
@@ -38,7 +38,7 @@ export const RequestTable = ({ data, sources, destinations, maxItems }: RequestT
 										className="w-4 h-4"
 									/>
 								) : (
-									<LogInLeftIcon className="w-4 h-4 text-muted-foreground" />
+									<IconLogin className="w-4 h-4 text-muted-foreground" />
 								)}
 
 								<p>{source.name}</p>

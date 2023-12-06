@@ -1,9 +1,8 @@
-import { Fragment } from "react"
+import { FCC, Fragment } from "react"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 
-import { IconProps } from "@hazel/icons"
 import { Logo } from "@hazel/ui/logo"
 
 import { SidebarClientItem } from "./sidebar-item"
@@ -11,8 +10,8 @@ import { SidebarClientItem } from "./sidebar-item"
 type SubItem = {
 	className?: string
 	href: string
-	icon: (props: IconProps) => JSX.Element
-	endIcon?: (props: IconProps) => JSX.Element
+	icon: (props: { className?: string }) => JSX.Element
+	endIcon?: (props: { className?: string }) => JSX.Element
 	title: string
 	target?: string
 	disabled?: boolean

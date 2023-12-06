@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation"
 import type { deleteDestinationAction, updateDestinationAction } from "@/server/actions/destination"
 import { DestinationsDataRowType } from "@/app/[locale]/(pages)/(destination)/destinations/page"
 
-import { DeleteDustbinIcon, EditPencilIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import {
@@ -18,6 +17,8 @@ import {
 	DialogTrigger,
 } from "@hazel/ui/dialog"
 import { toast } from "sonner"
+import { IconEdit } from "@tabler/icons-react"
+import { Icons } from "@/components/icons"
 
 export const DestinationsActions = ({
 	updateAction,
@@ -39,13 +40,13 @@ export const DestinationsActions = ({
 	return (
 		<div className="flex justify-end">
 			<Link href={`/destination/${data.publicId}/settings`} className={buttonVariants({ variant: "ghost" })}>
-				<EditPencilIcon className="h-4 w-4" />
+				<IconEdit className="h-4 w-4" />
 			</Link>
 
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button variant="ghost" disabled={data.connections.length > 0}>
-						<DeleteDustbinIcon className="h-4 w-4" />
+						<Icons.Delete className="h-4 w-4" />
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="max-w-sm">

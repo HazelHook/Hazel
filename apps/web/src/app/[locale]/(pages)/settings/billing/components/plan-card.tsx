@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils"
 import { CancelButton } from "@/app/[locale]/(pages)/settings/billing/components/cancel-button"
 import { CheckoutButton } from "@/app/[locale]/(pages)/settings/billing/components/checkout-button"
 
-import { CheckTickCircleIcon } from "@hazel/icons"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@hazel/ui/card"
 import { BillableMetricObject, PlanObject } from "lago-javascript-client"
+import { IconCircleCheck } from "@tabler/icons-react"
 
 export interface PlanCardProps {
 	plan: PlanObject
@@ -36,7 +36,7 @@ export const PlanCard = ({ plan, currentPlanId, currentSubscriptionId, metrics }
 			<CardContent>
 				{(plan.charges || []).map((feature) => (
 					<div key={feature.lago_id} className="flex flex-row items-center gap-2">
-						<CheckTickCircleIcon className="h-4 w-4 text-primary" />
+						<IconCircleCheck className="h-4 w-4 text-primary" />
 						<p className="text-sm">
 							{`${dashboardNumberFormatter().format((feature.properties as any).free_units)} ${
 								metrics.find((metric) => metric.code === feature.billable_metric_code)?.name

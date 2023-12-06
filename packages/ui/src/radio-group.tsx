@@ -2,10 +2,10 @@
 
 import * as React from "react"
 
-import { CheckTickIcon } from "@hazel/icons"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 
 import { cn } from "./utils"
+import { IconCheck } from "@tabler/icons-react"
 
 const RadioGroup = React.forwardRef<
 	React.ElementRef<typeof RadioGroupPrimitive.Root>,
@@ -29,7 +29,7 @@ const RadioGroupItem = React.forwardRef<
 			{...props}
 		>
 			<RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-				<CheckTickIcon className="h-3.5 w-3.5 fill-primary" />
+				<IconCheck className="h-3.5 w-3.5 fill-primary" />
 			</RadioGroupPrimitive.Indicator>
 		</RadioGroupPrimitive.Item>
 	)

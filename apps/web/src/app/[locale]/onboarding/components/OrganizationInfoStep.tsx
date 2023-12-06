@@ -4,11 +4,11 @@ import type { FormEvent } from "react"
 import { useCallback } from "react"
 
 import { useAuth } from "@hazel/auth/provider"
-import { ArrowRightIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import Heading from "@hazel/ui/heading"
 import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
+import { IconArrowRight } from "@tabler/icons-react"
 
 export interface OrganizationInfoStepData {
 	organization: string
@@ -54,7 +54,7 @@ const OrganizationInfoStep: React.FCC<{
 					<Button type={"submit"}>
 						<span className={"flex items-center space-x-2"}>
 							<span>Continue</span>
-							<ArrowRightIcon className={"h-5"} />
+							<IconArrowRight className={"h-5"} />
 						</span>
 					</Button>
 				</div>

@@ -4,18 +4,18 @@ import { useState } from "react"
 
 import { NewIntegrationForm } from "@/components/forms/integration/create-integration-form"
 
-import { DatabaseIcon, ShieldCheckIcon } from "@hazel/icons"
 import { INTEGRATION_CATEGORIES, INTEGRATION_FEATURES, INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
 import { Badge } from "@hazel/ui/badge"
 import { Card } from "@hazel/ui/card"
 import { Dialog, DialogContent, DialogHeader } from "@hazel/ui/dialog"
 import { Separator } from "@hazel/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@hazel/ui/tooltip"
+import { IconDatabase, IconShieldLock } from "@tabler/icons-react"
 
 const IntegrationFeatureIcon = (props: { slug: string; className: string }) =>
 	({
-		authentication: <ShieldCheckIcon {...props} />,
-		database: <DatabaseIcon {...props} />,
+		authentication: <IconShieldLock {...props} />,
+		database: <IconDatabase {...props} />,
 	})[props.slug] || null
 
 export const IntegrationToolCard = ({

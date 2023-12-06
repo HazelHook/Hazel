@@ -3,10 +3,10 @@
 import { getSeededProfileImageUrl } from "@/lib/utils"
 
 import { Connection, Destination, Source } from "@hazel/db/schema"
-import { ArrowDownIcon, ArrowUpIcon, CheckTickIcon } from "@hazel/icons"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"
+import { IconArrowDown, IconArrowUp, IconCheck } from "@tabler/icons-react"
 import { ColumnDef } from "@tanstack/react-table"
 
 export type Column = Source & {
@@ -21,9 +21,9 @@ export const columns: ColumnDef<Column>[] = [
 				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
 					Name
 					{column.getIsSorted() === "asc" ? (
-						<ArrowUpIcon className="ml-2 h-4 w-4" />
+						<IconArrowUp className="ml-2 h-4 w-4" />
 					) : (
-						<ArrowDownIcon className="ml-2 h-4 w-4" />
+						<IconArrowDown className="ml-2 h-4 w-4" />
 					)}
 				</Button>
 			)
@@ -79,9 +79,9 @@ export const columns: ColumnDef<Column>[] = [
 				<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
 					Group
 					{column.getIsSorted() === "asc" ? (
-						<ArrowUpIcon className="ml-2 h-4 w-4" />
+						<IconArrowUp className="ml-2 h-4 w-4" />
 					) : (
-						<ArrowDownIcon className="ml-2 h-4 w-4" />
+						<IconArrowDown className="ml-2 h-4 w-4" />
 					)}
 				</Button>
 			)
@@ -100,7 +100,7 @@ export const columns: ColumnDef<Column>[] = [
 
 			return (
 				<Badge>
-					<CheckTickIcon className="w-4 h-4 mr-2" />
+					<IconCheck className="w-4 h-4 mr-2" />
 					<p>{connections.length}</p>
 				</Badge>
 			)

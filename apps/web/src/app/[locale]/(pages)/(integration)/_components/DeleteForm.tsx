@@ -1,9 +1,9 @@
 "use client"
 
-import { MinusIcon } from "@hazel/icons"
 import { Card } from "@hazel/ui/card"
 import { Dialog, DialogContent } from "@hazel/ui/dialog"
 import { Separator } from "@hazel/ui/separator"
+import { IconMinus } from "@tabler/icons-react"
 
 export function DeleteForm({
 	onClose,
@@ -29,7 +29,7 @@ export function DeleteForm({
 						<img src={`/assets/integrations/${slug}.svg`} alt={slug} className="w-7 h-7" />
 						<h3>Add {name} Integration</h3>
 						<div className="w-5 h-5 ml-auto" onMouseDown={() => onClose()}>
-							<MinusIcon className="w-5 h-5 hover:bg-g hover:bg-opacity-20 hover:bg-white rounded" />
+							<IconMinus className="w-5 h-5 hover:bg-g hover:bg-opacity-20 hover:bg-white rounded" />
 						</div>
 					</div>
 					<Separator />

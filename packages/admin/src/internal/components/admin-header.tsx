@@ -1,9 +1,9 @@
 import Link from "next/link"
 
-import { ArrowLeftIcon } from "@hazel/icons"
 import { Button } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
 import { Heading } from "@hazel/ui/heading"
+import { IconArrowLeft } from "@tabler/icons-react"
 
 export function AdminHeader({ children }: React.PropsWithChildren) {
 	return (
@@ -17,7 +17,7 @@ export function AdminHeader({ children }: React.PropsWithChildren) {
 					<Button variant={"ghost"}>
 						<Link href={"/"}>
 							<span className={"flex space-x-2.5 items-center"}>
-								<ArrowLeftIcon className={"w-4 h-4"} />
+								<IconArrowLeft className={"w-4 h-4"} />
 
 								<span>Back to Dashboard</span>
 							</span>

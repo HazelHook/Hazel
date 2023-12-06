@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation"
 import type { changeDefaultMethodAction, removePaymentMethodAction } from "@/server/actions/stripe"
 import { cn } from "@/lib/utils"
 
-import { CheckTickCircleIcon, CrossCircleIcon } from "@hazel/icons"
 import { useAction } from "@hazel/server/actions/client"
 import { Button, buttonVariants } from "@hazel/ui/button"
 import { Card } from "@hazel/ui/card"
 import { Image } from "@hazel/ui/image"
 
 import { ConfirmationDialog } from "./confirmation-dialog"
+import { IconCircleCheck, IconCircleX } from "@tabler/icons-react"
 
 export interface CreditCardProps {
 	methodId: string
@@ -114,7 +114,7 @@ export const CreditCard = ({
 							size: "sm",
 						})}
 					>
-						<CheckTickCircleIcon className="h-4 w-4 text-primary" />
+						<IconCircleCheck className="h-4 w-4 text-primary" />
 					</div>
 				</div>
 			)}
@@ -145,7 +145,7 @@ export const CreditCard = ({
 						onSubmit={() => removePaymentHandler.mutate({ methodId })}
 					>
 						<Button variant="destructive" size="xs" disabled={isLoading} loading={isLoading}>
-							<CrossCircleIcon className="h-4 w-4" />
+							<IconCircleX className="h-4 w-4" />
 						</Button>
 					</ConfirmationDialog>
 				</div>

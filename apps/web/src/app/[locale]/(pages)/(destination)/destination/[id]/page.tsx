@@ -12,9 +12,9 @@ import { sub } from "date-fns"
 import { Tile } from "@hazel/ui/tile"
 import { CopyButton } from "@/components/copy-button"
 import Link from "next/link"
-import { ExternalLink01Icon } from "@hazel/icons"
 import { buttonVariants } from "@hazel/ui/button"
 import { and, db, eq } from "@hazel/db"
+import { IconExternalLink } from "@tabler/icons-react"
 
 const DestinationPage = async ({
 	params,
@@ -68,7 +68,7 @@ const DestinationPage = async ({
 								href={`/webhooks?destination=${destination.publicId}`}
 								className={buttonVariants({ variant: "outline", size: "icon" })}
 							>
-								<ExternalLink01Icon className="w-4 h-4" />
+								<IconExternalLink className="w-4 h-4" />
 							</Link>
 						</div>
 					</Tile.Body>

@@ -11,18 +11,7 @@ import { cn } from "@/lib/utils"
 import { useSignOut } from "@hazel/auth/hooks"
 import { useAuth } from "@hazel/auth/provider"
 import { Organization, OrganizationMember } from "@hazel/db/schema"
-import {
-	AddCircleIcon,
-	CardIcon,
-	CheckTickIcon,
-	ChevronSortVerticalIcon,
-	File2InfoIcon,
-	LogOutLeftIcon,
-	MonitorIcon,
-	MoonIcon,
-	RocketIcon,
-	SunIcon,
-} from "@hazel/icons"
+
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { Avatar, AvatarFallback, AvatarImage } from "@hazel/ui/avatar"
@@ -45,6 +34,18 @@ import {
 } from "@hazel/ui/dropdown-menu"
 import { useLocale } from "next-intl"
 import { useTheme } from "next-themes"
+import {
+	IconBook2,
+	IconCheck,
+	IconCirclePlus,
+	IconCreditCard,
+	IconDeviceDesktop,
+	IconLogout,
+	IconMoon,
+	IconRocket,
+	IconSelector,
+	IconSun,
+} from "@tabler/icons-react"
 
 type Membership = OrganizationMember & {
 	organization: Organization
@@ -69,8 +70,6 @@ export const ProfileSettings = ({
 	const signOut = useSignOut()
 
 	const currentMembership = memberships.find((membership) => membership.publicId === currentMembershipId)
-
-	const { user } = useAuth()
 
 	const changeLocale = (locale: string) => {
 		console.log(pathname)
@@ -119,25 +118,25 @@ export const ProfileSettings = ({
 							<PlanBadge plan={"free"} />
 						</div>
 					</div>
-					<ChevronSortVerticalIcon className="hidden w-4 h-4 md:block" />
+					<IconSelector className="hidden w-4 h-4 md:block" />
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="w-full lg:w-56" align="end" forceMount>
 					<DropdownMenuGroup>
 						<Link href="/onboarding">
 							<DropdownMenuItem className="cursor-pointer">
-								<RocketIcon className="w-4 h-4 mr-2" />
+								<IconRocket className="w-4 h-4 mr-2" />
 								<span>Onboarding</span>
 							</DropdownMenuItem>
 						</Link>
 						<Link href="https://docs.hazel.sh" target="__blank">
 							<DropdownMenuItem className="cursor-pointer">
-								<File2InfoIcon className="w-4 h-4 mr-2" />
+								<IconBook2 className="w-4 h-4 mr-2" />
 								<span>Docs</span>
 							</DropdownMenuItem>
 						</Link>
 						<Link href="/settings/billing">
 							<DropdownMenuItem className="cursor-pointer">
-								<CardIcon className="w-4 h-4 mr-2" />
+								<IconCreditCard className="w-4 h-4 mr-2" />
 								<span>Plans & Billing</span>
 							</DropdownMenuItem>
 						</Link>
@@ -153,7 +152,7 @@ export const ProfileSettings = ({
 										onCheckedChange={() => setTheme("light")}
 									>
 										<div className="flex items-center gap-2 ">
-											<SunIcon className="w-4 h-4" />
+											<IconSun className="w-4 h-4" />
 											Light
 										</div>
 									</DropdownMenuCheckboxItem>
@@ -162,7 +161,7 @@ export const ProfileSettings = ({
 										onCheckedChange={() => setTheme("dark")}
 									>
 										<div className="flex items-center gap-2 ">
-											<MoonIcon className="w-4 h-4" />
+											<IconMoon className="w-4 h-4" />
 											Dark
 										</div>
 									</DropdownMenuCheckboxItem>
@@ -171,7 +170,7 @@ export const ProfileSettings = ({
 										onCheckedChange={() => setTheme("system")}
 									>
 										<div className="flex items-center gap-2 ">
-											<MonitorIcon className="w-4 h-4" />
+											<IconDeviceDesktop className="w-4 h-4" />
 											System
 										</div>
 									</DropdownMenuCheckboxItem>
@@ -223,7 +222,7 @@ export const ProfileSettings = ({
 									/>
 								</Avatar>
 								{membership.organization.name}
-								<CheckTickIcon
+								<IconCheck
 									className={cn(
 										"ml-auto h-4 w-4",
 										selectedTeam.publicId === membership.publicId ? "opacity-100" : "opacity-0",
@@ -236,12 +235,12 @@ export const ProfileSettings = ({
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
 						<DropdownMenuItem onClick={() => setShowNewTeamDialog(true)}>
-							<AddCircleIcon className="w-4 h-4 mr-2 " />
+							<IconCirclePlus className="w-4 h-4 mr-2 " />
 							<span className="cursor-pointer">Create Workspace</span>
 						</DropdownMenuItem>
 						<Link href="/settings/invite">
 							<DropdownMenuItem>
-								<AddCircleIcon className="w-4 h-4 mr-2 " />
+								<IconCirclePlus className="w-4 h-4 mr-2 " />
 								<span className="cursor-pointer">Invite Member</span>
 							</DropdownMenuItem>
 						</Link>
@@ -257,7 +256,7 @@ export const ProfileSettings = ({
 							className="cursor-pointer"
 						>
 							<span>
-								<LogOutLeftIcon className="w-4 h-4 mr-2" />
+								<IconLogout className="w-4 h-4 mr-2" />
 								Sign out
 							</span>
 						</DropdownMenuItem>

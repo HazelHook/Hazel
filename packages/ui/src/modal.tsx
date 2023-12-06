@@ -1,11 +1,11 @@
 "use client"
 
-import { CrossIcon } from "@hazel/icons"
 import { useTranslations } from "next-intl"
 
 import { Button } from "./button"
 import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from "./dialog"
 import { If } from "./if"
+import { IconX } from "@tabler/icons-react"
 
 type ControlledOpenProps = {
 	isOpen: boolean
@@ -72,7 +72,7 @@ const Modal: React.FC<Props> & {
 									}
 								}}
 							>
-								<CrossIcon className={"h-6"} />
+								<IconX className={"h-6"} />
 								<span className="sr-only">Close</span>
 							</Button>
 						</DialogClose>
