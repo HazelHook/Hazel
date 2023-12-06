@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { deleteConnectionAction, pauseConnectionAction } from "@/server/actions/connections"
 import { getSeededProfileImageUrl } from "@/lib/utils"
-import { ConnectionActions } from "@/app/[locale]/(pages)/(connection)/_components/ConnectionActions"
+import { ConnectionActions } from "@/app/[locale]/(pages)/(connection)/_components/connection-actions"
 import { ConnectionDataRowType } from "@/app/[locale]/(pages)/(connection)/connections/page"
 
 import { Connection, Destination, Source } from "@hazel/db"

@@ -43,7 +43,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 										icon: IconHome,
 									},
 									{
-										title: "Webhooks",
+										title: "Connections",
 										href: "/webhooks",
 										icon: IconPlugConnected,
 									},
