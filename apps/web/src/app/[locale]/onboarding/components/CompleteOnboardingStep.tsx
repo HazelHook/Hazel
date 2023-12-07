@@ -42,6 +42,7 @@ function useCompleteOnboarding(data: CompleteOnboardingStepData) {
 		onSuccess: () => {
 			router.push(configuration.paths.home)
 		},
+		onError: () => {},
 	})
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
