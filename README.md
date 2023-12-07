@@ -36,3 +36,10 @@ This gradual approach allows you to adapt to Hazel's system without any disrupti
 - 📦 Easy to set up and integrate
 - 🛡 Debug and analyze with our in-depth views
 - 💻 Easy Development with our client CLI (Coming Soon)
+
+
+## 🔗 Links
+
+- [Home page](https://hazel.sh)
+- [Docs](https://docs.hazel.sh)
+
