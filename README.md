@@ -10,6 +10,11 @@
 
 
 
+
+![Hazel Dashboard](https://i.imgur.com/Ah9pI83.png)
+
+
+
 # ⭐️ Why Hazel
 Hazel revolutionizes the way you manage webhooks, streamlining your workflow and unifying their infrastructure. In the modern software development landscape, integrating numerous third-party services has become the norm, and syncing these services through webhooks to your services is the most common occourence. However, the implementation of webhooks often varies, and when multiple third-party services are used, the complexity can quickly become overwhelming. This makes monitoring and managing these webhooks an impossible task.
 
