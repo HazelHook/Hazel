@@ -5,6 +5,6 @@ export default ({
 	out: "./drizzle",
 	driver: "mysql2",
 	dbCredentials: {
-		uri: 'mysql://fnsc05mswgc4v2wljff3:pscale_pw_Fqzt5XwlNKL02sVcr7wKBjm4j7XJaLVt9kC4Ky05fRN@aws.connect.psdb.cloud/hazel?ssl={"rejectUnauthorized":true}',
+		uri: `mysql://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}/hazel?ssl={"rejectUnauthorized":true}`,
 	},
 } satisfies Config)

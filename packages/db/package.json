@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "db:push": "drizzle-kit push:mysql",
-    "db:pull": "drizzle-kit introspect:mysql",
+    "db:push": "infisical run -- drizzle-kit push:mysql",
+    "db:pull": "infisical run -- drizzle-kit introspect:mysql",
     "db:generate": "drizzle-kit generate:mysql",
     "tb:pull": "tb pull --auto --force"
   },
