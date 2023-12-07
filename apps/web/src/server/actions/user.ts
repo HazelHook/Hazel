@@ -13,8 +13,6 @@ export const updateUserAction = createAction(
 			...input,
 		})
 
-		console.log(input)
-
 		return {
 			id: input.id,
 		}

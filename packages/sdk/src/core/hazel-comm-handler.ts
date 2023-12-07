@@ -1,3 +1,4 @@
+import { getLogger } from "@hazel/utils"
 import { allProcessEnv, Env, hazelHeaders } from "../lib/helpers/env"
 import { rethrowError, serializeError } from "../lib/helpers/errors"
 import { runAsPromise } from "../lib/helpers/promises"
@@ -295,8 +296,7 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 						return runAsPromise(fn)
 							.catch(rethrowError(errMessage))
 							.catch((err) => {
-								// TODO: ADD LOGGER
-								// this.log("error", err)
+								getLogger().error(err)
 								throw err
 							})
 					},
@@ -343,6 +343,8 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 
 			const hazel_overview_mode = url.searchParams.get("hazel_overview")
 
+			const body = await actions.body("getting body")
+
 			if (hazel_overview_mode === "true") {
 				const registerBody = this.registerBody()
 
@@ -358,23 +360,15 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 				}
 			}
 
-			console.log(hazelKey)
-
 			if (!hazelKey) {
 				throw new Error("No webhook ID found in request")
 			}
 
 			const fn = this.fns[hazelKey]
 
-			console.log(fn, method)
-
 			if (!fn) {
 				throw new Error(`Could not find webhook handler with Key "${hazelKey}"`)
 			}
-
-			const body = await actions.body("getting body")
-
-			const res = await fn.fn.execute({ data: body })
 
 			if (method === "GET") {
 				const registerBody = this.registerBody()
@@ -399,6 +393,8 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 			}
 
 			if (method === "POST") {
+				const res = await fn.fn.execute({ data: body })
+
 				return {
 					status: 201,
 					body: safeStringify(res),

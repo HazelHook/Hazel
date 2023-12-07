@@ -17,7 +17,7 @@
     "react-dom": "^18.2.0",
     "zod": "^3.22.4",
     "@supabase/supabase-js": "^2.39.0",
-    "next": "14.0.3"
+    "next": "14.0.4"
   },
   "peerDependencies": {
     "@hazel/auth": "workspace:*",

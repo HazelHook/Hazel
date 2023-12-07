@@ -6,8 +6,6 @@ import { z } from "zod"
 
 export const retryRequestAction = createAction(
 	protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ input, ctx }) => {
-		console.log(input.id)
-
 		const res = await tiny.request.get({
 			workspace_id: ctx.auth.workspaceId,
 			request_id: input.id,

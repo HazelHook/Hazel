@@ -134,8 +134,6 @@ export type EventsFromOpts = Record<string, EventPayload>
 export type WebhookOptions<T extends string> = StrictUnion<{
 	event: T
 
-	id: string
-
 	name?: string
 }>
 

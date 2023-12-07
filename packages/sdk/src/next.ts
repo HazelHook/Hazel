@@ -5,6 +5,8 @@ import { isWorkerd } from "std-env"
 
 import { HazelCommHandler } from "./core/hazel-comm-handler"
 import type { ServeHandlerOptions, SupportedFrameworks } from "./lib/types"
+import { Either } from "./lib/helpers/types"
+import { getResponse } from "./lib/helpers/env"
 
 export const frameworkName: SupportedFrameworks = "nextjs"
 
@@ -36,22 +38,19 @@ export const serve = (options: ServeHandlerOptions) => {
 		frameworkName,
 		...options,
 		handler: (reqMethod: "GET" | "POST" | "PUT" | undefined, expectedReq: NextRequest, res: NextApiResponse) => {
-			const req = expectedReq as NextApiRequest | NextRequest
+			const req = expectedReq as Either<NextApiRequest, NextRequest>
 
 			const isEdge = isNextEdgeRequest(req)
 
-			return {
-				body: () => {
-					return isEdge ? req.json() : req.body
-				},
-				headers: (key) => {
-					// @ts-expect-error
-					return req.headers.get(key)
+			const getHeader = (key: string): string | null | undefined => {
+				const header = typeof req.headers.get === "function" ? req.headers.get(key) : req.headers[key]
 
-					// TODO: THIS CODE NEEDS TO BE RUN IF WE ARE IN PAGES DIR INSTEAD
-					// const header = req.headers[key]
-					// return Array.isArray(header) ? header[0] : header
-				},
+				return Array.isArray(header) ? header[0] : header
+			}
+
+			return {
+				body: () => (typeof req.json === "function" ? req.json() : req.body),
+				headers: getHeader,
 				method: () => {
 					/**
 					 * `req.method`, though types say otherwise, is not available in Next.js
@@ -76,11 +75,7 @@ export const serve = (options: ServeHandlerOptions) => {
 					}
 				},
 				queryString: (key, url) => {
-					if (isEdge) {
-						return url.searchParams.get(key)
-					}
-
-					const qs = req.query[key]
+					const qs = req.query?.[key] || url.searchParams.get(key)
 					return Array.isArray(qs) ? qs[0] : qs
 				},
 
@@ -90,23 +85,35 @@ export const serve = (options: ServeHandlerOptions) => {
 					}
 
 					return new URL(req.url as string)
-
-					// TODO: THIS CODE NEEDS TO BE RUN IF WE ARE IN PAGES DIR INSTEAD
-					// let scheme: "http" | "https" = "https"
-
-					// try {
-					// 	// eslint-disable-next-line @hazel/internal/process-warn
-					// 	if (process.env.NODE_ENV === "development") {
-					// 		scheme = "http"
-					// 	}
-					// } catch (err) {
-					// 	// no-op
-					// }
-
-					// return new URL(req.url as string, `${scheme}://${req.headers.host || ""}`)
 				},
 				transformResponse: ({ body, headers, status }) => {
-					return new Response(body, { status, headers })
+					/**
+					 * Carefully attempt to set headers and data on the response object
+					 * for Next.js 12 support.
+					 */
+					if (typeof res?.setHeader === "function") {
+						for (const [key, value] of Object.entries(headers)) {
+							res.setHeader(key, value)
+						}
+					}
+
+					if (typeof res?.status === "function" && typeof res?.send === "function") {
+						res.status(status).send(body)
+					}
+
+					/**
+					 * Next.js 13 requires that the return value is always `Response`,
+					 * though this serve handler can't understand if we're using 12 or 13.
+					 *
+					 * 12 doesn't seem to care if we also return a response from the
+					 * handler, so we'll just return `undefined` here, which will be safe
+					 * at runtime and enforce types for use with Next.js 13.
+					 *
+					 * We also don't know if the current environment has a native
+					 * `Response` object, so we'll grab that first.
+					 */
+					const Res = getResponse()
+					return new Res(body, { status, headers })
 				},
 				transformStreamingResponse: ({ body, headers, status }) => {
 					return new Response(body, { status, headers })

@@ -46,8 +46,6 @@ const SourcePage = async ({
 		start_date: startTime,
 	})
 
-	console.log(req)
-
 	const chartData = transformSourcesChartData(req.data)
 
 	return (

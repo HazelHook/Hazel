@@ -122,6 +122,7 @@ interface TimeoutPromise extends Promise<void> {
  * methods to start, clear, and reset the timeout.
  */
 export const createTimeoutPromise = (duration: number): TimeoutPromise => {
+	// biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
 	const { promise, resolve } = createDeferredPromise<void>()
 
 	let timeout: ReturnType<typeof setTimeout> | undefined

@@ -74,8 +74,6 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 		request_id: undefined,
 	})
 
-	console.log(data)
-
 	if (data.length === 0) {
 		notFound()
 	}

@@ -56,7 +56,7 @@ export class HazelWebhook<
 	 * The generated or given ID for this function.
 	 */
 	public id(prefix?: string): string {
-		return [prefix, this.opts.id].filter(Boolean).join("-")
+		return [prefix, this.opts.event].filter(Boolean).join("-")
 	}
 
 	/**
