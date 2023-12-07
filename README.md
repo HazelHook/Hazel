@@ -11,7 +11,7 @@
 
 
 
-![Hazel Dashboard](https://i.imgur.com/Ah9pI83.png)
+![Hazel Dashboard](https://i.imgur.com/6vOmecL.png)
 
 
 
