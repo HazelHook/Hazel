@@ -29,3 +29,14 @@ export const dataTableTimestampFormatter = (locale = "en") => {
 		hour12: true,
 	})
 }
+
+type FormatType = "json"
+
+export const formatCode = (code: string, type: FormatType) => {
+	switch (type) {
+		case "json": {
+			const jsonObject = JSON.parse(code)
+			return JSON.stringify(jsonObject, null, 2)
+		}
+	}
+}

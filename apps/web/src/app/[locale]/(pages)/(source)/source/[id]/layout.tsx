@@ -12,6 +12,7 @@ import { SimpleTooltip } from "@hazel/ui/tooltip"
 import { Container } from "@hazel/ui/container"
 import { Icons } from "@/components/icons"
 import { IconInfoCircle } from "@tabler/icons-react"
+import { SourceIcon } from "@/components/source-icon"
 
 const ConnectionLayout = async ({
 	children,
@@ -32,11 +33,7 @@ const ConnectionLayout = async ({
 			<div className="flex flex-row justify-between mb-4">
 				<div>
 					<div className="flex gap-2 items-center">
-						{toolSlug ? (
-							<img src={`/assets/integrations/${toolSlug}.svg`} alt={toolSlug} className="w-7 h-7" />
-						) : (
-							<Icons.Source className="w-7 h-7 text-muted-foreground" />
-						)}
+						<SourceIcon slug={toolSlug} />
 
 						<Heading className="pb-0" type={2}>
 							Source Overview

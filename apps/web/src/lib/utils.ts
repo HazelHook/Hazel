@@ -148,3 +148,15 @@ export const httpStatusCodes = [
 	{ name: "Not Extended", code: 510 },
 	{ name: "Network Authentication Required", code: 511 },
 ]
+
+export const getVariantForLatency = (latency: number): "success" | "warning" | "destructive" => {
+	if (latency < 200) {
+		return "success"
+	}
+
+	if (latency < 500) {
+		return "warning"
+	}
+
+	return "destructive"
+}

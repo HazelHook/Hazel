@@ -164,8 +164,6 @@ export type BaseContext<TOpts extends ClientOptions, TTrigger extends keyof Even
 	 * The event data present in the payload.
 	 */
 	event: EventsFromOpts[TTrigger]
-
-	events: [EventsFromOpts[TTrigger], ...EventsFromOpts[TTrigger][]]
 }
 
 /**

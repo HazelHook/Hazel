@@ -4,30 +4,23 @@ import { notFound } from "next/navigation"
 
 import { auth } from "@/lib/auth"
 import { getCachedDestination, getCachedSource } from "@/lib/orm"
-import { jsonToArray } from "@/lib/utils"
+import { getVariantForLatency, jsonToArray } from "@/lib/utils"
 import { Status } from "@/components/status"
 
 import tiny, { TBRequest } from "@hazel/tinybird"
 import { Badge } from "@hazel/ui/badge"
-import { Button } from "@hazel/ui/button"
+import { Button, buttonVariants } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { ExpandableList } from "@hazel/ui/expandable-list"
 import { Code } from "bright"
+import { formatCode } from "@/lib/formatters"
+import { Await } from "@hazel/ui/await"
+import { SourceIcon } from "@/components/source-icon"
+import { Spinner } from "@hazel/ui/spinner"
+import { StatusCodeBadge } from "@/components/status-code-badge"
+import { ListItem } from "../../_component/list-item"
 
-const ListItem = ({
-	name,
-	description,
-}: {
-	name: string
-	description: ReactNode | string
-}) => {
-	return (
-		<div className="flex flex-row justify-between max-w-[250px]">
-			<p className="text-muted-foreground">{name}</p>
-			<p>{description}</p>
-		</div>
-	)
-}
+Code.theme = "poimandres"
 
 interface ResponsePageProps {
 	params: {
@@ -69,9 +62,6 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const { data } = await tiny.response.get({
 		workspace_id: workspaceId,
 		response_id: params.id,
-		destination_id: undefined, // TODO
-		source_id: undefined,
-		request_id: undefined,
 	})
 
 	if (data.length === 0) {
@@ -85,7 +75,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 		request_id: res.request_id,
 	})
 
-	const source = await getCachedSource({
+	const source = getCachedSource({
 		publicId: res.source_id,
 		workspaceId,
 	})
@@ -94,6 +84,9 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	})
 
 	const headers = JSON.parse(res.headers)
+
+	const addedHazelLatency = new Date(res.send_at).getTime() - new Date(res.received_at).getTime()
+	const destinationLatency = new Date(res.response_at).getTime() - new Date(res.send_at).getTime()
 
 	return (
 		<div className="p-6 container space-y-4">
@@ -108,20 +101,35 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 						<ListItem
 							name="Source"
 							description={
-								<Link href={`/source/${res.source_id}`}>
-									<Button size="xs" variant="link">
-										{source?.name}
-									</Button>
-								</Link>
+								<Await promise={source} fallback={<Spinner />}>
+									{(data) => (
+										<Link
+											className={buttonVariants({
+												variant: "link",
+												size: "none",
+												className: "flex items-center gap-1",
+											})}
+											href={`/source/${res.source_id}`}
+										>
+											<SourceIcon slug={data?.integration?.tool} className="w-5 h-5" />
+
+											{data?.name}
+										</Link>
+									)}
+								</Await>
 							}
 						/>
 						<ListItem
 							name="Destination"
 							description={
-								<Link href={`/destination/${res.destination_id}`}>
-									<Button size="xs" variant="link">
-										{destination.name}
-									</Button>
+								<Link
+									className={buttonVariants({
+										variant: "link",
+										size: "none",
+									})}
+									href={`/destination/${res.destination_id}`}
+								>
+									{destination.name}
 								</Link>
 							}
 						/>
@@ -138,13 +146,17 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 						/>
 						<ListItem
 							name="Added Hazel Latency"
-							description={`${new Date(res.send_at).getTime() - new Date(res.received_at).getTime()}ms`}
+							description={
+								<Badge variant={getVariantForLatency(addedHazelLatency)}>{addedHazelLatency}ms</Badge>
+							}
 						/>
 
-						<ListItem name="Status" description={res.status} />
+						<ListItem name="Status" description={<StatusCodeBadge statusCode={res.status} />} />
 						<ListItem
 							name="Your API Latency"
-							description={`${new Date(res.response_at).getTime() - new Date(res.send_at).getTime()}ms`}
+							description={
+								<Badge variant={getVariantForLatency(destinationLatency)}>{destinationLatency}ms</Badge>
+							}
 						/>
 					</div>
 				</CardContent>
@@ -158,7 +170,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 				</CardHeader>
 				<CardContent>
 					<Suspense>
-						<Code lang="json">{res.body}</Code>
+						<Code lang="json">{formatCode(res.body, "json")}</Code>
 					</Suspense>
 				</CardContent>
 			</Card>

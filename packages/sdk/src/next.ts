@@ -49,7 +49,7 @@ export const serve = (options: ServeHandlerOptions) => {
 			}
 
 			return {
-				body: () => (typeof req.json === "function" ? req.json() : req.body),
+				body: async () => (typeof req.json === "function" ? await req.json() : req.body),
 				headers: getHeader,
 				method: () => {
 					/**

@@ -343,8 +343,6 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 
 			const hazel_overview_mode = url.searchParams.get("hazel_overview")
 
-			const body = await actions.body("getting body")
-
 			if (hazel_overview_mode === "true") {
 				const registerBody = this.registerBody()
 
@@ -393,7 +391,9 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 			}
 
 			if (method === "POST") {
-				const res = await fn.fn.execute({ data: body })
+				const body = await actions.body("getting body")
+
+				const res = await fn.fn.execute({ event: body })
 
 				return {
 					status: 201,

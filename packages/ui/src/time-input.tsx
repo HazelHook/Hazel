@@ -11,7 +11,7 @@ export type TimeInputProps = {
 	onChange: (val: number) => void
 }
 
-export const TimeInput = forwardRef(({ value, onChange, ...rest }: TimeInputProps) => {
+export const TimeInput = forwardRef(({ value, onChange, ...rest }: TimeInputProps, ref) => {
 	// Store the numeric value and time unit separately
 	const [numericValue, setNumericValue] = useState(() => convertMillis(value, determineType(value)))
 	const [type, setType] = useState<TimeTypes>(determineType(value))
@@ -24,6 +24,7 @@ export const TimeInput = forwardRef(({ value, onChange, ...rest }: TimeInputProp
 	return (
 		<div className="flex flex-row">
 			<Input
+				ref={ref as any}
 				type="number"
 				onChange={(e) => {
 					const val = e.target.value

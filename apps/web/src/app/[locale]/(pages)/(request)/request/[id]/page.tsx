@@ -4,32 +4,21 @@ import { notFound } from "next/navigation"
 
 import { auth } from "@/lib/auth"
 import { getCachedSource } from "@/lib/orm"
-import { capitalizeFirstLetter, jsonToArray } from "@/lib/utils"
+import { capitalizeFirstLetter, getVariantForLatency, jsonToArray } from "@/lib/utils"
 import { Status } from "@/components/status"
 
 import tiny from "@hazel/tinybird"
 import { Await } from "@hazel/ui/await"
-import { Button } from "@hazel/ui/button"
+import { Button, buttonVariants } from "@hazel/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@hazel/ui/card"
 import { ExpandableList } from "@hazel/ui/expandable-list"
 import { Code } from "bright"
+import { formatCode } from "@/lib/formatters"
+import { SourceIcon } from "@/components/source-icon"
+import { ListItem } from "../../../_component/list-item"
+import { Badge } from "@hazel/ui/badge"
 
-const ListItem = ({
-	name,
-	description,
-}: {
-	name: string
-	description: ReactNode | string
-}) => {
-	return (
-		<div className="flex flex-row justify-between max-w-[250px]">
-			<p className="text-muted-foreground">{name}</p>
-			<p>{description}</p>
-		</div>
-	)
-}
-
-Code.theme = "material-ocean"
+Code.theme = "material-palenight"
 
 interface ResponsePageProps {
 	params: {
@@ -63,6 +52,8 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 	const headers = JSON.parse(req.headers)
 	const source = getCachedSource({ publicId: req.source_id, workspaceId })
 
+	const addedHazelLatency = new Date(firstRes.send_at).getTime() - new Date(firstRes.received_at).getTime()
+
 	return (
 		<div className="p-6 container space-y-4">
 			<div className="flex flex-row gap-2 items-center">
@@ -78,16 +69,30 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 							description={
 								<Await promise={source}>
 									{(data) => (
-										<Link href={`/source/${req.source_id}`}>
-											<Button size="xs" variant="link">
-												{data?.name}
-											</Button>
+										<Link
+											className={buttonVariants({
+												variant: "link",
+												size: "none",
+												className: "flex items-center gap-1",
+											})}
+											href={`/source/${req.source_id}`}
+										>
+											<SourceIcon slug={data?.integration?.tool} className="w-5 h-5" />
+
+											{data?.name}
 										</Link>
 									)}
 								</Await>
 							}
 						/>
-						<ListItem name="Status" description={req.rejected ? "Rejected" : "Accepted"} />
+						<ListItem
+							name="Status"
+							description={
+								<Badge variant={req.rejected ? "destructive" : "success"}>
+									{req.rejected ? "Rejected" : "Accepted"}
+								</Badge>
+							}
+						/>
 						<ListItem name="Created Events" description={resData.length} />
 
 						<ListItem
@@ -102,17 +107,19 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 							}).format(new Date(req.timestamp))}
 						/>
 						<ListItem
-							name="Added Latency"
+							name="Added Hazel Latency"
 							description={
-								firstRes
-									? `${
-											new Date(firstRes.send_at).getTime() -
-											new Date(firstRes.received_at).getTime()
-									  }ms`
-									: "-"
+								<Badge variant={getVariantForLatency(addedHazelLatency)}>{addedHazelLatency}ms</Badge>
 							}
 						/>
-						<ListItem name="Verified" description={capitalizeFirstLetter(String(!!req.validated))} />
+						<ListItem
+							name="Verified"
+							description={
+								<Badge variant={req.validated ? "success" : "destructive"}>
+									{capitalizeFirstLetter(String(!!req.validated))}
+								</Badge>
+							}
+						/>
 					</div>
 				</CardContent>
 			</Card>
@@ -125,7 +132,7 @@ const ResponsePage = async ({ params }: ResponsePageProps) => {
 				</CardHeader>
 				<CardContent>
 					<Suspense>
-						<Code lang="json">{req.body}</Code>
+						<Code lang="json">{formatCode(req.body, "json")}</Code>
 					</Suspense>
 				</CardContent>
 			</Card>
