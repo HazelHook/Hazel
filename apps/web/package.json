@@ -45,7 +45,7 @@
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "edge-csrf": "^1.0.6",
-    "framer-motion": "^10.16.15",
+    "framer-motion": "^10.16.16",
     "geist": "^1.2.0",
     "lago-javascript-client": "0.51.0-beta",
     "maple-sdk": "0.4.3",

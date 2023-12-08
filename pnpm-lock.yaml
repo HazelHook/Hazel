@@ -108,9 +108,6 @@ importers:
 
   apps/web:
     dependencies:
-      '@babel/parser':
-        specifier: ^7.23.5
-        version: 7.23.5
       '@hazel/admin':
         specifier: workspace:*
         version: link:../../packages/admin
