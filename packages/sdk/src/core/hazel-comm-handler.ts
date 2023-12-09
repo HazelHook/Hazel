@@ -391,7 +391,7 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 			}
 
 			if (method === "POST") {
-				const body = await actions.body("getting body")
+				const body = await actions.body("processing run request")
 
 				const res = await fn.fn.execute({ event: body })
 

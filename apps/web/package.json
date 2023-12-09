@@ -30,6 +30,7 @@
     "@hazel/ui": "workspace:*",
     "@hazel/utils": "workspace:*",
     "@hookform/resolvers": "^3.3.2",
+    "@june-so/analytics-node": "^8.0.0",
     "@ngneat/falso": "^7.1.1",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.2.0",
