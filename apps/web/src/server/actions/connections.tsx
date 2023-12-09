@@ -63,8 +63,6 @@ export const updateConnectionAction = createAction(
 			// }
 			const { retryCount, ...rest } = input
 
-			console.log(retryCount)
-
 			const connection = await db.connection.update({
 				workspaceId: ctx.auth.workspaceId,
 				...rest,

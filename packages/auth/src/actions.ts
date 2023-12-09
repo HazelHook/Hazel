@@ -22,8 +22,6 @@ export const impersonateUserAction = createAction(
 
 		const email = user.email
 
-		console.log(email)
-
 		if (!email) {
 			throw new TRPCError({
 				message: "User has no email. Cannot impersonate",

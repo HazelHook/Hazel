@@ -1,6 +1,6 @@
 import { Buffer } from "buffer"
 
-export async function handleRequest(url: string, request: Request, body: string): Promise<string> {
+export async function convertRequestToBase64(url: string, request: Request, body: string): Promise<string> {
 	const data = {
 		method: request.method,
 		url: url,

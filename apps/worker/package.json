@@ -9,7 +9,8 @@
     "@hazel/db": "workspace:*",
     "@hazel/tinybird": "workspace:*",
     "@hazel/utils": "workspace:*",
-    "bullmq": "^4.15.0",
+    "@hazel/backend-core": "workspace:*",
+    "bullmq": "^4.15.2",
     "nanoid": "^5.0.4",
     "zod": "^3.22.4"
   },

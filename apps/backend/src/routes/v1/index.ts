@@ -1,14 +1,11 @@
 import db from "@hazel/db"
 import { WebhookVerifierFactory } from "@hazel/integrations"
 import tiny from "@hazel/tinybird"
-import { getLogger } from "@hazel/utils"
+import { genId, getLogger } from "@hazel/utils"
 import { Elysia } from "elysia"
-import { nanoid } from "nanoid"
 
-import { sendEvent } from "../../event"
-import { sourceQueue } from "../../lib/queue"
-import { handleRequest } from "../../lib/request.helper"
 import { ingestMetric } from "@hazel/utils/lago"
+import { sendEvent } from "@hazel/backend-core"
 
 export const v1Route = new Elysia()
 	.onParse(({ request }) => {
@@ -64,7 +61,7 @@ export const v1Route = new Elysia()
 					}
 				}
 
-				const requestId = `req_${nanoid()}`
+				const requestId = `req_${genId()}`
 
 				await tiny.request.publish({
 					id: requestId,
@@ -92,43 +89,23 @@ export const v1Route = new Elysia()
 							return
 						}
 
-						if (connection.delay && connection.delay > 0) {
-							const parsed: {
-								connectionId: string
-								requestId: string
-								request: string
-							} = {
-								requestId,
-								connectionId: connection.publicId,
-								request: await handleRequest(connection.destination.url, request, String(body)),
-							}
-
-							await sourceQueue.add(requestId, parsed, {
-								delay: connection.delay,
-								attempts: connection.retyCount,
-								backoff: {
-									type: connection.retryType,
-									delay: connection.retryDelay,
-								},
-							})
-						} else {
-							await sendEvent({
-								request,
-								body: String(body),
-								connection: connection,
-								requestId,
-								workspaceId: source.workspaceId,
-								sourceId: source.publicId,
-								sourceKey: source.key,
-								received_at,
-							})
-						}
+						await sendEvent({
+							request,
+							body: String(body),
+							connection: connection,
+							requestId,
+							workspaceId: source.workspaceId,
+							sourceId: source.publicId,
+							sourceKey: source.key,
+							received_at,
+							delay: connection.delay,
+						})
 					}
 				}
 
 				return {
 					status: "SUCCESS",
-					message: `Webhook handled by Hazel. Check your dashboard to inspect the request: https://app.hazelapp.dev/request/${requestId}`,
+					message: `Webhook handled by Hazel. Check your dashboard to inspect the request: https://app.hazel.sh/request/${requestId}`,
 					request_id: requestId,
 				}
 			}),

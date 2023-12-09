@@ -25,7 +25,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ initialImageUrl, gener
 	const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
 		if (file) {
-			console.log(file.size)
+			file.size
 
 			if (file.size > 1024 * 1024) {
 				toast.error("File size should not exceed 1MB.")

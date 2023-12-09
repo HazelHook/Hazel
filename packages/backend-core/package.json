@@ -1,0 +1,35 @@
+{
+  "name": "@hazel/backend-core",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "git clean -xdf .turbo node_modules",
+    "format": "prettier --check \"**/*.{ts,tsx}\"",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "bullmq": "^4.15.2"
+  },
+  "peerDependencies": {
+    "@hazel/db": "workspace:*",
+    "@hazel/tinybird": "workspace:*",
+    "@hazel/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@hazel/tsconfig": "workspace:*",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  }
+}

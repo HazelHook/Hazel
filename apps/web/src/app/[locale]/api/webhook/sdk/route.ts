@@ -14,8 +14,8 @@ const svix = hazel.createWebhook({ event: "svix" }, async (opts) => {
 })
 
 const linear = hazel.createWebhook({ event: "linear" }, async (opts) => {
-	console.log(JSON.stringify(opts.event), "WOWZIEZ")
-	return opts
+	console.log(opts.event, "WOZIEZ")
+	return opts.event
 })
 
 export const { GET, PUT, POST } = serve({

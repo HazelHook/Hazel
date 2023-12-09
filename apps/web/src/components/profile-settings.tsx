@@ -72,7 +72,6 @@ export const ProfileSettings = ({
 	const currentMembership = memberships.find((membership) => membership.publicId === currentMembershipId)
 
 	const changeLocale = (locale: string) => {
-		console.log(pathname)
 		router.replace(`${locale}/${pathname}`)
 	}
 	const locale = useLocale()

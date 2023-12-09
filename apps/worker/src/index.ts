@@ -38,6 +38,7 @@ const worker = new Worker<{
 		ingestMetric({ workspaceId: connection.workspaceId, type: "events" })
 
 		const sendTime = new Date().toISOString()
+
 		const res = await consumeBase64(job.data.request, {
 			"X-HAZEL_KEY": `${connection.destination.key}-${connection.source.key}`,
 			"X-HAZEL_SIGNATURE": "TODO: create signature",
