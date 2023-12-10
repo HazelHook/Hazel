@@ -4,8 +4,8 @@ import { cookies } from "next/headers"
 
 import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
 
-import { db } from "@hazel/db"
-import * as schema from "@hazel/db/schema"
+import { db, Organization } from "@hazel/db"
+import { schema } from "@hazel/db"
 import { generatePublicId } from "@hazel/db/schema/common"
 import { basicProtectedProcedure, createAction, protectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
 import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
@@ -18,7 +18,7 @@ export const createOrganzation = async ({
 	primaryEmail,
 	ownerId,
 }: {
-	plan: schema.Organization["plan"]
+	plan: Organization["plan"]
 	name: string
 	primaryEmail: string
 	ownerId: string

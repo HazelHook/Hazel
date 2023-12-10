@@ -3,7 +3,7 @@ import { useMemo } from "react"
 import { capitalizeFirstLetter } from "@/lib/utils"
 
 import { useAuth } from "@hazel/auth/provider"
-import { OrganizationMember } from "@hazel/db/schema"
+import { OrganizationMember } from "@hazel/db"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@hazel/ui/select"
 import { toast } from "sonner"
 

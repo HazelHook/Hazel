@@ -1,4 +1,4 @@
-import db from "@hazel/db"
+import db, { eq } from "@hazel/db"
 import { WebhookVerifierFactory } from "@hazel/integrations"
 import tiny from "@hazel/tinybird"
 import { genId, getLogger } from "@hazel/utils"
@@ -19,8 +19,17 @@ export const v1Route = new Elysia()
 			.post("/hook/:sourceId", async ({ params, set, request, body, headers }) => {
 				const received_at = new Date().toISOString()
 
-				const source = await db.source.getOne({
-					publicId: params.sourceId,
+				const source = await db.db.query.source.findFirst({
+					where: (table) => eq(table.publicId, params.sourceId),
+					with: {
+						connections: {
+							with: {
+								destination: true,
+							},
+						},
+						workspace: true,
+						integration: true,
+					},
 				})
 
 				if (!source) {

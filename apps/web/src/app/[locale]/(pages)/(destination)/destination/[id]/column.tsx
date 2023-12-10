@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 
-import { Destination } from "@hazel/db/schema"
+import { Destination } from "@hazel/db"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"

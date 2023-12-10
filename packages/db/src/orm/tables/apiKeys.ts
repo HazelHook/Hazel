@@ -5,6 +5,7 @@ import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"
 import { DrizzleTable } from "../db-table"
+import { InsertApiKey } from "../../schema/types"
 
 const apiKeysLogic = (db: DB) =>
 	({
@@ -19,7 +20,7 @@ const apiKeysLogic = (db: DB) =>
 				where: eq(schema.apiKeys.workspaceId, workspaceId),
 			})
 		},
-		create: async (data: Omit<schema.InsertApiKey, "publicId">) => {
+		create: async (data: Omit<InsertApiKey, "publicId">) => {
 			const publicId = generatePublicId("sk")
 			const res = await db.insert(schema.apiKeys).values({
 				...data,
@@ -27,7 +28,7 @@ const apiKeysLogic = (db: DB) =>
 			})
 			return { res, publicId }
 		},
-		update: async (data: OptionalExceptFor<Omit<schema.InsertApiKey, "customerId">, "publicId">) => {
+		update: async (data: OptionalExceptFor<Omit<InsertApiKey, "customerId">, "publicId">) => {
 			const res = await db.update(schema.apiKeys).set(data).where(eq(schema.apiKeys.publicId, data.publicId))
 			return { publicId: data.publicId }
 		},

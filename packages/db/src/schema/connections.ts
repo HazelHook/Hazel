@@ -44,6 +44,3 @@ export const connectionRelations = relations(connection, ({ one }) => ({
 		references: [source.id],
 	}),
 }))
-
-export type InsertConnection = InferInsertModel<typeof connection>
-export type Connection = InferSelectModel<typeof connection>

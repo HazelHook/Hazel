@@ -2,7 +2,7 @@
 
 import { getSeededProfileImageUrl } from "@/lib/utils"
 
-import { Connection, Destination, Integration, Source } from "@hazel/db/schema"
+import { Connection, Destination, Integration, Source } from "@hazel/db"
 import { Avatar, AvatarImage } from "@hazel/ui/avatar"
 import { Badge } from "@hazel/ui/badge"
 import { Button } from "@hazel/ui/button"

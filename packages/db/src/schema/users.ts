@@ -12,6 +12,3 @@ export const user = mysqlTable("users", {
 export const userRelation = relations(user, ({ many }) => ({
 	memberships: many(organizationMembers),
 }))
-
-export type InsertUser = InferInsertModel<typeof user>
-export type User = InferSelectModel<typeof user>

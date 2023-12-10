@@ -17,6 +17,3 @@ export const apiKeys = mysqlTable(
 		workspaceIdx: index("workspace_idx").on(table.workspaceId),
 	}),
 )
-
-export type InsertApiKey = InferInsertModel<typeof apiKeys>
-export type ApiKey = InferSelectModel<typeof apiKeys>

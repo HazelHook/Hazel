@@ -2,6 +2,7 @@ import { InferInsertModel, InferSelectModel, relations, sql } from "drizzle-orm"
 import { mysqlTable, serial, varchar, mysqlEnum, timestamp, int, index, uniqueIndex } from "drizzle-orm/mysql-core"
 import { generatePublicId, roleField } from "./common"
 import { user } from "./users"
+import { genId } from "@hazel/utils"
 
 export const organizations = mysqlTable(
 	"organizations",
@@ -15,6 +16,10 @@ export const organizations = mysqlTable(
 		ownerId: varchar("owner_id", { length: 128 }).notNull(),
 
 		name: varchar("name", { length: 128 }).notNull(),
+
+		secretKey: varchar("secret_key", { length: 64 })
+			.notNull()
+			.$defaultFn(() => genId(32)),
 
 		plan: mysqlEnum("plan", ["free", "pro", "enterprise"]),
 
@@ -94,12 +99,3 @@ export const organizationInviteRelations = relations(organizationInvites, ({ one
 		references: [organizations.id],
 	}),
 }))
-
-export type InsertOrganization = InferInsertModel<typeof organizations>
-export type Organization = InferSelectModel<typeof organizations>
-
-export type InsertOrganizationInvite = InferInsertModel<typeof organizationInvites>
-export type OrganizationInvite = InferSelectModel<typeof organizationInvites>
-
-export type InsertOrganizationMember = InferInsertModel<typeof organizationMembers>
-export type OrganizationMember = InferSelectModel<typeof organizationMembers>

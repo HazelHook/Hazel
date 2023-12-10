@@ -1,10 +1,8 @@
-import type { Connection, Destination } from "@hazel/db/schema"
+import type { Connection, Destination } from "@hazel/db"
 import tiny from "@hazel/tinybird"
 
 import { genId, getLogger } from "@hazel/utils"
 import { ingestMetric } from "@hazel/utils/lago"
-import { convertRequestToBase64 } from "./helpers/request.helper"
-import { sourceQueue } from "./queue"
 import { convertDataForSourceQueue, insertSourceQueue } from "./helpers/queue.helpers"
 
 interface Event {

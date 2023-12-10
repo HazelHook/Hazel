@@ -2,7 +2,7 @@
 
 import type { createOrganizationInvite, revokeOrganizationInvite } from "@/server/actions/organization-invite"
 
-import { OrganizationInvite } from "@hazel/db/schema"
+import { OrganizationInvite } from "@hazel/db"
 
 import { DataTable } from "../../members/data-table"
 import { columns } from "../columns"

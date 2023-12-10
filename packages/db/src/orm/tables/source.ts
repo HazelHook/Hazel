@@ -6,6 +6,7 @@ import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"
 import { TrxType } from "../../utils"
 import { DrizzleTable } from "../db-table"
+import { InsertSource } from "../../schema/types"
 
 type WithInput = NonNullable<Parameters<DB["query"]["source"]["findFirst"]>[0]>["with"]
 
@@ -39,7 +40,7 @@ const sourceLogic = (db: DB) => ({
 			},
 		})
 	},
-	create: async (data: Omit<schema.InsertSource, "publicId">) => {
+	create: async (data: Omit<InsertSource, "publicId">) => {
 		const publicId = generatePublicId("src")
 		const res = await db.insert(schema.source).values({
 			...data,
@@ -48,7 +49,7 @@ const sourceLogic = (db: DB) => ({
 
 		return { publicId }
 	},
-	update: async (data: OptionalExceptFor<schema.InsertSource, "publicId">) => {
+	update: async (data: OptionalExceptFor<InsertSource, "publicId">) => {
 		const { publicId, ...rest } = data
 		const res = await db.update(schema.source).set(rest).where(eq(schema.source.publicId, publicId))
 

@@ -5,7 +5,7 @@ import { getCachedSource } from "@/lib/orm"
 import { chartColors, formatDateTime } from "@/lib/utils"
 import { transformSourcesChartData } from "@/app/[locale]/(pages)/_utils"
 
-import { Destination } from "@hazel/db/schema"
+import { Destination } from "@hazel/db"
 import tiny from "@hazel/tinybird"
 import { Card, CardHeader, CardTitle } from "@hazel/ui/card"
 import { Chart } from "@hazel/ui/chart"

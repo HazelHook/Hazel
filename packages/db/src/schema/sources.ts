@@ -1,8 +1,9 @@
 import { index, int, mysqlTable, varchar } from "drizzle-orm/mysql-core"
 import { commonFields, nameField } from "./common"
-import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm"
+import { relations } from "drizzle-orm"
 import { connection } from "./connections"
 import { integration } from "./integrations"
+import { organizations } from "./organizations"
 
 export const source = mysqlTable(
 	"sources",
@@ -23,11 +24,12 @@ export const source = mysqlTable(
 
 export const sourceRelations = relations(source, ({ many, one }) => ({
 	connections: many(connection),
+	workspace: one(organizations, {
+		fields: [source.workspaceId],
+		references: [organizations.publicId],
+	}),
 	integration: one(integration, {
 		fields: [source.integrationId],
 		references: [integration.id],
 	}),
 }))
-
-export type InsertSource = InferInsertModel<typeof source>
-export type Source = InferSelectModel<typeof source>

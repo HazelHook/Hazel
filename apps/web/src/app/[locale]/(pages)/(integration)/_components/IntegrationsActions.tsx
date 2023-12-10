@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation"
 import type { deleteIntegrationAction, updateIntegrationAction } from "@/server/actions/integrations"
 import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
 
-import { Integration } from "@hazel/db/schema"
+import { Integration } from "@hazel/db"
 import { INTEGRATIONS } from "@hazel/integrations/web"
 import { useAction } from "@hazel/server/actions/client"
 import { Button } from "@hazel/ui/button"

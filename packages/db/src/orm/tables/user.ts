@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm"
 import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { DrizzleTable } from "../db-table"
+import { InsertUser } from "../../schema/types"
 
 const userLogic = (db: DB) => ({
 	table: new DrizzleTable("user", schema.user, db),
@@ -30,7 +31,7 @@ const userLogic = (db: DB) => ({
 			},
 		})
 	},
-	create: async (data: schema.InsertUser) => {
+	create: async (data: InsertUser) => {
 		const res = await db
 			.insert(schema.user)
 			.values({
@@ -42,7 +43,7 @@ const userLogic = (db: DB) => ({
 
 		return { id: data.id }
 	},
-	update: async (data: OptionalExceptFor<schema.InsertUser, "id">) => {
+	update: async (data: OptionalExceptFor<InsertUser, "id">) => {
 		const { id, ...rest } = data
 		const res = await db.update(schema.user).set(rest).where(eq(schema.user.id, id))
 

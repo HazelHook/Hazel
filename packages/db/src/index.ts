@@ -2,6 +2,8 @@ import { connectDB } from "./orm"
 
 import * as schema from "./schema"
 
+export * from "./schema/types"
+
 export * from "./orm"
 
 export * from "drizzle-orm"

@@ -1,4 +1,4 @@
-import { Destination } from "@hazel/db/schema"
+import { Destination } from "@hazel/db"
 
 export type ForwardResult =
 	| {

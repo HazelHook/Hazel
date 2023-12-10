@@ -15,6 +15,13 @@
       "when": 1701798764740,
       "tag": "0001_safe_juggernaut",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1702228031545,
+      "tag": "0002_rainy_silvermane",
+      "breakpoints": true
     }
   ]
 }

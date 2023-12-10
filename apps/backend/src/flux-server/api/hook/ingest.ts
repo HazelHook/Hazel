@@ -1,5 +1,5 @@
 import db from "@hazel/db"
-import { Destination } from "@hazel/db/schema"
+import { Destination } from "@hazel/db"
 import Elysia from "elysia"
 import { nanoid } from "nanoid"
 

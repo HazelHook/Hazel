@@ -24,6 +24,3 @@ export const integration = mysqlTable(
 export const integrationRelations = relations(integration, ({ many }) => ({
 	source: many(source),
 }))
-
-export type InsertIntegration = InferInsertModel<typeof integration>
-export type Integration = InferSelectModel<typeof integration>

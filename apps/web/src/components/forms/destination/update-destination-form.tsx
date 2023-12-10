@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import type { updateDestinationAction } from "@/server/actions/destination"
 import { updateDestinationSchema } from "@/lib/schemas/destination"
 
-import { Destination } from "@hazel/db/schema"
+import { Destination } from "@hazel/db"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
 import { LoadingButton } from "@hazel/ui/loading-button"

@@ -23,6 +23,3 @@ export const destination = mysqlTable(
 export const destinationRelations = relations(destination, ({ many, one }) => ({
 	connections: many(connection),
 }))
-
-export type InsertDestination = InferInsertModel<typeof destination>
-export type Destination = InferSelectModel<typeof destination>

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { createSourceAction } from "@/server/actions/source"
 import { createSourceSchema } from "@/lib/schemas/source"
 
-import { Integration } from "@hazel/db/schema"
+import { Integration } from "@hazel/db"
 import { INTEGRATIONS, IntegrationTool } from "@hazel/integrations/web"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm, AutoFormInputComponentProps } from "@hazel/ui/auto-form"

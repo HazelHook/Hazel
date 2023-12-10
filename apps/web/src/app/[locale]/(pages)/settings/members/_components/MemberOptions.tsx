@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 
 import { useAuth } from "@hazel/auth/provider"
-import { OrganizationMember } from "@hazel/db/schema"
+import { OrganizationMember } from "@hazel/db"
 import { Button } from "@hazel/ui/button"
 import {
 	DropdownMenu,

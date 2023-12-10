@@ -5,6 +5,7 @@ import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"
 import { DrizzleTable } from "../db-table"
+import { InsertDestination } from "../../schema/types"
 
 const destinationLogic = (db: DB) =>
 	({
@@ -26,7 +27,7 @@ const destinationLogic = (db: DB) =>
 				},
 			})
 		},
-		create: async (data: Omit<schema.InsertDestination, "publicId">) => {
+		create: async (data: Omit<InsertDestination, "publicId">) => {
 			const publicId = generatePublicId("dst")
 			const res = await db.insert(schema.destination).values({
 				...data,
@@ -35,7 +36,7 @@ const destinationLogic = (db: DB) =>
 
 			return { publicId }
 		},
-		update: async (data: OptionalExceptFor<schema.InsertDestination, "publicId">) => {
+		update: async (data: OptionalExceptFor<InsertDestination, "publicId">) => {
 			const { publicId, ...rest } = data
 			const res = await db.update(schema.destination).set(rest).where(eq(schema.destination.publicId, publicId))
 

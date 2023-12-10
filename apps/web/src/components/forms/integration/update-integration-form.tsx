@@ -4,7 +4,7 @@ import { notFound, useRouter } from "next/navigation"
 
 import { updateIntegrationAction } from "@/server/actions/integrations"
 
-import { Integration } from "@hazel/db/schema"
+import { Integration } from "@hazel/db"
 import { createZodIntegrationSchema, IntegrationTool } from "@hazel/integrations/web"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"

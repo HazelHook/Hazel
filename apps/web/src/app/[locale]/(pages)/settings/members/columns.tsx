@@ -1,6 +1,6 @@
 "use client"
 
-import { User } from "@hazel/db/schema"
+import { User } from "@hazel/db"
 import { ColumnDef } from "@tanstack/react-table"
 import { formatDistance } from "date-fns"
 

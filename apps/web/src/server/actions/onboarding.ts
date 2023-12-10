@@ -3,7 +3,7 @@
 import { cookies } from "next/headers"
 
 import { db } from "@hazel/db"
-import * as schema from "@hazel/db/schema"
+import { schema } from "@hazel/db"
 import { basicProtectedProcedure, createAction } from "@hazel/server/actions/trpc"
 import { z } from "zod"
 

@@ -5,6 +5,12 @@ import { DB, OptionalExceptFor } from ".."
 import * as schema from "../../schema"
 import { generatePublicId } from "../../schema/common"
 import { DrizzleTable } from "../db-table"
+import {
+	InsertOrganization,
+	InsertOrganizationInvite,
+	InsertOrganizationMember,
+	Organization,
+} from "../../schema/types"
 
 const organizationsLogic = (db: DB) =>
 	({
@@ -27,7 +33,7 @@ const organizationsLogic = (db: DB) =>
 				},
 			})
 		},
-		create: async (data: Omit<schema.InsertOrganization, "publicId">) => {
+		create: async (data: Omit<InsertOrganization, "publicId">) => {
 			const publicId = generatePublicId("org")
 			const memberPublicId = generatePublicId("mem")
 
@@ -44,7 +50,7 @@ const organizationsLogic = (db: DB) =>
 
 			return { publicId }
 		},
-		update: async (data: OptionalExceptFor<schema.Organization, "publicId">) => {
+		update: async (data: OptionalExceptFor<Organization, "publicId">) => {
 			const res = await db
 				.update(schema.organizations)
 				.set(data)
@@ -75,7 +81,7 @@ const organizationsLogic = (db: DB) =>
 
 				return invites
 			},
-			create: async (data: Omit<schema.InsertOrganizationInvite, "publicId">) => {
+			create: async (data: Omit<InsertOrganizationInvite, "publicId">) => {
 				const publicId = generatePublicId("inv")
 				const res = await db.insert(schema.organizationInvites).values({
 					...data,
@@ -94,7 +100,7 @@ const organizationsLogic = (db: DB) =>
 			},
 		},
 		memberships: {
-			create: async (data: Omit<schema.InsertOrganizationMember, "publicId">) => {
+			create: async (data: Omit<InsertOrganizationMember, "publicId">) => {
 				const publicId = generatePublicId("mem")
 				const res = await db.insert(schema.organizationMembers).values({
 					...data,
