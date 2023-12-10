@@ -1,7 +1,8 @@
 import { connectDB } from "./orm"
 
+import * as schema from "./schema"
+
 export * from "./orm"
-export * from "./schema"
 
 export * from "drizzle-orm"
 
@@ -12,3 +13,5 @@ export const db = connectDB({
 	host: process.env.DATABASE_HOST as string,
 	password: process.env.DATABASE_PASSWORD as string,
 })
+
+export { schema }
