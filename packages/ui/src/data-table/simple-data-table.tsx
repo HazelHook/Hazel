@@ -15,7 +15,7 @@ import {
 
 import { Button } from "../button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../table"
-import { IconArrowDownSquare, IconArrowUpSquare } from "@tabler/icons-react"
+import { IconChevronsDown, IconChevronsUp } from "@tabler/icons-react"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -118,9 +118,9 @@ export const SortableHeader = ({
 			>
 				{name}
 				{column.getIsSorted() === "asc" ? (
-					<IconArrowUpSquare className="ml-2 h-4 w-4" />
+					<IconChevronsUp className="ml-2 h-4 w-4" />
 				) : (
-					<IconArrowDownSquare className="ml-2 h-4 w-4" />
+					<IconChevronsDown className="ml-2 h-4 w-4" />
 				)}
 			</Button>
 		</div>

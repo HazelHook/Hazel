@@ -5,7 +5,7 @@ import { UserUpdateForm } from "@/components/forms/user/user-update-form"
 import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
 
-import { AvatarUpload } from "../components/AvatarUpload"
+import { AvatarUpload } from "../components/avatar-upload"
 
 const SettingsPage = async () => {
 	const { userId, user } = await auth()
