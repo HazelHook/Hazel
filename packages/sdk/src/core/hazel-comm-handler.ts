@@ -8,6 +8,7 @@ import { IntrospectRequest, MaybePromise } from "../lib/helpers/types"
 import { RegisterOptions, RegisterRequest, SupportedFrameworks, WebhookConfig } from "../lib/types"
 import { Hazel } from "./hazel"
 import { AnyHazelWebhook, HazelWebhook } from "./webhook-function"
+import { verifySignature } from "../lib/helpers/signature"
 
 /**
  * The broad definition of a handler passed when instantiating an
@@ -358,6 +359,27 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 				}
 			}
 
+			console.log(
+				"🚀 ~ file: hazel-comm-handler.ts:341 ~ HazelCommHandler<Input ~ handleAction ~ hazelSignature:",
+				hazelSignature,
+			)
+
+			const body = await actions.body("processing run request")
+
+			try {
+				const isValid = await verifySignature(this.secret, JSON.stringify(body), hazelSignature!)
+				console.log(
+					"🚀 ~ file: hazel-comm-handler.ts:370 ~ HazelCommHandler<Input ~ handleAction ~ isValid:",
+					isValid,
+				)
+
+				if (!isValid) {
+					console.log("WOW ITS NOT SIGNED CORRECLY")
+				}
+			} catch (error) {
+				console.log(error)
+			}
+
 			if (!hazelKey) {
 				throw new Error("No webhook ID found in request")
 			}
@@ -391,8 +413,6 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 			}
 
 			if (method === "POST") {
-				const body = await actions.body("processing run request")
-
 				const res = await fn.fn.execute({ event: body })
 
 				return {

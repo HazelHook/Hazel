@@ -19,7 +19,7 @@ export const organizations = mysqlTable(
 
 		secretKey: varchar("secret_key", { length: 64 })
 			.notNull()
-			.$defaultFn(() => genId(32)),
+			.$defaultFn(() => `sk_${genId(29)}`),
 
 		plan: mysqlEnum("plan", ["free", "pro", "enterprise"]),
 

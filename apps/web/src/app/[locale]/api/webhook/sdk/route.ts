@@ -4,23 +4,20 @@ import { serve } from "@hazel/sdk/next"
 const hazel = new Hazel({ id: "test" })
 
 const stripe = hazel.createWebhook({ event: "stripe" }, async (opts) => {
-	console.log("opts")
 	return { body: "Hello, World!" }
 })
 
 const svix = hazel.createWebhook({ event: "svix" }, async (opts) => {
-	console.log(opts)
 	return { body: "Hello, World!" }
 })
 
 const linear = hazel.createWebhook({ event: "linear" }, async (opts) => {
-	console.log(opts.event, "WOZIEZ")
 	return opts.event
 })
 
 export const { GET, PUT, POST } = serve({
 	client: hazel,
-	secret: "",
+	secret: "sk_530a7f6d609053a3d750107cc9f",
 	webhooks: [svix, stripe, linear],
 })
 

@@ -108,6 +108,7 @@ export const v1Route = new Elysia()
 							sourceKey: source.key,
 							received_at,
 							delay: connection.delay,
+							signKey: source.workspace.secretKey,
 						})
 					}
 				}

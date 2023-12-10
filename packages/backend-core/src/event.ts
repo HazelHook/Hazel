@@ -4,6 +4,7 @@ import tiny from "@hazel/tinybird"
 import { genId, getLogger } from "@hazel/utils"
 import { ingestMetric } from "@hazel/utils/lago"
 import { convertDataForSourceQueue, insertSourceQueue } from "./helpers/queue.helpers"
+import { generateSignature } from "./crypto"
 
 interface Event {
 	connection: Connection & {
@@ -17,6 +18,9 @@ interface Event {
 	workspaceId: string
 	received_at: string
 	shouldThrowOnError?: boolean
+
+	// Secret Key to Sign Webhooks with
+	signKey: string
 
 	//  Can have an inital Delay
 	delay?: number | null
@@ -32,6 +36,7 @@ export const sendEvent = async ({
 	body,
 	received_at,
 	shouldThrowOnError,
+	signKey,
 	delay,
 }: Event) => {
 	try {
@@ -48,6 +53,8 @@ export const sendEvent = async ({
 		} else {
 			ingestMetric({ workspaceId, type: "events" })
 
+			console.log(signKey)
+
 			const sendTime = new Date().toISOString()
 			const res = await fetch(connection.destination.url, {
 				...request.clone(),
@@ -56,7 +63,7 @@ export const sendEvent = async ({
 				headers: {
 					...request.headers,
 					"X-HAZEL_KEY": `${connection.destination.key}-${sourceKey}`,
-					"X-HAZEL_SIGNATURE": "TODO: create signature",
+					"X-HAZEL_SIGNATURE": generateSignature(signKey, body),
 				},
 			})
 

@@ -50,7 +50,6 @@ export const serve = (options: ServeHandlerOptions) => {
 
 			return {
 				body: () => {
-					console.log("CALLED BODY")
 					return typeof req.json === "function" ? req.json() : req.body
 				},
 				headers: getHeader,
