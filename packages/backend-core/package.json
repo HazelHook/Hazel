@@ -20,7 +20,7 @@
     "@hazel/tsconfig": "workspace:*",
     "eslint": "^8.54.0",
     "prettier": "^3.1.0",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   },
   "exports": {
     ".": "./src/index.ts"
