@@ -23,7 +23,7 @@
     "@hazel/auth": "workspace:*",
     "@hazel/db": "workspace:*",
     "@hazel/integrations": "workspace:*",
-    "@hazel/sdk": "workspace:*",
+    "@hazelapp/sdk": "workspace:*",
     "@hazel/server": "workspace:*",
     "@hazel/supabase": "workspace:*",
     "@hazel/tinybird": "workspace:*",

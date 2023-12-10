@@ -120,9 +120,6 @@ importers:
       '@hazel/integrations':
         specifier: workspace:*
         version: link:../../packages/integrations
-      '@hazel/sdk':
-        specifier: workspace:*
-        version: link:../../packages/sdk
       '@hazel/server':
         specifier: workspace:*
         version: link:../../packages/server
@@ -138,6 +135,9 @@ importers:
       '@hazel/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@hazelapp/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
       '@hookform/resolvers':
         specifier: ^3.3.2
         version: 3.3.2(react-hook-form@7.48.2)
