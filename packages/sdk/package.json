@@ -1,6 +1,6 @@
 {
   "name": "@hazelapp/sdk",
-  "private": true,
+  "private": false,
   "version": "0.0.1",
   "scripts": {
     "clean": "git clean -xdf .turbo node_modules",
