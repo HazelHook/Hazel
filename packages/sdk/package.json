@@ -35,6 +35,8 @@
     }
   },
   "dependencies": {
+    "@edge-runtime/ponyfill": "^2.4.1",
+    "@edge-runtime/primitives": "^4.0.5",
     "@hazel/utils": "workspace:*",
     "cross-fetch": "^4.0.0",
     "next": "14.0.4",

@@ -359,25 +359,12 @@ export class HazelCommHandler<Input extends any[] = any[], Output = any, StreamO
 				}
 			}
 
-			console.log(
-				"🚀 ~ file: hazel-comm-handler.ts:341 ~ HazelCommHandler<Input ~ handleAction ~ hazelSignature:",
-				hazelSignature,
-			)
-
 			const body = await actions.body("processing run request")
 
-			try {
-				const isValid = await verifySignature(this.secret, JSON.stringify(body), hazelSignature!)
-				console.log(
-					"🚀 ~ file: hazel-comm-handler.ts:370 ~ HazelCommHandler<Input ~ handleAction ~ isValid:",
-					isValid,
-				)
+			const isValid = await verifySignature(this.secret, JSON.stringify(body), hazelSignature!)
 
-				if (!isValid) {
-					console.log("WOW ITS NOT SIGNED CORRECLY")
-				}
-			} catch (error) {
-				console.log(error)
+			if (!isValid) {
+				throw new Error("Signature Invalid")
 			}
 
 			if (!hazelKey) {

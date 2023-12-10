@@ -53,8 +53,6 @@ export const sendEvent = async ({
 		} else {
 			ingestMetric({ workspaceId, type: "events" })
 
-			console.log(signKey)
-
 			const sendTime = new Date().toISOString()
 			const res = await fetch(connection.destination.url, {
 				...request.clone(),
@@ -63,7 +61,7 @@ export const sendEvent = async ({
 				headers: {
 					...request.headers,
 					"X-HAZEL_KEY": `${connection.destination.key}-${sourceKey}`,
-					"X-HAZEL_SIGNATURE": generateSignature(signKey, body),
+					"X-HAZEL_SIGNATURE": generateSignature({ secret: signKey, body }),
 				},
 			})
 

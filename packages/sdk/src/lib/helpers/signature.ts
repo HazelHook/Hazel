@@ -1,3 +1,5 @@
+import { crypto, TextEncoder } from "@edge-runtime/ponyfill"
+
 /**
  * Converts a hex string to a Uint8Array.
  *

@@ -599,6 +599,12 @@ importers:
 
   packages/sdk:
     dependencies:
+      '@edge-runtime/ponyfill':
+        specifier: ^2.4.1
+        version: 2.4.1
+      '@edge-runtime/primitives':
+        specifier: ^4.0.5
+        version: 4.0.5
       '@hazel/utils':
         specifier: workspace:*
         version: link:../utils
@@ -1590,6 +1596,16 @@ packages:
     dependencies:
       superjson: 2.2.1
     dev: true
+
+  /@edge-runtime/ponyfill@2.4.1:
+    resolution: {integrity: sha512-ZbR/EViY3gg2rmEAQTKPa6mXl4aR1/+cFcQe4r1segCjEbTAxT6PWu40odbu/KlZKSysEb2O/BWIC2lJgSJOMQ==}
+    engines: {node: '>=16'}
+    dev: false
+
+  /@edge-runtime/primitives@4.0.5:
+    resolution: {integrity: sha512-t7QiN5d/KpXgCvIfSt6Nm9Hj3WVdNgc5CpOD73jasY+9EvTI7Ngdj5cXvjcHrPcmYWJZMySPgeEeoL/1N/Llag==}
+    engines: {node: '>=16'}
+    dev: false
 
   /@elysiajs/bearer@0.7.0(elysia@0.7.30):
     resolution: {integrity: sha512-JVZizVi4Vp7uTRDZ30O37AEPPl1sqVQh8KwWKk++x2lOAdHIw9Lnr7azqZs5B+LyhAh02cMeHr3zDmN9u7O73A==}
