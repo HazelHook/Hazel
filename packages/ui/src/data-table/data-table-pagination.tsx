@@ -80,7 +80,7 @@ export function DataTablePagination<TData>({
 						onClick={() => table.nextPage()}
 						disabled={!table.getCanNextPage()}
 					>
-						<IconChevronsRight className="h-4 w-4" aria-hidden="true" />
+						<IconChevronRight className="h-4 w-4" aria-hidden="true" />
 					</Button>
 					<Button
 						aria-label="Go to last page"
@@ -89,7 +89,7 @@ export function DataTablePagination<TData>({
 						onClick={() => table.setPageIndex(table.getPageCount() - 1)}
 						disabled={!table.getCanNextPage()}
 					>
-						<IconChevronRight className="h-4 w-4" aria-hidden="true" />
+						<IconChevronsRight className="h-4 w-4" aria-hidden="true" />
 					</Button>
 				</div>
 			</div>
