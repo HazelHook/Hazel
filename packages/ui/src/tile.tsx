@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 
-import Heading from "./heading"
+import { Heading } from "./heading"
 import { cn } from "./utils"
 import { IconArrowDown, IconArrowUp, IconPlayerPause } from "@tabler/icons-react"
 

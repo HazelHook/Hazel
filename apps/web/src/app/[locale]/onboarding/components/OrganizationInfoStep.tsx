@@ -5,7 +5,7 @@ import { useCallback } from "react"
 
 import { useAuth } from "@hazel/auth/provider"
 import { Button } from "@hazel/ui/button"
-import Heading from "@hazel/ui/heading"
+import { Heading } from "@hazel/ui/heading"
 import { Input } from "@hazel/ui/input"
 import { Label } from "@hazel/ui/label"
 import { IconArrowRight } from "@tabler/icons-react"

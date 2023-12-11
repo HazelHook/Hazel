@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 
 import { useAction } from "@hazel/server/actions/client"
 import { TRPCActionHandler } from "@hazel/server/actions/trpc"
-import Heading from "@hazel/ui/heading"
+import { Heading } from "@hazel/ui/heading"
 import { ImageUpload } from "@hazel/ui/image-upload"
 import { toast } from "sonner"
 

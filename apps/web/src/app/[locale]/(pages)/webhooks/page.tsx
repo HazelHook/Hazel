@@ -5,7 +5,7 @@ import { auth } from "@/lib/auth"
 import { db } from "@hazel/db"
 import { buttonVariants } from "@hazel/ui/button"
 import { Container } from "@hazel/ui/container"
-import Heading from "@hazel/ui/heading"
+import { Heading } from "@hazel/ui/heading"
 import { SimpleTooltip } from "@hazel/ui/tooltip"
 
 import { ConnectionPath } from "./components/connection-path"

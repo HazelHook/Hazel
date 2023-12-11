@@ -34,5 +34,3 @@ export const Heading: React.FCC<{ type?: HeadingType; className?: string }> = ({
 			return <Heading type={1}>{children}</Heading>
 	}
 }
-
-export default Heading

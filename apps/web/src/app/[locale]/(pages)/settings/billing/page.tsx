@@ -4,7 +4,7 @@ import { PlanCard } from "@/app/[locale]/(pages)/settings/billing/components/pla
 import Alert, { AlertHeading } from "@hazel/ui/alert"
 import { Card } from "@hazel/ui/card"
 import { Container } from "@hazel/ui/container"
-import Heading from "@hazel/ui/heading"
+import { Heading } from "@hazel/ui/heading"
 import { PageHeader } from "@hazel/ui/page-header"
 import { createCustomer, createSubscription, lago } from "@hazel/utils/lago"
 

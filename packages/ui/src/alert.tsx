@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority"
 import classNames from "clsx"
 
 import { Button } from "./button"
-import Heading from "./heading"
+import { Heading } from "./heading"
 import { IconAlertHexagon, IconAlertTriangle, IconCheck, IconInfoCircle, IconX } from "@tabler/icons-react"
 
 type AlertType = "success" | "error" | "warn" | "info"

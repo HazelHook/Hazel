@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import Heading from "@hazel/ui/heading"
+import { Heading } from "@hazel/ui/heading"
 import { useTranslations } from "next-intl"
 
 import { SignUpMethodsContainer } from "../internal-components/sign-up-methods-container"

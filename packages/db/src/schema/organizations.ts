@@ -17,7 +17,7 @@ export const organizations = mysqlTable(
 
 		name: varchar("name", { length: 128 }).notNull(),
 
-		secretKey: varchar("secret_key", { length: 64 })
+		secretKey: varchar("secret_key", { length: 32 })
 			.notNull()
 			.$defaultFn(() => `sk_${genId(29)}`),
 
