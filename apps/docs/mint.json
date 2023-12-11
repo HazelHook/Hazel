@@ -1,0 +1,114 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Hazel",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373",
+    "anchors": {
+      "from": "#0D9373",
+      "to": "#07C983"
+    }
+  },
+  "openapi": "http://localhost:3006/swagger/json",
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@hazel.sh"
+    },
+    {
+      "name": "Github",
+      "url": "https://github.com/HazelHook/Hazel"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://app.hazel.sh"
+  },
+  "tabs": [
+    {
+      "name": "Libraries",
+      "url": "libraries"
+    },
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Github",
+      "icon": "github",
+      "url": "https://github.com/HazelHook/Hazel"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://hazel.sh/blog"
+    },
+    {
+      "name": "API Reference",
+      "icon": "cloud",
+      "url": "/api-reference/introduction"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "development"
+      ]
+    },
+    {
+      "group": "Essentials",
+      "pages": [
+        "essentials/connections",
+        "essentials/sources",
+        "essentials/destinations"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "Connections",
+      "pages": [
+        "api-reference/endpoint/connections/get-connection",
+        "api-reference/endpoint/connections/get-connections",
+        "api-reference/endpoint/connections/create-connection",
+        "api-reference/endpoint/connections/update-connection",
+        "api-reference/endpoint/connections/delete-connection",
+        "api-reference/endpoint/connections/pause-connection",
+        "api-reference/endpoint/connections/unpause-connection"
+      ]
+    },
+    {
+      "group": "Models",
+      "pages": [
+        "api-reference/models/source",
+        "api-reference/models/destination",
+        "api-reference/models/connection"
+      ]
+    },
+    {
+      "group": "Libraries",
+      "pages": [
+        "libraries/sdk/overview"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/hazeldotsh",
+    "github": "https://github.com/HazelHook/Hazel"
+  }
+}

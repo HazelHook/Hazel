@@ -1,0 +1,33 @@
+---
+title: 'Quickstart'
+description: 'Get started with Hazel in 5 minutes'
+---
+
+## How Hazel works
+
+Hazel describes webhooks with [connections](/connections), a connection describes a "connection" between [source](/source) and [destination](/destination).
+
+
+## How Connections Work in Hazel
+
+In Hazel, when a Webhook request is received from a source, it is immediately forwarded to all connected destinations. These relationships are defined as [connections](/connections) in Hazel. 
+
+- **Multiple Connections**: A single source can have unlimited [connections](/connections), enabling a one-to-many relationship. This simplifies the creation of multiple connections for one [source](/source).
+- **Configuration**: Each connection offers dynamic rules, including rate limiting, automatic retries, and submission delays, that can be tailored to your specific use case.
+- **Pause and Resume**: Connections can be paused to temporarily halt webhook submissions and resumed later. Hazel ensures no requests are lost during this period and can be consumed later when the connection is being resumed.
+
+## Getting Started with Hazel
+
+To begin managing your Webhooks with Hazel, the first step is to create a new connection. This can be done easily [here](https://app.hazel.sh/connection/new).
+
+1. **Create a New Source**:
+   - **Specify Details**: Provide a name and a unique identifier for integration with our SDK.
+   - **Naming Convention**: Use a format like `ProviderName-Environment` (e.g., `Stripe-Prod`) for easy identification.
+   - **Webhook Verification**: Add an integration to your source for automatic signature verification. If your provider isn't listed, feel free to [contact us](mailto:support@hazel.sh).
+
+2. **Set Up a Destination**:
+   - **Destination Details**: Again, specify a name and unique identifier, along with the destination URL (the webhook URL you were using previously).
+
+3. **Success**:
+    - Once the Source and Destination are set up, you can create the Connection. An optional name can be assigned for easy identification.
+    - Following creation, you'll be redirected to the connection's page. This page will guide you to utilize Hazel fully in your environment.

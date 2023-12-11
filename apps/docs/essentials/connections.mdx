@@ -1,0 +1,15 @@
+---
+title: 'Connections'
+description: 'A Connection describes a "connection" between [source](/source) and [destination](/destination).'
+---
+
+## How Connections Work
+
+In Hazel, when a Webhook request is received from a source, it is immediately forwarded to all connected destinations. These relationships are defined as [connections](/connections) in Hazel. 
+
+- **Multiple Connections**: A single source can have unlimited [connections](/connections), enabling a one-to-many relationship. This simplifies the creation of multiple connections for one [source](/source).
+- **Configuration**: Each connection offers dynamic rules, including rate limiting, automatic retries, and submission delays, that can be tailored to your specific use case.
+- **Pause and Resume**: Connections can be paused to temporarily halt webhook submissions and resumed later. Hazel ensures no requests are lost during this period and can be consumed later when the connection is being resumed.
+
+
+
