@@ -1,5 +1,5 @@
-import { Hazel } from "@hazel/sdk"
-import { serve } from "@hazel/sdk/next"
+import { Hazel } from "@hazelapp/sdk"
+import { serve } from "@hazelapp/sdk/next"
 
 const hazel = new Hazel({ id: "test" })
 

@@ -1,4 +1,4 @@
-import { verifySignature } from "@hazel/sdk"
+import { verifySignature } from "@hazelapp/sdk"
 
 export const POST = async (req: Request) => {
 	const isValid = verifySignature(
