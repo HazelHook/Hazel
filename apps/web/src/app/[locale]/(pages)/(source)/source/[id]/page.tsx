@@ -19,6 +19,7 @@ import { SourceCopyButton } from "@/components/source-copy-button"
 import Link from "next/link"
 import { buttonVariants } from "@hazel/ui/button"
 import { IconExternalLink } from "@tabler/icons-react"
+import { zinc } from "tailwindcss/colors"
 
 const SourcePage = async ({
 	params,
@@ -44,6 +45,7 @@ const SourcePage = async ({
 		workspace_id: workspaceId,
 		source_id: source.publicId,
 		start_date: startTime,
+		period: "daily",
 	})
 
 	const chartData = transformSourcesChartData(req.data)
@@ -88,7 +90,7 @@ const SourcePage = async ({
 						<Chart
 							options={{
 								chart: {
-									id: "wow",
+									id: "responses",
 									sparkline: {
 										enabled: false,
 									},
@@ -96,7 +98,7 @@ const SourcePage = async ({
 										show: false,
 									},
 								},
-								colors: chartColors,
+								colors: [zinc[700]],
 								legend: {
 									show: true,
 									position: "top",
@@ -119,7 +121,7 @@ const SourcePage = async ({
 								},
 							}}
 							series={chartData.series}
-							type="area"
+							type="bar"
 							height={350}
 							width={"100%"}
 						/>

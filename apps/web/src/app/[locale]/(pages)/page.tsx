@@ -131,7 +131,6 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 							color={chartColors[0]}
 							title={"Events"}
 							subtitle={String(data.reduce((curr, el) => curr + el.events, 0))}
-							group="kpis"
 							id={"events"}
 							series={[
 								{
