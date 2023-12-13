@@ -80,7 +80,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 	const kpiError = tiny.response.kpi({
 		workspace_id: workspaceId,
-		// success: 0,
+		success: 0,
 		start_date: startTime,
 		end_date: endTime,
 	})

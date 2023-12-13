@@ -65,6 +65,7 @@ const kpiParameters = {
 	start_date: z.string(),
 	end_date: z.string().optional(),
 	period: period.default("daily").optional(),
+	success: z.number().max(1).min(0).optional(),
 	source_id: z.string().optional(),
 }
 export type TBKpiResponseParameters = ZodMapped<typeof kpiParameters>
