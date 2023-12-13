@@ -1,5 +1,5 @@
-import { connect } from "@planetscale/database"
-import { drizzle, PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless"
+import { sql } from "@vercel/postgres"
+import { drizzle, VercelPgDatabase } from "drizzle-orm/vercel-postgres"
 
 import * as schema from "../schema"
 import apiKeysLogic from "./tables/apiKeys"
@@ -10,22 +10,16 @@ import organizationsLogic from "./tables/organization"
 import sourceLogic from "./tables/source"
 import userLogic from "./tables/user"
 
-export type DB = PlanetScaleDatabase<typeof schema>
+export type DB = VercelPgDatabase<typeof schema>
 
 export type OptionalExceptFor<T, K extends keyof T> = Partial<T> & Pick<T, K>
 
 export function connectDB({
-	host,
-	username,
-	password,
+	connectionString,
 }: {
-	host: string
-	username: string
-	password: string
+	connectionString: string
 }) {
-	const client = connect({ host, username, password })
-
-	const db = drizzle(client, { schema, logger: false })
+	const db = drizzle(sql, { schema, logger: false })
 
 	return {
 		db,
@@ -40,7 +34,5 @@ export function connectDB({
 }
 
 export default connectDB({
-	username: process.env.DATABASE_USERNAME as string,
-	host: process.env.DATABASE_HOST as string,
-	password: process.env.DATABASE_PASSWORD as string,
+	connectionString: process.env.DATABASE_URL as string,
 })

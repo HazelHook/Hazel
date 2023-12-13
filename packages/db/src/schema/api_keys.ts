@@ -1,18 +1,18 @@
-import { index, mysqlTable, timestamp, varchar } from "drizzle-orm/mysql-core"
+import { pgTable, index, timestamp, varchar } from "drizzle-orm/pg-core"
 import { commonFields } from "./common"
+import { organizations } from "./organizations"
 
-export const apiKeys = mysqlTable(
+export const apiKeys = pgTable(
 	"api_keys",
 	{
 		...commonFields("sk"),
-		workspaceId: varchar("workspace_id", { length: 128 }).notNull(),
-		// .references(() => organizations.publicId),
+		workspaceId: varchar("workspace_id", { length: 128 })
+			.notNull()
+			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
 		ownerId: varchar("owner_id", { length: 128 }),
 		name: varchar("name", { length: 128 }),
-		expires: timestamp("expires", { fsp: 3 }),
+		expires: timestamp("expires", { precision: 3 }),
 	},
-	(table) => ({
-		workspaceIdx: index("workspace_idx").on(table.workspaceId),
-	}),
+	(table) => ({}),
 )

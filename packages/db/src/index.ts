@@ -11,9 +11,7 @@ export * from "drizzle-orm"
 export { default } from "./orm"
 
 export const db = connectDB({
-	username: process.env.DATABASE_USERNAME as string,
-	host: process.env.DATABASE_HOST as string,
-	password: process.env.DATABASE_PASSWORD as string,
+	connectionString: process.env.DATABASE_URL as string,
 })
 
 export { schema }

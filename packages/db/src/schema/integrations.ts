@@ -1,24 +1,26 @@
-import { index, json, mysqlEnum, mysqlTable, varchar } from "drizzle-orm/mysql-core"
+import { index, json, pgEnum, pgTable, varchar } from "drizzle-orm/pg-core"
 import { commonFields } from "./common"
 
 import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm"
 import { source } from "./sources"
 
 import { INTEGRATIONS } from "@hazel/integrations/web"
+import { organizations } from "./organizations"
 
-export const integration = mysqlTable(
+export const toolEnum = pgEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]])
+
+export const integration = pgTable(
 	"integrations",
 	{
 		...commonFields("itg"),
-		workspaceId: varchar("workspace_id", { length: 128 }).notNull(),
-		// .references(() => organizations.publicId),
+		workspaceId: varchar("workspace_id", { length: 128 })
+			.notNull()
+			.references(() => organizations.publicId),
 		publicId: varchar("public_id", { length: 21 }).unique().notNull(),
-		tool: mysqlEnum("tool", Object.keys(INTEGRATIONS) as [string, ...string[]]).notNull(),
+		tool: toolEnum("tool").notNull(),
 		config: json("config").notNull(),
 	},
-	(table) => ({
-		workspaceIdx: index("workspace_idx").on(table.workspaceId),
-	}),
+	(table) => ({}),
 )
 
 export const integrationRelations = relations(integration, ({ many }) => ({

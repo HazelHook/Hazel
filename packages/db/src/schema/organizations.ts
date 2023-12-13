@@ -1,10 +1,12 @@
 import { InferInsertModel, InferSelectModel, relations, sql } from "drizzle-orm"
-import { mysqlTable, serial, varchar, mysqlEnum, timestamp, int, index, uniqueIndex } from "drizzle-orm/mysql-core"
+import { serial, varchar, pgTable, timestamp, integer, index, uniqueIndex, pgEnum } from "drizzle-orm/pg-core"
 import { generatePublicId, roleField } from "./common"
 import { user } from "./users"
 import { genId } from "@hazel/utils"
 
-export const organizations = mysqlTable(
+export const planEnum = pgEnum("plan", ["free", "pro", "enterprise"])
+
+export const organizations = pgTable(
 	"organizations",
 	{
 		id: serial("id").primaryKey(),
@@ -21,7 +23,7 @@ export const organizations = mysqlTable(
 			.notNull()
 			.$defaultFn(() => `sk_${genId(29)}`),
 
-		plan: mysqlEnum("plan", ["free", "pro", "enterprise"]),
+		plan: planEnum("plan").default("free"),
 
 		profileImage: varchar("profile_image", { length: 256 }),
 
@@ -31,7 +33,7 @@ export const organizations = mysqlTable(
 	(table) => ({}),
 )
 
-export const organizationMembers = mysqlTable(
+export const organizationMembers = pgTable(
 	"organization_members",
 	{
 		id: serial("id").primaryKey(),
@@ -43,11 +45,13 @@ export const organizationMembers = mysqlTable(
 		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 		updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 
-		userId: varchar("user_id", { length: 256 }).notNull(),
-		// .references(() => user.id)
+		userId: varchar("user_id", { length: 256 })
+			.notNull()
+			.references(() => user.id),
 
-		organizationId: int("organization_id").notNull(),
-		// .references(() => organizations.id, { onDelete: "cascade" }),
+		organizationId: integer("organization_id")
+			.notNull()
+			.references(() => organizations.id, { onDelete: "cascade" }),
 		role: roleField,
 	},
 	(table) => ({
@@ -55,7 +59,7 @@ export const organizationMembers = mysqlTable(
 	}),
 )
 
-export const organizationInvites = mysqlTable(
+export const organizationInvites = pgTable(
 	"organization_invites",
 	{
 		id: serial("id").primaryKey(),
@@ -69,8 +73,9 @@ export const organizationInvites = mysqlTable(
 
 		email: varchar("email", { length: 128 }).notNull(),
 		role: roleField,
-		organizationId: int("organization_id").notNull(),
-		// .references(() => organizations.id, { onDelete: "cascade" }),
+		organizationId: integer("organization_id")
+			.notNull()
+			.references(() => organizations.id, { onDelete: "cascade" }),
 	},
 	(table) => ({
 		emailIdx: uniqueIndex("email_idx").on(table.email),

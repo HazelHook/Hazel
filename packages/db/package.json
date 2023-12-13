@@ -3,15 +3,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "db:push": "infisical run -- drizzle-kit push:mysql",
-    "db:pull": "infisical run -- drizzle-kit introspect:mysql",
-    "db:generate": "drizzle-kit generate:mysql",
+    "db:push": "infisical run -- drizzle-kit push:pg",
+    "db:pull": "infisical run -- drizzle-kit introspect:pg",
+    "db:generate": "drizzle-kit generate:pg",
     "tb:pull": "tb pull --auto --force"
   },
   "dependencies": {
-    "@hazel/integrations": "workspace:*",
     "@chronark/zod-bird": "^0.3.1",
+    "@hazel/integrations": "workspace:*",
+    "@neondatabase/serverless": "^0.6.0",
     "@planetscale/database": "^1.11.0",
+    "@vercel/postgres": "^0.5.1",
     "drizzle-orm": "^0.29.1",
     "drizzle-zod": "^0.5.1"
   },

@@ -1,1 +1,0 @@
-ALTER TABLE `organizations` ADD `secret_key` varchar(32) NOT NULL;

@@ -3,8 +3,8 @@ import type { Config } from "drizzle-kit"
 export default ({
 	schema: "./src/schema/index.ts",
 	out: "./drizzle",
-	driver: "mysql2",
+	driver: "pg",
 	dbCredentials: {
-		uri: `mysql://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}/hazel?ssl={"rejectUnauthorized":true}`,
+		connectionString: process.env.DIRECT_DATABASE_URL,
 	},
 } satisfies Config)

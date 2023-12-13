@@ -1,4 +1,4 @@
-import { MySqlSelect } from "drizzle-orm/mysql-core"
+import { PgSelect } from "drizzle-orm/pg-core"
 
 import { db, DBQueryConfig, ExtractTablesWithRelations } from "."
 import { DB } from "./orm"
@@ -18,7 +18,7 @@ import * as schema from "./schema"
  *
  * @public
  */
-export function withPagination<T extends MySqlSelect<any, any, any, any>>(qb: T, page: number, pageSize = 10) {
+export function withPagination<T extends PgSelect<any, any, any, any>>(qb: T, page: number, pageSize = 10) {
 	return qb.limit(pageSize).offset(page * pageSize)
 }
 

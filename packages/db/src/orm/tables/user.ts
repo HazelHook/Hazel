@@ -37,7 +37,8 @@ const userLogic = (db: DB) => ({
 			.values({
 				...data,
 			})
-			.onDuplicateKeyUpdate({
+			.onConflictDoUpdate({
+				target: schema.user.id,
 				set: data,
 			})
 
