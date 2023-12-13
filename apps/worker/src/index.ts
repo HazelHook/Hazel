@@ -1,4 +1,4 @@
-import db from "@hazel/db"
+import db, { eq, schema } from "@hazel/db"
 import tiny from "@hazel/tinybird"
 import { ConnectionOptions, MetricsTime, Worker } from "bullmq"
 import { nanoid } from "nanoid"
@@ -6,6 +6,7 @@ import { nanoid } from "nanoid"
 import { consumeBase64 } from "./lib/request.helper"
 import { getLogger } from "@hazel/utils"
 import { ingestMetric } from "@hazel/utils/lago"
+import { generateSignature } from "@hazel/backend-core/crypto"
 
 getLogger().info("Hazel Worker starting up....")
 
@@ -26,8 +27,17 @@ const worker = new Worker<{
 	async (job) => {
 		getLogger().info("Doing Job! :) ", job.attemptsMade)
 
-		const connection = await db.connection.getOne({
-			publicId: job.data.connectionId,
+		const connection = await db.db.query.connection.findFirst({
+			where: eq(schema.connection.publicId, job.data.connectionId),
+			with: {
+				destination: true,
+				source: {
+					with: {
+						integration: true,
+						workspace: true,
+					},
+				},
+			},
 		})
 
 		if (!connection) {
@@ -39,10 +49,13 @@ const worker = new Worker<{
 
 		const sendTime = new Date().toISOString()
 
-		const res = await consumeBase64(job.data.request, {
+		const res = await consumeBase64(job.data.request, (body) => ({
 			"X-HAZEL_KEY": `${connection.destination.key}-${connection.source.key}`,
-			"X-HAZEL_SIGNATURE": "TODO: create signature",
-		})
+			"X-HAZEL_SIGNATURE": generateSignature({
+				secret: connection.source.workspace.secretKey,
+				body: JSON.stringify(body),
+			}),
+		}))
 
 		const headersObj: Record<string, string> = {}
 

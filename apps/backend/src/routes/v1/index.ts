@@ -86,11 +86,6 @@ export const v1Route = new Elysia()
 
 				if (!verified.validated || (verified.validated && verified.valid)) {
 					for (const connection of source.connections) {
-						if (!connection.destination) {
-							// TODO: LOG HERE THAT USER NEEDS DESTINATION
-							return
-						}
-
 						if (!connection.enabled) {
 							// TODO: Log it
 							// TODO: Should be put in queue here for later when connection is resumed
