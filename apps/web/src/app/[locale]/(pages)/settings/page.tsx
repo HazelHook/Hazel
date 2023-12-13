@@ -8,6 +8,7 @@ import { Container } from "@hazel/ui/container"
 import { AvatarUpload } from "./components/avatar-upload"
 import { CopyButton } from "@/components/copy-button"
 import { Heading } from "@hazel/ui/heading"
+import { Button } from "@hazel/ui/button"
 
 const SettingsPage = async () => {
 	const { workspaceId, organization } = await auth()
@@ -35,11 +36,13 @@ const SettingsPage = async () => {
 				</div>
 
 				<CopyButton value={organization.secretKey} />
+
+				<Button variant="destructive">Regenerate</Button>
 			</Card>
 		</Container>
 	)
 }
 
-// export const runtime = "edge"
+export const runtime = "edge"
 
 export default SettingsPage
