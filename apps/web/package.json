@@ -8,7 +8,7 @@
     "dev:raw": "next dev",
     "dev:turbo": "infisical run -- next dev --turbo --port 3004",
     "dev:build": "infisical run --next build",
-    "build": "npx @cloudflare/next-on-pages",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

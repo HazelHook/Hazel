@@ -1,4 +1,4 @@
-import { InferInsertModel, InferSelectModel, relations, sql } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import { mysqlTable, serial, varchar, mysqlEnum, timestamp, int, index, uniqueIndex } from "drizzle-orm/mysql-core"
 import { generatePublicId, roleField } from "./common"
 import { user } from "./users"

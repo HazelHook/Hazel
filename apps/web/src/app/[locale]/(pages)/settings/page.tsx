@@ -1,4 +1,4 @@
-import { updateOrganizationProfileImageAction } from "@/server/actions/organization"
+import { regenerateOrganizationSecretAction, updateOrganizationProfileImageAction } from "@/server/actions/organization"
 import { auth } from "@/lib/auth"
 import { OrganizationUpdateForm } from "@/components/forms/organization/OrganizationUpdateForm"
 
@@ -9,6 +9,7 @@ import { AvatarUpload } from "./components/avatar-upload"
 import { CopyButton } from "@/components/copy-button"
 import { Heading } from "@hazel/ui/heading"
 import { Button } from "@hazel/ui/button"
+import { ApiKeyConfirmation } from "./components/api-key-confirmation"
 
 const SettingsPage = async () => {
 	const { workspaceId, organization } = await auth()
@@ -37,7 +38,7 @@ const SettingsPage = async () => {
 
 				<CopyButton value={organization.secretKey} />
 
-				<Button variant="destructive">Regenerate</Button>
+				<ApiKeyConfirmation regenerateAction={regenerateOrganizationSecretAction} />
 			</Card>
 		</Container>
 	)
