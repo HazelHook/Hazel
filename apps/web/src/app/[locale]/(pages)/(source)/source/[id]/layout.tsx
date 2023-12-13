@@ -10,9 +10,10 @@ import { NavTabs } from "@hazel/ui/nav-tabs"
 import { Heading } from "@hazel/ui/heading"
 import { SimpleTooltip } from "@hazel/ui/tooltip"
 import { Container } from "@hazel/ui/container"
-import { Icons } from "@/components/icons"
-import { IconInfoCircle } from "@tabler/icons-react"
+import { IconInfoCircle, IconKey } from "@tabler/icons-react"
 import { SourceIcon } from "@/components/source-icon"
+import { notFound } from "next/navigation"
+import { CopyButton } from "@/components/copy-button"
 
 const ConnectionLayout = async ({
 	children,
@@ -26,12 +27,17 @@ const ConnectionLayout = async ({
 	const { workspaceId } = await auth()
 
 	const source = await getCachedSource({ publicId: params.id, workspaceId })
-	const toolSlug = source?.integration?.tool
+
+	if (!source) {
+		notFound()
+	}
+
+	const toolSlug = source.integration?.tool
 
 	return (
 		<Container>
 			<div className="flex flex-row justify-between mb-4">
-				<div>
+				<div className="space-y-2">
 					<div className="flex gap-2 items-center">
 						<SourceIcon slug={toolSlug} />
 
@@ -43,18 +49,22 @@ const ConnectionLayout = async ({
 							<IconInfoCircle />
 						</SimpleTooltip>
 					</div>
-					<h4 className="text-lg text-muted-foreground">{source?.name}</h4>
+					<Heading type={3}>
+						{source.name} <span className="text-muted-foreground text-base">({source.key})</span>
+					</Heading>
 				</div>
 
 				<Link className={buttonVariants()} href={`/connection/new?source=${params.id}`}>
 					Add to New Connection
 				</Link>
 			</div>
-			<NavTabs>
-				<LinkTab href={`/source/${params.id}`}>Overview</LinkTab>
-				<LinkTab href={`/source/${params.id}/settings`}>Settings</LinkTab>
-			</NavTabs>
-			{children}
+			<div className="space-y-4">
+				<NavTabs>
+					<LinkTab href={`/source/${params.id}`}>Overview</LinkTab>
+					<LinkTab href={`/source/${params.id}/settings`}>Settings</LinkTab>
+				</NavTabs>
+				{children}
+			</div>
 		</Container>
 	)
 }

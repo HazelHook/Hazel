@@ -15,7 +15,7 @@ export type Column = Destination
 export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: "publicId",
-		header: "Destination",
+		header: "Connected Destinations",
 		cell: ({ cell, row }) => {
 			const publicId = cell.getValue() as string
 

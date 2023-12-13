@@ -8,15 +8,11 @@ import { Sidebar } from "@/components/sidebar"
 import { db } from "@hazel/db"
 import { TooltipProvider } from "@hazel/ui/tooltip"
 
-import { IconBook2, IconHome, IconOutlet, IconPlug, IconPlugConnected, IconSettings } from "@tabler/icons-react"
+import { IconBook2, IconHome } from "@tabler/icons-react"
 import { Icons } from "@/components/icons"
 
 interface RootLayoutProps {
 	children: React.ReactNode
-	params: {
-		org?: string
-		slug?: string
-	}
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {

@@ -1,6 +1,5 @@
 import { index, mysqlTable, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { commonFields } from "./common"
-import type { InferInsertModel, InferSelectModel } from "drizzle-orm"
 
 export const apiKeys = mysqlTable(
 	"api_keys",
