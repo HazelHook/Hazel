@@ -103,7 +103,13 @@
     {
       "group": "Libraries",
       "pages": [
-        "libraries/sdk/overview"
+        {
+          "group": "Hazel SDK",
+          "pages": [
+            "libraries/sdk/overview",
+            "libraries/sdk/getting_started"
+          ]
+        }
       ]
     }
   ],

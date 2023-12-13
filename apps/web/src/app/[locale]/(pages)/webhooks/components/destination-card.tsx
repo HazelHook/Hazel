@@ -16,13 +16,10 @@ import { Separator } from "@hazel/ui/separator"
 import { toast } from "sonner"
 import { Icons } from "@/components/icons"
 import { IconDotsVertical } from "@tabler/icons-react"
+import { Destination } from "@hazel/db"
 
-export type DestinationCardProps = {
-	id: string
-	name: string
-	url: string
-}
-export const DestinationCard = ({ id, name, ...rest }: DestinationCardProps) => {
+export type DestinationCardProps = { destination: Destination }
+export const DestinationCard = ({ destination: { publicId, name, ...rest } }: DestinationCardProps) => {
 	const router = useRouter()
 
 	const handleDelete = useAction(deleteDestinationAction, {
@@ -66,7 +63,7 @@ export const DestinationCard = ({ id, name, ...rest }: DestinationCardProps) => 
 								<DropdownMenuItem
 									className="text-destructive"
 									onClick={async () => {
-										toast.promise(() => handleDelete.mutateAsync(id), {
+										toast.promise(() => handleDelete.mutateAsync(publicId), {
 											loading: "Deleting Source...",
 											success: "Successfully deleted the Source",
 											error: "There was an error deleting the Source",
@@ -84,7 +81,7 @@ export const DestinationCard = ({ id, name, ...rest }: DestinationCardProps) => 
 						onSubmit={async (values) => {
 							return await handleUpdate.mutateAsync({
 								...values,
-								publicId: id,
+								publicId: publicId,
 							})
 						}}
 						defaultValues={{ name, ...rest }}
@@ -92,7 +89,7 @@ export const DestinationCard = ({ id, name, ...rest }: DestinationCardProps) => 
 					>
 						<Separator className="-mx-4" />
 						<div className="flex flex-row gap-2 justify-between">
-							<Link href={`/destination/${id}`} className={buttonVariants({ variant: "outline" })}>
+							<Link href={`/destination/${publicId}`} className={buttonVariants({ variant: "outline" })}>
 								<Icons.Destination className="mr-2 w-4 h-4" />
 								Open Destination
 							</Link>

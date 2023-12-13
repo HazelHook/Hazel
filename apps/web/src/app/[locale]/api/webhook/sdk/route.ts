@@ -16,6 +16,7 @@ const linear = hazel.createWebhook({ event: "linear" }, async (opts) => {
 })
 
 export const { GET, PUT, POST } = serve({
+	id: "test",
 	client: hazel,
 	secret: "sk_530a7f6d609053a3d750107cc9f",
 	webhooks: [svix, stripe, linear],

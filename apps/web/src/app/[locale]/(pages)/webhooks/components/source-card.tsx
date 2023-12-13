@@ -8,7 +8,7 @@ import { deleteSourceAction, updateSourceAction } from "@/server/actions/source"
 import { updateSourceSchema } from "@/lib/schemas/source"
 import { UpdateIntegrationForm } from "@/components/forms/integration/update-integration-form"
 
-import { Integration } from "@hazel/db"
+import { Integration, Source } from "@hazel/db"
 import { INTEGRATIONS, IntegrationTools } from "@hazel/integrations/web"
 import { useAction } from "@hazel/server/actions/client"
 import { AutoForm } from "@hazel/ui/auto-form"
@@ -25,12 +25,12 @@ import { IconDotsVertical, IconLogin } from "@tabler/icons-react"
 import { Icons } from "@/components/icons"
 
 type SourceCardProps = {
-	id: string
-	name: string
-	integration: Integration | null
+	source: Source & {
+		integration: Integration | null
+	}
 }
 
-export const SourceCard = ({ name, id, integration }: SourceCardProps) => {
+export const SourceCard = ({ source: { name, publicId: id, integration } }: SourceCardProps) => {
 	const router = useRouter()
 
 	const handleDelete = useAction(deleteSourceAction, {

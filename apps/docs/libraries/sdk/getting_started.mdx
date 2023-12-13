@@ -1,0 +1,58 @@
+---
+title: 'Getting Started'
+description: 'This Section helps you get the Hazel SDK Setup in your Environment'
+---
+
+First you need to install the SDK itself this is the same for every evironment you are in.
+
+## 1. Install Hazel SDK
+
+<Tabs>
+  <Tab title="npm">
+  ```bash
+   npm install @hazelapp/sdk
+  ```
+  </Tab>
+  <Tab title="pnpm">
+  ```bash
+   pnpm add @hazelapp/sdk
+  ```
+  </Tab>
+  <Tab title="yarn">
+  ```bash
+   yarn add @hazelapp/sdk
+  ```
+  </Tab>
+    <Tab title="bun">
+    ```bash
+    bun install @hazelapp/sdk
+    ```
+  </Tab>
+</Tabs>
+
+
+## 2. Access your Hazel Workspace Secret
+
+When a Webhook is handled with Hazel a Hazel Signature will be added
+to be verified in your Destination, our SDK does that for you automatically.
+
+You can find your Workspace Secret in your [settings](https://app.hazel.sh/settings), 
+please add this as seen below as a Environment Variable to your APP
+
+```ts
+HAZEL_SECRET_KEY="YOUR ID"
+```
+
+
+## 3. Initiate Hazel Client
+
+Create a new file to initate the Hazel Client, you will need to add an ID, the id is 
+the identifier you have choosen earlier for your Destination, this can also be found again 
+on your
+
+
+```ts hazel.ts
+import { Hazel } from "@hazelapp/sdk"
+
+const hazel = new Hazel({ id: "test" })
+```

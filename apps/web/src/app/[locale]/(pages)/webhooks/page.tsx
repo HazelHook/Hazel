@@ -37,7 +37,7 @@ const WebhooksPage = async () => {
 
 			{connections.map(({ source, name, publicId, destination, delay, retryType, retryDelay, retyCount }) => (
 				<div className={"flex group justify-between items-center"} key={publicId}>
-					<SourceCard name={source.name} id={source.publicId} integration={source.integration} />
+					<SourceCard source={source} />
 					<ConnectionPath
 						name={name}
 						id={publicId}
@@ -47,7 +47,7 @@ const WebhooksPage = async () => {
 						retryCount={retyCount}
 					/>
 
-					<DestinationCard name={destination.name} url={destination.url} id={destination.publicId} />
+					<DestinationCard destination={destination} />
 				</div>
 			))}
 		</Container>

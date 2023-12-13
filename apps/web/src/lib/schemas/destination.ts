@@ -24,4 +24,7 @@ export const updateDestinationSchema = z.object({
 		})
 		.max(20),
 	url: z.string().url(),
+	key: z.string().regex(/^[a-z_-]+$/, {
+		message: "Only lowercase letters a-z, underscores, and hyphens are allowed",
+	}),
 })
