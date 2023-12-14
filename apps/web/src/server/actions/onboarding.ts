@@ -16,13 +16,6 @@ const formSchema = z.object({
 export const handleOnboardingAction = createAction(
 	basicProtectedProcedure.input(formSchema).mutation(async ({ ctx, input }) => {
 		const membershipId = await db.db.transaction(async (tx) => {
-			const res = await createOrganzation({
-				name: input.organizationName,
-				plan: "free",
-				primaryEmail: ctx.auth.user.email!,
-				ownerId: ctx.auth.customerId,
-			})
-
 			await tx
 				.insert(schema.user)
 				.values({
@@ -35,6 +28,13 @@ export const handleOnboardingAction = createAction(
 						onboarded: true,
 					},
 				})
+
+			const res = await createOrganzation({
+				name: input.organizationName,
+				plan: "free",
+				primaryEmail: ctx.auth.user.email!,
+				ownerId: ctx.auth.customerId,
+			})
 
 			return res.membershipId
 		})
