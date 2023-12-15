@@ -95,7 +95,7 @@ importers:
         version: 2.0.6
       drizzle-orm:
         specifier: ^0.29.1
-        version: 0.29.1(@neondatabase/serverless@0.6.0)(@planetscale/database@1.11.0)(@vercel/postgres@0.5.1)
+        version: 0.29.1(@vercel/postgres@0.5.1)
       elysia:
         specifier: 0.7.30
         version: 0.7.30(@sinclair/typebox@0.31.28)(typescript@5.3.3)
@@ -105,6 +105,8 @@ importers:
       qs:
         specifier: ^6.11.2
         version: 6.11.2
+
+  apps/docs: {}
 
   apps/web:
     dependencies:
@@ -522,23 +524,17 @@ importers:
       '@hazel/utils':
         specifier: workspace:*
         version: link:../utils
-      '@neondatabase/serverless':
-        specifier: ^0.6.0
-        version: 0.6.0
-      '@planetscale/database':
-        specifier: ^1.11.0
-        version: 1.11.0
       '@vercel/postgres':
         specifier: ^0.5.1
         version: 0.5.1
       drizzle-orm:
         specifier: ^0.29.1
-        version: 0.29.1(@neondatabase/serverless@0.6.0)(@planetscale/database@1.11.0)(@vercel/postgres@0.5.1)
+        version: 0.29.1(@vercel/postgres@0.5.1)
       drizzle-zod:
         specifier: ^0.5.1
         version: 0.5.1(drizzle-orm@0.29.1)(zod@3.22.4)
       zod:
-        specifier: ^3.x
+        specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
       '@hazel/tsconfig':
@@ -3431,11 +3427,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /@planetscale/database@1.11.0:
-    resolution: {integrity: sha512-aWbU+D/IRHoDE9975y+Q4c+EwwAWxCPwFId+N1AhQVFXzbeJMkj6KN2iQtoi03elcLMRdfT+V3i9Z4WRw+/oIA==}
-    engines: {node: '>=16'}
-    dev: false
 
   /@radix-ui/number@1.0.1:
     resolution: {integrity: sha512-T5gIdVO2mmPW3NNhjNgEP3cqMXjXL9UbO0BzWcXfvdBs+BohbQxvd/K5hSVKmn9/lbTdsQVKbUcP5WLCwvUbBg==}
@@ -6893,7 +6884,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /drizzle-orm@0.29.1(@neondatabase/serverless@0.6.0)(@planetscale/database@1.11.0)(@vercel/postgres@0.5.1):
+  /drizzle-orm@0.29.1(@vercel/postgres@0.5.1):
     resolution: {integrity: sha512-yItc4unfHnk8XkDD3/bdC63vdboTY7e7I03lCF1OJYABXSIfQYU9BFTQJXMMovVeb3T1/OJWwfW/70T1XPnuUA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -6955,8 +6946,6 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@neondatabase/serverless': 0.6.0
-      '@planetscale/database': 1.11.0
       '@vercel/postgres': 0.5.1
     dev: false
 
@@ -6966,7 +6955,7 @@ packages:
       drizzle-orm: '>=0.23.13'
       zod: '*'
     dependencies:
-      drizzle-orm: 0.29.1(@neondatabase/serverless@0.6.0)(@planetscale/database@1.11.0)(@vercel/postgres@0.5.1)
+      drizzle-orm: 0.29.1(@vercel/postgres@0.5.1)
       zod: 3.22.4
     dev: false
 
