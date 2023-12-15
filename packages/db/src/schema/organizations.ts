@@ -1,4 +1,4 @@
-import { InferInsertModel, InferSelectModel, relations, sql } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import { serial, varchar, pgTable, timestamp, integer, index, uniqueIndex, pgEnum } from "drizzle-orm/pg-core"
 import { generatePublicId, roleField } from "./common"
 import { user } from "./users"

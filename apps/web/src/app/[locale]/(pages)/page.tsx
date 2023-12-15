@@ -80,7 +80,7 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 
 	const kpiError = tiny.response.kpi({
 		workspace_id: workspaceId,
-		// success: 0,
+		success: 0,
 		start_date: startTime,
 		end_date: endTime,
 	})
@@ -131,7 +131,6 @@ const Dashboard = async ({ searchParams }: DashboardPageProps) => {
 							color={chartColors[0]}
 							title={"Events"}
 							subtitle={String(data.reduce((curr, el) => curr + el.events, 0))}
-							group="kpis"
 							id={"events"}
 							series={[
 								{

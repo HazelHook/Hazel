@@ -4,13 +4,15 @@ import { cookies } from "next/headers"
 
 import { createOrgFormSchema, orgUpdateFormSchema } from "@/lib/schemas/organization"
 
-import { db, Organization } from "@hazel/db"
+import { db, eq, Organization } from "@hazel/db"
 import { schema } from "@hazel/db"
 import { generatePublicId } from "@hazel/db/schema/common"
 import { basicProtectedProcedure, createAction, protectedProcedure, TRPCError } from "@hazel/server/actions/trpc"
 import { getSupabaseServerActionClient } from "@hazel/supabase/clients"
 import { createCustomer, createSubscription } from "@hazel/utils/lago"
 import { z } from "zod"
+import { genId } from "@hazel/utils"
+import { organizations } from "@hazel/db/schema"
 
 export const createOrganzation = async ({
 	plan = "free",
@@ -163,5 +165,15 @@ export const switchOrganizationAction = createAction(
 		return {
 			id: opts.input.publicId,
 		}
+	}),
+)
+
+export const regenerateOrganizationSecretAction = createAction(
+	protectedProcedure.input(z.void()).mutation(async ({ ctx }) => {
+		const newSecret = `sk_${genId(29)}`
+
+		await db.organization.update({ publicId: ctx.auth.workspaceId, secretKey: newSecret })
+
+		return { id: ctx.auth.workspaceId }
 	}),
 )

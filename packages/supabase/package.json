@@ -35,7 +35,8 @@
     ".": "./src/index.ts",
     "./hooks": "./src/hooks.ts",
     "./database.types.ts": "./src/database.types.ts",
-    "./clients": "./src/clients.ts"
+    "./clients": "./src/clients.ts",
+    "./clients/browser-client": "./src/clients/browser-client.ts"
   },
   "typesVersions": {
     "*": {

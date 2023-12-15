@@ -25,16 +25,19 @@ SQL >
                 required=True,
             )
         }}
-        AND {% if defined(source_id) %}
-            source_id = {{ String(source_id, description="Source ID", required=False) }} AND
+        {% if defined(source_id) %}
+            AND source_id = {{ String(source_id, description="Source ID", required=False) }} 
+        {% end %}
+         {% if defined(success) %}
+            AND success = {{ Int8(success, description="Success (0 | 1)", required=False) }} 
         {% end %}
         {% if period == 'daily' or period == 'hourly' or not defined(period) %}
-            received_at >= {{ DateTime(start_date, required=True) }}
+            AND received_at >= {{ DateTime(start_date, required=True) }}
             {% if defined(end_date) %}
-                AND received_at < {{ DateTime(end_date, required=False) }}
+                 AND received_at < {{ DateTime(end_date, required=False) }}
             {% end %}
         {% elif period == 'weekly' or period == 'monthly' %}
-            bucket >= toDate({{ DateTime(start_date, required=True) }})
+            AND bucket >= toDate({{ DateTime(start_date, required=True) }})
             {% if defined(end_date) %} AND bucket < toDate({{ DateTime(end_date, required=False) }})
             {% end %}
         {% end %}

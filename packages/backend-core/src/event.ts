@@ -1,10 +1,11 @@
-import type { Connection, Destination } from "@hazel/db"
+import { db, type Connection, type Destination } from "@hazel/db"
 import tiny from "@hazel/tinybird"
 
 import { genId, getLogger } from "@hazel/utils"
 import { ingestMetric } from "@hazel/utils/lago"
 import { convertDataForSourceQueue, insertSourceQueue } from "./helpers/queue.helpers"
 import { generateSignature } from "./crypto"
+import { alerts } from "@hazel/db/schema"
 
 interface Event {
 	connection: Connection & {
@@ -63,6 +64,7 @@ export const sendEvent = async ({
 					"X-HAZEL_KEY": `${connection.destination.key}-${sourceKey}`,
 					"X-HAZEL_SIGNATURE": generateSignature({ secret: signKey, body }),
 				},
+				signal: AbortSignal.timeout(60000),
 			})
 
 			const headersObj: Record<string, string> = {}
@@ -110,6 +112,15 @@ export const sendEvent = async ({
 		if (shouldThrowOnError) {
 			throw error
 		}
+
+		db.db.insert(alerts).values({
+			workspaceId: workspaceId,
+			level: "warning",
+			code: "TIMEOUT",
+			affectedElements: {
+				destinationId: connection.publicId,
+			},
+		})
 
 		const data = await convertDataForSourceQueue({
 			destinationUrl: connection.destination.url,
