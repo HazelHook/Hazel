@@ -87,4 +87,4 @@ export default async function UsagePage() {
 	)
 }
 
-// export const runtime = "edge"
+export const runtime = "edge"
