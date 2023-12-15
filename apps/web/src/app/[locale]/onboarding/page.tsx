@@ -24,6 +24,6 @@ const OnboardingPage = async () => {
 	return <OnboardingContainer csrfToken={csrfToken} />
 }
 
-export const runtime = "edge"
+// export const runtime = "edge"
 
 export default OnboardingPage
