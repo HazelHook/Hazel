@@ -1,3 +1,3 @@
-FROM getlago/api:v0.52.2-beta
+FROM getlago/api:v0.54.2-beta
 VOLUME ["/app/storage"]
 EXPOSE 3000
