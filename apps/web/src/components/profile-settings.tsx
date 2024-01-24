@@ -9,7 +9,6 @@ import { createOrgFormSchema } from "@/lib/schemas/organization"
 import { cn } from "@/lib/utils"
 
 import { useSignOut } from "@hazel/auth/hooks"
-import { useAuth } from "@hazel/auth/provider"
 import { Organization, OrganizationMember } from "@hazel/db"
 
 import { useAction } from "@hazel/server/actions/client"

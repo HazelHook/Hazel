@@ -1,30 +1,30 @@
 {
-	"name": "hazel",
-	"private": true,
-	"scripts": {
-		"build": "turbo run build",
-		"dev": "turbo run dev",
-		"dev:backend": "turbo run dev --filter backend --filter worker",
-		"lint": "turbo run lint",
-		"format": "pnpm prettier:write && pnpm rome:format:write",
-		"prettier:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
-		"rome:format:write": "biome format --write ./",
-		"biome:lint": "biome lint --apply  ./",
-		"supabase:gen": "supabase gen types typescript --linked > ./packages/db/src/database.types.ts"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^1.4.0",
-		"@ianvs/prettier-plugin-sort-imports": "4.1.1",
-		"@turbo/gen": "1.11.0",
-		"pino-pretty": "^10.2.3",
-		"prettier": "3.1.0",
-		"tsup": "8.0.1",
-		"turbo": "^1.11.1"
-	},
-	"workspaces": [
-		"apps/*",
-		"packages/*",
-		"tooling/*"
-	],
-	"packageManager": "pnpm@8.10.5"
+  "name": "hazel",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:backend": "turbo run dev --filter backend --filter worker",
+    "lint": "turbo run lint",
+    "format": "pnpm prettier:write && pnpm rome:format:write",
+    "prettier:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
+    "rome:format:write": "biome format --write ./",
+    "biome:lint": "biome lint --apply  ./",
+    "supabase:gen": "supabase gen types typescript --linked > ./packages/db/src/database.types.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.4.0",
+    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@turbo/gen": "1.11.0",
+    "pino-pretty": "^10.2.3",
+    "prettier": "3.1.0",
+    "tsup": "8.0.1",
+    "turbo": "^1.11.1"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tooling/*"
+  ],
+  "packageManager": "pnpm@8.10.5"
 }
